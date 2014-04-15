@@ -38,7 +38,7 @@ class ArrayMatcherTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($matcher->match($this->simpleArray, $this->simpleArray));
         $this->assertTrue($matcher->match(array(), array()));
         $this->assertFalse($matcher->match($this->simpleArray, array()));
-        $this->assertFalse($matcher->match(['foo', 1, 3], ['foo', 2, 3]));
+        $this->assertFalse($matcher->match(array('foo', 1, 3), array('foo', 2, 3)));
         $this->assertFalse($matcher->match($this->simpleArray, array(6, 6.66, false, false, array(1, 2, 'foo'), array('foo' => 'bar2'), null)));
         $this->assertFalse($matcher->match($this->simpleArray, array(
             'users' => array(
