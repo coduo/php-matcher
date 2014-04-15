@@ -35,7 +35,6 @@ class ChainMatcher implements PropertyMatcher
         return true;
     }
 
-
     /**
      * {@inheritDoc}
      */

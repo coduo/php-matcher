@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace JsonMatcher\Tests;
 
 use JsonMatcher\Matcher\ArrayMatcher;
@@ -36,8 +36,6 @@ class ArrayMatcherTest extends \PHPUnit_Framework_TestCase
         $chain->addMatcher(new ScalarMatcher());
         $matcher = new ArrayMatcher($chain);
 
-
-
         $this->assertTrue($matcher->match($this->simpleArray, $this->simpleArray));
         $this->assertTrue($matcher->match([], []));
         $this->assertFalse($matcher->match($this->simpleArray, []));
@@ -56,6 +54,5 @@ class ArrayMatcherTest extends \PHPUnit_Framework_TestCase
             ]
         ]));
     }
-
 
 }
