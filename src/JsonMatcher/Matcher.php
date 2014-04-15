@@ -3,19 +3,19 @@ namespace JsonMatcher;
 
 class Matcher
 {
-    public function match($toMatch, $expectedJson)
+    public function match($matcher, $matchTo)
     {
 
-        if (is_array($toMatch)) {
-            if (-1 === $this->matchArray($toMatch, $expectedJson)) {
+        if (is_array($matcher)) {
+            if (-1 === $this->matchArray($matcher, $matchTo)) {
                return false;
             }
-        } elseif(is_scalar($toMatch) && strpos($expectedJson, '@') > -1) {
-            if (-1 === $this->matchType($toMatch, $expectedJson)) {
+        } elseif(is_scalar($matcher) && strpos($matchTo, '@') > -1) {
+            if (-1 === $this->matchType($matcher, $matchTo)) {
                 return false;
             }
-        } elseif (is_scalar($toMatch)) {
-            if (-1 === $this->matchScalar($toMatch, $expectedJson)) {
+        } elseif (is_scalar($matcher)) {
+            if (-1 === $this->matchScalar($matcher, $matchTo)) {
                 return false;
             }
         }
