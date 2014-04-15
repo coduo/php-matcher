@@ -61,7 +61,6 @@ class ArrayMatcher implements PropertyMatcher
         return is_array($pattern);
     }
 
-
     private function buildPath(array $array, $parentPath)
     {
         foreach ($array as $key => $element) {

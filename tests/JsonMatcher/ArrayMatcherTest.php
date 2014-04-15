@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace JsonMatcher\Tests;
 
 use JsonMatcher\Matcher\ArrayMatcher;

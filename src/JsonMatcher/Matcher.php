@@ -24,6 +24,4 @@ class Matcher implements PropertyMatcher
     {
         return true;
     }
-
-
 }
