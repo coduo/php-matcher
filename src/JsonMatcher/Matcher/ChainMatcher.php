@@ -19,10 +19,10 @@ class ChainMatcher implements PropertyMatcher
     /**
      * {@inheritDoc}
      */
-    public function match($matcher, $pattern)
+    public function match($value, $pattern)
     {
-        foreach ($this->matchers as $m) {
-            if (false === $m->match($matcher, $pattern)) {
+        foreach ($this->matchers as $propertyMatcher) {
+            if (false === $propertyMatcher->match($value, $pattern)) {
                 return false;
             }
         }

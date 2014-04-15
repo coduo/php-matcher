@@ -2,29 +2,31 @@
 
 namespace JsonMatcher\Matcher;
 
-use JsonMatcher\Matcher\PropertyMatcher;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\Exception\NoSuchIndexException;
+
 class ArrayMatcher implements PropertyMatcher
 {
     /**
-     * @var Matcher\PropertyMatcher
+     * @var PropertyMatcher
      */
     private $propertyMatcher;
+
+    private $paths;
 
     public function __construct(PropertyMatcher $propertyMatcher)
     {
         $this->propertyMatcher = $propertyMatcher;
     }
 
-    public function match($matcher, $pattern)
+    public function match($value, $pattern)
     {
         $accessorBuilder = PropertyAccess::createPropertyAccessorBuilder();
         $accessorBuilder->enableExceptionOnInvalidIndex();
         $accessor = $accessorBuilder->getPropertyAccessor();
 
-        $paths = [];
-        foreach ($matcher as $key => $element) {
+        $this->paths = [];
+        foreach ($value as $key => $element) {
             $path = sprintf("[%s]", $key);
 
             if (is_array($element)) {
@@ -32,11 +34,11 @@ class ArrayMatcher implements PropertyMatcher
                 continue;
             }
 
-            $paths[] = $path;
+            $this->paths[] = $path;
         }
 
-        foreach ($paths as $path) {
-            $value = $accessor->getValue($matcher, $path);
+        foreach ($this->paths as $path) {
+            $elementValue = $accessor->getValue($value, $path);
             try {
                 $patternValue = $accessor->getValue($pattern, $path);
             } catch (NoSuchIndexException $e) {
@@ -44,7 +46,7 @@ class ArrayMatcher implements PropertyMatcher
             }
 
             if ($this->propertyMatcher->canMatch($patternValue)) {
-                if (false === $this->propertyMatcher->match($value, $patternValue)) {
+                if (false === $this->propertyMatcher->match($elementValue, $patternValue)) {
                     return false;
                 }
             }

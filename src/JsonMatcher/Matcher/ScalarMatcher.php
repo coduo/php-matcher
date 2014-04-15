@@ -4,18 +4,16 @@ namespace JsonMatcher\Matcher;
 
 class ScalarMatcher implements PropertyMatcher
 {
-
     /**
      * {@inheritDoc}
      */
-    public function match($matcher, $pattern)
+    public function match($value, $pattern)
     {
-        return $matcher === $pattern;
+        return $value === $pattern;
     }
 
     public function canMatch($pattern)
     {
         return is_scalar($pattern);
     }
-
 }

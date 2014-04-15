@@ -8,9 +8,9 @@ class TypeMatcher implements PropertyMatcher
     /**
      * {@inheritDoc}
      */
-    public function match($matcher, $pattern)
+    public function match($value, $pattern)
     {
-        return gettype($matcher) === $this->extractType($pattern);
+        return gettype($value) === $this->extractType($pattern);
     }
 
     public function canMatch($pattern)

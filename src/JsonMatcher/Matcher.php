@@ -15,9 +15,9 @@ class Matcher implements PropertyMatcher
         $this->matcher = $matcher;
     }
 
-    public function match($matcher, $pattern)
+    public function match($value, $pattern)
     {
-        return $this->matcher->match($matcher, $pattern);
+        return $this->matcher->match($value, $pattern);
     }
 
     public function canMatch($pattern)
