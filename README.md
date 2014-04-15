@@ -1,0 +1,1 @@
+[![Build Status](https://travis-ci.org/defrag/JsonMatcher.svg)](https://travis-ci.org/defrag/JsonMatcher.svg)
