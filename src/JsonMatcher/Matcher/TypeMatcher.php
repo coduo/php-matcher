@@ -15,7 +15,7 @@ class TypeMatcher implements PropertyMatcher
 
     public function canMatch($pattern)
     {
-        return is_scalar($pattern);
+        return 0 !== preg_match("/^@(string|integer|boolean|double)@$/", $pattern);
     }
 
     private function extractType($pattern)
