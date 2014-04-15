@@ -25,7 +25,7 @@ class ArrayMatcher implements PropertyMatcher
         $accessorBuilder->enableExceptionOnInvalidIndex();
         $accessor = $accessorBuilder->getPropertyAccessor();
 
-        $this->paths = [];
+        $this->paths = array();
         foreach ($value as $key => $element) {
             $path = sprintf("[%s]", $key);
 
