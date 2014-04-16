@@ -41,12 +41,12 @@ Feature: Listing user toys
         {
           "id": "@string@",
           "name": "GI Joe",
-          "_links: "*"
+          "_links": "*"
         },
         {
           "id": "@string@",
           "name": "Optimus Prime",
-          "_links: "*"
+          "_links": "*"
         }
       ]
     """
