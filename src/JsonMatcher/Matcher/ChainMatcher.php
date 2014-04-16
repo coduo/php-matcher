@@ -22,12 +22,14 @@ class ChainMatcher implements PropertyMatcher
     public function match($value, $pattern)
     {
         foreach ($this->matchers as $propertyMatcher) {
-            if (false === $propertyMatcher->match($value, $pattern)) {
-                return false;
+            if ($propertyMatcher->canMatch($pattern)) {
+                if (true === $propertyMatcher->match($value, $pattern)) {
+                    return true;
+                }
             }
         }
 
-        return true;
+        return false;
     }
 
     public function canMatch($pattern)

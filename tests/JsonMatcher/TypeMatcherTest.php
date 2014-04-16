@@ -15,6 +15,7 @@ class TypeMatcherTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($matcher->canMatch("qweqwe"));
         $this->assertFalse($matcher->canMatch(1));
         $this->assertFalse($matcher->canMatch("@string"));
+        $this->assertFalse($matcher->canMatch(new \stdClass()));
     }
 
     public function test_type_match()
