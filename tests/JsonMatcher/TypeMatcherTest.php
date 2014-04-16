@@ -5,30 +5,83 @@ use JsonMatcher\Matcher\TypeMatcher;
 
 class TypeMatcherTest extends \PHPUnit_Framework_TestCase
 {
-    public function test_can_match()
+    /**
+     * @dataProvider positiveCanMatchData
+     */
+    public function test_positive_can_matches($pattern)
     {
         $matcher = new TypeMatcher();
-        $this->assertTrue($matcher->canMatch('@integer@'));
+        $this->assertTrue($matcher->canMatch($pattern));
         $this->assertTrue($matcher->canMatch('@string@'));
         $this->assertTrue($matcher->canMatch('@boolean@'));
-        $this->assertFalse($matcher->canMatch('@integer'));
-        $this->assertFalse($matcher->canMatch("qweqwe"));
-        $this->assertFalse($matcher->canMatch(1));
-        $this->assertFalse($matcher->canMatch("@string"));
-        $this->assertFalse($matcher->canMatch(new \stdClass()));
     }
 
-    public function test_type_match()
+    /**
+     * @dataProvider negativeCanMatchData
+     */
+    public function test_negative_can_matches($pattern)
     {
         $matcher = new TypeMatcher();
-        $this->assertTrue($matcher->match(false, '@boolean@'));
-        $this->assertTrue($matcher->match("Norbert", '@string@'));
-        $this->assertTrue($matcher->match(1, '@integer@'));
-        $this->assertTrue($matcher->match(1.1, '@double@'));
+        $this->assertFalse($matcher->canMatch($pattern));
+    }
 
-        $this->assertFalse($matcher->match("test", '@boolean@'));
-        $this->assertFalse($matcher->match(new \stdClass(), '@string@'));
-        $this->assertFalse($matcher->match(1.1, '@integer@'));
-        $this->assertFalse($matcher->match(false, '@double@'));
+    /**
+     * @dataProvider positiveMatchData
+     */
+    public function test_positive_match($value, $pattern)
+    {
+        $matcher = new TypeMatcher();
+        $this->assertTrue($matcher->match($value, $pattern));
+    }
+
+    /**
+     * @dataProvider negativeMatchData
+     */
+    public function test_negative_match($value, $pattern)
+    {
+        $matcher = new TypeMatcher();
+        $this->assertFalse($matcher->match($value, $pattern));
+    }
+
+    public static function positiveCanMatchData()
+    {
+        return array(
+            array("@integer@"),
+            array("@string@"),
+            array("@boolean@"),
+            array("@double@")
+        );
+    }
+
+    public static function positiveMatchData()
+    {
+        return array(
+            array(false, "@boolean@"),
+            array("Norbert", "@string@"),
+            array(1, "@integer@"),
+            array(6.66, "@double@")
+        );
+    }
+
+    public static function negativeCanMatchData()
+    {
+        return array(
+            array("@integer"),
+            array("qweqwe"),
+            array(1),
+            array("@string"),
+            array(new \stdClass),
+            array(array("foobar"))
+        );
+    }
+
+    public static function negativeMatchData()
+    {
+        return array(
+            array("test", "@boolean@"),
+            array(new \stdClass,  "@string@"),
+            array(1.1, "@integer@"),
+            array(false, "@double@")
+        );
     }
 }

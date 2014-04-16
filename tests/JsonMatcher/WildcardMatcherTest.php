@@ -22,7 +22,7 @@ class WildcardMatcherTest extends \PHPUnit_Framework_TestCase
             array("foobar"),
             array(true),
             array(6.66),
-            array(["bar"]),
+            array(array("bar")),
             array(new \stdClass),
         );
     }
