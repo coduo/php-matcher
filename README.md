@@ -16,7 +16,7 @@ Feature: Listing user toys
   Background:
     Given I send and accept JSON
 
-  Scenario: Listing timesheets
+  Scenario: Listing toys
     Given the following users exist:
       | firstName     | lastName     |
       | Chuck         | Norris       | 
