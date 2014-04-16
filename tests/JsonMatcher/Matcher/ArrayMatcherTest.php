@@ -1,5 +1,5 @@
 <?php
-namespace JsonMatcher\Tests;
+namespace JsonMatcher\Tests\Matcher;
 
 use JsonMatcher\Matcher\ArrayMatcher;
 use JsonMatcher\Matcher\ChainMatcher;
