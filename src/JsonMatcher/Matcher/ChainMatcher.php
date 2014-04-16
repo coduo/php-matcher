@@ -32,16 +32,12 @@ class ChainMatcher implements PropertyMatcher
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function canMatch($pattern)
     {
         return true;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function getName()
-    {
-        return 'chain';
-    }
 }

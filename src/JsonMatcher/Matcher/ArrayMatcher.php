@@ -19,6 +19,9 @@ class ArrayMatcher implements PropertyMatcher
         $this->propertyMatcher = $propertyMatcher;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function match($value, $pattern)
     {
         $accessorBuilder = PropertyAccess::createPropertyAccessorBuilder();
@@ -56,6 +59,9 @@ class ArrayMatcher implements PropertyMatcher
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function canMatch($pattern)
     {
         return is_array($pattern);

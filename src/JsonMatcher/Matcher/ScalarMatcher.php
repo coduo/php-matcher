@@ -12,6 +12,9 @@ class ScalarMatcher implements PropertyMatcher
         return $value === $pattern;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function canMatch($pattern)
     {
         return is_scalar($pattern);

@@ -13,6 +13,9 @@ class TypeMatcher implements PropertyMatcher
         return gettype($value) === $this->extractType($pattern);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function canMatch($pattern)
     {
         return is_string($pattern) && 0 !== preg_match("/^@(string|integer|boolean|double)@$/", $pattern);
