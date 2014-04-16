@@ -12,8 +12,6 @@ class TypeMatcherTest extends \PHPUnit_Framework_TestCase
     {
         $matcher = new TypeMatcher();
         $this->assertTrue($matcher->canMatch($pattern));
-        $this->assertTrue($matcher->canMatch('@string@'));
-        $this->assertTrue($matcher->canMatch('@boolean@'));
     }
 
     /**
