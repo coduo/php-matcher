@@ -17,7 +17,7 @@ class WildcardMatcher implements PropertyMatcher
      */
     public function canMatch($pattern)
     {
-        return '*' === $pattern;
+        return is_string($pattern) && 0 !== preg_match("/^@(\*|wildcard)@$/", $pattern);
     }
 
 }
