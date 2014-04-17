@@ -2,6 +2,7 @@
 
 use JsonMatcher\Matcher\ArrayMatcher;
 use JsonMatcher\Matcher\ChainMatcher;
+use JsonMatcher\Matcher\ExpressionMatcher;
 use JsonMatcher\Matcher\JsonMatcher;
 use JsonMatcher\Matcher\ScalarMatcher;
 use JsonMatcher\Matcher\TypeMatcher;
@@ -31,6 +32,7 @@ if (!function_exists('match')) {
     function match($value, $pattern)
     {
         $scalarMatchers = new ChainMatcher(array(
+            new ExpressionMatcher(),
             new TypeMatcher(),
             new ScalarMatcher(),
             new WildcardMatcher()

@@ -3,6 +3,7 @@ namespace JsonMatcher\Tests;
 
 use JsonMatcher\Matcher\ArrayMatcher;
 use JsonMatcher\Matcher\ChainMatcher;
+use JsonMatcher\Matcher\ExpressionMatcher;
 use JsonMatcher\Matcher\JsonMatcher;
 use JsonMatcher\Matcher\ScalarMatcher;
 use JsonMatcher\Matcher\TypeMatcher;
@@ -18,6 +19,7 @@ class MatcherTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $scalarMatchers = new ChainMatcher(array(
+            new ExpressionMatcher(),
             new TypeMatcher(),
             new ScalarMatcher(),
             new WildcardMatcher()
@@ -155,7 +157,7 @@ class MatcherTest extends \PHPUnit_Framework_TestCase
                     "id": "@integer@",
                     "firstName": "Michał",
                     "lastName": "Dąbrowski",
-                    "enabled": "@boolean@",
+                    "enabled": "expr(value == false)",
                     "roles": "@array@"
                 }
             ],
