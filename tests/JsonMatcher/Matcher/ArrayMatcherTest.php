@@ -7,11 +7,27 @@ use JsonMatcher\Matcher\ScalarMatcher;
 
 class ArrayMatcherTest extends \PHPUnit_Framework_TestCase
 {
-    private $simpleArray;
-
-    public function setUp()
+    /**
+     * @dataProvider positiveMatchData
+     */
+    public function test_positive_match_arrays($value, $pattern)
     {
-        $this->simpleArray = array(
+        $matcher = new ArrayMatcher(new ScalarMatcher());
+        $this->assertTrue($matcher->match($value, $pattern));
+    }
+
+    /**
+     * @dataProvider negativeMatchData
+     */
+    public function test_negative_match_arrays($value, $pattern)
+    {
+        $matcher = new ArrayMatcher(new ScalarMatcher());
+        $this->assertFalse($matcher->match($value, $pattern));
+    }
+
+    public static function positiveMatchData()
+    {
+        $simpleArr =  array(
             'users' => array(
                 array(
                     'firstName' => 'Norbert',
@@ -27,23 +43,21 @@ class ArrayMatcherTest extends \PHPUnit_Framework_TestCase
             1,
             6.66
         );
+
+        return array(
+            array($simpleArr, $simpleArr),
+            array(array(), array()),
+            array(array('key' => 'val'), array('key' => 'val')),
+            array(array(1), array(1))
+        );
     }
 
-    public function test_match_arrays()
+    public static function negativeMatchData()
     {
-        $chain = new ChainMatcher();
-        $chain->addMatcher(new ScalarMatcher());
-        $matcher = new ArrayMatcher($chain);
-
-        $this->assertTrue($matcher->match($this->simpleArray, $this->simpleArray));
-        $this->assertTrue($matcher->match(array(), array()));
-        $this->assertFalse($matcher->match($this->simpleArray, array()));
-        $this->assertFalse($matcher->match(array('foo', 1, 3), array('foo', 2, 3)));
-        $this->assertFalse($matcher->match($this->simpleArray, array(6, 6.66, false, false, array(1, 2, 'foo'), array('foo' => 'bar2'), null)));
-        $this->assertFalse($matcher->match($this->simpleArray, array(
+        $simpleArr =  array(
             'users' => array(
                 array(
-                    'firstName' => 'Pawel',
+                    'firstName' => 'Norbert',
                     'lastName' => 'Orzechowicz'
                 ),
                 array(
@@ -55,7 +69,32 @@ class ArrayMatcherTest extends \PHPUnit_Framework_TestCase
             false,
             1,
             6.66
-        )));
+        );
+
+        $simpleDiff =  array(
+            'users' => array(
+                array(
+                    'firstName' => 'Norbert',
+                    'lastName' => 'Orzechowicz'
+                ),
+                array(
+                    'firstName' => 'Pablo',
+                    'lastName' => 'Dąbrowski'
+                )
+            ),
+            true,
+            false,
+            1,
+            6.66
+        );
+
+        return array(
+            array($simpleArr, $simpleDiff),
+            array(array(1), array()),
+            array(array('key' => 'val'), array('key' => 'val2')),
+            array(array(1), array(2)),
+            array(array('foo', 1, 3), array('foo', 2, 3))
+        );
     }
 
 }
