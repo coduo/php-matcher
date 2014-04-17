@@ -14,7 +14,8 @@
         "psr-0": {
             "JsonMatcher": "src/",
             "JsonMatcher\\Tests": "tests/"
-        }
+        },
+        "files": ["match.php"]
     },
     "config": {
         "bin-dir": "bin"

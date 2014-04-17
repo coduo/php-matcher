@@ -74,6 +74,28 @@ class MatcherTest extends \PHPUnit_Framework_TestCase
                 'data' => '@wildcard@',
             )
         ));
+
+        $this->assertTrue(match(
+            $this->arrayValue,
+            array(
+                'users' => array(
+                    array(
+                        'id' => '@integer@',
+                        'firstName' => '@string@',
+                        'lastName' => 'Orzechowicz',
+                        'enabled' => '@boolean@'
+                    ),
+                    array(
+                        'id' => '@integer@',
+                        'firstName' => '@string@',
+                        'lastName' => 'Dąbrowski',
+                        'enabled' => '@boolean@',
+                    )
+                ),
+                'readyToUse' => true,
+                'data' => '@wildcard@',
+            )
+        ));
     }
 
     public function test_matcher_with_scalar_values()
@@ -82,7 +104,15 @@ class MatcherTest extends \PHPUnit_Framework_TestCase
             'Norbert Orzechowicz',
             '@string@'
         ));
+        $this->assertTrue(match(
+            'Norbert Orzechowicz',
+            '@string@'
+        ));
         $this->assertTrue($this->matcher->match(
+            6.66,
+            '@double@'
+        ));
+        $this->assertTrue(match(
             6.66,
             '@double@'
         ));
@@ -135,5 +165,6 @@ class MatcherTest extends \PHPUnit_Framework_TestCase
 
 
         $this->assertTrue($this->matcher->match($json, $jsonPattern));
+        $this->assertTrue(match($json, $jsonPattern));
     }
 }
