@@ -3,6 +3,7 @@ namespace JsonMatcher\Tests;
 
 use JsonMatcher\Matcher\ArrayMatcher;
 use JsonMatcher\Matcher\ChainMatcher;
+use JsonMatcher\Matcher\JsonMatcher;
 use JsonMatcher\Matcher\ScalarMatcher;
 use JsonMatcher\Matcher\TypeMatcher;
 use JsonMatcher\Matcher\WildcardMatcher;
@@ -21,9 +22,13 @@ class MatcherTest extends \PHPUnit_Framework_TestCase
             new ScalarMatcher(),
             new WildcardMatcher()
         ));
+
+        $arrayMatcher = new ArrayMatcher($scalarMatchers);
+
         $this->matcher = new Matcher(new ChainMatcher(array(
             $scalarMatchers,
-            new ArrayMatcher($scalarMatchers)
+            $arrayMatcher,
+            new JsonMatcher($arrayMatcher)
         )));
 
         $this->arrayValue = array(
@@ -81,5 +86,54 @@ class MatcherTest extends \PHPUnit_Framework_TestCase
             6.66,
             '@double@'
         ));
+    }
+
+    public function test_matcher_with_json()
+    {
+        $json = '
+        {
+            "users":[
+                {
+                    "id": 131,
+                    "firstName": "Norbert",
+                    "lastName": "Orzechowicz",
+                    "enabled": true,
+                    "roles": ["ROLE_DEVELOPER"]
+                },
+                {
+                    "id": 132,
+                    "firstName": "Michał",
+                    "lastName": "Dąbrowski",
+                    "enabled": false,
+                    "roles": ["ROLE_DEVELOPER"]
+                }
+            ],
+            "prevPage": "http:\/\/example.com\/api\/users\/1?limit=2",
+            "nextPage": "http:\/\/example.com\/api\/users\/3?limit=2"
+        }';
+        $jsonPattern = '
+        {
+            "users":[
+                {
+                    "id": "@integer@",
+                    "firstName":"Norbert",
+                    "lastName":"Orzechowicz",
+                    "enabled": "@boolean@",
+                    "roles": "@array@"
+                },
+                {
+                    "id": "@integer@",
+                    "firstName": "Michał",
+                    "lastName": "Dąbrowski",
+                    "enabled": "@boolean@",
+                    "roles": "@array@"
+                }
+            ],
+            "prevPage": "@string@",
+            "nextPage": "@string@"
+        }';
+
+
+        $this->assertTrue($this->matcher->match($json, $jsonPattern));
     }
 }
