@@ -4,16 +4,31 @@ namespace JsonMatcher\Tests\Matcher;
 use JsonMatcher\Matcher\ArrayMatcher;
 use JsonMatcher\Matcher\ChainMatcher;
 use JsonMatcher\Matcher\ScalarMatcher;
+use JsonMatcher\Matcher\WildcardMatcher;
 
 class ArrayMatcherTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var ArrayMatcher
+     */
+    private $matcher;
+
+    public function setUp()
+    {
+        $this->matcher = new ArrayMatcher(
+            new ChainMatcher(array(
+                new ScalarMatcher(),
+                new WildcardMatcher()
+            ))
+        );
+    }
+
     /**
      * @dataProvider positiveMatchData
      */
     public function test_positive_match_arrays($value, $pattern)
     {
-        $matcher = new ArrayMatcher(new ScalarMatcher());
-        $this->assertTrue($matcher->match($value, $pattern));
+        $this->assertTrue($this->matcher->match($value, $pattern));
     }
 
     /**
@@ -21,8 +36,7 @@ class ArrayMatcherTest extends \PHPUnit_Framework_TestCase
      */
     public function test_negative_match_arrays($value, $pattern)
     {
-        $matcher = new ArrayMatcher(new ScalarMatcher());
-        $this->assertFalse($matcher->match($value, $pattern));
+        $this->assertFalse($this->matcher->match($value, $pattern));
     }
 
     public static function positiveMatchData()
@@ -48,7 +62,8 @@ class ArrayMatcherTest extends \PHPUnit_Framework_TestCase
             array($simpleArr, $simpleArr),
             array(array(), array()),
             array(array('key' => 'val'), array('key' => 'val')),
-            array(array(1), array(1))
+            array(array(1), array(1)),
+            array(array('roles' => array('ROLE_ADMIN', 'ROLE_DEVELOPER')), array('roles' => '@wildcard@'))
         );
     }
 

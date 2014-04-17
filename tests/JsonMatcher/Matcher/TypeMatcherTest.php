@@ -47,7 +47,8 @@ class TypeMatcherTest extends \PHPUnit_Framework_TestCase
             array("@integer@"),
             array("@string@"),
             array("@boolean@"),
-            array("@double@")
+            array("@double@"),
+            array("@array@")
         );
     }
 
@@ -57,7 +58,8 @@ class TypeMatcherTest extends \PHPUnit_Framework_TestCase
             array(false, "@boolean@"),
             array("Norbert", "@string@"),
             array(1, "@integer@"),
-            array(6.66, "@double@")
+            array(6.66, "@double@"),
+            array(array('test'), '@array@')
         );
     }
 
@@ -79,7 +81,8 @@ class TypeMatcherTest extends \PHPUnit_Framework_TestCase
             array("test", "@boolean@"),
             array(new \stdClass,  "@string@"),
             array(1.1, "@integer@"),
-            array(false, "@double@")
+            array(false, "@double@"),
+            array(1, "@array@")
         );
     }
 }

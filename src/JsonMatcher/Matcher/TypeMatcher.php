@@ -4,7 +4,6 @@ namespace JsonMatcher\Matcher;
 
 class TypeMatcher implements PropertyMatcher
 {
-
     /**
      * {@inheritDoc}
      */
@@ -18,12 +17,11 @@ class TypeMatcher implements PropertyMatcher
      */
     public function canMatch($pattern)
     {
-        return is_string($pattern) && 0 !== preg_match("/^@(string|integer|boolean|double)@$/", $pattern);
+        return is_string($pattern) && 0 !== preg_match("/^@(string|integer|boolean|double|array)@$/", $pattern);
     }
 
     private function extractType($pattern)
     {
         return str_replace("@", "", $pattern);
     }
-
 }

@@ -85,8 +85,8 @@ class JsonMatcherTest extends \PHPUnit_Framework_TestCase
                 '{"users":["@string@","@string@"]}'
             ),
             array(
-                '{"users":[{"firstName":"Norbert","lastName":"Orzechowicz","roles":["ROLE_USER"]}]}',
-                '{"users":[{"firstName":"Norbert","lastName":"Orzechowicz","roles":["@wildcard@"]}]}'
+                '{"users":[{"firstName":"Norbert","lastName":"Orzechowicz","roles":["ROLE_USER", "ROLE_DEVELOPER"]}]}',
+                '{"users":[{"firstName":"Norbert","lastName":"Orzechowicz","roles":"@wildcard@"}]}'
             )
         );
     }
