@@ -66,7 +66,7 @@ class MatcherTest extends \PHPUnit_Framework_TestCase
                     )
                 ),
                 'readyToUse' => true,
-                'data' => '*',
+                'data' => '@wildcard@',
             )
         ));
     }
