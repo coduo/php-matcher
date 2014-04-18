@@ -84,13 +84,13 @@ match(
    array(
       'users' => array(
           array(
-              'id' => '@integer',
+              'id' => '@integer@',
               'firstName' => '@string@',
               'lastName' => 'Orzechowicz',
               'roles' => '@array@'
           ),
           array(
-              'id' => '@integer'
+              'id' => '@integer@'
               'firstName' => '@string@',
               'lastName' => 'Dąbrowski',
               'roles' => '@array@'
@@ -162,17 +162,17 @@ Feature: Listing user toys
         {
           "id": "@string@",
           "name": "Barbie",
-          "_links: "*"
+          "_links: "@*@"
         },
         {
           "id": "@string@",
           "name": "GI Joe",
-          "_links": "*"
+          "_links": "@*@"
         },
         {
           "id": "@string@",
           "name": "Optimus Prime",
-          "_links": "*"
+          "_links": "@*@"
         }
       ]
     """
