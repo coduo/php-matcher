@@ -2,7 +2,16 @@
     "name": "defrag/php-matcher",
     "type": "library",
     "keywords": ["json", "matcher", "tests"],
-    "license": "MIT",    
+    "license": "MIT", 
+    "authors": [
+        {
+            "name": "Michał Dąbrowski"
+        },
+        {
+            "name": "Norbert Orzechowicz",
+            "email": "norbert@orzechowicz.pl"
+        }
+    ],
     "require": {
         "php": ">=5.3.0",
         "symfony/property-access": "~2.3",
