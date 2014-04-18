@@ -47,19 +47,19 @@ public function testGetToys()
     $content = $response->getContent();
     $pattern = '[
         {
-          "id": "@string@",
+          "id": @string@,
           "name": "Barbie",
-          "_links: "@*@"
+          "_links: @*@
         },
         {
-          "id": "@string@",
+          "id": @string@,
           "name": "GI Joe",
-          "_links": "@*@"
+          "_links": @*@
         },
         {
-          "id": "@string@",
+          "id": @string@,
           "name": "Optimus Prime",
-          "_links": "@*@"
+          "_links": @*@
         }
       ]
    ';
@@ -174,9 +174,9 @@ match(
   '{
     "users":[
       {
-        "firstName": "@string@",
-        "lastName":" @string@",
-        "roles": "@array@"
+        "firstName": @string@,
+        "lastName": @string@,
+        "roles": @array@
       }
     ]
   }'
@@ -214,17 +214,17 @@ Feature: Listing user toys
     """
       [
         {
-          "id": "@string@",
+          "id": @string@,
           "name": "Barbie",
           "_links: "@*@"
         },
         {
-          "id": "@string@",
+          "id": @string@,
           "name": "GI Joe",
           "_links": "@*@"
         },
         {
-          "id": "@string@",
+          "id": @string@,
           "name": "Optimus Prime",
           "_links": "@*@"
         }
