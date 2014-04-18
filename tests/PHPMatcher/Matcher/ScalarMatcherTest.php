@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace PHPMatcher\Tests\Matcher;
 
 use PHPMatcher\Matcher\ScalarMatcher;

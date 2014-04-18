@@ -25,8 +25,8 @@ if (is_dir($vendor = __DIR__ . '/../vendor')) {
 
 if (!function_exists('match')) {
     /**
-     * @param mixed $value
-     * @param mixed $pattern
+     * @param  mixed   $value
+     * @param  mixed   $pattern
      * @return boolean
      */
     function match($value, $pattern)

@@ -29,6 +29,7 @@ class JsonMatcher implements PropertyMatcher
         }
 
         $pattern = $this->transformPattern($pattern);
+
         return $this->matcher->match(json_decode($value, true), json_decode($pattern, true));
     }
 
@@ -43,6 +44,7 @@ class JsonMatcher implements PropertyMatcher
     private function isValidJson($string)
     {
         @json_decode($string, true);
+
         return (json_last_error() === JSON_ERROR_NONE);
     }
 
@@ -55,6 +57,7 @@ class JsonMatcher implements PropertyMatcher
     private function transformPattern($pattern)
     {
         $replacement = '$1"@$2@"$3';
+
         return preg_replace(self::REPLACE_PATTERN, $replacement, $pattern);
     }
 

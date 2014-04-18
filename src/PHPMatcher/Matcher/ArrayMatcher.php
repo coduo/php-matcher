@@ -50,8 +50,8 @@ class ArrayMatcher implements PropertyMatcher
     }
 
     /**
-     * @param array $value
-     * @param array $pattern
+     * @param  array $value
+     * @param  array $pattern
      * @return bool
      */
     private function iterateMatch(array $value, array $pattern)

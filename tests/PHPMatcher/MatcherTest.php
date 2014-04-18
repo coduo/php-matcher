@@ -165,7 +165,6 @@ class MatcherTest extends \PHPUnit_Framework_TestCase
             "nextPage": "@string@"
         }';
 
-
         $this->assertTrue($this->matcher->match($json, $jsonPattern));
         $this->assertTrue(match($json, $jsonPattern));
     }

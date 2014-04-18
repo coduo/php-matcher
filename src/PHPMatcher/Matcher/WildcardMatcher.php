@@ -4,6 +4,8 @@ namespace PHPMatcher\Matcher;
 
 class WildcardMatcher implements PropertyMatcher
 {
+    const MATCH_PATTERN = "/^@(\*|wildcard)@$/";
+
     /**
      * {@inheritDoc}
      */
@@ -17,7 +19,7 @@ class WildcardMatcher implements PropertyMatcher
      */
     public function canMatch($pattern)
     {
-        return is_string($pattern) && 0 !== preg_match("/^@(\*|wildcard)@$/", $pattern);
+        return is_string($pattern) && 0 !== preg_match(self::MATCH_PATTERN, $pattern);
     }
 
 }

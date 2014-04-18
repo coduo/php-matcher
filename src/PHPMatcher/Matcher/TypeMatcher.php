@@ -4,6 +4,8 @@ namespace PHPMatcher\Matcher;
 
 class TypeMatcher implements PropertyMatcher
 {
+    const MATCH_PATTERN = "/^@(string|integer|boolean|double|array)@$/";
+
     /**
      * {@inheritDoc}
      */
@@ -17,7 +19,7 @@ class TypeMatcher implements PropertyMatcher
      */
     public function canMatch($pattern)
     {
-        return is_string($pattern) && 0 !== preg_match("/^@(string|integer|boolean|double|array)@$/", $pattern);
+        return is_string($pattern) && 0 !== preg_match(self::MATCH_PATTERN, $pattern);
     }
 
     private function extractType($pattern)
