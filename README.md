@@ -1,8 +1,111 @@
-JsonMatcher
-========
-***JsonMatcher*** lets You assert Your json like a gangster in Your test cases.
+#Matcher
+
+***Matcher*** lets You assert like a gangster in Your test cases.
 
 [![Build Status](https://travis-ci.org/defrag/JsonMatcher.svg)](https://travis-ci.org/defrag/JsonMatcher)
+
+##Example usage
+
+### Scalar matching
+
+```php
+match(1, 1);
+match('string', 'string')
+```
+
+### Type matching
+
+```php
+
+match(1, '@integer@');
+match('Norbert', '@string@');
+match(array('foo', 'bar'), '@array');
+match(12.4, '@double@');
+match(true, '@boolean@');
+```
+
+### Wildcard 
+
+```php
+match(1, '@*@');
+match(new \stdClass(), '@wildcard@');
+```
+
+### Expression matching 
+
+```php
+match(new \DateTime('2014-04-01'), "expr(value.format('Y-m-d') == '2014-04-01'");
+match("Norbert", "expr(value === 'Norbert')");
+```
+
+### Array matching 
+
+```php
+match(
+   array(
+      'users' => array(
+          array(
+              'id' => 1,
+              'firstName' => 'Norbert',
+              'lastName' => 'Orzechowicz',
+              'roles' => array('ROLE_USER')
+          ),
+          array(
+              'id' => 2,
+              'firstName' => 'Michał',
+              'lastName' => 'Dąbrowski',
+              'roles' => array('ROLE_USER')
+          )
+      ),
+      true,
+      6.66
+  ),
+   array(
+      'users' => array(
+          array(
+              'id' => '@integer',
+              'firstName' => '@string@',
+              'lastName' => 'Orzechowicz',
+              'roles' => '@array@'
+          ),
+          array(
+              'id' => '@integer'
+              'firstName' => '@string@',
+              'lastName' => 'Dąbrowski',
+              'roles' => '@array@'
+          )
+      ),
+      '@boolean@',
+      '@double@'
+  )  
+)
+```
+
+### Json matching 
+
+
+```php
+match(
+  '{
+    "users":[
+      {
+        "firstName": "Norbert",
+        "lastName": "Orzechowicz",
+        "roles":["ROLE_USER", "ROLE_DEVELOPER"]}
+      ]
+  }',
+  '{
+    "users":[
+      {
+        "firstName": "@string@",
+        "lastName":" @string@",
+        "roles": "@array@"
+      }
+    ]
+  }'
+)
+
+```
 
 Example scenario for api in behat using mongo.
 ---
