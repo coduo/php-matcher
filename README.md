@@ -4,11 +4,25 @@
 
 [![Build Status](https://travis-ci.org/defrag/php-matcher.svg)](https://travis-ci.org/defrag/php-matcher)
 
+##Installation
+
+Add to your composer.json 
+
+```
+require: {
+   "defrag/php-matcher": "dev-master"
+}
+```
+
+From now you should be able to use global function ``match($value, $pattern)``
+
 ##Example usage
 
 ### Scalar matching
 
 ```php
+<?php
+
 match(1, 1);
 match('string', 'string')
 ```
@@ -16,6 +30,7 @@ match('string', 'string')
 ### Type matching
 
 ```php
+<?php
 
 match(1, '@integer@');
 match('Norbert', '@string@');
@@ -27,6 +42,8 @@ match(true, '@boolean@');
 ### Wildcard 
 
 ```php
+<?php
+
 match(1, '@*@');
 match(new \stdClass(), '@wildcard@');
 ```
@@ -34,6 +51,8 @@ match(new \stdClass(), '@wildcard@');
 ### Expression matching 
 
 ```php
+<?php
+
 match(new \DateTime('2014-04-01'), "expr(value.format('Y-m-d') == '2014-04-01'");
 match("Norbert", "expr(value === 'Norbert')");
 ```
@@ -41,6 +60,8 @@ match("Norbert", "expr(value === 'Norbert')");
 ### Array matching 
 
 ```php
+<?php
+
 match(
    array(
       'users' => array(
@@ -85,6 +106,8 @@ match(
 
 
 ```php
+<?php
+
 match(
   '{
     "users":[
