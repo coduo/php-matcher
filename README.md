@@ -47,17 +47,17 @@ public function testGetToys()
     $content = $response->getContent();
     $pattern = '[
         {
-          "id": "@string@",
+          "id": @string@,
           "name": "Barbie",
           "_links: "@*@"
         },
         {
-          "id": "@string@",
+          "id": @string@,
           "name": "GI Joe",
           "_links": "@*@"
         },
         {
-          "id": "@string@",
+          "id": @string@,
           "name": "Optimus Prime",
           "_links": "@*@"
         }
@@ -214,17 +214,17 @@ Feature: Listing user toys
     """
       [
         {
-          "id": "@string@",
+          "id": @string@,
           "name": "Barbie",
           "_links: "@*@"
         },
         {
-          "id": "@string@",
+          "id": @string@,
           "name": "GI Joe",
           "_links": "@*@"
         },
         {
-          "id": "@string@",
+          "id": @string@,
           "name": "Optimus Prime",
           "_links": "@*@"
         }
