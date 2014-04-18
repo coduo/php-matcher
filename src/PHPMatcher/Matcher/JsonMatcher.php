@@ -4,6 +4,8 @@ namespace PHPMatcher\Matcher;
 
 class JsonMatcher implements PropertyMatcher
 {
+    const REPLACE_PATTERN = '/([^"])@(integer|string|array|double|wildcard|boolean)@([^"])/';
+
     /**
      * @var
      */
@@ -41,11 +43,19 @@ class JsonMatcher implements PropertyMatcher
     private function isValidJson($string)
     {
         @json_decode($string, true);
-        return (json_last_error() == JSON_ERROR_NONE);
+        return (json_last_error() === JSON_ERROR_NONE);
     }
 
+    /**
+     * Wraps placeholders which arent wrapped with quotes yet
+     *
+     * @param $pattern
+     * @return mixed
+     */
     private function transformPattern($pattern)
     {
-        return preg_replace('/([^"])@(integer|string|array|double|wildcard|boolean)@([^"])/', '$1"@$2@"$3', $pattern);
+        $replacement = '$1"@$2@"$3';
+        return preg_replace(self::REPLACE_PATTERN, $replacement, $pattern);
     }
+
 }
