@@ -1,6 +1,6 @@
 <?php
 
-namespace JsonMatcher\Matcher;
+namespace PHPMatcher\Matcher;
 
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\Exception\NoSuchIndexException;

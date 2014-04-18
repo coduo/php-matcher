@@ -1,6 +1,6 @@
 <?php
 
-namespace JsonMatcher\Matcher;
+namespace PHPMatcher\Matcher;
 
 class TypeMatcher implements PropertyMatcher
 {

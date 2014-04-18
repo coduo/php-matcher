@@ -1,6 +1,6 @@
 <?php
 
-namespace JsonMatcher\Matcher;
+namespace PHPMatcher\Matcher;
 
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 

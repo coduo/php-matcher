@@ -1,14 +1,14 @@
 <?php
-namespace JsonMatcher\Tests;
+namespace PHPMatcher\Tests;
 
-use JsonMatcher\Matcher\ArrayMatcher;
-use JsonMatcher\Matcher\ChainMatcher;
-use JsonMatcher\Matcher\ExpressionMatcher;
-use JsonMatcher\Matcher\JsonMatcher;
-use JsonMatcher\Matcher\ScalarMatcher;
-use JsonMatcher\Matcher\TypeMatcher;
-use JsonMatcher\Matcher\WildcardMatcher;
-use JsonMatcher\Matcher;
+use PHPMatcher\Matcher\ArrayMatcher;
+use PHPMatcher\Matcher\ChainMatcher;
+use PHPMatcher\Matcher\ExpressionMatcher;
+use PHPMatcher\Matcher\JsonMatcher;
+use PHPMatcher\Matcher\ScalarMatcher;
+use PHPMatcher\Matcher\TypeMatcher;
+use PHPMatcher\Matcher\WildcardMatcher;
+use PHPMatcher\Matcher;
 
 class MatcherTest extends \PHPUnit_Framework_TestCase
 {

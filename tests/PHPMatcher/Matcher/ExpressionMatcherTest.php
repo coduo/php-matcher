@@ -1,7 +1,7 @@
 <?php
-namespace JsonMatcher\Tests\Matcher;
+namespace PHPMatcher\Tests\Matcher;
 
-use JsonMatcher\Matcher\ExpressionMatcher;
+use PHPMatcher\Matcher\ExpressionMatcher;
 
 class ExpressionMatcherTest extends \PHPUnit_Framework_TestCase
 {

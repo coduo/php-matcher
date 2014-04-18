@@ -1,7 +1,7 @@
 <?php
-namespace JsonMatcher;
+namespace PHPMatcher;
 
-use JsonMatcher\Matcher\PropertyMatcher;
+use PHPMatcher\Matcher\PropertyMatcher;
 
 class Matcher implements PropertyMatcher
 {

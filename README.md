@@ -1,6 +1,6 @@
 #Matcher
 
-***Matcher*** lets You assert like a gangster in Your test cases.
+***Matcher*** lets You assert like a gangster in Your test cases, where response can be something you cannot predict
 
 [![Build Status](https://travis-ci.org/defrag/JsonMatcher.svg)](https://travis-ci.org/defrag/JsonMatcher)
 

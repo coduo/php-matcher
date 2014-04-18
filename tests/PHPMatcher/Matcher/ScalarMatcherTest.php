@@ -1,7 +1,7 @@
 <?php 
-namespace JsonMatcher\Tests\Matcher;
+namespace PHPMatcher\Tests\Matcher;
 
-use JsonMatcher\Matcher\ScalarMatcher;
+use PHPMatcher\Matcher\ScalarMatcher;
 
 class ScalarMatcherTest extends \PHPUnit_Framework_TestCase
 {

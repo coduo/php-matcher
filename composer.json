@@ -1,7 +1,7 @@
 {
-    "name": "defrag/json-matcher",
+    "name": "defrag/php-matcher",
     "type": "library",
-    "keywords": ["json", "matcher"],
+    "keywords": ["json", "matcher", "tests"],
     "license": "MIT",    
     "require": {
         "php": ">=5.3.0",
@@ -13,8 +13,8 @@
     },
     "autoload": {
         "psr-0": {
-            "JsonMatcher": "src/",
-            "JsonMatcher\\Tests": "tests/"
+            "PHPMatcher": "src/",
+            "PHPMatcher\\Tests": "tests/"
         },
         "files": ["match.php"]
     },

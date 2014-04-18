@@ -1,7 +1,7 @@
 <?php
-namespace JsonMatcher\Tests\Matcher;
+namespace PHPMatcher\Tests\Matcher;
 
-use JsonMatcher\Matcher\TypeMatcher;
+use PHPMatcher\Matcher\TypeMatcher;
 
 class TypeMatcherTest extends \PHPUnit_Framework_TestCase
 {

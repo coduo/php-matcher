@@ -1,10 +1,10 @@
 <?php
-namespace JsonMatcher\Tests\Matcher;
+namespace PHPMatcher\Tests\Matcher;
 
-use JsonMatcher\Matcher\ArrayMatcher;
-use JsonMatcher\Matcher\ChainMatcher;
-use JsonMatcher\Matcher\ScalarMatcher;
-use JsonMatcher\Matcher\WildcardMatcher;
+use PHPMatcher\Matcher\ArrayMatcher;
+use PHPMatcher\Matcher\ChainMatcher;
+use PHPMatcher\Matcher\ScalarMatcher;
+use PHPMatcher\Matcher\WildcardMatcher;
 
 class ArrayMatcherTest extends \PHPUnit_Framework_TestCase
 {

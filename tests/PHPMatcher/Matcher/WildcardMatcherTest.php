@@ -1,7 +1,7 @@
 <?php
-namespace JsonMatcher\Tests\Matcher;
+namespace PHPMatcher\Tests\Matcher;
 
-use JsonMatcher\Matcher\WildcardMatcher;
+use PHPMatcher\Matcher\WildcardMatcher;
 
 class WildcardMatcherTest extends \PHPUnit_Framework_TestCase
 {
