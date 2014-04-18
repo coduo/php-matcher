@@ -49,17 +49,17 @@ public function testGetToys()
         {
           "id": @string@,
           "name": "Barbie",
-          "_links: "@*@"
+          "_links: @*@
         },
         {
           "id": @string@,
           "name": "GI Joe",
-          "_links": "@*@"
+          "_links": @*@
         },
         {
           "id": @string@,
           "name": "Optimus Prime",
-          "_links": "@*@"
+          "_links": @*@
         }
       ]
    ';
@@ -174,9 +174,9 @@ match(
   '{
     "users":[
       {
-        "firstName": "@string@",
-        "lastName":" @string@",
-        "roles": "@array@"
+        "firstName": @string@,
+        "lastName": @string@,
+        "roles": @array@
       }
     ]
   }'
