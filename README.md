@@ -14,6 +14,60 @@ require: {
 }
 ```
 
+### Ways of testing
+Common way of testing api responses with Symfony2 WebTestCase
+
+```php
+public function testGetToys()
+{
+    $this->setUpFixtures();
+    $this->setUpOath();
+    $this->client->request('GET', '/api/toys');
+    $response = $this->client->getResponse();
+    $this->assertJsonResponse($response, 200);
+    $content = $response->getContent();
+    $decoded = json_decode($content, true);
+    $this->assertTrue(isset($decoded[0]['id']));
+    $this->assertTrue(isset($decoded[1]['id']));
+    $this->assertTrue(isset($decoded[2]['id']));
+    $this->assertEquals($decoded[0]['name'], 'Barbie'));
+    $this->assertEquals($decoded[1]['name'], 'GI Joe'));
+    $this->assertEquals($decoded[2]['name'], 'Optimus Prime'));
+}
+```
+With php-matcher, you can make it more readable to the person reading the test:
+```php
+public function testGetToys()
+{
+    $this->setUpFixtures();
+    $this->setUpOath();
+    $this->client->request('GET', '/api/toys');
+    $response = $this->client->getResponse();
+    $this->assertJsonResponse($response, 200);
+    $content = $response->getContent();
+    $pattern = '[
+        {
+          "id": "@string@",
+          "name": "Barbie",
+          "_links: "@*@"
+        },
+        {
+          "id": "@string@",
+          "name": "GI Joe",
+          "_links": "@*@"
+        },
+        {
+          "id": "@string@",
+          "name": "Optimus Prime",
+          "_links": "@*@"
+        }
+      ]
+   ';
+   $this->assertEquals(match($content, $pattern));
+}
+```
+
+
 From now you should be able to use global function ``match($value, $pattern)``
 
 ##Example usage
