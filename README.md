@@ -1,6 +1,6 @@
-#Matcher
+#PHP Matcher
 
-***Matcher*** lets You assert like a gangster in Your test cases, where response can be something you cannot predict
+***PHP Matcher*** lets You assert like a gangster in Your test cases, where response can be something you cannot predict
 
 [![Build Status](https://travis-ci.org/defrag/php-matcher.svg)](https://travis-ci.org/defrag/php-matcher)
 
