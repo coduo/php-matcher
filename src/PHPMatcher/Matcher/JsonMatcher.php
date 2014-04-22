@@ -4,7 +4,8 @@ namespace PHPMatcher\Matcher;
 
 class JsonMatcher implements PropertyMatcher
 {
-    const REPLACE_PATTERN = '/([^"])@(integer|string|array|double|wildcard|boolean)@([^"])/';
+    const TRANSFORM_QUOTATION_PATTERN = '/([^"])@(integer|string|array|double|wildcard|boolean)@([^"])/';
+    const TRANSFORM_QUOTATION_REPLACEMENT = '$1"@$2@"$3';
 
     /**
      * @var
@@ -57,9 +58,7 @@ class JsonMatcher implements PropertyMatcher
      */
     private function transformPattern($pattern)
     {
-        $replacement = '$1"@$2@"$3';
-
-        return preg_replace(self::REPLACE_PATTERN, $replacement, $pattern);
+        return preg_replace(self::TRANSFORM_QUOTATION_PATTERN, self::TRANSFORM_QUOTATION_REPLACEMENT, $pattern);
     }
 
 }
