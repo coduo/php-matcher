@@ -38,6 +38,7 @@ class JsonMatcher implements PropertyMatcher
      */
     public function canMatch($pattern)
     {
+        $pattern = $this->transformPattern($pattern);
         return is_string($pattern) && $this->isValidJson($pattern);
     }
 
