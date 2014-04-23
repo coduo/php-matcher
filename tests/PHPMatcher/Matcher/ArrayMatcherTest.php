@@ -39,6 +39,17 @@ class ArrayMatcherTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->matcher->match($value, $pattern));
     }
 
+    public function test_negative_match_when_cant_find_matcher_that_can_match_array_element()
+    {
+        $matcher = new ArrayMatcher(
+            new ChainMatcher(array(
+                new WildcardMatcher()
+            ))
+        );
+
+        $this->assertFalse($matcher->match(array('test' => 1), array('test' => 1)));
+    }
+
     public static function positiveMatchData()
     {
         $simpleArr =  array(
