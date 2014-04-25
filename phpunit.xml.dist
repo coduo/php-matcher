@@ -17,7 +17,7 @@
     </testsuites>
     <filter>
         <whitelist>
-            <directory>./src/PHPMatcher/</directory>
+            <directory>./src/Coduo/PHPMatcher/</directory>
         </whitelist>
     </filter>
 </phpunit>

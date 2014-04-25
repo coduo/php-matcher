@@ -1,7 +1,7 @@
 <?php
-namespace PHPMatcher\Tests\Matcher;
+namespace Coduo\PHPMatcher\Tests\Matcher;
 
-use PHPMatcher\Matcher\WildcardMatcher;
+use Coduo\PHPMatcher\Matcher\WildcardMatcher;
 
 class WildcardMatcherTest extends \PHPUnit_Framework_TestCase
 {

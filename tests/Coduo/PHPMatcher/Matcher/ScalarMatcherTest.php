@@ -1,7 +1,7 @@
 <?php
-namespace PHPMatcher\Tests\Matcher;
+namespace Coduo\PHPMatcher\Tests\Matcher;
 
-use PHPMatcher\Matcher\ScalarMatcher;
+use Coduo\PHPMatcher\Matcher\ScalarMatcher;
 
 class ScalarMatcherTest extends \PHPUnit_Framework_TestCase
 {

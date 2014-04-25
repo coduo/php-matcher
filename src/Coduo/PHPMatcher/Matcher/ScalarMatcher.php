@@ -1,6 +1,6 @@
 <?php
 
-namespace PHPMatcher\Matcher;
+namespace Coduo\PHPMatcher\Matcher;
 
 class ScalarMatcher implements PropertyMatcher
 {

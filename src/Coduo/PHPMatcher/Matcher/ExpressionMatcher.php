@@ -1,6 +1,6 @@
 <?php
 
-namespace PHPMatcher\Matcher;
+namespace Coduo\PHPMatcher\Matcher;
 
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 

@@ -1,7 +1,7 @@
 <?php
-namespace PHPMatcher\Tests\Matcher;
+namespace Coduo\PHPMatcher\Tests\Matcher;
 
-use PHPMatcher\Matcher\ExpressionMatcher;
+use Coduo\PHPMatcher\Matcher\ExpressionMatcher;
 
 class ExpressionMatcherTest extends \PHPUnit_Framework_TestCase
 {

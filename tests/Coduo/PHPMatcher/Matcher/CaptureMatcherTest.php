@@ -1,7 +1,7 @@
 <?php
-namespace PHPMatcher\Tests\Matcher;
+namespace Coduo\PHPMatcher\Tests\Matcher;
 
-use PHPMatcher\Matcher\CaptureMatcher;
+use Coduo\PHPMatcher\Matcher\CaptureMatcher;
 
 class CaptureMatcherTest extends \PHPUnit_Framework_TestCase
 {

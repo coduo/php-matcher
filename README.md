@@ -2,7 +2,7 @@
 
 ***PHP Matcher*** lets You assert like a gangster in Your test cases, where response can be something you cannot predict
 
-[![Build Status](https://travis-ci.org/defrag/php-matcher.svg)](https://travis-ci.org/defrag/php-matcher)
+[![Build Status](https://travis-ci.org/coduo/php-matcher.svg)](https://travis-ci.org/coduo/php-matcher)
 
 ##Installation
 
@@ -10,7 +10,7 @@ Add to your composer.json
 
 ```
 require: {
-   "defrag/php-matcher": "dev-master"
+   "coduo/php-matcher": "dev-master"
 }
 ```
 
@@ -63,7 +63,7 @@ public function testGetToys()
         }
       ]
    ';
-   $this->assertEquals(match($content, $pattern));
+   $this->assertTrue(match($content, $pattern));
 }
 ```
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace PHPMatcher\Matcher;
+namespace Coduo\PHPMatcher\Matcher;
 
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\Exception\NoSuchIndexException;

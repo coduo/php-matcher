@@ -1,7 +1,7 @@
 <?php
-namespace PHPMatcher;
+namespace Coduo\PHPMatcher;
 
-use PHPMatcher\Matcher\PropertyMatcher;
+use Coduo\PHPMatcher\Matcher\PropertyMatcher;
 
 class Matcher implements PropertyMatcher
 {

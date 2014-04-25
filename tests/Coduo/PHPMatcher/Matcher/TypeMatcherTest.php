@@ -1,7 +1,7 @@
 <?php
-namespace PHPMatcher\Tests\Matcher;
+namespace Coduo\PHPMatcher\Tests\Matcher;
 
-use PHPMatcher\Matcher\TypeMatcher;
+use Coduo\PHPMatcher\Matcher\TypeMatcher;
 
 class TypeMatcherTest extends \PHPUnit_Framework_TestCase
 {

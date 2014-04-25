@@ -1,10 +1,10 @@
 <?php
-namespace PHPMatcher\Tests\Matcher;
+namespace Coduo\PHPMatcher\Tests\Matcher;
 
-use PHPMatcher\Matcher\ArrayMatcher;
-use PHPMatcher\Matcher\ChainMatcher;
-use PHPMatcher\Matcher\ScalarMatcher;
-use PHPMatcher\Matcher\WildcardMatcher;
+use Coduo\PHPMatcher\Matcher\ArrayMatcher;
+use Coduo\PHPMatcher\Matcher\ChainMatcher;
+use Coduo\PHPMatcher\Matcher\ScalarMatcher;
+use Coduo\PHPMatcher\Matcher\WildcardMatcher;
 
 class ArrayMatcherTest extends \PHPUnit_Framework_TestCase
 {

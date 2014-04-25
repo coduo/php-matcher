@@ -1,5 +1,5 @@
 {
-    "name": "defrag/php-matcher",
+    "name": "coduo/php-matcher",
     "type": "library",
     "keywords": ["json", "matcher", "tests"],
     "license": "MIT", 
@@ -23,8 +23,8 @@
     },
     "autoload": {
         "psr-0": {
-            "PHPMatcher": "src/",
-            "PHPMatcher\\Tests": "tests/"
+            "Coduo\\PHPMatcher": "src/",
+            "Coduo\\PHPMatcher\\Tests": "tests/"
         },
         "files": ["match.php"]
     },
