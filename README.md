@@ -236,7 +236,7 @@ Feature: Listing user toys
 
 This library is distributed under the MIT license. Please see the LICENSE file.
 
-# Credits
+## Credits
 
 This lib was inspired by [JSON Expressions gem](https://github.com/chancancode/json_expressions) && [Behat RestExtension ](https://github.com/jakzal/RestExtension)
 
