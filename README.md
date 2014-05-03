@@ -35,7 +35,7 @@ public function testGetToys()
     $this->assertEquals($decoded[2]['name'], 'Optimus Prime'));
 }
 ```
-With php-matcher, you can make it more readable to the person reading the test:
+With php-matcher, you can make it more readable:
 ```php
 public function testGetToys()
 {
