@@ -3,7 +3,7 @@ namespace Coduo\PHPMatcher;
 
 use Coduo\PHPMatcher\Matcher\PropertyMatcher;
 
-class Matcher implements PropertyMatcher
+class Matcher
 {
     /**
      * @var Matcher\PropertyMatcher
@@ -18,10 +18,5 @@ class Matcher implements PropertyMatcher
     public function match($value, $pattern)
     {
         return $this->matcher->match($value, $pattern);
-    }
-
-    public function canMatch($pattern)
-    {
-        return true;
     }
 }
