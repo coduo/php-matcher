@@ -21,4 +21,10 @@ interface PropertyMatcher
      */
     public function canMatch($pattern);
 
+    /**
+     * Returns a string description why matching failed
+     *
+     * @return null|string
+     */
+    public function getError();
 }

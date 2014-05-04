@@ -50,6 +50,18 @@ class ArrayMatcherTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($matcher->match(array('test' => 1), array('test' => 1)));
     }
 
+    public function test_error_when_path_does_not_exist()
+    {
+        $this->assertFalse($this->matcher->match(array('foo' => 'foo value'), array('bar' => 'bar value')));
+        $this->assertEquals($this->matcher->getError(), 'There is no element under path [foo] in pattern array.');
+    }
+
+    public function test_error_when_matching_fail()
+    {
+        $this->assertFalse($this->matcher->match(array('foo' => 'foo value'), array('foo' => 'bar value')));
+        $this->assertEquals($this->matcher->getError(), '"foo value" does not match "bar value".');
+    }
+
     public static function positiveMatchData()
     {
         $simpleArr =  array(

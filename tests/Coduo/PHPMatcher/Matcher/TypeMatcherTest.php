@@ -41,6 +41,16 @@ class TypeMatcherTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($matcher->match($value, $pattern));
     }
 
+    /**
+     * @dataProvider negativeMatchDescription
+     */
+    public function test_negative_match_description($value, $pattern, $error)
+    {
+        $matcher = new TypeMatcher();
+        $matcher->match($value, $pattern);
+        $this->assertEquals($error, $matcher->getError());
+    }
+
     public static function positiveCanMatchData()
     {
         return array(
@@ -83,6 +93,17 @@ class TypeMatcherTest extends \PHPUnit_Framework_TestCase
             array(1.1, "@integer@"),
             array(false, "@double@"),
             array(1, "@array@")
+        );
+    }
+
+    public static function negativeMatchDescription()
+    {
+        return array(
+            array("test", "@boolean@", "string \"test\" does not match @boolean@ pattern."),
+            array(new \stdClass,  "@string@", "object \"\\stdClass\" does not match @string@ pattern."),
+            array(1.1, "@integer@", "double \"1.1\" does not match @integer@ pattern."),
+            array(false, "@double@", "boolean \"false\" does not match @double@ pattern."),
+            array(1, "@array@", "integer \"1\" does not match @array@ pattern.")
         );
     }
 }

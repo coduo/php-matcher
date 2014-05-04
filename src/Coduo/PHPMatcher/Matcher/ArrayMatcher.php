@@ -6,14 +6,12 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\Exception\NoSuchIndexException;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 
-class ArrayMatcher implements PropertyMatcher
+class ArrayMatcher extends Matcher
 {
     /**
      * @var PropertyMatcher
      */
     private $propertyMatcher;
-
-    private $paths;
 
     /**
      * @var PropertyAccessor
@@ -60,6 +58,7 @@ class ArrayMatcher implements PropertyMatcher
             $path = sprintf("[%s]", $key);
 
             if (!$this->hasValue($pattern, $path)) {
+                $this->error = sprintf('There is no element under path %s in pattern array.', $path);
                 return false;
             }
             $elementPattern = $this->getValue($pattern, $path);
@@ -70,6 +69,7 @@ class ArrayMatcher implements PropertyMatcher
             }
 
             if (!is_array($element)) {
+                $this->error = $this->propertyMatcher->getError();
                 return false;
             }
 

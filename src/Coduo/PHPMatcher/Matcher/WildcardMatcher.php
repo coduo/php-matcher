@@ -2,7 +2,7 @@
 
 namespace Coduo\PHPMatcher\Matcher;
 
-class WildcardMatcher implements PropertyMatcher
+class WildcardMatcher extends Matcher
 {
     const MATCH_PATTERN = "/^@(\*|wildcard)@$/";
 
@@ -21,5 +21,4 @@ class WildcardMatcher implements PropertyMatcher
     {
         return is_string($pattern) && 0 !== preg_match(self::MATCH_PATTERN, $pattern);
     }
-
 }

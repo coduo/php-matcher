@@ -41,6 +41,16 @@ class ScalarMatcherTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($matcher->match($value, $pattern));
     }
 
+    /**
+     * @dataProvider negativeMatchDescription
+     */
+    public function test_negative_match_description($value, $pattern, $error)
+    {
+        $matcher = new ScalarMatcher();
+        $matcher->match($value, $pattern);
+        $this->assertEquals($error, $matcher->getError());
+    }
+
     public static function negativeMatches()
     {
         return array(
@@ -77,6 +87,16 @@ class ScalarMatcherTest extends \PHPUnit_Framework_TestCase
         return array(
             array(new \stdClass),
             array(array())
+        );
+    }
+
+    public static function negativeMatchDescription()
+    {
+        return array(
+            array("test", "norbert", "\"test\" does not match \"norbert\"."),
+            array(new \stdClass,  1, "\"\\stdClass\" does not match \"1\"."),
+            array(1.1, false, "\"1.1\" does not match \"false\"."),
+            array(false, array('foo', 'bar'), "\"false\" does not match \"Array(2)\"."),
         );
     }
 }

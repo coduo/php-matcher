@@ -2,14 +2,21 @@
 
 namespace Coduo\PHPMatcher\Matcher;
 
-class ScalarMatcher implements PropertyMatcher
+use Coduo\ToString\String;
+
+class ScalarMatcher extends Matcher
 {
     /**
      * {@inheritDoc}
      */
     public function match($value, $pattern)
     {
-        return $value === $pattern;
+        if ($value !== $pattern) {
+            $this->error = sprintf("\"%s\" does not match \"%s\".", new String($value), new String($pattern));
+            return false;
+        }
+
+        return true;
     }
 
     /**
