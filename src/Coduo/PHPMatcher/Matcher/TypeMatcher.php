@@ -2,7 +2,9 @@
 
 namespace Coduo\PHPMatcher\Matcher;
 
-class TypeMatcher implements PropertyMatcher
+use Coduo\ToString\String;
+
+class TypeMatcher extends Matcher
 {
     const MATCH_PATTERN = "/^@(string|integer|boolean|double|array)@$/";
 
@@ -11,7 +13,12 @@ class TypeMatcher implements PropertyMatcher
      */
     public function match($value, $pattern)
     {
-        return gettype($value) === $this->extractType($pattern);
+        if (gettype($value) !== $this->extractType($pattern)) {
+            $this->error = sprintf("%s \"%s\" does not match %s pattern.", gettype($value), new String($value), $pattern);
+            return false;
+        }
+
+        return true;
     }
 
     /**
@@ -21,6 +28,7 @@ class TypeMatcher implements PropertyMatcher
     {
         return is_string($pattern) && 0 !== preg_match(self::MATCH_PATTERN, $pattern);
     }
+
 
     private function extractType($pattern)
     {

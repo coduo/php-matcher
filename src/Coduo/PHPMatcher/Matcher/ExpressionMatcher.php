@@ -2,9 +2,10 @@
 
 namespace Coduo\PHPMatcher\Matcher;
 
+use Coduo\ToString\String;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
-class ExpressionMatcher implements PropertyMatcher
+class ExpressionMatcher extends Matcher
 {
     const MATCH_PATTERN = "/^expr\((.*?)\)$/";
 
@@ -15,8 +16,13 @@ class ExpressionMatcher implements PropertyMatcher
     {
         $language = new ExpressionLanguage();
         preg_match(self::MATCH_PATTERN, $pattern, $matches);
+        $expressionResult = $language->evaluate($matches[1], array('value' => $value));
 
-        return $language->evaluate($matches[1], array('value' => $value));
+        if (!$expressionResult) {
+            $this->error = sprintf("\"%s\" expression fails for value \"%s\".", $pattern, new String($value));
+        }
+
+        return $expressionResult;
     }
 
     /**

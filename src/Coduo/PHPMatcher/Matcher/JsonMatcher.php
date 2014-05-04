@@ -2,7 +2,7 @@
 
 namespace Coduo\PHPMatcher\Matcher;
 
-class JsonMatcher implements PropertyMatcher
+class JsonMatcher extends Matcher
 {
     const TRANSFORM_QUOTATION_PATTERN = '/([^"])@(integer|string|array|double|wildcard|boolean)@([^"])/';
     const TRANSFORM_QUOTATION_REPLACEMENT = '$1"@$2@"$3';
@@ -30,8 +30,13 @@ class JsonMatcher implements PropertyMatcher
         }
 
         $pattern = $this->transformPattern($pattern);
+        $match = $this->matcher->match(json_decode($value, true), json_decode($pattern, true));
+        if (!$match) {
+            $this->error = $this->matcher->getError();
+            return false;
+        }
 
-        return $this->matcher->match(json_decode($value, true), json_decode($pattern, true));
+        return true;
     }
 
     /**

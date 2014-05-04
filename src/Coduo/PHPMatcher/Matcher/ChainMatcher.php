@@ -2,15 +2,26 @@
 
 namespace Coduo\PHPMatcher\Matcher;
 
-class ChainMatcher implements PropertyMatcher
+use Coduo\ToString\String;
+
+class ChainMatcher extends Matcher
 {
+    /**
+     * @var array|PropertyMatcher[]
+     */
     private $matchers;
 
+    /**
+     * @param array|PropertyMatcher[] $matchers
+     */
     public function __construct(array $matchers = array())
     {
         $this->matchers = $matchers;
     }
 
+    /**
+     * @param PropertyMatcher $matcher
+     */
     public function addMatcher(PropertyMatcher $matcher)
     {
         $this->matchers[] = $matcher;
@@ -26,7 +37,17 @@ class ChainMatcher implements PropertyMatcher
                 if (true === $propertyMatcher->match($value, $pattern)) {
                     return true;
                 }
+
+                $this->error = $propertyMatcher->getError();
             }
+        }
+
+        if (!isset($this->error)) {
+            $this->error = sprintf(
+                'Any matcher from chain can\'t match value "%s" to pattern "%s"',
+                new String($value),
+                new String($pattern)
+            );
         }
 
         return false;
@@ -39,5 +60,4 @@ class ChainMatcher implements PropertyMatcher
     {
         return true;
     }
-
 }

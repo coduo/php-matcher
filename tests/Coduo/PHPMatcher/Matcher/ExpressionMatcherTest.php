@@ -41,6 +41,16 @@ class ExpressionMatcherTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($matcher->match($value, $pattern));
     }
 
+    /**
+     * @dataProvider negativeMatchDescription
+     */
+    public function test_negative_match_description($value, $pattern, $error)
+    {
+        $matcher = new ExpressionMatcher();
+        $matcher->match($value, $pattern);
+        $this->assertEquals($error, $matcher->getError());
+    }
+
     public static function positiveCanMatchData()
     {
         return array(
@@ -74,6 +84,18 @@ class ExpressionMatcherTest extends \PHPUnit_Framework_TestCase
         return array(
             array(4, "expr(value < 2)"),
             array("foo", "expr(value != 'foo')"),
+        );
+    }
+
+    public static function negativeMatchDescription()
+    {
+        return array(
+            array(4, "expr(value < 2)", "\"expr(value < 2)\" expression fails for value \"4\"."),
+            array(
+                new \DateTime('2014-04-01'),
+                "expr(value.format('Y-m-d') == '2014-04-02')",
+                "\"expr(value.format('Y-m-d') == '2014-04-02')\" expression fails for value \"\\DateTime\"."
+            ),
         );
     }
 }

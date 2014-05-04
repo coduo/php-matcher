@@ -2,7 +2,7 @@
 
 namespace Coduo\PHPMatcher\Matcher;
 
-class CaptureMatcher implements PropertyMatcher, \ArrayAccess
+class CaptureMatcher extends Matcher implements \ArrayAccess
 {
     const MATCH_PATTERN = "/^:.*:$/";
 
@@ -39,6 +39,7 @@ class CaptureMatcher implements PropertyMatcher, \ArrayAccess
             $this->captures[$offset] = $value;
         }
     }
+
     public function offsetExists($offset)
     {
         return isset($this->captures[$offset]);

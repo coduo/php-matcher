@@ -60,6 +60,25 @@ class JsonMatcherTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->matcher->match($value, $pattern));
     }
 
+    public function test_error_when_matching_fail()
+    {
+        $value = json_encode(array(
+            'users' => array(
+                array('name' => 'Norbert'),
+                array('name' => 'Michał')
+            )
+        ));
+        $pattern = json_encode(array(
+            'users' => array(
+                array('name' => '@string@'),
+                array('name' => '@boolean@')
+            )
+        ));
+
+        $this->assertFalse($this->matcher->match($value, $pattern));
+        $this->assertEquals($this->matcher->getError(), '"Michał" does not match "@boolean@".');
+    }
+
     public static function positivePatterns()
     {
         return array(
