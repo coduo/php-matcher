@@ -10,7 +10,7 @@ Add to your composer.json
 
 ```
 require: {
-   "coduo/php-matcher": "dev-master"
+   "coduo/php-matcher": "1.0.*"
 }
 ```
 
