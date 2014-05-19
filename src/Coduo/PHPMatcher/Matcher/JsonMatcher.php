@@ -44,8 +44,11 @@ class JsonMatcher extends Matcher
      */
     public function canMatch($pattern)
     {
-        $pattern = $this->transformPattern($pattern);
-        return is_string($pattern) && $this->isValidJson($pattern);
+        if (!is_string($pattern)) {
+            return false;
+        }
+
+        return $this->isValidJson($this->transformPattern($pattern));
     }
 
     private function isValidJson($string)
