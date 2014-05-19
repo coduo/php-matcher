@@ -2,6 +2,7 @@
 namespace Coduo\PHPMatcher\Tests;
 
 use Coduo\PHPMatcher\Matcher\ArrayMatcher;
+use Coduo\PHPMatcher\Matcher\CallbackMatcher;
 use Coduo\PHPMatcher\Matcher\ChainMatcher;
 use Coduo\PHPMatcher\Matcher\ExpressionMatcher;
 use Coduo\PHPMatcher\Matcher\JsonMatcher;
@@ -12,13 +13,15 @@ use Coduo\PHPMatcher\Matcher;
 
 class MatcherTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var Matcher
+     */
     protected $matcher;
-
-    protected $arrayValue;
 
     public function setUp()
     {
         $scalarMatchers = new ChainMatcher(array(
+            new CallbackMatcher(),
             new ExpressionMatcher(),
             new TypeMatcher(),
             new ScalarMatcher(),
@@ -32,8 +35,11 @@ class MatcherTest extends \PHPUnit_Framework_TestCase
             $arrayMatcher,
             new JsonMatcher($arrayMatcher)
         )));
+    }
 
-        $this->arrayValue = array(
+    public function test_matcher_with_array_value()
+    {
+        $value = array(
             'users' => array(
                 array(
                     'id' => 1,
@@ -51,73 +57,47 @@ class MatcherTest extends \PHPUnit_Framework_TestCase
             'readyToUse' => true,
             'data' => new \stdClass(),
         );
+
+        $expecation = array(
+            'users' => array(
+                array(
+                    'id' => '@integer@',
+                    'firstName' => '@string@',
+                    'lastName' => 'Orzechowicz',
+                    'enabled' => '@boolean@'
+                ),
+                array(
+                    'id' => '@integer@',
+                    'firstName' => '@string@',
+                    'lastName' => 'Dąbrowski',
+                    'enabled' => '@boolean@',
+                )
+            ),
+            'readyToUse' => true,
+            'data' => '@wildcard@',
+        );
+
+        $this->assertTrue($this->matcher->match($value, $expecation));
+        $this->assertTrue(match($value, $expecation));
     }
 
-    public function test_matcher_with_array_value()
+    /**
+     * @dataProvider scalarValues
+     */
+    public function test_matcher_with_scalar_values($value, $pattern)
     {
-        $this->assertTrue($this->matcher->match(
-            $this->arrayValue,
-            array(
-                'users' => array(
-                    array(
-                        'id' => '@integer@',
-                        'firstName' => '@string@',
-                        'lastName' => 'Orzechowicz',
-                        'enabled' => '@boolean@'
-                    ),
-                    array(
-                        'id' => '@integer@',
-                        'firstName' => '@string@',
-                        'lastName' => 'Dąbrowski',
-                        'enabled' => '@boolean@',
-                    )
-                ),
-                'readyToUse' => true,
-                'data' => '@wildcard@',
-            )
-        ));
-
-        $this->assertTrue(match(
-            $this->arrayValue,
-            array(
-                'users' => array(
-                    array(
-                        'id' => '@integer@',
-                        'firstName' => '@string@',
-                        'lastName' => 'Orzechowicz',
-                        'enabled' => '@boolean@'
-                    ),
-                    array(
-                        'id' => '@integer@',
-                        'firstName' => '@string@',
-                        'lastName' => 'Dąbrowski',
-                        'enabled' => '@boolean@',
-                    )
-                ),
-                'readyToUse' => true,
-                'data' => '@wildcard@',
-            )
-        ));
+        $this->assertTrue($this->matcher->match($value, $pattern));
+        $this->assertTrue(match($value, $pattern));
     }
 
-    public function test_matcher_with_scalar_values()
+    public function scalarValues()
     {
-        $this->assertTrue($this->matcher->match(
-            'Norbert Orzechowicz',
-            '@string@'
-        ));
-        $this->assertTrue(match(
-            'Norbert Orzechowicz',
-            '@string@'
-        ));
-        $this->assertTrue($this->matcher->match(
-            6.66,
-            '@double@'
-        ));
-        $this->assertTrue(match(
-            6.66,
-            '@double@'
-        ));
+        return array(
+            array('Norbert Orzechowicz', '@string@'),
+            array(6.66, '@double@'),
+            array(1, '@integer@'),
+            array(array('foo'), '@array@')
+        );
     }
 
     public function test_matcher_with_json()
@@ -167,5 +147,17 @@ class MatcherTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($this->matcher->match($json, $jsonPattern));
         $this->assertTrue(match($json, $jsonPattern));
+    }
+
+    function test_matcher_with_callback()
+    {
+        $this->assertTrue($this->matcher->match('test', function($value) { return $value === 'test';}));
+        $this->assertFalse($this->matcher->match('test', function($value) { return $value !== 'test';}));
+    }
+
+    function test_matcher_with_wildcard()
+    {
+        $this->assertTrue($this->matcher->match('test', '@*@'));
+        $this->assertTrue($this->matcher->match('test', '@wildcard@'));
     }
 }
