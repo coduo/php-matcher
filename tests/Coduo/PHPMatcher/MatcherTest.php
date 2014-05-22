@@ -2,6 +2,7 @@
 namespace Coduo\PHPMatcher\Tests;
 
 use Coduo\PHPMatcher\Matcher\ArrayMatcher;
+use Coduo\PHPMatcher\Matcher\CaptureMatcher;
 use Coduo\PHPMatcher\Matcher\ChainMatcher;
 use Coduo\PHPMatcher\Matcher\ExpressionMatcher;
 use Coduo\PHPMatcher\Matcher\JsonMatcher;
@@ -16,10 +17,16 @@ class MatcherTest extends \PHPUnit_Framework_TestCase
 
     protected $arrayValue;
 
+    protected $captureMatcher;
+
     public function setUp()
     {
+        $this->captureMatcher = new CaptureMatcher();
+
         $scalarMatchers = new ChainMatcher(array(
             new ExpressionMatcher(),
+            $this->captureMatcher,
+            new CaptureMatcher(),
             new TypeMatcher(),
             new ScalarMatcher(),
             new WildcardMatcher()
@@ -167,5 +174,14 @@ class MatcherTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($this->matcher->match($json, $jsonPattern));
         $this->assertTrue(match($json, $jsonPattern));
+    }
+
+    public function test_matcher_with_captures()
+    {
+        $this->assertTrue($this->matcher->match(
+            array('foo' => 'bar', 'user' => array('id' => 5)),
+            array('foo' => 'bar', 'user' => array('id' => ':uid:'))
+        ));
+        $this->assertEquals($this->captureMatcher['uid'], 5);
     }
 }

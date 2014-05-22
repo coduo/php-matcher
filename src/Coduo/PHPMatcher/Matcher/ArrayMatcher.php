@@ -3,7 +3,6 @@
 namespace Coduo\PHPMatcher\Matcher;
 
 use Symfony\Component\PropertyAccess\PropertyAccess;
-use Symfony\Component\PropertyAccess\Exception\NoSuchIndexException;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 
 class ArrayMatcher extends Matcher
@@ -86,13 +85,7 @@ class ArrayMatcher extends Matcher
      */
     private function hasValue($array, $path)
     {
-        try {
-            $this->getPropertyAccessor()->getValue($array, $path);
-        } catch (NoSuchIndexException $e) {
-            return false;
-        }
-
-        return true;
+        return null !== $this->getPropertyAccessor()->getValue($array, $path);
     }
 
     /**
@@ -115,7 +108,6 @@ class ArrayMatcher extends Matcher
         }
 
         $accessorBuilder = PropertyAccess::createPropertyAccessorBuilder();
-        $accessorBuilder->enableExceptionOnInvalidIndex();
         $this->accessor = $accessorBuilder->getPropertyAccessor();
 
         return $this->accessor;
