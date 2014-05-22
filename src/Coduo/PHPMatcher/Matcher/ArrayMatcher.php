@@ -86,13 +86,7 @@ class ArrayMatcher extends Matcher
      */
     private function hasValue($array, $path)
     {
-        try {
-            $this->getPropertyAccessor()->getValue($array, $path);
-        } catch (NoSuchIndexException $e) {
-            return false;
-        }
-
-        return true;
+        return null !== $this->getPropertyAccessor()->getValue($array, $path);
     }
 
     /**
@@ -115,7 +109,6 @@ class ArrayMatcher extends Matcher
         }
 
         $accessorBuilder = PropertyAccess::createPropertyAccessorBuilder();
-        $accessorBuilder->enableExceptionOnInvalidIndex();
         $this->accessor = $accessorBuilder->getPropertyAccessor();
 
         return $this->accessor;

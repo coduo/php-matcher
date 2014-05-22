@@ -14,7 +14,6 @@ class CaptureMatcher extends Matcher implements \ArrayAccess
     public function match($value, $pattern)
     {
         $this->captures[$this->extractPattern($pattern)] = $value;
-
         return true;
     }
 
