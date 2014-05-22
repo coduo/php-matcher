@@ -1,6 +1,7 @@
 <?php
 
 use Coduo\PHPMatcher\Matcher\ArrayMatcher;
+use Coduo\PHPMatcher\Matcher\CallbackMatcher;
 use Coduo\PHPMatcher\Matcher\ChainMatcher;
 use Coduo\PHPMatcher\Matcher\ExpressionMatcher;
 use Coduo\PHPMatcher\Matcher\JsonMatcher;
@@ -32,6 +33,7 @@ if (!function_exists('match')) {
     function match($value, $pattern)
     {
         $scalarMatchers = new ChainMatcher(array(
+            new CallbackMatcher(),
             new ExpressionMatcher(),
             new TypeMatcher(),
             new ScalarMatcher(),
