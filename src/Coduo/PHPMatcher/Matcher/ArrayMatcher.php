@@ -3,7 +3,6 @@
 namespace Coduo\PHPMatcher\Matcher;
 
 use Symfony\Component\PropertyAccess\PropertyAccess;
-use Symfony\Component\PropertyAccess\Exception\NoSuchIndexException;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 
 class ArrayMatcher extends Matcher
