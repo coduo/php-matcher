@@ -79,6 +79,26 @@ class JsonMatcherTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->matcher->getError(), '"Michał" does not match "@boolean@".');
     }
 
+    public function test_error_when_path_in_nested_pattern_does_not_exist()
+    {
+        $value = json_encode(array('foo' => array('bar' => array('baz' => 'bar value'))));
+        $pattern = json_encode(array('foo' => array('bar' => array('faz' => 'faz value'))));
+
+        $this->assertFalse($this->matcher->match($value, $pattern));
+
+        $this->assertEquals($this->matcher->getError(), 'There is no element under path [foo][bar][baz] in pattern.');
+    }
+
+    public function test_error_when_path_in_nested_value_does_not_exist()
+    {
+        $value = json_encode(array('foo' => array('bar' => array())));
+        $pattern = json_encode(array('foo' => array('bar' => array('faz' => 'faz value'))));
+
+        $this->assertFalse($this->matcher->match($value, $pattern));
+
+        $this->assertEquals($this->matcher->getError(), 'There is no element under path [foo][bar][faz] in value.');
+    }
+
     public static function positivePatterns()
     {
         return array(

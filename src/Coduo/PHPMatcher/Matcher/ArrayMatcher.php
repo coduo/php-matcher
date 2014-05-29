@@ -49,15 +49,16 @@ class ArrayMatcher extends Matcher
     /**
      * @param  array $value
      * @param  array $pattern
+     * @param string $parentPath
      * @return bool
      */
-    private function iterateMatch(array $value, array $pattern)
+    private function iterateMatch(array $value, array $pattern, $parentPath = "")
     {
         foreach ($value as $key => $element) {
             $path = sprintf("[%s]", $key);
 
             if (!$this->hasValue($pattern, $path)) {
-                $this->error = sprintf('There is no element under path %s in pattern array.', $path);
+                $this->error = sprintf('There is no element under path %s%s in pattern.', $parentPath, $path);
                 return false;
             }
             $elementPattern = $this->getValue($pattern, $path);
@@ -72,20 +73,12 @@ class ArrayMatcher extends Matcher
                 return false;
             }
 
-            if (false === $this->iterateMatch($element, $elementPattern)) {
+            if (false === $this->iterateMatch($element, $elementPattern, $parentPath . $path)) {
                 return false;
             }
         }
 
-        if(is_array($pattern)) {
-            $notExistingKeys = array_diff_key($pattern, $value);
-
-            if (count($notExistingKeys) > 0) {
-                $keyNames = array_keys($notExistingKeys);
-                $this->error = sprintf('There is no element under path [%s] in value array.', $keyNames[0]);
-                return false;
-            }
-        }
+        return $this->checkIfPathsFromPatternExistInValue($value, $pattern, $parentPath);
     }
 
     /**
@@ -121,5 +114,26 @@ class ArrayMatcher extends Matcher
         $this->accessor = $accessorBuilder->getPropertyAccessor();
 
         return $this->accessor;
+    }
+
+    /**
+     * @param array $value
+     * @param array $pattern
+     * @param $parentPath
+     * @return bool
+     */
+    private function checkIfPathsFromPatternExistInValue(array $value, array $pattern, $parentPath)
+    {
+        if (is_array($pattern)) {
+            $notExistingKeys = array_diff_key($pattern, $value);
+
+            if (count($notExistingKeys) > 0) {
+                $keyNames = array_keys($notExistingKeys);
+                $this->error = sprintf('There is no element under path %s[%s] in value.', $parentPath, $keyNames[0]);
+                return false;
+            }
+        }
+
+        return true;
     }
 }

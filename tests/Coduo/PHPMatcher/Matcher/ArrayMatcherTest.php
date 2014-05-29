@@ -50,16 +50,40 @@ class ArrayMatcherTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($matcher->match(array('test' => 1), array('test' => 1)));
     }
 
-    public function test_error_when_path_does_not_exist()
+    public function test_error_when_path_in_pattern_does_not_exist()
     {
         $this->assertFalse($this->matcher->match(array('foo' => 'foo value'), array('bar' => 'bar value')));
-        $this->assertEquals($this->matcher->getError(), 'There is no element under path [foo] in pattern array.');
+        $this->assertEquals($this->matcher->getError(), 'There is no element under path [foo] in pattern.');
+    }
+
+    public function test_error_when_path_in_nested_pattern_does_not_exist()
+    {
+        $array = array('foo' => array('bar' => array('baz' => 'bar value')));
+        $pattern = array('foo' => array('bar' => array('faz' => 'faz value')));
+
+        $this->assertFalse($this->matcher->match($array,$pattern));
+
+        $this->assertEquals($this->matcher->getError(), 'There is no element under path [foo][bar][baz] in pattern.');
     }
 
     public function test_error_when_path_in_value_does_not_exist()
     {
-        $this->assertFalse($this->matcher->match(array('foo' => 'foo'), array('foo' => 'foo', 'bar' => 'bar')));
-        $this->assertEquals($this->matcher->getError(), 'There is no element under path [bar] in value array.');
+        $array = array('foo' => 'foo');
+        $pattern = array('foo' => 'foo', 'bar' => 'bar');
+
+        $this->assertFalse($this->matcher->match($array, $pattern));
+
+        $this->assertEquals($this->matcher->getError(), 'There is no element under path [bar] in value.');
+    }
+
+    public function test_error_when_path_in_nested_value_does_not_exist()
+    {
+        $array = array('foo' => array('bar' => array()));
+        $pattern = array('foo' => array('bar' => array('faz' => 'faz value')));
+
+        $this->assertFalse($this->matcher->match($array, $pattern));
+
+        $this->assertEquals($this->matcher->getError(), 'There is no element under path [foo][bar][faz] in value.');
     }
 
     public function test_error_when_matching_fail()
@@ -142,5 +166,4 @@ class ArrayMatcherTest extends \PHPUnit_Framework_TestCase
             array(array(), array('foo' => 'bar'))
         );
     }
-
 }
