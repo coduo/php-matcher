@@ -128,6 +128,7 @@ class ArrayMatcherTest extends \PHPUnit_Framework_TestCase
 
         return array(
             array($simpleArr, $simpleDiff),
+            array(array("status" => "ok", "data" => array(array('foo'))), array("status" => "ok", "data" => array())),
             array(array(1), array()),
             array(array('key' => 'val'), array('key' => 'val2')),
             array(array(1), array(2)),

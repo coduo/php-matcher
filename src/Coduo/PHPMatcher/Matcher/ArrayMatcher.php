@@ -67,7 +67,7 @@ class ArrayMatcher extends Matcher
                 }
             }
 
-            if (!is_array($element)) {
+            if (!is_array($element) || empty($element)) {
                 $this->error = $this->propertyMatcher->getError();
                 return false;
             }
