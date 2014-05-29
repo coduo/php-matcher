@@ -78,10 +78,10 @@ class ArrayMatcher extends Matcher
         }
 
         if(is_array($pattern)) {
-            $unexistingKeys = array_diff_key($pattern, $value);
+            $notExistingKeys = array_diff_key($pattern, $value);
 
-            if (count($unexistingKeys) > 0) {
-                $keyNames = array_keys($unexistingKeys);
+            if (count($notExistingKeys) > 0) {
+                $keyNames = array_keys($notExistingKeys);
                 $this->error = sprintf('There is no element under path [%s] in value array.', $keyNames[0]);
                 return false;
             }
