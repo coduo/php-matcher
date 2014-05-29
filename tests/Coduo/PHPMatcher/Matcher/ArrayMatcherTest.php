@@ -56,6 +56,12 @@ class ArrayMatcherTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->matcher->getError(), 'There is no element under path [foo] in pattern array.');
     }
 
+    public function test_error_when_path_in_value_does_not_exist()
+    {
+        $this->assertFalse($this->matcher->match(array('foo' => 'foo'), array('foo' => 'foo', 'bar' => 'bar')));
+        $this->assertEquals($this->matcher->getError(), 'There is no element under path [bar] in value array.');
+    }
+
     public function test_error_when_matching_fail()
     {
         $this->assertFalse($this->matcher->match(array('foo' => 'foo value'), array('foo' => 'bar value')));
@@ -128,10 +134,12 @@ class ArrayMatcherTest extends \PHPUnit_Framework_TestCase
 
         return array(
             array($simpleArr, $simpleDiff),
+            array(array("status" => "ok", "data" => array(array('foo'))), array("status" => "ok", "data" => array())),
             array(array(1), array()),
             array(array('key' => 'val'), array('key' => 'val2')),
             array(array(1), array(2)),
-            array(array('foo', 1, 3), array('foo', 2, 3))
+            array(array('foo', 1, 3), array('foo', 2, 3)),
+            array(array(), array('foo' => 'bar'))
         );
     }
 

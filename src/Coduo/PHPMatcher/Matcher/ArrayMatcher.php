@@ -76,6 +76,16 @@ class ArrayMatcher extends Matcher
                 return false;
             }
         }
+
+        if(is_array($pattern)) {
+            $notExistingKeys = array_diff_key($pattern, $value);
+
+            if (count($notExistingKeys) > 0) {
+                $keyNames = array_keys($notExistingKeys);
+                $this->error = sprintf('There is no element under path [%s] in value array.', $keyNames[0]);
+                return false;
+            }
+        }
     }
 
     /**
