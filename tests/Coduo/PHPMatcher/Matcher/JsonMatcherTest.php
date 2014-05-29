@@ -130,6 +130,14 @@ class JsonMatcherTest extends \PHPUnit_Framework_TestCase
                 '{"users":["Michał","@string@"]}'
             ),
             array(
+                '{"status":"ok","data":[]}',
+                '{"status":"ok","data":[{"id": 4,"code":"123987","name":"Anvill","short_description":"ACME Anvill","url":"http://test-store.example.com/p/123987","image":{"url":"http://test-store.example.com/i/123987-0.jpg","description":"ACME Anvill"},"price":95,"promotion_description":"Anvills sale"},{"id": 5,"code":"123988","name":"Red Anvill","short_description":"Red ACME Anvill","url":"http://test-store.example.com/p/123988","image":{"url":"http://test-store.example.com/i/123988-0.jpg","description":"ACME Anvill"},"price":44.99,"promotion_description":"Red is cheap"}]}'
+            ),
+            array(
+                '{"foo":"foo val","bar":"bar val"}',
+                '{"foo":"foo val"}'
+            ),
+            array(
                 array(),
                 '[]'
             )
