@@ -7,6 +7,8 @@ use Symfony\Component\PropertyAccess\PropertyAccessor;
 
 class ArrayMatcher extends Matcher
 {
+    const UNBOUNDED_PATTERN = '@...@';
+
     /**
      * @var PropertyMatcher
      */
@@ -54,21 +56,33 @@ class ArrayMatcher extends Matcher
      */
     private function iterateMatch(array $value, array $pattern, $parentPath = "")
     {
+        $lastPattern = array_values($pattern);
+        $unboundedMode = end($lastPattern) === self::UNBOUNDED_PATTERN;
+
+        if ($unboundedMode) {
+            $unboundedPattern = prev($lastPattern);
+            array_pop($pattern);
+        }
+
         foreach ($value as $key => $element) {
             $path = sprintf("[%s]", $key);
 
-            if (!$this->hasValue($pattern, $path)) {
+            if ($this->hasValue($pattern, $path)) {
+                $elementPattern = $this->getValue($pattern, $path);
+            } else if ($unboundedMode) {
+                $elementPattern = $unboundedPattern;
+            } else {
                 $this->error = sprintf('There is no element under path %s%s in pattern.', $parentPath, $path);
                 return false;
             }
-            $elementPattern = $this->getValue($pattern, $path);
+
             if ($this->propertyMatcher->canMatch($elementPattern)) {
                 if (true === $this->propertyMatcher->match($element, $elementPattern)) {
                     continue;
                 }
             }
 
-            if (!is_array($element)) {
+            if (!is_array($element) || !is_array($elementPattern)) {
                 $this->error = $this->propertyMatcher->getError();
                 return false;
             }

@@ -4,6 +4,7 @@ namespace Coduo\PHPMatcher\Tests\Matcher;
 use Coduo\PHPMatcher\Matcher\ArrayMatcher;
 use Coduo\PHPMatcher\Matcher\ChainMatcher;
 use Coduo\PHPMatcher\Matcher\ScalarMatcher;
+use Coduo\PHPMatcher\Matcher\TypeMatcher;
 use Coduo\PHPMatcher\Matcher\WildcardMatcher;
 
 class ArrayMatcherTest extends \PHPUnit_Framework_TestCase
@@ -18,6 +19,7 @@ class ArrayMatcherTest extends \PHPUnit_Framework_TestCase
         $this->matcher = new ArrayMatcher(
             new ChainMatcher(array(
                 new ScalarMatcher(),
+                new TypeMatcher(),
                 new WildcardMatcher()
             ))
         );
@@ -111,8 +113,23 @@ class ArrayMatcherTest extends \PHPUnit_Framework_TestCase
             6.66
         );
 
+        $simpleArrPattern =  array(
+            'users' => array(
+                array(
+                    'firstName' => '@string@',
+                    'lastName' => '@string@'
+                ),
+                '@...@'
+            ),
+            true,
+            false,
+            1,
+            6.66
+        );
+
         return array(
             array($simpleArr, $simpleArr),
+            array($simpleArr, $simpleArrPattern),
             array(array(), array()),
             array(array('key' => 'val'), array('key' => 'val')),
             array(array(1), array(1)),
