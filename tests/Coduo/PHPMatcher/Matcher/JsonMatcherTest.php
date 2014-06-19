@@ -41,9 +41,9 @@ class JsonMatcherTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider negativePatterns
      */
-    public function test_negative_can_match()
+    public function test_negative_can_match($pattern)
     {
-        $this->assertFalse($this->matcher->canMatch('*'));
+        $this->assertFalse($this->matcher->canMatch($pattern));
     }
 
     /**
@@ -51,7 +51,7 @@ class JsonMatcherTest extends \PHPUnit_Framework_TestCase
      */
     public function test_positive_matches($value, $pattern)
     {
-        $this->assertTrue($this->matcher->match($value, $pattern));
+        $this->assertTrue($this->matcher->match($value, $pattern), $this->matcher->getError());
     }
 
     /**
@@ -59,7 +59,7 @@ class JsonMatcherTest extends \PHPUnit_Framework_TestCase
      */
     public function test_negative_matches($value, $pattern)
     {
-        $this->assertFalse($this->matcher->match($value, $pattern));
+        $this->assertFalse($this->matcher->match($value, $pattern), $this->matcher->getError());
     }
 
     public function test_error_when_matching_fail()
@@ -113,7 +113,7 @@ class JsonMatcherTest extends \PHPUnit_Framework_TestCase
     public static function negativePatterns()
     {
         return array(
-            array('["Norbert",@string@]'),
+            array('@string@'),
             array('["Norbert", '),
         );
     }
@@ -146,9 +146,17 @@ class JsonMatcherTest extends \PHPUnit_Framework_TestCase
                 '{"null":[@null@]}'
             ),
             array(
+                '{"users":["Norbert","Michał",[]]}',
+                '{"users":["Norbert","@string@",@...@]}'
+            ),
+            array(
                 '{"users":[{"firstName":"Norbert","lastName":"Orzechowicz","roles":["ROLE_USER", "ROLE_DEVELOPER"]}]}',
                 '{"users":[{"firstName":"Norbert","lastName":"Orzechowicz","roles":"@wildcard@"}]}'
-            )
+            ),
+            array(
+                '[{"name": "Norbert"},{"name":"Michał"},{"name":"Bob"},{"name":"Martin"}]',
+                '[{"name": "Norbert"},@...@]'
+            ),
         );
     }
 
@@ -162,10 +170,6 @@ class JsonMatcherTest extends \PHPUnit_Framework_TestCase
             array(
                 '{"users":["Norbert","Michał", "John"], "stuff": [1, 2, 3]}',
                 '{"users":["@string@", @...@], "stuff": [1, 2]}'
-            ),
-            array(
-                '{"users":["Norbert","Michał", []]}',
-                '{"users":["@string@", @...@]}'
             ),
             array(
                 '{this_is_not_valid_json',
