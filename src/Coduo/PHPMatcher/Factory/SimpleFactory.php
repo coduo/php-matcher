@@ -39,6 +39,7 @@ class SimpleFactory implements Factory
             new Matcher\CallbackMatcher(),
             new Matcher\ExpressionMatcher(),
             new Matcher\TypeMatcher(),
+            new Matcher\NullMatcher(),
             new Matcher\ScalarMatcher(),
             new Matcher\WildcardMatcher()
         ));
