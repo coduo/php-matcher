@@ -126,6 +126,14 @@ class JsonMatcherTest extends \PHPUnit_Framework_TestCase
                 '{"users":["@string@","@string@"]}'
             ),
             array(
+                '{"users":["Norbert","Michał"]}',
+                '{"users":["@string@","@...@"]}'
+            ),
+            array(
+                '{"users":["Norbert","Michał"]}',
+                '{"users":["@string@",@...@]}'
+            ),
+            array(
                 '{"numbers":[1,2]}',
                 '{"numbers":[@integer@, @integer@]}'
             ),
@@ -150,6 +158,14 @@ class JsonMatcherTest extends \PHPUnit_Framework_TestCase
             array(
                 '{"users":["Norbert","Michał"]}',
                 '{"users":["Michał","@string@"]}'
+            ),
+            array(
+                '{"users":["Norbert","Michał", "John"], "stuff": [1, 2, 3]}',
+                '{"users":["@string@", @...@], "stuff": [1, 2]}'
+            ),
+            array(
+                '{"users":["Norbert","Michał", []]}',
+                '{"users":["@string@", @...@]}'
             ),
             array(
                 '{this_is_not_valid_json',
