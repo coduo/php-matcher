@@ -5,6 +5,7 @@ use Coduo\PHPMatcher\Matcher\CallbackMatcher;
 use Coduo\PHPMatcher\Matcher\ChainMatcher;
 use Coduo\PHPMatcher\Matcher\ExpressionMatcher;
 use Coduo\PHPMatcher\Matcher\JsonMatcher;
+use Coduo\PHPMatcher\Matcher\NullMatcher;
 use Coduo\PHPMatcher\Matcher\ScalarMatcher;
 use Coduo\PHPMatcher\Matcher\TypeMatcher;
 use Coduo\PHPMatcher\Matcher\WildcardMatcher;
@@ -36,6 +37,7 @@ if (!function_exists('match')) {
             new CallbackMatcher(),
             new ExpressionMatcher(),
             new TypeMatcher(),
+            new NullMatcher(),
             new ScalarMatcher(),
             new WildcardMatcher()
         ));

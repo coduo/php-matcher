@@ -4,6 +4,7 @@ namespace Coduo\PHPMatcher\Tests\Matcher;
 use Coduo\PHPMatcher\Matcher\ArrayMatcher;
 use Coduo\PHPMatcher\Matcher\ChainMatcher;
 use Coduo\PHPMatcher\Matcher\JsonMatcher;
+use Coduo\PHPMatcher\Matcher\NullMatcher;
 use Coduo\PHPMatcher\Matcher\ScalarMatcher;
 use Coduo\PHPMatcher\Matcher\TypeMatcher;
 use Coduo\PHPMatcher\Matcher\WildcardMatcher;
@@ -20,6 +21,7 @@ class JsonMatcherTest extends \PHPUnit_Framework_TestCase
         $scalarMatchers = new ChainMatcher(array(
             new TypeMatcher(),
             new ScalarMatcher(),
+            new NullMatcher(),
             new WildcardMatcher()
         ));
         $this->matcher = new JsonMatcher(new ChainMatcher(array(
@@ -130,6 +132,10 @@ class JsonMatcherTest extends \PHPUnit_Framework_TestCase
             array(
                 '{"foobar":[1.22, 2, "hello"]}',
                 '{"foobar":[@double@, @integer@, @string@]}'
+            ),
+            array(
+                '{"null":[null]}',
+                '{"null":[@null@]}'
             ),
             array(
                 '{"users":[{"firstName":"Norbert","lastName":"Orzechowicz","roles":["ROLE_USER", "ROLE_DEVELOPER"]}]}',
