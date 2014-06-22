@@ -19,6 +19,9 @@ class ArrayMatcher extends Matcher
      */
     private $accessor;
 
+    /**
+     * @param PropertyMatcher $propertyMatcher
+     */
     public function __construct(PropertyMatcher $propertyMatcher)
     {
         $this->propertyMatcher = $propertyMatcher;
@@ -49,60 +52,101 @@ class ArrayMatcher extends Matcher
     }
 
     /**
-     * @param  array $value
-     * @param  array $pattern
+     * @param  array $values
+     * @param  array $patterns
      * @param string $parentPath
      * @return bool
      */
-    private function iterateMatch(array $value, array $pattern, $parentPath = "")
+    private function iterateMatch(array $values, array $patterns, $parentPath = "")
     {
-        $lastPattern = array_values($pattern);
-        $unboundedMode = end($lastPattern) === self::UNBOUNDED_PATTERN;
+        $pattern = null;
+        foreach ($values as $key => $value) {
+            $path = $this->formatAccessPath($key);
 
-        if ($unboundedMode) {
-            $unboundedPattern = prev($lastPattern);
-            array_pop($pattern);
-        }
+            if ($this->shouldSkippValueMatchingFor($pattern)) {
+                continue;
+            }
 
-        foreach ($value as $key => $element) {
-            $path = sprintf("[%s]", $key);
-
-            if ($this->hasValue($pattern, $path)) {
-                $elementPattern = $this->getValue($pattern, $path);
-            } else if ($unboundedMode) {
-                $elementPattern = $unboundedPattern;
+            if ($this->valueExist($path, $patterns)) {
+                $pattern = $this->getValueByPath($patterns, $path);
             } else {
-                $this->error = sprintf('There is no element under path %s%s in pattern.', $parentPath, $path);
+                $this->setMissingElementInError('pattern', $this->formatFullPath($parentPath, $path));
                 return false;
             }
 
-            if ($this->propertyMatcher->canMatch($elementPattern)) {
-                if (true === $this->propertyMatcher->match($element, $elementPattern)) {
-                    continue;
-                }
+            if ($this->shouldSkippValueMatchingFor($pattern)) {
+                continue;
             }
 
-            if (!is_array($element) || !is_array($elementPattern)) {
-                $this->error = $this->propertyMatcher->getError();
+            if ($this->valueMatchPattern($value, $pattern)) {
+                continue;
+            }
+
+            if (!is_array($value) || !$this->canMatch($pattern)) {
                 return false;
             }
 
-            if (false === $this->iterateMatch($element, $elementPattern, $parentPath . $path)) {
+            if (false === $this->iterateMatch($value, $pattern, $this->formatFullPath($parentPath, $path))) {
                 return false;
             }
         }
 
-        return $this->checkIfPathsFromPatternExistInValue($value, $pattern, $parentPath);
+        if (!$this->isPatternValid($patterns, $values, $parentPath)) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
-     * @param $array
-     * @param $path
+     * Check if pattern elements exist in value array
+     *
+     * @param array $pattern
+     * @param array $values
+     * @param $parentPath
      * @return bool
      */
-    private function hasValue($array, $path)
+    private function isPatternValid(array $pattern, array $values, $parentPath)
     {
-        return null !== $this->getPropertyAccessor()->getValue($array, $path);
+        if (is_array($pattern)) {
+            $notExistingKeys = array_diff_key($pattern, $values);
+
+            if (count($notExistingKeys) > 0) {
+                $keyNames = array_keys($notExistingKeys);
+                $path = $this->formatFullPath($parentPath,  $this->formatAccessPath($keyNames[0]));
+                $this->setMissingElementInError('value', $path);
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param $value
+     * @param $pattern
+     * @return bool
+     */
+    private function valueMatchPattern($value, $pattern)
+    {
+        $match = $this->propertyMatcher->canMatch($pattern) &&
+            true === $this->propertyMatcher->match($value, $pattern);
+
+        if (!$match) {
+            $this->error = $this->propertyMatcher->getError();
+        }
+
+        return $match;
+    }
+
+    /**
+     * @param $path
+     * @param $haystack
+     * @return bool
+     */
+    private function valueExist($path, array $haystack)
+    {
+        return null !== $this->getPropertyAccessor()->getValue($haystack, $path);
     }
 
     /**
@@ -110,7 +154,7 @@ class ArrayMatcher extends Matcher
      * @param $path
      * @return mixed
      */
-    private function getValue($array, $path)
+    private function getValueByPath($array, $path)
     {
         return $this->getPropertyAccessor()->getValue($array, $path);
     }
@@ -131,23 +175,39 @@ class ArrayMatcher extends Matcher
     }
 
     /**
-     * @param array $value
-     * @param array $pattern
+     * @param $place
+     * @param $path
+     */
+    private function setMissingElementInError($place, $path)
+    {
+        $this->error = sprintf('There is no element under path %s in %s.', $path, $place);
+    }
+
+    /**
+     * @param $key
+     * @return string
+     */
+    private function formatAccessPath($key)
+    {
+        return sprintf("[%s]", $key);;
+    }
+
+    /**
      * @param $parentPath
+     * @param $path
+     * @return string
+     */
+    private function formatFullPath($parentPath, $path)
+    {
+        return sprintf("%s%s", $parentPath, $path);
+    }
+
+    /**
+     * @param $lastPattern
      * @return bool
      */
-    private function checkIfPathsFromPatternExistInValue(array $value, array $pattern, $parentPath)
+    private function shouldSkippValueMatchingFor($lastPattern)
     {
-        if (is_array($pattern)) {
-            $notExistingKeys = array_diff_key($pattern, $value);
-
-            if (count($notExistingKeys) > 0) {
-                $keyNames = array_keys($notExistingKeys);
-                $this->error = sprintf('There is no element under path %s[%s] in value.', $parentPath, $keyNames[0]);
-                return false;
-            }
-        }
-
-        return true;
+        return $lastPattern === self::UNBOUNDED_PATTERN;
     }
 }
