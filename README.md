@@ -70,6 +70,18 @@ public function testGetToys()
 
 From now you should be able to use global function ``match($value, $pattern)``
 
+### Available patterns
+
+* ``@string@``
+* ``@integer@``
+* ``@boolean@``
+* ``@array@``
+* ``@...@`` - *unbounded array*
+* ``@double@``
+* ``@null@``
+* ``@*@`` || ``@wildcard@``
+* ``expr(expression)``
+
 ##Example usage
 
 ### Scalar matching
@@ -130,6 +142,12 @@ match(
               'firstName' => 'Michał',
               'lastName' => 'Dąbrowski',
               'roles' => array('ROLE_USER')
+          ),
+          array(
+              'id' => 3,
+              'firstName' => 'Johnny',
+              'lastName' => 'DąbrowsBravoki',
+              'roles' => array('ROLE_HANDSOME_GUY')
           )
       ),
       true,
@@ -148,7 +166,8 @@ match(
               'firstName' => '@string@',
               'lastName' => 'Dąbrowski',
               'roles' => '@array@'
-          )
+          ),
+          '@...@'
       ),
       '@boolean@',
       '@double@'
