@@ -11,7 +11,7 @@
     bootstrap="tests/bootstrap.php"
     >
     <testsuites>
-        <testsuite name="Jsom Matcher Test Suite">
+        <testsuite name="Json Matcher Test Suite">
             <directory>./tests/</directory>
         </testsuite>
     </testsuites>
