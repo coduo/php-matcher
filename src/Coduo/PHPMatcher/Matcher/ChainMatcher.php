@@ -7,12 +7,12 @@ use Coduo\ToString\String;
 class ChainMatcher extends Matcher
 {
     /**
-     * @var array|PropertyMatcher[]
+     * @var array|ValueMatcher[]
      */
     private $matchers;
 
     /**
-     * @param array|PropertyMatcher[] $matchers
+     * @param array|ValueMatcher[] $matchers
      */
     public function __construct(array $matchers = array())
     {
@@ -20,9 +20,9 @@ class ChainMatcher extends Matcher
     }
 
     /**
-     * @param PropertyMatcher $matcher
+     * @param ValueMatcher $matcher
      */
-    public function addMatcher(PropertyMatcher $matcher)
+    public function addMatcher(ValueMatcher $matcher)
     {
         $this->matchers[] = $matcher;
     }

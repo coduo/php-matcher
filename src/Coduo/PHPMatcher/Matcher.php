@@ -1,19 +1,19 @@
 <?php
 namespace Coduo\PHPMatcher;
 
-use Coduo\PHPMatcher\Matcher\PropertyMatcher;
+use Coduo\PHPMatcher\Matcher\ValueMatcher;
 
 class Matcher
 {
     /**
-     * @var Matcher\PropertyMatcher
+     * @var ValueMatcher
      */
     private $matcher;
 
     /**
-     * @param PropertyMatcher $matcher
+     * @param ValueMatcher $matcher
      */
-    public function __construct(PropertyMatcher $matcher)
+    public function __construct(ValueMatcher $matcher)
     {
         $this->matcher = $matcher;
     }

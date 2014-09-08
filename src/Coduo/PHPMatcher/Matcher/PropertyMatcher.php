@@ -2,29 +2,9 @@
 
 namespace Coduo\PHPMatcher\Matcher;
 
-interface PropertyMatcher
+/**
+ * @deprecated since 1.1, to be removed in 2.0. Use ValueMatcher instead
+ */
+interface PropertyMatcher extends ValueMatcher
 {
-    /**
-     * Matches value against the pattern
-     *
-     * @param $value
-     * @param $pattern
-     * @return boolean
-     */
-    public function match($value, $pattern);
-
-    /**
-     * Checks if matcher can match the pattern
-     *
-     * @param $pattern
-     * @return boolean
-     */
-    public function canMatch($pattern);
-
-    /**
-     * Returns a string description why matching failed
-     *
-     * @return null|string
-     */
-    public function getError();
 }
