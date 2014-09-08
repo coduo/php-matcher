@@ -100,7 +100,7 @@ match('string', 'string')
 
 match(1, '@integer@');
 match('Norbert', '@string@');
-match(array('foo', 'bar'), '@array');
+match(array('foo', 'bar'), '@array@');
 match(12.4, '@double@');
 match(true, '@boolean@');
 ```
