@@ -16,6 +16,9 @@ if (is_dir($vendor = __DIR__ . '/../vendor')) {
     );
 }
 
+/**
+ * @deprecated since 1.1, to be removed in 2.0. Use SimpleFactory and object approach instead
+ */
 if (!function_exists('match')) {
     /**
      * @param  mixed   $value

@@ -13,9 +13,9 @@ class JsonMatcher extends Matcher
     private $matcher;
 
     /**
-     * @param PropertyMatcher $matcher
+     * @param ValueMatcher $matcher
      */
-    public function __construct(PropertyMatcher $matcher)
+    public function __construct(ValueMatcher $matcher)
     {
         $this->matcher = $matcher;
     }

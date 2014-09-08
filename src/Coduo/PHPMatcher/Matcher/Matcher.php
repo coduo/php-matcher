@@ -2,7 +2,7 @@
 
 namespace Coduo\PHPMatcher\Matcher;
 
-abstract class Matcher implements PropertyMatcher
+abstract class Matcher implements ValueMatcher
 {
     /**
      * @var string|null

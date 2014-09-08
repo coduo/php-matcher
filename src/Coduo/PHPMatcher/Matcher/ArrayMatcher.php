@@ -20,9 +20,9 @@ class ArrayMatcher extends Matcher
     private $accessor;
 
     /**
-     * @param PropertyMatcher $propertyMatcher
+     * @param ValueMatcher $propertyMatcher
      */
-    public function __construct(PropertyMatcher $propertyMatcher)
+    public function __construct(ValueMatcher $propertyMatcher)
     {
         $this->propertyMatcher = $propertyMatcher;
     }
