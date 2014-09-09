@@ -2,11 +2,14 @@
 
 namespace Coduo\PHPMatcher\Matcher;
 
+use Coduo\ToString\String;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 
 class ArrayMatcher extends Matcher
 {
+    const ARRAY_PATTERN = "/^@array@$/";
+
     const UNBOUNDED_PATTERN = '@...@';
 
     /**
@@ -33,7 +36,12 @@ class ArrayMatcher extends Matcher
     public function match($value, $pattern)
     {
         if (!is_array($value)) {
+            $this->error = sprintf("%s \"%s\" is not a valid array.", gettype($value), new String($value));
             return false;
+        }
+
+        if ($this->isArrayPattern($pattern)) {
+            return true;
         }
 
         if (false === $this->iterateMatch($value, $pattern)) {
@@ -48,7 +56,12 @@ class ArrayMatcher extends Matcher
      */
     public function canMatch($pattern)
     {
-        return is_array($pattern);
+        return is_array($pattern) || $this->isArrayPattern($pattern);
+    }
+
+    private function isArrayPattern($pattern)
+    {
+        return is_string($pattern) && 0 !== preg_match(self::ARRAY_PATTERN, $pattern);
     }
 
     /**
@@ -84,6 +97,10 @@ class ArrayMatcher extends Matcher
 
             if (!is_array($value) || !$this->canMatch($pattern)) {
                 return false;
+            }
+
+            if ($this->isArrayPattern($pattern)) {
+                continue;
             }
 
             if (false === $this->iterateMatch($value, $pattern, $this->formatFullPath($parentPath, $path))) {

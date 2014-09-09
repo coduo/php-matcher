@@ -28,13 +28,17 @@ class MatcherTest extends \PHPUnit_Framework_TestCase
         $this->captureMatcher = new CaptureMatcher();
 
         $scalarMatchers = new ChainMatcher(array(
-            new CallbackMatcher(),
-            new ExpressionMatcher(),
             $this->captureMatcher,
-            new CaptureMatcher(),
-            new TypeMatcher(),
-            new ScalarMatcher(),
-            new WildcardMatcher()
+            new Matcher\CallbackMatcher(),
+            new Matcher\ExpressionMatcher(),
+            new Matcher\NullMatcher(),
+            new Matcher\StringMatcher(),
+            new Matcher\IntegerMatcher(),
+            new Matcher\BooleanMatcher(),
+            new Matcher\DoubleMatcher(),
+            new Matcher\NumberMatcher(),
+            new Matcher\ScalarMatcher(),
+            new Matcher\WildcardMatcher(),
         ));
 
         $arrayMatcher = new ArrayMatcher($scalarMatchers);
@@ -86,7 +90,7 @@ class MatcherTest extends \PHPUnit_Framework_TestCase
             'data' => '@wildcard@',
         );
 
-        $this->assertTrue($this->matcher->match($value, $expecation));
+        $this->assertTrue($this->matcher->match($value, $expecation), $this->matcher->getError());
         $this->assertTrue(match($value, $expecation));
     }
 

@@ -4,6 +4,10 @@ namespace Coduo\PHPMatcher\Matcher;
 
 use Coduo\ToString\String;
 
+/**
+ * @deprecated since 1.1, to be removed in 2.0. Use StringMatcher, NumberMatcher, IntegerMatcher,
+ * BooleanMatcher, ArrayMatcher instead.
+ */
 class TypeMatcher extends Matcher
 {
     const MATCH_PATTERN = "/^@(string|integer|boolean|double|array)@$/";
