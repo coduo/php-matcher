@@ -1,26 +1,29 @@
 <?php
 namespace Coduo\PHPMatcher\Tests\Matcher;
 
-use Coduo\PHPMatcher\Matcher\ArrayMatcher;
-use Coduo\PHPMatcher\Matcher\ChainMatcher;
-use Coduo\PHPMatcher\Matcher\ScalarMatcher;
-use Coduo\PHPMatcher\Matcher\TypeMatcher;
-use Coduo\PHPMatcher\Matcher\WildcardMatcher;
+use Coduo\PHPMatcher\Matcher;
 
 class ArrayMatcherTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var ArrayMatcher
+     * @var Matcher\ArrayMatcher
      */
     private $matcher;
 
     public function setUp()
     {
-        $this->matcher = new ArrayMatcher(
-            new ChainMatcher(array(
-                new ScalarMatcher(),
-                new TypeMatcher(),
-                new WildcardMatcher()
+        $this->matcher = new Matcher\ArrayMatcher(
+            new Matcher\ChainMatcher(array(
+                new Matcher\CallbackMatcher(),
+                new Matcher\ExpressionMatcher(),
+                new Matcher\NullMatcher(),
+                new Matcher\StringMatcher(),
+                new Matcher\IntegerMatcher(),
+                new Matcher\BooleanMatcher(),
+                new Matcher\DoubleMatcher(),
+                new Matcher\NumberMatcher(),
+                new Matcher\ScalarMatcher(),
+                new Matcher\WildcardMatcher(),
             ))
         );
     }
@@ -43,9 +46,9 @@ class ArrayMatcherTest extends \PHPUnit_Framework_TestCase
 
     public function test_negative_match_when_cant_find_matcher_that_can_match_array_element()
     {
-        $matcher = new ArrayMatcher(
-            new ChainMatcher(array(
-                new WildcardMatcher()
+        $matcher = new Matcher\ArrayMatcher(
+            new Matcher\ChainMatcher(array(
+                new Matcher\WildcardMatcher()
             ))
         );
 
@@ -92,6 +95,17 @@ class ArrayMatcherTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertFalse($this->matcher->match(array('foo' => 'foo value'), array('foo' => 'bar value')));
         $this->assertEquals($this->matcher->getError(), '"foo value" does not match "bar value".');
+    }
+
+    public function test_error_message_when_matching_non_array_value()
+    {
+        $this->assertFalse($this->matcher->match(new \DateTime(), "@array@"));
+        $this->assertEquals($this->matcher->getError(), "object \"\\DateTime\" is not a valid array.");
+    }
+
+    public function test_matching_array_to_array_pattern()
+    {
+        $this->assertTrue($this->matcher->match(array("foo", "bar"), "@array@"));
     }
 
     public static function positiveMatchData()

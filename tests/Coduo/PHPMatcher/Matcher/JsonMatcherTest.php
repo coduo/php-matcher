@@ -1,32 +1,32 @@
 <?php
 namespace Coduo\PHPMatcher\Tests\Matcher;
 
-use Coduo\PHPMatcher\Matcher\ArrayMatcher;
-use Coduo\PHPMatcher\Matcher\ChainMatcher;
-use Coduo\PHPMatcher\Matcher\JsonMatcher;
-use Coduo\PHPMatcher\Matcher\NullMatcher;
-use Coduo\PHPMatcher\Matcher\ScalarMatcher;
-use Coduo\PHPMatcher\Matcher\TypeMatcher;
-use Coduo\PHPMatcher\Matcher\WildcardMatcher;
+use Coduo\PHPMatcher\Matcher;
 
 class JsonMatcherTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var JsonMatcher
+     * @var Matcher\JsonMatcher
      */
     private $matcher;
 
     public function setUp()
     {
-        $scalarMatchers = new ChainMatcher(array(
-            new TypeMatcher(),
-            new ScalarMatcher(),
-            new NullMatcher(),
-            new WildcardMatcher()
+        $scalarMatchers = new Matcher\ChainMatcher(array(
+            new Matcher\CallbackMatcher(),
+            new Matcher\ExpressionMatcher(),
+            new Matcher\NullMatcher(),
+            new Matcher\StringMatcher(),
+            new Matcher\IntegerMatcher(),
+            new Matcher\BooleanMatcher(),
+            new Matcher\DoubleMatcher(),
+            new Matcher\NumberMatcher(),
+            new Matcher\ScalarMatcher(),
+            new Matcher\WildcardMatcher(),
         ));
-        $this->matcher = new JsonMatcher(new ChainMatcher(array(
+        $this->matcher = new Matcher\JsonMatcher(new Matcher\ChainMatcher(array(
             $scalarMatchers,
-            new ArrayMatcher($scalarMatchers)
+            new Matcher\ArrayMatcher($scalarMatchers)
         )));
     }
 

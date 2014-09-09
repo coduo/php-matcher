@@ -38,8 +38,12 @@ class SimpleFactory implements Factory
         return new Matcher\ChainMatcher(array(
             new Matcher\CallbackMatcher(),
             new Matcher\ExpressionMatcher(),
-            new Matcher\TypeMatcher(),
             new Matcher\NullMatcher(),
+            new Matcher\StringMatcher(),
+            new Matcher\IntegerMatcher(),
+            new Matcher\BooleanMatcher(),
+            new Matcher\DoubleMatcher(),
+            new Matcher\NumberMatcher(),
             new Matcher\ScalarMatcher(),
             new Matcher\WildcardMatcher()
         ));
