@@ -1,16 +1,9 @@
 <?php
 namespace Coduo\PHPMatcher\Tests;
 
-use Coduo\PHPMatcher\Matcher\ArrayMatcher;
-use Coduo\PHPMatcher\Matcher\CaptureMatcher;
-use Coduo\PHPMatcher\Matcher\CallbackMatcher;
-use Coduo\PHPMatcher\Matcher\ChainMatcher;
-use Coduo\PHPMatcher\Matcher\ExpressionMatcher;
-use Coduo\PHPMatcher\Matcher\JsonMatcher;
-use Coduo\PHPMatcher\Matcher\ScalarMatcher;
-use Coduo\PHPMatcher\Matcher\TypeMatcher;
-use Coduo\PHPMatcher\Matcher\WildcardMatcher;
+use Coduo\PHPMatcher\Lexer;
 use Coduo\PHPMatcher\Matcher;
+use Coduo\PHPMatcher\Parser;
 
 class MatcherTest extends \PHPUnit_Framework_TestCase
 {
@@ -25,28 +18,28 @@ class MatcherTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->captureMatcher = new CaptureMatcher();
-
-        $scalarMatchers = new ChainMatcher(array(
+        $this->captureMatcher = new Matcher\CaptureMatcher();
+        $parser = new Parser(new Lexer());
+        $scalarMatchers = new Matcher\ChainMatcher(array(
             $this->captureMatcher,
             new Matcher\CallbackMatcher(),
             new Matcher\ExpressionMatcher(),
             new Matcher\NullMatcher(),
-            new Matcher\StringMatcher(),
-            new Matcher\IntegerMatcher(),
+            new Matcher\StringMatcher($parser),
+            new Matcher\IntegerMatcher($parser),
             new Matcher\BooleanMatcher(),
-            new Matcher\DoubleMatcher(),
+            new Matcher\DoubleMatcher($parser),
             new Matcher\NumberMatcher(),
             new Matcher\ScalarMatcher(),
             new Matcher\WildcardMatcher(),
         ));
 
-        $arrayMatcher = new ArrayMatcher($scalarMatchers);
+        $arrayMatcher = new Matcher\ArrayMatcher($scalarMatchers, $parser);
 
-        $this->matcher = new Matcher(new ChainMatcher(array(
+        $this->matcher = new Matcher(new Matcher\ChainMatcher(array(
             $scalarMatchers,
             $arrayMatcher,
-            new JsonMatcher($arrayMatcher)
+            new Matcher\JsonMatcher($arrayMatcher)
         )));
     }
 

@@ -2,14 +2,13 @@
 
 namespace Coduo\PHPMatcher\Matcher;
 
+use Coduo\PHPMatcher\Parser;
 use Coduo\ToString\String;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 
 class ArrayMatcher extends Matcher
 {
-    const ARRAY_PATTERN = "/^@array@$/";
-
     const UNBOUNDED_PATTERN = '@...@';
 
     /**
@@ -23,11 +22,17 @@ class ArrayMatcher extends Matcher
     private $accessor;
 
     /**
+     * @var Parser
+     */
+    private $parser;
+
+    /**
      * @param ValueMatcher $propertyMatcher
      */
-    public function __construct(ValueMatcher $propertyMatcher)
+    public function __construct(ValueMatcher $propertyMatcher, Parser $parser)
     {
         $this->propertyMatcher = $propertyMatcher;
+        $this->parser = $parser;
     }
 
     /**
@@ -41,7 +46,7 @@ class ArrayMatcher extends Matcher
         }
 
         if ($this->isArrayPattern($pattern)) {
-            return true;
+            return $this->allExpandersMatch($value, $pattern);
         }
 
         if (false === $this->iterateMatch($value, $pattern)) {
@@ -61,7 +66,11 @@ class ArrayMatcher extends Matcher
 
     private function isArrayPattern($pattern)
     {
-        return is_string($pattern) && 0 !== preg_match(self::ARRAY_PATTERN, $pattern);
+        if (!is_string($pattern)) {
+            return false;
+        }
+
+        return $this->parser->hasValidSyntax($pattern) && $this->parser->parse($pattern)->is('array');
     }
 
     /**
@@ -100,6 +109,10 @@ class ArrayMatcher extends Matcher
             }
 
             if ($this->isArrayPattern($pattern)) {
+                if (!$this->allExpandersMatch($value, $pattern)) {
+                    return false;
+                }
+
                 continue;
             }
 
@@ -206,7 +219,7 @@ class ArrayMatcher extends Matcher
      */
     private function formatAccessPath($key)
     {
-        return sprintf("[%s]", $key);;
+        return sprintf("[%s]", $key);
     }
 
     /**
@@ -226,5 +239,22 @@ class ArrayMatcher extends Matcher
     private function shouldSkippValueMatchingFor($lastPattern)
     {
         return $lastPattern === self::UNBOUNDED_PATTERN;
+    }
+
+    /**
+     * @param $value
+     * @param $pattern
+     * @return bool
+     * @throws \Coduo\PHPMatcher\Exception\UnknownExpanderException
+     */
+    private function allExpandersMatch($value, $pattern)
+    {
+        $typePattern = $this->parser->parse($pattern);
+        if (!$typePattern->matchExpanders($value)) {
+            $this->error = $typePattern->getError();
+            return false;
+        }
+
+        return true;
     }
 }

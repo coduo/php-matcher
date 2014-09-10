@@ -1,17 +1,28 @@
 <?php
 namespace Coduo\PHPMatcher\Tests\Matcher;
 
+use Coduo\PHPMatcher\Lexer;
 use Coduo\PHPMatcher\Matcher\IntegerMatcher;
+use Coduo\PHPMatcher\Parser;
 
 class IntegerMatcherTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var IntegerMatcher
+     */
+    private $matcher;
+
+    public function setUp()
+    {
+        $this->matcher = new IntegerMatcher(new Parser(new Lexer()));
+    }
+
     /**
      * @dataProvider positiveCanMatchData
      */
     public function test_positive_can_matches($pattern)
     {
-        $matcher = new IntegerMatcher();
-        $this->assertTrue($matcher->canMatch($pattern));
+        $this->assertTrue($this->matcher->canMatch($pattern));
     }
 
     /**
@@ -19,8 +30,7 @@ class IntegerMatcherTest extends \PHPUnit_Framework_TestCase
      */
     public function test_negative_can_matches($pattern)
     {
-        $matcher = new IntegerMatcher();
-        $this->assertFalse($matcher->canMatch($pattern));
+        $this->assertFalse($this->matcher->canMatch($pattern));
     }
 
     /**
@@ -28,8 +38,7 @@ class IntegerMatcherTest extends \PHPUnit_Framework_TestCase
      */
     public function test_positive_match($value, $pattern)
     {
-        $matcher = new IntegerMatcher();
-        $this->assertTrue($matcher->match($value, $pattern));
+        $this->assertTrue($this->matcher->match($value, $pattern));
     }
 
     /**
@@ -37,8 +46,7 @@ class IntegerMatcherTest extends \PHPUnit_Framework_TestCase
      */
     public function test_negative_match($value, $pattern)
     {
-        $matcher = new IntegerMatcher();
-        $this->assertFalse($matcher->match($value, $pattern));
+        $this->assertFalse($this->matcher->match($value, $pattern));
     }
 
     /**
@@ -46,9 +54,8 @@ class IntegerMatcherTest extends \PHPUnit_Framework_TestCase
      */
     public function test_negative_match_description($value, $pattern, $error)
     {
-        $matcher = new IntegerMatcher();
-        $matcher->match($value, $pattern);
-        $this->assertEquals($error, $matcher->getError());
+        $this->matcher->match($value, $pattern);
+        $this->assertEquals($error, $this->matcher->getError());
     }
 
     public static function positiveCanMatchData()
@@ -62,6 +69,7 @@ class IntegerMatcherTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             array(10, "@integer@"),
+            array(10, "@integer@.lowerThan(50).greaterThan(1)"),
         );
     }
 

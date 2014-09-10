@@ -1,7 +1,10 @@
 <?php
+
 namespace Coduo\PHPMatcher\Tests\Matcher;
 
+use Coduo\PHPMatcher\Lexer;
 use Coduo\PHPMatcher\Matcher;
+use Coduo\PHPMatcher\Parser;
 
 class JsonMatcherTest extends \PHPUnit_Framework_TestCase
 {
@@ -12,21 +15,22 @@ class JsonMatcherTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        $parser = new Parser(new Lexer());
         $scalarMatchers = new Matcher\ChainMatcher(array(
             new Matcher\CallbackMatcher(),
             new Matcher\ExpressionMatcher(),
             new Matcher\NullMatcher(),
-            new Matcher\StringMatcher(),
-            new Matcher\IntegerMatcher(),
+            new Matcher\StringMatcher($parser),
+            new Matcher\IntegerMatcher($parser),
             new Matcher\BooleanMatcher(),
-            new Matcher\DoubleMatcher(),
+            new Matcher\DoubleMatcher($parser),
             new Matcher\NumberMatcher(),
             new Matcher\ScalarMatcher(),
             new Matcher\WildcardMatcher(),
         ));
         $this->matcher = new Matcher\JsonMatcher(new Matcher\ChainMatcher(array(
             $scalarMatchers,
-            new Matcher\ArrayMatcher($scalarMatchers)
+            new Matcher\ArrayMatcher($scalarMatchers, $parser)
         )));
     }
 

@@ -1,4 +1,5 @@
 <?php
+
 namespace Coduo\PHPMatcher;
 
 interface Factory

@@ -1,4 +1,5 @@
 <?php
+
 namespace Coduo\PHPMatcher;
 
 use Coduo\PHPMatcher\Matcher\ValueMatcher;
