@@ -15,7 +15,7 @@
     ],
     "require": {
         "php": ">=5.3.0",
-        "coduo/php-to-string": "0.1.*",
+        "coduo/php-to-string": "1.0.*",
         "symfony/property-access": "~2.3",
         "symfony/expression-language": "~2.4"
     },
