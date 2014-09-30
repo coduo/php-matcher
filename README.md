@@ -203,6 +203,48 @@ match(
 
 ```
 
+### Xml matching
+
+
+```php
+<?php
+
+match(
+    <<<XML
+<?xml version="1.0"?>
+<soap:Envelope
+xmlns:soap="http://www.w3.org/2001/12/soap-envelope"
+soap:encodingStyle="http://www.w3.org/2001/12/soap-encoding">
+
+<soap:Body xmlns:m="http://www.example.org/stock">
+  <m:GetStockPrice>
+    <m:StockName>IBM</m:StockName>
+    <m:StockValue>Any Value</m:StockValue>
+  </m:GetStockPrice>
+</soap:Body>
+
+</soap:Envelope>
+XML
+    ,
+   <<<XML
+<?xml version="1.0"?>
+<soap:Envelope
+    xmlns:soap="@string@"
+            soap:encodingStyle="@string@">
+
+<soap:Body xmlns:m="@string@">
+  <m:GetStockPrice>
+    <m:StockName>@string@</m:StockName>
+    <m:StockValue>@string@</m:StockValue>
+  </m:GetStockPrice>
+</soap:Body>
+
+</soap:Envelope>
+XML
+)
+
+```
+
 Example scenario for api in behat using mongo.
 ---
 ``` cucumber
