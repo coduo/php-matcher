@@ -26,7 +26,8 @@ class SimpleFactory implements Factory
         return new Matcher\ChainMatcher(array(
             $scalarMatchers,
             $arrayMatcher,
-            new Matcher\JsonMatcher($arrayMatcher)
+            new Matcher\JsonMatcher($arrayMatcher),
+            new Matcher\XmlMatcher($arrayMatcher)
         ));
     }
 

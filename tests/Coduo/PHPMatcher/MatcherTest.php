@@ -11,6 +11,7 @@ use Coduo\PHPMatcher\Matcher\ScalarMatcher;
 use Coduo\PHPMatcher\Matcher\TypeMatcher;
 use Coduo\PHPMatcher\Matcher\WildcardMatcher;
 use Coduo\PHPMatcher\Matcher;
+use Coduo\PHPMatcher\Matcher\XmlMatcher;
 
 class MatcherTest extends \PHPUnit_Framework_TestCase
 {
@@ -42,7 +43,8 @@ class MatcherTest extends \PHPUnit_Framework_TestCase
         $this->matcher = new Matcher(new ChainMatcher(array(
             $scalarMatchers,
             $arrayMatcher,
-            new JsonMatcher($arrayMatcher)
+            new JsonMatcher($arrayMatcher),
+            new XmlMatcher($arrayMatcher)
         )));
     }
 
@@ -156,6 +158,41 @@ class MatcherTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($this->matcher->match($json, $jsonPattern));
         $this->assertTrue(match($json, $jsonPattern));
+    }
+
+    public function test_matcher_with_xml()
+    {
+        $xml = <<<XML
+<?xml version="1.0"?>
+<soap:Envelope
+xmlns:soap="http://www.w3.org/2001/12/soap-envelope"
+soap:encodingStyle="http://www.w3.org/2001/12/soap-encoding">
+
+<soap:Body xmlns:m="http://www.example.org/stock">
+  <m:GetStockPrice>
+    <m:StockName>IBM</m:StockName>
+    <m:StockValue>Any Value</m:StockValue>
+  </m:GetStockPrice>
+</soap:Body>
+
+</soap:Envelope>
+XML;
+        $xmlPattern = <<<XML
+<?xml version="1.0"?>
+<soap:Envelope
+    xmlns:soap="@string@"
+            soap:encodingStyle="@string@">
+
+<soap:Body xmlns:m="@string@">
+  <m:GetStockPrice>
+    <m:StockName>@string@</m:StockName>
+    <m:StockValue>@string@</m:StockValue>
+  </m:GetStockPrice>
+</soap:Body>
+
+</soap:Envelope>
+XML;
+
     }
 
     public function test_matcher_with_captures()
