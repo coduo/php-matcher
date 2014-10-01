@@ -18,7 +18,8 @@
         "coduo/php-to-string": "~1.0",
         "symfony/property-access": "~2.3",
         "symfony/expression-language": "~2.4",
-        "doctrine/lexer": "1.0.*"
+        "doctrine/lexer": "1.0.*",
+        "openlss/lib-array2xml": "0.0.9"
     },
     "require-dev": {
         "phpunit/phpunit": "3.7.*"
