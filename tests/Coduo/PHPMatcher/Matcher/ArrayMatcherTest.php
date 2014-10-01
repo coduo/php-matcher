@@ -1,7 +1,10 @@
 <?php
+
 namespace Coduo\PHPMatcher\Tests\Matcher;
 
+use Coduo\PHPMatcher\Lexer;
 use Coduo\PHPMatcher\Matcher;
+use Coduo\PHPMatcher\Parser;
 
 class ArrayMatcherTest extends \PHPUnit_Framework_TestCase
 {
@@ -12,19 +15,21 @@ class ArrayMatcherTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        $parser = new Parser(new Lexer());
         $this->matcher = new Matcher\ArrayMatcher(
             new Matcher\ChainMatcher(array(
                 new Matcher\CallbackMatcher(),
                 new Matcher\ExpressionMatcher(),
                 new Matcher\NullMatcher(),
-                new Matcher\StringMatcher(),
-                new Matcher\IntegerMatcher(),
+                new Matcher\StringMatcher($parser),
+                new Matcher\IntegerMatcher($parser),
                 new Matcher\BooleanMatcher(),
-                new Matcher\DoubleMatcher(),
+                new Matcher\DoubleMatcher($parser),
                 new Matcher\NumberMatcher(),
                 new Matcher\ScalarMatcher(),
                 new Matcher\WildcardMatcher(),
-            ))
+            )),
+            $parser
         );
     }
 
@@ -49,7 +54,8 @@ class ArrayMatcherTest extends \PHPUnit_Framework_TestCase
         $matcher = new Matcher\ArrayMatcher(
             new Matcher\ChainMatcher(array(
                 new Matcher\WildcardMatcher()
-            ))
+            )),
+            $parser = new Parser(new Lexer())
         );
 
         $this->assertFalse($matcher->match(array('test' => 1), array('test' => 1)));
@@ -106,6 +112,14 @@ class ArrayMatcherTest extends \PHPUnit_Framework_TestCase
     public function test_matching_array_to_array_pattern()
     {
         $this->assertTrue($this->matcher->match(array("foo", "bar"), "@array@"));
+        $this->assertTrue($this->matcher->match(array("foo"), "@array@.inArray(\"foo\")"));
+        $this->assertTrue($this->matcher->match(
+            array("foo", array("bar")),
+            array(
+                "@string@",
+                "@array@.inArray(\"bar\")"
+            )
+        ));
     }
 
     public static function positiveMatchData()

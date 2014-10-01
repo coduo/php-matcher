@@ -1,17 +1,29 @@
 <?php
+
 namespace Coduo\PHPMatcher\Tests\Matcher;
 
+use Coduo\PHPMatcher\Lexer;
 use Coduo\PHPMatcher\Matcher\StringMatcher;
+use Coduo\PHPMatcher\Parser;
 
 class StringMatcherTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var StringMatcher
+     */
+    private $matcher;
+
+    public function setUp()
+    {
+        $parser = new Parser(new Lexer());
+        $this->matcher = new StringMatcher($parser);
+    }
     /**
      * @dataProvider positiveCanMatchData
      */
     public function test_positive_can_matches($pattern)
     {
-        $matcher = new StringMatcher();
-        $this->assertTrue($matcher->canMatch($pattern));
+        $this->assertTrue($this->matcher->canMatch($pattern));
     }
 
     /**
@@ -19,8 +31,7 @@ class StringMatcherTest extends \PHPUnit_Framework_TestCase
      */
     public function test_negative_can_matches($pattern)
     {
-        $matcher = new StringMatcher();
-        $this->assertFalse($matcher->canMatch($pattern));
+        $this->assertFalse($this->matcher->canMatch($pattern));
     }
 
     /**
@@ -28,8 +39,7 @@ class StringMatcherTest extends \PHPUnit_Framework_TestCase
      */
     public function test_positive_match($value, $pattern)
     {
-        $matcher = new StringMatcher();
-        $this->assertTrue($matcher->match($value, $pattern));
+        $this->assertTrue($this->matcher->match($value, $pattern));
     }
 
     /**
@@ -37,8 +47,7 @@ class StringMatcherTest extends \PHPUnit_Framework_TestCase
      */
     public function test_negative_match($value, $pattern)
     {
-        $matcher = new StringMatcher();
-        $this->assertFalse($matcher->match($value, $pattern));
+        $this->assertFalse($this->matcher->match($value, $pattern));
     }
 
     /**
@@ -46,9 +55,8 @@ class StringMatcherTest extends \PHPUnit_Framework_TestCase
      */
     public function test_negative_match_description($value, $pattern, $error)
     {
-        $matcher = new StringMatcher();
-        $matcher->match($value, $pattern);
-        $this->assertEquals($error, $matcher->getError());
+        $this->matcher->match($value, $pattern);
+        $this->assertEquals($error, $this->matcher->getError());
     }
 
     public static function positiveCanMatchData()
@@ -62,6 +70,10 @@ class StringMatcherTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             array("lorem ipsum", "@string@"),
+            array("lorem ipsum", "@string@.notEmpty()"),
+            array("lorem ipsum", "@string@.startsWith('lorem')"),
+            array("lorem ipsum", "@string@.endsWith('ipsum')"),
+            array("lorem ipsum dolor", "@string@.startsWith('lorem').contains('ipsum').endsWith('dolor')"),
         );
     }
 
@@ -88,7 +100,8 @@ class StringMatcherTest extends \PHPUnit_Framework_TestCase
             array(new \stdClass,  "@string@", "object \"\\stdClass\" is not a valid string."),
             array(1.1, "@integer@", "double \"1.1\" is not a valid string."),
             array(false, "@double@", "boolean \"false\" is not a valid string."),
-            array(1, "@array@", "integer \"1\" is not a valid string.")
+            array(1, "@array@", "integer \"1\" is not a valid string."),
+            array("lorem ipsum", "@array@.startsWith('ipsum')", "string \"lorem ipsum\" doesn't starts with string \"ipsum\".")
         );
     }
 }

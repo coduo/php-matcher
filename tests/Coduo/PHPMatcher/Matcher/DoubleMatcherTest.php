@@ -1,17 +1,28 @@
 <?php
 namespace Coduo\PHPMatcher\Tests\Matcher;
 
+use Coduo\PHPMatcher\Lexer;
 use Coduo\PHPMatcher\Matcher\DoubleMatcher;
+use Coduo\PHPMatcher\Parser;
 
 class DoubleMatcherTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var DoubleMatcher
+     */
+    private $matcher;
+
+    public function setUp()
+    {
+        $this->matcher = new DoubleMatcher(new Parser(new Lexer()));
+    }
+
     /**
      * @dataProvider positiveCanMatchData
      */
     public function test_positive_can_matches($pattern)
     {
-        $matcher = new DoubleMatcher();
-        $this->assertTrue($matcher->canMatch($pattern));
+        $this->assertTrue($this->matcher->canMatch($pattern));
     }
 
     /**
@@ -19,8 +30,7 @@ class DoubleMatcherTest extends \PHPUnit_Framework_TestCase
      */
     public function test_negative_can_matches($pattern)
     {
-        $matcher = new DoubleMatcher();
-        $this->assertFalse($matcher->canMatch($pattern));
+        $this->assertFalse($this->matcher->canMatch($pattern));
     }
 
     /**
@@ -28,8 +38,7 @@ class DoubleMatcherTest extends \PHPUnit_Framework_TestCase
      */
     public function test_positive_match($value, $pattern)
     {
-        $matcher = new DoubleMatcher();
-        $this->assertTrue($matcher->match($value, $pattern));
+        $this->assertTrue($this->matcher->match($value, $pattern));
     }
 
     /**
@@ -37,8 +46,7 @@ class DoubleMatcherTest extends \PHPUnit_Framework_TestCase
      */
     public function test_negative_match($value, $pattern)
     {
-        $matcher = new DoubleMatcher();
-        $this->assertFalse($matcher->match($value, $pattern));
+        $this->assertFalse($this->matcher->match($value, $pattern));
     }
 
     /**
@@ -46,9 +54,8 @@ class DoubleMatcherTest extends \PHPUnit_Framework_TestCase
      */
     public function test_negative_match_description($value, $pattern, $error)
     {
-        $matcher = new DoubleMatcher();
-        $matcher->match($value, $pattern);
-        $this->assertEquals($error, $matcher->getError());
+        $this->matcher->match($value, $pattern);
+        $this->assertEquals($error, $this->matcher->getError());
     }
 
     public static function positiveCanMatchData()
@@ -62,6 +69,7 @@ class DoubleMatcherTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             array(10.1, "@double@"),
+            array(10.1, "@double@.lowerThan(50.12).greaterThan(10)"),
         );
     }
 
@@ -70,7 +78,7 @@ class DoubleMatcherTest extends \PHPUnit_Framework_TestCase
         return array(
             array("@double"),
             array("double"),
-            array(1)
+            array(1),
         );
     }
 
@@ -79,7 +87,9 @@ class DoubleMatcherTest extends \PHPUnit_Framework_TestCase
         return array(
             array("1", "@double@"),
             array(new \DateTime(),  "@double@"),
-            array(10,  "@double@")
+            array(10,  "@double@"),
+            array(4.9, "@double@.greaterThan(5)"),
+            array(4.9, "@double@.lowerThan(20).greaterThan(5)"),
         );
     }
 

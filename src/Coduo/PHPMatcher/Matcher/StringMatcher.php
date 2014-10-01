@@ -2,11 +2,23 @@
 
 namespace Coduo\PHPMatcher\Matcher;
 
+use Coduo\PHPMatcher\Parser;
 use Coduo\ToString\String;
 
 class StringMatcher extends Matcher
 {
-    const STRING_PATTERN = '/^@string@$/';
+    /**
+     * @var Parser
+     */
+    private $parser;
+
+    /**
+     * @param Parser $parser
+     */
+    public function __construct(Parser $parser)
+    {
+        $this->parser = $parser;
+    }
 
     /**
      * {@inheritDoc}
@@ -18,6 +30,12 @@ class StringMatcher extends Matcher
             return false;
         }
 
+        $typePattern = $this->parser->parse($pattern);
+        if (!$typePattern->matchExpanders($value)) {
+            $this->error = $typePattern->getError();
+            return false;
+        }
+
         return true;
     }
 
@@ -26,6 +44,10 @@ class StringMatcher extends Matcher
      */
     public function canMatch($pattern)
     {
-        return is_string($pattern) && 0 !== preg_match(self::STRING_PATTERN, $pattern);
+        if (!is_string($pattern)) {
+            return false;
+        }
+
+        return $this->parser->hasValidSyntax($pattern) && $this->parser->parse($pattern)->is('string');
     }
 }
