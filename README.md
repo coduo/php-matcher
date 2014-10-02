@@ -2,7 +2,10 @@
 
 ***PHP Matcher*** lets You assert like a gangster in Your test cases, where response can be something you cannot predict
 
-[![Build Status](https://travis-ci.org/coduo/php-matcher.svg)](https://travis-ci.org/coduo/php-matcher)
+* [![Build Status](https://travis-ci.org/coduo/php-matcher.svg)](https://travis-ci.org/coduo/php-matcher) - master
+* [![Build Status](https://travis-ci.org/coduo/php-matcher.svg?branch=1.0.7)](https://travis-ci.org/coduo/php-matcher)  - 1.0.7
+
+[Readme for 1.0 version](https://github.com/coduo/php-matcher/tree/1.0)
 
 ##Installation
 
@@ -10,70 +13,30 @@ Add to your composer.json
 
 ```
 require: {
-   "coduo/php-matcher": "1.0.*"
+   "coduo/php-matcher": "1.0.*@dev"
 }
 ```
 
-### Ways of testing
-Common way of testing api responses with Symfony2 WebTestCase
+## Basic usage
 
 ```php
-public function testGetToys()
-{
-    $this->setUpFixtures();
-    $this->setUpOath();
-    $this->client->request('GET', '/api/toys');
-    $response = $this->client->getResponse();
-    $this->assertJsonResponse($response, 200);
-    $content = $response->getContent();
-    $decoded = json_decode($content, true);
-    $this->assertTrue(isset($decoded[0]['id']));
-    $this->assertTrue(isset($decoded[1]['id']));
-    $this->assertTrue(isset($decoded[2]['id']));
-    $this->assertEquals($decoded[0]['name'], 'Barbie'));
-    $this->assertEquals($decoded[1]['name'], 'GI Joe'));
-    $this->assertEquals($decoded[2]['name'], 'Optimus Prime'));
-}
-```
-With php-matcher, you can make it more readable:
-```php
-public function testGetToys()
-{
-    $this->setUpFixtures();
-    $this->setUpOath();
-    $this->client->request('GET', '/api/toys');
-    $response = $this->client->getResponse();
-    $this->assertJsonResponse($response, 200);
-    $content = $response->getContent();
-    $pattern = '[
-        {
-          "id": @string@,
-          "name": "Barbie",
-          "_links: @*@
-        },
-        {
-          "id": @string@,
-          "name": "GI Joe",
-          "_links": @*@
-        },
-        {
-          "id": @string@,
-          "name": "Optimus Prime",
-          "_links": @*@
-        }
-      ]
-   ';
-   $this->assertTrue(match($content, $pattern));
-}
-```
+<?php
 
+use Coduo\PHPMatcher\Factory\SimpleFactory;
 
-From now you should be able to use global function ``match($value, $pattern)``
+$factory = new SimpleFactory();
+$matcher = $factory->createMatcher();
+
+$match = $matcher->match("lorem ipsum dolor", "@string@")
+// $match === true
+```
 
 ### Available patterns
 
 * ``@string@``
 * ``@integer@``
+* ``@number@``
+* ``@double@``
 * ``@boolean@``
 * ``@array@``
 * ``@...@`` - *unbounded array*
@@ -82,6 +45,16 @@ From now you should be able to use global function ``match($value, $pattern)``
 * ``@*@`` || ``@wildcard@``
 * ``expr(expression)``
 
+### Available pattern exapanders
+
+* startsWith($stringBeginning, $ignoreCase = false)
+* endsWith($stringEnding, $ignoreCase = false)
+* contains($string, $ignoreCase = false)
+* notEmpty()
+* lowerThan($boundry)
+* greaterThan($boundry)
+* inArray($value)
+
 ##Example usage
 
 ### Scalar matching
@@ -89,29 +62,106 @@ From now you should be able to use global function ``match($value, $pattern)``
 ```php
 <?php
 
-match(1, 1);
-match('string', 'string')
+use Coduo\PHPMatcher\Factory\SimpleFactory;
+
+$factory = new SimpleFactory();
+$matcher = $factory->createMatcher();
+
+$matcher->match(1, 1);
+$matcher->match('string', 'string')
 ```
 
-### Type matching
+### String matching
 
 ```php
 <?php
 
-match(1, '@integer@');
-match('Norbert', '@string@');
-match(array('foo', 'bar'), '@array@');
-match(12.4, '@double@');
-match(true, '@boolean@');
+use Coduo\PHPMatcher\Factory\SimpleFactory;
+
+$factory = new SimpleFactory();
+$matcher = $factory->createMatcher();
+
+$matcher->match('Norbert', '@string@');
+$matcher->match("lorem ipsum dolor", "@string@.startsWith('lorem').contains('ipsum').endsWith('dolor')")
+
 ```
 
-### Wildcard 
+### Integer matching
 
 ```php
 <?php
 
-match(1, '@*@');
-match(new \stdClass(), '@wildcard@');
+use Coduo\PHPMatcher\Factory\SimpleFactory;
+
+$factory = new SimpleFactory();
+$matcher = $factory->createMatcher();
+
+$matcher->match(100, '@integer@');
+$matcher->match(100, '@integer@.lowerThan(200).greaterThan(10)');
+
+```
+
+### Number matching
+
+```php
+<?php
+
+use Coduo\PHPMatcher\Factory\SimpleFactory;
+
+$factory = new SimpleFactory();
+$matcher = $factory->createMatcher();
+
+$matcher->match(100, '@number@');
+$matcher->match('200', '@number@');
+$matcher->match(1.25, '@number@');
+$matcher->match('1.25', '@number@');
+$matcher->match(0b10100111001, '@number@');
+```
+
+### Double matching
+
+```php
+<?php
+
+use Coduo\PHPMatcher\Factory\SimpleFactory;
+
+$factory = new SimpleFactory();
+$matcher = $factory->createMatcher();
+
+$matcher->match(10.1, "@double@");
+$matcher->match(10.1, "@double@.lowerThan(50.12).greaterThan(10)");
+```
+
+### Boolean matching
+
+```php
+<?php
+
+use Coduo\PHPMatcher\Factory\SimpleFactory;
+
+$factory = new SimpleFactory();
+$matcher = $factory->createMatcher();
+
+$matcher->match(true, "@boolean@");
+$matcher->match(false, "@boolean@");
+```
+
+### Wildcard matching
+
+```php
+<?php
+
+use Coduo\PHPMatcher\Factory\SimpleFactory;
+
+$factory = new SimpleFactory();
+$matcher = $factory->createMatcher();
+
+$matcher->match("@integer@", "@*@"),
+$matcher->match("foobar", "@*@"),
+$matcher->match(true, "@*@"),
+$matcher->match(6.66, "@*@"),
+$matcher->match(array("bar"), "@wildcard@"),
+$matcher->match(new \stdClass, "@wildcard@"),
 ```
 
 ### Expression matching 
@@ -119,8 +169,13 @@ match(new \stdClass(), '@wildcard@');
 ```php
 <?php
 
-match(new \DateTime('2014-04-01'), "expr(value.format('Y-m-d') == '2014-04-01'");
-match("Norbert", "expr(value === 'Norbert')");
+use Coduo\PHPMatcher\Factory\SimpleFactory;
+
+$factory = new SimpleFactory();
+$matcher = $factory->createMatcher();
+
+$matcher->match(new \DateTime('2014-04-01'), "expr(value.format('Y-m-d') == '2014-04-01'");
+$matcher->match("Norbert", "expr(value === 'Norbert')");
 ```
 
 ### Array matching 
@@ -128,7 +183,12 @@ match("Norbert", "expr(value === 'Norbert')");
 ```php
 <?php
 
-match(
+use Coduo\PHPMatcher\Factory\SimpleFactory;
+
+$factory = new SimpleFactory();
+$matcher = $factory->createMatcher();
+
+$matcher->match(
    array(
       'users' => array(
           array(
@@ -156,7 +216,7 @@ match(
    array(
       'users' => array(
           array(
-              'id' => '@integer@',
+              'id' => '@integer@.greaterThan(0)',
               'firstName' => '@string@',
               'lastName' => 'Orzechowicz',
               'roles' => '@array@'
@@ -177,11 +237,15 @@ match(
 
 ### Json matching 
 
-
 ```php
 <?php
 
-match(
+use Coduo\PHPMatcher\Factory\SimpleFactory;
+
+$factory = new SimpleFactory();
+$matcher = $factory->createMatcher();
+
+$matcher->match(
   '{
     "users":[
       {
@@ -201,6 +265,50 @@ match(
   }'
 )
 
+```
+
+### Xml matching
+
+```php
+<?php
+
+use Coduo\PHPMatcher\Factory\SimpleFactory;
+
+$factory = new SimpleFactory();
+$matcher = $factory->createMatcher();
+
+$matcher->match(<<<XML
+<?xml version="1.0"?>
+<soap:Envelope
+xmlns:soap="http://www.w3.org/2001/12/soap-envelope"
+soap:encodingStyle="http://www.w3.org/2001/12/soap-encoding">
+
+<soap:Body xmlns:m="http://www.example.org/stock">
+  <m:GetStockPrice>
+    <m:StockName>IBM</m:StockName>
+    <m:StockValue>Any Value</m:StockValue>
+  </m:GetStockPrice>
+</soap:Body>
+
+</soap:Envelope>
+XML
+                ,
+                <<<XML
+<?xml version="1.0"?>
+<soap:Envelope
+    xmlns:soap="@string@"
+            soap:encodingStyle="@string@">
+
+<soap:Body xmlns:m="@string@">
+  <m:GetStockPrice>
+    <m:StockName>@string@</m:StockName>
+    <m:StockValue>@string@</m:StockValue>
+  </m:GetStockPrice>
+</soap:Body>
+
+</soap:Envelope>
+XML
+        );
 ```
 
 Example scenario for api in behat using mongo.
@@ -257,5 +365,6 @@ This library is distributed under the MIT license. Please see the LICENSE file.
 
 ## Credits
 
-This lib was inspired by [JSON Expressions gem](https://github.com/chancancode/json_expressions) && [Behat RestExtension ](https://github.com/jakzal/RestExtension)
+This lib was inspired by [JSON Expressions gem](https://github.com/chancancode/json_expressions) &&
+[Behat RestExtension ](https://github.com/jakzal/RestExtension)
 
