@@ -47,13 +47,13 @@ $match = $matcher->match("lorem ipsum dolor", "@string@")
 
 ### Available pattern exapanders
 
-* startsWith($stringBeginning, $ignoreCase = false)
-* endsWith($stringEnding, $ignoreCase = false)
-* contains($string, $ignoreCase = false)
-* notEmpty()
-* lowerThan($boundry)
-* greaterThan($boundry)
-* inArray($value)
+* ``startsWith($stringBeginning, $ignoreCase = false)``
+* ``endsWith($stringEnding, $ignoreCase = false)``
+* ``contains($string, $ignoreCase = false)``
+* ``notEmpty()``
+* ``lowerThan($boundry)``
+* ``greaterThan($boundry)``
+* ``inArray($value)``
 
 ##Example usage
 
