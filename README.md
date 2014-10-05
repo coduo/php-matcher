@@ -2,6 +2,8 @@
 
 ***PHP Matcher*** lets You assert like a gangster in Your test cases, where response can be something you cannot predict
 
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/coduo/php-matcher/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/coduo/php-matcher/?branch=master)
+
 * [![Build Status](https://travis-ci.org/coduo/php-matcher.svg)](https://travis-ci.org/coduo/php-matcher) - master
 * [![Build Status](https://travis-ci.org/coduo/php-matcher.svg?branch=1.0.7)](https://travis-ci.org/coduo/php-matcher)  - 1.0.7
 
