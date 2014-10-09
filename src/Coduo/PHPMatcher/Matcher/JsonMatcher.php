@@ -11,7 +11,7 @@ class JsonMatcher extends Matcher
      * @var
      */
     private $matcher;
-
+    
     /**
      * @param ValueMatcher $matcher
      */

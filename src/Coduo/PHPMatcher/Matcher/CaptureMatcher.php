@@ -25,14 +25,9 @@ class CaptureMatcher extends Matcher implements \ArrayAccess
         return is_string($pattern) && 0 !== preg_match(self::MATCH_PATTERN, $pattern);
     }
 
-    private function extractPattern($pattern)
-    {
-        return str_replace(":", "", $pattern);
-    }
-
     public function offsetSet($offset, $value)
     {
-        if (is_null($offset)) {
+        if (null === $offset) {
             $this->captures[] = $value;
         } else {
             $this->captures[$offset] = $value;
@@ -52,5 +47,10 @@ class CaptureMatcher extends Matcher implements \ArrayAccess
     public function offsetGet($offset)
     {
         return isset($this->captures[$offset]) ? $this->captures[$offset] : null;
+    }
+
+    private function extractPattern($pattern)
+    {
+        return str_replace(":", "", $pattern);
     }
 }

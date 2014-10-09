@@ -202,7 +202,21 @@ XML;
         ));
         $this->assertEquals($this->captureMatcher['uid'], 5);
     }
-    
+
+    public function test_matcher_with_json_captures()
+    {
+        $json = '
+            {"id": "1234"}
+        ';
+
+        $jsonPattern = '
+            {"id": ":identifier:"}
+        ';
+
+        $this->assertTrue($this->matcher->match($json, $jsonPattern));
+        $this->assertEquals('1234', $this->captureMatcher['identifier']);
+    }
+
     function test_matcher_with_callback()
     {
         $this->assertTrue($this->matcher->match('test', function($value) { return $value === 'test';}));
