@@ -29,7 +29,9 @@ class Parser
         "lowerThan" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\LowerThan",
         "greaterThan" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\GreaterThan",
         "inArray" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\InArray",
-        "contains" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\Contains"
+        "contains" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\Contains",
+
+        "oneOf" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\OneOf"
     );
 
     /**
@@ -222,6 +224,10 @@ class Parser
             return $this->getArrayArgument();
         }
 
+        if ($this->lexer->isNextToken(Lexer::T_EXPANDER_NAME)) {
+            return $this->getNextExpanderNode();
+        }
+
         if (!$this->lexer->isNextTokenAny($validArgumentTypes)) {
             $this->unexpectedSyntaxError($this->lexer->lookahead, "string, number, boolean or null argument");
         }
@@ -343,16 +349,26 @@ class Parser
     }
 
     /**
-     * @param AST\Expander $expander
+     * @param AST\Expander $expanderNode
      * @throws InvalidExpanderTypeException
      * @return Pattern\PatternExpander
      */
-    private function initializeExpander(AST\Expander $expander)
+    private function initializeExpander(AST\Expander $expanderNode)
     {
-        $reflection = new \ReflectionClass($this->expanderDefinitions[$expander->getName()]);
-        $expander = !$expander->hasArguments()
-            ? $reflection->newInstance()
-            : $reflection->newInstanceArgs($expander->getArguments());
+        $reflection = new \ReflectionClass($this->expanderDefinitions[$expanderNode->getName()]);
+
+        if ($expanderNode->hasArguments()) {
+            $arguments = array();
+            foreach ($expanderNode->getArguments() as $argument) {
+                $arguments[] = ($argument instanceof AST\Expander)
+                    ? $this->initializeExpander($argument)
+                    : $argument;
+            }
+
+            $expander = $reflection->newInstanceArgs($arguments);
+        } else {
+            $expander = $reflection->newInstance();
+        }
 
         if (!$expander instanceof Pattern\PatternExpander) {
             throw new InvalidExpanderTypeException();

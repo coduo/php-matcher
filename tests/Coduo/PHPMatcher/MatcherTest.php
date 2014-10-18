@@ -202,16 +202,41 @@ XML;
         ));
         $this->assertEquals($this->captureMatcher['uid'], 5);
     }
-    
-    function test_matcher_with_callback()
+
+    public function test_matcher_with_callback()
     {
         $this->assertTrue($this->matcher->match('test', function($value) { return $value === 'test';}));
         $this->assertFalse($this->matcher->match('test', function($value) { return $value !== 'test';}));
     }
 
-    function test_matcher_with_wildcard()
+    public function test_matcher_with_wildcard()
     {
         $this->assertTrue($this->matcher->match('test', '@*@'));
         $this->assertTrue($this->matcher->match('test', '@wildcard@'));
+    }
+
+    /**
+     * @dataProvider expanderExamples()
+     */
+    public function test_expanders($value, $pattern, $expectedResult)
+    {
+        $this->assertSame($expectedResult, $this->matcher->match($value, $pattern));
+    }
+
+    public static function expanderExamples()
+    {
+        return array(
+            array("lorem ipsum", "@string@.startsWith(\"lorem\")", true),
+            array("lorem ipsum", "@string@.startsWith(\"LOREM\", true)", true),
+            array("lorem ipsum", "@string@.endsWith(\"ipsum\")", true),
+            array("lorem ipsum", "@string@.endsWith(\"IPSUM\", true)", true),
+            array("lorem ipsum", "@string@.contains(\"lorem\")", true),
+            array(100, "@integer@.lowerThan(101).greaterThan(10)", true),
+            array("", "@string@.notEmpty()", false),
+            array("lorem ipsum", "@string@.notEmpty()", true),
+            array(array("foo", "bar"), "@array@.inArray(\"bar\")", true),
+            array("lorem ipsum", "@string@.oneOf(contains(\"lorem\"), contains(\"test\"))", true),
+            array("lorem ipsum", "@string@.oneOf(contains(\"lorem\"), contains(\"test\")).endsWith(\"ipsum\")", true),
+        );
     }
 }
