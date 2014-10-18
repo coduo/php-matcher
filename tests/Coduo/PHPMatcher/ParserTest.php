@@ -2,6 +2,7 @@
 
 namespace Coduo\PHPMatcher\Tests;
 
+use Coduo\PHPMatcher\AST\Expander;
 use Coduo\PHPMatcher\Lexer;
 use Coduo\PHPMatcher\Parser;
 
@@ -14,7 +15,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->parser = new Parser(new Lexer());
+        $this->parser = new Parser(new Lexer(), new Parser\ExpanderInitializer());
     }
 
     public function test_simple_pattern_without_expanders()
@@ -128,6 +129,25 @@ class ParserTest extends \PHPUnit_Framework_TestCase
             array(
                 "@type@.expander({\"foo\" : \"bar\", 1 : {\"first\" : 1, \"second\" : 2}})",
                 array(array("foo" => "bar", 1 => array("first" => 1, "second" => 2)))
+            )
+        );
+    }
+
+    public function test_expanders_that_takes_other_expanders_as_arguments()
+    {
+        $pattern = "@type@.expander(expander(\"test\"), expander(1))";
+        $expanders = $this->parser->getAST($pattern)->getExpanders();
+
+        $firstExpander = new Expander("expander");
+        $firstExpander->addArgument("test");
+        $secondExpander = new Expander("expander");
+        $secondExpander->addArgument(1);
+
+        $this->assertEquals(
+            $expanders[0]->getArguments(),
+            array(
+                $firstExpander,
+                $secondExpander
             )
         );
     }

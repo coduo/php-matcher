@@ -4,11 +4,10 @@ namespace Coduo\PHPMatcher;
 
 use Coduo\PHPMatcher\AST;
 use Coduo\PHPMatcher\Exception\Exception;
-use Coduo\PHPMatcher\Exception\InvalidExpanderTypeException;
 use Coduo\PHPMatcher\Exception\PatternException;
-use Coduo\PHPMatcher\Exception\UnknownExpanderClassException;
 use Coduo\PHPMatcher\Exception\UnknownExpanderException;
 use Coduo\PHPMatcher\Matcher\Pattern;
+use Coduo\PHPMatcher\Parser\ExpanderInitializer;
 
 class Parser
 {
@@ -20,24 +19,17 @@ class Parser
     private $lexer;
 
     /**
-     * @var array
+     * @var ExpanderInitializer
      */
-    private $expanderDefinitions = array(
-        "startsWith" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\StartsWith",
-        "endsWith" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\EndsWith",
-        "notEmpty" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\NotEmpty",
-        "lowerThan" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\LowerThan",
-        "greaterThan" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\GreaterThan",
-        "inArray" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\InArray",
-        "contains" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\Contains"
-    );
+    private $expanderInitializer;
 
     /**
      * @param Lexer $lexer
      */
-    public function __construct(Lexer $lexer)
+    public function __construct(Lexer $lexer, ExpanderInitializer $expanderInitializer)
     {
         $this->lexer = $lexer;
+        $this->expanderInitializer = $expanderInitializer;
     }
 
     /**
@@ -64,11 +56,7 @@ class Parser
         $AST = $this->getAST($pattern);
         $pattern = new Pattern\TypePattern((string) $AST->getType());
         foreach ($AST->getExpanders() as $expander) {
-            if (!array_key_exists($expander->getName(), $this->expanderDefinitions)) {
-                throw new UnknownExpanderException(sprintf("Unknown expander \"%s\"", $expander->getName()));
-            }
-
-            $pattern->addExpander($this->initializeExpander($expander));
+            $pattern->addExpander($this->expanderInitializer->initialize($expander));
         }
 
         return $pattern;
@@ -82,20 +70,6 @@ class Parser
     {
         $this->lexer->setInput($pattern);
         return $this->getPattern();
-    }
-
-    /**
-     * @param $expanderName
-     * @param $expanderFQCN Fully-Qualified Class Name that implements PatternExpander interface
-     * @throws UnknownExpanderClassException
-     */
-    public function addExpanderDefinition($expanderName, $expanderFQCN)
-    {
-        if (!class_exists($expanderFQCN)) {
-            throw new UnknownExpanderClassException(sprintf("Class \"%s\" does not exists.", $expanderFQCN));
-        }
-
-        $this->expanderDefinitions[$expanderName] = $expanderFQCN;
     }
 
     /**
@@ -222,6 +196,10 @@ class Parser
             return $this->getArrayArgument();
         }
 
+        if ($this->lexer->isNextToken(Lexer::T_EXPANDER_NAME)) {
+            return $this->getNextExpanderNode();
+        }
+
         if (!$this->lexer->isNextTokenAny($validArgumentTypes)) {
             $this->unexpectedSyntaxError($this->lexer->lookahead, "string, number, boolean or null argument");
         }
@@ -340,24 +318,5 @@ class Parser
     private function endOfPattern()
     {
         return is_null($this->lexer->lookahead);
-    }
-
-    /**
-     * @param AST\Expander $expander
-     * @throws InvalidExpanderTypeException
-     * @return Pattern\PatternExpander
-     */
-    private function initializeExpander(AST\Expander $expander)
-    {
-        $reflection = new \ReflectionClass($this->expanderDefinitions[$expander->getName()]);
-        $expander = !$expander->hasArguments()
-            ? $reflection->newInstance()
-            : $reflection->newInstanceArgs($expander->getArguments());
-
-        if (!$expander instanceof Pattern\PatternExpander) {
-            throw new InvalidExpanderTypeException();
-        }
-
-        return $expander;
     }
 }

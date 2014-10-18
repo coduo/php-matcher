@@ -14,7 +14,7 @@ class DoubleMatcherTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->matcher = new DoubleMatcher(new Parser(new Lexer()));
+        $this->matcher = new DoubleMatcher(new Parser(new Lexer(), new Parser\ExpanderInitializer()));
     }
 
     /**

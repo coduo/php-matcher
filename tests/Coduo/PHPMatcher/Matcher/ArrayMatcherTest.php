@@ -15,7 +15,7 @@ class ArrayMatcherTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $parser = new Parser(new Lexer());
+        $parser = new Parser(new Lexer(), new Parser\ExpanderInitializer());
         $this->matcher = new Matcher\ArrayMatcher(
             new Matcher\ChainMatcher(array(
                 new Matcher\CallbackMatcher(),
@@ -55,7 +55,7 @@ class ArrayMatcherTest extends \PHPUnit_Framework_TestCase
             new Matcher\ChainMatcher(array(
                 new Matcher\WildcardMatcher()
             )),
-            $parser = new Parser(new Lexer())
+            $parser = new Parser(new Lexer(), new Parser\ExpanderInitializer())
         );
 
         $this->assertFalse($matcher->match(array('test' => 1), array('test' => 1)));
