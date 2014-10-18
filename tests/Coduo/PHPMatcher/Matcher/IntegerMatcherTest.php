@@ -14,7 +14,7 @@ class IntegerMatcherTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->matcher = new IntegerMatcher(new Parser(new Lexer()));
+        $this->matcher = new IntegerMatcher(new Parser(new Lexer(), new Parser\ExpanderInitializer()));
     }
 
     /**

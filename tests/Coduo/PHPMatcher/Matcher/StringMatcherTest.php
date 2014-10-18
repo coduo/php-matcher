@@ -15,7 +15,7 @@ class StringMatcherTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $parser = new Parser(new Lexer());
+        $parser = new Parser(new Lexer(), new Parser\ExpanderInitializer());
         $this->matcher = new StringMatcher($parser);
     }
     /**

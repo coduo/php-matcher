@@ -20,7 +20,7 @@ class MatcherTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->captureMatcher = new Matcher\CaptureMatcher();
-        $parser = new Parser(new Lexer());
+        $parser = new Parser(new Lexer(), new Parser\ExpanderInitializer());
         $scalarMatchers = new Matcher\ChainMatcher(array(
             $this->captureMatcher,
             new Matcher\CallbackMatcher(),

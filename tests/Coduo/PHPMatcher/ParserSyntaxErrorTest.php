@@ -14,7 +14,7 @@ class ParserSyntaxErrorTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->parser = new Parser(new Lexer());
+        $this->parser = new Parser(new Lexer(), new Parser\ExpanderInitializer());
     }
 
     /**

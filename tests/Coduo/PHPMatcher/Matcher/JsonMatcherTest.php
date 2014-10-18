@@ -15,7 +15,7 @@ class JsonMatcherTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $parser = new Parser(new Lexer());
+        $parser = new Parser(new Lexer(), new Parser\ExpanderInitializer());
         $scalarMatchers = new Matcher\ChainMatcher(array(
             new Matcher\CallbackMatcher(),
             new Matcher\ExpressionMatcher(),

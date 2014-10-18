@@ -59,6 +59,6 @@ class SimpleFactory implements Factory
      */
     protected function buildParser()
     {
-        return new Parser(new Lexer());
+        return new Parser(new Lexer(), new Parser\ExpanderInitializer());
     }
 }
