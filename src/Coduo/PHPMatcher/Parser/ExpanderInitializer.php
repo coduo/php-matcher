@@ -18,6 +18,7 @@ class ExpanderInitializer
         "startsWith" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\StartsWith",
         "endsWith" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\EndsWith",
         "notEmpty" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\NotEmpty",
+        "isDateTime" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\IsDateTime",
         "lowerThan" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\LowerThan",
         "greaterThan" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\GreaterThan",
         "inArray" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\InArray",
