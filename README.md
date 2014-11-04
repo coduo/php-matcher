@@ -47,11 +47,13 @@ $match = $matcher->match("lorem ipsum dolor", "@string@")
 * ``@*@`` || ``@wildcard@``
 * ``expr(expression)``
 
-### Available pattern exapanders
+### Available pattern expanders
 
 * ``startsWith($stringBeginning, $ignoreCase = false)``
 * ``endsWith($stringEnding, $ignoreCase = false)``
 * ``contains($string, $ignoreCase = false)``
+* ``isDateTime()``
+* ``isEmail()``
 * ``notEmpty()``
 * ``lowerThan($boundry)``
 * ``greaterThan($boundry)``
@@ -254,6 +256,7 @@ $matcher->match(
       {
         "firstName": "Norbert",
         "lastName": "Orzechowicz",
+        "created": "2014-01-01",
         "roles":["ROLE_USER", "ROLE_DEVELOPER"]}
       ]
   }',
@@ -262,6 +265,7 @@ $matcher->match(
       {
         "firstName": @string@,
         "lastName": @string@,
+        "created": "@string@.isDateTime()",
         "roles": @array@
       }
     ]
