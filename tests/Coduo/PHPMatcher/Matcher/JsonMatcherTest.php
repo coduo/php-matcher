@@ -59,6 +59,14 @@ class JsonMatcherTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider normalizationRequiredDataProvider
+     */
+    public function test_positive_matches_after_normalization($value, $pattern)
+    {
+        $this->assertTrue($this->matcher->match($value, $pattern), $this->matcher->getError());
+    }
+
+    /**
      * @dataProvider negativeMatches
      */
     public function test_negative_matches($value, $pattern)
@@ -191,6 +199,36 @@ class JsonMatcherTest extends \PHPUnit_Framework_TestCase
                 array(),
                 '[]'
             )
+        );
+    }
+
+    public static function normalizationRequiredDataProvider()
+    {
+        return array(
+            array(
+                '{"name": "Norbert"}',
+                '{"name": @string@}'
+            ),
+            array(
+                '{"name": 25}',
+                '{"name": @number@}'
+            ),
+            array(
+                '{"name": 25}',
+                '{"name": @integer@}'
+            ),
+            array(
+                '{"name": true}',
+                '{"name": @boolean@}'
+            ),
+            array(
+                '{"name": ["Norbert", "Michał"]}',
+                '{"name": ["Norbert", @...@]}'
+            ),
+            array(
+                '{"name": "Norbert", "roles": ["ADMIN", "USER"]}',
+                '{"name": @string@, "roles": [@string@, @string@]}'
+            ),
         );
     }
 }

@@ -4,7 +4,7 @@ namespace Coduo\PHPMatcher\Matcher;
 
 class JsonMatcher extends Matcher
 {
-    const TRANSFORM_QUOTATION_PATTERN = '/([^"])@(integer|string|array|double|wildcard|boolean|\.\.\.|null)@([^"])/';
+    const TRANSFORM_QUOTATION_PATTERN = '/([^"])@([a-zA-Z0-9\.]+)@([^"])/';
     const TRANSFORM_QUOTATION_REPLACEMENT = '$1"@$2@"$3';
 
     /**
