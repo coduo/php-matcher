@@ -14,17 +14,17 @@ class ArrayMatcher extends Matcher
     /**
      * @var PropertyMatcher
      */
-    private $propertyMatcher;
+    protected $propertyMatcher;
 
     /**
      * @var PropertyAccessor
      */
-    private $accessor;
+    protected $accessor;
 
     /**
      * @var Parser
      */
-    private $parser;
+    protected $parser;
 
     /**
      * @param ValueMatcher $propertyMatcher
@@ -64,7 +64,7 @@ class ArrayMatcher extends Matcher
         return is_array($pattern) || $this->isArrayPattern($pattern);
     }
 
-    private function isArrayPattern($pattern)
+    protected function isArrayPattern($pattern)
     {
         if (!is_string($pattern)) {
             return false;
@@ -79,7 +79,7 @@ class ArrayMatcher extends Matcher
      * @param string $parentPath
      * @return bool
      */
-    private function iterateMatch(array $values, array $patterns, $parentPath = "")
+    protected function iterateMatch(array $values, array $patterns, $parentPath = "")
     {
         $pattern = null;
         foreach ($values as $key => $value) {
@@ -136,7 +136,7 @@ class ArrayMatcher extends Matcher
      * @param $parentPath
      * @return bool
      */
-    private function isPatternValid(array $pattern, array $values, $parentPath)
+    protected function isPatternValid(array $pattern, array $values, $parentPath)
     {
         if (is_array($pattern)) {
             $notExistingKeys = array_diff_key($pattern, $values);
@@ -157,7 +157,7 @@ class ArrayMatcher extends Matcher
      * @param $pattern
      * @return bool
      */
-    private function valueMatchPattern($value, $pattern)
+    protected function valueMatchPattern($value, $pattern)
     {
         $match = $this->propertyMatcher->canMatch($pattern) &&
             true === $this->propertyMatcher->match($value, $pattern);
@@ -174,7 +174,7 @@ class ArrayMatcher extends Matcher
      * @param $haystack
      * @return bool
      */
-    private function valueExist($path, array $haystack)
+    protected function valueExist($path, array $haystack)
     {
         return null !== $this->getPropertyAccessor()->getValue($haystack, $path);
     }
@@ -184,7 +184,7 @@ class ArrayMatcher extends Matcher
      * @param $path
      * @return mixed
      */
-    private function getValueByPath($array, $path)
+    protected function getValueByPath($array, $path)
     {
         return $this->getPropertyAccessor()->getValue($array, $path);
     }
@@ -192,7 +192,7 @@ class ArrayMatcher extends Matcher
     /**
      * @return \Symfony\Component\PropertyAccess\PropertyAccessorInterface
      */
-    private function getPropertyAccessor()
+    protected function getPropertyAccessor()
     {
         if (isset($this->accessor)) {
             return $this->accessor;
@@ -208,7 +208,7 @@ class ArrayMatcher extends Matcher
      * @param $place
      * @param $path
      */
-    private function setMissingElementInError($place, $path)
+    protected function setMissingElementInError($place, $path)
     {
         $this->error = sprintf('There is no element under path %s in %s.', $path, $place);
     }
@@ -217,7 +217,7 @@ class ArrayMatcher extends Matcher
      * @param $key
      * @return string
      */
-    private function formatAccessPath($key)
+    protected function formatAccessPath($key)
     {
         return sprintf("[%s]", $key);
     }
@@ -227,7 +227,7 @@ class ArrayMatcher extends Matcher
      * @param $path
      * @return string
      */
-    private function formatFullPath($parentPath, $path)
+    protected function formatFullPath($parentPath, $path)
     {
         return sprintf("%s%s", $parentPath, $path);
     }
@@ -236,7 +236,7 @@ class ArrayMatcher extends Matcher
      * @param $lastPattern
      * @return bool
      */
-    private function shouldSkippValueMatchingFor($lastPattern)
+    protected function shouldSkippValueMatchingFor($lastPattern)
     {
         return $lastPattern === self::UNBOUNDED_PATTERN;
     }
@@ -247,7 +247,7 @@ class ArrayMatcher extends Matcher
      * @return bool
      * @throws \Coduo\PHPMatcher\Exception\UnknownExpanderException
      */
-    private function allExpandersMatch($value, $pattern)
+    protected function allExpandersMatch($value, $pattern)
     {
         $typePattern = $this->parser->parse($pattern);
         if (!$typePattern->matchExpanders($value)) {
