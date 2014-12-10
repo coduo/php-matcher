@@ -31,6 +31,9 @@ class JsonMatcherTest extends \PHPUnit_Framework_TestCase
         $this->matcher = new Matcher\JsonMatcher(new Matcher\ChainMatcher(array(
             $scalarMatchers,
             new Matcher\ArrayMatcher($scalarMatchers, $parser)
+        )), new Matcher\ChainMatcher(array(
+            $scalarMatchers,
+            new Matcher\NonStrictArrayMatcher($scalarMatchers, $parser)
         )));
     }
 
@@ -111,6 +114,22 @@ class JsonMatcherTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->matcher->match($value, $pattern));
 
         $this->assertEquals($this->matcher->getError(), 'There is no element under path [foo][bar][faz] in value.');
+    }
+
+    /**
+     * @dataProvider nonStrictPositiveMatches
+     */
+    public function test_non_strict_json_postive_matching($value, $pattern)
+    {
+        $this->assertTrue($this->matcher->match($value, $pattern), $this->matcher->getError());
+    }
+
+    /**
+     * @dataProvider nonStrictNegativeMatches
+     */
+    public function test_non_strict_json_negative_matching($value, $pattern)
+    {
+        $this->assertFalse($this->matcher->match($value, $pattern), $this->matcher->getError());
     }
 
     public static function positivePatterns()
@@ -228,6 +247,34 @@ class JsonMatcherTest extends \PHPUnit_Framework_TestCase
             array(
                 '{"name": "Norbert", "roles": ["ADMIN", "USER"]}',
                 '{"name": @string@, "roles": [@string@, @string@]}'
+            ),
+        );
+    }
+
+    public function nonStrictPositiveMatches()
+    {
+        return array(
+            array(
+                '{"key": "value", "foo": "bar"}',
+                '{"foo": "bar"}@ignore_extra_keys@',
+            ),
+            array(
+                '{"key": "value", "foo": "bar", "roles": ["ADMIN", "USER"], "more": {"buz": "guz", "paz": "kaz"}}',
+                '{"foo": "bar", "more": {"buz": "guz"}}@ignore_extra_keys@',
+            ),
+            array(
+                '{"key": "value", "foo": "bar", "roles": ["ADMIN", "USER"], "more": {"buz": "guz", "paz": "kaz"}}',
+                '{"foo": "bar", "more": {"buz": @string@}}@ignore_extra_keys@',
+            ),
+        );
+    }
+
+    public function nonStrictNegativeMatches()
+    {
+        return array(
+            array(
+                '{"key": "value", "foo": "bar"}',
+                '{"important_key": "bar"}@ignore_extra_keys@',
             ),
         );
     }
