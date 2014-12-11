@@ -22,7 +22,7 @@ class ExpressionMatcher extends Matcher
             $this->error = sprintf("\"%s\" expression fails for value \"%s\".", $pattern, new String($value));
         }
 
-        return $expressionResult;
+        return (bool) $expressionResult;
     }
 
     /**

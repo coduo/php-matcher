@@ -51,6 +51,24 @@ class ExpressionMatcherTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($error, $matcher->getError());
     }
 
+    /**
+     * @dataProvider positiveRegexMatchData
+     */
+    public function test_positive_regex_matches($value, $pattern)
+    {
+        $matcher = new ExpressionMatcher();
+        $this->assertTrue($matcher->match($value, $pattern));
+    }
+
+    /**
+     * @dataProvider negativeRegexMatchData
+     */
+    public function test_negative_regex_matches($value, $pattern)
+    {
+        $matcher = new ExpressionMatcher();
+        $this->assertFalse($matcher->match($value, $pattern));
+    }
+
     public static function positiveCanMatchData()
     {
         return array(
@@ -96,6 +114,22 @@ class ExpressionMatcherTest extends \PHPUnit_Framework_TestCase
                 "expr(value.format('Y-m-d') == '2014-04-02')",
                 "\"expr(value.format('Y-m-d') == '2014-04-02')\" expression fails for value \"\\DateTime\"."
             ),
+        );
+    }
+
+    public static function positiveRegexMatchData()
+    {
+        return array(
+            array('Cakper', 'expr(value matches "/Cakper/")'),
+            array('Cakper', 'expr(not(value matches "/Yaboomaster/"))'),
+        );
+    }
+
+    public static function negativeRegexMatchData()
+    {
+        return array(
+            array('Cakper', 'expr(not(value matches "/Cakper/"))'),
+            array('Cakper', 'expr(value matches "/Yaboomaster/")'),
         );
     }
 }
