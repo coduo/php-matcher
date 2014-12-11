@@ -11,12 +11,10 @@
 
 ##Installation
 
-Add to your composer.json 
+Require new dev dependency using composer (assuming it's installed globally):
 
 ```
-require: {
-   "coduo/php-matcher": "1.1.*"
-}
+composer require --dev "coduo/php-matcher"
 ```
 
 ## Basic usage
