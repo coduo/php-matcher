@@ -38,6 +38,14 @@ class TypePattern implements Pattern
     }
 
     /**
+     * @return string
+     */
+    public function getType()
+    {
+        return strtolower($this->type);
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function addExpander(PatternExpander $expander)

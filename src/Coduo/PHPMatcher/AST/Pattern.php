@@ -24,7 +24,7 @@ class Pattern implements Node
     }
 
     /**
-     * @return mixed
+     * @return Type
      */
     public function getType()
     {

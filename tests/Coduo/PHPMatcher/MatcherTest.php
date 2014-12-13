@@ -41,7 +41,8 @@ class MatcherTest extends \PHPUnit_Framework_TestCase
             $scalarMatchers,
             $arrayMatcher,
             new Matcher\JsonMatcher($arrayMatcher),
-            new Matcher\XmlMatcher($arrayMatcher)
+            new Matcher\XmlMatcher($arrayMatcher),
+            new Matcher\TextMatcher($scalarMatchers, $parser)
         )));
     }
 
@@ -192,6 +193,14 @@ XML;
 
         $this->assertTrue($this->matcher->match($xml, $xmlPattern));
         $this->assertTrue(match($xml, $xmlPattern));
+    }
+
+    public function test_text_matcher()
+    {
+        $value = "lorem ipsum 1234 random text";
+        $pattern = "@string@.startsWith('lo') ipsum @number@.greaterThan(10) random text";
+        $this->assertTrue($this->matcher->match($value, $pattern));
+        $this->assertTrue(match($value, $pattern));
     }
 
     public function test_matcher_with_captures()

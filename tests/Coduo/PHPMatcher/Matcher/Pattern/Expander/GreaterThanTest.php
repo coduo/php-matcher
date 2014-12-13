@@ -23,6 +23,7 @@ class GreaterThanTest extends \PHPUnit_Framework_TestCase
             array(-20, -10.5, true),
             array(10, 1, false),
             array(1, 1, false),
+            array(10, "20", true)
         );
     }
 
