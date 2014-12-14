@@ -29,7 +29,8 @@ class SimpleFactory implements Factory
             $scalarMatchers,
             $arrayMatcher,
             new Matcher\JsonMatcher($arrayMatcher),
-            new Matcher\XmlMatcher($arrayMatcher)
+            new Matcher\XmlMatcher($arrayMatcher),
+            new Matcher\TextMatcher($scalarMatchers, $this->buildParser())
         ));
     }
 

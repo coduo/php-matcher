@@ -35,7 +35,7 @@ class GreaterThan implements PatternExpander
      */
     public function match($value)
     {
-        if (!is_float($value) && !is_integer($value) && !is_double($value)) {
+        if (!is_float($value) && !is_integer($value) && !is_double($value) && !is_numeric($value)) {
             $this->error = sprintf("Value \"%s\" is not a valid number.", new String($value));
             return false;
         }
