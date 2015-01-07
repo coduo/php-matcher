@@ -79,6 +79,10 @@ class TextMatcher extends Matcher
             return false;
         }
 
+        if (mb_strlen($pattern) !== 6 && false !== mb_strpos($pattern, '@null@')) {
+            return false;
+        }
+
         return true;
     }
 
