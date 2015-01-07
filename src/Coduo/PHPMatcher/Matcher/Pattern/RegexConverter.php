@@ -19,6 +19,8 @@ class RegexConverter
                 return "(\\-?[0-9]*)";
             case 'double':
                 return "(\\-?[0-9]*[\\.|\\,][0-9]*)";
+            case 'null':
+                return "(null|NULL)";
             default:
                 throw new UnknownTypeException();
         }
