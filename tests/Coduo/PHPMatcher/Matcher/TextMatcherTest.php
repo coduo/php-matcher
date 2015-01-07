@@ -37,6 +37,20 @@ class TextMatcherTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    public function test_can_match_general_strings()
+    {
+        $this->assertTrue($this->matcher->canMatch(''));
+        $this->assertTrue($this->matcher->canMatch('String with text'));
+        $this->assertTrue($this->matcher->canMatch('String with text, @number@ and @*@'));
+    }
+
+    public function test_cannot_match_null_as_part_of_pattern()
+    {
+        $this->assertFalse($this->matcher->canMatch("Using @null@ inside other text"));
+        $this->assertFalse($this->matcher->canMatch("@null@ at start of pattern"));
+        $this->assertFalse($this->matcher->canMatch("pattern ends with @null@"));
+    }
+
     /**
      * @dataProvider matchingData
      */
