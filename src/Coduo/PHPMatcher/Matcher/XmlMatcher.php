@@ -2,6 +2,7 @@
 
 namespace Coduo\PHPMatcher\Matcher;
 
+use Coduo\PHPMatcher\Matcher\Pattern\Assert\Xml;
 use LSS\XML2Array;
 
 class XmlMatcher extends Matcher
@@ -24,7 +25,7 @@ class XmlMatcher extends Matcher
      */
     public function match($value, $pattern)
     {
-        if (!is_string($value) || !$this->isValidXml($value) || !$this->isValidXml($pattern)) {
+        if (!Xml::isValid($value) || !Xml::isValid($pattern)) {
             return false;
         }
 
@@ -45,22 +46,6 @@ class XmlMatcher extends Matcher
      */
     public function canMatch($pattern)
     {
-        if (!is_string($pattern)) {
-            return false;
-        }
-
-        return $this->isValidXml($pattern);
-    }
-
-    private function isValidXml($string)
-    {
-        $xml = @simplexml_load_string($string);
-
-        if (!$xml instanceof \SimpleXMLElement) {
-
-            return false;
-        }
-
-        return true;
+        return Xml::isValid($pattern);
     }
 }

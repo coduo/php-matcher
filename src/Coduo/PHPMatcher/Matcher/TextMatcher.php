@@ -2,6 +2,9 @@
 
 namespace Coduo\PHPMatcher\Matcher;
 
+use Coduo\PHPMatcher\Exception\UnknownTypeException;
+use Coduo\PHPMatcher\Matcher\Pattern\Assert\Json;
+use Coduo\PHPMatcher\Matcher\Pattern\Assert\Xml;
 use Coduo\PHPMatcher\Matcher\Pattern\TypePattern;
 use Coduo\PHPMatcher\Parser;
 use Coduo\PHPMatcher\Matcher\Pattern\RegexConverter;
@@ -46,7 +49,12 @@ class TextMatcher extends Matcher
         $patternRegex = $pattern;
         $patternsReplacedWithRegex = $this->replaceTypePatternsWithPlaceholders($patternRegex);
         $patternRegex = $this->prepareRegex($patternRegex);
-        $patternRegex = $this->replacePlaceholderWithPatternRegexes($patternRegex, $patternsReplacedWithRegex);
+        try {
+            $patternRegex = $this->replacePlaceholderWithPatternRegexes($patternRegex, $patternsReplacedWithRegex);
+        } catch (UnknownTypeException $exception) {
+            $this->error = sprintf(sprintf("Type pattern \"%s\" is not supported by TextMatcher.", $exception->getType()));
+            return false;
+        }
 
         if (!preg_match($patternRegex, $value, $matchedValues)) {
             $this->error = sprintf("\"%s\" does not match \"%s\" pattern", $value, $pattern);
@@ -76,6 +84,14 @@ class TextMatcher extends Matcher
     public function canMatch($pattern)
     {
         if (!is_string($pattern)) {
+            return false;
+        }
+
+        if (Json::isValidPattern($pattern)) {
+            return false;
+        }
+
+        if (Xml::isValid($pattern)) {
             return false;
         }
 

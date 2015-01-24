@@ -6,9 +6,9 @@ use Coduo\PHPMatcher\Exception\UnknownTypeException;
 
 class RegexConverter
 {
-    public function toRegex(TypePattern $type)
+    public function toRegex(TypePattern $typePattern)
     {
-        switch ($type->getType()) {
+        switch ($typePattern->getType()) {
             case 'string':
             case 'wildcard':
             case '*':
@@ -20,7 +20,7 @@ class RegexConverter
             case 'double':
                 return "(\\-?[0-9]*[\\.|\\,][0-9]*)";
             default:
-                throw new UnknownTypeException();
+                throw new UnknownTypeException($typePattern->getType());
         }
     }
 }
