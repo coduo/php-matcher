@@ -203,6 +203,16 @@ XML;
         $this->assertTrue(match($value, $pattern));
     }
 
+
+    public function test_error_when_json_value_does_not_match_json_pattern()
+    {
+        $pattern = '{"a": @null@, "b": 4}';
+        $value = '{"a": null, "b": 5}';
+
+        $this->assertFalse($this->matcher->match($value, $pattern));
+        $this->assertSame('"5" does not match "4".', $this->matcher->getError());
+    }
+
     public function test_matcher_with_captures()
     {
         $this->assertTrue($this->matcher->match(
