@@ -17,6 +17,6 @@ class CallbackMatcher extends Matcher
      */
     public function canMatch($pattern)
     {
-        return is_callable($pattern);
+        return is_object($pattern) && is_callable($pattern);
     }
 }
