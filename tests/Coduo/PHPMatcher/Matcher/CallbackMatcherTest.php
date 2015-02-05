@@ -15,6 +15,7 @@ class CallbackMatcherTest extends \PHPUnit_Framework_TestCase
     {
         $matcher = new CallbackMatcher();
         $this->assertFalse($matcher->canMatch(new \DateTime()));
+        $this->assertFalse($matcher->canMatch('SIN'));
     }
 
     function test_positive_matches()
