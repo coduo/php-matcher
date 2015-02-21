@@ -20,6 +20,7 @@ class ExpanderInitializer
         "notEmpty" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\NotEmpty",
         "isDateTime" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\IsDateTime",
         "isEmail" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\IsEmail",
+        "isUrl" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\IsUrl",
         "lowerThan" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\LowerThan",
         "greaterThan" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\GreaterThan",
         "inArray" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\InArray",
