@@ -252,6 +252,8 @@ XML;
             array("lorem ipsum", "@string@.contains(\"lorem\")", true),
             array("norbert@coduo.pl", "@string@.isEmail()", true),
             array("lorem ipsum", "@string@.isEmail()", false),
+            array("http://coduo.pl/", "@string@.isUrl()", true),
+            array("lorem ipsum", "@string@.isUrl()", false),
             array("2014-08-19", "@string@.isDateTime()", true),
             array(100, "@integer@.lowerThan(101).greaterThan(10)", true),
             array("", "@string@.notEmpty()", false),

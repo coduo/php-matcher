@@ -52,6 +52,7 @@ $match = $matcher->match("lorem ipsum dolor", "@string@")
 * ``contains($string, $ignoreCase = false)``
 * ``isDateTime()``
 * ``isEmail()``
+* ``isUrl()``
 * ``notEmpty()``
 * ``lowerThan($boundry)``
 * ``greaterThan($boundry)``
