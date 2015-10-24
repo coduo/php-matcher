@@ -40,7 +40,6 @@ $match = $matcher->match("lorem ipsum dolor", "@string@")
 * ``@boolean@``
 * ``@array@``
 * ``@...@`` - *unbounded array*
-* ``@double@``
 * ``@null@``
 * ``@*@`` || ``@wildcard@``
 * ``expr(expression)``
