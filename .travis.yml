@@ -22,4 +22,4 @@ install:
   - if [ "$DEPENDENCIES" == "low" ]; then composer update --prefer-lowest; fi;
 
 script:
-  - ./bin/phpunit --coverage-text
+  - ./bin/phpunit
