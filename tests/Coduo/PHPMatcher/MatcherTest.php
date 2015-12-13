@@ -87,7 +87,6 @@ class MatcherTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->assertTrue($this->matcher->match($value, $expecation), $this->matcher->getError());
-        $this->assertTrue(match($value, $expecation));
     }
 
     /**
@@ -96,7 +95,6 @@ class MatcherTest extends \PHPUnit_Framework_TestCase
     public function test_matcher_with_scalar_values($value, $pattern)
     {
         $this->assertTrue($this->matcher->match($value, $pattern));
-        $this->assertTrue(match($value, $pattern));
     }
 
     public function scalarValues()
@@ -155,7 +153,6 @@ class MatcherTest extends \PHPUnit_Framework_TestCase
         }';
 
         $this->assertTrue($this->matcher->match($json, $jsonPattern));
-        $this->assertTrue(match($json, $jsonPattern));
     }
 
     public function test_matcher_with_xml()
@@ -192,7 +189,6 @@ XML;
 XML;
 
         $this->assertTrue($this->matcher->match($xml, $xmlPattern));
-        $this->assertTrue(match($xml, $xmlPattern));
     }
 
     public function test_text_matcher()
@@ -200,7 +196,6 @@ XML;
         $value = "lorem ipsum 1234 random text";
         $pattern = "@string@.startsWith('lo') ipsum @number@.greaterThan(10) random text";
         $this->assertTrue($this->matcher->match($value, $pattern));
-        $this->assertTrue(match($value, $pattern));
     }
 
 
