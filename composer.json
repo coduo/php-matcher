@@ -29,8 +29,7 @@
         "psr-0": {
             "Coduo\\PHPMatcher": "src/",
             "Coduo\\PHPMatcher\\Tests": "tests/"
-        },
-        "files": ["match.php"]
+        }
     },
     "config": {
         "bin-dir": "bin"
