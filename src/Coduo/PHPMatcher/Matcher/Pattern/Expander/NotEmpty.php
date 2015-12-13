@@ -3,7 +3,7 @@
 namespace Coduo\PHPMatcher\Matcher\Pattern\Expander;
 
 use Coduo\PHPMatcher\Matcher\Pattern\PatternExpander;
-use Coduo\ToString\String;
+use Coduo\ToString\StringConverter;
 
 class NotEmpty implements PatternExpander
 {
@@ -16,7 +16,7 @@ class NotEmpty implements PatternExpander
     public function match($value)
     {
         if (false === $value || (empty($value) && '0' != $value)) {
-            $this->error = sprintf("Value %s is not blank.", new String($value));
+            $this->error = sprintf("Value %s is not blank.", new StringConverter($value));
             return false;
         }
 

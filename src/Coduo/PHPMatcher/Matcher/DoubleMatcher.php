@@ -3,7 +3,7 @@
 namespace Coduo\PHPMatcher\Matcher;
 
 use Coduo\PHPMatcher\Parser;
-use Coduo\ToString\String;
+use Coduo\ToString\StringConverter;
 
 class DoubleMatcher extends Matcher
 {
@@ -26,7 +26,7 @@ class DoubleMatcher extends Matcher
     public function match($value, $pattern)
     {
         if (!is_double($value)) {
-            $this->error = sprintf("%s \"%s\" is not a valid double.", gettype($value), new String($value));
+            $this->error = sprintf("%s \"%s\" is not a valid double.", gettype($value), new StringConverter($value));
             return false;
         }
 

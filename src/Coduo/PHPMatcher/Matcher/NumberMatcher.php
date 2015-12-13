@@ -2,7 +2,7 @@
 
 namespace Coduo\PHPMatcher\Matcher;
 
-use Coduo\ToString\String;
+use Coduo\ToString\StringConverter;
 
 class NumberMatcher extends Matcher
 {
@@ -14,7 +14,7 @@ class NumberMatcher extends Matcher
     public function match($value, $pattern)
     {
         if (!is_numeric($value)) {
-            $this->error = sprintf("%s \"%s\" is not a valid number.", gettype($value), new String($value));
+            $this->error = sprintf("%s \"%s\" is not a valid number.", gettype($value), new StringConverter($value));
             return false;
         }
 

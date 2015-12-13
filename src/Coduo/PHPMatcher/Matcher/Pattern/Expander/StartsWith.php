@@ -3,7 +3,7 @@
 namespace Coduo\PHPMatcher\Matcher\Pattern\Expander;
 
 use Coduo\PHPMatcher\Matcher\Pattern\PatternExpander;
-use Coduo\ToString\String;
+use Coduo\ToString\StringConverter;
 
 class StartsWith implements PatternExpander
 {
@@ -43,7 +43,7 @@ class StartsWith implements PatternExpander
     public function match($value)
     {
         if (!is_string($value)) {
-            $this->error = sprintf("StartsWith expander require \"string\", got \"%s\".", new String($value));
+            $this->error = sprintf("StartsWith expander require \"string\", got \"%s\".", new StringConverter($value));
             return false;
         }
 

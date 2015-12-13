@@ -2,7 +2,7 @@
 
 namespace Coduo\PHPMatcher\Matcher;
 
-use Coduo\ToString\String;
+use Coduo\ToString\StringConverter;
 
 class BooleanMatcher extends Matcher
 {
@@ -14,7 +14,7 @@ class BooleanMatcher extends Matcher
     public function match($value, $pattern)
     {
         if (!is_bool($value)) {
-            $this->error = sprintf("%s \"%s\" is not a valid boolean.", gettype($value), new String($value));
+            $this->error = sprintf("%s \"%s\" is not a valid boolean.", gettype($value), new StringConverter($value));
             return false;
         }
 

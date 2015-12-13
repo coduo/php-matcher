@@ -2,7 +2,7 @@
 
 namespace Coduo\PHPMatcher\Matcher;
 
-use Coduo\ToString\String;
+use Coduo\ToString\StringConverter;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
 class ExpressionMatcher extends Matcher
@@ -19,7 +19,7 @@ class ExpressionMatcher extends Matcher
         $expressionResult = $language->evaluate($matches[1], array('value' => $value));
 
         if (!$expressionResult) {
-            $this->error = sprintf("\"%s\" expression fails for value \"%s\".", $pattern, new String($value));
+            $this->error = sprintf("\"%s\" expression fails for value \"%s\".", $pattern, new StringConverter($value));
         }
 
         return (bool) $expressionResult;

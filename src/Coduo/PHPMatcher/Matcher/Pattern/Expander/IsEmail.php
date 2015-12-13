@@ -3,7 +3,7 @@
 namespace Coduo\PHPMatcher\Matcher\Pattern\Expander;
 
 use Coduo\PHPMatcher\Matcher\Pattern\PatternExpander;
-use Coduo\ToString\String;
+use Coduo\ToString\StringConverter;
 
 class IsEmail implements PatternExpander
 {
@@ -19,7 +19,7 @@ class IsEmail implements PatternExpander
     public function match($value)
     {
         if (false === is_string($value)) {
-            $this->error = sprintf("IsEmail expander require \"string\", got \"%s\".", new String($value));
+            $this->error = sprintf("IsEmail expander require \"string\", got \"%s\".", new StringConverter($value));
             return false;
         }
 
