@@ -2,7 +2,7 @@
 
 namespace Coduo\PHPMatcher\Matcher;
 
-use Coduo\ToString\String;
+use Coduo\ToString\StringConverter;
 
 class ChainMatcher extends Matcher
 {
@@ -45,8 +45,8 @@ class ChainMatcher extends Matcher
         if (!isset($this->error)) {
             $this->error = sprintf(
                 'Any matcher from chain can\'t match value "%s" to pattern "%s"',
-                new String($value),
-                new String($pattern)
+                new StringConverter($value),
+                new StringConverter($pattern)
             );
         }
 

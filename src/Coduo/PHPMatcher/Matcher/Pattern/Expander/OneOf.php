@@ -3,7 +3,7 @@
 namespace Coduo\PHPMatcher\Matcher\Pattern\Expander;
 
 use Coduo\PHPMatcher\Matcher\Pattern\PatternExpander;
-use Coduo\ToString\String;
+use Coduo\ToString\StringConverter;
 
 class OneOf implements PatternExpander
 {
@@ -40,7 +40,7 @@ class OneOf implements PatternExpander
             }
         }
 
-        $this->error = sprintf("Any expander available in OneOf expander does not match \"%s\".", new String($value));
+        $this->error = sprintf("Any expander available in OneOf expander does not match \"%s\".", new StringConverter($value));
         return false;
     }
 

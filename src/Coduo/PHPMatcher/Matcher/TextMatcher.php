@@ -8,7 +8,7 @@ use Coduo\PHPMatcher\Matcher\Pattern\Assert\Xml;
 use Coduo\PHPMatcher\Matcher\Pattern\TypePattern;
 use Coduo\PHPMatcher\Parser;
 use Coduo\PHPMatcher\Matcher\Pattern\RegexConverter;
-use Coduo\ToString\String;
+use Coduo\ToString\StringConverter;
 
 class TextMatcher extends Matcher
 {
@@ -42,7 +42,7 @@ class TextMatcher extends Matcher
     public function match($value, $pattern)
     {
         if (!is_string($value)) {
-            $this->error = sprintf("%s \"%s\" is not a valid string.", gettype($value), new String($value));
+            $this->error = sprintf("%s \"%s\" is not a valid string.", gettype($value), new StringConverter($value));
             return false;
         }
 

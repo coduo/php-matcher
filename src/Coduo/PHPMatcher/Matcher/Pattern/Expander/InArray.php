@@ -3,7 +3,7 @@
 namespace Coduo\PHPMatcher\Matcher\Pattern\Expander;
 
 use Coduo\PHPMatcher\Matcher\Pattern\PatternExpander;
-use Coduo\ToString\String;
+use Coduo\ToString\StringConverter;
 
 class InArray implements PatternExpander
 {
@@ -32,12 +32,12 @@ class InArray implements PatternExpander
     public function match($value)
     {
         if (!is_array($value)) {
-            $this->error = sprintf("InArray expander require \"array\", got \"%s\".", new String($value));
+            $this->error = sprintf("InArray expander require \"array\", got \"%s\".", new StringConverter($value));
             return false;
         }
 
         if (!in_array($this->value, $value, true)) {
-            $this->error = sprintf("%s doesn't have \"%s\" element.", new String($value), new String($this->value));
+            $this->error = sprintf("%s doesn't have \"%s\" element.", new StringConverter($value), new StringConverter($this->value));
             return false;
         }
 

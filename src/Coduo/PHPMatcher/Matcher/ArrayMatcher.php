@@ -3,7 +3,7 @@
 namespace Coduo\PHPMatcher\Matcher;
 
 use Coduo\PHPMatcher\Parser;
-use Coduo\ToString\String;
+use Coduo\ToString\StringConverter;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 
@@ -41,7 +41,7 @@ class ArrayMatcher extends Matcher
     public function match($value, $pattern)
     {
         if (!is_array($value)) {
-            $this->error = sprintf("%s \"%s\" is not a valid array.", gettype($value), new String($value));
+            $this->error = sprintf("%s \"%s\" is not a valid array.", gettype($value), new StringConverter($value));
             return false;
         }
 

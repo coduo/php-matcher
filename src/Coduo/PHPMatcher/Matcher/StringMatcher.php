@@ -3,7 +3,7 @@
 namespace Coduo\PHPMatcher\Matcher;
 
 use Coduo\PHPMatcher\Parser;
-use Coduo\ToString\String;
+use Coduo\ToString\StringConverter;
 
 class StringMatcher extends Matcher
 {
@@ -26,7 +26,7 @@ class StringMatcher extends Matcher
     public function match($value, $pattern)
     {
         if (!is_string($value)) {
-            $this->error = sprintf("%s \"%s\" is not a valid string.", gettype($value), new String($value));
+            $this->error = sprintf("%s \"%s\" is not a valid string.", gettype($value), new StringConverter($value));
             return false;
         }
 

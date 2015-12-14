@@ -2,7 +2,7 @@
 
 namespace Coduo\PHPMatcher\Matcher;
 
-use Coduo\ToString\String;
+use Coduo\ToString\StringConverter;
 
 class ScalarMatcher extends Matcher
 {
@@ -12,7 +12,7 @@ class ScalarMatcher extends Matcher
     public function match($value, $pattern)
     {
         if ($value !== $pattern) {
-            $this->error = sprintf("\"%s\" does not match \"%s\".", new String($value), new String($pattern));
+            $this->error = sprintf("\"%s\" does not match \"%s\".", new StringConverter($value), new StringConverter($pattern));
             return false;
         }
 

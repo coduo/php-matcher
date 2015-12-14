@@ -2,7 +2,7 @@
 
 namespace Coduo\PHPMatcher\Matcher;
 
-use Coduo\ToString\String;
+use Coduo\ToString\StringConverter;
 
 class NullMatcher extends Matcher
 {
@@ -14,7 +14,7 @@ class NullMatcher extends Matcher
     public function match($value, $pattern)
     {
         if (null !== $value) {
-            $this->error = sprintf("%s \"%s\" does not match null.", gettype($value), new String($value));
+            $this->error = sprintf("%s \"%s\" does not match null.", gettype($value), new StringConverter($value));
             return false;
         }
 

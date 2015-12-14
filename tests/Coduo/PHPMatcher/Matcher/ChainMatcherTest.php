@@ -23,8 +23,8 @@ class ChainMatcherTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->firstMatcher = $this->getMock('Coduo\PHPMatcher\Matcher\PropertyMatcher');
-        $this->secondMatcher = $this->getMock('Coduo\PHPMatcher\Matcher\PropertyMatcher');
+        $this->firstMatcher = $this->getMock('Coduo\PHPMatcher\Matcher\ValueMatcher');
+        $this->secondMatcher = $this->getMock('Coduo\PHPMatcher\Matcher\ValueMatcher');
 
         $this->matcher = new ChainMatcher(array(
             $this->firstMatcher,

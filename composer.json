@@ -16,28 +16,27 @@
     "require": {
         "php": ">=5.3.0",
         "ext-filter": "*",
-        "coduo/php-to-string": "~1.0",
-        "symfony/property-access": "~2.3",
-        "symfony/expression-language": "~2.4",
+        "coduo/php-to-string": "^2",
+        "symfony/property-access": "^2.3|^3.0",
+        "symfony/expression-language": "^2.3|^3.0",
         "doctrine/lexer": "1.0.*",
-        "openlss/lib-array2xml": "0.0.9"
+        "openlss/lib-array2xml": "0.0.10"
     },
     "require-dev": {
-        "phpunit/phpunit": "3.7.*"
+        "phpunit/phpunit": "^4.8"
     },
     "autoload": {
         "psr-0": {
             "Coduo\\PHPMatcher": "src/",
             "Coduo\\PHPMatcher\\Tests": "tests/"
-        },
-        "files": ["match.php"]
+        }
     },
     "config": {
         "bin-dir": "bin"
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.2-dev"
+            "dev-master": "2.1-dev"
         }
     }
 }
