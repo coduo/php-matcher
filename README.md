@@ -57,6 +57,7 @@ $match = $matcher->match("lorem ipsum dolor", "@string@")
 * ``greaterThan($boundry)``
 * ``inArray($value)``
 * ``oneOf(...$expanders)`` - example usage ``"@string@.oneOf(contains('foo'), contains('bar'), contains('baz'))"``
+* ``matchRegex($regex)`` - example usage ``"@string@.matchRegex('/^lorem.+/')"``
 
 ##Example usage
 

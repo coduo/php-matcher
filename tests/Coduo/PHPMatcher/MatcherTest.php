@@ -256,6 +256,8 @@ XML;
             array(array("foo", "bar"), "@array@.inArray(\"bar\")", true),
             array("lorem ipsum", "@string@.oneOf(contains(\"lorem\"), contains(\"test\"))", true),
             array("lorem ipsum", "@string@.oneOf(contains(\"lorem\"), contains(\"test\")).endsWith(\"ipsum\")", true),
+            array("lorem ipsum", "@string@.match(\"/^lorem \\w+$/\")", true),
+            array("lorem ipsum", "@string@.match(\"/^foo/\")", false),
         );
     }
 }
