@@ -53,6 +53,7 @@ $match = $matcher->match("lorem ipsum dolor", "@string@")
 * ``isEmail()``
 * ``isUrl()``
 * ``notEmpty()``
+* ``isEmpty()``
 * ``lowerThan($boundry)``
 * ``greaterThan($boundry)``
 * ``inArray($value)``

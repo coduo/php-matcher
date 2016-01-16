@@ -18,6 +18,7 @@ class ExpanderInitializer
         "startsWith" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\StartsWith",
         "endsWith" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\EndsWith",
         "notEmpty" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\NotEmpty",
+        "isEmpty" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\IsEmpty",
         "isDateTime" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\IsDateTime",
         "isEmail" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\IsEmail",
         "isUrl" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\IsUrl",
