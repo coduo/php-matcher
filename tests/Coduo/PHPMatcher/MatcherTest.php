@@ -253,7 +253,10 @@ XML;
             array(100, "@integer@.lowerThan(101).greaterThan(10)", true),
             array("", "@string@.notEmpty()", false),
             array("lorem ipsum", "@string@.notEmpty()", true),
+            array("", "@string@.isEmpty()", true),
             array(array("foo", "bar"), "@array@.inArray(\"bar\")", true),
+            array(array(), "@array@.isEmpty()", true),
+            array(array('foo'), "@array@.isEmpty()", false),
             array("lorem ipsum", "@string@.oneOf(contains(\"lorem\"), contains(\"test\"))", true),
             array("lorem ipsum", "@string@.oneOf(contains(\"lorem\"), contains(\"test\")).endsWith(\"ipsum\")", true),
         );
