@@ -26,6 +26,7 @@ class ExpanderInitializer
         "greaterThan" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\GreaterThan",
         "inArray" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\InArray",
         "contains" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\Contains",
+        "match" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\MatchRegex",
 
         "oneOf" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\OneOf"
     );
