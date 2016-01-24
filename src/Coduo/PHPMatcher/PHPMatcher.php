@@ -7,41 +7,20 @@ use Coduo\PHPMatcher\Factory\SimpleFactory;
 final class PHPMatcher
 {
     /**
-     * @var Matcher|null
-     */
-    private static $matcher;
-
-    /**
      * @param $value
      * @param $pattern
+     * @param null $error
      * @return bool
      */
-    public static function match($value, $pattern)
+    public static function match($value, $pattern, &$error = null)
     {
-        $matcher = self::createMatcher();
+        $matcher = (new SimpleFactory())->createMatcher();
      
-        return $matcher->match($value, $pattern);
-    }
-
-    /**
-     * @return null|string
-     */
-    public static function getError()
-    {
-        $matcher = self::createMatcher();
-        
-        return $matcher->getError();
-    }
-    
-    private static function createMatcher()
-    {
-        if (self::$matcher instanceof Matcher) {
-            return self::$matcher;
+        if (!$matcher->match($value, $pattern)) {
+            $error = $matcher->getError();
+            return false;
         }
         
-        $factory = new SimpleFactory();
-        self::$matcher = $factory->createMatcher();
-        
-        return self::$matcher;
+        return true;
     }
 }
