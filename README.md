@@ -4,10 +4,14 @@
 
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/coduo/php-matcher/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/coduo/php-matcher/?branch=master)
 
-* [![Build Status](https://travis-ci.org/coduo/php-matcher.svg)](https://travis-ci.org/coduo/php-matcher) - 1.1.*
-* [![Build Status](https://travis-ci.org/coduo/php-matcher.svg?branch=1.0.7)](https://travis-ci.org/coduo/php-matcher)  - 1.0.7
+* [![Build Status](https://travis-ci.org/coduo/php-matcher.svg)](https://travis-ci.org/coduo/php-matcher) - master
+* [![Build Status](https://travis-ci.org/coduo/php-matcher.svg?branch=1.1)](https://travis-ci.org/coduo/php-matcher) - 1.1.*
+* [![Build Status](https://travis-ci.org/coduo/php-matcher.svg?branch=1.0)](https://travis-ci.org/coduo/php-matcher) - 1.0.*
 
-[Readme for 1.0 version](https://github.com/coduo/php-matcher/tree/1.0)
+[Readme for master version](https://github.com/coduo/php-matcher/tree/master/README.md)  
+[Readme for 1.1 version](https://github.com/coduo/php-matcher/tree/1.1/README.md)  
+[Readme for 1.0 version](https://github.com/coduo/php-matcher/tree/1.0/README.md)
+
 
 ##Installation
 
@@ -45,6 +49,7 @@ $matcher = $factory->createMatcher();
 
 $match = $matcher->match("lorem ipsum dolor", "@string@")
 // $match === true
+$matcher->getError(); // returns null or error message
 ```
 
 ### Available patterns
