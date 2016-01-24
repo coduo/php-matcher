@@ -246,8 +246,8 @@ XML;
             array(array('foo'), "@array@.isEmpty()", false),
             array("lorem ipsum", "@string@.oneOf(contains(\"lorem\"), contains(\"test\"))", true),
             array("lorem ipsum", "@string@.oneOf(contains(\"lorem\"), contains(\"test\")).endsWith(\"ipsum\")", true),
-            array("lorem ipsum", "@string@.match(\"/^lorem \\w+$/\")", true),
-            array("lorem ipsum", "@string@.match(\"/^foo/\")", false),
+            array("lorem ipsum", "@string@.matchRegex(\"/^lorem \\w+$/\")", true),
+            array("lorem ipsum", "@string@.matchRegex(\"/^foo/\")", false),
         );
     }
 }
