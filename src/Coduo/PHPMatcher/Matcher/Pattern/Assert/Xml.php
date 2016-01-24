@@ -2,7 +2,7 @@
 
 namespace Coduo\PHPMatcher\Matcher\Pattern\Assert;
 
-class Xml
+final class Xml
 {
     /**
      * @param $value

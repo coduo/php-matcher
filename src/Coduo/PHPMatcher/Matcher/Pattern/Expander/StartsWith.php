@@ -5,7 +5,7 @@ namespace Coduo\PHPMatcher\Matcher\Pattern\Expander;
 use Coduo\PHPMatcher\Matcher\Pattern\PatternExpander;
 use Coduo\ToString\StringConverter;
 
-class StartsWith implements PatternExpander
+final class StartsWith implements PatternExpander
 {
     /**
      * @var

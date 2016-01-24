@@ -5,7 +5,7 @@ namespace Coduo\PHPMatcher\Matcher;
 use Coduo\ToString\StringConverter;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
-class ExpressionMatcher extends Matcher
+final class ExpressionMatcher extends Matcher
 {
     const MATCH_PATTERN = "/^expr\((.*?)\)$/";
 

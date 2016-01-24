@@ -5,7 +5,7 @@ namespace Coduo\PHPMatcher\Matcher\Pattern\Expander;
 use Coduo\PHPMatcher\Matcher\Pattern\PatternExpander;
 use Coduo\ToString\StringConverter;
 
-class InArray implements PatternExpander
+final class InArray implements PatternExpander
 {
     /**
      * @var null|string

@@ -2,7 +2,7 @@
 
 namespace Coduo\PHPMatcher\AST;
 
-class Type implements Node
+final class Type implements Node
 {
     /**
      * @var string

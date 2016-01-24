@@ -2,7 +2,7 @@
 
 namespace Coduo\PHPMatcher\Matcher;
 
-class WildcardMatcher extends Matcher
+final class WildcardMatcher extends Matcher
 {
     const MATCH_PATTERN = "/^@(\*|wildcard)@$/";
 

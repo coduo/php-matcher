@@ -4,7 +4,7 @@ namespace Coduo\PHPMatcher\Matcher;
 
 use Coduo\ToString\StringConverter;
 
-class NullMatcher extends Matcher
+final class NullMatcher extends Matcher
 {
     const MATCH_PATTERN = "/^@null@$/";
 

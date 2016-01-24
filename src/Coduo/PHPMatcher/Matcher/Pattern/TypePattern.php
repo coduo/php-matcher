@@ -2,7 +2,7 @@
 
 namespace Coduo\PHPMatcher\Matcher\Pattern;
 
-class TypePattern implements Pattern
+final class TypePattern implements Pattern
 {
     /**
      * @var string

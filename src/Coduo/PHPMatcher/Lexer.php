@@ -4,7 +4,7 @@ namespace Coduo\PHPMatcher;
 
 use Doctrine\Common\Lexer\AbstractLexer;
 
-class Lexer extends AbstractLexer
+final class Lexer extends AbstractLexer
 {
     const T_NONE = 1;
     const T_EXPANDER_NAME = 2;

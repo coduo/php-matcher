@@ -5,10 +5,7 @@ namespace Coduo\PHPMatcher\Matcher\Pattern\Expander;
 use Coduo\PHPMatcher\Matcher\Pattern\PatternExpander;
 use Coduo\ToString\StringConverter;
 
-/**
- * @author Benjamin Lazarecki <benjamin.lazarecki@gmail.com>
- */
-class isEmpty implements PatternExpander
+final class isEmpty implements PatternExpander
 {
     private $error;
 

@@ -2,7 +2,7 @@
 
 namespace Coduo\PHPMatcher\AST;
 
-class Pattern implements Node
+final class Pattern implements Node
 {
     /**
      * @var Type

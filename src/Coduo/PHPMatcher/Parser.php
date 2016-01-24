@@ -9,7 +9,7 @@ use Coduo\PHPMatcher\Exception\UnknownExpanderException;
 use Coduo\PHPMatcher\Matcher\Pattern;
 use Coduo\PHPMatcher\Parser\ExpanderInitializer;
 
-class Parser
+final class Parser
 {
     const NULL_VALUE = 'null';
 

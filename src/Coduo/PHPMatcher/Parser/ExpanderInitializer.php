@@ -9,7 +9,7 @@ use Coduo\PHPMatcher\Exception\UnknownExpanderClassException;
 use Coduo\PHPMatcher\Exception\UnknownExpanderException;
 use Coduo\PHPMatcher\Matcher\Pattern\PatternExpander;
 
-class ExpanderInitializer
+final class ExpanderInitializer
 {
     /**
      * @var array

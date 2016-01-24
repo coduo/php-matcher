@@ -4,7 +4,7 @@ namespace Coduo\PHPMatcher\Matcher;
 
 use Coduo\PHPMatcher\Matcher\Pattern\Assert\Json;
 
-class JsonMatcher extends Matcher
+final class JsonMatcher extends Matcher
 {
     /**
      * @var

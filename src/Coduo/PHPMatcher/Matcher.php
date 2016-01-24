@@ -4,7 +4,7 @@ namespace Coduo\PHPMatcher;
 
 use Coduo\PHPMatcher\Matcher\ValueMatcher;
 
-class Matcher
+final class Matcher
 {
     /**
      * @var ValueMatcher
