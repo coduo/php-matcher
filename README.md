@@ -19,6 +19,21 @@ composer require --dev "coduo/php-matcher"
 
 ## Basic usage
 
+### Using facade
+
+```php
+<?php
+
+use Coduo\PHPMatcher\PHPMatcher;
+
+if (!PHPMatcher::match("lorem ipsum dolor", "@string@")) {
+    echo PHPMatcher::getError(); // reason why value does not match pattern.
+}
+```
+
+
+### Using Factory
+
 ```php
 <?php
 

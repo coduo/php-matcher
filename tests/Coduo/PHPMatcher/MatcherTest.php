@@ -5,6 +5,7 @@ namespace Coduo\PHPMatcher\Tests;
 use Coduo\PHPMatcher\Lexer;
 use Coduo\PHPMatcher\Matcher;
 use Coduo\PHPMatcher\Parser;
+use Coduo\PHPMatcher\PHPMatcher;
 
 class MatcherTest extends \PHPUnit_Framework_TestCase
 {
@@ -12,8 +13,6 @@ class MatcherTest extends \PHPUnit_Framework_TestCase
      * @var Matcher
      */
     protected $matcher;
-
-    protected $arrayValue;
 
     public function setUp()
     {
@@ -63,7 +62,7 @@ class MatcherTest extends \PHPUnit_Framework_TestCase
             'data' => new \stdClass(),
         );
 
-        $expecation = array(
+        $expectation = array(
             'users' => array(
                 array(
                     'id' => '@integer@',
@@ -82,25 +81,17 @@ class MatcherTest extends \PHPUnit_Framework_TestCase
             'data' => '@wildcard@',
         );
 
-        $this->assertTrue($this->matcher->match($value, $expecation), $this->matcher->getError());
+        $this->assertTrue($this->matcher->match($value, $expectation), $this->matcher->getError());
+        $this->assertTrue(PHPMatcher::match($value, $expectation), PHPMatcher::getError());
     }
 
     /**
-     * @dataProvider scalarValues
+     * @dataProvider scalarValueExamples
      */
     public function test_matcher_with_scalar_values($value, $pattern)
     {
         $this->assertTrue($this->matcher->match($value, $pattern));
-    }
-
-    public function scalarValues()
-    {
-        return array(
-            array('Norbert Orzechowicz', '@string@'),
-            array(6.66, '@double@'),
-            array(1, '@integer@'),
-            array(array('foo'), '@array@')
-        );
+        $this->assertTrue(PHPMatcher::match($value, $pattern));
     }
 
     public function test_matcher_with_json()
@@ -149,6 +140,7 @@ class MatcherTest extends \PHPUnit_Framework_TestCase
         }';
 
         $this->assertTrue($this->matcher->match($json, $jsonPattern));
+        $this->assertTrue(PHPMatcher::match($json, $jsonPattern));
     }
 
     public function test_matcher_with_xml()
@@ -185,6 +177,7 @@ XML;
 XML;
 
         $this->assertTrue($this->matcher->match($xml, $xmlPattern));
+        $this->assertTrue(PHPMatcher::match($xml, $xmlPattern));
     }
 
     public function test_text_matcher()
@@ -192,6 +185,7 @@ XML;
         $value = "lorem ipsum 1234 random text";
         $pattern = "@string@.startsWith('lo') ipsum @number@.greaterThan(10) random text";
         $this->assertTrue($this->matcher->match($value, $pattern));
+        $this->assertTrue(PHPMatcher::match($value, $pattern));
     }
 
 
@@ -202,18 +196,25 @@ XML;
 
         $this->assertFalse($this->matcher->match($value, $pattern));
         $this->assertSame('"5" does not match "4".', $this->matcher->getError());
+
+        $this->assertFalse(PHPMatcher::match($value, $pattern));
+        $this->assertSame('"5" does not match "4".', PHPMatcher::getError());
     }
 
     public function test_matcher_with_callback()
     {
         $this->assertTrue($this->matcher->match('test', function($value) { return $value === 'test';}));
+        $this->assertTrue(PHPMatcher::match('test', function($value) { return $value === 'test';}));
         $this->assertFalse($this->matcher->match('test', function($value) { return $value !== 'test';}));
+        $this->assertFalse(PHPMatcher::match('test', function($value) { return $value !== 'test';}));
     }
 
     public function test_matcher_with_wildcard()
     {
         $this->assertTrue($this->matcher->match('test', '@*@'));
+        $this->assertTrue(PHPMatcher::match('test', '@*@'));
         $this->assertTrue($this->matcher->match('test', '@wildcard@'));
+        $this->assertTrue(PHPMatcher::match('test', '@wildcard@'));
     }
 
     /**
@@ -222,8 +223,19 @@ XML;
     public function test_expanders($value, $pattern, $expectedResult)
     {
         $this->assertSame($expectedResult, $this->matcher->match($value, $pattern));
+        $this->assertSame($expectedResult, PHPMatcher::match($value, $pattern));
     }
 
+    public function scalarValueExamples()
+    {
+        return array(
+            array('Norbert Orzechowicz', '@string@'),
+            array(6.66, '@double@'),
+            array(1, '@integer@'),
+            array(array('foo'), '@array@')
+        );
+    }
+    
     public static function expanderExamples()
     {
         return array(
