@@ -14,7 +14,8 @@ final class PHPMatcher
      */
     public static function match($value, $pattern, &$error = null)
     {
-        $matcher = (new SimpleFactory())->createMatcher();
+        $factory = new SimpleFactory();
+        $matcher = $factory->createMatcher();
      
         if (!$matcher->match($value, $pattern)) {
             $error = $matcher->getError();
