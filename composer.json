@@ -1,7 +1,7 @@
 {
     "name": "coduo/php-matcher",
     "type": "library",
-    "keywords": ["json", "matcher", "tests"],
+    "keywords": ["json", "matcher", "tests", "match"],
     "license": "MIT", 
     "authors": [
         {
