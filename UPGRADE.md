@@ -4,7 +4,8 @@
 * ``Coduo\PHPMatcher\Matcher\CaptureMatcher`` was removed
 * ``Coduo\PHPMatcher\Matcher\TypeMatcher`` was removed 
 * ``Coduo\PHPMatcher\Matcher\PropertyMatcher`` interface was remved
-* Removed ``match`` function
+* Removed ``match`` function, use PHPMatcher facade instead
+* Renamed ``@pattern@.notEmpty()`` expander into ``@pattern@.isNotEmpty()``
 
 # Upgrade from 1.0 to 1.1
 

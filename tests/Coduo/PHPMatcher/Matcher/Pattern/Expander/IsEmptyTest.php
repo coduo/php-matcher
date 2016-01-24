@@ -2,12 +2,12 @@
 
 namespace Coduo\PHPMatcher\Tests\Matcher\Pattern\Expander;
 
-use Coduo\PHPMatcher\Matcher\Pattern\Expander\isEmpty;
+use Coduo\PHPMatcher\Matcher\Pattern\Expander\IsEmpty;
 
 /**
  * @author Benjamin Lazarecki <benjamin.lazarecki@gmail.com>
  */
-class isEmptyTest extends \PHPUnit_Framework_TestCase
+class IsEmptyTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @dataProvider examplesProvider

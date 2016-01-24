@@ -52,8 +52,8 @@ $match = $matcher->match("lorem ipsum dolor", "@string@")
 * ``isDateTime()``
 * ``isEmail()``
 * ``isUrl()``
-* ``notEmpty()``
 * ``isEmpty()``
+* ``isNotEmpty()``
 * ``lowerThan($boundry)``
 * ``greaterThan($boundry)``
 * ``inArray($value)``

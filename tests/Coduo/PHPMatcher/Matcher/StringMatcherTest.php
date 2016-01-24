@@ -70,7 +70,7 @@ class StringMatcherTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             array("lorem ipsum", "@string@"),
-            array("lorem ipsum", "@string@.notEmpty()"),
+            array("lorem ipsum", "@string@.isNotEmpty()"),
             array("lorem ipsum", "@string@.startsWith('lorem')"),
             array("lorem ipsum", "@string@.endsWith('ipsum')"),
             array("lorem ipsum dolor", "@string@.startsWith('lorem').contains('ipsum').endsWith('dolor')"),
