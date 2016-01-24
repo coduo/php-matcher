@@ -82,7 +82,7 @@ class MatcherTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->assertTrue($this->matcher->match($value, $expectation), $this->matcher->getError());
-        $this->assertTrue(PHPMatcher::match($value, $expectation), PHPMatcher::getError());
+        $this->assertTrue(PHPMatcher::match($value, $expectation, $error), $error);
     }
 
     /**
@@ -197,8 +197,8 @@ XML;
         $this->assertFalse($this->matcher->match($value, $pattern));
         $this->assertSame('"5" does not match "4".', $this->matcher->getError());
 
-        $this->assertFalse(PHPMatcher::match($value, $pattern));
-        $this->assertSame('"5" does not match "4".', PHPMatcher::getError());
+        $this->assertFalse(PHPMatcher::match($value, $pattern, $error));
+        $this->assertSame('"5" does not match "4".', $error);
     }
 
     public function test_matcher_with_callback()
