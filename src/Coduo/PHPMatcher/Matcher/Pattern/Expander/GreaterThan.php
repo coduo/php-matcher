@@ -5,7 +5,7 @@ namespace Coduo\PHPMatcher\Matcher\Pattern\Expander;
 use Coduo\PHPMatcher\Matcher\Pattern\PatternExpander;
 use Coduo\ToString\StringConverter;
 
-class GreaterThan implements PatternExpander
+final class GreaterThan implements PatternExpander
 {
     /**
      * @var
@@ -22,7 +22,7 @@ class GreaterThan implements PatternExpander
      */
     public function __construct($boundary)
     {
-        if (!is_float($boundary) && !is_integer($boundary) && !is_double($boundary)) {
+        if (!is_float($boundary) && !is_int($boundary)) {
             throw new \InvalidArgumentException(sprintf("Boundary value \"%s\" is not a valid number.", new StringConverter($boundary)));
         }
 
@@ -35,7 +35,7 @@ class GreaterThan implements PatternExpander
      */
     public function match($value)
     {
-        if (!is_float($value) && !is_integer($value) && !is_double($value) && !is_numeric($value)) {
+        if (!is_float($value) && !is_int($value) && !is_numeric($value)) {
             $this->error = sprintf("Value \"%s\" is not a valid number.", new StringConverter($value));
             return false;
         }

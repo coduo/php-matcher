@@ -4,7 +4,7 @@ namespace Coduo\PHPMatcher\Matcher;
 
 use Coduo\ToString\StringConverter;
 
-class ScalarMatcher extends Matcher
+final class ScalarMatcher extends Matcher
 {
     /**
      * {@inheritDoc}

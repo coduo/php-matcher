@@ -2,7 +2,7 @@
 
 namespace Coduo\PHPMatcher\AST;
 
-class Expander implements Node
+final class Expander implements Node
 {
     /**
      * @var

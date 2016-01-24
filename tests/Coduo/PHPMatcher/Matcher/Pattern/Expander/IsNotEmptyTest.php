@@ -3,16 +3,16 @@
 namespace Coduo\PHPMatcher\Tests\Matcher\Pattern\Expander;
 
 use Coduo\PHPMatcher\Matcher;
-use Coduo\PHPMatcher\Matcher\Pattern\Expander\NotEmpty;
+use Coduo\PHPMatcher\Matcher\Pattern\Expander\IsNotEmpty;
 
-class NotEmptyTest extends \PHPUnit_Framework_TestCase
+class IsNotEmptyTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @dataProvider examplesProvider
      */
     public function test_examples_not_ignoring_case($value, $expectedResult)
     {
-        $expander = new NotEmpty();
+        $expander = new IsNotEmpty();
         $this->assertEquals($expectedResult, $expander->match($value));
     }
 

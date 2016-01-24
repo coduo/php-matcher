@@ -2,7 +2,7 @@
 
 namespace Coduo\PHPMatcher\Matcher\Pattern\Assert;
 
-class Json
+final class Json
 {
     const TRANSFORM_QUOTATION_PATTERN = '/([^"])@([a-zA-Z0-9\.]+)@([^"])/';
     const TRANSFORM_QUOTATION_REPLACEMENT = '$1"@$2@"$3';

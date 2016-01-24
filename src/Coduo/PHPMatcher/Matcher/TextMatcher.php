@@ -10,7 +10,7 @@ use Coduo\PHPMatcher\Parser;
 use Coduo\PHPMatcher\Matcher\Pattern\RegexConverter;
 use Coduo\ToString\StringConverter;
 
-class TextMatcher extends Matcher
+final class TextMatcher extends Matcher
 {
     const PATTERN_REGEXP = "/@[a-zA-Z\\.]+@(\\.[a-zA-Z0-9_]+\\([a-zA-Z0-9{},:@\\.\"'\\(\\)]*\\))*/";
 

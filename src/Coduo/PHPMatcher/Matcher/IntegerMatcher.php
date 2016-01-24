@@ -5,7 +5,7 @@ namespace Coduo\PHPMatcher\Matcher;
 use Coduo\PHPMatcher\Parser;
 use Coduo\ToString\StringConverter;
 
-class IntegerMatcher extends Matcher
+final class IntegerMatcher extends Matcher
 {
     /**
      * @var Parser

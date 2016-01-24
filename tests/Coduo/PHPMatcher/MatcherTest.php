@@ -15,14 +15,10 @@ class MatcherTest extends \PHPUnit_Framework_TestCase
 
     protected $arrayValue;
 
-    protected $captureMatcher;
-
     public function setUp()
     {
-        $this->captureMatcher = new Matcher\CaptureMatcher();
         $parser = new Parser(new Lexer(), new Parser\ExpanderInitializer());
         $scalarMatchers = new Matcher\ChainMatcher(array(
-            $this->captureMatcher,
             new Matcher\CallbackMatcher(),
             new Matcher\ExpressionMatcher(),
             new Matcher\NullMatcher(),
@@ -208,15 +204,6 @@ XML;
         $this->assertSame('"5" does not match "4".', $this->matcher->getError());
     }
 
-    public function test_matcher_with_captures()
-    {
-        $this->assertTrue($this->matcher->match(
-            array('foo' => 'bar', 'user' => array('id' => 5)),
-            array('foo' => 'bar', 'user' => array('id' => ':uid:'))
-        ));
-        $this->assertEquals($this->captureMatcher['uid'], 5);
-    }
-
     public function test_matcher_with_callback()
     {
         $this->assertTrue($this->matcher->match('test', function($value) { return $value === 'test';}));
@@ -251,16 +238,16 @@ XML;
             array("lorem ipsum", "@string@.isUrl()", false),
             array("2014-08-19", "@string@.isDateTime()", true),
             array(100, "@integer@.lowerThan(101).greaterThan(10)", true),
-            array("", "@string@.notEmpty()", false),
-            array("lorem ipsum", "@string@.notEmpty()", true),
+            array("", "@string@.isNotEmpty()", false),
+            array("lorem ipsum", "@string@.isNotEmpty()", true),
             array("", "@string@.isEmpty()", true),
             array(array("foo", "bar"), "@array@.inArray(\"bar\")", true),
             array(array(), "@array@.isEmpty()", true),
             array(array('foo'), "@array@.isEmpty()", false),
             array("lorem ipsum", "@string@.oneOf(contains(\"lorem\"), contains(\"test\"))", true),
             array("lorem ipsum", "@string@.oneOf(contains(\"lorem\"), contains(\"test\")).endsWith(\"ipsum\")", true),
-            array("lorem ipsum", "@string@.match(\"/^lorem \\w+$/\")", true),
-            array("lorem ipsum", "@string@.match(\"/^foo/\")", false),
+            array("lorem ipsum", "@string@.matchRegex(\"/^lorem \\w+$/\")", true),
+            array("lorem ipsum", "@string@.matchRegex(\"/^foo/\")", false),
         );
     }
 }

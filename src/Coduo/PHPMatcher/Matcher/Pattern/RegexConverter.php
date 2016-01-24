@@ -4,7 +4,7 @@ namespace Coduo\PHPMatcher\Matcher\Pattern;
 
 use Coduo\PHPMatcher\Exception\UnknownTypeException;
 
-class RegexConverter
+final class RegexConverter
 {
     public function toRegex(TypePattern $typePattern)
     {

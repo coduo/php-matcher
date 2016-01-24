@@ -2,7 +2,7 @@
 
 namespace Coduo\PHPMatcher\Matcher;
 
-class CallbackMatcher extends Matcher
+final class CallbackMatcher extends Matcher
 {
     /**
      * {@inheritdoc}

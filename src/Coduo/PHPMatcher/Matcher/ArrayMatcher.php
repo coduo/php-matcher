@@ -7,7 +7,7 @@ use Coduo\ToString\StringConverter;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 
-class ArrayMatcher extends Matcher
+final class ArrayMatcher extends Matcher
 {
     const UNBOUNDED_PATTERN = '@...@';
 

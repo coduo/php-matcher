@@ -4,7 +4,7 @@ namespace Coduo\PHPMatcher\Matcher;
 
 use Coduo\ToString\StringConverter;
 
-class NumberMatcher extends Matcher
+final class NumberMatcher extends Matcher
 {
     const NUMBER_PATTERN = '/^@number@$/';
 

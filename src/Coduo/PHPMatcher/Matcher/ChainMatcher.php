@@ -4,7 +4,7 @@ namespace Coduo\PHPMatcher\Matcher;
 
 use Coduo\ToString\StringConverter;
 
-class ChainMatcher extends Matcher
+final class ChainMatcher extends Matcher
 {
     /**
      * @var array|ValueMatcher[]

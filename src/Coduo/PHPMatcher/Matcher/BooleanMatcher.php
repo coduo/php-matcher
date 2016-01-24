@@ -4,7 +4,7 @@ namespace Coduo\PHPMatcher\Matcher;
 
 use Coduo\ToString\StringConverter;
 
-class BooleanMatcher extends Matcher
+final class BooleanMatcher extends Matcher
 {
     const BOOLEAN_PATTERN = '/^@boolean@$/';
 

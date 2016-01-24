@@ -5,7 +5,7 @@ namespace Coduo\PHPMatcher\Matcher;
 use Coduo\PHPMatcher\Matcher\Pattern\Assert\Xml;
 use LSS\XML2Array;
 
-class XmlMatcher extends Matcher
+final class XmlMatcher extends Matcher
 {
     /**
      * @var

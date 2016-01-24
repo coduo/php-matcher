@@ -5,7 +5,7 @@ namespace Coduo\PHPMatcher\Matcher\Pattern\Expander;
 use Coduo\PHPMatcher\Matcher\Pattern\PatternExpander;
 use Coduo\ToString\StringConverter;
 
-class OneOf implements PatternExpander
+final class OneOf implements PatternExpander
 {
     /**
      * @var PatternExpander[]
