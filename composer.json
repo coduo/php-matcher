@@ -26,9 +26,13 @@
         "phpunit/phpunit": "^4.8"
     },
     "autoload": {
-        "psr-0": {
-            "Coduo\\PHPMatcher": "src/",
-            "Coduo\\PHPMatcher\\Tests": "tests/"
+        "psr-4": {
+            "Coduo\\PHPMatcher\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Coduo\\PHPMatcher\\Tests\\": "tests/"
         }
     },
     "config": {
