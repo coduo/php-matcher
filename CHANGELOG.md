@@ -1,4 +1,4 @@
-# 2.0 
+# 2.0.0-alpha1
 
 * Added support for PHP7 
 * Updated dependencies to support Symfony3 components
@@ -7,7 +7,7 @@
 * Added PHPMatcher facade in order to improve developers experience
  
 
-# 1.1 
+# 1.1.0 
 
 * Added pattern expanders mechanism with following expanders: 
     * ``Coduo\PHPMatcher\Tests\Matcher\Pattern\Expander\Contains``
@@ -22,7 +22,7 @@
     * ``Coduo\PHPMatcher\Tests\Matcher\Pattern\Expander\OneOf``
     * ``Coduo\PHPMatcher\Tests\Matcher\Pattern\Expander\StartsWith``
     
-# 1.0
+# 1.0.0
 
 * PHPMatcher initial release with following matchers:
     * ``Coduo\PHPMatcher\Tests\Matcher\Pattern\Expander\ArrayMatcher``
