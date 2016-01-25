@@ -6,11 +6,13 @@
     <testsuites>
         <testsuite name="PHP Matcher Test Suite">
             <directory>./tests/</directory>
+            <exclude>tests/PHPUnit/PHPMatcherAssertionsTest.php</exclude>
+            <file phpVersion="5.4.0" phpVersionOperator=">=">tests/PHPUnit/PHPMatcherAssertionsTest.php</file>
         </testsuite>
     </testsuites>
     <filter>
         <whitelist>
-            <directory>./src/Coduo/PHPMatcher/</directory>
+            <directory>./src/</directory>
         </whitelist>
     </filter>
 </phpunit>

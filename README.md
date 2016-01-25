@@ -387,6 +387,37 @@ Feature: Listing user toys
     """
 ``` 
 
+## PHPUnit integration
+
+The `assertMatchesPattern()` is a handy assertion that matches values in PHPUnit tests.
+To use it either include the `Coduo\PHPMatcher\PHPUnit\PHPMatcherAssertions` trait,
+or extend the `Coduo\PHPMatcher\PHPUnit\PHPMatcherTestCase`:
+
+```php
+namespace Coduo\PHPMatcher\Tests\PHPUnit;
+
+use Coduo\PHPMatcher\PHPUnit\PHPMatcherAssertions;
+
+class PHPMatcherAssertionsTest extends \PHPUnit_Framework_TestCase
+{
+    use PHPMatcherAssertions;
+
+    public function test_it_asserts_if_a_value_matches_the_pattern()
+    {
+        $this->assertMatchesPattern('@string@', 'foo');
+    }
+}
+```
+
+The `matchesPattern()` method can be used in PHPUnit stubs or mocks:
+
+```php
+$mock = $this->getMock(Foo::class);
+$mock->method('bar')
+    ->with($this->matchesPattern('@string@'))
+    ->willReturn('foo');
+```
+
 ## License
 
 This library is distributed under the MIT license. Please see the LICENSE file.
