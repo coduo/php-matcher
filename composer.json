@@ -1,6 +1,7 @@
 {
     "name": "coduo/php-matcher",
     "type": "library",
+    "description": "PHP Matcher enables you to match values with patterns",
     "keywords": ["json", "matcher", "tests", "match"],
     "license": "MIT", 
     "authors": [
