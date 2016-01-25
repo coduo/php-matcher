@@ -1,9 +1,13 @@
+# 2.0.0-alpha2
+
+* PHPUnit integration - @jakzal
+
 # 2.0.0-alpha1
 
 * Added support for PHP7 
 * Updated dependencies to support Symfony3 components
-* Added ``Coduo\PHPMatcher\Tests\Matcher\Pattern\Expander\MatchRegexTest`` expander - benjamin.lazarecki@gmail.com
-* Added ``Coduo\PHPMatcher\Tests\Matcher\Pattern\Expander\IsEmpty`` expander - benjamin.lazarecki@gmail.com
+* Added ``Coduo\PHPMatcher\Tests\Matcher\Pattern\Expander\MatchRegexTest`` expander - @blazarecki
+* Added ``Coduo\PHPMatcher\Tests\Matcher\Pattern\Expander\IsEmpty`` expander - @blazarecki
 * Added PHPMatcher facade in order to improve developers experience
  
 
