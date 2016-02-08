@@ -1,3 +1,7 @@
+# 2.0.0-beta
+
+* Openssl/lib-array2xml dependency is now more flexible - @blazarecki 
+
 # 2.0.0-alpha2
 
 * PHPUnit integration - @jakzal
