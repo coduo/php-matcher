@@ -24,6 +24,10 @@ final class JsonMatcher extends Matcher
      */
     public function match($value, $pattern)
     {
+        if (parent::match($value, $pattern)) {
+            return true;
+        }
+
         if (!Json::isValid($value)) {
             return false;
         }

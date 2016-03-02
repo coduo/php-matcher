@@ -58,7 +58,7 @@ class ArrayMatcherTest extends \PHPUnit_Framework_TestCase
             $parser = new Parser(new Lexer(), new Parser\ExpanderInitializer())
         );
 
-        $this->assertFalse($matcher->match(array('test' => 1), array('test' => 1)));
+        $this->assertTrue($matcher->match(array('test' => 1), array('test' => 1)));
     }
 
     public function test_error_when_path_in_pattern_does_not_exist()
@@ -159,6 +159,8 @@ class ArrayMatcherTest extends \PHPUnit_Framework_TestCase
             array($simpleArr, $simpleArr),
             array($simpleArr, $simpleArrPattern),
             array(array(), array()),
+            array(array('foo' => null), array('foo' => null)),
+            array(array('foo' => null), array('foo' => "@null@")),
             array(array('key' => 'val'), array('key' => 'val')),
             array(array(1), array(1)),
             array(array('roles' => array('ROLE_ADMIN', 'ROLE_DEVELOPER')), array('roles' => '@wildcard@'))

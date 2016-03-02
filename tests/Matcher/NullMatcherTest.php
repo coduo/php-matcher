@@ -54,7 +54,8 @@ class NullMatcherTest extends \PHPUnit_Framework_TestCase
     public static function positiveCanMatchData()
     {
         return array(
-            array("@null@")
+            array("@null@"),
+            array(null)
         );
     }
 
@@ -62,6 +63,7 @@ class NullMatcherTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             array(null, "@null@"),
+            array(null, null),
         );
     }
 

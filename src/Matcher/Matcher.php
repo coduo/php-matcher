@@ -16,4 +16,14 @@ abstract class Matcher implements ValueMatcher
     {
         return $this->error;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function match($value, $pattern)
+    {
+        if ($value === $pattern) {
+            return true;
+        }
+    }
 }

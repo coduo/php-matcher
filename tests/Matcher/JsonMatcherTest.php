@@ -158,6 +158,14 @@ class JsonMatcherTest extends \PHPUnit_Framework_TestCase
                 '{"null":[@null@]}'
             ),
             array(
+                '{"null":null}',
+                '{"null":@null@}'
+            ),
+            array(
+                '{"null":null}',
+                '{"null":null}'
+            ),
+            array(
                 '{"users":["Norbert","Michał",[]]}',
                 '{"users":["Norbert","@string@",@...@]}'
             ),
