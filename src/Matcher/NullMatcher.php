@@ -26,6 +26,6 @@ final class NullMatcher extends Matcher
      */
     public function canMatch($pattern)
     {
-        return is_string($pattern) && 0 !== preg_match(self::MATCH_PATTERN, $pattern);
+        return $pattern === null || (is_string($pattern) && 0 !== preg_match(self::MATCH_PATTERN, $pattern));
     }
 }

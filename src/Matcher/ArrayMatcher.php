@@ -40,6 +40,10 @@ final class ArrayMatcher extends Matcher
      */
     public function match($value, $pattern)
     {
+        if (parent::match($value, $pattern)) {
+            return true;
+        }
+
         if (!is_array($value)) {
             $this->error = sprintf("%s \"%s\" is not a valid array.", gettype($value), new StringConverter($value));
             return false;

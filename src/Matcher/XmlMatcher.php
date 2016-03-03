@@ -25,6 +25,10 @@ final class XmlMatcher extends Matcher
      */
     public function match($value, $pattern)
     {
+        if (parent::match($value, $pattern)) {
+            return true;
+        }
+
         if (!Xml::isValid($value) || !Xml::isValid($pattern)) {
             return false;
         }
