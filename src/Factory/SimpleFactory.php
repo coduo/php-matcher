@@ -23,15 +23,40 @@ class SimpleFactory implements Factory
     protected function buildMatchers()
     {
         $scalarMatchers = $this->buildScalarMatchers();
-        $arrayMatcher = new Matcher\ArrayMatcher($scalarMatchers, $this->buildParser());
+        $orMatcher = $this->buildOrMatcher();
 
-        return new Matcher\ChainMatcher(array(
+        $chainMatcher = new Matcher\ChainMatcher(array(
             $scalarMatchers,
-            $arrayMatcher,
-            new Matcher\JsonMatcher($arrayMatcher),
-            new Matcher\XmlMatcher($arrayMatcher),
+            $orMatcher,
+            new Matcher\JsonMatcher($orMatcher),
+            new Matcher\XmlMatcher($orMatcher),
             new Matcher\TextMatcher($scalarMatchers, $this->buildParser())
         ));
+
+        return $chainMatcher;
+    }
+
+    /**
+     * @return Matcher\ChainMatcher
+     */
+    protected function buildOrMatcher()
+    {
+        $scalarMatchers = $this->buildScalarMatchers();
+        $orMatcher = new Matcher\OrMatcher($scalarMatchers);
+        $arrayMatcher = new Matcher\ArrayMatcher(
+            new Matcher\ChainMatcher(array(
+                $orMatcher,
+                $scalarMatchers
+            )),
+            $this->buildParser()
+        );
+
+        $chainMatcher = new Matcher\ChainMatcher(array(
+            $orMatcher,
+            $arrayMatcher,
+        ));
+
+        return $chainMatcher;
     }
 
     /**
