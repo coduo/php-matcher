@@ -72,7 +72,7 @@ class ArrayMatcherTest extends \PHPUnit_Framework_TestCase
         $array = array('foo' => array('bar' => array('baz' => 'bar value')));
         $pattern = array('foo' => array('bar' => array('faz' => 'faz value')));
 
-        $this->assertFalse($this->matcher->match($array,$pattern));
+        $this->assertFalse($this->matcher->match($array, $pattern));
 
         $this->assertEquals($this->matcher->getError(), 'There is no element under path [foo][bar][baz] in pattern.');
     }
@@ -124,7 +124,7 @@ class ArrayMatcherTest extends \PHPUnit_Framework_TestCase
 
     public static function positiveMatchData()
     {
-        $simpleArr =  array(
+        $simpleArr = array(
             'users' => array(
                 array(
                     'firstName' => 'Norbert',
@@ -141,7 +141,7 @@ class ArrayMatcherTest extends \PHPUnit_Framework_TestCase
             6.66
         );
 
-        $simpleArrPattern =  array(
+        $simpleArrPattern = array(
             'users' => array(
                 array(
                     'firstName' => '@string@',
@@ -169,7 +169,7 @@ class ArrayMatcherTest extends \PHPUnit_Framework_TestCase
 
     public static function negativeMatchData()
     {
-        $simpleArr =  array(
+        $simpleArr = array(
             'users' => array(
                 array(
                     'firstName' => 'Norbert',
@@ -186,7 +186,7 @@ class ArrayMatcherTest extends \PHPUnit_Framework_TestCase
             6.66
         );
 
-        $simpleDiff =  array(
+        $simpleDiff = array(
             'users' => array(
                 array(
                     'firstName' => 'Norbert',

@@ -6,13 +6,14 @@ use Coduo\PHPMatcher\Parser;
 use Coduo\ToString\StringConverter;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
+use Symfony\Component\PropertyAccess\PropertyPath;
 
 final class ArrayMatcher extends Matcher
 {
     const UNBOUNDED_PATTERN = '@...@';
 
     /**
-     * @var PropertyMatcher
+     * @var ValueMatcher
      */
     private $propertyMatcher;
 
@@ -147,7 +148,7 @@ final class ArrayMatcher extends Matcher
 
             if (count($notExistingKeys) > 0) {
                 $keyNames = array_keys($notExistingKeys);
-                $path = $this->formatFullPath($parentPath,  $this->formatAccessPath($keyNames[0]));
+                $path = $this->formatFullPath($parentPath, $this->formatAccessPath($keyNames[0]));
                 $this->setMissingElementInError('value', $path);
                 return false;
             }
@@ -180,7 +181,33 @@ final class ArrayMatcher extends Matcher
      */
     private function valueExist($path, array $haystack)
     {
-        return null !== $this->getPropertyAccessor()->getValue($haystack, $path);
+        $propertyPath = new PropertyPath($path);
+        $length = $propertyPath->getLength();
+        $valueExist = true;
+        for ($i = 0; $i < $length; ++$i) {
+            $property = $propertyPath->getElement($i);
+            $isIndex = $propertyPath->isIndex($i);
+            $propertyExist = $this->arrayPropertyExists($property, $haystack);
+
+            if ($isIndex && !$propertyExist) {
+                $valueExist = false;
+                break;
+            }
+        }
+
+        unset($propertyPath);
+        return $valueExist;
+    }
+
+    /**
+     * @param string $property
+     * @param array $objectOrArray
+     * @return bool
+     */
+    private function arrayPropertyExists($property, array $objectOrArray)
+    {
+        return ($objectOrArray instanceof \ArrayAccess && isset($objectOrArray[$property])) ||
+            (is_array($objectOrArray) && array_key_exists($property, $objectOrArray));
     }
 
     /**

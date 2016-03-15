@@ -162,6 +162,10 @@ class JsonMatcherTest extends \PHPUnit_Framework_TestCase
                 '{"null":@null@}'
             ),
             array(
+                '{"username":null,"some_data":"test"}',
+                '{"username":null, "some_data": @string@}'
+            ),
+            array(
                 '{"null":null}',
                 '{"null":null}'
             ),
@@ -176,7 +180,7 @@ class JsonMatcherTest extends \PHPUnit_Framework_TestCase
             array(
                 '[{"name": "Norbert"},{"name":"Michał"},{"name":"Bob"},{"name":"Martin"}]',
                 '[{"name": "Norbert"},@...@]'
-            ),
+            )
         );
     }
 
