@@ -2,7 +2,7 @@
 
 namespace Coduo\PHPMatcher\Tests;
 
-use Coduo\PHPMatcher\Lexer;
+use Coduo\PHPMatcher\Factory\SimpleFactory;
 use Coduo\PHPMatcher\Matcher;
 use Coduo\PHPMatcher\Parser;
 use Coduo\PHPMatcher\PHPMatcher;
@@ -16,29 +16,8 @@ class MatcherTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $parser = new Parser(new Lexer(), new Parser\ExpanderInitializer());
-        $scalarMatchers = new Matcher\ChainMatcher(array(
-            new Matcher\CallbackMatcher(),
-            new Matcher\ExpressionMatcher(),
-            new Matcher\NullMatcher(),
-            new Matcher\StringMatcher($parser),
-            new Matcher\IntegerMatcher($parser),
-            new Matcher\BooleanMatcher(),
-            new Matcher\DoubleMatcher($parser),
-            new Matcher\NumberMatcher(),
-            new Matcher\ScalarMatcher(),
-            new Matcher\WildcardMatcher(),
-        ));
-
-        $arrayMatcher = new Matcher\ArrayMatcher($scalarMatchers, $parser);
-
-        $this->matcher = new Matcher(new Matcher\ChainMatcher(array(
-            $scalarMatchers,
-            $arrayMatcher,
-            new Matcher\JsonMatcher($arrayMatcher),
-            new Matcher\XmlMatcher($arrayMatcher),
-            new Matcher\TextMatcher($scalarMatchers, $parser)
-        )));
+        $factory = new SimpleFactory();
+        $this->matcher = $factory->createMatcher();
     }
 
     public function test_matcher_with_array_value()
@@ -218,6 +197,15 @@ XML;
     }
 
     /**
+     * @dataProvider orExamples()
+     */
+    public function test_matcher_with_or($value, $pattern, $expectedResult)
+    {
+        $this->assertSame($expectedResult, $this->matcher->match($value, $pattern));
+        $this->assertSame($expectedResult, PHPMatcher::match($value, $pattern));
+    }
+
+    /**
      * @dataProvider expanderExamples()
      */
     public function test_expanders($value, $pattern, $expectedResult)
@@ -235,7 +223,7 @@ XML;
             array(array('foo'), '@array@')
         );
     }
-    
+
     public static function expanderExamples()
     {
         return array(
@@ -260,6 +248,19 @@ XML;
             array("lorem ipsum", "@string@.oneOf(contains(\"lorem\"), contains(\"test\")).endsWith(\"ipsum\")", true),
             array("lorem ipsum", "@string@.matchRegex(\"/^lorem \\w+$/\")", true),
             array("lorem ipsum", "@string@.matchRegex(\"/^foo/\")", false),
+        );
+    }
+
+    public static function orExamples()
+    {
+        return array(
+            array("lorem ipsum", "@string@.startsWith(\"lorem\")||@string@.contains(\"lorem\")", true),
+            array("norbert@coduo.pl", "@string@.isEmail()||@null@", true),
+            array(null, "@string@.isEmail()||@null@", true),
+            array(null, "@string@.isEmail()||@null@", true),
+            array("2014-08-19", "@string@.isDateTime()||@integer@", true),
+            array(null, "@integer@||@string@", false),
+            array(1, "@integer@.greaterThan(10)||@string@.contains(\"10\")", false),
         );
     }
 }
