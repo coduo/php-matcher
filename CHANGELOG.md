@@ -1,3 +1,9 @@
+# 2.0.0-r2
+
+* Added or operator ``@string@||@null@`` - @partikus
+
+# 2.0.0-r1
+
 # 2.0.0-beta
 
 * Openssl/lib-array2xml dependency is now more flexible - @blazarecki 
