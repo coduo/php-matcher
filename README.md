@@ -47,7 +47,7 @@ use Coduo\PHPMatcher\Factory\SimpleFactory;
 $factory = new SimpleFactory();
 $matcher = $factory->createMatcher();
 
-$match = $matcher->match("lorem ipsum dolor", "@string@")
+$match = $matcher->match("lorem ipsum dolor", "@string@");
 // $match === true
 $matcher->getError(); // returns null or error message
 ```
@@ -248,7 +248,7 @@ $matcher->match(
               'roles' => '@array@'
           ),
           array(
-              'id' => '@integer@'
+              'id' => '@integer@',
               'firstName' => '@string@',
               'lastName' => 'Dąbrowski',
               'roles' => '@array@'
