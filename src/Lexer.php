@@ -56,20 +56,22 @@ final class Lexer extends AbstractLexer
      */
     protected function getType(&$value)
     {
-        switch($value) {
-            case ')':
-                return self::T_CLOSE_PARENTHESIS;
-            case '{':
-                return self::T_OPEN_CURLY_BRACE;
-            case '}':
-                return self::T_CLOSE_CURLY_BRACE;
-            case ':':
-                return self::T_COLON;
-            case ',':
-                return self::T_COMMA;
-            default:
-                $type = self::T_NONE;
-                break;
+        $type = self::T_NONE;
+
+        if (')' === $value) {
+            return self::T_CLOSE_PARENTHESIS;
+        }
+        if ('{' === $value) {
+            return self::T_OPEN_CURLY_BRACE;
+        }
+        if ('}' === $value) {
+            return self::T_CLOSE_CURLY_BRACE;
+        }
+        if (':' === $value) {
+            return self::T_COLON;
+        }
+        if (',' === $value) {
+            return self::T_COMMA;
         }
 
         if ($this->isTypePatternToken($value)) {
