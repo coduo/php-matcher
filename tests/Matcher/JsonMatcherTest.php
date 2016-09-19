@@ -113,6 +113,26 @@ class JsonMatcherTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->matcher->getError(), 'There is no element under path [foo][bar][faz] in value.');
     }
 
+    public function test_error_when_json_pattern_is_invalid()
+    {
+        $value = '{"test": "value"}';
+        $pattern = '{"test": "@string@",}';
+
+        $this->assertFalse($this->matcher->match($value, $pattern));
+
+        $this->assertEquals($this->matcher->getError(), 'Invalid given JSON of pattern. Syntax error, malformed JSON');
+    }
+
+    public function test_error_when_json_value_is_invalid()
+    {
+        $value = '{"test": "value",}';
+        $pattern = '{"test": "@string@"}';
+
+        $this->assertFalse($this->matcher->match($value, $pattern));
+
+        $this->assertEquals($this->matcher->getError(), 'Invalid given JSON of value. Syntax error, malformed JSON');
+    }
+
     public static function positivePatterns()
     {
         return array(
