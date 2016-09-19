@@ -263,4 +263,26 @@ XML;
             array(1, "@integer@.greaterThan(10)||@string@.contains(\"10\")", false),
         );
     }
+
+    public function test_null_value_in_the_json_pattern()
+    {
+        $factory = new SimpleFactory();
+        $matcher = $factory->createMatcher();
+        $json1 = '{"proformaInvoiceLink":null}';
+        $json2 = '{"proformaInvoiceLink":null}';
+        $match = $matcher->match($json1, $json2);
+        $this->assertTrue($match, $matcher->getError());
+
+        $matcher = $factory->createMatcher();
+        $json1 = '{"proformaInvoiceLink":null, "test":"test"}';
+        $json2 = '{"proformaInvoiceLink":null, "test":"@string@"}';
+        $match = $matcher->match($json1, $json2);
+        $this->assertTrue($match, $matcher->getError());
+
+        $matcher = $factory->createMatcher();
+        $json1 = '{"proformaInvoiceLink":null, "test":"test"}';
+        $json2 = '{"proformaInvoiceLink":@null@, "test":"@string@"}';
+        $match = $matcher->match($json1, $json2);
+        $this->assertTrue($match, $matcher->getError());
+    }
 }
