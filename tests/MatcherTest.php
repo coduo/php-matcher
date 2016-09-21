@@ -264,25 +264,25 @@ XML;
         );
     }
 
-    public function test_null_value_in_the_json_pattern()
+    /**
+     * @dataProvider nullExamples
+     */
+    public function test_null_value_in_the_json($value, $pattern)
     {
         $factory = new SimpleFactory();
         $matcher = $factory->createMatcher();
-        $json1 = '{"proformaInvoiceLink":null}';
-        $json2 = '{"proformaInvoiceLink":null}';
-        $match = $matcher->match($json1, $json2);
+        $match = $matcher->match($value, $pattern);
         $this->assertTrue($match, $matcher->getError());
+    }
 
-        $matcher = $factory->createMatcher();
-        $json1 = '{"proformaInvoiceLink":null, "test":"test"}';
-        $json2 = '{"proformaInvoiceLink":null, "test":"@string@"}';
-        $match = $matcher->match($json1, $json2);
-        $this->assertTrue($match, $matcher->getError());
-
-        $matcher = $factory->createMatcher();
-        $json1 = '{"proformaInvoiceLink":null, "test":"test"}';
-        $json2 = '{"proformaInvoiceLink":@null@, "test":"@string@"}';
-        $match = $matcher->match($json1, $json2);
-        $this->assertTrue($match, $matcher->getError());
+    public static function nullExamples()
+    {
+        return array(
+            array(
+                '{"proformaInvoiceLink":null}', '{"proformaInvoiceLink":null}',
+                '{"proformaInvoiceLink":null, "test":"test"}', '{"proformaInvoiceLink":null, "test":"@string@"}',
+                '{"proformaInvoiceLink":null, "test":"test"}', '{"proformaInvoiceLink":@null@, "test":"@string@"}',
+            )
+        );
     }
 }
