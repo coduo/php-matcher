@@ -263,4 +263,26 @@ XML;
             array(1, "@integer@.greaterThan(10)||@string@.contains(\"10\")", false),
         );
     }
+
+    /**
+     * @dataProvider nullExamples
+     */
+    public function test_null_value_in_the_json($value, $pattern)
+    {
+        $factory = new SimpleFactory();
+        $matcher = $factory->createMatcher();
+        $match = $matcher->match($value, $pattern);
+        $this->assertTrue($match, $matcher->getError());
+    }
+
+    public static function nullExamples()
+    {
+        return array(
+            array(
+                '{"proformaInvoiceLink":null}', '{"proformaInvoiceLink":null}',
+                '{"proformaInvoiceLink":null, "test":"test"}', '{"proformaInvoiceLink":null, "test":"@string@"}',
+                '{"proformaInvoiceLink":null, "test":"test"}', '{"proformaInvoiceLink":@null@, "test":"@string@"}',
+            )
+        );
+    }
 }
