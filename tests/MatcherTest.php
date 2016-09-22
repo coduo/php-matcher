@@ -244,6 +244,8 @@ XML;
             array(array("foo", "bar"), "@array@.inArray(\"bar\")", true),
             array(array(), "@array@.isEmpty()", true),
             array(array('foo'), "@array@.isEmpty()", false),
+            array(array(1, 2, 3), "@array@.count(3)", true),
+            array(array(1, 2, 3), "@array@.count(4)", false),
             array("lorem ipsum", "@string@.oneOf(contains(\"lorem\"), contains(\"test\"))", true),
             array("lorem ipsum", "@string@.oneOf(contains(\"lorem\"), contains(\"test\")).endsWith(\"ipsum\")", true),
             array("lorem ipsum", "@string@.matchRegex(\"/^lorem \\w+$/\")", true),
