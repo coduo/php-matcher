@@ -29,6 +29,12 @@ final class JsonMatcher extends Matcher
         }
 
         if (!Json::isValid($value)) {
+            $this->error = sprintf("Invalid given JSON of value. %s", $this->getErrorMessage());
+            return false;
+        }
+
+        if (!Json::isValidPattern($pattern) ) {
+            $this->error = sprintf("Invalid given JSON of pattern. %s", $this->getErrorMessage());
             return false;
         }
 
@@ -48,5 +54,23 @@ final class JsonMatcher extends Matcher
     public function canMatch($pattern)
     {
         return Json::isValidPattern($pattern);
+    }
+
+    private function getErrorMessage()
+    {
+        switch(json_last_error()) {
+            case JSON_ERROR_DEPTH:
+                return 'Maximum stack depth exceeded';
+            case JSON_ERROR_STATE_MISMATCH:
+                return 'Underflow or the modes mismatch';
+            case JSON_ERROR_CTRL_CHAR:
+                return 'Unexpected control character found';
+            case JSON_ERROR_SYNTAX:
+                return 'Syntax error, malformed JSON';
+            case JSON_ERROR_UTF8:
+                return 'Malformed UTF-8 characters, possibly incorrectly encoded';
+            default:
+                return 'Unknown error';
+        }
     }
 }
