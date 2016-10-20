@@ -10,7 +10,7 @@
 * [![Build Status](https://travis-ci.org/coduo/php-matcher.svg?branch=1.0)](https://travis-ci.org/coduo/php-matcher) - 1.0.*
 
 [Readme for master (2.1) version](https://github.com/coduo/php-matcher/tree/master/README.md)  
-[Readme for 2.0 version](https://github.com/coduo/php-matcher/tree/2.0/README.md)
+[Readme for 2.0 version](https://github.com/coduo/php-matcher/tree/2.0/README.md)  
 [Readme for 1.1 version](https://github.com/coduo/php-matcher/tree/1.1/README.md)  
 [Readme for 1.0 version](https://github.com/coduo/php-matcher/tree/1.0/README.md)
 
