@@ -76,7 +76,8 @@ class SimpleFactory implements Factory
             new Matcher\DoubleMatcher($parser),
             new Matcher\NumberMatcher(),
             new Matcher\ScalarMatcher(),
-            new Matcher\WildcardMatcher()
+            new Matcher\WildcardMatcher(),
+            new Matcher\UuidMatcher(),
         ));
     }
 

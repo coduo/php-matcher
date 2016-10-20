@@ -64,6 +64,7 @@ $matcher->getError(); // returns null or error message
 * ``@null@``
 * ``@*@`` || ``@wildcard@``
 * ``expr(expression)``
+* ``@uuid@``
 
 ### Available pattern expanders
 
@@ -202,6 +203,19 @@ $matcher = $factory->createMatcher();
 
 $matcher->match(new \DateTime('2014-04-01'), "expr(value.format('Y-m-d') == '2014-04-01'");
 $matcher->match("Norbert", "expr(value === 'Norbert')");
+```
+
+### UUID matching
+
+```php
+<?php
+
+use Coduo\PHPMatcher\Factory\SimpleFactory;
+
+$factory = new SimpleFactory();
+$matcher = $factory->createMatcher();
+
+$matcher->match('9f4db639-0e87-4367-9beb-d64e3f42ae18', '@uuid@');
 ```
 
 ### Array matching 
