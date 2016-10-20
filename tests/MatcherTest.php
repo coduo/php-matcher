@@ -167,7 +167,6 @@ XML;
         $this->assertTrue(PHPMatcher::match($value, $pattern));
     }
 
-
     public function test_error_when_json_value_does_not_match_json_pattern()
     {
         $pattern = '{"a": @null@, "b": 4}';
@@ -220,7 +219,8 @@ XML;
             array('Norbert Orzechowicz', '@string@'),
             array(6.66, '@double@'),
             array(1, '@integer@'),
-            array(array('foo'), '@array@')
+            array(array('foo'), '@array@'),
+            array('9f4db639-0e87-4367-9beb-d64e3f42ae18', '@uuid@'),
         );
     }
 
