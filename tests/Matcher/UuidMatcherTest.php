@@ -66,7 +66,11 @@ class UuidMatcherTest extends \PHPUnit_Framework_TestCase
     public static function positiveMatchData()
     {
         return array(
+            array("21627164-acb7-11e6-80f5-76304dec7eb7", "@uuid@"),
+            array("d9c04bc2-173f-2cb7-ad4e-e4ca3b2c273f", "@uuid@"),
+            array("7b368038-a5ca-3aa3-b0db-1177d1761c9e", "@uuid@"),
             array("9f4db639-0e87-4367-9beb-d64e3f42ae18", "@uuid@"),
+            array("1f2b1a18-81a0-5685-bca7-f23022ed7c7b", "@uuid@"),
         );
     }
 
