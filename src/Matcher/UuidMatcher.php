@@ -7,7 +7,7 @@ use Coduo\ToString\StringConverter;
 final class UuidMatcher extends Matcher
 {
     const UUID_PATTERN = '/^@uuid@$/';
-    const UUID_FORMAT_PATTERN = '|^[\da-f]{8}-[\da-f]{4}-4[\da-f]{3}-[89ab][\da-f]{3}-[\da-f]{12}$|';
+    const UUID_FORMAT_PATTERN = '|^[\da-f]{8}-[\da-f]{4}-[1-5][\da-f]{3}-[89ab][\da-f]{3}-[\da-f]{12}$|';
 
     /**
      * {@inheritDoc}
