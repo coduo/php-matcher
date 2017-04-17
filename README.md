@@ -1,4 +1,4 @@
-#PHP Matcher
+# PHP Matcher
 
 ***PHP Matcher*** lets You assert like a gangster in Your test cases, where response can be something you cannot predict
 
@@ -15,7 +15,7 @@
 [Readme for 1.0 version](https://github.com/coduo/php-matcher/tree/1.0/README.md)
 
 
-##Installation
+## Installation
 
 Require new dev dependency using composer (assuming it's installed globally):
 
@@ -84,7 +84,7 @@ $matcher->getError(); // returns null or error message
 * ``oneOf(...$expanders)`` - example usage ``"@string@.oneOf(contains('foo'), contains('bar'), contains('baz'))"``
 * ``matchRegex($regex)`` - example usage ``"@string@.matchRegex('/^lorem.+/')"``
 
-##Example usage
+## Example usage
 
 ### Scalar matching
 
