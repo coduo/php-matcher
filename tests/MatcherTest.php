@@ -4,7 +4,6 @@ namespace Coduo\PHPMatcher\Tests;
 
 use Coduo\PHPMatcher\Factory\SimpleFactory;
 use Coduo\PHPMatcher\Matcher;
-use Coduo\PHPMatcher\Parser;
 use Coduo\PHPMatcher\PHPMatcher;
 
 class MatcherTest extends \PHPUnit_Framework_TestCase
@@ -28,14 +27,14 @@ class MatcherTest extends \PHPUnit_Framework_TestCase
                     'id' => 1,
                     'firstName' => 'Norbert',
                     'lastName' => 'Orzechowicz',
-                    'enabled' => true
+                    'enabled' => true,
                 ),
                 array(
                     'id' => 2,
                     'firstName' => 'Michał',
                     'lastName' => 'Dąbrowski',
                     'enabled' => true,
-                )
+                ),
             ),
             'readyToUse' => true,
             'data' => new \stdClass(),
@@ -47,14 +46,14 @@ class MatcherTest extends \PHPUnit_Framework_TestCase
                     'id' => '@integer@',
                     'firstName' => '@string@',
                     'lastName' => 'Orzechowicz',
-                    'enabled' => '@boolean@'
+                    'enabled' => '@boolean@',
                 ),
                 array(
                     'id' => '@integer@',
                     'firstName' => '@string@',
                     'lastName' => 'Dąbrowski',
                     'enabled' => '@boolean@',
-                )
+                ),
             ),
             'readyToUse' => true,
             'data' => '@wildcard@',
@@ -73,53 +72,110 @@ class MatcherTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(PHPMatcher::match($value, $pattern));
     }
 
-    public function test_matcher_with_json()
+    /**
+     * @dataProvider jsonDataProvider
+     */
+    public function test_matcher_with_json($json, $jsonPattern)
     {
-        $json = '
-        {
-            "users":[
-                {
-                    "id": 131,
-                    "firstName": "Norbert",
-                    "lastName": "Orzechowicz",
-                    "enabled": true,
-                    "roles": ["ROLE_DEVELOPER"]
-                },
-                {
-                    "id": 132,
-                    "firstName": "Michał",
-                    "lastName": "Dąbrowski",
-                    "enabled": false,
-                    "roles": ["ROLE_DEVELOPER"]
-                }
-            ],
-            "prevPage": "http:\/\/example.com\/api\/users\/1?limit=2",
-            "nextPage": "http:\/\/example.com\/api\/users\/3?limit=2"
-        }';
-        $jsonPattern = '
-        {
-            "users":[
-                {
-                    "id": "@integer@",
-                    "firstName":"Norbert",
-                    "lastName":"Orzechowicz",
-                    "enabled": "@boolean@",
-                    "roles": "@array@"
-                },
-                {
-                    "id": "@integer@",
-                    "firstName": "Michał",
-                    "lastName": "Dąbrowski",
-                    "enabled": "expr(value == false)",
-                    "roles": "@array@"
-                }
-            ],
-            "prevPage": "@string@",
-            "nextPage": "@string@"
-        }';
-
         $this->assertTrue($this->matcher->match($json, $jsonPattern));
         $this->assertTrue(PHPMatcher::match($json, $jsonPattern));
+    }
+
+    public function jsonDataProvider()
+    {
+        return array(
+            'matches exactly' => array(
+                /** @lang JSON */
+                '{
+                    "users":[
+                        {
+                            "id": 131,
+                            "firstName": "Norbert",
+                            "lastName": "Orzechowicz",
+                            "enabled": true,
+                            "roles": ["ROLE_DEVELOPER"]
+                        },
+                        {
+                            "id": 132,
+                            "firstName": "Michał",
+                            "lastName": "Dąbrowski",
+                            "enabled": false,
+                            "roles": ["ROLE_DEVELOPER"]
+                        }
+                    ],
+                    "prevPage": "http:\/\/example.com\/api\/users\/1?limit=2",
+                    "nextPage": "http:\/\/example.com\/api\/users\/3?limit=2"
+                }',
+                /** @lang JSON */
+                '{
+                    "users":[
+                        {
+                            "id": "@integer@",
+                            "firstName":"Norbert",
+                            "lastName":"Orzechowicz",
+                            "enabled": "@boolean@",
+                            "roles": "@array@"
+                        },
+                        {
+                            "id": "@integer@",
+                            "firstName": "Michał",
+                            "lastName": "Dąbrowski",
+                            "enabled": "expr(value == false)",
+                            "roles": "@array@"
+                        }
+                    ],
+                    "prevPage": "@string@",
+                    "nextPage": "@string@"
+                }',
+            ),
+            'matches none elements - empty array' => array(
+                /** @lang JSON */
+                '{
+                    "users":[],
+                    "prevPage": "http:\/\/example.com\/api\/users\/1?limit=2",
+                    "nextPage": "http:\/\/example.com\/api\/users\/3?limit=2"
+                }',
+                /** @lang JSON */
+                '{
+                    "users":[
+                        "@...@"                        
+                    ],
+                    "prevPage": "@string@",
+                    "nextPage": "@string@"
+                }',
+            ),
+            'matches one element' => array(
+                /** @lang JSON */
+                '{
+                    "users":[
+                        {
+                            "id": 131,
+                            "firstName": "Norbert",
+                            "lastName": "Orzechowicz",
+                            "enabled": true,
+                            "roles": ["ROLE_DEVELOPER"]
+                        }                       
+                    ],
+                    "prevPage": "http:\/\/example.com\/api\/users\/1?limit=2",
+                    "nextPage": "http:\/\/example.com\/api\/users\/3?limit=2"
+                }',
+                /** @lang JSON */
+                '{
+                    "users":[
+                        {
+                            "id": "@integer@",
+                            "firstName":"Norbert",
+                            "lastName":"Orzechowicz",
+                            "enabled": "@boolean@",
+                            "roles": "@array@"
+                        },
+                        "@...@"
+                    ],
+                    "prevPage": "@string@",
+                    "nextPage": "@string@"
+                }',
+            ),
+        );
     }
 
     public function test_matcher_with_xml()
@@ -284,7 +340,7 @@ XML;
                 '{"proformaInvoiceLink":null}', '{"proformaInvoiceLink":null}',
                 '{"proformaInvoiceLink":null, "test":"test"}', '{"proformaInvoiceLink":null, "test":"@string@"}',
                 '{"proformaInvoiceLink":null, "test":"test"}', '{"proformaInvoiceLink":@null@, "test":"@string@"}',
-            )
+            ),
         );
     }
 }
