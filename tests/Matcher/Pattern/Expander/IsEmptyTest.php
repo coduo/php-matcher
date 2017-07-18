@@ -7,7 +7,7 @@ use Coduo\PHPMatcher\Matcher\Pattern\Expander\IsEmpty;
 /**
  * @author Benjamin Lazarecki <benjamin.lazarecki@gmail.com>
  */
-class IsEmptyTest extends \PHPUnit_Framework_TestCase
+class IsEmptyTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @dataProvider examplesProvider

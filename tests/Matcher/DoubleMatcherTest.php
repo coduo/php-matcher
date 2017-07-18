@@ -5,7 +5,7 @@ use Coduo\PHPMatcher\Lexer;
 use Coduo\PHPMatcher\Matcher\DoubleMatcher;
 use Coduo\PHPMatcher\Parser;
 
-class DoubleMatcherTest extends \PHPUnit_Framework_TestCase
+class DoubleMatcherTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var DoubleMatcher

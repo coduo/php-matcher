@@ -5,7 +5,7 @@ use Coduo\PHPMatcher\Factory\SimpleFactory;
 use Coduo\PHPMatcher\Matcher;
 use Coduo\PHPMatcher\Parser;
 
-class OrMatcherTest extends \PHPUnit_Framework_TestCase
+class OrMatcherTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Matcher\OrMatcher

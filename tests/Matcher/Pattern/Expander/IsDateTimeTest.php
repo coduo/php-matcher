@@ -5,7 +5,7 @@ namespace Coduo\PHPMatcher\Tests\Matcher\Pattern\Expander;
 use Coduo\PHPMatcher\Matcher;
 use Coduo\PHPMatcher\Matcher\Pattern\Expander\IsDateTime;
 
-class IsDateTimeTest extends \PHPUnit_Framework_TestCase
+class IsDateTimeTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @dataProvider examplesDatesProvider

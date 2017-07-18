@@ -5,7 +5,7 @@ namespace Coduo\PHPMatcher\Tests\Matcher\Pattern\Expander;
 use Coduo\PHPMatcher\Matcher;
 use Coduo\PHPMatcher\Matcher\Pattern\Expander\StartsWith;
 
-class StartsWithTest extends \PHPUnit_Framework_TestCase
+class StartsWithTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @dataProvider notIgnoringCaseExamplesProvider
