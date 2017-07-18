@@ -5,7 +5,7 @@ namespace Coduo\PHPMatcher\Tests\Matcher\Pattern;
 use Coduo\PHPMatcher\Matcher\Pattern\TypePattern;
 use Coduo\PHPMatcher\Matcher\Pattern\RegexConverter;
 
-class RegexConverterTest  extends \PHPUnit_Framework_TestCase
+class RegexConverterTest  extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var RegexConverter

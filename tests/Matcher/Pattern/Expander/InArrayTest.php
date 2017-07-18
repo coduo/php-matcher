@@ -5,7 +5,7 @@ namespace Coduo\PHPMatcher\Tests\Matcher\Pattern\Expander;
 use Coduo\PHPMatcher\Matcher;
 use Coduo\PHPMatcher\Matcher\Pattern\Expander\InArray;
 
-class InArrayTest extends \PHPUnit_Framework_TestCase
+class InArrayTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @dataProvider examplesProvider

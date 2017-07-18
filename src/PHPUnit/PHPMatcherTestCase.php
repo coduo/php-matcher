@@ -2,7 +2,7 @@
 
 namespace Coduo\PHPMatcher\PHPUnit;
 
-abstract class PHPMatcherTestCase extends \PHPUnit_Framework_TestCase
+abstract class PHPMatcherTestCase extends \PHPUnit\Framework\TestCase
 {
     /**
      * @param string $pattern

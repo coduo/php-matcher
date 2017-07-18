@@ -4,7 +4,7 @@ namespace Coduo\PHPMatcher\Tests;
 use Coduo\PHPMatcher\Matcher;
 use Coduo\PHPMatcher\Factory\SimpleFactory;
 
-class SimpleFactoryTest extends \PHPUnit_Framework_TestCase
+class SimpleFactoryTest extends \PHPUnit\Framework\TestCase
 {
     public function test_creating_matcher()
     {

@@ -7,7 +7,7 @@ use Coduo\PHPMatcher\Matcher;
 use Coduo\PHPMatcher\Parser;
 use Coduo\PHPMatcher\PHPMatcher;
 
-class MatcherTest extends \PHPUnit_Framework_TestCase
+class MatcherTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Matcher

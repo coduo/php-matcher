@@ -3,7 +3,7 @@ namespace Coduo\PHPMatcher\Tests\Matcher;
 
 use Coduo\PHPMatcher\Matcher\ExpressionMatcher;
 
-class ExpressionMatcherTest extends \PHPUnit_Framework_TestCase
+class ExpressionMatcherTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @dataProvider positiveCanMatchData

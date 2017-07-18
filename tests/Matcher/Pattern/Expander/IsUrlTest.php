@@ -5,7 +5,7 @@ namespace Coduo\PHPMatcher\Tests\Matcher\Pattern\Expander;
 use Coduo\PHPMatcher\Matcher;
 use Coduo\PHPMatcher\Matcher\Pattern\Expander\IsUrl;
 
-class IsUrlTest extends \PHPUnit_Framework_TestCase
+class IsUrlTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @dataProvider examplesUrlsProvider

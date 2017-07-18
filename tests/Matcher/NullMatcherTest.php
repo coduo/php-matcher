@@ -3,7 +3,7 @@ namespace Coduo\PHPMatcher\Tests\Matcher;
 
 use Coduo\PHPMatcher\Matcher\NullMatcher;
 
-class NullMatcherTest extends \PHPUnit_Framework_TestCase
+class NullMatcherTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @dataProvider positiveCanMatchData

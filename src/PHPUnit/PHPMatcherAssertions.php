@@ -11,7 +11,7 @@ trait PHPMatcherAssertions
      */
     protected function assertMatchesPattern($pattern, $value, $message = '')
     {
-        \PHPUnit_Framework_TestCase::assertThat($value, self::matchesPattern($pattern), $message);
+        \PHPUnit\Framework\TestCase::assertThat($value, self::matchesPattern($pattern), $message);
     }
 
     /**

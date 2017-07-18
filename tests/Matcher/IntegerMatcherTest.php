@@ -5,7 +5,7 @@ use Coduo\PHPMatcher\Lexer;
 use Coduo\PHPMatcher\Matcher\IntegerMatcher;
 use Coduo\PHPMatcher\Parser;
 
-class IntegerMatcherTest extends \PHPUnit_Framework_TestCase
+class IntegerMatcherTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var IntegerMatcher

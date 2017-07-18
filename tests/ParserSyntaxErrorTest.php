@@ -5,7 +5,7 @@ namespace Coduo\PHPMatcher\Tests;
 use Coduo\PHPMatcher\Lexer;
 use Coduo\PHPMatcher\Parser;
 
-class ParserSyntaxErrorTest extends \PHPUnit_Framework_TestCase
+class ParserSyntaxErrorTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Parser

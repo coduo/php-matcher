@@ -5,7 +5,7 @@ namespace Coduo\PHPMatcher\Tests\Matcher\Pattern\Expander;
 use Coduo\PHPMatcher\Matcher\Pattern\Expander\Contains;
 use Coduo\PHPMatcher\Matcher\Pattern\Expander\OneOf;
 
-class OneOfTest extends \PHPUnit_Framework_TestCase
+class OneOfTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @expectedException \InvalidArgumentException
