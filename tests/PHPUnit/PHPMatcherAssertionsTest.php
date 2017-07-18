@@ -4,7 +4,7 @@ namespace Coduo\PHPMatcher\Tests\PHPUnit;
 
 use Coduo\PHPMatcher\PHPUnit\PHPMatcherAssertions;
 
-class PHPMatcherAssertionsTest extends \PHPUnit_Framework_TestCase
+class PHPMatcherAssertionsTest extends \PHPUnit\Framework\TestCase
 {
     use PHPMatcherAssertions;
 
@@ -14,7 +14,7 @@ class PHPMatcherAssertionsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedException \PHPUnit\Framework\AssertionFailedError
      * @expectedExceptionMessage Failed asserting that '{"foo":"bar"}' matches the pattern
      */
     public function test_it_throws_an_expectation_failed_exception_if_a_value_does_not_match_the_pattern()
@@ -23,7 +23,7 @@ class PHPMatcherAssertionsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedException \PHPUnit\Framework\AssertionFailedError
      * @expectedExceptionMessage Failed asserting that 42 matches the pattern.
      */
     public function test_it_creates_a_constraint_for_stubs()

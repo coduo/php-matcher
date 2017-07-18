@@ -3,7 +3,7 @@ namespace Coduo\PHPMatcher\Tests\Matcher;
 
 use Coduo\PHPMatcher\Matcher\ScalarMatcher;
 
-class ScalarMatcherTest extends \PHPUnit_Framework_TestCase
+class ScalarMatcherTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @dataProvider positiveCanMatches

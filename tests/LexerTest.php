@@ -4,7 +4,7 @@ namespace Coduo\PHPMatcher\Tests;
 
 use Coduo\PHPMatcher\Lexer;
 
-class LexerTest extends \PHPUnit_Framework_TestCase
+class LexerTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @dataProvider validStringValuesProvider

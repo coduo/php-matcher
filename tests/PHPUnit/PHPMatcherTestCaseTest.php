@@ -12,7 +12,7 @@ class PHPMatcherTestCaseTest extends PHPMatcherTestCase
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedException \PHPUnit\Framework\AssertionFailedError
      * @expectedExceptionMessage Failed asserting that '{"foo":"bar"}' matches the pattern
      */
     public function test_it_throws_an_expectation_failed_exception_if_a_value_does_not_match_the_pattern()
@@ -21,7 +21,7 @@ class PHPMatcherTestCaseTest extends PHPMatcherTestCase
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedException \PHPUnit\Framework\AssertionFailedError
      * @expectedExceptionMessage Failed asserting that 42 matches the pattern.
      */
     public function test_it_creates_a_constraint_for_stubs()

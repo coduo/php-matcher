@@ -7,7 +7,7 @@ use Coduo\PHPMatcher\Matcher\Pattern\Expander\MatchRegex;
 /**
  * @author Benjamin Lazarecki <benjamin.lazarecki@gmail.com>
  */
-class MatchRegexTest extends \PHPUnit_Framework_TestCase
+class MatchRegexTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @dataProvider examplesProvider
