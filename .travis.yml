@@ -9,15 +9,16 @@ cache:
 matrix:
   include:
     - php: 7.0
+      env: DEPENDENCIES='low'
     - php: 7.1
-    - php: hhvm
 
 before_install:
   - composer self-update
 
 install:
   - export COMPOSER_ROOT_VERSION=dev-master
-  - composer update
+  - if [ "$DEPENDENCIES" != "low" ]; then composer update; fi;
+  - if [ "$DEPENDENCIES" == "low" ]; then composer update --prefer-lowest; fi;
 
 script:
   - ./bin/phpunit
