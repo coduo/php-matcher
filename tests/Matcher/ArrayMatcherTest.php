@@ -147,7 +147,7 @@ class ArrayMatcherTest extends \PHPUnit\Framework\TestCase
                     'firstName' => '@string@',
                     'lastName' => '@string@'
                 ),
-                '@...@'
+                Matcher\ArrayMatcher::UNBOUNDED_PATTERN
             ),
             true,
             false,
@@ -163,7 +163,25 @@ class ArrayMatcherTest extends \PHPUnit\Framework\TestCase
             array(array('foo' => null), array('foo' => "@null@")),
             array(array('key' => 'val'), array('key' => 'val')),
             array(array(1), array(1)),
-            array(array('roles' => array('ROLE_ADMIN', 'ROLE_DEVELOPER')), array('roles' => '@wildcard@'))
+            array(
+                array('roles' => array('ROLE_ADMIN', 'ROLE_DEVELOPER')),
+                array('roles' => '@wildcard@'),
+            ),
+            'unbound array should match one or none elements' => array(
+                array(
+                    'users' => array(
+                        array(
+                            'firstName' => 'Norbert',
+                            'lastName' => 'Foobar',
+                        ),
+                    ),
+                    true,
+                    false,
+                    1,
+                    6.66,
+                ),
+                $simpleArrPattern,
+            ),
         );
     }
 
@@ -210,7 +228,22 @@ class ArrayMatcherTest extends \PHPUnit\Framework\TestCase
             array(array('key' => 'val'), array('key' => 'val2')),
             array(array(1), array(2)),
             array(array('foo', 1, 3), array('foo', 2, 3)),
-            array(array(), array('foo' => 'bar'))
+            array(array(), array('foo' => 'bar')),
+            'unbound array should match one or none elements' => array(
+                array(
+                    'users' => array(
+                        array(
+                            'firstName' => 'Norbert',
+                            'lastName' => 'Foobar',
+                        ),
+                    ),
+                    true,
+                    false,
+                    1,
+                    6.66,
+                ),
+                $simpleDiff,
+            ),
         );
     }
 }

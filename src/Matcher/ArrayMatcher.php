@@ -144,6 +144,15 @@ final class ArrayMatcher extends Matcher
     private function isPatternValid(array $pattern, array $values, $parentPath)
     {
         if (is_array($pattern)) {
+            $skipPattern = static::UNBOUNDED_PATTERN;
+
+            $pattern = array_filter(
+                $pattern,
+                function ($item) use ($skipPattern) {
+                    return $item !== $skipPattern;
+                }
+            );
+
             $notExistingKeys = array_diff_key($pattern, $values);
 
             if (count($notExistingKeys) > 0) {
