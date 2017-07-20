@@ -6,7 +6,7 @@ use Coduo\PHPMatcher\AST\Expander;
 use Coduo\PHPMatcher\Lexer;
 use Coduo\PHPMatcher\Parser;
 
-class ParserTest extends \PHPUnit_Framework_TestCase
+class ParserTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Parser

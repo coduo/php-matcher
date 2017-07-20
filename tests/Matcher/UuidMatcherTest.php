@@ -4,7 +4,7 @@ namespace Coduo\PHPMatcher\Tests\Matcher;
 
 use Coduo\PHPMatcher\Matcher\UuidMatcher;
 
-class UuidMatcherTest extends \PHPUnit_Framework_TestCase
+class UuidMatcherTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var UuidMatcher

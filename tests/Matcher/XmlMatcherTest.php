@@ -6,7 +6,7 @@ use Coduo\PHPMatcher\Lexer;
 use Coduo\PHPMatcher\Matcher;
 use Coduo\PHPMatcher\Parser;
 
-class XmlMatcherTest extends \PHPUnit_Framework_TestCase
+class XmlMatcherTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Matcher\XmlMatcher

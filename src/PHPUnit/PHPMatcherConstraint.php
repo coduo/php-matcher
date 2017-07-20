@@ -5,7 +5,7 @@ namespace Coduo\PHPMatcher\PHPUnit;
 use Coduo\PHPMatcher\Factory\SimpleFactory;
 use Coduo\PHPMatcher\Matcher;
 
-final class PHPMatcherConstraint extends \PHPUnit_Framework_Constraint
+final class PHPMatcherConstraint extends \PHPUnit\Framework\Constraint\Constraint
 {
     /**
      * @var string

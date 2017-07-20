@@ -5,7 +5,7 @@ namespace Coduo\PHPMatcher\Tests\Matcher\Pattern\Expander;
 use Coduo\PHPMatcher\Matcher;
 use Coduo\PHPMatcher\Matcher\Pattern\Expander\GreaterThan;
 
-class GreaterThanTest extends \PHPUnit_Framework_TestCase
+class GreaterThanTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @dataProvider examplesProvider

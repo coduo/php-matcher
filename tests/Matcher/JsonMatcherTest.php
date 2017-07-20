@@ -6,7 +6,7 @@ use Coduo\PHPMatcher\Lexer;
 use Coduo\PHPMatcher\Matcher;
 use Coduo\PHPMatcher\Parser;
 
-class JsonMatcherTest extends \PHPUnit_Framework_TestCase
+class JsonMatcherTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Matcher\JsonMatcher

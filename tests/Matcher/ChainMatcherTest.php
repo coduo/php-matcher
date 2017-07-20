@@ -4,7 +4,7 @@ namespace Coduo\PHPMatcher\Tests\Matcher;
 use Coduo\PHPMatcher\Matcher\ArrayMatcher;
 use Coduo\PHPMatcher\Matcher\ChainMatcher;
 
-class ChainMatcherTest extends \PHPUnit_Framework_TestCase
+class ChainMatcherTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var ArrayMatcher
@@ -23,8 +23,8 @@ class ChainMatcherTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->firstMatcher = $this->getMock('Coduo\PHPMatcher\Matcher\ValueMatcher');
-        $this->secondMatcher = $this->getMock('Coduo\PHPMatcher\Matcher\ValueMatcher');
+        $this->firstMatcher = $this->createMock('Coduo\PHPMatcher\Matcher\ValueMatcher');
+        $this->secondMatcher = $this->createMock('Coduo\PHPMatcher\Matcher\ValueMatcher');
 
         $this->matcher = new ChainMatcher(array(
             $this->firstMatcher,

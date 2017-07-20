@@ -3,7 +3,7 @@ namespace Coduo\PHPMatcher\Tests\Matcher;
 
 use Coduo\PHPMatcher\Matcher\CallbackMatcher;
 
-class CallbackMatcherTest extends \PHPUnit_Framework_TestCase
+class CallbackMatcherTest extends \PHPUnit\Framework\TestCase
 {
     function test_positive_can_match()
     {
