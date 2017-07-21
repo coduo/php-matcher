@@ -18,15 +18,12 @@ final class Match implements PatternExpander
      */
     private $value;
 
-    private $matcher;
-
     /**
      * @param $value
      */
     public function __construct($value)
     {
         $this->value = $value;
-        $this->matcher = (new SimpleFactory)->createMatcher();
     }
 
     /**
@@ -41,14 +38,14 @@ final class Match implements PatternExpander
         }
 
         $match = true;
+        $matcher = (new SimpleFactory)->createMatcher();
         foreach ($value as $singleRowValue) {
-            if (!$this->matcher->match($singleRowValue, $this->value)) {
+            if (!$matcher->match($singleRowValue, $this->value)) {
                 $match = false;
-                $this->error = $this->matcher->getError();
+                $this->error = $matcher->getError();
             }
         }
-
-        unset($this->matcher);
+        unset($matcher);
 
         return $match;
     }

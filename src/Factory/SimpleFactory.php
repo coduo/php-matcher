@@ -9,6 +9,8 @@ use Coduo\PHPMatcher\Parser;
 
 class SimpleFactory implements Factory
 {
+    private $parser;
+
     /**
      * @return Matcher
      */
@@ -22,56 +24,61 @@ class SimpleFactory implements Factory
      */
     protected function buildMatchers()
     {
+        $parser = $this->buildParser();
         $scalarMatchers = $this->buildScalarMatchers();
-        $orMatcher = $this->buildOrMatcher();
+        $orMatcher = $this->buildOrMatcher($scalarMatchers);
+        $jsonMatcher = $this->buildJsonObjectMatcher($scalarMatchers);
+        $arrayMatcher = $this->buildArrayMatcher($scalarMatchers, $orMatcher, $jsonMatcher, $parser);
 
         $chainMatcher = new Matcher\ChainMatcher(array(
-            $scalarMatchers,
             $orMatcher,
-            new Matcher\JsonMatcher($orMatcher),
-            new Matcher\XmlMatcher($orMatcher),
-            new Matcher\TextMatcher($scalarMatchers, $this->buildParser()),
+            $jsonMatcher,
+            $scalarMatchers,
+            $arrayMatcher,
         ));
 
-        return $chainMatcher;
+        $decoratedMatcher = new Matcher\ChainMatcher([
+            new Matcher\JsonMatcher($chainMatcher),
+            new Matcher\XmlMatcher($chainMatcher),
+            new Matcher\TextMatcher($chainMatcher, $parser),
+            $chainMatcher,
+        ]);
+
+        return $decoratedMatcher;
+    }
+
+    protected function buildArrayMatcher(
+        Matcher\ValueMatcher $scalarMatchers,
+        Matcher\ValueMatcher $orMatcher,
+        Matcher\ValueMatcher $jsonMatcher,
+        Parser $parser
+    )
+    {
+        return new Matcher\ArrayMatcher(new Matcher\ChainMatcher([
+            $orMatcher,
+            $scalarMatchers,
+            $jsonMatcher
+        ]), $parser);
     }
 
     /**
-     * @return Matcher\ChainMatcher
+     * @return Matcher\ValueMatcher
      */
-    protected function buildOrMatcher()
+    protected function buildOrMatcher(Matcher\ChainMatcher $scalarMatchers)
     {
-        $scalarMatchers = $this->buildScalarMatchers();
-        $orMatcher = new Matcher\OrMatcher($scalarMatchers);
-        $arrayMatcher = new Matcher\ArrayMatcher(
-            new Matcher\ChainMatcher(array(
-                $orMatcher,
-                $scalarMatchers,
-                $this->buildJsonObjectMatcher(),
-            )),
-            $this->buildParser()
-        );
+        $chainMatcher = new Matcher\ChainMatcher([
+            $scalarMatchers,
+            $this->buildJsonObjectMatcher($scalarMatchers)
+        ]);
 
-        $chainMatcher = new Matcher\ChainMatcher(array(
-            $orMatcher,
-            $arrayMatcher,
-        ));
-
-        return $chainMatcher;
+        return new Matcher\OrMatcher($chainMatcher);
     }
 
-    protected function buildJsonObjectMatcher()
+    protected function buildJsonObjectMatcher(Matcher\ValueMatcher $scalarMatchers)
     {
         $parser = $this->buildParser();
-        $scalarMatchers = $this->buildScalarMatchers();
-        $orMatcher = new Matcher\OrMatcher($scalarMatchers);
-        $arrayMatcher = new Matcher\ArrayMatcher($orMatcher, $parser);
 
-        return new Matcher\JsonObjectMatcher(new Matcher\ChainMatcher([
-            $orMatcher,
-            $scalarMatchers,
-            $arrayMatcher,
-        ]), $parser);
+        return new Matcher\JsonObjectMatcher($scalarMatchers, $parser);
     }
 
     /**
@@ -101,6 +108,10 @@ class SimpleFactory implements Factory
      */
     protected function buildParser()
     {
-        return new Parser(new Lexer(), new Parser\ExpanderInitializer());
+        if ($this->parser) {
+            return $this->parser;
+        }
+
+        return $this->parser = new Parser(new Lexer(), new Parser\ExpanderInitializer());
     }
 }

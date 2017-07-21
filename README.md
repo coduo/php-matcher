@@ -83,6 +83,7 @@ $matcher->getError(); // returns null or error message
 * ``inArray($value)``
 * ``oneOf(...$expanders)`` - example usage ``"@string@.oneOf(contains('foo'), contains('bar'), contains('baz'))"``
 * ``matchRegex($regex)`` - example usage ``"@string@.matchRegex('/^lorem.+/')"``
+* ``match($subPattern)`` - example usage ``"@json@.match({"id": "@integer@"})"``
 
 ##Example usage
 
@@ -97,7 +98,7 @@ $factory = new SimpleFactory();
 $matcher = $factory->createMatcher();
 
 $matcher->match(1, 1);
-$matcher->match('string', 'string')
+$matcher->match('string', 'string');
 ```
 
 ### String matching
@@ -111,7 +112,7 @@ $factory = new SimpleFactory();
 $matcher = $factory->createMatcher();
 
 $matcher->match('Norbert', '@string@');
-$matcher->match("lorem ipsum dolor", "@string@.startsWith('lorem').contains('ipsum').endsWith('dolor')")
+$matcher->match("lorem ipsum dolor", "@string@.startsWith('lorem').contains('ipsum').endsWith('dolor')");
 
 ```
 
@@ -185,12 +186,12 @@ use Coduo\PHPMatcher\Factory\SimpleFactory;
 $factory = new SimpleFactory();
 $matcher = $factory->createMatcher();
 
-$matcher->match("@integer@", "@*@"),
-$matcher->match("foobar", "@*@"),
-$matcher->match(true, "@*@"),
-$matcher->match(6.66, "@*@"),
-$matcher->match(array("bar"), "@wildcard@"),
-$matcher->match(new \stdClass, "@wildcard@"),
+$matcher->match("@integer@", "@*@");
+$matcher->match("foobar", "@*@");
+$matcher->match(true, "@*@");
+$matcher->match(6.66, "@*@");
+$matcher->match(array("bar"), "@wildcard@");
+$matcher->match(new \stdClass, "@wildcard@");
 ```
 
 ### Expression matching 
@@ -274,7 +275,7 @@ $matcher->match(
       '@boolean@',
       '@double@'
   )  
-)
+);
 ```
 
 ### Json matching 
@@ -307,7 +308,7 @@ $matcher->match(
       }
     ]
   }'
-)
+);
 
 ```
 
@@ -353,6 +354,52 @@ XML
 </soap:Envelope>
 XML
         );
+```
+
+### Nested Object matching
+
+```php
+
+$factory = new SimpleFactory();
+$matcher = $factory->createMatcher();
+
+$matcher->match(<<<JSON
+    {
+        "id": 1,
+        "galleries": [
+            [
+                "id": 1,
+                "cover": null,
+                "images": [['id': 1], ['id': 2]],
+            ],
+            [
+                "id": 1,
+                "cover": null,
+                "images": [['id': 1], ['id': 2]],
+            ]
+        ]   
+    }
+JSON, <<<JSON
+    {
+        "id": "@integer@",
+        "galleries": '
+            @json@.match({
+                "id": "@integer@",
+                "cover": \'
+                    @null@||@json@.match({
+                        "id": "@integer@"
+                    })
+                \',
+                "images": \'
+                    @json@.match({
+                        "id": "@integer@"
+                    })
+                \'
+            })
+        '
+    }
+JSON);
+
 ```
 
 Example scenario for api in behat using mongo.
