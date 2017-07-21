@@ -38,10 +38,10 @@ class SimpleFactory implements Factory
         ));
 
         $decoratedMatcher = new Matcher\ChainMatcher([
+            $chainMatcher,
             new Matcher\JsonMatcher($chainMatcher),
             new Matcher\XmlMatcher($chainMatcher),
             new Matcher\TextMatcher($chainMatcher, $parser),
-            $chainMatcher,
         ]);
 
         return $decoratedMatcher;
