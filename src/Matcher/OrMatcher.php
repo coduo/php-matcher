@@ -26,7 +26,7 @@ final class OrMatcher extends Matcher
     {
         $patterns = explode('||', $pattern);
         foreach ($patterns as $childPattern) {
-            if ($this->matchChild($value, $childPattern)){
+            if ($this->matchChild($value, $childPattern)) {
                 return true;
             }
         }

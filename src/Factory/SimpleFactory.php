@@ -30,7 +30,7 @@ class SimpleFactory implements Factory
             $orMatcher,
             new Matcher\JsonMatcher($orMatcher),
             new Matcher\XmlMatcher($orMatcher),
-            new Matcher\TextMatcher($scalarMatchers, $this->buildParser())
+            new Matcher\TextMatcher($scalarMatchers, $this->buildParser()),
         ));
 
         return $chainMatcher;
@@ -46,7 +46,8 @@ class SimpleFactory implements Factory
         $arrayMatcher = new Matcher\ArrayMatcher(
             new Matcher\ChainMatcher(array(
                 $orMatcher,
-                $scalarMatchers
+                $scalarMatchers,
+                $this->buildJsonObjectMatcher(),
             )),
             $this->buildParser()
         );
@@ -57,6 +58,20 @@ class SimpleFactory implements Factory
         ));
 
         return $chainMatcher;
+    }
+
+    protected function buildJsonObjectMatcher()
+    {
+        $parser = $this->buildParser();
+        $scalarMatchers = $this->buildScalarMatchers();
+        $orMatcher = new Matcher\OrMatcher($scalarMatchers);
+        $arrayMatcher = new Matcher\ArrayMatcher($orMatcher, $parser);
+
+        return new Matcher\JsonObjectMatcher(new Matcher\ChainMatcher([
+            $orMatcher,
+            $scalarMatchers,
+            $arrayMatcher,
+        ]), $parser);
     }
 
     /**
