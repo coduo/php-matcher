@@ -175,6 +175,23 @@ class MatcherTest extends \PHPUnit\Framework\TestCase
                     "nextPage": "@string@"
                 }',
             ),
+            'excludes missing property from match for optional property' => array(
+                /** @lang JSON */
+                '{
+                    "users":[],
+                    "prevPage": "http:\/\/example.com\/api\/users\/1?limit=2",
+                    "currPage": 2
+                }',
+                /** @lang JSON */
+                '{
+                    "users":[
+                        "@...@"                        
+                    ],
+                    "prevPage": "@string@.optional()",
+                    "nextPage": "@string@.optional()",
+                    "currPage": "@integer@.optional()"
+                }',
+            ),
         );
     }
 
@@ -205,6 +222,46 @@ XML;
   <m:GetStockPrice>
     <m:StockName>@string@</m:StockName>
     <m:StockValue>@string@</m:StockValue>
+  </m:GetStockPrice>
+</soap:Body>
+
+</soap:Envelope>
+XML;
+
+        $this->assertTrue($this->matcher->match($xml, $xmlPattern));
+        $this->assertTrue(PHPMatcher::match($xml, $xmlPattern));
+    }
+
+
+
+    public function test_matcher_with_xml_including_optional_node()
+    {
+        $xml = <<<XML
+<?xml version="1.0"?>
+<soap:Envelope
+xmlns:soap="http://www.w3.org/2001/12/soap-envelope"
+soap:encodingStyle="http://www.w3.org/2001/12/soap-encoding">
+
+<soap:Body xmlns:m="http://www.example.org/stock">
+  <m:GetStockPrice>
+    <m:StockName>IBM</m:StockName>
+    <m:StockValue>Any Value</m:StockValue>
+  </m:GetStockPrice>
+</soap:Body>
+
+</soap:Envelope>
+XML;
+        $xmlPattern = <<<XML
+<?xml version="1.0"?>
+<soap:Envelope
+    xmlns:soap="@string@"
+            soap:encodingStyle="@string@">
+
+<soap:Body xmlns:m="@string@">
+  <m:GetStockPrice>
+    <m:StockName>@string@.optional()</m:StockName>
+    <m:StockValue>@string@.optional()</m:StockValue>
+    <m:StockQty>@string@.optional()</m:StockQty>
   </m:GetStockPrice>
 </soap:Body>
 
