@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php
 
 namespace Coduo\PHPMatcher\Matcher\Pattern;
 
@@ -41,7 +41,7 @@ final class TypePattern implements Pattern
      * @param $type
      * @return boolean
      */
-    public function is($type): bool
+    public function is($type)
     {
         return strtolower($this->type) === strtolower($type);
     }
@@ -49,7 +49,7 @@ final class TypePattern implements Pattern
     /**
      * @return string
      */
-    public function getType(): ?string
+    public function getType()
     {
         return strtolower($this->type);
     }
@@ -65,7 +65,7 @@ final class TypePattern implements Pattern
     /**
      * {@inheritdoc}
      */
-    public function matchExpanders($value): bool
+    public function matchExpanders($value)
     {
         foreach ($this->expanders as $expander) {
             if (!$expander->match($value)) {
@@ -80,7 +80,7 @@ final class TypePattern implements Pattern
     /**
      * {@inheritdoc}
      */
-    public function getError(): ?string
+    public function getError()
     {
         return $this->error;
     }
@@ -88,7 +88,7 @@ final class TypePattern implements Pattern
     /**
      * {@inheritdoc}
      */
-    public function hasExpander(string $expanderName): bool
+    public function hasExpander(string $expanderName)
     {
         foreach ($this->expanders as $expander) {
             if (!$this->expanderInitializer->hasExpanderDefinition($expanderName)) {
