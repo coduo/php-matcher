@@ -28,7 +28,7 @@ final class ExpanderInitializer
         "count" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\Count",
         "contains" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\Contains",
         "matchRegex" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\MatchRegex",
-
+        "optional" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\Optional",
         "oneOf" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\OneOf"
     );
 
