@@ -1,6 +1,8 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Coduo\PHPMatcher\Matcher\Pattern;
+
+use Coduo\PHPMatcher\Parser\ExpanderInitializer;
 
 final class TypePattern implements Pattern
 {
@@ -20,19 +22,26 @@ final class TypePattern implements Pattern
     private $error;
 
     /**
-     * @param string $type
+     * @var ExpanderInitializer
      */
-    public function __construct($type)
+    private $expanderInitializer;
+
+    /**
+     * @param string $type
+     * @param ExpanderInitializer $expanderInitializer
+     */
+    public function __construct($type, ExpanderInitializer $expanderInitializer)
     {
         $this->type = $type;
         $this->expanders = array();
+        $this->expanderInitializer = $expanderInitializer;
     }
 
     /**
      * @param $type
      * @return boolean
      */
-    public function is($type)
+    public function is($type): bool
     {
         return strtolower($this->type) === strtolower($type);
     }
@@ -40,7 +49,7 @@ final class TypePattern implements Pattern
     /**
      * @return string
      */
-    public function getType()
+    public function getType(): ?string
     {
         return strtolower($this->type);
     }
@@ -56,7 +65,7 @@ final class TypePattern implements Pattern
     /**
      * {@inheritdoc}
      */
-    public function matchExpanders($value)
+    public function matchExpanders($value): bool
     {
         foreach ($this->expanders as $expander) {
             if (!$expander->match($value)) {
@@ -69,10 +78,28 @@ final class TypePattern implements Pattern
     }
 
     /**
-     * @return null|string
+     * {@inheritdoc}
      */
-    public function getError()
+    public function getError(): ?string
     {
         return $this->error;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasExpander(string $expanderName): bool
+    {
+        foreach ($this->expanders as $expander) {
+            if (!$this->expanderInitializer->hasExpanderDefinition($expanderName)) {
+                continue;
+            }
+
+            if ($this->expanderInitializer->getExpanderDefinition($expanderName) === get_class($expander)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

@@ -54,7 +54,7 @@ final class Parser
     public function parse($pattern)
     {
         $AST = $this->getAST($pattern);
-        $pattern = new Pattern\TypePattern((string) $AST->getType());
+        $pattern = new Pattern\TypePattern((string) $AST->getType(), $this->expanderInitializer);
         foreach ($AST->getExpanders() as $expander) {
             $pattern->addExpander($this->expanderInitializer->initialize($expander));
         }

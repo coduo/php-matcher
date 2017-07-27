@@ -4,6 +4,7 @@ namespace Coduo\PHPMatcher\Tests\Matcher\Pattern;
 
 use Coduo\PHPMatcher\Matcher\Pattern\TypePattern;
 use Coduo\PHPMatcher\Matcher\Pattern\RegexConverter;
+use Coduo\PHPMatcher\Parser\ExpanderInitializer;
 
 class RegexConverterTest  extends \PHPUnit\Framework\TestCase
 {
@@ -22,6 +23,6 @@ class RegexConverterTest  extends \PHPUnit\Framework\TestCase
      */
     public function test_convert_unknown_type()
     {
-        $this->converter->toRegex(new TypePattern("not_a_type"));
+        $this->converter->toRegex(new TypePattern("not_a_type", new ExpanderInitializer()));
     }
 }
