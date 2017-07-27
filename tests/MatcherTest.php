@@ -261,7 +261,7 @@ XML;
   <m:GetStockPrice>
     <m:StockName>@string@.optional()</m:StockName>
     <m:StockValue>@string@.optional()</m:StockValue>
-    <m:StockQty>@string@.optional()</m:StockQty>
+    <m:StockQty>@integer@.optional()</m:StockQty>
   </m:GetStockPrice>
 </soap:Body>
 
