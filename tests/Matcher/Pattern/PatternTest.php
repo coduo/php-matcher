@@ -7,7 +7,6 @@ use Coduo\PHPMatcher\Matcher\Pattern\Expander\IsEmpty;
 use Coduo\PHPMatcher\Matcher\Pattern\Expander\Optional;
 use Coduo\PHPMatcher\Matcher\Pattern\Pattern;
 use Coduo\PHPMatcher\Matcher\Pattern\TypePattern;
-use Coduo\PHPMatcher\Parser\ExpanderInitializer;
 
 class PatternTest  extends \PHPUnit\Framework\TestCase
 {
@@ -18,7 +17,7 @@ class PatternTest  extends \PHPUnit\Framework\TestCase
 
     public function setUp()
     {
-        $this->pattern = new TypePattern('dummy', new ExpanderInitializer());
+        $this->pattern = new TypePattern('dummy');
         $this->pattern->addExpander(new isEmail());
         $this->pattern->addExpander(new isEmpty());
         $this->pattern->addExpander(new Optional());

@@ -2,8 +2,6 @@
 
 namespace Coduo\PHPMatcher\Matcher\Pattern;
 
-use Coduo\PHPMatcher\Parser\ExpanderInitializer;
-
 final class TypePattern implements Pattern
 {
     /**
@@ -22,19 +20,12 @@ final class TypePattern implements Pattern
     private $error;
 
     /**
-     * @var ExpanderInitializer
-     */
-    private $expanderInitializer;
-
-    /**
      * @param string $type
-     * @param ExpanderInitializer $expanderInitializer
      */
-    public function __construct($type, ExpanderInitializer $expanderInitializer)
+    public function __construct($type)
     {
         $this->type = $type;
         $this->expanders = array();
-        $this->expanderInitializer = $expanderInitializer;
     }
 
     /**
@@ -91,11 +82,7 @@ final class TypePattern implements Pattern
     public function hasExpander(string $expanderName)
     {
         foreach ($this->expanders as $expander) {
-            if (!$this->expanderInitializer->hasExpanderDefinition($expanderName)) {
-                continue;
-            }
-
-            if ($this->expanderInitializer->getExpanderDefinition($expanderName) === get_class($expander)) {
+            if ($expander->getName() === $expanderName) {
                 return true;
             }
         }
