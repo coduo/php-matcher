@@ -52,4 +52,12 @@ final class IsDateTime implements PatternExpander
             return false;
         }
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'isDateTime';
+    }
 }

@@ -51,4 +51,12 @@ final class OneOf implements PatternExpander
     {
         return $this->error;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'oneOf';
+    }
 }

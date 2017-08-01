@@ -62,4 +62,12 @@ final class MatchRegex implements PatternExpander
     {
         return $this->error;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'matchRegex';
+    }
 }

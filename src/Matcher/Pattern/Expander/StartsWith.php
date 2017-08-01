@@ -68,6 +68,14 @@ final class StartsWith implements PatternExpander
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'startsWith';
+    }
+
+    /**
      * @param $value
      * @return bool
      */

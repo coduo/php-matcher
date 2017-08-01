@@ -51,4 +51,12 @@ final class IsUrl implements PatternExpander
             return false;
         }
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'isUrl';
+    }
 }

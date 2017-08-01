@@ -51,4 +51,12 @@ final class IsEmail implements PatternExpander
             return false;
         }
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'isEmail';
+    }
 }

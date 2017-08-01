@@ -7,9 +7,7 @@ use Coduo\PHPMatcher\Matcher\Pattern\PatternExpander;
 final class Optional implements PatternExpander
 {
     /**
-     * @param mixed $value
-     *
-     * @return boolean
+     * {@inheritdoc}
      */
     public function match($value)
     {
@@ -17,10 +15,18 @@ final class Optional implements PatternExpander
     }
 
     /**
-     * @return string|null
+     * {@inheritdoc}
      */
     public function getError()
     {
         return null;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'optional';
     }
 }

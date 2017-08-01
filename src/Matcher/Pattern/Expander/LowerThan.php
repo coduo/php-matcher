@@ -55,4 +55,12 @@ final class LowerThan implements PatternExpander
     {
         return $this->error;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'lowerThan';
+    }
 }

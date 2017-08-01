@@ -77,4 +77,12 @@ final class EndsWith implements PatternExpander
             ? mb_substr(mb_strtolower($value), -mb_strlen(mb_strtolower($this->stringEnding))) === mb_strtolower($this->stringEnding)
             : mb_substr($value, -mb_strlen($this->stringEnding)) === $this->stringEnding;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'endsWith';
+    }
 }

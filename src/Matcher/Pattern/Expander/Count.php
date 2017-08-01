@@ -51,4 +51,12 @@ final class Count implements PatternExpander
     {
         return $this->error;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'count';
+    }
 }

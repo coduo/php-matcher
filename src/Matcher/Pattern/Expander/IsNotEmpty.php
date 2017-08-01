@@ -30,4 +30,12 @@ final class IsNotEmpty implements PatternExpander
     {
         return $this->error;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'isNotEmpty';
+    }
 }

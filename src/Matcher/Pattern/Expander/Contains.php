@@ -62,4 +62,12 @@ final class Contains implements PatternExpander
     {
         return $this->error;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'contains';
+    }
 }

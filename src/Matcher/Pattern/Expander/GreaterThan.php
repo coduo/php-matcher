@@ -55,4 +55,12 @@ final class GreaterThan implements PatternExpander
     {
         return $this->error;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'greaterThan';
+    }
 }
