@@ -6,6 +6,8 @@ use Coduo\PHPMatcher\Matcher\Pattern\PatternExpander;
 
 final class Optional implements PatternExpander
 {
+    const NAME = 'optional';
+
     /**
      * {@inheritdoc}
      */
@@ -20,13 +22,5 @@ final class Optional implements PatternExpander
     public function getError()
     {
         return null;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'optional';
     }
 }

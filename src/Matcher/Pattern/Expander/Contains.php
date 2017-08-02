@@ -7,6 +7,8 @@ use Coduo\ToString\StringConverter;
 
 final class Contains implements PatternExpander
 {
+    const NAME = 'contains';
+
     /**
      * @var null|string
      */
@@ -61,13 +63,5 @@ final class Contains implements PatternExpander
     public function getError()
     {
         return $this->error;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'contains';
     }
 }

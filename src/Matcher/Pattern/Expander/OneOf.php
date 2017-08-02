@@ -7,6 +7,8 @@ use Coduo\ToString\StringConverter;
 
 final class OneOf implements PatternExpander
 {
+    const NAME = 'oneOf';
+
     /**
      * @var PatternExpander[]
      */
@@ -50,13 +52,5 @@ final class OneOf implements PatternExpander
     public function getError()
     {
         return $this->error;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'oneOf';
     }
 }

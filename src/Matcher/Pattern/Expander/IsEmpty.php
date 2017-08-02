@@ -7,6 +7,8 @@ use Coduo\ToString\StringConverter;
 
 final class IsEmpty implements PatternExpander
 {
+    const NAME = 'isEmpty';
+
     private $error;
 
     /**
@@ -31,13 +33,5 @@ final class IsEmpty implements PatternExpander
     public function getError()
     {
         return $this->error;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'isEmpty';
     }
 }

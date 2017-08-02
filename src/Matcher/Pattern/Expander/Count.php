@@ -7,6 +7,8 @@ use Coduo\ToString\StringConverter;
 
 final class Count implements PatternExpander
 {
+    const NAME = 'count';
+
     /**
      * @var null|string
      */
@@ -50,13 +52,5 @@ final class Count implements PatternExpander
     public function getError()
     {
         return $this->error;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'count';
     }
 }

@@ -7,6 +7,8 @@ use Coduo\ToString\StringConverter;
 
 final class IsUrl implements PatternExpander
 {
+    const NAME = 'isUrl';
+
     /**
      * @var null|string
      */
@@ -50,13 +52,5 @@ final class IsUrl implements PatternExpander
         } catch (\Exception $e) {
             return false;
         }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'isUrl';
     }
 }

@@ -7,6 +7,8 @@ use Coduo\ToString\StringConverter;
 
 final class IsEmail implements PatternExpander
 {
+    const NAME = 'isEmail';
+
     /**
      * @var null|string
      */
@@ -50,13 +52,5 @@ final class IsEmail implements PatternExpander
         } catch (\Exception $e) {
             return false;
         }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'isEmail';
     }
 }

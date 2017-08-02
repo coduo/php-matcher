@@ -7,6 +7,8 @@ use Coduo\ToString\StringConverter;
 
 final class InArray implements PatternExpander
 {
+    const NAME = 'inArray';
+
     /**
      * @var null|string
      */
@@ -50,13 +52,5 @@ final class InArray implements PatternExpander
     public function getError()
     {
         return $this->error;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'inArray';
     }
 }

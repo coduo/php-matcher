@@ -7,6 +7,8 @@ use Coduo\ToString\StringConverter;
 
 final class IsDateTime implements PatternExpander
 {
+    const NAME = 'isDateTime';
+
     /**
      * @var null|string
      */
@@ -51,13 +53,5 @@ final class IsDateTime implements PatternExpander
         } catch (\Exception $e) {
             return false;
         }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'isDateTime';
     }
 }

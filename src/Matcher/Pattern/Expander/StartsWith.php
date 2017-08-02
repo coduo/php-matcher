@@ -7,6 +7,8 @@ use Coduo\ToString\StringConverter;
 
 final class StartsWith implements PatternExpander
 {
+    const NAME = 'startsWith';
+
     /**
      * @var
      */
@@ -65,14 +67,6 @@ final class StartsWith implements PatternExpander
     public function getError()
     {
         return $this->error;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'startsWith';
     }
 
     /**

@@ -7,6 +7,8 @@ use Coduo\ToString\StringConverter;
 
 final class LowerThan implements PatternExpander
 {
+    const NAME = 'lowerThan';
+
     /**
      * @var
      */
@@ -54,13 +56,5 @@ final class LowerThan implements PatternExpander
     public function getError()
     {
         return $this->error;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'lowerThan';
     }
 }

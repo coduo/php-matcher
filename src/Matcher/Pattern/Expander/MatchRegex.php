@@ -7,6 +7,8 @@ use Coduo\ToString\StringConverter;
 
 final class MatchRegex implements PatternExpander
 {
+    const NAME = 'matchRegex';
+
     /**
      * @var null|string
      */
@@ -61,13 +63,5 @@ final class MatchRegex implements PatternExpander
     public function getError()
     {
         return $this->error;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'matchRegex';
     }
 }

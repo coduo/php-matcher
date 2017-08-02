@@ -7,6 +7,8 @@ use Coduo\ToString\StringConverter;
 
 final class EndsWith implements PatternExpander
 {
+    const NAME = 'endsWith';
+
     /**
      * @var
      */
@@ -76,13 +78,5 @@ final class EndsWith implements PatternExpander
         return $this->ignoreCase
             ? mb_substr(mb_strtolower($value), -mb_strlen(mb_strtolower($this->stringEnding))) === mb_strtolower($this->stringEnding)
             : mb_substr($value, -mb_strlen($this->stringEnding)) === $this->stringEnding;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'endsWith';
     }
 }
