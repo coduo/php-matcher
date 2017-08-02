@@ -2,6 +2,7 @@
 
 namespace Coduo\PHPMatcher\Matcher;
 
+use Coduo\PHPMatcher\Exception\Exception;
 use Coduo\PHPMatcher\Parser;
 use Coduo\ToString\StringConverter;
 use Symfony\Component\PropertyAccess\PropertyAccess;
@@ -153,17 +154,44 @@ final class ArrayMatcher extends Matcher
                 }
             );
 
-            $notExistingKeys = array_diff_key($pattern, $values);
-
+            $notExistingKeys = $this->findNotExistingKeys($pattern, $values);
             if (count($notExistingKeys) > 0) {
                 $keyNames = array_keys($notExistingKeys);
                 $path = $this->formatFullPath($parentPath, $this->formatAccessPath($keyNames[0]));
                 $this->setMissingElementInError('value', $path);
+
                 return false;
             }
         }
 
         return true;
+    }
+
+    /**
+     * Finds not existing keys
+     * Excludes keys with pattern which includes Optional Expander
+     *
+     * @param $pattern
+     * @param $values
+     * @return array
+     */
+    private function findNotExistingKeys($pattern, $values)
+    {
+        $notExistingKeys = array_diff_key($pattern, $values);
+
+        return array_filter($notExistingKeys, function ($pattern) use ($values) {
+            if (is_array($pattern)) {
+                return !$this->match($values, $pattern);
+            }
+
+            try {
+                $typePattern = $this->parser->parse($pattern);
+            } catch (Exception $e) {
+                return true;
+            }
+
+            return !$typePattern->hasExpander('optional');
+        });
     }
 
     /**

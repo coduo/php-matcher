@@ -7,6 +7,8 @@ use Coduo\ToString\StringConverter;
 
 final class EndsWith implements PatternExpander
 {
+    const NAME = 'endsWith';
+
     /**
      * @var
      */
@@ -21,6 +23,14 @@ final class EndsWith implements PatternExpander
      * @var bool
      */
     private $ignoreCase;
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function is(string $name)
+    {
+        return self::NAME === $name;
+    }
 
     /**
      * @param string $stringEnding

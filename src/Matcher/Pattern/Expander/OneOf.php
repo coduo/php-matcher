@@ -7,12 +7,22 @@ use Coduo\ToString\StringConverter;
 
 final class OneOf implements PatternExpander
 {
+    const NAME = 'oneOf';
+
     /**
      * @var PatternExpander[]
      */
     protected $expanders;
 
     protected $error;
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function is(string $name)
+    {
+        return self::NAME === $name;
+    }
 
     public function __construct()
     {

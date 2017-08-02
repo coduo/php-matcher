@@ -7,6 +7,8 @@ use Coduo\ToString\StringConverter;
 
 final class MatchRegex implements PatternExpander
 {
+    const NAME = 'matchRegex';
+
     /**
      * @var null|string
      */
@@ -16,6 +18,14 @@ final class MatchRegex implements PatternExpander
      * @var string
      */
     private $pattern;
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function is(string $name)
+    {
+        return self::NAME === $name;
+    }
 
     /**
      * @param string $pattern

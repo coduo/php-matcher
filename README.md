@@ -83,6 +83,7 @@ $matcher->getError(); // returns null or error message
 * ``inArray($value)``
 * ``oneOf(...$expanders)`` - example usage ``"@string@.oneOf(contains('foo'), contains('bar'), contains('baz'))"``
 * ``matchRegex($regex)`` - example usage ``"@string@.matchRegex('/^lorem.+/')"``
+* ``optional()`` - work's only with ``ArrayMatcher``, ``JsonMatcher`` and ``XmlMatcher``
 
 ## Example usage
 
@@ -237,7 +238,8 @@ $matcher->match(
               'id' => 1,
               'firstName' => 'Norbert',
               'lastName' => 'Orzechowicz',
-              'roles' => array('ROLE_USER')
+              'roles' => array('ROLE_USER'),
+              'position' => 'Developer',
           ),
           array(
               'id' => 2,
@@ -261,7 +263,8 @@ $matcher->match(
               'id' => '@integer@.greaterThan(0)',
               'firstName' => '@string@',
               'lastName' => 'Orzechowicz',
-              'roles' => '@array@'
+              'roles' => '@array@',
+              'position' => '@string@.optional()'
           ),
           array(
               'id' => '@integer@',
@@ -303,7 +306,8 @@ $matcher->match(
         "firstName": @string@,
         "lastName": @string@,
         "created": "@string@.isDateTime()",
-        "roles": @array@
+        "roles": @array@,
+        "posiiton": "@string@.optional()"
       }
     ]
   }'
@@ -347,6 +351,7 @@ XML
   <m:GetStockPrice>
     <m:StockName>@string@</m:StockName>
     <m:StockValue>@string@</m:StockValue>
+    <m:StockQty>@integer@.optional()</m:StockQty>
   </m:GetStockPrice>
 </soap:Body>
 
