@@ -20,6 +20,14 @@ final class Count implements PatternExpander
     private $value;
 
     /**
+     * {@inheritdoc}
+     */
+    public static function is(string $name)
+    {
+        return self::NAME === $name;
+    }
+
+    /**
      * @param $value
      */
     public function __construct($value)

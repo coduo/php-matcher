@@ -25,6 +25,14 @@ final class Contains implements PatternExpander
     private $ignoreCase;
 
     /**
+     * {@inheritdoc}
+     */
+    public static function is(string $name)
+    {
+        return self::NAME === $name;
+    }
+
+    /**
      * @param $string
      * @param bool $ignoreCase
      */

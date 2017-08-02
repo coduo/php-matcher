@@ -16,6 +16,14 @@ final class OneOf implements PatternExpander
 
     protected $error;
 
+    /**
+     * {@inheritdoc}
+     */
+    public static function is(string $name)
+    {
+        return self::NAME === $name;
+    }
+
     public function __construct()
     {
         if (func_num_args() < 2) {

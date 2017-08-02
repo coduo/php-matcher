@@ -20,6 +20,14 @@ final class GreaterThan implements PatternExpander
     private $error;
 
     /**
+     * {@inheritdoc}
+     */
+    public static function is(string $name)
+    {
+        return self::NAME === $name;
+    }
+
+    /**
      * @param $boundary
      */
     public function __construct($boundary)

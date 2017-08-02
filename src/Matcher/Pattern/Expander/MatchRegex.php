@@ -20,6 +20,14 @@ final class MatchRegex implements PatternExpander
     private $pattern;
 
     /**
+     * {@inheritdoc}
+     */
+    public static function is(string $name)
+    {
+        return self::NAME === $name;
+    }
+
+    /**
      * @param string $pattern
      */
     public function __construct($pattern)

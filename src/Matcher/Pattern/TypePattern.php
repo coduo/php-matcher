@@ -82,7 +82,7 @@ final class TypePattern implements Pattern
     public function hasExpander(string $expanderName)
     {
         foreach ($this->expanders as $expander) {
-            if ($expander::NAME === $expanderName) {
+            if ($expander::is($expanderName)) {
                 return true;
             }
         }

@@ -12,6 +12,14 @@ final class IsNotEmpty implements PatternExpander
     private $error;
 
     /**
+     * {@inheritdoc}
+     */
+    public static function is(string $name)
+    {
+        return self::NAME === $name;
+    }
+
+    /**
      * @param $value
      * @return boolean
      */

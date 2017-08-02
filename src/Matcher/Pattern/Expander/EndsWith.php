@@ -25,6 +25,14 @@ final class EndsWith implements PatternExpander
     private $ignoreCase;
 
     /**
+     * {@inheritdoc}
+     */
+    public static function is(string $name)
+    {
+        return self::NAME === $name;
+    }
+
+    /**
      * @param string $stringEnding
      * @param bool $ignoreCase
      */

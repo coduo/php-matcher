@@ -25,6 +25,14 @@ final class StartsWith implements PatternExpander
     private $ignoreCase;
 
     /**
+     * {@inheritdoc}
+     */
+    public static function is(string $name)
+    {
+        return self::NAME === $name;
+    }
+
+    /**
      * @param string $stringBeginning
      * @param bool $ignoreCase
      */

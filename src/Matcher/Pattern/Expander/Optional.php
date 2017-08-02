@@ -11,6 +11,14 @@ final class Optional implements PatternExpander
     /**
      * {@inheritdoc}
      */
+    public static function is(string $name)
+    {
+        return self::NAME === $name;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function match($value)
     {
         return true;
