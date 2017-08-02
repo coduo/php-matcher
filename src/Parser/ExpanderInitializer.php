@@ -2,35 +2,36 @@
 
 namespace Coduo\PHPMatcher\Parser;
 
-use Coduo\PHPMatcher\AST\Expander;
+use Coduo\PHPMatcher\AST\Expander as ExpanderNode;
 use Coduo\PHPMatcher\Exception\InvalidArgumentException;
 use Coduo\PHPMatcher\Exception\InvalidExpanderTypeException;
 use Coduo\PHPMatcher\Exception\UnknownExpanderClassException;
 use Coduo\PHPMatcher\Exception\UnknownExpanderException;
 use Coduo\PHPMatcher\Matcher\Pattern\PatternExpander;
+use Coduo\PHPMatcher\Matcher\Pattern\Expander;
 
 final class ExpanderInitializer
 {
     /**
      * @var array
      */
-    private $expanderDefinitions = array(
-        "startsWith" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\StartsWith",
-        "endsWith" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\EndsWith",
-        "isNotEmpty" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\IsNotEmpty",
-        "isEmpty" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\IsEmpty",
-        "isDateTime" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\IsDateTime",
-        "isEmail" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\IsEmail",
-        "isUrl" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\IsUrl",
-        "lowerThan" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\LowerThan",
-        "greaterThan" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\GreaterThan",
-        "inArray" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\InArray",
-        "count" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\Count",
-        "contains" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\Contains",
-        "matchRegex" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\MatchRegex",
-        "optional" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\Optional",
-        "oneOf" => "Coduo\\PHPMatcher\\Matcher\\Pattern\\Expander\\OneOf"
-    );
+    private $expanderDefinitions = [
+        Expander\Contains::NAME => Expander\Contains::class,
+        Expander\Count::NAME => Expander\Count::class,
+        Expander\EndsWith::NAME => Expander\EndsWith::class,
+        Expander\GreaterThan::NAME => Expander\GreaterThan::class,
+        Expander\InArray::NAME => Expander\InArray::class,
+        Expander\IsDateTime::NAME => Expander\IsDateTime::class,
+        Expander\IsEmail::NAME => Expander\IsEmail::class,
+        Expander\IsEmpty::NAME => Expander\IsEmpty::class,
+        Expander\IsNotEmpty::NAME => Expander\IsNotEmpty::class,
+        Expander\IsUrl::NAME => Expander\IsUrl::class,
+        Expander\LowerThan::NAME => Expander\LowerThan::class,
+        Expander\MatchRegex::NAME => Expander\MatchRegex::class,
+        Expander\OneOf::NAME => Expander\OneOf::class,
+        Expander\Optional::NAME => Expander\Optional::class,
+        Expander\StartsWith::NAME => Expander\StartsWith::class,
+    ];
 
     /**
      * @param string $expanderName
@@ -70,12 +71,12 @@ final class ExpanderInitializer
     }
 
     /**
-     * @param Expander $expanderNode
+     * @param ExpanderNode $expanderNode
      * @throws InvalidExpanderTypeException
      * @throws UnknownExpanderException
      * @return PatternExpander
      */
-    public function initialize(Expander $expanderNode)
+    public function initialize(ExpanderNode $expanderNode)
     {
         if (!array_key_exists($expanderNode->getName(), $this->expanderDefinitions)) {
             throw new UnknownExpanderException(sprintf("Unknown expander \"%s\"", $expanderNode->getName()));
@@ -86,7 +87,7 @@ final class ExpanderInitializer
         if ($expanderNode->hasArguments()) {
             $arguments = array();
             foreach ($expanderNode->getArguments() as $argument) {
-                $arguments[] = ($argument instanceof Expander)
+                $arguments[] = ($argument instanceof ExpanderNode)
                     ? $this->initialize($argument)
                     : $argument;
             }
