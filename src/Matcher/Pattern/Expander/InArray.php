@@ -7,6 +7,8 @@ use Coduo\ToString\StringConverter;
 
 final class InArray implements PatternExpander
 {
+    const NAME = 'inArray';
+
     /**
      * @var null|string
      */
@@ -16,6 +18,14 @@ final class InArray implements PatternExpander
      * @var
      */
     private $value;
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function is(string $name)
+    {
+        return self::NAME === $name;
+    }
 
     /**
      * @param $value

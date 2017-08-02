@@ -7,10 +7,20 @@ use Coduo\ToString\StringConverter;
 
 final class IsEmail implements PatternExpander
 {
+    const NAME = 'isEmail';
+
     /**
      * @var null|string
      */
     private $error;
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function is(string $name)
+    {
+        return self::NAME === $name;
+    }
 
     /**
      * @param string $value

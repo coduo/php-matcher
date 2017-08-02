@@ -7,6 +7,8 @@ use Coduo\ToString\StringConverter;
 
 final class Count implements PatternExpander
 {
+    const NAME = 'count';
+
     /**
      * @var null|string
      */
@@ -16,6 +18,14 @@ final class Count implements PatternExpander
      * @var
      */
     private $value;
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function is(string $name)
+    {
+        return self::NAME === $name;
+    }
 
     /**
      * @param $value

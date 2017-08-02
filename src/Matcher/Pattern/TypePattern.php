@@ -69,10 +69,24 @@ final class TypePattern implements Pattern
     }
 
     /**
-     * @return null|string
+     * {@inheritdoc}
      */
     public function getError()
     {
         return $this->error;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasExpander(string $expanderName)
+    {
+        foreach ($this->expanders as $expander) {
+            if ($expander::is($expanderName)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
