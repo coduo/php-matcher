@@ -56,42 +56,42 @@ class BooleanMatcherTest extends TestCase
 
     public static function positiveCanMatchData()
     {
-        return array(
-            array("@boolean@")
-        );
+        return [
+            ["@boolean@"]
+        ];
     }
 
     public static function positiveMatchData()
     {
-        return array(
-            array(true, "@boolean@"),
-        );
+        return [
+            [true, "@boolean@"],
+        ];
     }
 
     public static function negativeCanMatchData()
     {
-        return array(
-            array("@boolean"),
-            array("boolean"),
-            array(1)
-        );
+        return [
+            ["@boolean"],
+            ["boolean"],
+            [1]
+        ];
     }
 
     public static function negativeMatchData()
     {
-        return array(
-            array("1", "@boolean@"),
-            array(new \DateTime(),  "@boolean@")
-        );
+        return [
+            ["1", "@boolean@"],
+            [new \DateTime(),  "@boolean@"]
+        ];
     }
 
     public static function negativeMatchDescription()
     {
-        return array(
-            array(new \stdClass,  "@boolean@", "object \"\\stdClass\" is not a valid boolean."),
-            array(1.1, "@boolean@", "double \"1.1\" is not a valid boolean."),
-            array("true", "@string@", "string \"true\" is not a valid boolean."),
-            array(array('test'), "@boolean@", "array \"Array(1)\" is not a valid boolean.")
-        );
+        return [
+            [new \stdClass,  "@boolean@", "object \"\\stdClass\" is not a valid boolean."],
+            [1.1, "@boolean@", "double \"1.1\" is not a valid boolean."],
+            ["true", "@string@", "string \"true\" is not a valid boolean."],
+            [['test'], "@boolean@", "array \"Array(1)\" is not a valid boolean."]
+        ];
     }
 }

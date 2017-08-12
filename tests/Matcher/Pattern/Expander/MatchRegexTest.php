@@ -21,11 +21,11 @@ class MatchRegexTest extends TestCase
 
     public static function examplesProvider()
     {
-        return array(
-            array(true, null, '/^\w$/', 'a'),
-            array(false, 'string "aa" don\'t match pattern /^\w$/.', '/^\w$/', 'aa'),
-            array(false, 'Match expander require "string", got "Array(0)".', '/^\w$/', array()),
-        );
+        return [
+            [true, null, '/^\w$/', 'a'],
+            [false, 'string "aa" don\'t match pattern /^\w$/.', '/^\w$/', 'aa'],
+            [false, 'Match expander require "string", got "Array(0)".', '/^\w$/', []],
+        ];
     }
 
     /**

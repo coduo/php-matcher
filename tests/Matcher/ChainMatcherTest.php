@@ -29,10 +29,10 @@ class ChainMatcherTest extends TestCase
         $this->firstMatcher = $this->createMock('Coduo\PHPMatcher\Matcher\ValueMatcher');
         $this->secondMatcher = $this->createMock('Coduo\PHPMatcher\Matcher\ValueMatcher');
 
-        $this->matcher = new ChainMatcher(array(
+        $this->matcher = new ChainMatcher([
             $this->firstMatcher,
             $this->secondMatcher
-        ));
+        ]);
     }
 
     public function test_only_one_matcher_can_match_but_none_matchers_match()

@@ -20,12 +20,12 @@ class ContainsTest extends TestCase
 
     public static function examplesIgnoreCaseProvider()
     {
-        return array(
-            array("ipsum", "lorem ipsum", true),
-            array("wor", "this is my hello world string", true),
-            array("lol", "lorem ipsum", false),
-            array("NO", "norbert", false)
-        );
+        return [
+            ["ipsum", "lorem ipsum", true],
+            ["wor", "this is my hello world string", true],
+            ["lol", "lorem ipsum", false],
+            ["NO", "norbert", false]
+        ];
     }
 
     /**
@@ -39,12 +39,12 @@ class ContainsTest extends TestCase
 
     public static function examplesProvider()
     {
-        return array(
-            array("IpSum", "lorem ipsum", true),
-            array("wor", "this is my hello WORLD string", true),
-            array("lol", "LOREM ipsum", false),
-            array("NO", "NORBERT", true)
-        );
+        return [
+            ["IpSum", "lorem ipsum", true],
+            ["wor", "this is my hello WORLD string", true],
+            ["lol", "LOREM ipsum", false],
+            ["NO", "NORBERT", true]
+        ];
     }
 
     /**
@@ -59,9 +59,9 @@ class ContainsTest extends TestCase
 
     public static function invalidCasesProvider()
     {
-        return array(
-            array("ipsum", "hello world", "String \"hello world\" doesn't contains \"ipsum\"."),
-            array("lorem", new \DateTime(), "Contains expander require \"string\", got \"\\DateTime\"."),
-        );
+        return [
+            ["ipsum", "hello world", "String \"hello world\" doesn't contains \"ipsum\"."],
+            ["lorem", new \DateTime(), "Contains expander require \"string\", got \"\\DateTime\"."],
+        ];
     }
 }

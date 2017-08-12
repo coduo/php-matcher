@@ -20,14 +20,14 @@ class OptionalTest extends TestCase
 
     public static function examplesProvider()
     {
-        return array(
-            array(array(), true),
-            array(array('data'), true),
-            array('', true),
-            array(0, true),
-            array(10.1, true),
-            array(null, true),
-            array('Lorem ipsum', true),
-        );
+        return [
+            [[], true],
+            [['data'], true],
+            ['', true],
+            [0, true],
+            [10.1, true],
+            [null, true],
+            ['Lorem ipsum', true],
+        ];
     }
 }

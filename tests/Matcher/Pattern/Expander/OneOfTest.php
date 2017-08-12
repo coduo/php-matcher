@@ -25,7 +25,7 @@ class OneOfTest extends TestCase
      */
     public function test_invalid_argument_types()
     {
-        $expander = new OneOf("arg1", array("test"));
+        $expander = new OneOf("arg1", ["test"]);
     }
 
     public function test_positive_match()

@@ -10,9 +10,6 @@ final class NumberMatcher extends Matcher
 {
     const NUMBER_PATTERN = '/^@number@$/';
 
-    /**
-     * {@inheritDoc}
-     */
     public function match($value, $pattern) : bool
     {
         if (!is_numeric($value)) {
@@ -23,9 +20,6 @@ final class NumberMatcher extends Matcher
         return true;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function canMatch($pattern) : bool
     {
         return is_string($pattern) && 0 !== preg_match(self::NUMBER_PATTERN, $pattern);

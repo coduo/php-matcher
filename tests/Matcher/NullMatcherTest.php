@@ -56,45 +56,45 @@ class NullMatcherTest extends TestCase
 
     public static function positiveCanMatchData()
     {
-        return array(
-            array("@null@"),
-            array(null)
-        );
+        return [
+            ["@null@"],
+            [null]
+        ];
     }
 
     public static function positiveMatchData()
     {
-        return array(
-            array(null, "@null@"),
-            array(null, null),
-        );
+        return [
+            [null, "@null@"],
+            [null, null],
+        ];
     }
 
     public static function negativeCanMatchData()
     {
-        return array(
-            array("@null"),
-            array("null"),
-            array(0)
-        );
+        return [
+            ["@null"],
+            ["null"],
+            [0]
+        ];
     }
 
     public static function negativeMatchData()
     {
-        return array(
-            array("null", "@null@"),
-            array(0,  "@null@")
-        );
+        return [
+            ["null", "@null@"],
+            [0,  "@null@"]
+        ];
     }
 
     public static function negativeMatchDescription()
     {
-        return array(
-            array("test", "@boolean@", "string \"test\" does not match null."),
-            array(new \stdClass,  "@string@", "object \"\\stdClass\" does not match null."),
-            array(1.1, "@integer@", "double \"1.1\" does not match null."),
-            array(false, "@double@", "boolean \"false\" does not match null."),
-            array(1, "@array@", "integer \"1\" does not match null.")
-        );
+        return [
+            ["test", "@boolean@", "string \"test\" does not match null."],
+            [new \stdClass,  "@string@", "object \"\\stdClass\" does not match null."],
+            [1.1, "@integer@", "double \"1.1\" does not match null."],
+            [false, "@double@", "boolean \"false\" does not match null."],
+            [1, "@array@", "integer \"1\" does not match null."]
+        ];
     }
 }

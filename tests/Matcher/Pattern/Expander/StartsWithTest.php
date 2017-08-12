@@ -20,13 +20,13 @@ class StartsWithTest extends TestCase
 
     public static function notIgnoringCaseExamplesProvider()
     {
-        return array(
-            array("lorem", "lorem ipsum", true),
-            array("lorem", "Lorem ipsum", false),
-            array("", "lorem ipsum", true),
-            array("lorem", "lorem ipsum", true),
-            array("ipsum", "lorem ipsum", false)
-        );
+        return [
+            ["lorem", "lorem ipsum", true],
+            ["lorem", "Lorem ipsum", false],
+            ["", "lorem ipsum", true],
+            ["lorem", "lorem ipsum", true],
+            ["ipsum", "lorem ipsum", false]
+        ];
     }
 
     /**
@@ -40,11 +40,11 @@ class StartsWithTest extends TestCase
 
     public static function ignoringCaseExamplesProvider()
     {
-        return array(
-            array("lorem", "Lorem ipsum", true),
-            array("Lorem", "lorem ipsum", true),
-            array("LOREM", "LoReM ipsum", true),
-        );
+        return [
+            ["lorem", "Lorem ipsum", true],
+            ["Lorem", "lorem ipsum", true],
+            ["LOREM", "LoReM ipsum", true],
+        ];
     }
 
     /**
@@ -59,9 +59,9 @@ class StartsWithTest extends TestCase
 
     public static function invalidCasesProvider()
     {
-        return array(
-            array("lorem", "ipsum lorem", "string \"ipsum lorem\" doesn't starts with string \"lorem\"."),
-            array("lorem", new \DateTime(), "StartsWith expander require \"string\", got \"\\DateTime\"."),
-        );
+        return [
+            ["lorem", "ipsum lorem", "string \"ipsum lorem\" doesn't starts with string \"lorem\"."],
+            ["lorem", new \DateTime(), "StartsWith expander require \"string\", got \"\\DateTime\"."],
+        ];
     }
 }

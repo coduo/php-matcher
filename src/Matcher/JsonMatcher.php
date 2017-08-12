@@ -8,22 +8,13 @@ use Coduo\PHPMatcher\Matcher\Pattern\Assert\Json;
 
 final class JsonMatcher extends Matcher
 {
-    /**
-     * @var
-     */
     private $matcher;
 
-    /**
-     * @param ValueMatcher $matcher
-     */
     public function __construct(ValueMatcher $matcher)
     {
         $this->matcher = $matcher;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function match($value, $pattern) : bool
     {
         if (parent::match($value, $pattern)) {
@@ -50,9 +41,6 @@ final class JsonMatcher extends Matcher
         return true;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function canMatch($pattern) : bool
     {
         return Json::isValidPattern($pattern);

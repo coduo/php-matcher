@@ -56,50 +56,50 @@ class ScalarMatcherTest extends TestCase
 
     public static function negativeMatches()
     {
-        return array(
-            array(false, "false"),
-            array(false, 0),
-            array(true, 1),
-            array("array", array()),
-        );
+        return [
+            [false, "false"],
+            [false, 0],
+            [true, 1],
+            ["array", []],
+        ];
     }
 
     public static function positiveMatches()
     {
-        return array(
-            array(1, 1),
-            array("michal", "michal"),
-            array(false, false),
-            array(6.66, 6.66),
-        );
+        return [
+            [1, 1],
+            ["michal", "michal"],
+            [false, false],
+            [6.66, 6.66],
+        ];
     }
 
     public static function positiveCanMatches()
     {
-        return array(
-            array(1),
-            array("michal"),
-            array(true),
-            array(false),
-            array(6.66),
-        );
+        return [
+            [1],
+            ["michal"],
+            [true],
+            [false],
+            [6.66],
+        ];
     }
 
     public static function negativeCanMatches()
     {
-        return array(
-            array(new \stdClass),
-            array(array())
-        );
+        return [
+            [new \stdClass],
+            [[]]
+        ];
     }
 
     public static function negativeMatchDescription()
     {
-        return array(
-            array("test", "norbert", "\"test\" does not match \"norbert\"."),
-            array(new \stdClass,  1, "\"\\stdClass\" does not match \"1\"."),
-            array(1.1, false, "\"1.1\" does not match \"false\"."),
-            array(false, array('foo', 'bar'), "\"false\" does not match \"Array(2)\"."),
-        );
+        return [
+            ["test", "norbert", "\"test\" does not match \"norbert\"."],
+            [new \stdClass,  1, "\"\\stdClass\" does not match \"1\"."],
+            [1.1, false, "\"1.1\" does not match \"false\"."],
+            [false, ['foo', 'bar'], "\"false\" does not match \"Array(2)\"."],
+        ];
     }
 }

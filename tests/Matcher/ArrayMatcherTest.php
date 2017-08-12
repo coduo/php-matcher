@@ -20,7 +20,7 @@ class ArrayMatcherTest extends TestCase
     {
         $parser = new Parser(new Lexer(), new Parser\ExpanderInitializer());
         $this->matcher = new Matcher\ArrayMatcher(
-            new Matcher\ChainMatcher(array(
+            new Matcher\ChainMatcher([
                 new Matcher\CallbackMatcher(),
                 new Matcher\ExpressionMatcher(),
                 new Matcher\NullMatcher(),
@@ -31,7 +31,7 @@ class ArrayMatcherTest extends TestCase
                 new Matcher\NumberMatcher(),
                 new Matcher\ScalarMatcher(),
                 new Matcher\WildcardMatcher(),
-            )),
+            ]),
             $parser
         );
     }
@@ -55,25 +55,25 @@ class ArrayMatcherTest extends TestCase
     public function test_negative_match_when_cant_find_matcher_that_can_match_array_element()
     {
         $matcher = new Matcher\ArrayMatcher(
-            new Matcher\ChainMatcher(array(
+            new Matcher\ChainMatcher([
                 new Matcher\WildcardMatcher()
-            )),
+            ]),
             $parser = new Parser(new Lexer(), new Parser\ExpanderInitializer())
         );
 
-        $this->assertTrue($matcher->match(array('test' => 1), array('test' => 1)));
+        $this->assertTrue($matcher->match(['test' => 1], ['test' => 1]));
     }
 
     public function test_error_when_path_in_pattern_does_not_exist()
     {
-        $this->assertFalse($this->matcher->match(array('foo' => 'foo value'), array('bar' => 'bar value')));
+        $this->assertFalse($this->matcher->match(['foo' => 'foo value'], ['bar' => 'bar value']));
         $this->assertEquals($this->matcher->getError(), 'There is no element under path [foo] in pattern.');
     }
 
     public function test_error_when_path_in_nested_pattern_does_not_exist()
     {
-        $array = array('foo' => array('bar' => array('baz' => 'bar value')));
-        $pattern = array('foo' => array('bar' => array('faz' => 'faz value')));
+        $array = ['foo' => ['bar' => ['baz' => 'bar value']]];
+        $pattern = ['foo' => ['bar' => ['faz' => 'faz value']]];
 
         $this->assertFalse($this->matcher->match($array, $pattern));
 
@@ -82,8 +82,8 @@ class ArrayMatcherTest extends TestCase
 
     public function test_error_when_path_in_value_does_not_exist()
     {
-        $array = array('foo' => 'foo');
-        $pattern = array('foo' => 'foo', 'bar' => 'bar');
+        $array = ['foo' => 'foo'];
+        $pattern = ['foo' => 'foo', 'bar' => 'bar'];
 
         $this->assertFalse($this->matcher->match($array, $pattern));
 
@@ -92,8 +92,8 @@ class ArrayMatcherTest extends TestCase
 
     public function test_error_when_path_in_nested_value_does_not_exist()
     {
-        $array = array('foo' => array('bar' => array()));
-        $pattern = array('foo' => array('bar' => array('faz' => 'faz value')));
+        $array = ['foo' => ['bar' => []]];
+        $pattern = ['foo' => ['bar' => ['faz' => 'faz value']]];
 
         $this->assertFalse($this->matcher->match($array, $pattern));
 
@@ -102,7 +102,7 @@ class ArrayMatcherTest extends TestCase
 
     public function test_error_when_matching_fail()
     {
-        $this->assertFalse($this->matcher->match(array('foo' => 'foo value'), array('foo' => 'bar value')));
+        $this->assertFalse($this->matcher->match(['foo' => 'foo value'], ['foo' => 'bar value']));
         $this->assertEquals($this->matcher->getError(), '"foo value" does not match "bar value".');
     }
 
@@ -114,139 +114,139 @@ class ArrayMatcherTest extends TestCase
 
     public function test_matching_array_to_array_pattern()
     {
-        $this->assertTrue($this->matcher->match(array("foo", "bar"), "@array@"));
-        $this->assertTrue($this->matcher->match(array("foo"), "@array@.inArray(\"foo\")"));
+        $this->assertTrue($this->matcher->match(["foo", "bar"], "@array@"));
+        $this->assertTrue($this->matcher->match(["foo"], "@array@.inArray(\"foo\")"));
         $this->assertTrue($this->matcher->match(
-            array("foo", array("bar")),
-            array(
+            ["foo", ["bar"]],
+            [
                 "@string@",
                 "@array@.inArray(\"bar\")"
-            )
+            ]
         ));
     }
 
     public static function positiveMatchData()
     {
-        $simpleArr = array(
-            'users' => array(
-                array(
+        $simpleArr = [
+            'users' => [
+                [
                     'firstName' => 'Norbert',
                     'lastName' => 'Orzechowicz'
-                ),
-                array(
+                ],
+                [
                     'firstName' => 'Michał',
                     'lastName' => 'Dąbrowski'
-                )
-            ),
+                ]
+            ],
             true,
             false,
             1,
             6.66
-        );
+        ];
 
-        $simpleArrPattern = array(
-            'users' => array(
-                array(
+        $simpleArrPattern = [
+            'users' => [
+                [
                     'firstName' => '@string@',
                     'lastName' => '@string@'
-                ),
+                ],
                 Matcher\ArrayMatcher::UNBOUNDED_PATTERN
-            ),
+            ],
             true,
             false,
             1,
             6.66
-        );
+        ];
 
-        return array(
-            array($simpleArr, $simpleArr),
-            array($simpleArr, $simpleArrPattern),
-            array(array(), array()),
-            array(array('foo' => null), array('foo' => null)),
-            array(array('foo' => null), array('foo' => "@null@")),
-            array(array('key' => 'val'), array('key' => 'val')),
-            array(array(1), array(1)),
-            array(
-                array('roles' => array('ROLE_ADMIN', 'ROLE_DEVELOPER')),
-                array('roles' => '@wildcard@'),
-            ),
-            'unbound array should match one or none elements' => array(
-                array(
-                    'users' => array(
-                        array(
+        return [
+            [$simpleArr, $simpleArr],
+            [$simpleArr, $simpleArrPattern],
+            [[], []],
+            [['foo' => null], ['foo' => null]],
+            [['foo' => null], ['foo' => "@null@"]],
+            [['key' => 'val'], ['key' => 'val']],
+            [[1], [1]],
+            [
+                ['roles' => ['ROLE_ADMIN', 'ROLE_DEVELOPER']],
+                ['roles' => '@wildcard@'],
+            ],
+            'unbound array should match one or none elements' => [
+                [
+                    'users' => [
+                        [
                             'firstName' => 'Norbert',
                             'lastName' => 'Foobar',
-                        ),
-                    ),
+                        ],
+                    ],
                     true,
                     false,
                     1,
                     6.66,
-                ),
+                ],
                 $simpleArrPattern,
-            ),
-        );
+            ],
+        ];
     }
 
     public static function negativeMatchData()
     {
-        $simpleArr = array(
-            'users' => array(
-                array(
+        $simpleArr = [
+            'users' => [
+                [
                     'firstName' => 'Norbert',
                     'lastName' => 'Orzechowicz'
-                ),
-                array(
+                ],
+                [
                     'firstName' => 'Michał',
                     'lastName' => 'Dąbrowski'
-                )
-            ),
+                ]
+            ],
             true,
             false,
             1,
             6.66
-        );
+        ];
 
-        $simpleDiff = array(
-            'users' => array(
-                array(
+        $simpleDiff = [
+            'users' => [
+                [
                     'firstName' => 'Norbert',
                     'lastName' => 'Orzechowicz'
-                ),
-                array(
+                ],
+                [
                     'firstName' => 'Pablo',
                     'lastName' => 'Dąbrowski'
-                )
-            ),
+                ]
+            ],
             true,
             false,
             1,
             6.66
-        );
+        ];
 
-        return array(
-            array($simpleArr, $simpleDiff),
-            array(array("status" => "ok", "data" => array(array('foo'))), array("status" => "ok", "data" => array())),
-            array(array(1), array()),
-            array(array('key' => 'val'), array('key' => 'val2')),
-            array(array(1), array(2)),
-            array(array('foo', 1, 3), array('foo', 2, 3)),
-            array(array(), array('foo' => 'bar')),
-            'unbound array should match one or none elements' => array(
-                array(
-                    'users' => array(
-                        array(
+        return [
+            [$simpleArr, $simpleDiff],
+            [["status" => "ok", "data" => [['foo']]], ["status" => "ok", "data" => []]],
+            [[1], []],
+            [['key' => 'val'], ['key' => 'val2']],
+            [[1], [2]],
+            [['foo', 1, 3], ['foo', 2, 3]],
+            [[], ['foo' => 'bar']],
+            'unbound array should match one or none elements' => [
+                [
+                    'users' => [
+                        [
                             'firstName' => 'Norbert',
                             'lastName' => 'Foobar',
-                        ),
-                    ),
+                        ],
+                    ],
                     true,
                     false,
                     1,
                     6.66,
-                ),
+                ],
                 $simpleDiff,
-            ),
-        );
+            ],
+        ];
     }
 }

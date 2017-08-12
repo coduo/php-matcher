@@ -14,7 +14,7 @@ final class Expander implements Node
     public function __construct(string $name)
     {
         $this->name = $name;
-        $this->arguments = array();
+        $this->arguments = [];
     }
 
     public function getName() : string

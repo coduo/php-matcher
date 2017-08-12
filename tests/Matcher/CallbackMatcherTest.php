@@ -34,6 +34,6 @@ class CallbackMatcherTest extends TestCase
         $this->assertFalse($matcher->match(2, function($value) { return false; }));
         $this->assertFalse($matcher->match(0, function($value) { return $value; }));
         $this->assertFalse($matcher->match(null, function($value) { return $value; }));
-        $this->assertFalse($matcher->match(array(), function($value) { return $value; }));
+        $this->assertFalse($matcher->match([], function($value) { return $value; }));
     }
 }

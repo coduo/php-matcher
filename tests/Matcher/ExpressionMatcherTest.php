@@ -74,65 +74,65 @@ class ExpressionMatcherTest extends TestCase
 
     public static function positiveCanMatchData()
     {
-        return array(
-            array("expr(1 > 2)"),
-            array("expr(value == 'foo')"),
-        );
+        return [
+            ["expr(1 > 2)"],
+            ["expr(value == 'foo')"],
+        ];
     }
 
     public static function negativeCanMatchData()
     {
-        return array(
-            array("@integer"),
-            array("expr("),
-            array("@string"),
-            array(new \stdClass),
-            array(array("foobar"))
-        );
+        return [
+            ["@integer"],
+            ["expr("],
+            ["@string"],
+            [new \stdClass],
+            [["foobar"]]
+        ];
     }
 
     public static function positiveMatchData()
     {
-        return array(
-            array(4, "expr(value > 2)"),
-            array("foo", "expr(value == 'foo')"),
-            array(new \DateTime('2014-04-01'), "expr(value.format('Y-m-d') == '2014-04-01')")
-        );
+        return [
+            [4, "expr(value > 2)"],
+            ["foo", "expr(value == 'foo')"],
+            [new \DateTime('2014-04-01'), "expr(value.format('Y-m-d') == '2014-04-01')"]
+        ];
     }
 
     public static function negativeMatchData()
     {
-        return array(
-            array(4, "expr(value < 2)"),
-            array("foo", "expr(value != 'foo')"),
-        );
+        return [
+            [4, "expr(value < 2)"],
+            ["foo", "expr(value != 'foo')"],
+        ];
     }
 
     public static function negativeMatchDescription()
     {
-        return array(
-            array(4, "expr(value < 2)", "\"expr(value < 2)\" expression fails for value \"4\"."),
-            array(
+        return [
+            [4, "expr(value < 2)", "\"expr(value < 2)\" expression fails for value \"4\"."],
+            [
                 new \DateTime('2014-04-01'),
                 "expr(value.format('Y-m-d') == '2014-04-02')",
                 "\"expr(value.format('Y-m-d') == '2014-04-02')\" expression fails for value \"\\DateTime\"."
-            ),
-        );
+            ],
+        ];
     }
 
     public static function positiveRegexMatchData()
     {
-        return array(
-            array('Cakper', 'expr(value matches "/Cakper/")'),
-            array('Cakper', 'expr(not(value matches "/Yaboomaster/"))'),
-        );
+        return [
+            ['Cakper', 'expr(value matches "/Cakper/")'],
+            ['Cakper', 'expr(not(value matches "/Yaboomaster/"))'],
+        ];
     }
 
     public static function negativeRegexMatchData()
     {
-        return array(
-            array('Cakper', 'expr(not(value matches "/Cakper/"))'),
-            array('Cakper', 'expr(value matches "/Yaboomaster/")'),
-        );
+        return [
+            ['Cakper', 'expr(not(value matches "/Cakper/"))'],
+            ['Cakper', 'expr(value matches "/Yaboomaster/")'],
+        ];
     }
 }

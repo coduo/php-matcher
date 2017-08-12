@@ -9,22 +9,13 @@ use Coduo\ToString\StringConverter;
 
 final class DoubleMatcher extends Matcher
 {
-    /**
-     * @var Parser
-     */
     private $parser;
 
-    /**
-     * @param Parser $parser
-     */
     public function __construct(Parser $parser)
     {
         $this->parser = $parser;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function match($value, $pattern) : bool
     {
         if (!is_double($value)) {
@@ -41,9 +32,6 @@ final class DoubleMatcher extends Matcher
         return true;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function canMatch($pattern) : bool
     {
         if (!is_string($pattern)) {

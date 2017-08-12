@@ -11,24 +11,14 @@ final class IsEmail implements PatternExpander
 {
     const NAME = 'isEmail';
 
-    /**
-     * @var null|string
-     */
     private $error;
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function is(string $name)
+    public static function is(string $name) : bool
     {
         return self::NAME === $name;
     }
 
-    /**
-     * @param string $value
-     * @return boolean
-     */
-    public function match($value)
+    public function match($value) : bool
     {
         if (false === is_string($value)) {
             $this->error = sprintf("IsEmail expander require \"string\", got \"%s\".", new StringConverter($value));
@@ -43,19 +33,12 @@ final class IsEmail implements PatternExpander
         return true;
     }
 
-    /**
-     * @return string|null
-     */
     public function getError()
     {
         return $this->error;
     }
 
-    /**
-     * @param string $value
-     * @return bool
-     */
-    protected function matchValue($value)
+    protected function matchValue(string $value) : bool
     {
         try {
             return false !== filter_var($value, FILTER_VALIDATE_EMAIL);

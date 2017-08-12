@@ -112,7 +112,7 @@ final class TextMatcher extends Matcher
      */
     private function replaceTypePatternsWithPlaceholders(string &$patternRegex) : array
     {
-        $patternsReplacedWithRegex = array();
+        $patternsReplacedWithRegex = [];
         preg_match_all(self::PATTERN_REGEXP, $patternRegex, $matches);
 
         foreach ($matches[0] as $index => $typePatternString) {

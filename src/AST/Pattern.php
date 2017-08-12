@@ -12,7 +12,7 @@ final class Pattern implements Node
 
     public function __construct(Type $type)
     {
-        $this->expanders = array();
+        $this->expanders = [];
         $this->type = $type;
     }
 

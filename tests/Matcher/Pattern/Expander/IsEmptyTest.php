@@ -20,12 +20,12 @@ class IsEmptyTest extends TestCase
 
     public static function examplesProvider()
     {
-        return array(
-            array(array(), true),
-            array(array('data'), false),
-            array('', true),
-            array(0, true),
-            array(null, true),
-        );
+        return [
+            [[], true],
+            [['data'], false],
+            ['', true],
+            [0, true],
+            [null, true],
+        ];
     }
 }

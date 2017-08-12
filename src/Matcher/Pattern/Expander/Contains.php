@@ -29,26 +29,18 @@ final class Contains implements PatternExpander
     /**
      * {@inheritdoc}
      */
-    public static function is(string $name)
+    public static function is(string $name) : bool
     {
         return self::NAME === $name;
     }
 
-    /**
-     * @param $string
-     * @param bool $ignoreCase
-     */
-    public function __construct($string, $ignoreCase = false)
+    public function __construct(string $string, $ignoreCase = false)
     {
         $this->string = $string;
         $this->ignoreCase = $ignoreCase;
     }
 
-    /**
-     * @param $value
-     * @return boolean
-     */
-    public function match($value)
+    public function match($value) : bool
     {
         if (!is_string($value)) {
             $this->error = sprintf("Contains expander require \"string\", got \"%s\".", new StringConverter($value));
@@ -67,9 +59,6 @@ final class Contains implements PatternExpander
         return true;
     }
 
-    /**
-     * @return string|null
-     */
     public function getError()
     {
         return $this->error;

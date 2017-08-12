@@ -10,25 +10,16 @@ final class Optional implements PatternExpander
 {
     const NAME = 'optional';
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function is(string $name)
+    public static function is(string $name) : bool
     {
         return self::NAME === $name;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function match($value)
+    public function match($value) : bool
     {
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getError()
     {
         return null;

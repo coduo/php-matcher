@@ -9,29 +9,23 @@ use Coduo\ToString\StringConverter;
 final class ChainMatcher extends Matcher
 {
     /**
-     * @var array|ValueMatcher[]
+     * @var ValueMatcher[]
      */
     private $matchers;
 
     /**
-     * @param array|ValueMatcher[] $matchers
+     * @param ValueMatcher[] $matchers
      */
-    public function __construct(array $matchers = array())
+    public function __construct(array $matchers = [])
     {
         $this->matchers = $matchers;
     }
 
-    /**
-     * @param ValueMatcher $matcher
-     */
     public function addMatcher(ValueMatcher $matcher)
     {
         $this->matchers[] = $matcher;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function match($value, $pattern) : bool
     {
         foreach ($this->matchers as $propertyMatcher) {
@@ -55,9 +49,6 @@ final class ChainMatcher extends Matcher
         return false;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function canMatch($pattern) : bool
     {
         return true;

@@ -20,12 +20,12 @@ class LowerThanTest extends TestCase
 
     public static function examplesProvider()
     {
-        return array(
-            array(10.5, 10, true),
-            array(-10.5, -20, true),
-            array(1, 10, false),
-            array(1, 1, false),
-        );
+        return [
+            [10.5, 10, true],
+            [-10.5, -20, true],
+            [1, 10, false],
+            [1, 1, false],
+        ];
     }
 
     /**
@@ -40,10 +40,10 @@ class LowerThanTest extends TestCase
 
     public static function invalidCasesProvider()
     {
-        return array(
-            array(1, "ipsum lorem", "Value \"ipsum lorem\" is not a valid number."),
-            array(5, 10, "Value \"10\" is not lower than \"5\"."),
-            array(5, 5, "Value \"5\" is not lower than \"5\"."),
-        );
+        return [
+            [1, "ipsum lorem", "Value \"ipsum lorem\" is not a valid number."],
+            [5, 10, "Value \"10\" is not lower than \"5\"."],
+            [5, 5, "Value \"5\" is not lower than \"5\"."],
+        ];
     }
 }

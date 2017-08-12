@@ -8,9 +8,6 @@ use Coduo\ToString\StringConverter;
 
 final class ScalarMatcher extends Matcher
 {
-    /**
-     * {@inheritDoc}
-     */
     public function match($value, $pattern) : bool
     {
         if ($value !== $pattern) {
@@ -21,9 +18,6 @@ final class ScalarMatcher extends Matcher
         return true;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function canMatch($pattern) : bool
     {
         return is_scalar($pattern);

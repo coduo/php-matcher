@@ -19,7 +19,7 @@ class TextMatcherTest extends TestCase
     public function setUp()
     {
         $parser = new Parser(new Lexer(), new Parser\ExpanderInitializer());
-        $scalarMatchers = new Matcher\ChainMatcher(array(
+        $scalarMatchers = new Matcher\ChainMatcher([
             new Matcher\CallbackMatcher(),
             new Matcher\ExpressionMatcher(),
             new Matcher\NullMatcher(),
@@ -30,12 +30,12 @@ class TextMatcherTest extends TestCase
             new Matcher\NumberMatcher(),
             new Matcher\ScalarMatcher(),
             new Matcher\WildcardMatcher(),
-        ));
+        ]);
         $this->matcher = new Matcher\TextMatcher(
-            new Matcher\ChainMatcher(array(
+            new Matcher\ChainMatcher([
                 $scalarMatchers,
                 new Matcher\ArrayMatcher($scalarMatchers, $parser)
-            )),
+            ]),
             $parser
         );
     }
@@ -50,12 +50,12 @@ class TextMatcherTest extends TestCase
 
     public function test_ignore_valid_json_patterns()
     {
-        $jsonPattern = json_encode(array(
-            'users' => array(
-                array('id' => '@number@', 'name' => 'Norbert'),
-                array('id' => '@number@', 'name' => 'Michal')
-            )
-        ));
+        $jsonPattern = json_encode([
+            'users' => [
+                ['id' => '@number@', 'name' => 'Norbert'],
+                ['id' => '@number@', 'name' => 'Michal']
+            ]
+        ]);
 
         $this->assertFalse($this->matcher->canMatch($jsonPattern));
     }
@@ -92,22 +92,22 @@ XML;
 
     public function matchingData()
     {
-        return array(
-            array(
+        return [
+            [
                 "lorem ipsum lol lorem 24 dolorem",
                 "lorem ipsum @string@.startsWith(\"lo\") lorem @number@ dolorem",
                 true
-            ),
-            array(
+            ],
+            [
                 "lorem ipsum 24 dolorem",
                 "lorem ipsum @integer@",
                 false
-            ),
-            array(
+            ],
+            [
                 "/users/12345/active",
                 "/users/@integer@.greaterThan(0)/active",
                 true
-            )
-        );
+            ]
+        ];
     }
 }

@@ -8,22 +8,13 @@ final class OrMatcher extends Matcher
 {
     const MATCH_PATTERN = "/\|\|/";
 
-    /**
-     * @var ChainMatcher
-     */
     private $chainMatcher;
 
-    /**
-     * @param ChainMatcher $chainMatcher
-     */
     public function __construct(ChainMatcher $chainMatcher)
     {
         $this->chainMatcher = $chainMatcher;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function match($value, $pattern) : bool
     {
         $patterns = explode('||', $pattern);
@@ -36,13 +27,6 @@ final class OrMatcher extends Matcher
         return false;
     }
 
-    /**
-     * Matches single pattern
-     *
-     * @param $value
-     * @param $pattern
-     * @return bool
-     */
     private function matchChild($value, $pattern) : bool
     {
         if (!$this->chainMatcher->canMatch($pattern)) {
@@ -56,9 +40,6 @@ final class OrMatcher extends Matcher
         return false;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function canMatch($pattern): bool
     {
         return is_string($pattern) && 0 !== preg_match_all(self::MATCH_PATTERN, $pattern, $matches);

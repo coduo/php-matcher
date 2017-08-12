@@ -112,9 +112,6 @@ final class ArrayMatcher extends Matcher
         return true;
     }
 
-    /**
-     * Check if pattern elements exist in value array
-     */
     private function isPatternValid(array $pattern, array $values, string $parentPath) : bool
     {
         if (is_array($pattern)) {
@@ -140,10 +137,6 @@ final class ArrayMatcher extends Matcher
         return true;
     }
 
-    /**
-     * Finds not existing keys
-     * Excludes keys with pattern which includes Optional Expander
-     */
     private function findNotExistingKeys(array $pattern, array $values) : array
     {
         $notExistingKeys = array_diff_key($pattern, $values);
@@ -204,9 +197,6 @@ final class ArrayMatcher extends Matcher
             (is_array($objectOrArray) && array_key_exists($property, $objectOrArray));
     }
 
-    /**
-     * @return mixed
-     */
     private function getValueByPath(array $array, string $path)
     {
         return $this->getPropertyAccessor()->getValue($array, $path);
@@ -244,9 +234,6 @@ final class ArrayMatcher extends Matcher
         return $lastPattern === self::UNBOUNDED_PATTERN;
     }
 
-    /**
-     * @throws \Coduo\PHPMatcher\Exception\UnknownExpanderException
-     */
     private function allExpandersMatch($value, $pattern) : bool
     {
         $typePattern = $this->parser->parse($pattern);

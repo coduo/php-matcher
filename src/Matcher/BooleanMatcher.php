@@ -10,9 +10,6 @@ final class BooleanMatcher extends Matcher
 {
     const BOOLEAN_PATTERN = '/^@boolean@$/';
 
-    /**
-     * {@inheritDoc}
-     */
     public function match($value, $pattern) : bool
     {
         if (!is_bool($value)) {
@@ -23,9 +20,6 @@ final class BooleanMatcher extends Matcher
         return true;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function canMatch($pattern) : bool
     {
         return is_string($pattern) && 0 !== preg_match(self::BOOLEAN_PATTERN, $pattern);

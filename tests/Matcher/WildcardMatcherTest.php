@@ -35,21 +35,21 @@ class WildcardMatcherTest extends TestCase
 
     public static function data()
     {
-        return array(
-            array("@integer@"),
-            array("foobar"),
-            array(true),
-            array(6.66),
-            array(array("bar")),
-            array(new \stdClass),
-        );
+        return [
+            ["@integer@"],
+            ["foobar"],
+            [true],
+            [6.66],
+            [["bar"]],
+            [new \stdClass],
+        ];
     }
 
     public static function positivePatterns()
     {
-        return array(
-            array("@*@"),
-            array("@wildcard@"),
-        );
+        return [
+            ["@*@"],
+            ["@wildcard@"],
+        ];
     }
 }

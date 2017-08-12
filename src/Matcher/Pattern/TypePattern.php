@@ -6,59 +6,34 @@ namespace Coduo\PHPMatcher\Matcher\Pattern;
 
 final class TypePattern implements Pattern
 {
-    /**
-     * @var string
-     */
     private $type;
 
-    /**
-     * @var PatternExpander[]|array
-     */
     private $expanders;
 
-    /**
-     * @var null|string
-     */
     private $error;
 
-    /**
-     * @param string $type
-     */
-    public function __construct($type)
+    public function __construct(string $type)
     {
         $this->type = $type;
-        $this->expanders = array();
+        $this->expanders = [];
     }
 
-    /**
-     * @param $type
-     * @return boolean
-     */
-    public function is($type)
+    public function is(string $type)
     {
         return strtolower($this->type) === strtolower($type);
     }
 
-    /**
-     * @return string
-     */
-    public function getType()
+    public function getType() : string
     {
         return strtolower($this->type);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addExpander(PatternExpander $expander)
     {
         $this->expanders[] = $expander;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function matchExpanders($value)
+    public function matchExpanders($value) : bool
     {
         foreach ($this->expanders as $expander) {
             if (!$expander->match($value)) {
@@ -70,18 +45,12 @@ final class TypePattern implements Pattern
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getError()
     {
         return $this->error;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasExpander(string $expanderName)
+    public function hasExpander(string $expanderName) : bool
     {
         foreach ($this->expanders as $expander) {
             if ($expander::is($expanderName)) {

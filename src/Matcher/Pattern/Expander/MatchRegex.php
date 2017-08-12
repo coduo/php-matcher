@@ -11,27 +11,10 @@ final class MatchRegex implements PatternExpander
 {
     const NAME = 'matchRegex';
 
-    /**
-     * @var null|string
-     */
     private $error;
 
-    /**
-     * @var string
-     */
     private $pattern;
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function is(string $name)
-    {
-        return self::NAME === $name;
-    }
-
-    /**
-     * @param string $pattern
-     */
     public function __construct($pattern)
     {
         if (!is_string($pattern)) {
@@ -45,12 +28,12 @@ final class MatchRegex implements PatternExpander
         $this->pattern = $pattern;
     }
 
-    /**
-     * @param string $value
-     *
-     * @return boolean
-     */
-    public function match($value)
+    public static function is(string $name) : bool
+    {
+        return self::NAME === $name;
+    }
+
+    public function match($value) : bool
     {
         if (false === is_string($value)) {
             $this->error = sprintf("Match expander require \"string\", got \"%s\".", new StringConverter($value));
@@ -67,9 +50,6 @@ final class MatchRegex implements PatternExpander
         return true;
     }
 
-    /**
-     * @return string|null
-     */
     public function getError()
     {
         return $this->error;

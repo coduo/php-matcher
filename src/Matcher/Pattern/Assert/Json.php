@@ -9,11 +9,7 @@ final class Json
     const TRANSFORM_QUOTATION_PATTERN = '/([^"])@([a-zA-Z0-9\.]+)@([^"])/';
     const TRANSFORM_QUOTATION_REPLACEMENT = '$1"@$2@"$3';
 
-    /**
-     * @param string $value
-     * @return bool
-     */
-    public static function isValid($value)
+    public static function isValid($value) : bool
     {
         if (!is_string($value)) {
             return false;
@@ -26,13 +22,7 @@ final class Json
         return true;
     }
 
-    /**
-     * Before checking json it wraps type patterns (@type@) with quotes ("@type@")
-     *
-     * @param string $value
-     * @return bool
-     */
-    public static function isValidPattern($value)
+    public static function isValidPattern($value) : bool
     {
         if (!is_string($value)) {
             return false;
@@ -41,13 +31,7 @@ final class Json
         return self::isValid(self::transformPattern($value));
     }
 
-    /**
-     * Wraps placeholders which arent wrapped with quotes yet
-     *
-     * @param $pattern
-     * @return mixed
-     */
-    public static function transformPattern($pattern)
+    public static function transformPattern(string $pattern) : string
     {
         return preg_replace(self::TRANSFORM_QUOTATION_PATTERN, self::TRANSFORM_QUOTATION_REPLACEMENT, $pattern);
     }

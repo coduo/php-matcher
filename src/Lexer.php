@@ -107,12 +107,12 @@ final class Lexer extends AbstractLexer
 
     protected function isStringToken(string $value) : bool
     {
-        return in_array(substr($value, 0, 1), array("\"", "'"));
+        return in_array(substr($value, 0, 1), ["\"", "'"]);
     }
 
     protected function isBooleanToken(string $value) : bool
     {
-        return in_array(strtolower($value), array('true', 'false'), true);
+        return in_array(strtolower($value), ['true', 'false'], true);
     }
 
     protected function isNullToken(string $value) : bool

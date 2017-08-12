@@ -11,37 +11,21 @@ final class Count implements PatternExpander
 {
     const NAME = 'count';
 
-    /**
-     * @var null|string
-     */
     private $error;
 
-    /**
-     * @var
-     */
     private $value;
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function is(string $name)
+    public static function is(string $name) : bool
     {
         return self::NAME === $name;
     }
 
-    /**
-     * @param $value
-     */
-    public function __construct($value)
+    public function __construct(int $value)
     {
         $this->value = $value;
     }
 
-    /**
-     * @param $value
-     * @return boolean
-     */
-    public function match($value)
+    public function match($value) :bool
     {
         if (!is_array($value)) {
             $this->error = sprintf("Count expander require \"array\", got \"%s\".", new StringConverter($value));
@@ -55,10 +39,6 @@ final class Count implements PatternExpander
 
         return true;
     }
-
-    /**
-     * @return string|null
-     */
     public function getError()
     {
         return $this->error;

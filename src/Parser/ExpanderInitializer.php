@@ -14,9 +14,6 @@ use Coduo\PHPMatcher\Matcher\Pattern\Expander;
 
 final class ExpanderInitializer
 {
-    /**
-     * @var array
-     */
     private $expanderDefinitions = [
         Expander\Contains::NAME => Expander\Contains::class,
         Expander\Count::NAME => Expander\Count::class,
@@ -35,9 +32,6 @@ final class ExpanderInitializer
         Expander\StartsWith::NAME => Expander\StartsWith::class,
     ];
 
-    /**
-     * @throws UnknownExpanderClassException
-     */
     public function setExpanderDefinition(string $expanderName, string $expanderFQCN)
     {
         if (!class_exists($expanderFQCN)) {
@@ -52,9 +46,6 @@ final class ExpanderInitializer
         return array_key_exists($expanderName, $this->expanderDefinitions);
     }
 
-    /**
-     * @throws InvalidArgumentException
-     */
     public function getExpanderDefinition(string $expanderName) : string
     {
         if (!$this->hasExpanderDefinition($expanderName)) {
@@ -64,10 +55,6 @@ final class ExpanderInitializer
         return $this->expanderDefinitions[$expanderName];
     }
 
-    /**
-     * @throws InvalidExpanderTypeException
-     * @throws UnknownExpanderException
-     */
     public function initialize(ExpanderNode $expanderNode) : PatternExpander
     {
         if (!array_key_exists($expanderNode->getName(), $this->expanderDefinitions)) {
@@ -77,7 +64,7 @@ final class ExpanderInitializer
         $reflection = new \ReflectionClass($this->expanderDefinitions[$expanderNode->getName()]);
 
         if ($expanderNode->hasArguments()) {
-            $arguments = array();
+            $arguments = [];
             foreach ($expanderNode->getArguments() as $argument) {
                 $arguments[] = ($argument instanceof ExpanderNode)
                     ? $this->initialize($argument)

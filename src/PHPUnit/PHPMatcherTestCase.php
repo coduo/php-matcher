@@ -8,9 +8,6 @@ use PHPUnit\Framework\TestCase;
 
 abstract class PHPMatcherTestCase extends TestCase
 {
-    /**
-     * @param mixed $value
-     */
     protected function assertMatchesPattern(string $pattern, $value, string $message = '')
     {
         $this->assertThat($value, self::matchesPattern($pattern), $message);

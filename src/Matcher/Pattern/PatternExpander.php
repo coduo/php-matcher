@@ -6,20 +6,9 @@ namespace Coduo\PHPMatcher\Matcher\Pattern;
 
 interface PatternExpander
 {
-    /**
-     * @param string $name
-     * @return bool
-     */
-    public static function is(string $name);
+    public static function is(string $name) : bool;
 
-    /**
-     * @param $value
-     * @return boolean
-     */
-    public function match($value);
+    public function match($value) : bool;
 
-    /**
-     * @return string|null
-     */
     public function getError();
 }

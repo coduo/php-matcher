@@ -11,34 +11,13 @@ final class StartsWith implements PatternExpander
 {
     const NAME = 'startsWith';
 
-    /**
-     * @var
-     */
     private $stringBeginning;
 
-    /**
-     * @var null|string
-     */
     private $error;
 
-    /**
-     * @var bool
-     */
     private $ignoreCase;
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function is(string $name)
-    {
-        return self::NAME === $name;
-    }
-
-    /**
-     * @param string $stringBeginning
-     * @param bool $ignoreCase
-     */
-    public function __construct($stringBeginning, $ignoreCase = false)
+    public function __construct(string $stringBeginning, bool $ignoreCase = false)
     {
         if (!is_string($stringBeginning)) {
             throw new \InvalidArgumentException("String beginning must be a valid string.");
@@ -48,11 +27,13 @@ final class StartsWith implements PatternExpander
         $this->ignoreCase = $ignoreCase;
     }
 
-    /**
-     * @param $value
-     * @return boolean
-     */
-    public function match($value)
+
+    public static function is(string $name) : bool
+    {
+        return self::NAME === $name;
+    }
+
+    public function match($value) : bool
     {
         if (!is_string($value)) {
             $this->error = sprintf("StartsWith expander require \"string\", got \"%s\".", new StringConverter($value));
@@ -71,19 +52,12 @@ final class StartsWith implements PatternExpander
         return true;
     }
 
-    /**
-     * @return string|null
-     */
     public function getError()
     {
         return $this->error;
     }
 
-    /**
-     * @param $value
-     * @return bool
-     */
-    protected function matchValue($value)
+    protected function matchValue(string $value) : bool
     {
         return $this->ignoreCase
             ? mb_strpos(mb_strtolower($value), mb_strtolower($this->stringBeginning)) !== 0

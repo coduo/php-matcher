@@ -13,20 +13,12 @@ final class IsEmpty implements PatternExpander
 
     private $error;
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function is(string $name)
+    public static function is(string $name) : bool
     {
         return self::NAME === $name;
     }
 
-    /**
-     * @param mixed $value
-     *
-     * @return boolean
-     */
-    public function match($value)
+    public function match($value) : bool
     {
         if (!empty($value)) {
             $this->error = sprintf("Value %s is not empty.", new StringConverter($value));
@@ -37,9 +29,6 @@ final class IsEmpty implements PatternExpander
         return true;
     }
 
-    /**
-     * @return string|null
-     */
     public function getError()
     {
         return $this->error;
