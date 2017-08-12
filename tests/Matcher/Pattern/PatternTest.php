@@ -11,7 +11,7 @@ use Coduo\PHPMatcher\Matcher\Pattern\Pattern;
 use Coduo\PHPMatcher\Matcher\Pattern\TypePattern;
 use PHPUnit\Framework\TestCase;
 
-class PatternTest  extends TestCase
+class PatternTest extends TestCase
 {
     /**
      * @var Pattern

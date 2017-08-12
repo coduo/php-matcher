@@ -33,11 +33,13 @@ class XmlMatcherTest extends TestCase
         ]);
 
         $this->matcher = new Matcher\XmlMatcher(
-            new Matcher\ChainMatcher([
+            new Matcher\ChainMatcher(
+                [
                 $scalarMatchers,
                 new Matcher\ArrayMatcher($scalarMatchers, $parser)
                 ]
-        ));
+        )
+        );
     }
 
     /**
@@ -70,7 +72,6 @@ class XmlMatcherTest extends TestCase
     public function test_negative_matches($value, $pattern)
     {
         $this->assertFalse($this->matcher->match($value, $pattern), $this->matcher->getError());
-
     }
 
     public static function positivePatterns()

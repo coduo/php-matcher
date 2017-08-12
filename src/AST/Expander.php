@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 namespace Coduo\PHPMatcher\AST;
 
 final class Expander implements Node

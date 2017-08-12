@@ -8,7 +8,7 @@ use Coduo\PHPMatcher\Matcher\Pattern\TypePattern;
 use Coduo\PHPMatcher\Matcher\Pattern\RegexConverter;
 use PHPUnit\Framework\TestCase;
 
-class RegexConverterTest  extends TestCase
+class RegexConverterTest extends TestCase
 {
     /**
      * @var RegexConverter

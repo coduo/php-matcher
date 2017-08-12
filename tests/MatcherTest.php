@@ -297,10 +297,18 @@ XML;
 
     public function test_matcher_with_callback()
     {
-        $this->assertTrue($this->matcher->match('test', function($value) { return $value === 'test';}));
-        $this->assertTrue(PHPMatcher::match('test', function($value) { return $value === 'test';}));
-        $this->assertFalse($this->matcher->match('test', function($value) { return $value !== 'test';}));
-        $this->assertFalse(PHPMatcher::match('test', function($value) { return $value !== 'test';}));
+        $this->assertTrue($this->matcher->match('test', function ($value) {
+            return $value === 'test';
+        }));
+        $this->assertTrue(PHPMatcher::match('test', function ($value) {
+            return $value === 'test';
+        }));
+        $this->assertFalse($this->matcher->match('test', function ($value) {
+            return $value !== 'test';
+        }));
+        $this->assertFalse(PHPMatcher::match('test', function ($value) {
+            return $value !== 'test';
+        }));
     }
 
     public function test_matcher_with_wildcard()

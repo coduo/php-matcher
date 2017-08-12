@@ -26,7 +26,7 @@ final class JsonMatcher extends Matcher
             return false;
         }
 
-        if (!Json::isValidPattern($pattern) ) {
+        if (!Json::isValidPattern($pattern)) {
             $this->error = sprintf("Invalid given JSON of pattern. %s", $this->getErrorMessage());
             return false;
         }
@@ -48,7 +48,7 @@ final class JsonMatcher extends Matcher
 
     private function getErrorMessage()
     {
-        switch(json_last_error()) {
+        switch (json_last_error()) {
             case JSON_ERROR_DEPTH:
                 return 'Maximum stack depth exceeded';
             case JSON_ERROR_STATE_MISMATCH:

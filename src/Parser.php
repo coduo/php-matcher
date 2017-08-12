@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Coduo\PHPMatcher;
 
-use Coduo\PHPMatcher\AST;
 use Coduo\PHPMatcher\Exception\Exception;
 use Coduo\PHPMatcher\Exception\PatternException;
 use Coduo\PHPMatcher\Matcher\Pattern;
@@ -75,7 +74,7 @@ final class Parser
 
     private function addExpanderNodes(AST\Pattern $pattern)
     {
-        while(($expander = $this->getNextExpanderNode()) !== null)  {
+        while (($expander = $this->getNextExpanderNode()) !== null) {
             $pattern->addExpander($expander);
         }
     }
@@ -128,10 +127,10 @@ final class Parser
      */
     private function addArgumentValues(AST\Expander $expander)
     {
-        while(($argument = $this->getNextArgumentValue()) !== null) {
+        while (($argument = $this->getNextArgumentValue()) !== null) {
             $argument = ($argument === self::NULL_VALUE) ? null : $argument;
             $expander->addArgument($argument);
-            if (!$this->lexer->isNextToken(Lexer::T_COMMA)){
+            if (!$this->lexer->isNextToken(Lexer::T_COMMA)) {
                 break;
             }
 
