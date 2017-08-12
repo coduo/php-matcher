@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Matcher\Pattern;
 
 use Coduo\PHPMatcher\Exception\UnknownTypeException;

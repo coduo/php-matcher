@@ -1,9 +1,12 @@
 <?php
+
+declare(strict_types=1);
 namespace Coduo\PHPMatcher\Tests\Matcher;
 
 use Coduo\PHPMatcher\Matcher\NumberMatcher;
+use PHPUnit\Framework\TestCase;
 
-class NumberMatcherTest extends \PHPUnit\Framework\TestCase
+class NumberMatcherTest extends TestCase
 {
     /**
      * @dataProvider positiveCanMatchData

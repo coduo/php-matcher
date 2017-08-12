@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Parser;
 
 use Coduo\PHPMatcher\AST\Expander as ExpanderNode;
@@ -34,11 +36,9 @@ final class ExpanderInitializer
     ];
 
     /**
-     * @param string $expanderName
-     * @param string $expanderFQCN Fully-Qualified Class Name that implements PatternExpander interface
      * @throws UnknownExpanderClassException
      */
-    public function setExpanderDefinition($expanderName, $expanderFQCN)
+    public function setExpanderDefinition(string $expanderName, string $expanderFQCN)
     {
         if (!class_exists($expanderFQCN)) {
             throw new UnknownExpanderClassException(sprintf("Class \"%s\" does not exists.", $expanderFQCN));
@@ -47,21 +47,15 @@ final class ExpanderInitializer
         $this->expanderDefinitions[$expanderName] = $expanderFQCN;
     }
 
-    /**
-     * @param $expanderName
-     * @return bool
-     */
-    public function hasExpanderDefinition($expanderName)
+    public function hasExpanderDefinition(string $expanderName) : bool
     {
         return array_key_exists($expanderName, $this->expanderDefinitions);
     }
 
     /**
-     * @param $expanderName
-     * @return string
      * @throws InvalidArgumentException
      */
-    public function getExpanderDefinition($expanderName)
+    public function getExpanderDefinition(string $expanderName) : string
     {
         if (!$this->hasExpanderDefinition($expanderName)) {
             throw new InvalidArgumentException(sprintf("Definition for \"%s\" expander does not exists.", $expanderName));
@@ -71,12 +65,10 @@ final class ExpanderInitializer
     }
 
     /**
-     * @param ExpanderNode $expanderNode
      * @throws InvalidExpanderTypeException
      * @throws UnknownExpanderException
-     * @return PatternExpander
      */
-    public function initialize(ExpanderNode $expanderNode)
+    public function initialize(ExpanderNode $expanderNode) : PatternExpander
     {
         if (!array_key_exists($expanderNode->getName(), $this->expanderDefinitions)) {
             throw new UnknownExpanderException(sprintf("Unknown expander \"%s\"", $expanderNode->getName()));

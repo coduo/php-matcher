@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Matcher;
 
 abstract class Matcher implements ValueMatcher
@@ -17,13 +19,12 @@ abstract class Matcher implements ValueMatcher
         return $this->error;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function match($value, $pattern)
+    public function match($value, $pattern) : bool
     {
         if ($value === $pattern) {
             return true;
         }
+
+        return false;
     }
 }

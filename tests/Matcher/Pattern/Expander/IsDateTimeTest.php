@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Tests\Matcher\Pattern\Expander;
 
-use Coduo\PHPMatcher\Matcher;
 use Coduo\PHPMatcher\Matcher\Pattern\Expander\IsDateTime;
+use PHPUnit\Framework\TestCase;
 
-class IsDateTimeTest extends \PHPUnit\Framework\TestCase
+class IsDateTimeTest extends TestCase
 {
     /**
      * @dataProvider examplesDatesProvider

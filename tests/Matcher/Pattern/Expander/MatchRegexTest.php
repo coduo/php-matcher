@@ -1,13 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Tests\Matcher\Pattern\Expander;
 
 use Coduo\PHPMatcher\Matcher\Pattern\Expander\MatchRegex;
+use PHPUnit\Framework\TestCase;
 
-/**
- * @author Benjamin Lazarecki <benjamin.lazarecki@gmail.com>
- */
-class MatchRegexTest extends \PHPUnit\Framework\TestCase
+class MatchRegexTest extends TestCase
 {
     /**
      * @dataProvider examplesProvider

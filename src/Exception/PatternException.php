@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Exception;
 
 class PatternException extends Exception
 {
-    public static function syntaxError($message, $previous = null)
+    public static function syntaxError(string $message, Exception $previous = null)
     {
         return new self('[Syntax Error] ' . $message, 0, $previous);
     }

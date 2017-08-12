@@ -1,11 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Tests\Matcher\Pattern\Expander;
 
 use Coduo\PHPMatcher\Matcher\Pattern\Expander\Contains;
 use Coduo\PHPMatcher\Matcher\Pattern\Expander\OneOf;
+use PHPUnit\Framework\TestCase;
 
-class OneOfTest extends \PHPUnit\Framework\TestCase
+class OneOfTest extends TestCase
 {
     /**
      * @expectedException \InvalidArgumentException

@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Tests\Matcher;
 
 use Coduo\PHPMatcher\Lexer;
 use Coduo\PHPMatcher\Matcher;
 use Coduo\PHPMatcher\Parser;
+use PHPUnit\Framework\TestCase;
 
-class TextMatcherTest extends \PHPUnit\Framework\TestCase
+class TextMatcherTest extends TestCase
 {
     /**
      * @var Matcher\TextMatcher

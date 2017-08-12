@@ -1,10 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Tests\Matcher;
 
 use Coduo\PHPMatcher\Matcher\UuidMatcher;
+use PHPUnit\Framework\TestCase;
 
-class UuidMatcherTest extends \PHPUnit\Framework\TestCase
+class UuidMatcherTest extends TestCase
 {
     /**
      * @var UuidMatcher

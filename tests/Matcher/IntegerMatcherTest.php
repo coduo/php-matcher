@@ -1,11 +1,14 @@
 <?php
+
+declare(strict_types=1);
 namespace Coduo\PHPMatcher\Tests\Matcher;
 
 use Coduo\PHPMatcher\Lexer;
 use Coduo\PHPMatcher\Matcher\IntegerMatcher;
 use Coduo\PHPMatcher\Parser;
+use PHPUnit\Framework\TestCase;
 
-class IntegerMatcherTest extends \PHPUnit\Framework\TestCase
+class IntegerMatcherTest extends TestCase
 {
     /**
      * @var IntegerMatcher

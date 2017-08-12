@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Matcher;
 
 use Coduo\ToString\StringConverter;
@@ -30,7 +32,7 @@ final class ChainMatcher extends Matcher
     /**
      * {@inheritDoc}
      */
-    public function match($value, $pattern)
+    public function match($value, $pattern) : bool
     {
         foreach ($this->matchers as $propertyMatcher) {
             if ($propertyMatcher->canMatch($pattern)) {
@@ -56,7 +58,7 @@ final class ChainMatcher extends Matcher
     /**
      * {@inheritDoc}
      */
-    public function canMatch($pattern)
+    public function canMatch($pattern) : bool
     {
         return true;
     }

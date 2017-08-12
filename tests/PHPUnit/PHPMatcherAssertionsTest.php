@@ -1,10 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Tests\PHPUnit;
 
 use Coduo\PHPMatcher\PHPUnit\PHPMatcherAssertions;
+use PHPUnit\Framework\TestCase;
 
-class PHPMatcherAssertionsTest extends \PHPUnit\Framework\TestCase
+class PHPMatcherAssertionsTest extends TestCase
 {
     use PHPMatcherAssertions;
 

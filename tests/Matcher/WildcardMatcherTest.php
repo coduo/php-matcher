@@ -1,9 +1,12 @@
 <?php
+
+declare(strict_types=1);
 namespace Coduo\PHPMatcher\Tests\Matcher;
 
 use Coduo\PHPMatcher\Matcher\WildcardMatcher;
+use PHPUnit\Framework\TestCase;
 
-class WildcardMatcherTest extends \PHPUnit\Framework\TestCase
+class WildcardMatcherTest extends TestCase
 {
 
     /**

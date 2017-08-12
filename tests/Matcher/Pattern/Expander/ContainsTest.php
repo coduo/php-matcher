@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Tests\Matcher\Pattern\Expander;
 
-use Coduo\PHPMatcher\Matcher;
 use Coduo\PHPMatcher\Matcher\Pattern\Expander\Contains;
+use PHPUnit\Framework\TestCase;
 
-class ContainsTest extends \PHPUnit\Framework\TestCase
+class ContainsTest extends TestCase
 {
     /**
      * @dataProvider examplesIgnoreCaseProvider

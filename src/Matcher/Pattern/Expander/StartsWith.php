@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Matcher\Pattern\Expander;
 
 use Coduo\PHPMatcher\Matcher\Pattern\PatternExpander;

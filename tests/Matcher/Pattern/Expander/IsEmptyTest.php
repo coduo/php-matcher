@@ -1,13 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Tests\Matcher\Pattern\Expander;
 
 use Coduo\PHPMatcher\Matcher\Pattern\Expander\IsEmpty;
+use PHPUnit\Framework\TestCase;
 
-/**
- * @author Benjamin Lazarecki <benjamin.lazarecki@gmail.com>
- */
-class IsEmptyTest extends \PHPUnit\Framework\TestCase
+class IsEmptyTest extends TestCase
 {
     /**
      * @dataProvider examplesProvider

@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Tests\Matcher\Pattern\Expander;
 
-use Coduo\PHPMatcher\Matcher;
 use Coduo\PHPMatcher\Matcher\Pattern\Expander\IsEmail;
+use PHPUnit\Framework\TestCase;
 
-class IsEmailTest extends \PHPUnit\Framework\TestCase
+class IsEmailTest extends TestCase
 {
     /**
      * @dataProvider examplesEmailsProvider

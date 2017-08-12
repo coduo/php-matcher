@@ -1,11 +1,14 @@
 <?php
+
+declare(strict_types=1);
 namespace Coduo\PHPMatcher\Tests\Matcher;
 
 use Coduo\PHPMatcher\Lexer;
 use Coduo\PHPMatcher\Matcher\DoubleMatcher;
 use Coduo\PHPMatcher\Parser;
+use PHPUnit\Framework\TestCase;
 
-class DoubleMatcherTest extends \PHPUnit\Framework\TestCase
+class DoubleMatcherTest extends TestCase
 {
     /**
      * @var DoubleMatcher

@@ -1,9 +1,12 @@
 <?php
+
+declare(strict_types=1);
 namespace Coduo\PHPMatcher\Tests\Matcher;
 
 use Coduo\PHPMatcher\Matcher\BooleanMatcher;
+use PHPUnit\Framework\TestCase;
 
-class BooleanMatcherTest extends \PHPUnit\Framework\TestCase
+class BooleanMatcherTest extends TestCase
 {
     /**
      * @dataProvider positiveCanMatchData

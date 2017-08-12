@@ -1,9 +1,12 @@
 <?php
+
+declare(strict_types=1);
 namespace Coduo\PHPMatcher\Tests\Matcher;
 
 use Coduo\PHPMatcher\Matcher\CallbackMatcher;
+use PHPUnit\Framework\TestCase;
 
-class CallbackMatcherTest extends \PHPUnit\Framework\TestCase
+class CallbackMatcherTest extends TestCase
 {
     function test_positive_can_match()
     {

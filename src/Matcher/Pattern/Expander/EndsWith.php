@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Matcher\Pattern\Expander;
 
 use Coduo\PHPMatcher\Matcher\Pattern\PatternExpander;
@@ -41,7 +43,7 @@ final class EndsWith implements PatternExpander
         if (!is_string($stringEnding)) {
             throw new \InvalidArgumentException("String ending must be a valid string.");
         }
-        
+
         $this->stringEnding = $stringEnding;
         $this->ignoreCase = $ignoreCase;
     }

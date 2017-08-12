@@ -1,10 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Tests\Matcher\Pattern\Expander;
 
 use Coduo\PHPMatcher\Matcher\Pattern\Expander\Optional;
+use PHPUnit\Framework\TestCase;
 
-class OptionalTest extends \PHPUnit\Framework\TestCase
+class OptionalTest extends TestCase
 {
     /**
      * @dataProvider examplesProvider

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Factory;
 
 use Coduo\PHPMatcher\Factory;
@@ -9,18 +11,12 @@ use Coduo\PHPMatcher\Parser;
 
 class SimpleFactory implements Factory
 {
-    /**
-     * @return Matcher
-     */
-    public function createMatcher()
+    public function createMatcher() : Matcher
     {
         return new Matcher($this->buildMatchers());
     }
 
-    /**
-     * @return Matcher\ChainMatcher
-     */
-    protected function buildMatchers()
+    protected function buildMatchers() : Matcher\ChainMatcher
     {
         $scalarMatchers = $this->buildScalarMatchers();
         $orMatcher = $this->buildOrMatcher();
@@ -36,10 +32,7 @@ class SimpleFactory implements Factory
         return $chainMatcher;
     }
 
-    /**
-     * @return Matcher\ChainMatcher
-     */
-    protected function buildOrMatcher()
+    protected function buildOrMatcher() : Matcher\ChainMatcher
     {
         $scalarMatchers = $this->buildScalarMatchers();
         $orMatcher = new Matcher\OrMatcher($scalarMatchers);
@@ -62,7 +55,7 @@ class SimpleFactory implements Factory
     /**
      * @return Matcher\ChainMatcher
      */
-    protected function buildScalarMatchers()
+    protected function buildScalarMatchers() : Matcher\ChainMatcher
     {
         $parser = $this->buildParser();
 
@@ -81,10 +74,7 @@ class SimpleFactory implements Factory
         ));
     }
 
-    /**
-     * @return Parser
-     */
-    protected function buildParser()
+    protected function buildParser() : Parser
     {
         return new Parser(new Lexer(), new Parser\ExpanderInitializer());
     }

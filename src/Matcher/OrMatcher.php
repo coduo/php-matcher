@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Matcher;
 
 final class OrMatcher extends Matcher
@@ -22,7 +24,7 @@ final class OrMatcher extends Matcher
     /**
      * {@inheritDoc}
      */
-    public function match($value, $pattern)
+    public function match($value, $pattern) : bool
     {
         $patterns = explode('||', $pattern);
         foreach ($patterns as $childPattern) {
@@ -41,7 +43,7 @@ final class OrMatcher extends Matcher
      * @param $pattern
      * @return bool
      */
-    private function matchChild($value, $pattern)
+    private function matchChild($value, $pattern) : bool
     {
         if (!$this->chainMatcher->canMatch($pattern)) {
             return false;
@@ -57,7 +59,7 @@ final class OrMatcher extends Matcher
     /**
      * {@inheritDoc}
      */
-    public function canMatch($pattern)
+    public function canMatch($pattern): bool
     {
         return is_string($pattern) && 0 !== preg_match_all(self::MATCH_PATTERN, $pattern, $matches);
     }

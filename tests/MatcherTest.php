@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Tests;
 
 use Coduo\PHPMatcher\Factory\SimpleFactory;
 use Coduo\PHPMatcher\Matcher;
 use Coduo\PHPMatcher\PHPMatcher;
+use PHPUnit\Framework\TestCase;
 
-class MatcherTest extends \PHPUnit\Framework\TestCase
+class MatcherTest extends TestCase
 {
     /**
      * @var Matcher

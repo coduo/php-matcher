@@ -1,15 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Tests;
 
 use Coduo\PHPMatcher\Lexer;
+use PHPUnit\Framework\TestCase;
 
-class LexerTest extends \PHPUnit\Framework\TestCase
+class LexerTest extends TestCase
 {
     /**
      * @dataProvider validStringValuesProvider
      */
-    public function test_string_values($value)
+    public function test_string_values(string $value)
     {
         $lexer = new Lexer();
         $lexer->setInput($value);
@@ -20,10 +23,10 @@ class LexerTest extends \PHPUnit\Framework\TestCase
 
     public static function validStringValuesProvider()
     {
-        return array(
-            array('"String"'),
-            array("'String'"),
-        );
+        return [
+            ['"String"'],
+            ["'String'"],
+        ];
     }
 
 
@@ -41,17 +44,17 @@ class LexerTest extends \PHPUnit\Framework\TestCase
 
     public static function validNumberValuesProvider()
     {
-        return array(
-            array(1, 1),
-            array(1.25, 1.25),
-            array(0, 0),
-            array("125", 125),
-            array("12.15", 12.15),
-            array(-10, -10),
-            array(-1.124, -1.124),
-            array("-10", -10),
-            array("-1.24", -1.24)
-        );
+        return [
+            [1, 1],
+            [1.25, 1.25],
+            [0, 0],
+            ["125", 125],
+            ["12.15", 12.15],
+            [-10, -10],
+            [-1.124, -1.124],
+            ["-10", -10],
+            ["-1.24", -1.24]
+        ];
     }
 
     /**
@@ -68,12 +71,12 @@ class LexerTest extends \PHPUnit\Framework\TestCase
 
     public static function validBooleanValuesProvider()
     {
-        return array(
-            array("true", true),
-            array("false", false),
-            array("TRUE", true),
-            array("fAlSe", false)
-        );
+        return [
+            ["true", true],
+            ["false", false],
+            ["TRUE", true],
+            ["fAlSe", false]
+        ];
     }
 
     /**
@@ -90,11 +93,11 @@ class LexerTest extends \PHPUnit\Framework\TestCase
 
     public static function validNullValuesProvider()
     {
-        return array(
-            array("null"),
-            array("NULL"),
-            array("NuLl"),
-        );
+        return [
+            ["null"],
+            ["NULL"],
+            ["NuLl"],
+        ];
     }
 
     /**
@@ -110,12 +113,12 @@ class LexerTest extends \PHPUnit\Framework\TestCase
 
     public static function validNonTokenValuesProvider()
     {
-        return array(
-            array("@integer"),
-            array("integer@"),
-            array("test"),
-            array("@")
-        );
+        return [
+            ["@integer"],
+            ["integer@"],
+            ["test"],
+            ["@"]
+        ];
     }
 
     public function test_close_parenthesis()
@@ -172,14 +175,14 @@ class LexerTest extends \PHPUnit\Framework\TestCase
 
     public static function validMatcherTypePatterns()
     {
-        return array(
-            array("@string@"),
-            array("@boolean@"),
-            array("@integer@"),
-            array("@number@"),
-            array("@*@"),
-            array("@wildcard@")
-        );
+        return [
+            ["@string@"],
+            ["@boolean@"],
+            ["@integer@"],
+            ["@number@"],
+            ["@*@"],
+            ["@wildcard@"]
+        ];
     }
 
     /**
@@ -196,16 +199,16 @@ class LexerTest extends \PHPUnit\Framework\TestCase
 
     public static function validExpanderNamesProvider()
     {
-        return array(
-            array("expanderName(", "expanderName"),
-            array("e(", "e"),
-            array(".e(", "e")
-        );
+        return [
+            ["expanderName(", "expanderName"],
+            ["e(", "e"],
+            [".e(", "e"]
+        ];
     }
 
     public function test_ignore_whitespaces_between_parenthesis()
     {
-        $expectedTokens = array("type", "expander", "arg1", ",", 2, ",", "arg3", ",", 4, ")");
+        $expectedTokens = ["type", "expander", "arg1", ",", 2, ",", "arg3", ",", 4, ")"];
         $lexer = new Lexer();
         $lexer->setInput("@type@.expander( 'arg1',    2    ,'arg3',4)");
 
@@ -218,7 +221,7 @@ class LexerTest extends \PHPUnit\Framework\TestCase
      */
     protected function collectTokens(Lexer $lexer)
     {
-        $tokens = array();
+        $tokens = [];
         while ($lexer->moveNext()) {
             $tokens[] = $lexer->lookahead['value'];
         }

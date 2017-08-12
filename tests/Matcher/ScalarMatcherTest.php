@@ -1,9 +1,12 @@
 <?php
+
+declare(strict_types=1);
 namespace Coduo\PHPMatcher\Tests\Matcher;
 
 use Coduo\PHPMatcher\Matcher\ScalarMatcher;
+use PHPUnit\Framework\TestCase;
 
-class ScalarMatcherTest extends \PHPUnit\Framework\TestCase
+class ScalarMatcherTest extends TestCase
 {
     /**
      * @dataProvider positiveCanMatches

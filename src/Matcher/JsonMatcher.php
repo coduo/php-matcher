@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Matcher;
 
 use Coduo\PHPMatcher\Matcher\Pattern\Assert\Json;
@@ -22,7 +24,7 @@ final class JsonMatcher extends Matcher
     /**
      * {@inheritDoc}
      */
-    public function match($value, $pattern)
+    public function match($value, $pattern) : bool
     {
         if (parent::match($value, $pattern)) {
             return true;
@@ -51,7 +53,7 @@ final class JsonMatcher extends Matcher
     /**
      * {@inheritDoc}
      */
-    public function canMatch($pattern)
+    public function canMatch($pattern) : bool
     {
         return Json::isValidPattern($pattern);
     }

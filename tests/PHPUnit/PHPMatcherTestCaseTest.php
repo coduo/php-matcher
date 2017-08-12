@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Tests\PHPUnit;
 
 use Coduo\PHPMatcher\PHPUnit\PHPMatcherTestCase;

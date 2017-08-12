@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Tests;
 
 use Coduo\PHPMatcher\AST\Expander;
 use Coduo\PHPMatcher\Lexer;
 use Coduo\PHPMatcher\Parser;
+use PHPUnit\Framework\TestCase;
 
-class ParserTest extends \PHPUnit\Framework\TestCase
+class ParserTest extends TestCase
 {
     /**
      * @var Parser

@@ -1,10 +1,13 @@
 <?php
+
+declare(strict_types=1);
 namespace Coduo\PHPMatcher\Tests\Matcher;
 
 use Coduo\PHPMatcher\Matcher\ArrayMatcher;
 use Coduo\PHPMatcher\Matcher\ChainMatcher;
+use PHPUnit\Framework\TestCase;
 
-class ChainMatcherTest extends \PHPUnit\Framework\TestCase
+class ChainMatcherTest extends TestCase
 {
     /**
      * @var ArrayMatcher
