@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Tests\Matcher\Pattern\Expander;
 
-use Coduo\PHPMatcher\Matcher;
 use Coduo\PHPMatcher\Matcher\Pattern\Expander\IsEmail;
+use PHPUnit\Framework\TestCase;
 
-class IsEmailTest extends \PHPUnit\Framework\TestCase
+class IsEmailTest extends TestCase
 {
     /**
      * @dataProvider examplesEmailsProvider
@@ -18,11 +20,11 @@ class IsEmailTest extends \PHPUnit\Framework\TestCase
 
     public static function examplesEmailsProvider()
     {
-        return array(
-            array("valid@email.com", true),
-            array("valid+12345@email.com", true),
-            array("...@domain.com", false),
-            array("2222----###@domain.co", true)
-        );
+        return [
+            ["valid@email.com", true],
+            ["valid+12345@email.com", true],
+            ["...@domain.com", false],
+            ["2222----###@domain.co", true]
+        ];
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Matcher\Pattern\Expander;
 
 use Coduo\PHPMatcher\Matcher\Pattern\PatternExpander;
@@ -16,14 +18,6 @@ final class OneOf implements PatternExpander
 
     protected $error;
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function is(string $name)
-    {
-        return self::NAME === $name;
-    }
-
     public function __construct()
     {
         if (func_num_args() < 2) {
@@ -38,11 +32,12 @@ final class OneOf implements PatternExpander
         }
     }
 
-    /**
-     * @param $value
-     * @return boolean
-     */
-    public function match($value)
+    public static function is(string $name) :bool
+    {
+        return self::NAME === $name;
+    }
+
+    public function match($value) : bool
     {
         foreach ($this->expanders as $expander) {
             if ($expander->match($value)) {
@@ -54,9 +49,6 @@ final class OneOf implements PatternExpander
         return false;
     }
 
-    /**
-     * @return string|null
-     */
     public function getError()
     {
         return $this->error;

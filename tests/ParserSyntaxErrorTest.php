@@ -1,11 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Tests;
 
 use Coduo\PHPMatcher\Lexer;
 use Coduo\PHPMatcher\Parser;
+use PHPUnit\Framework\TestCase;
 
-class ParserSyntaxErrorTest extends \PHPUnit\Framework\TestCase
+class ParserSyntaxErrorTest extends TestCase
 {
     /**
      * @var Parser

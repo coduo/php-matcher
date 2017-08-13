@@ -1,25 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Matcher;
 
 interface ValueMatcher
 {
     /**
      * Matches value against the pattern
-     *
-     * @param $value
-     * @param $pattern
-     * @return boolean
      */
-    public function match($value, $pattern);
+    public function match($value, $pattern) : bool;
 
     /**
      * Checks if matcher can match the pattern
-     *
-     * @param $pattern
-     * @return boolean
      */
-    public function canMatch($pattern);
+    public function canMatch($pattern) : bool;
 
     /**
      * Returns a string description why matching failed

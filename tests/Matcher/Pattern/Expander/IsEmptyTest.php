@@ -1,13 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Tests\Matcher\Pattern\Expander;
 
 use Coduo\PHPMatcher\Matcher\Pattern\Expander\IsEmpty;
+use PHPUnit\Framework\TestCase;
 
-/**
- * @author Benjamin Lazarecki <benjamin.lazarecki@gmail.com>
- */
-class IsEmptyTest extends \PHPUnit\Framework\TestCase
+class IsEmptyTest extends TestCase
 {
     /**
      * @dataProvider examplesProvider
@@ -20,12 +20,12 @@ class IsEmptyTest extends \PHPUnit\Framework\TestCase
 
     public static function examplesProvider()
     {
-        return array(
-            array(array(), true),
-            array(array('data'), false),
-            array('', true),
-            array(0, true),
-            array(null, true),
-        );
+        return [
+            [[], true],
+            [['data'], false],
+            ['', true],
+            [0, true],
+            [null, true],
+        ];
     }
 }

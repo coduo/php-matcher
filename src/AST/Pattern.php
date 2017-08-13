@@ -1,55 +1,39 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\AST;
 
 final class Pattern implements Node
 {
-    /**
-     * @var Type
-     */
     private $type;
 
-    /**
-     * @var Expander[]|array
-     */
     private $expanders;
 
-    /**
-     * @param Type $type
-     */
     public function __construct(Type $type)
     {
-        $this->expanders = array();
+        $this->expanders = [];
         $this->type = $type;
     }
 
-    /**
-     * @return Type
-     */
-    public function getType()
+    public function getType() : Type
     {
         return $this->type;
     }
 
-    /**
-     * @return bool
-     */
-    public function hasExpanders()
+    public function hasExpanders() : bool
     {
         return (boolean) count($this->expanders);
     }
 
     /**
-     * @return Expander[]|array
+     * @return Expander[]
      */
-    public function getExpanders()
+    public function getExpanders() : array
     {
         return $this->expanders;
     }
 
-    /**
-     * @param Expander $expander
-     */
     public function addExpander(Expander $expander)
     {
         $this->expanders[] = $expander;

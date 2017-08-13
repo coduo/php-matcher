@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher;
 
 use Doctrine\Common\Lexer\AbstractLexer;
@@ -21,40 +23,33 @@ final class Lexer extends AbstractLexer
 
     /**
      * Lexical catchable patterns.
-     *
-     * @return array
      */
-    protected function getCatchablePatterns()
+    protected function getCatchablePatterns() : array
     {
-        return array(
+        return [
             "\\.?[a-zA-Z0-9_]+\\(", // expander name
             "[a-zA-Z0-9.]*", // words
             "\\-?[0-9]*\\.?[0-9]*", // numbers
             "'(?:[^']|'')*'", // string between ' character
             "\"(?:[^\"]|\"\")*\"", // string between " character,
             "@[a-zA-Z0-9\\*]+@", // type pattern
-        );
+        ];
     }
 
     /**
      * Lexical non-catchable patterns.
-     *
-     * @return array
      */
-    protected function getNonCatchablePatterns()
+    protected function getNonCatchablePatterns() : array
     {
-        return array(
+        return [
             "\\s+",
-        );
+        ];
     }
 
     /**
      * Retrieve token type. Also processes the token value if necessary.
-     *
-     * @param string $value
-     * @return integer
      */
-    protected function getType(&$value)
+    protected function getType(&$value) : int
     {
         $type = self::T_NONE;
 
@@ -110,56 +105,32 @@ final class Lexer extends AbstractLexer
         return $type;
     }
 
-    /**
-     * @param $value
-     * @return bool
-     */
-    protected function isStringToken($value)
+    protected function isStringToken(string $value) : bool
     {
-        return in_array(substr($value, 0, 1), array("\"", "'"));
+        return in_array(substr($value, 0, 1), ["\"", "'"]);
     }
 
-    /**
-     * @param string $value
-     * @return bool
-     */
-    protected function isBooleanToken($value)
+    protected function isBooleanToken(string $value) : bool
     {
-        return in_array(strtolower($value), array('true', 'false'), true);
+        return in_array(strtolower($value), ['true', 'false'], true);
     }
 
-    /**
-     * @param string $value
-     * @return bool
-     */
-    protected function isNullToken($value)
+    protected function isNullToken(string $value) : bool
     {
         return strtolower($value) === 'null';
     }
 
-    /**
-     * @param $value
-     * @return string
-     */
-    protected function extractStringValue($value)
+    protected function extractStringValue(string $value) : string
     {
         return trim(trim($value, "'"), '"');
     }
 
-    /**
-     * @param $value
-     * @return bool
-     */
-    protected function isExpanderNameToken($value)
+    protected function isExpanderNameToken(string $value) : bool
     {
         return substr($value, -1) === '(' && strlen($value) > 1;
     }
 
-    /**
-     * @param $value
-     * @return bool
-     */
-    protected function isTypePatternToken($value)
+    protected function isTypePatternToken(string $value) : bool
     {
         return substr($value, 0, 1) === '@' && substr($value, strlen($value) - 1, 1) === '@' && strlen($value) > 1;
     }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Factory;
 
 use Coduo\PHPMatcher\Factory;
@@ -9,52 +11,43 @@ use Coduo\PHPMatcher\Parser;
 
 class SimpleFactory implements Factory
 {
-    /**
-     * @return Matcher
-     */
-    public function createMatcher()
+    public function createMatcher() : Matcher
     {
         return new Matcher($this->buildMatchers());
     }
 
-    /**
-     * @return Matcher\ChainMatcher
-     */
-    protected function buildMatchers()
+    protected function buildMatchers() : Matcher\ChainMatcher
     {
         $scalarMatchers = $this->buildScalarMatchers();
         $orMatcher = $this->buildOrMatcher();
 
-        $chainMatcher = new Matcher\ChainMatcher(array(
+        $chainMatcher = new Matcher\ChainMatcher([
             $scalarMatchers,
             $orMatcher,
             new Matcher\JsonMatcher($orMatcher),
             new Matcher\XmlMatcher($orMatcher),
             new Matcher\TextMatcher($scalarMatchers, $this->buildParser())
-        ));
+        ]);
 
         return $chainMatcher;
     }
 
-    /**
-     * @return Matcher\ChainMatcher
-     */
-    protected function buildOrMatcher()
+    protected function buildOrMatcher() : Matcher\ChainMatcher
     {
         $scalarMatchers = $this->buildScalarMatchers();
         $orMatcher = new Matcher\OrMatcher($scalarMatchers);
         $arrayMatcher = new Matcher\ArrayMatcher(
-            new Matcher\ChainMatcher(array(
+            new Matcher\ChainMatcher([
                 $orMatcher,
                 $scalarMatchers
-            )),
+            ]),
             $this->buildParser()
         );
 
-        $chainMatcher = new Matcher\ChainMatcher(array(
+        $chainMatcher = new Matcher\ChainMatcher([
             $orMatcher,
             $arrayMatcher,
-        ));
+        ]);
 
         return $chainMatcher;
     }
@@ -62,11 +55,11 @@ class SimpleFactory implements Factory
     /**
      * @return Matcher\ChainMatcher
      */
-    protected function buildScalarMatchers()
+    protected function buildScalarMatchers() : Matcher\ChainMatcher
     {
         $parser = $this->buildParser();
 
-        return new Matcher\ChainMatcher(array(
+        return new Matcher\ChainMatcher([
             new Matcher\CallbackMatcher(),
             new Matcher\ExpressionMatcher(),
             new Matcher\NullMatcher(),
@@ -78,13 +71,10 @@ class SimpleFactory implements Factory
             new Matcher\ScalarMatcher(),
             new Matcher\WildcardMatcher(),
             new Matcher\UuidMatcher(),
-        ));
+        ]);
     }
 
-    /**
-     * @return Parser
-     */
-    protected function buildParser()
+    protected function buildParser() : Parser
     {
         return new Parser(new Lexer(), new Parser\ExpanderInitializer());
     }

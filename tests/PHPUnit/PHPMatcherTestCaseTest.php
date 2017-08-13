@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Tests\PHPUnit;
 
 use Coduo\PHPMatcher\PHPUnit\PHPMatcherTestCase;
@@ -17,7 +19,7 @@ class PHPMatcherTestCaseTest extends PHPMatcherTestCase
      */
     public function test_it_throws_an_expectation_failed_exception_if_a_value_does_not_match_the_pattern()
     {
-        $this->assertMatchesPattern('{"foo": "@integer@"}', json_encode(array('foo' => 'bar')));
+        $this->assertMatchesPattern('{"foo": "@integer@"}', json_encode(['foo' => 'bar']));
     }
 
     /**
@@ -27,7 +29,7 @@ class PHPMatcherTestCaseTest extends PHPMatcherTestCase
     public function test_it_creates_a_constraint_for_stubs()
     {
         $mock = $this->getMockBuilder('stdClass')
-            ->setMethods(array('getTitle'))
+            ->setMethods(['getTitle'])
             ->getMock();
 
         $mock->method('getTitle')

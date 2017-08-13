@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Parser;
 
 use Coduo\PHPMatcher\AST\Expander as ExpanderNode;
@@ -12,9 +14,6 @@ use Coduo\PHPMatcher\Matcher\Pattern\Expander;
 
 final class ExpanderInitializer
 {
-    /**
-     * @var array
-     */
     private $expanderDefinitions = [
         Expander\Contains::NAME => Expander\Contains::class,
         Expander\Count::NAME => Expander\Count::class,
@@ -33,12 +32,7 @@ final class ExpanderInitializer
         Expander\StartsWith::NAME => Expander\StartsWith::class,
     ];
 
-    /**
-     * @param string $expanderName
-     * @param string $expanderFQCN Fully-Qualified Class Name that implements PatternExpander interface
-     * @throws UnknownExpanderClassException
-     */
-    public function setExpanderDefinition($expanderName, $expanderFQCN)
+    public function setExpanderDefinition(string $expanderName, string $expanderFQCN)
     {
         if (!class_exists($expanderFQCN)) {
             throw new UnknownExpanderClassException(sprintf("Class \"%s\" does not exists.", $expanderFQCN));
@@ -47,21 +41,12 @@ final class ExpanderInitializer
         $this->expanderDefinitions[$expanderName] = $expanderFQCN;
     }
 
-    /**
-     * @param $expanderName
-     * @return bool
-     */
-    public function hasExpanderDefinition($expanderName)
+    public function hasExpanderDefinition(string $expanderName) : bool
     {
         return array_key_exists($expanderName, $this->expanderDefinitions);
     }
 
-    /**
-     * @param $expanderName
-     * @return string
-     * @throws InvalidArgumentException
-     */
-    public function getExpanderDefinition($expanderName)
+    public function getExpanderDefinition(string $expanderName) : string
     {
         if (!$this->hasExpanderDefinition($expanderName)) {
             throw new InvalidArgumentException(sprintf("Definition for \"%s\" expander does not exists.", $expanderName));
@@ -70,13 +55,7 @@ final class ExpanderInitializer
         return $this->expanderDefinitions[$expanderName];
     }
 
-    /**
-     * @param ExpanderNode $expanderNode
-     * @throws InvalidExpanderTypeException
-     * @throws UnknownExpanderException
-     * @return PatternExpander
-     */
-    public function initialize(ExpanderNode $expanderNode)
+    public function initialize(ExpanderNode $expanderNode) : PatternExpander
     {
         if (!array_key_exists($expanderNode->getName(), $this->expanderDefinitions)) {
             throw new UnknownExpanderException(sprintf("Unknown expander \"%s\"", $expanderNode->getName()));
@@ -85,7 +64,7 @@ final class ExpanderInitializer
         $reflection = new \ReflectionClass($this->expanderDefinitions[$expanderNode->getName()]);
 
         if ($expanderNode->hasArguments()) {
-            $arguments = array();
+            $arguments = [];
             foreach ($expanderNode->getArguments() as $argument) {
                 $arguments[] = ($argument instanceof ExpanderNode)
                     ? $this->initialize($argument)

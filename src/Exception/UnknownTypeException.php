@@ -1,21 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Exception;
 
 class UnknownTypeException extends Exception
 {
     private $type;
 
-    public function __construct($type)
+    public function __construct(string $type)
     {
         $this->type = "@" . $type . "@";
         parent::__construct(sprintf("Type pattern \"%s\" is not supported.", $this->type), 0, null);
     }
 
-    /**
-     * @return mixed
-     */
-    public function getType()
+    public function getType() : string
     {
         return $this->type;
     }

@@ -1,23 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\AST;
 
 final class Type implements Node
 {
-    /**
-     * @var string
-     */
     private $type;
 
-    /**
-     * @param string $type
-     */
-    public function __construct($type)
+    public function __construct(string $type)
     {
         $this->type = $type;
     }
 
-    public function __toString()
+    public function __toString() : string
     {
         return $this->type;
     }

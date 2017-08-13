@@ -1,10 +1,14 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Tests\Matcher;
 
 use Coduo\PHPMatcher\Matcher\ArrayMatcher;
 use Coduo\PHPMatcher\Matcher\ChainMatcher;
+use PHPUnit\Framework\TestCase;
 
-class ChainMatcherTest extends \PHPUnit\Framework\TestCase
+class ChainMatcherTest extends TestCase
 {
     /**
      * @var ArrayMatcher
@@ -26,10 +30,10 @@ class ChainMatcherTest extends \PHPUnit\Framework\TestCase
         $this->firstMatcher = $this->createMock('Coduo\PHPMatcher\Matcher\ValueMatcher');
         $this->secondMatcher = $this->createMock('Coduo\PHPMatcher\Matcher\ValueMatcher');
 
-        $this->matcher = new ChainMatcher(array(
+        $this->matcher = new ChainMatcher([
             $this->firstMatcher,
             $this->secondMatcher
-        ));
+        ]);
     }
 
     public function test_only_one_matcher_can_match_but_none_matchers_match()

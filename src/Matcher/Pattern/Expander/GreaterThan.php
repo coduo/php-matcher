@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Matcher\Pattern\Expander;
 
 use Coduo\PHPMatcher\Matcher\Pattern\PatternExpander;
@@ -9,27 +11,10 @@ final class GreaterThan implements PatternExpander
 {
     const NAME = 'greaterThan';
 
-    /**
-     * @var
-     */
     private $boundary;
 
-    /**
-     * @var null|string
-     */
     private $error;
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function is(string $name)
-    {
-        return self::NAME === $name;
-    }
-
-    /**
-     * @param $boundary
-     */
     public function __construct($boundary)
     {
         if (!is_float($boundary) && !is_int($boundary)) {
@@ -39,11 +24,12 @@ final class GreaterThan implements PatternExpander
         $this->boundary = $boundary;
     }
 
-    /**
-     * @param $value
-     * @return boolean
-     */
-    public function match($value)
+    public static function is(string $name) : bool
+    {
+        return self::NAME === $name;
+    }
+
+    public function match($value) : bool
     {
         if (!is_float($value) && !is_int($value) && !is_numeric($value)) {
             $this->error = sprintf("Value \"%s\" is not a valid number.", new StringConverter($value));
@@ -58,9 +44,6 @@ final class GreaterThan implements PatternExpander
         return $value > $this->boundary;
     }
 
-    /**
-     * @return string|null
-     */
     public function getError()
     {
         return $this->error;

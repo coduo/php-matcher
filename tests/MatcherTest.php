@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Tests;
 
 use Coduo\PHPMatcher\Factory\SimpleFactory;
 use Coduo\PHPMatcher\Matcher;
 use Coduo\PHPMatcher\PHPMatcher;
+use PHPUnit\Framework\TestCase;
 
-class MatcherTest extends \PHPUnit\Framework\TestCase
+class MatcherTest extends TestCase
 {
     /**
      * @var Matcher
@@ -21,43 +24,43 @@ class MatcherTest extends \PHPUnit\Framework\TestCase
 
     public function test_matcher_with_array_value()
     {
-        $value = array(
-            'users' => array(
-                array(
+        $value = [
+            'users' => [
+                [
                     'id' => 1,
                     'firstName' => 'Norbert',
                     'lastName' => 'Orzechowicz',
                     'enabled' => true,
-                ),
-                array(
+                ],
+                [
                     'id' => 2,
                     'firstName' => 'Michał',
                     'lastName' => 'Dąbrowski',
                     'enabled' => true,
-                ),
-            ),
+                ],
+            ],
             'readyToUse' => true,
             'data' => new \stdClass(),
-        );
+        ];
 
-        $expectation = array(
-            'users' => array(
-                array(
+        $expectation = [
+            'users' => [
+                [
                     'id' => '@integer@',
                     'firstName' => '@string@',
                     'lastName' => 'Orzechowicz',
                     'enabled' => '@boolean@',
-                ),
-                array(
+                ],
+                [
                     'id' => '@integer@',
                     'firstName' => '@string@',
                     'lastName' => 'Dąbrowski',
                     'enabled' => '@boolean@',
-                ),
-            ),
+                ],
+            ],
             'readyToUse' => true,
             'data' => '@wildcard@',
-        );
+        ];
 
         $this->assertTrue($this->matcher->match($value, $expectation), $this->matcher->getError());
         $this->assertTrue(PHPMatcher::match($value, $expectation, $error), $error);
@@ -83,8 +86,8 @@ class MatcherTest extends \PHPUnit\Framework\TestCase
 
     public function jsonDataProvider()
     {
-        return array(
-            'matches exactly' => array(
+        return [
+            'matches exactly' => [
                 /** @lang JSON */
                 '{
                     "users":[
@@ -127,8 +130,8 @@ class MatcherTest extends \PHPUnit\Framework\TestCase
                     "prevPage": "@string@",
                     "nextPage": "@string@"
                 }',
-            ),
-            'matches none elements - empty array' => array(
+            ],
+            'matches none elements - empty array' => [
                 /** @lang JSON */
                 '{
                     "users":[],
@@ -143,8 +146,8 @@ class MatcherTest extends \PHPUnit\Framework\TestCase
                     "prevPage": "@string@",
                     "nextPage": "@string@"
                 }',
-            ),
-            'matches one element' => array(
+            ],
+            'matches one element' => [
                 /** @lang JSON */
                 '{
                     "users":[
@@ -174,8 +177,8 @@ class MatcherTest extends \PHPUnit\Framework\TestCase
                     "prevPage": "@string@",
                     "nextPage": "@string@"
                 }',
-            ),
-            'excludes missing property from match for optional property' => array(
+            ],
+            'excludes missing property from match for optional property' => [
                 /** @lang JSON */
                 '{
                     "users":[],
@@ -191,8 +194,8 @@ class MatcherTest extends \PHPUnit\Framework\TestCase
                     "nextPage": "@string@.optional()",
                     "currPage": "@integer@.optional()"
                 }',
-            ),
-        );
+            ],
+        ];
     }
 
     public function test_matcher_with_xml()
@@ -294,10 +297,18 @@ XML;
 
     public function test_matcher_with_callback()
     {
-        $this->assertTrue($this->matcher->match('test', function($value) { return $value === 'test';}));
-        $this->assertTrue(PHPMatcher::match('test', function($value) { return $value === 'test';}));
-        $this->assertFalse($this->matcher->match('test', function($value) { return $value !== 'test';}));
-        $this->assertFalse(PHPMatcher::match('test', function($value) { return $value !== 'test';}));
+        $this->assertTrue($this->matcher->match('test', function ($value) {
+            return $value === 'test';
+        }));
+        $this->assertTrue(PHPMatcher::match('test', function ($value) {
+            return $value === 'test';
+        }));
+        $this->assertFalse($this->matcher->match('test', function ($value) {
+            return $value !== 'test';
+        }));
+        $this->assertFalse(PHPMatcher::match('test', function ($value) {
+            return $value !== 'test';
+        }));
     }
 
     public function test_matcher_with_wildcard()
@@ -328,55 +339,55 @@ XML;
 
     public function scalarValueExamples()
     {
-        return array(
-            array('Norbert Orzechowicz', '@string@'),
-            array(6.66, '@double@'),
-            array(1, '@integer@'),
-            array(array('foo'), '@array@'),
-            array('9f4db639-0e87-4367-9beb-d64e3f42ae18', '@uuid@'),
-        );
+        return [
+            ['Norbert Orzechowicz', '@string@'],
+            [6.66, '@double@'],
+            [1, '@integer@'],
+            [['foo'], '@array@'],
+            ['9f4db639-0e87-4367-9beb-d64e3f42ae18', '@uuid@'],
+        ];
     }
 
     public static function expanderExamples()
     {
-        return array(
-            array("lorem ipsum", "@string@.startsWith(\"lorem\")", true),
-            array("lorem ipsum", "@string@.startsWith(\"LOREM\", true)", true),
-            array("lorem ipsum", "@string@.endsWith(\"ipsum\")", true),
-            array("lorem ipsum", "@string@.endsWith(\"IPSUM\", true)", true),
-            array("lorem ipsum", "@string@.contains(\"lorem\")", true),
-            array("norbert@coduo.pl", "@string@.isEmail()", true),
-            array("lorem ipsum", "@string@.isEmail()", false),
-            array("http://coduo.pl/", "@string@.isUrl()", true),
-            array("lorem ipsum", "@string@.isUrl()", false),
-            array("2014-08-19", "@string@.isDateTime()", true),
-            array(100, "@integer@.lowerThan(101).greaterThan(10)", true),
-            array("", "@string@.isNotEmpty()", false),
-            array("lorem ipsum", "@string@.isNotEmpty()", true),
-            array("", "@string@.isEmpty()", true),
-            array(array("foo", "bar"), "@array@.inArray(\"bar\")", true),
-            array(array(), "@array@.isEmpty()", true),
-            array(array('foo'), "@array@.isEmpty()", false),
-            array(array(1, 2, 3), "@array@.count(3)", true),
-            array(array(1, 2, 3), "@array@.count(4)", false),
-            array("lorem ipsum", "@string@.oneOf(contains(\"lorem\"), contains(\"test\"))", true),
-            array("lorem ipsum", "@string@.oneOf(contains(\"lorem\"), contains(\"test\")).endsWith(\"ipsum\")", true),
-            array("lorem ipsum", "@string@.matchRegex(\"/^lorem \\w+$/\")", true),
-            array("lorem ipsum", "@string@.matchRegex(\"/^foo/\")", false),
-        );
+        return [
+            ["lorem ipsum", "@string@.startsWith(\"lorem\")", true],
+            ["lorem ipsum", "@string@.startsWith(\"LOREM\", true)", true],
+            ["lorem ipsum", "@string@.endsWith(\"ipsum\")", true],
+            ["lorem ipsum", "@string@.endsWith(\"IPSUM\", true)", true],
+            ["lorem ipsum", "@string@.contains(\"lorem\")", true],
+            ["norbert@coduo.pl", "@string@.isEmail()", true],
+            ["lorem ipsum", "@string@.isEmail()", false],
+            ["http://coduo.pl/", "@string@.isUrl()", true],
+            ["lorem ipsum", "@string@.isUrl()", false],
+            ["2014-08-19", "@string@.isDateTime()", true],
+            [100, "@integer@.lowerThan(101).greaterThan(10)", true],
+            ["", "@string@.isNotEmpty()", false],
+            ["lorem ipsum", "@string@.isNotEmpty()", true],
+            ["", "@string@.isEmpty()", true],
+            [["foo", "bar"], "@array@.inArray(\"bar\")", true],
+            [[], "@array@.isEmpty()", true],
+            [['foo'], "@array@.isEmpty()", false],
+            [[1, 2, 3], "@array@.count(3)", true],
+            [[1, 2, 3], "@array@.count(4)", false],
+            ["lorem ipsum", "@string@.oneOf(contains(\"lorem\"), contains(\"test\"))", true],
+            ["lorem ipsum", "@string@.oneOf(contains(\"lorem\"), contains(\"test\")).endsWith(\"ipsum\")", true],
+            ["lorem ipsum", "@string@.matchRegex(\"/^lorem \\w+$/\")", true],
+            ["lorem ipsum", "@string@.matchRegex(\"/^foo/\")", false],
+        ];
     }
 
     public static function orExamples()
     {
-        return array(
-            array("lorem ipsum", "@string@.startsWith(\"lorem\")||@string@.contains(\"lorem\")", true),
-            array("norbert@coduo.pl", "@string@.isEmail()||@null@", true),
-            array(null, "@string@.isEmail()||@null@", true),
-            array(null, "@string@.isEmail()||@null@", true),
-            array("2014-08-19", "@string@.isDateTime()||@integer@", true),
-            array(null, "@integer@||@string@", false),
-            array(1, "@integer@.greaterThan(10)||@string@.contains(\"10\")", false),
-        );
+        return [
+            ["lorem ipsum", "@string@.startsWith(\"lorem\")||@string@.contains(\"lorem\")", true],
+            ["norbert@coduo.pl", "@string@.isEmail()||@null@", true],
+            [null, "@string@.isEmail()||@null@", true],
+            [null, "@string@.isEmail()||@null@", true],
+            ["2014-08-19", "@string@.isDateTime()||@integer@", true],
+            [null, "@integer@||@string@", false],
+            [1, "@integer@.greaterThan(10)||@string@.contains(\"10\")", false],
+        ];
     }
 
     /**
@@ -392,12 +403,12 @@ XML;
 
     public static function nullExamples()
     {
-        return array(
-            array(
+        return [
+            [
                 '{"proformaInvoiceLink":null}', '{"proformaInvoiceLink":null}',
                 '{"proformaInvoiceLink":null, "test":"test"}', '{"proformaInvoiceLink":null, "test":"@string@"}',
                 '{"proformaInvoiceLink":null, "test":"test"}', '{"proformaInvoiceLink":@null@, "test":"@string@"}',
-            ),
-        );
+            ],
+        ];
     }
 }

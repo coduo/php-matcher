@@ -1,10 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Tests\PHPUnit;
 
 use Coduo\PHPMatcher\PHPUnit\PHPMatcherConstraint;
+use PHPUnit\Framework\TestCase;
 
-class PHPMatcherConstraintTest extends \PHPUnit\Framework\TestCase
+class PHPMatcherConstraintTest extends TestCase
 {
     public function test_it_is_a_phpunit_constraint()
     {
@@ -23,13 +26,6 @@ class PHPMatcherConstraintTest extends \PHPUnit\Framework\TestCase
         $constraint = new PHPMatcherConstraint('@string@');
 
         $this->assertFalse($constraint->evaluate(42, '', true));
-    }
-
-    public function test_it_returns_false_if_a_pattern_is_not_a_string()
-    {
-        $constraint = new PHPMatcherConstraint(new \stdClass());
-
-        $this->assertFalse($constraint->evaluate('foo', '', true));
     }
 
     /**

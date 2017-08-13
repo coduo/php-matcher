@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Tests\Matcher\Pattern\Expander;
 
-use Coduo\PHPMatcher\Matcher;
 use Coduo\PHPMatcher\Matcher\Pattern\Expander\InArray;
+use PHPUnit\Framework\TestCase;
 
-class InArrayTest extends \PHPUnit\Framework\TestCase
+class InArrayTest extends TestCase
 {
     /**
      * @dataProvider examplesProvider
@@ -18,11 +20,11 @@ class InArrayTest extends \PHPUnit\Framework\TestCase
 
     public static function examplesProvider()
     {
-        return array(
-            array("ipsum", array("ipsum"), true),
-            array(1, array("foo", 1), true),
-            array(array("foo" => "bar"), array(array("foo" => "bar")), true),
-        );
+        return [
+            ["ipsum", ["ipsum"], true],
+            [1, ["foo", 1], true],
+            [["foo" => "bar"], [["foo" => "bar"]], true],
+        ];
     }
 
     /**
@@ -37,9 +39,9 @@ class InArrayTest extends \PHPUnit\Framework\TestCase
 
     public static function invalidCasesProvider()
     {
-        return array(
-            array("ipsum", array("ipsum lorem"), "Array(1) doesn't have \"ipsum\" element."),
-            array("lorem", new \DateTime(), "InArray expander require \"array\", got \"\\DateTime\"."),
-        );
+        return [
+            ["ipsum", ["ipsum lorem"], "Array(1) doesn't have \"ipsum\" element."],
+            ["lorem", new \DateTime(), "InArray expander require \"array\", got \"\\DateTime\"."],
+        ];
     }
 }

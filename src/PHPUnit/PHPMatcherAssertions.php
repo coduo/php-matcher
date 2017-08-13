@@ -1,25 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\PHPUnit;
+
+use PHPUnit\Framework\TestCase;
 
 trait PHPMatcherAssertions
 {
-    /**
-     * @param string $pattern
-     * @param mixed  $value
-     * @param string $message
-     */
-    protected function assertMatchesPattern($pattern, $value, $message = '')
+    protected function assertMatchesPattern(string $pattern, $value, string $message = '')
     {
-        \PHPUnit\Framework\TestCase::assertThat($value, self::matchesPattern($pattern), $message);
+        TestCase::assertThat($value, self::matchesPattern($pattern), $message);
     }
 
-    /**
-     * @param string $pattern
-     *
-     * @return PHPMatcherConstraint
-     */
-    protected static function matchesPattern($pattern)
+    protected static function matchesPattern(string $pattern) : PHPMatcherConstraint
     {
         return new PHPMatcherConstraint($pattern);
     }

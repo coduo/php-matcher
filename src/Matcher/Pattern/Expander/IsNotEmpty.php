@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Matcher\Pattern\Expander;
 
 use Coduo\PHPMatcher\Matcher\Pattern\PatternExpander;
@@ -11,19 +13,12 @@ final class IsNotEmpty implements PatternExpander
 
     private $error;
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function is(string $name)
+    public static function is(string $name) : bool
     {
         return self::NAME === $name;
     }
 
-    /**
-     * @param $value
-     * @return boolean
-     */
-    public function match($value)
+    public function match($value) : bool
     {
         if (false === $value || (empty($value) && '0' != $value)) {
             $this->error = sprintf("Value %s is not blank.", new StringConverter($value));
@@ -33,9 +28,6 @@ final class IsNotEmpty implements PatternExpander
         return true;
     }
 
-    /**
-     * @return string|null
-     */
     public function getError()
     {
         return $this->error;

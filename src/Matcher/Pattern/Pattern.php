@@ -1,33 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Matcher\Pattern;
 
 interface Pattern
 {
-    /**
-     * @param PatternExpander $expander
-     */
     public function addExpander(PatternExpander $expander);
 
-    /**
-     * @param $value
-     * @return boolean
-     */
-    public function matchExpanders($value);
+    public function matchExpanders($value) : bool;
 
-    /**
-     * Return error message from first expander that doesn't match.
-     *
-     * @return null|string
-     */
     public function getError();
 
-    /**
-     * Checks whether a Pattern has added Expander.
-     *
-     * @param string $expanderName The name of the expander
-     *
-     * @return bool true if the specified pattern has expander, false otherwise
-     */
-    public function hasExpander(string $expanderName);
+    public function hasExpander(string $expanderName) : bool;
 }

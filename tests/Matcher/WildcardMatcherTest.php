@@ -1,9 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Tests\Matcher;
 
 use Coduo\PHPMatcher\Matcher\WildcardMatcher;
+use PHPUnit\Framework\TestCase;
 
-class WildcardMatcherTest extends \PHPUnit\Framework\TestCase
+class WildcardMatcherTest extends TestCase
 {
 
     /**
@@ -32,21 +36,21 @@ class WildcardMatcherTest extends \PHPUnit\Framework\TestCase
 
     public static function data()
     {
-        return array(
-            array("@integer@"),
-            array("foobar"),
-            array(true),
-            array(6.66),
-            array(array("bar")),
-            array(new \stdClass),
-        );
+        return [
+            ["@integer@"],
+            ["foobar"],
+            [true],
+            [6.66],
+            [["bar"]],
+            [new \stdClass],
+        ];
     }
 
     public static function positivePatterns()
     {
-        return array(
-            array("@*@"),
-            array("@wildcard@"),
-        );
+        return [
+            ["@*@"],
+            ["@wildcard@"],
+        ];
     }
 }

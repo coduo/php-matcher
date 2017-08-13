@@ -1,26 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\PHPUnit;
 
 use Coduo\PHPMatcher\Factory\SimpleFactory;
 use Coduo\PHPMatcher\Matcher;
+use PHPUnit\Framework\Constraint\Constraint;
 
-final class PHPMatcherConstraint extends \PHPUnit\Framework\Constraint\Constraint
+final class PHPMatcherConstraint extends Constraint
 {
-    /**
-     * @var string
-     */
     private $pattern;
 
-    /**
-     * @var Matcher
-     */
     private $matcher;
 
-    /**
-     * @param string $pattern
-     */
-    public function __construct($pattern)
+    public function __construct(string $pattern)
     {
         parent::__construct();
 
@@ -28,38 +22,22 @@ final class PHPMatcherConstraint extends \PHPUnit\Framework\Constraint\Constrain
         $this->matcher = $this->createMatcher();
     }
 
-    /**
-     * @return string
-     */
-    public function toString()
+    public function toString() : string
     {
         return 'matches the pattern';
     }
 
-    /**
-     * @param mixed $other
-     *
-     * @return null|string
-     */
     protected function additionalFailureDescription($other)
     {
         return $this->matcher->getError();
     }
 
-    /**
-     * @param mixed $value
-     *
-     * @return bool
-     */
-    protected function matches($value)
+    protected function matches($value) : bool
     {
         return $this->matcher->match($value, $this->pattern);
     }
 
-    /**
-     * @return Matcher
-     */
-    private function createMatcher()
+    private function createMatcher() : Matcher
     {
         $factory = new SimpleFactory();
 

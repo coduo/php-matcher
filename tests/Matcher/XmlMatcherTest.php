@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Tests\Matcher;
 
 use Coduo\PHPMatcher\Lexer;
 use Coduo\PHPMatcher\Matcher;
 use Coduo\PHPMatcher\Parser;
+use PHPUnit\Framework\TestCase;
 
-class XmlMatcherTest extends \PHPUnit\Framework\TestCase
+class XmlMatcherTest extends TestCase
 {
     /**
      * @var Matcher\XmlMatcher
@@ -16,7 +19,7 @@ class XmlMatcherTest extends \PHPUnit\Framework\TestCase
     public function setUp()
     {
         $parser = new Parser(new Lexer(), new Parser\ExpanderInitializer());
-        $scalarMatchers = new Matcher\ChainMatcher(array(
+        $scalarMatchers = new Matcher\ChainMatcher([
             new Matcher\CallbackMatcher(),
             new Matcher\ExpressionMatcher(),
             new Matcher\NullMatcher(),
@@ -27,14 +30,16 @@ class XmlMatcherTest extends \PHPUnit\Framework\TestCase
             new Matcher\NumberMatcher(),
             new Matcher\ScalarMatcher(),
             new Matcher\WildcardMatcher(),
-        ));
+        ]);
 
         $this->matcher = new Matcher\XmlMatcher(
-            new Matcher\ChainMatcher(array(
+            new Matcher\ChainMatcher(
+                [
                 $scalarMatchers,
                 new Matcher\ArrayMatcher($scalarMatchers, $parser)
-            )
-        ));
+                ]
+        )
+        );
     }
 
     /**
@@ -67,45 +72,44 @@ class XmlMatcherTest extends \PHPUnit\Framework\TestCase
     public function test_negative_matches($value, $pattern)
     {
         $this->assertFalse($this->matcher->match($value, $pattern), $this->matcher->getError());
-
     }
 
     public static function positivePatterns()
     {
-        return array(
-            array('<xml></xml>'),
-            array('<users><user>@string@</user></users>'),
-        );
+        return [
+            ['<xml></xml>'],
+            ['<users><user>@string@</user></users>'],
+        ];
     }
 
     public static function negativePatterns()
     {
-        return array(
-            array('<xml '),
-            array('asdkasdasdqwrq'),
-        );
+        return [
+            ['<xml '],
+            ['asdkasdasdqwrq'],
+        ];
     }
 
     public static function positiveMatches()
     {
-        return array(
-            array(
+        return [
+            [
                 '<users><user>Norbert</user><user>Michał</user></users>',
                 '<users><user>@string@</user><user>@string@</user></users>'
-            ),
-            array(
+            ],
+            [
                 '<users><user id="1">Norbert</user></users>',
                 '<users><user id="@string@">@string@</user></users>'
-            ),
-            array(
+            ],
+            [
                 '<users><user><name>Norbert</name><age>25</age></user></users>',
                 '<users><user><name>Norbert</name><age>@string@</age></user></users>'
-            ),
-            array(
+            ],
+            [
                 '<string><![CDATA[Any kid of text here]]></string>',
                 '<string><![CDATA[@string@]]></string>'
-            ),
-            array(
+            ],
+            [
                 <<<XML
 <?xml version="1.0"?>
 <soap:Envelope
@@ -137,21 +141,21 @@ XML
 
 </soap:Envelope>
 XML
-            )
-        );
+            ]
+        ];
     }
 
     public static function negativeMatches()
     {
-        return array(
-            array(
+        return [
+            [
                 '<users><user>Norbert</user><user>Michał</user></users>',
                 '{"users":["Michał","@string@"]}'
-            ),
-            array(
+            ],
+            [
                 '<users><user>Norbert</user><user>Michał</user></users>',
                 '<users><user>@integer@</user><user>@integer@</user></users>'
-            ),
-        );
+            ],
+        ];
     }
 }

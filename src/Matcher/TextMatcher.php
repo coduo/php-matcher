@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Matcher;
 
 use Coduo\PHPMatcher\Exception\UnknownTypeException;
@@ -39,7 +41,7 @@ final class TextMatcher extends Matcher
     /**
      * {@inheritDoc}
      */
-    public function match($value, $pattern)
+    public function match($value, $pattern) : bool
     {
         if (!is_string($value)) {
             $this->error = sprintf("%s \"%s\" is not a valid string.", gettype($value), new StringConverter($value));
@@ -81,7 +83,7 @@ final class TextMatcher extends Matcher
     /**
      * {@inheritDoc}
      */
-    public function canMatch($pattern)
+    public function canMatch($pattern) : bool
     {
         if (!is_string($pattern)) {
             return false;
@@ -108,9 +110,9 @@ final class TextMatcher extends Matcher
      * @param string $patternRegex
      * @return TypePattern[]|array
      */
-    private function replaceTypePatternsWithPlaceholders(&$patternRegex)
+    private function replaceTypePatternsWithPlaceholders(string &$patternRegex) : array
     {
-        $patternsReplacedWithRegex = array();
+        $patternsReplacedWithRegex = [];
         preg_match_all(self::PATTERN_REGEXP, $patternRegex, $matches);
 
         foreach ($matches[0] as $index => $typePatternString) {
@@ -136,7 +138,7 @@ final class TextMatcher extends Matcher
      * @return string
      * @throws \Coduo\PHPMatcher\Exception\UnknownTypeException
      */
-    private function replacePlaceholderWithPatternRegexes($patternRegex, array $patternsReplacedWithRegex)
+    private function replacePlaceholderWithPatternRegexes(string $patternRegex, array $patternsReplacedWithRegex) : string
     {
         $regexConverter = new RegexConverter();
         foreach ($patternsReplacedWithRegex as $index => $typePattern) {
@@ -156,7 +158,7 @@ final class TextMatcher extends Matcher
      * @param string $patternRegex
      * @return string
      */
-    private function prepareRegex($patternRegex)
+    private function prepareRegex(string $patternRegex) : string
     {
         return "/^" . preg_quote($patternRegex, '/') . "$/";
     }

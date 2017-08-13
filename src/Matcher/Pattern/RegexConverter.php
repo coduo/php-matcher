@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Matcher\Pattern;
 
 use Coduo\PHPMatcher\Exception\UnknownTypeException;
 
 final class RegexConverter
 {
-    public function toRegex(TypePattern $typePattern)
+    public function toRegex(TypePattern $typePattern) : string
     {
         switch ($typePattern->getType()) {
             case 'string':

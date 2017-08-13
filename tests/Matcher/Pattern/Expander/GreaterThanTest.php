@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Tests\Matcher\Pattern\Expander;
 
-use Coduo\PHPMatcher\Matcher;
 use Coduo\PHPMatcher\Matcher\Pattern\Expander\GreaterThan;
+use PHPUnit\Framework\TestCase;
 
-class GreaterThanTest extends \PHPUnit\Framework\TestCase
+class GreaterThanTest extends TestCase
 {
     /**
      * @dataProvider examplesProvider
@@ -18,13 +20,13 @@ class GreaterThanTest extends \PHPUnit\Framework\TestCase
 
     public static function examplesProvider()
     {
-        return array(
-            array(10, 10.5, true),
-            array(-20, -10.5, true),
-            array(10, 1, false),
-            array(1, 1, false),
-            array(10, "20", true)
-        );
+        return [
+            [10, 10.5, true],
+            [-20, -10.5, true],
+            [10, 1, false],
+            [1, 1, false],
+            [10, "20", true]
+        ];
     }
 
     /**
@@ -39,10 +41,10 @@ class GreaterThanTest extends \PHPUnit\Framework\TestCase
 
     public static function invalidCasesProvider()
     {
-        return array(
-            array(1, "ipsum lorem", "Value \"ipsum lorem\" is not a valid number."),
-            array(10, 5, "Value \"5\" is not greater than \"10\"."),
-            array(5, 5, "Value \"5\" is not greater than \"5\"."),
-        );
+        return [
+            [1, "ipsum lorem", "Value \"ipsum lorem\" is not a valid number."],
+            [10, 5, "Value \"5\" is not greater than \"10\"."],
+            [5, 5, "Value \"5\" is not greater than \"5\"."],
+        ];
     }
 }

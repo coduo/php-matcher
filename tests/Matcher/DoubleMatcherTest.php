@@ -1,11 +1,15 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Tests\Matcher;
 
 use Coduo\PHPMatcher\Lexer;
 use Coduo\PHPMatcher\Matcher\DoubleMatcher;
 use Coduo\PHPMatcher\Parser;
+use PHPUnit\Framework\TestCase;
 
-class DoubleMatcherTest extends \PHPUnit\Framework\TestCase
+class DoubleMatcherTest extends TestCase
 {
     /**
      * @var DoubleMatcher
@@ -60,46 +64,46 @@ class DoubleMatcherTest extends \PHPUnit\Framework\TestCase
 
     public static function positiveCanMatchData()
     {
-        return array(
-            array("@double@")
-        );
+        return [
+            ["@double@"]
+        ];
     }
 
     public static function positiveMatchData()
     {
-        return array(
-            array(10.1, "@double@"),
-            array(10.1, "@double@.lowerThan(50.12).greaterThan(10)"),
-        );
+        return [
+            [10.1, "@double@"],
+            [10.1, "@double@.lowerThan(50.12).greaterThan(10)"],
+        ];
     }
 
     public static function negativeCanMatchData()
     {
-        return array(
-            array("@double"),
-            array("double"),
-            array(1),
-        );
+        return [
+            ["@double"],
+            ["double"],
+            [1],
+        ];
     }
 
     public static function negativeMatchData()
     {
-        return array(
-            array("1", "@double@"),
-            array(new \DateTime(),  "@double@"),
-            array(10,  "@double@"),
-            array(4.9, "@double@.greaterThan(5)"),
-            array(4.9, "@double@.lowerThan(20).greaterThan(5)"),
-        );
+        return [
+            ["1", "@double@"],
+            [new \DateTime(),  "@double@"],
+            [10,  "@double@"],
+            [4.9, "@double@.greaterThan(5)"],
+            [4.9, "@double@.lowerThan(20).greaterThan(5)"],
+        ];
     }
 
     public static function negativeMatchDescription()
     {
-        return array(
-            array(new \stdClass,  "@integer@", "object \"\\stdClass\" is not a valid double."),
-            array(25, "@integer@", "integer \"25\" is not a valid double."),
-            array(false, "@integer@", "boolean \"false\" is not a valid double."),
-            array(array('test'), "@integer@", "array \"Array(1)\" is not a valid double.")
-        );
+        return [
+            [new \stdClass,  "@integer@", "object \"\\stdClass\" is not a valid double."],
+            [25, "@integer@", "integer \"25\" is not a valid double."],
+            [false, "@integer@", "boolean \"false\" is not a valid double."],
+            [['test'], "@integer@", "array \"Array(1)\" is not a valid double."]
+        ];
     }
 }

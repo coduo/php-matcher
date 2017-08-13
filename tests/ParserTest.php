@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Tests;
 
 use Coduo\PHPMatcher\AST\Expander;
 use Coduo\PHPMatcher\Lexer;
 use Coduo\PHPMatcher\Parser;
+use PHPUnit\Framework\TestCase;
 
-class ParserTest extends \PHPUnit\Framework\TestCase
+class ParserTest extends TestCase
 {
     /**
      * @var Parser
@@ -41,23 +44,23 @@ class ParserTest extends \PHPUnit\Framework\TestCase
         $pattern = "@type@.expander('arg1', 2, 2.24, \"arg3\")";
         $this->assertEquals("type", $this->parser->getAST($pattern)->getType());
         $expanders = $this->parser->getAST($pattern)->getExpanders();
-        $expectedArguments = array(
+        $expectedArguments = [
             "arg1",
             2,
             2.24,
             "arg3"
-        );
+        ];
         $this->assertEquals($expectedArguments, $expanders[0]->getArguments());
     }
 
     public function test_many_expanders()
     {
         $pattern = "@type@.expander('arg1', 2, 2.24, \"arg3\", null, false).expander1().expander(1,2,3, true, null)";
-        $expanderArguments = array(
-            array('arg1', 2, 2.24, 'arg3', null, false),
-            array(),
-            array(1, 2, 3, true, null)
-        );
+        $expanderArguments = [
+            ['arg1', 2, 2.24, 'arg3', null, false],
+            [],
+            [1, 2, 3, true, null]
+        ];
 
         $expanders = $this->parser->getAST($pattern)->getExpanders();
         $this->assertEquals("type", $this->parser->getAST($pattern)->getType());
@@ -81,56 +84,56 @@ class ParserTest extends \PHPUnit\Framework\TestCase
 
     public static function expandersWithArrayArguments()
     {
-        return array(
-            array(
+        return [
+            [
                 "@type@.expander({\"foo\":\"bar\"})",
-                array(array("foo" => "bar"))
-            ),
-            array(
+                [["foo" => "bar"]]
+            ],
+            [
                 "@type@.expander({1 : \"bar\"})",
-                array(array(1 => "bar"))
-            ),
-            array(
+                [[1 => "bar"]]
+            ],
+            [
                 "@type@.expander({\"foo\":\"bar\"}, {\"foz\" : \"baz\"})",
-                array(array("foo" => "bar"), array("foz" => "baz"))
-            ),
-            array(
+                [["foo" => "bar"], ["foz" => "baz"]]
+            ],
+            [
                 "@type@.expander({1 : 1})",
-                array(array(1 => 1))
-            ),
-            array(
+                [[1 => 1]]
+            ],
+            [
                 "@type@.expander({1 : true})",
-                array(array(1 => true))
-            ),
-            array(
+                [[1 => true]]
+            ],
+            [
                 "@type@.expander({1 : 1}, {1 : 1})",
-                array(array(1 => 1), array(1 => 1))
-            ),
-            array(
+                [[1 => 1], [1 => 1]]
+            ],
+            [
                 "@type@.expander({1 : {\"foo\" : \"bar\"}}, {1 : 1})",
-                array(array(1 => array("foo" => "bar")), array(1 => 1))
-            ),
-            array(
+                [[1 => ["foo" => "bar"]], [1 => 1]]
+            ],
+            [
                 "@type@.expander({null: \"bar\"})",
-                array(array("" => "bar"))
-            ),
-            array(
+                [["" => "bar"]]
+            ],
+            [
                 "@type@.expander({\"foo\": null})",
-                array(array("foo" => null))
-            ),
-            array(
+                [["foo" => null]]
+            ],
+            [
                 "@type@.expander({\"foo\" : \"bar\", \"foz\" : \"baz\"})",
-                array(array("foo" => "bar", "foz" => "baz"))
-            ),
-            array(
+                [["foo" => "bar", "foz" => "baz"]]
+            ],
+            [
                 "@type@.expander({\"foo\" : \"bar\", \"foo\" : \"baz\"})",
-                array(array("foo" => "baz"))
-            ),
-            array(
+                [["foo" => "baz"]]
+            ],
+            [
                 "@type@.expander({\"foo\" : \"bar\", 1 : {\"first\" : 1, \"second\" : 2}})",
-                array(array("foo" => "bar", 1 => array("first" => 1, "second" => 2)))
-            )
-        );
+                [["foo" => "bar", 1 => ["first" => 1, "second" => 2]]]
+            ]
+        ];
     }
 
     public function test_expanders_that_takes_other_expanders_as_arguments()
@@ -145,10 +148,10 @@ class ParserTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals(
             $expanders[0]->getArguments(),
-            array(
+            [
                 $firstExpander,
                 $secondExpander
-            )
+            ]
         );
     }
 }

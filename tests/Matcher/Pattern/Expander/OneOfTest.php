@@ -1,11 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Tests\Matcher\Pattern\Expander;
 
 use Coduo\PHPMatcher\Matcher\Pattern\Expander\Contains;
 use Coduo\PHPMatcher\Matcher\Pattern\Expander\OneOf;
+use PHPUnit\Framework\TestCase;
 
-class OneOfTest extends \PHPUnit\Framework\TestCase
+class OneOfTest extends TestCase
 {
     /**
      * @expectedException \InvalidArgumentException
@@ -22,7 +25,7 @@ class OneOfTest extends \PHPUnit\Framework\TestCase
      */
     public function test_invalid_argument_types()
     {
-        $expander = new OneOf("arg1", array("test"));
+        $expander = new OneOf("arg1", ["test"]);
     }
 
     public function test_positive_match()

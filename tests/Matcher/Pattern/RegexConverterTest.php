@@ -1,11 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Tests\Matcher\Pattern;
 
 use Coduo\PHPMatcher\Matcher\Pattern\TypePattern;
 use Coduo\PHPMatcher\Matcher\Pattern\RegexConverter;
+use PHPUnit\Framework\TestCase;
 
-class RegexConverterTest  extends \PHPUnit\Framework\TestCase
+class RegexConverterTest extends TestCase
 {
     /**
      * @var RegexConverter

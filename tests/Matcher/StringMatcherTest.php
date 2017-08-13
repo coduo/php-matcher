@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Tests\Matcher;
 
 use Coduo\PHPMatcher\Lexer;
 use Coduo\PHPMatcher\Matcher\StringMatcher;
 use Coduo\PHPMatcher\Parser;
+use PHPUnit\Framework\TestCase;
 
-class StringMatcherTest extends \PHPUnit\Framework\TestCase
+class StringMatcherTest extends TestCase
 {
     /**
      * @var StringMatcher
@@ -61,47 +64,47 @@ class StringMatcherTest extends \PHPUnit\Framework\TestCase
 
     public static function positiveCanMatchData()
     {
-        return array(
-            array("@string@")
-        );
+        return [
+            ["@string@"]
+        ];
     }
 
     public static function positiveMatchData()
     {
-        return array(
-            array("lorem ipsum", "@string@"),
-            array("lorem ipsum", "@string@.isNotEmpty()"),
-            array("lorem ipsum", "@string@.startsWith('lorem')"),
-            array("lorem ipsum", "@string@.endsWith('ipsum')"),
-            array("lorem ipsum dolor", "@string@.startsWith('lorem').contains('ipsum').endsWith('dolor')"),
-        );
+        return [
+            ["lorem ipsum", "@string@"],
+            ["lorem ipsum", "@string@.isNotEmpty()"],
+            ["lorem ipsum", "@string@.startsWith('lorem')"],
+            ["lorem ipsum", "@string@.endsWith('ipsum')"],
+            ["lorem ipsum dolor", "@string@.startsWith('lorem').contains('ipsum').endsWith('dolor')"],
+        ];
     }
 
     public static function negativeCanMatchData()
     {
-        return array(
-            array("@string"),
-            array("string"),
-            array(1)
-        );
+        return [
+            ["@string"],
+            ["string"],
+            [1]
+        ];
     }
 
     public static function negativeMatchData()
     {
-        return array(
-            array(1, "@string@"),
-            array(0,  "@string@")
-        );
+        return [
+            [1, "@string@"],
+            [0,  "@string@"]
+        ];
     }
 
     public static function negativeMatchDescription()
     {
-        return array(
-            array(new \stdClass,  "@string@", "object \"\\stdClass\" is not a valid string."),
-            array(1.1, "@integer@", "double \"1.1\" is not a valid string."),
-            array(false, "@double@", "boolean \"false\" is not a valid string."),
-            array(1, "@array@", "integer \"1\" is not a valid string."),
-            array("lorem ipsum", "@array@.startsWith('ipsum')", "string \"lorem ipsum\" doesn't starts with string \"ipsum\".")
-        );
+        return [
+            [new \stdClass,  "@string@", "object \"\\stdClass\" is not a valid string."],
+            [1.1, "@integer@", "double \"1.1\" is not a valid string."],
+            [false, "@double@", "boolean \"false\" is not a valid string."],
+            [1, "@array@", "integer \"1\" is not a valid string."],
+            ["lorem ipsum", "@array@.startsWith('ipsum')", "string \"lorem ipsum\" doesn't starts with string \"ipsum\"."]
+        ];
     }
 }

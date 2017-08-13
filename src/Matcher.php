@@ -1,30 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher;
 
 use Coduo\PHPMatcher\Matcher\ValueMatcher;
 
 final class Matcher
 {
-    /**
-     * @var ValueMatcher
-     */
     private $matcher;
 
-    /**
-     * @param ValueMatcher $matcher
-     */
     public function __construct(ValueMatcher $matcher)
     {
         $this->matcher = $matcher;
     }
 
-    /**
-     * @param mixed $value
-     * @param mixed $pattern
-     * @return bool
-     */
-    public function match($value, $pattern)
+    public function match($value, $pattern) : bool
     {
         return $this->matcher->match($value, $pattern);
     }

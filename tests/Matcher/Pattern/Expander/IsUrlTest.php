@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Tests\Matcher\Pattern\Expander;
 
-use Coduo\PHPMatcher\Matcher;
 use Coduo\PHPMatcher\Matcher\Pattern\Expander\IsUrl;
+use PHPUnit\Framework\TestCase;
 
-class IsUrlTest extends \PHPUnit\Framework\TestCase
+class IsUrlTest extends TestCase
 {
     /**
      * @dataProvider examplesUrlsProvider
@@ -18,14 +20,14 @@ class IsUrlTest extends \PHPUnit\Framework\TestCase
 
     public static function examplesUrlsProvider()
     {
-        return array(
-            array("http://example.com/test.html", true),
-            array("https://example.com/test.html", true),
-            array("https://example.com/user/{id}/", true),
-            array("mailto:email@example.com", true),
-            array("//example.com/test/", false),
-            array("example", false),
-            array("", false)
-        );
+        return [
+            ["http://example.com/test.html", true],
+            ["https://example.com/test.html", true],
+            ["https://example.com/user/{id}/", true],
+            ["mailto:email@example.com", true],
+            ["//example.com/test/", false],
+            ["example", false],
+            ["", false]
+        ];
     }
 }

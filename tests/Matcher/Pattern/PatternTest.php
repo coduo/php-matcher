@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Tests\Matcher\Pattern;
 
 use Coduo\PHPMatcher\Matcher\Pattern\Expander\IsEmail;
@@ -7,8 +9,9 @@ use Coduo\PHPMatcher\Matcher\Pattern\Expander\IsEmpty;
 use Coduo\PHPMatcher\Matcher\Pattern\Expander\Optional;
 use Coduo\PHPMatcher\Matcher\Pattern\Pattern;
 use Coduo\PHPMatcher\Matcher\Pattern\TypePattern;
+use PHPUnit\Framework\TestCase;
 
-class PatternTest  extends \PHPUnit\Framework\TestCase
+class PatternTest extends TestCase
 {
     /**
      * @var Pattern
@@ -33,12 +36,12 @@ class PatternTest  extends \PHPUnit\Framework\TestCase
 
     public static function examplesProvider()
     {
-        return array(
-            array("isEmail", true),
-            array("isEmpty", true),
-            array("optional", true),
-            array("isUrl", false),
-            array("non existing expander", false),
-        );
+        return [
+            ["isEmail", true],
+            ["isEmpty", true],
+            ["optional", true],
+            ["isUrl", false],
+            ["non existing expander", false],
+        ];
     }
 }

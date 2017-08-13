@@ -1,9 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Tests\Matcher;
 
 use Coduo\PHPMatcher\Matcher\NumberMatcher;
+use PHPUnit\Framework\TestCase;
 
-class NumberMatcherTest extends \PHPUnit\Framework\TestCase
+class NumberMatcherTest extends TestCase
 {
     /**
      * @dataProvider positiveCanMatchData
@@ -53,43 +57,43 @@ class NumberMatcherTest extends \PHPUnit\Framework\TestCase
 
     public static function positiveCanMatchData()
     {
-        return array(
-            array("@number@")
-        );
+        return [
+            ["@number@"]
+        ];
     }
 
     public static function positiveMatchData()
     {
-        return array(
-            array(10.1, "@number@"),
-            array(10, "@number@"),
-            array("25", "@number@"),
-        );
+        return [
+            [10.1, "@number@"],
+            [10, "@number@"],
+            ["25", "@number@"],
+        ];
     }
 
     public static function negativeCanMatchData()
     {
-        return array(
-            array("@number"),
-            array("number"),
-            array(1)
-        );
+        return [
+            ["@number"],
+            ["number"],
+            [1]
+        ];
     }
 
     public static function negativeMatchData()
     {
-        return array(
-            array(array("test"), "@number@"),
-            array(new \DateTime(),  "@number@"),
-        );
+        return [
+            [["test"], "@number@"],
+            [new \DateTime(),  "@number@"],
+        ];
     }
 
     public static function negativeMatchDescription()
     {
-        return array(
-            array(new \stdClass,  "@number@", "object \"\\stdClass\" is not a valid number."),
-            array(false, "@number@", "boolean \"false\" is not a valid number."),
-            array(array('test'), "@number@", "array \"Array(1)\" is not a valid number.")
-        );
+        return [
+            [new \stdClass,  "@number@", "object \"\\stdClass\" is not a valid number."],
+            [false, "@number@", "boolean \"false\" is not a valid number."],
+            [['test'], "@number@", "array \"Array(1)\" is not a valid number."]
+        ];
     }
 }

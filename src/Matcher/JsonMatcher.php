@@ -1,28 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Matcher;
 
 use Coduo\PHPMatcher\Matcher\Pattern\Assert\Json;
 
 final class JsonMatcher extends Matcher
 {
-    /**
-     * @var
-     */
     private $matcher;
 
-    /**
-     * @param ValueMatcher $matcher
-     */
     public function __construct(ValueMatcher $matcher)
     {
         $this->matcher = $matcher;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function match($value, $pattern)
+    public function match($value, $pattern) : bool
     {
         if (parent::match($value, $pattern)) {
             return true;
@@ -33,7 +26,7 @@ final class JsonMatcher extends Matcher
             return false;
         }
 
-        if (!Json::isValidPattern($pattern) ) {
+        if (!Json::isValidPattern($pattern)) {
             $this->error = sprintf("Invalid given JSON of pattern. %s", $this->getErrorMessage());
             return false;
         }
@@ -48,17 +41,14 @@ final class JsonMatcher extends Matcher
         return true;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function canMatch($pattern)
+    public function canMatch($pattern) : bool
     {
         return Json::isValidPattern($pattern);
     }
 
     private function getErrorMessage()
     {
-        switch(json_last_error()) {
+        switch (json_last_error()) {
             case JSON_ERROR_DEPTH:
                 return 'Maximum stack depth exceeded';
             case JSON_ERROR_STATE_MISMATCH:

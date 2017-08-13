@@ -1,13 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Tests\Matcher\Pattern\Expander;
 
 use Coduo\PHPMatcher\Matcher\Pattern\Expander\MatchRegex;
+use PHPUnit\Framework\TestCase;
 
-/**
- * @author Benjamin Lazarecki <benjamin.lazarecki@gmail.com>
- */
-class MatchRegexTest extends \PHPUnit\Framework\TestCase
+class MatchRegexTest extends TestCase
 {
     /**
      * @dataProvider examplesProvider
@@ -21,11 +21,11 @@ class MatchRegexTest extends \PHPUnit\Framework\TestCase
 
     public static function examplesProvider()
     {
-        return array(
-            array(true, null, '/^\w$/', 'a'),
-            array(false, 'string "aa" don\'t match pattern /^\w$/.', '/^\w$/', 'aa'),
-            array(false, 'Match expander require "string", got "Array(0)".', '/^\w$/', array()),
-        );
+        return [
+            [true, null, '/^\w$/', 'a'],
+            [false, 'string "aa" don\'t match pattern /^\w$/.', '/^\w$/', 'aa'],
+            [false, 'Match expander require "string", got "Array(0)".', '/^\w$/', []],
+        ];
     }
 
     /**

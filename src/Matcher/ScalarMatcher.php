@@ -1,15 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Matcher;
 
 use Coduo\ToString\StringConverter;
 
 final class ScalarMatcher extends Matcher
 {
-    /**
-     * {@inheritDoc}
-     */
-    public function match($value, $pattern)
+    public function match($value, $pattern) : bool
     {
         if ($value !== $pattern) {
             $this->error = sprintf("\"%s\" does not match \"%s\".", new StringConverter($value), new StringConverter($pattern));
@@ -19,10 +18,7 @@ final class ScalarMatcher extends Matcher
         return true;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function canMatch($pattern)
+    public function canMatch($pattern) : bool
     {
         return is_scalar($pattern);
     }

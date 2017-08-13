@@ -1,11 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher;
 
-use Coduo\PHPMatcher\AST;
 use Coduo\PHPMatcher\Exception\Exception;
 use Coduo\PHPMatcher\Exception\PatternException;
-use Coduo\PHPMatcher\Exception\UnknownExpanderException;
 use Coduo\PHPMatcher\Matcher\Pattern;
 use Coduo\PHPMatcher\Parser\ExpanderInitializer;
 
@@ -13,30 +13,17 @@ final class Parser
 {
     const NULL_VALUE = 'null';
 
-    /**
-     * @var Lexer
-     */
     private $lexer;
 
-    /**
-     * @var ExpanderInitializer
-     */
     private $expanderInitializer;
 
-    /**
-     * @param Lexer $lexer
-     */
     public function __construct(Lexer $lexer, ExpanderInitializer $expanderInitializer)
     {
         $this->lexer = $lexer;
         $this->expanderInitializer = $expanderInitializer;
     }
 
-    /**
-     * @param string $pattern
-     * @return bool
-     */
-    public function hasValidSyntax($pattern)
+    public function hasValidSyntax(string $pattern) : bool
     {
         try {
             $this->getAST($pattern);
@@ -46,12 +33,7 @@ final class Parser
         }
     }
 
-    /**
-     * @param string $pattern
-     * @throws UnknownExpanderException
-     * @return Pattern\TypePattern
-     */
-    public function parse($pattern)
+    public function parse(string $pattern) : Pattern\TypePattern
     {
         $AST = $this->getAST($pattern);
         $pattern = new Pattern\TypePattern((string) $AST->getType());
@@ -62,22 +44,13 @@ final class Parser
         return $pattern;
     }
 
-    /**
-     * @param $pattern
-     * @return AST\Pattern
-     */
-    public function getAST($pattern)
+    public function getAST(string $pattern) : AST\Pattern
     {
         $this->lexer->setInput($pattern);
         return $this->getPattern();
     }
 
-    /**
-     * Create AST root
-     *
-     * @return AST\Pattern
-     */
-    private function getPattern()
+    private function getPattern() : AST\Pattern
     {
         $this->lexer->moveNext();
 
@@ -99,18 +72,16 @@ final class Parser
         return $pattern;
     }
 
-    /**
-     * @param AST\Pattern $pattern
-     */
     private function addExpanderNodes(AST\Pattern $pattern)
     {
-        while(($expander = $this->getNextExpanderNode()) !== null)  {
+        while (($expander = $this->getNextExpanderNode()) !== null) {
             $pattern->addExpander($expander);
         }
     }
 
     /**
      * Try to get next expander, return null if there is no expander left
+     *
      * @return AST\Expander|null
      */
     private function getNextExpanderNode()
@@ -138,10 +109,6 @@ final class Parser
         return $expander;
     }
 
-    /**
-     * @return mixed
-     * @throws PatternException
-     */
     private function getExpanderName()
     {
         if ($this->lexer->lookahead['type'] !== Lexer::T_EXPANDER_NAME) {
@@ -160,10 +127,10 @@ final class Parser
      */
     private function addArgumentValues(AST\Expander $expander)
     {
-        while(($argument = $this->getNextArgumentValue()) !== null) {
+        while (($argument = $this->getNextArgumentValue()) !== null) {
             $argument = ($argument === self::NULL_VALUE) ? null : $argument;
             $expander->addArgument($argument);
-            if (!$this->lexer->isNextToken(Lexer::T_COMMA)){
+            if (!$this->lexer->isNextToken(Lexer::T_COMMA)) {
                 break;
             }
 
@@ -177,16 +144,17 @@ final class Parser
 
     /**
      * Try to get next argument. Return false if there are no arguments left before ")"
+     *
      * @return null|mixed
      */
     private function getNextArgumentValue()
     {
-        $validArgumentTypes = array(
+        $validArgumentTypes = [
             Lexer::T_STRING,
             Lexer::T_NUMBER,
             Lexer::T_BOOLEAN,
             Lexer::T_NULL
-        );
+        ];
 
         if ($this->lexer->isNextToken(Lexer::T_CLOSE_PARENTHESIS)) {
             return ;
@@ -215,12 +183,9 @@ final class Parser
         return $argument;
     }
 
-    /**
-     * return array
-     */
-    private function getArrayArgument()
+    private function getArrayArgument() : array
     {
-        $arrayArgument = array();
+        $arrayArgument = [];
         $this->lexer->moveNext();
 
         while ($this->getNextArrayElement($arrayArgument) !== null) {
@@ -236,11 +201,6 @@ final class Parser
         return $arrayArgument;
     }
 
-    /**
-     * @param array $array
-     * @return bool
-     * @throws PatternException
-     */
     private function getNextArrayElement(array &$array)
     {
         if ($this->lexer->isNextToken(Lexer::T_CLOSE_CURLY_BRACE)) {
@@ -272,10 +232,7 @@ final class Parser
         return true;
     }
 
-    /**
-     * @return bool
-     */
-    private function isNextCloseParenthesis()
+    private function isNextCloseParenthesis() : bool
     {
         $isCloseParenthesis = $this->lexer->isNextToken(Lexer::T_CLOSE_PARENTHESIS);
         $this->lexer->moveNext();
@@ -284,11 +241,11 @@ final class Parser
     }
 
     /**
-     * @param $unexpectedToken
-     * @param null $expected
+     * @param array $unexpectedToken
+     * @param string $expected
      * @throws PatternException
      */
-    private function unexpectedSyntaxError($unexpectedToken, $expected = null)
+    private function unexpectedSyntaxError(array $unexpectedToken, string $expected = null)
     {
         $tokenPos = (isset($unexpectedToken['position'])) ? $unexpectedToken['position'] : '-1';
         $message  = sprintf("line 0, col %d: Error: ", $tokenPos);
@@ -299,12 +256,12 @@ final class Parser
     }
 
     /**
-     * @param null $expected
+     * @param string $expected
      * @throws PatternException
      */
-    private function unexpectedEndOfString($expected = null)
+    private function unexpectedEndOfString(string $expected = null)
     {
-        $tokenPos = (isset($this->lexer->token['position'])) ? $this->lexer->token['position'] + strlen($this->lexer->token['value']) : '-1';
+        $tokenPos = (isset($this->lexer->token['position'])) ? $this->lexer->token['position'] + strlen((string) $this->lexer->token['value']) : '-1';
         $message  = sprintf("line 0, col %d: Error: ", $tokenPos);
         $message .= (isset($expected)) ? sprintf("Expected \"%s\", got end of string.", $expected) : "Unexpected";
         $message .= "end of string";
@@ -312,10 +269,7 @@ final class Parser
         throw PatternException::syntaxError($message);
     }
 
-    /**
-     * @return bool
-     */
-    private function endOfPattern()
+    private function endOfPattern() : bool
     {
         return is_null($this->lexer->lookahead);
     }

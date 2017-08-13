@@ -1,11 +1,15 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Tests\Matcher;
 
 use Coduo\PHPMatcher\Lexer;
 use Coduo\PHPMatcher\Matcher\IntegerMatcher;
 use Coduo\PHPMatcher\Parser;
+use PHPUnit\Framework\TestCase;
 
-class IntegerMatcherTest extends \PHPUnit\Framework\TestCase
+class IntegerMatcherTest extends TestCase
 {
     /**
      * @var IntegerMatcher
@@ -60,43 +64,43 @@ class IntegerMatcherTest extends \PHPUnit\Framework\TestCase
 
     public static function positiveCanMatchData()
     {
-        return array(
-            array("@integer@")
-        );
+        return [
+            ["@integer@"]
+        ];
     }
 
     public static function positiveMatchData()
     {
-        return array(
-            array(10, "@integer@"),
-            array(10, "@integer@.lowerThan(50).greaterThan(1)"),
-        );
+        return [
+            [10, "@integer@"],
+            [10, "@integer@.lowerThan(50).greaterThan(1)"],
+        ];
     }
 
     public static function negativeCanMatchData()
     {
-        return array(
-            array("@integer"),
-            array("integer"),
-            array(1)
-        );
+        return [
+            ["@integer"],
+            ["integer"],
+            [1]
+        ];
     }
 
     public static function negativeMatchData()
     {
-        return array(
-            array("1", "@integer@"),
-            array(new \DateTime(),  "@integer@")
-        );
+        return [
+            ["1", "@integer@"],
+            [new \DateTime(),  "@integer@"]
+        ];
     }
 
     public static function negativeMatchDescription()
     {
-        return array(
-            array(new \stdClass,  "@integer@", "object \"\\stdClass\" is not a valid integer."),
-            array(1.1, "@integer@", "double \"1.1\" is not a valid integer."),
-            array(false, "@integer@", "boolean \"false\" is not a valid integer."),
-            array(array('test'), "@integer@", "array \"Array(1)\" is not a valid integer.")
-        );
+        return [
+            [new \stdClass,  "@integer@", "object \"\\stdClass\" is not a valid integer."],
+            [1.1, "@integer@", "double \"1.1\" is not a valid integer."],
+            [false, "@integer@", "boolean \"false\" is not a valid integer."],
+            [['test'], "@integer@", "array \"Array(1)\" is not a valid integer."]
+        ];
     }
 }

@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Tests\Matcher\Pattern\Expander;
 
-use Coduo\PHPMatcher\Matcher;
 use Coduo\PHPMatcher\Matcher\Pattern\Expander\Count;
+use PHPUnit\Framework\TestCase;
 
-class CountTest extends \PHPUnit\Framework\TestCase
+class CountTest extends TestCase
 {
     /**
      * @dataProvider examplesProvider
@@ -18,10 +20,10 @@ class CountTest extends \PHPUnit\Framework\TestCase
 
     public static function examplesProvider()
     {
-        return array(
-            array(1, array("ipsum"), true),
-            array(2, array("foo", 1), true),
-        );
+        return [
+            [1, ["ipsum"], true],
+            [2, ["foo", 1], true],
+        ];
     }
 
     /**
@@ -36,9 +38,9 @@ class CountTest extends \PHPUnit\Framework\TestCase
 
     public static function invalidCasesProvider()
     {
-        return array(
-            array(2, array(1, 2, 3), "Expected count of Array(3) is 2."),
-            array(2, new \DateTime(), "Count expander require \"array\", got \"\\DateTime\"."),
-        );
+        return [
+            [2, [1, 2, 3], "Expected count of Array(3) is 2."],
+            [2, new \DateTime(), "Count expander require \"array\", got \"\\DateTime\"."],
+        ];
     }
 }
