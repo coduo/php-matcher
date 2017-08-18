@@ -9,6 +9,8 @@ use Coduo\ToString\StringConverter;
 
 final class IntegerMatcher extends Matcher
 {
+    const PATTERN = 'integer';
+
     private $parser;
 
     public function __construct(Parser $parser)
@@ -38,6 +40,6 @@ final class IntegerMatcher extends Matcher
             return false;
         }
 
-        return $this->parser->hasValidSyntax($pattern) && $this->parser->parse($pattern)->is('integer');
+        return $this->parser->hasValidSyntax($pattern) && $this->parser->parse($pattern)->is(self::PATTERN);
     }
 }

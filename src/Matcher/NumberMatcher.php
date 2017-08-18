@@ -4,11 +4,19 @@ declare(strict_types=1);
 
 namespace Coduo\PHPMatcher\Matcher;
 
+use Coduo\PHPMatcher\Parser;
 use Coduo\ToString\StringConverter;
 
 final class NumberMatcher extends Matcher
 {
-    const NUMBER_PATTERN = '/^@number@$/';
+    const PATTERN = 'number';
+
+    private $parser;
+
+    public function __construct(Parser $parser)
+    {
+        $this->parser = $parser;
+    }
 
     public function match($value, $pattern) : bool
     {
@@ -22,6 +30,10 @@ final class NumberMatcher extends Matcher
 
     public function canMatch($pattern) : bool
     {
-        return is_string($pattern) && 0 !== preg_match(self::NUMBER_PATTERN, $pattern);
+        if (!is_string($pattern)) {
+            return false;
+        }
+
+        return $this->parser->hasValidSyntax($pattern) && $this->parser->parse($pattern)->is(self::PATTERN);
     }
 }

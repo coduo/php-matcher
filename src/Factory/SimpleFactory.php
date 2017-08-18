@@ -62,15 +62,15 @@ class SimpleFactory implements Factory
         return new Matcher\ChainMatcher([
             new Matcher\CallbackMatcher(),
             new Matcher\ExpressionMatcher(),
-            new Matcher\NullMatcher(),
+            new Matcher\NullMatcher($parser),
             new Matcher\StringMatcher($parser),
             new Matcher\IntegerMatcher($parser),
-            new Matcher\BooleanMatcher(),
+            new Matcher\BooleanMatcher($parser),
             new Matcher\DoubleMatcher($parser),
-            new Matcher\NumberMatcher(),
+            new Matcher\NumberMatcher($parser),
             new Matcher\ScalarMatcher(),
             new Matcher\WildcardMatcher(),
-            new Matcher\UuidMatcher(),
+            new Matcher\UuidMatcher($parser),
         ]);
     }
 

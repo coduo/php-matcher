@@ -4,11 +4,19 @@ declare(strict_types=1);
 
 namespace Coduo\PHPMatcher\Matcher;
 
+use Coduo\PHPMatcher\Parser;
 use Coduo\ToString\StringConverter;
 
 final class BooleanMatcher extends Matcher
 {
-    const BOOLEAN_PATTERN = '/^@boolean@$/';
+    const PATTERN = 'boolean';
+
+    private $parser;
+
+    public function __construct(Parser $parser)
+    {
+        $this->parser = $parser;
+    }
 
     public function match($value, $pattern) : bool
     {
@@ -22,6 +30,10 @@ final class BooleanMatcher extends Matcher
 
     public function canMatch($pattern) : bool
     {
-        return is_string($pattern) && 0 !== preg_match(self::BOOLEAN_PATTERN, $pattern);
+        if (!is_string($pattern)) {
+            return false;
+        }
+
+        return $this->parser->hasValidSyntax($pattern) && $this->parser->parse($pattern)->is(self::PATTERN);
     }
 }
