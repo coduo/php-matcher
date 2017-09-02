@@ -8,7 +8,7 @@ use Coduo\PHPMatcher\Matcher\Pattern\Expander\Optional;
 use Coduo\PHPMatcher\Matcher\Pattern\Pattern;
 use Coduo\PHPMatcher\Matcher\Pattern\TypePattern;
 
-class PatternTest  extends \PHPUnit\Framework\TestCase
+class PatternTest  extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Pattern
