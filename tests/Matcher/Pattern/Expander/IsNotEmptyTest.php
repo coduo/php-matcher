@@ -2,7 +2,6 @@
 
 namespace Coduo\PHPMatcher\Tests\Matcher\Pattern\Expander;
 
-use Coduo\PHPMatcher\Matcher;
 use Coduo\PHPMatcher\Matcher\Pattern\Expander\IsNotEmpty;
 
 class IsNotEmptyTest extends \PHPUnit_Framework_TestCase

@@ -4,7 +4,7 @@ namespace Coduo\PHPMatcher\Tests\Matcher\Pattern\Expander;
 
 use Coduo\PHPMatcher\Matcher\Pattern\Expander\Optional;
 
-class OptionalTest extends \PHPUnit\Framework\TestCase
+class OptionalTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @dataProvider examplesProvider
