@@ -8,7 +8,7 @@ interface PatternExpander
      * @param string $name
      * @return bool
      */
-    public static function is(string $name);
+    public static function is($name);
 
     /**
      * @param $value

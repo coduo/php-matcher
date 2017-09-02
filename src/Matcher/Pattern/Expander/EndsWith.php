@@ -27,7 +27,7 @@ final class EndsWith implements PatternExpander
     /**
      * {@inheritdoc}
      */
-    public static function is(string $name)
+    public static function is($name)
     {
         return self::NAME === $name;
     }
@@ -41,7 +41,7 @@ final class EndsWith implements PatternExpander
         if (!is_string($stringEnding)) {
             throw new \InvalidArgumentException("String ending must be a valid string.");
         }
-        
+
         $this->stringEnding = $stringEnding;
         $this->ignoreCase = $ignoreCase;
     }

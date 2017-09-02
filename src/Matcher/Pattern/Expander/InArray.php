@@ -22,7 +22,7 @@ final class InArray implements PatternExpander
     /**
      * {@inheritdoc}
      */
-    public static function is(string $name)
+    public static function is($name)
     {
         return self::NAME === $name;
     }
