@@ -29,5 +29,5 @@ interface Pattern
      *
      * @return bool true if the specified pattern has expander, false otherwise
      */
-    public function hasExpander(string $expanderName);
+    public function hasExpander($expanderName);
 }

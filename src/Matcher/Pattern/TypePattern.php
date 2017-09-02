@@ -79,7 +79,7 @@ final class TypePattern implements Pattern
     /**
      * {@inheritdoc}
      */
-    public function hasExpander(string $expanderName)
+    public function hasExpander($expanderName)
     {
         foreach ($this->expanders as $expander) {
             if ($expander::is($expanderName)) {
