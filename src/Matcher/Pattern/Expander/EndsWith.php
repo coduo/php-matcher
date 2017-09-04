@@ -7,6 +7,8 @@ use Coduo\ToString\StringConverter;
 
 final class EndsWith implements PatternExpander
 {
+    const NAME = 'endsWith';
+
     /**
      * @var
      */
@@ -23,6 +25,14 @@ final class EndsWith implements PatternExpander
     private $ignoreCase;
 
     /**
+     * {@inheritdoc}
+     */
+    public static function is($name)
+    {
+        return self::NAME === $name;
+    }
+
+    /**
      * @param string $stringEnding
      * @param bool $ignoreCase
      */
@@ -31,7 +41,7 @@ final class EndsWith implements PatternExpander
         if (!is_string($stringEnding)) {
             throw new \InvalidArgumentException("String ending must be a valid string.");
         }
-        
+
         $this->stringEnding = $stringEnding;
         $this->ignoreCase = $ignoreCase;
     }

@@ -4,7 +4,6 @@ namespace Coduo\PHPMatcher\Tests;
 
 use Coduo\PHPMatcher\Factory\SimpleFactory;
 use Coduo\PHPMatcher\Matcher;
-use Coduo\PHPMatcher\Parser;
 use Coduo\PHPMatcher\PHPMatcher;
 
 class MatcherTest extends \PHPUnit_Framework_TestCase
@@ -122,6 +121,120 @@ class MatcherTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(PHPMatcher::match($json, $jsonPattern));
     }
 
+    public function jsonDataProvider()
+    {
+        return array(
+            'matches exactly' => array(
+                /** @lang JSON */
+                '{
+                    "users":[
+                        {
+                            "id": 131,
+                            "firstName": "Norbert",
+                            "lastName": "Orzechowicz",
+                            "enabled": true,
+                            "roles": ["ROLE_DEVELOPER"]
+                        },
+                        {
+                            "id": 132,
+                            "firstName": "Michał",
+                            "lastName": "Dąbrowski",
+                            "enabled": false,
+                            "roles": ["ROLE_DEVELOPER"]
+                        }
+                    ],
+                    "prevPage": "http:\/\/example.com\/api\/users\/1?limit=2",
+                    "nextPage": "http:\/\/example.com\/api\/users\/3?limit=2"
+                }',
+                /** @lang JSON */
+                '{
+                    "users":[
+                        {
+                            "id": "@integer@",
+                            "firstName":"Norbert",
+                            "lastName":"Orzechowicz",
+                            "enabled": "@boolean@",
+                            "roles": "@array@"
+                        },
+                        {
+                            "id": "@integer@",
+                            "firstName": "Michał",
+                            "lastName": "Dąbrowski",
+                            "enabled": "expr(value == false)",
+                            "roles": "@array@"
+                        }
+                    ],
+                    "prevPage": "@string@",
+                    "nextPage": "@string@"
+                }',
+            ),
+            'matches none elements - empty array' => array(
+                /** @lang JSON */
+                '{
+                    "users":[],
+                    "prevPage": "http:\/\/example.com\/api\/users\/1?limit=2",
+                    "nextPage": "http:\/\/example.com\/api\/users\/3?limit=2"
+                }',
+                /** @lang JSON */
+                '{
+                    "users":[
+                        "@...@"                        
+                    ],
+                    "prevPage": "@string@",
+                    "nextPage": "@string@"
+                }',
+            ),
+            'matches one element' => array(
+                /** @lang JSON */
+                '{
+                    "users":[
+                        {
+                            "id": 131,
+                            "firstName": "Norbert",
+                            "lastName": "Orzechowicz",
+                            "enabled": true,
+                            "roles": ["ROLE_DEVELOPER"]
+                        }                       
+                    ],
+                    "prevPage": "http:\/\/example.com\/api\/users\/1?limit=2",
+                    "nextPage": "http:\/\/example.com\/api\/users\/3?limit=2"
+                }',
+                /** @lang JSON */
+                '{
+                    "users":[
+                        {
+                            "id": "@integer@",
+                            "firstName":"Norbert",
+                            "lastName":"Orzechowicz",
+                            "enabled": "@boolean@",
+                            "roles": "@array@"
+                        },
+                        "@...@"
+                    ],
+                    "prevPage": "@string@",
+                    "nextPage": "@string@"
+                }',
+            ),
+            'excludes missing property from match for optional property' => array(
+                /** @lang JSON */
+                '{
+                    "users":[],
+                    "prevPage": "http:\/\/example.com\/api\/users\/1?limit=2",
+                    "currPage": 2
+                }',
+                /** @lang JSON */
+                '{
+                    "users":[
+                        "@...@"                        
+                    ],
+                    "prevPage": "@string@.optional()",
+                    "nextPage": "@string@.optional()",
+                    "currPage": "@integer@.optional()"
+                }',
+            ),
+        );
+    }
+
     public function test_matcher_with_xml()
     {
         $xml = <<<XML
@@ -149,6 +262,46 @@ XML;
   <m:GetStockPrice>
     <m:StockName>@string@</m:StockName>
     <m:StockValue>@string@</m:StockValue>
+  </m:GetStockPrice>
+</soap:Body>
+
+</soap:Envelope>
+XML;
+
+        $this->assertTrue($this->matcher->match($xml, $xmlPattern));
+        $this->assertTrue(PHPMatcher::match($xml, $xmlPattern));
+    }
+
+
+
+    public function test_matcher_with_xml_including_optional_node()
+    {
+        $xml = <<<XML
+<?xml version="1.0"?>
+<soap:Envelope
+xmlns:soap="http://www.w3.org/2001/12/soap-envelope"
+soap:encodingStyle="http://www.w3.org/2001/12/soap-encoding">
+
+<soap:Body xmlns:m="http://www.example.org/stock">
+  <m:GetStockPrice>
+    <m:StockName>IBM</m:StockName>
+    <m:StockValue>Any Value</m:StockValue>
+  </m:GetStockPrice>
+</soap:Body>
+
+</soap:Envelope>
+XML;
+        $xmlPattern = <<<XML
+<?xml version="1.0"?>
+<soap:Envelope
+    xmlns:soap="@string@"
+            soap:encodingStyle="@string@">
+
+<soap:Body xmlns:m="@string@">
+  <m:GetStockPrice>
+    <m:StockName>@string@.optional()</m:StockName>
+    <m:StockValue>@string@.optional()</m:StockValue>
+    <m:StockQty>@integer@.optional()</m:StockQty>
   </m:GetStockPrice>
 </soap:Body>
 

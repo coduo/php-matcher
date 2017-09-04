@@ -21,4 +21,13 @@ interface Pattern
      * @return null|string
      */
     public function getError();
+
+    /**
+     * Checks whether a Pattern has added Expander.
+     *
+     * @param string $expanderName The name of the expander
+     *
+     * @return bool true if the specified pattern has expander, false otherwise
+     */
+    public function hasExpander($expanderName);
 }

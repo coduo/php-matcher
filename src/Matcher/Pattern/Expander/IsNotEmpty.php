@@ -7,7 +7,17 @@ use Coduo\ToString\StringConverter;
 
 final class IsNotEmpty implements PatternExpander
 {
+    const NAME = 'isNotEmpty';
+
     private $error;
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function is($name)
+    {
+        return self::NAME === $name;
+    }
 
     /**
      * @param $value

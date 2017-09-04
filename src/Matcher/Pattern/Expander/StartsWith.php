@@ -7,6 +7,8 @@ use Coduo\ToString\StringConverter;
 
 final class StartsWith implements PatternExpander
 {
+    const NAME = 'startsWith';
+
     /**
      * @var
      */
@@ -21,6 +23,14 @@ final class StartsWith implements PatternExpander
      * @var bool
      */
     private $ignoreCase;
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function is($name)
+    {
+        return self::NAME === $name;
+    }
 
     /**
      * @param string $stringBeginning

@@ -7,6 +7,8 @@ use Coduo\ToString\StringConverter;
 
 final class Contains implements PatternExpander
 {
+    const NAME = 'contains';
+
     /**
      * @var null|string
      */
@@ -21,6 +23,14 @@ final class Contains implements PatternExpander
      * @var bool
      */
     private $ignoreCase;
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function is($name)
+    {
+        return self::NAME === $name;
+    }
 
     /**
      * @param $string
