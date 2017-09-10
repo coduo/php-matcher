@@ -22,7 +22,7 @@ class XmlMatcherTest extends TestCase
         $scalarMatchers = new Matcher\ChainMatcher([
             new Matcher\CallbackMatcher(),
             new Matcher\ExpressionMatcher(),
-            new Matcher\NullMatcher($parser),
+            new Matcher\NullMatcher(),
             new Matcher\StringMatcher($parser),
             new Matcher\IntegerMatcher($parser),
             new Matcher\BooleanMatcher($parser),
@@ -38,7 +38,7 @@ class XmlMatcherTest extends TestCase
                 $scalarMatchers,
                 new Matcher\ArrayMatcher($scalarMatchers, $parser)
                 ]
-        )
+            )
         );
     }
 
@@ -106,7 +106,7 @@ class XmlMatcherTest extends TestCase
                 '<users><user><name>Norbert</name><age>@string@</age></user></users>'
             ],
             [
-                '<string><![CDATA[Any kid of text here]]></string>',
+                '<string><![CDATA[Any kind of text here]]></string>',
                 '<string><![CDATA[@string@]]></string>'
             ],
             [
