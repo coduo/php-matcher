@@ -75,6 +75,7 @@ class NumberMatcherTest extends TestCase
             [10.1, "@number@"],
             [10, "@number@"],
             ["25", "@number@"],
+            [10, "@number@.lowerThan(50).greaterThan(1)"],
         ];
     }
 
