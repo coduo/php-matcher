@@ -13,6 +13,7 @@ use Symfony\Component\PropertyAccess\PropertyPath;
 
 final class ArrayMatcher extends Matcher
 {
+    const PATTERN = 'array';
     const UNBOUNDED_PATTERN = '@...@';
 
     private $propertyMatcher;
@@ -60,7 +61,7 @@ final class ArrayMatcher extends Matcher
             return false;
         }
 
-        return $this->parser->hasValidSyntax($pattern) && $this->parser->parse($pattern)->is('array');
+        return $this->parser->hasValidSyntax($pattern) && $this->parser->parse($pattern)->is(self::PATTERN);
     }
 
     private function iterateMatch(array $values, array $patterns, string $parentPath = "") : bool

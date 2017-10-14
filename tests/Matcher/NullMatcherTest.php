@@ -4,18 +4,29 @@ declare(strict_types=1);
 
 namespace Coduo\PHPMatcher\Tests\Matcher;
 
+use Coduo\PHPMatcher\Lexer;
+use Coduo\PHPMatcher\Parser;
 use Coduo\PHPMatcher\Matcher\NullMatcher;
 use PHPUnit\Framework\TestCase;
 
 class NullMatcherTest extends TestCase
 {
     /**
+     * @var NullMatcher
+     */
+    private $matcher;
+
+    public function setUp()
+    {
+        $this->matcher = new NullMatcher(new Parser(new Lexer(), new Parser\ExpanderInitializer()));
+    }
+
+    /**
      * @dataProvider positiveCanMatchData
      */
     public function test_positive_can_matches($pattern)
     {
-        $matcher = new NullMatcher();
-        $this->assertTrue($matcher->canMatch($pattern));
+        $this->assertTrue($this->matcher->canMatch($pattern));
     }
 
     /**
@@ -23,8 +34,7 @@ class NullMatcherTest extends TestCase
      */
     public function test_negative_can_matches($pattern)
     {
-        $matcher = new NullMatcher();
-        $this->assertFalse($matcher->canMatch($pattern));
+        $this->assertFalse($this->matcher->canMatch($pattern));
     }
 
     /**
@@ -32,8 +42,7 @@ class NullMatcherTest extends TestCase
      */
     public function test_positive_match($value, $pattern)
     {
-        $matcher = new NullMatcher();
-        $this->assertTrue($matcher->match($value, $pattern));
+        $this->assertTrue($this->matcher->match($value, $pattern));
     }
 
     /**
@@ -41,8 +50,7 @@ class NullMatcherTest extends TestCase
      */
     public function test_negative_match($value, $pattern)
     {
-        $matcher = new NullMatcher();
-        $this->assertFalse($matcher->match($value, $pattern));
+        $this->assertFalse($this->matcher->match($value, $pattern));
     }
 
     /**
@@ -50,9 +58,8 @@ class NullMatcherTest extends TestCase
      */
     public function test_negative_match_description($value, $pattern, $error)
     {
-        $matcher = new NullMatcher();
-        $matcher->match($value, $pattern);
-        $this->assertEquals($error, $matcher->getError());
+        $this->matcher->match($value, $pattern);
+        $this->assertEquals($error, $this->matcher->getError());
     }
 
     public static function positiveCanMatchData()
@@ -91,11 +98,11 @@ class NullMatcherTest extends TestCase
     public static function negativeMatchDescription()
     {
         return [
-            ["test", "@boolean@", "string \"test\" does not match null."],
-            [new \stdClass,  "@string@", "object \"\\stdClass\" does not match null."],
-            [1.1, "@integer@", "double \"1.1\" does not match null."],
-            [false, "@double@", "boolean \"false\" does not match null."],
-            [1, "@array@", "integer \"1\" does not match null."]
+            ["test", "@null@", "string \"test\" does not match null."],
+            [new \stdClass,  "@null@", "object \"\\stdClass\" does not match null."],
+            [1.1, "@null@", "double \"1.1\" does not match null."],
+            [false, "@null@", "boolean \"false\" does not match null."],
+            [1, "@null@", "integer \"1\" does not match null."]
         ];
     }
 }

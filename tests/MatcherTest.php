@@ -235,8 +235,6 @@ XML;
         $this->assertTrue(PHPMatcher::match($xml, $xmlPattern));
     }
 
-
-
     public function test_matcher_with_xml_including_optional_node()
     {
         $xml = <<<XML
@@ -374,6 +372,17 @@ XML;
             ["lorem ipsum", "@string@.oneOf(contains(\"lorem\"), contains(\"test\")).endsWith(\"ipsum\")", true],
             ["lorem ipsum", "@string@.matchRegex(\"/^lorem \\w+$/\")", true],
             ["lorem ipsum", "@string@.matchRegex(\"/^foo/\")", false],
+            [[], ['unexistent_key' => '@array@.optional()'], true],
+            [[], ['unexistent_key' => '@boolean@.optional()'], true],
+            [[], ['unexistent_key' => '@double@.optional()'], true],
+            [[], ['unexistent_key' => '@integer@.optional()'], true],
+            [[], ['unexistent_key' => '@json@.optional()'], true],
+            [[], ['unexistent_key' => '@number@.optional()'], true],
+            [[], ['unexistent_key' => '@scalar@.optional()'], true],
+            [[], ['unexistent_key' => '@string@.optional()'], true],
+            [[], ['unexistent_key' => '@text@.optional()'], true],
+            [[], ['unexistent_key' => '@uuid@.optional()'], true],
+            [[], ['unexistent_key' => '@xml@.optional()'], true],
         ];
     }
 
@@ -381,6 +390,7 @@ XML;
     {
         return [
             ["lorem ipsum", "@string@.startsWith(\"lorem\")||@string@.contains(\"lorem\")", true],
+            ["ipsum lorem", "@string@.startsWith(\"lorem\")||@string@.contains(\"lorem\")", true],
             ["norbert@coduo.pl", "@string@.isEmail()||@null@", true],
             [null, "@string@.isEmail()||@null@", true],
             [null, "@string@.isEmail()||@null@", true],

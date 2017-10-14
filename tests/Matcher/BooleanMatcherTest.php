@@ -4,18 +4,29 @@ declare(strict_types=1);
 
 namespace Coduo\PHPMatcher\Tests\Matcher;
 
+use Coduo\PHPMatcher\Lexer;
+use Coduo\PHPMatcher\Parser;
 use Coduo\PHPMatcher\Matcher\BooleanMatcher;
 use PHPUnit\Framework\TestCase;
 
 class BooleanMatcherTest extends TestCase
 {
     /**
+     * @var BooleanMatcher
+     */
+    private $matcher;
+
+    public function setUp()
+    {
+        $this->matcher = new BooleanMatcher(new Parser(new Lexer(), new Parser\ExpanderInitializer()));
+    }
+
+    /**
      * @dataProvider positiveCanMatchData
      */
     public function test_positive_can_matches($pattern)
     {
-        $matcher = new BooleanMatcher();
-        $this->assertTrue($matcher->canMatch($pattern));
+        $this->assertTrue($this->matcher->canMatch($pattern));
     }
 
     /**
@@ -23,8 +34,7 @@ class BooleanMatcherTest extends TestCase
      */
     public function test_negative_can_matches($pattern)
     {
-        $matcher = new BooleanMatcher();
-        $this->assertFalse($matcher->canMatch($pattern));
+        $this->assertFalse($this->matcher->canMatch($pattern));
     }
 
     /**
@@ -32,8 +42,7 @@ class BooleanMatcherTest extends TestCase
      */
     public function test_positive_match($value, $pattern)
     {
-        $matcher = new BooleanMatcher();
-        $this->assertTrue($matcher->match($value, $pattern));
+        $this->assertTrue($this->matcher->match($value, $pattern));
     }
 
     /**
@@ -41,8 +50,7 @@ class BooleanMatcherTest extends TestCase
      */
     public function test_negative_match($value, $pattern)
     {
-        $matcher = new BooleanMatcher();
-        $this->assertFalse($matcher->match($value, $pattern));
+        $this->assertFalse($this->matcher->match($value, $pattern));
     }
 
     /**
@@ -50,9 +58,8 @@ class BooleanMatcherTest extends TestCase
      */
     public function test_negative_match_description($value, $pattern, $error)
     {
-        $matcher = new BooleanMatcher();
-        $matcher->match($value, $pattern);
-        $this->assertEquals($error, $matcher->getError());
+        $this->matcher->match($value, $pattern);
+        $this->assertEquals($error, $this->matcher->getError());
     }
 
     public static function positiveCanMatchData()

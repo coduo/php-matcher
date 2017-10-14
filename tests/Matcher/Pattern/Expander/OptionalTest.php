@@ -27,6 +27,7 @@ class OptionalTest extends TestCase
             [0, true],
             [10.1, true],
             [null, true],
+            [true, true],
             ['Lorem ipsum', true],
         ];
     }
