@@ -84,6 +84,7 @@ $matcher->getError(); // returns null or error message
 * ``oneOf(...$expanders)`` - example usage ``"@string@.oneOf(contains('foo'), contains('bar'), contains('baz'))"``
 * ``matchRegex($regex)`` - example usage ``"@string@.matchRegex('/^lorem.+/')"``
 * ``optional()`` - work's only with ``ArrayMatcher``, ``JsonMatcher`` and ``XmlMatcher``
+* ``repeat($pattern, $isStrict = true)`` - example usage ``'@array@.repeat({"name": "foe"})'`` or ``"@array@.repeat('@string@')"``
 
 ## Example usage
 
