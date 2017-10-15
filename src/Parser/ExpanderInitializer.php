@@ -31,6 +31,7 @@ final class ExpanderInitializer
         Expander\OneOf::NAME => Expander\OneOf::class,
         Expander\Optional::NAME => Expander\Optional::class,
         Expander\StartsWith::NAME => Expander\StartsWith::class,
+        Expander\Repeat::NAME => Expander\Repeat::class,
     ];
 
     /**
