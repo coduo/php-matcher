@@ -73,8 +73,8 @@ class RepeatTest extends TestCase
         ];
 
         return [
-            [$pattern, $valueTest, 'Repeat expander, entry n°0, key "name", find error : integer "1" is not a valid string.'],
-            [$pattern, $keyTest, 'Repeat expander, entry n°0, require "array" to have key "name".'],
+            [$pattern, $valueTest, 'Repeat expander, entry nÂ°0, key "name", find error : integer "1" is not a valid string.'],
+            [$pattern, $keyTest, 'Repeat expander, entry nÂ°0, require "array" to have key "name".'],
             [$pattern, $strictTest, 'Repeat expander expect to have 2 keys in array but get : 3'],
             [$pattern, "", 'Repeat expander require "array", got "".']
         ];
