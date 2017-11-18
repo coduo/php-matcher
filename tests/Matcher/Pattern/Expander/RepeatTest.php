@@ -70,8 +70,8 @@ class RepeatTest extends \PHPUnit_Framework_TestCase
         );
 
         return array(
-            array($pattern, $valueTest, 'Repeat expander, entry n°0, key "name", find error : integer "1" is not a valid string.'),
-            array($pattern, $keyTest, 'Repeat expander, entry n°0, require "array" to have key "name".'),
+            array($pattern, $valueTest, 'Repeat expander, entry nÂ°0, key "name", find error : integer "1" is not a valid string.'),
+            array($pattern, $keyTest, 'Repeat expander, entry nÂ°0, require "array" to have key "name".'),
             array($pattern, $strictTest, 'Repeat expander expect to have 2 keys in array but get : 3'),
             array($pattern, "", 'Repeat expander require "array", got "".')
         );
