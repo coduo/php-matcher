@@ -46,6 +46,10 @@ final class Parser
 
     public function getAST(string $pattern) : AST\Pattern
     {
+        if($pattern === '') {
+            return new AST\Pattern(new AST\Type(''));
+        }
+
         $this->lexer->setInput($pattern);
         return $this->getPattern();
     }

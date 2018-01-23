@@ -421,4 +421,32 @@ XML;
             ],
         ];
     }
+
+    public static function emptyPatternString()
+    {
+        return [
+            [
+                '', '', true,
+                '123', '', false,
+                ' ', '', false,
+                null, '', false,
+                1, '', false,
+                0, '', false,
+                '{"name": "123"}', '{"name": ""}', false,
+                '{"name": ""}', '{"name": ""}', true,
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider emptyPatternString
+     */
+    public function test_empty_pattern_in_the_json($value, $pattern, $expectedResult)
+    {
+        $factory = new SimpleFactory();
+        $matcher = $factory->createMatcher();
+
+        $match = $matcher->match($value, $pattern);
+        $this->assertSame($expectedResult, $match);
+    }
 }
