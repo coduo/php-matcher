@@ -11,24 +11,12 @@ final class Contains implements PatternExpander
 {
     const NAME = 'contains';
 
-    /**
-     * @var null|string
-     */
     private $error;
 
-    /**
-     * @var
-     */
     private $string;
 
-    /**
-     * @var bool
-     */
     private $ignoreCase;
 
-    /**
-     * {@inheritdoc}
-     */
     public static function is(string $name) : bool
     {
         return self::NAME === $name;
@@ -48,7 +36,7 @@ final class Contains implements PatternExpander
         }
 
         $contains = $this->ignoreCase
-            ? \mb_strpos(\mb_strtolower($value), \mb_strtolower($this->string))
+            ? \mb_stripos($value, $this->string)
             : \mb_strpos($value, $this->string);
 
         if ($contains === false) {

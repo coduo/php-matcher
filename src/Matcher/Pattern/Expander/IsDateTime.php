@@ -38,7 +38,7 @@ final class IsDateTime implements PatternExpander
         return $this->error;
     }
 
-    protected function matchValue(string $value) : bool
+    private function matchValue(string $value) : bool
     {
         try {
             new \DateTime($value);

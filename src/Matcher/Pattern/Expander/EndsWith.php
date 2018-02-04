@@ -56,7 +56,7 @@ final class EndsWith implements PatternExpander
         return $this->error;
     }
 
-    protected function matchValue(string $value) : bool
+    private function matchValue(string $value) : bool
     {
         return $this->ignoreCase
             ? \mb_substr(\mb_strtolower($value), -\mb_strlen(\mb_strtolower($this->stringEnding))) === \mb_strtolower($this->stringEnding)

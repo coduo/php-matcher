@@ -13,37 +13,19 @@ final class Repeat implements PatternExpander
 {
     const NAME = 'repeat';
 
-    /**
-     * @var null|string
-     */
     private $error;
 
-    /**
-     * @var string
-     */
     private $pattern;
 
-    /**
-     * @var bool
-     */
     private $isStrict;
 
-    /**
-     * @var bool
-     */
     private $isScalar;
 
-    /**
-     * {@inheritdoc}
-     */
     public static function is(string $name) : bool
     {
         return self::NAME === $name;
     }
 
-    /**
-     * @param $value
-     */
     public function __construct(string $pattern, bool $isStrict = true)
     {
         if (!\is_string($pattern)) {
@@ -62,10 +44,6 @@ final class Repeat implements PatternExpander
         }
     }
 
-    /**
-     * @param $values
-     * @return bool
-     */
     public function match($values) : bool
     {
         if (!\is_array($values)) {
@@ -83,19 +61,11 @@ final class Repeat implements PatternExpander
         return $this->matchJson($values, $matcher);
     }
 
-    /**
-     * @return string|null
-     */
     public function getError()
     {
         return $this->error;
     }
 
-    /**
-     * @param array $values
-     * @param Matcher $matcher
-     * @return bool
-     */
     private function matchScalar(array $values, Matcher $matcher) : bool
     {
         foreach ($values as $index => $value) {

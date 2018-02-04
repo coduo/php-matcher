@@ -14,9 +14,9 @@ final class OneOf implements PatternExpander
     /**
      * @var PatternExpander[]
      */
-    protected $expanders;
+    private $expanders;
 
-    protected $error;
+    private $error;
 
     public function __construct()
     {

@@ -38,7 +38,7 @@ final class IsEmail implements PatternExpander
         return $this->error;
     }
 
-    protected function matchValue(string $value) : bool
+    private function matchValue(string $value) : bool
     {
         try {
             return false !== \filter_var($value, FILTER_VALIDATE_EMAIL);

@@ -57,10 +57,10 @@ final class StartsWith implements PatternExpander
         return $this->error;
     }
 
-    protected function matchValue(string $value) : bool
+    private function matchValue(string $value) : bool
     {
         return $this->ignoreCase
-            ? \mb_strpos(\mb_strtolower($value), \mb_strtolower($this->stringBeginning)) !== 0
+            ? \mb_stripos($value, $this->stringBeginning) !== 0
             : \mb_strpos($value, $this->stringBeginning) !== 0;
     }
 }
