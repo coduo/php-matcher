@@ -383,6 +383,7 @@ XML;
             [[], ['unexistent_key' => '@text@.optional()'], true],
             [[], ['unexistent_key' => '@uuid@.optional()'], true],
             [[], ['unexistent_key' => '@xml@.optional()'], true],
+            [['Norbert', 'Michał'], '@array@.repeat("@string@")', true],
         ];
     }
 
