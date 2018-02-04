@@ -13,6 +13,6 @@ final class CallbackMatcher extends Matcher
 
     public function canMatch($pattern) : bool
     {
-        return is_object($pattern) && is_callable($pattern);
+        return \is_object($pattern) && \is_callable($pattern);
     }
 }

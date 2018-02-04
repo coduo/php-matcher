@@ -39,7 +39,7 @@ final class ChainMatcher extends Matcher
         }
 
         if (!isset($this->error)) {
-            $this->error = sprintf(
+            $this->error = \sprintf(
                 'Any matcher from chain can\'t match value "%s" to pattern "%s"',
                 new StringConverter($value),
                 new StringConverter($pattern)

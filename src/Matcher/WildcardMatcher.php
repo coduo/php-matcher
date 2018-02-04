@@ -15,6 +15,6 @@ final class WildcardMatcher extends Matcher
 
     public function canMatch($pattern) : bool
     {
-        return is_string($pattern) && 0 !== preg_match(self::MATCH_PATTERN, $pattern);
+        return \is_string($pattern) && 0 !== \preg_match(self::MATCH_PATTERN, $pattern);
     }
 }

@@ -70,7 +70,7 @@ final class Lexer extends AbstractLexer
         }
 
         if ($this->isTypePatternToken($value)) {
-            $value = trim($value, '@');
+            $value = \trim($value, '@');
             return self::T_TYPE_PATTERN;
         }
 
@@ -80,7 +80,7 @@ final class Lexer extends AbstractLexer
         }
 
         if ($this->isBooleanToken($value)) {
-            $value = (strtolower($value) === 'true') ? true : false;
+            $value = (\strtolower($value) === 'true') ? true : false;
             return self::T_BOOLEAN;
         }
 
@@ -89,16 +89,16 @@ final class Lexer extends AbstractLexer
             return self::T_NULL;
         }
 
-        if (is_numeric($value)) {
-            if (is_string($value)) {
-                $value = (strpos($value, '.') === false) ? (int) $value : (float) $value;
+        if (\is_numeric($value)) {
+            if (\is_string($value)) {
+                $value = (\strpos($value, '.') === false) ? (int) $value : (float) $value;
             }
 
             return self::T_NUMBER;
         }
 
         if ($this->isExpanderNameToken($value)) {
-            $value = rtrim(ltrim($value, '.'), '(');
+            $value = \rtrim(\ltrim($value, '.'), '(');
             return self::T_EXPANDER_NAME;
         }
 
@@ -107,31 +107,31 @@ final class Lexer extends AbstractLexer
 
     protected function isStringToken(string $value) : bool
     {
-        return in_array(substr($value, 0, 1), ['"', "'"]);
+        return \in_array(\substr($value, 0, 1), ['"', "'"]);
     }
 
     protected function isBooleanToken(string $value) : bool
     {
-        return in_array(strtolower($value), ['true', 'false'], true);
+        return \in_array(\strtolower($value), ['true', 'false'], true);
     }
 
     protected function isNullToken(string $value) : bool
     {
-        return strtolower($value) === 'null';
+        return \strtolower($value) === 'null';
     }
 
     protected function extractStringValue(string $value) : string
     {
-        return trim(trim($value, "'"), '"');
+        return \trim(\trim($value, "'"), '"');
     }
 
     protected function isExpanderNameToken(string $value) : bool
     {
-        return substr($value, -1) === '(' && strlen($value) > 1;
+        return \substr($value, -1) === '(' && \strlen($value) > 1;
     }
 
     protected function isTypePatternToken(string $value) : bool
     {
-        return substr($value, 0, 1) === '@' && substr($value, strlen($value) - 1, 1) === '@' && strlen($value) > 1;
+        return \substr($value, 0, 1) === '@' && \substr($value, \strlen($value) - 1, 1) === '@' && \strlen($value) > 1;
     }
 }

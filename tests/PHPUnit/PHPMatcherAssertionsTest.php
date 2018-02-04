@@ -22,7 +22,7 @@ class PHPMatcherAssertionsTest extends TestCase
      */
     public function test_it_throws_an_expectation_failed_exception_if_a_value_does_not_match_the_pattern()
     {
-        $this->assertMatchesPattern('{"foo": "@integer@"}', json_encode(['foo' => 'bar']));
+        $this->assertMatchesPattern('{"foo": "@integer@"}', \json_encode(['foo' => 'bar']));
     }
 
     /**

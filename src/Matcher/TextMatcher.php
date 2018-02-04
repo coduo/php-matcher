@@ -43,8 +43,8 @@ final class TextMatcher extends Matcher
      */
     public function match($value, $pattern) : bool
     {
-        if (!is_string($value)) {
-            $this->error = sprintf('%s "%s" is not a valid string.', gettype($value), new StringConverter($value));
+        if (!\is_string($value)) {
+            $this->error = \sprintf('%s "%s" is not a valid string.', \gettype($value), new StringConverter($value));
             return false;
         }
 
@@ -54,18 +54,18 @@ final class TextMatcher extends Matcher
         try {
             $patternRegex = $this->replacePlaceholderWithPatternRegexes($patternRegex, $patternsReplacedWithRegex);
         } catch (UnknownTypeException $exception) {
-            $this->error = sprintf(sprintf('Type pattern "%s" is not supported by TextMatcher.', $exception->getType()));
+            $this->error = \sprintf(\sprintf('Type pattern "%s" is not supported by TextMatcher.', $exception->getType()));
             return false;
         }
 
-        if (!preg_match($patternRegex, $value, $matchedValues)) {
-            $this->error = sprintf('"%s" does not match "%s" pattern', $value, $pattern);
+        if (!\preg_match($patternRegex, $value, $matchedValues)) {
+            $this->error = \sprintf('"%s" does not match "%s" pattern', $value, $pattern);
             return false;
         }
 
-        array_shift($matchedValues); // remove matched string
+        \array_shift($matchedValues); // remove matched string
 
-        if (count($patternsReplacedWithRegex) !== count($matchedValues)) {
+        if (\count($patternsReplacedWithRegex) !== \count($matchedValues)) {
             $this->error = 'Unexpected TextMatcher error.';
             return false;
         }
@@ -85,7 +85,7 @@ final class TextMatcher extends Matcher
      */
     public function canMatch($pattern) : bool
     {
-        if (!is_string($pattern)) {
+        if (!\is_string($pattern)) {
             return false;
         }
 
@@ -113,14 +113,14 @@ final class TextMatcher extends Matcher
     private function replaceTypePatternsWithPlaceholders(string &$patternRegex) : array
     {
         $patternsReplacedWithRegex = [];
-        preg_match_all(self::PATTERN_REGEXP, $patternRegex, $matches);
+        \preg_match_all(self::PATTERN_REGEXP, $patternRegex, $matches);
 
         foreach ($matches[0] as $index => $typePatternString) {
             $typePattern = $this->parser->parse($typePatternString);
             $patternsReplacedWithRegex[] = $typePattern;
-            $patternRegex = str_replace(
+            $patternRegex = \str_replace(
                 $typePatternString,
-                sprintf(self::PATTERN_REGEXP_PLACEHOLDER_TEMPLATE, $index),
+                \sprintf(self::PATTERN_REGEXP_PLACEHOLDER_TEMPLATE, $index),
                 $patternRegex
             );
         }
@@ -142,8 +142,8 @@ final class TextMatcher extends Matcher
     {
         $regexConverter = new RegexConverter();
         foreach ($patternsReplacedWithRegex as $index => $typePattern) {
-            $patternRegex = str_replace(
-                sprintf(self::PATTERN_REGEXP_PLACEHOLDER_TEMPLATE, $index),
+            $patternRegex = \str_replace(
+                \sprintf(self::PATTERN_REGEXP_PLACEHOLDER_TEMPLATE, $index),
                 $regexConverter->toRegex($typePattern),
                 $patternRegex
             );
@@ -160,6 +160,6 @@ final class TextMatcher extends Matcher
      */
     private function prepareRegex(string $patternRegex) : string
     {
-        return '/^' . preg_quote($patternRegex, '/') . '$/';
+        return '/^' . \preg_quote($patternRegex, '/') . '$/';
     }
 }

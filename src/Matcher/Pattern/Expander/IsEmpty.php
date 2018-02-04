@@ -21,7 +21,7 @@ final class IsEmpty implements PatternExpander
     public function match($value) : bool
     {
         if (!empty($value)) {
-            $this->error = sprintf('Value %s is not empty.', new StringConverter($value));
+            $this->error = \sprintf('Value %s is not empty.', new StringConverter($value));
 
             return false;
         }

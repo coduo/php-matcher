@@ -19,7 +19,7 @@ final class EndsWith implements PatternExpander
 
     public function __construct(string $stringEnding, bool $ignoreCase = false)
     {
-        if (!is_string($stringEnding)) {
+        if (!\is_string($stringEnding)) {
             throw new \InvalidArgumentException('String ending must be a valid string.');
         }
 
@@ -34,8 +34,8 @@ final class EndsWith implements PatternExpander
 
     public function match($value) : bool
     {
-        if (!is_string($value)) {
-            $this->error = sprintf('EndsWith expander require "string", got "%s".', new StringConverter($value));
+        if (!\is_string($value)) {
+            $this->error = \sprintf('EndsWith expander require "string", got "%s".', new StringConverter($value));
             return false;
         }
 
@@ -44,7 +44,7 @@ final class EndsWith implements PatternExpander
         }
 
         if (!$this->matchValue($value)) {
-            $this->error = sprintf("string \"%s\" doesn't ends with string \"%s\".", $value, $this->stringEnding);
+            $this->error = \sprintf("string \"%s\" doesn't ends with string \"%s\".", $value, $this->stringEnding);
             return false;
         }
 
@@ -59,7 +59,7 @@ final class EndsWith implements PatternExpander
     protected function matchValue(string $value) : bool
     {
         return $this->ignoreCase
-            ? mb_substr(mb_strtolower($value), -mb_strlen(mb_strtolower($this->stringEnding))) === mb_strtolower($this->stringEnding)
-            : mb_substr($value, -mb_strlen($this->stringEnding)) === $this->stringEnding;
+            ? \mb_substr(\mb_strtolower($value), -\mb_strlen(\mb_strtolower($this->stringEnding))) === \mb_strtolower($this->stringEnding)
+            : \mb_substr($value, -\mb_strlen($this->stringEnding)) === $this->stringEnding;
     }
 }

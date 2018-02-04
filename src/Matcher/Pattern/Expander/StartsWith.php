@@ -19,7 +19,7 @@ final class StartsWith implements PatternExpander
 
     public function __construct(string $stringBeginning, bool $ignoreCase = false)
     {
-        if (!is_string($stringBeginning)) {
+        if (!\is_string($stringBeginning)) {
             throw new \InvalidArgumentException('String beginning must be a valid string.');
         }
 
@@ -35,8 +35,8 @@ final class StartsWith implements PatternExpander
 
     public function match($value) : bool
     {
-        if (!is_string($value)) {
-            $this->error = sprintf('StartsWith expander require "string", got "%s".', new StringConverter($value));
+        if (!\is_string($value)) {
+            $this->error = \sprintf('StartsWith expander require "string", got "%s".', new StringConverter($value));
             return false;
         }
 
@@ -45,7 +45,7 @@ final class StartsWith implements PatternExpander
         }
 
         if ($this->matchValue($value)) {
-            $this->error = sprintf("string \"%s\" doesn't starts with string \"%s\".", $value, $this->stringBeginning);
+            $this->error = \sprintf("string \"%s\" doesn't starts with string \"%s\".", $value, $this->stringBeginning);
             return false;
         }
 
@@ -60,7 +60,7 @@ final class StartsWith implements PatternExpander
     protected function matchValue(string $value) : bool
     {
         return $this->ignoreCase
-            ? mb_strpos(mb_strtolower($value), mb_strtolower($this->stringBeginning)) !== 0
-            : mb_strpos($value, $this->stringBeginning) !== 0;
+            ? \mb_strpos(\mb_strtolower($value), \mb_strtolower($this->stringBeginning)) !== 0
+            : \mb_strpos($value, $this->stringBeginning) !== 0;
     }
 }

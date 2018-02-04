@@ -23,7 +23,7 @@ final class Pattern implements Node
 
     public function hasExpanders() : bool
     {
-        return (boolean) count($this->expanders);
+        return (boolean) \count($this->expanders);
     }
 
     /**

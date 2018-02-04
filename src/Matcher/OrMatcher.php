@@ -17,7 +17,7 @@ final class OrMatcher extends Matcher
 
     public function match($value, $pattern) : bool
     {
-        $patterns = explode('||', $pattern);
+        $patterns = \explode('||', $pattern);
         foreach ($patterns as $childPattern) {
             if ($this->matchChild($value, $childPattern)) {
                 return true;
@@ -42,6 +42,6 @@ final class OrMatcher extends Matcher
 
     public function canMatch($pattern): bool
     {
-        return is_string($pattern) && 0 !== preg_match_all(self::MATCH_PATTERN, $pattern, $matches);
+        return \is_string($pattern) && 0 !== \preg_match_all(self::MATCH_PATTERN, $pattern, $matches);
     }
 }

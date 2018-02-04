@@ -20,10 +20,10 @@ final class OneOf implements PatternExpander
 
     public function __construct()
     {
-        if (func_num_args() < 2) {
+        if (\func_num_args() < 2) {
             throw new \InvalidArgumentException('OneOf expander require at least two expanders.');
         }
-        foreach (func_get_args() as $argument) {
+        foreach (\func_get_args() as $argument) {
             if (!$argument instanceof PatternExpander) {
                 throw new \InvalidArgumentException('OneOf expander require each argument to be a valid PatternExpander.');
             }
@@ -45,7 +45,7 @@ final class OneOf implements PatternExpander
             }
         }
 
-        $this->error = sprintf('Any expander available in OneOf expander does not match "%s".', new StringConverter($value));
+        $this->error = \sprintf('Any expander available in OneOf expander does not match "%s".', new StringConverter($value));
         return false;
     }
 

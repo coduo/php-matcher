@@ -18,7 +18,7 @@ class LexerTest extends TestCase
         $lexer->setInput($value);
         $lexer->moveNext();
         $this->assertEquals($lexer->lookahead['type'], Lexer::T_STRING);
-        $this->assertEquals($lexer->lookahead['value'], trim(trim($value, "'"), '"'));
+        $this->assertEquals($lexer->lookahead['value'], \trim(\trim($value, "'"), '"'));
     }
 
     public static function validStringValuesProvider()
@@ -170,7 +170,7 @@ class LexerTest extends TestCase
         $lexer->setInput($value);
         $lexer->moveNext();
         $this->assertEquals($lexer->lookahead['type'], Lexer::T_TYPE_PATTERN);
-        $this->assertEquals($lexer->lookahead['value'], trim($value, '@'));
+        $this->assertEquals($lexer->lookahead['value'], \trim($value, '@'));
     }
 
     public static function validMatcherTypePatterns()

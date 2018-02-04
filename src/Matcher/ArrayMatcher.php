@@ -34,8 +34,8 @@ final class ArrayMatcher extends Matcher
             return true;
         }
 
-        if (!is_array($value)) {
-            $this->error = sprintf('%s "%s" is not a valid array.', gettype($value), new StringConverter($value));
+        if (!\is_array($value)) {
+            $this->error = \sprintf('%s "%s" is not a valid array.', \gettype($value), new StringConverter($value));
             return false;
         }
 
@@ -52,12 +52,12 @@ final class ArrayMatcher extends Matcher
 
     public function canMatch($pattern) : bool
     {
-        return is_array($pattern) || $this->isArrayPattern($pattern);
+        return \is_array($pattern) || $this->isArrayPattern($pattern);
     }
 
     private function isArrayPattern($pattern) : bool
     {
-        if (!is_string($pattern)) {
+        if (!\is_string($pattern)) {
             return false;
         }
 
@@ -89,7 +89,7 @@ final class ArrayMatcher extends Matcher
                 continue;
             }
 
-            if (!is_array($value) || !$this->canMatch($pattern)) {
+            if (!\is_array($value) || !$this->canMatch($pattern)) {
                 return false;
             }
 
@@ -115,10 +115,10 @@ final class ArrayMatcher extends Matcher
 
     private function isPatternValid(array $pattern, array $values, string $parentPath) : bool
     {
-        if (is_array($pattern)) {
+        if (\is_array($pattern)) {
             $skipPattern = static::UNBOUNDED_PATTERN;
 
-            $pattern = array_filter(
+            $pattern = \array_filter(
                 $pattern,
                 function ($item) use ($skipPattern) {
                     return $item !== $skipPattern;
@@ -126,8 +126,8 @@ final class ArrayMatcher extends Matcher
             );
 
             $notExistingKeys = $this->findNotExistingKeys($pattern, $values);
-            if (count($notExistingKeys) > 0) {
-                $keyNames = array_keys($notExistingKeys);
+            if (\count($notExistingKeys) > 0) {
+                $keyNames = \array_keys($notExistingKeys);
                 $path = $this->formatFullPath($parentPath, $this->formatAccessPath($keyNames[0]));
                 $this->setMissingElementInError('value', $path);
 
@@ -140,10 +140,10 @@ final class ArrayMatcher extends Matcher
 
     private function findNotExistingKeys(array $pattern, array $values) : array
     {
-        $notExistingKeys = array_diff_key($pattern, $values);
+        $notExistingKeys = \array_diff_key($pattern, $values);
 
-        return array_filter($notExistingKeys, function ($pattern) use ($values) {
-            if (is_array($pattern)) {
+        return \array_filter($notExistingKeys, function ($pattern) use ($values) {
+            if (\is_array($pattern)) {
                 return !$this->match($values, $pattern);
             }
 
@@ -195,7 +195,7 @@ final class ArrayMatcher extends Matcher
     private function arrayPropertyExists(string $property, array $objectOrArray) : bool
     {
         return ($objectOrArray instanceof \ArrayAccess && isset($objectOrArray[$property])) ||
-            (is_array($objectOrArray) && array_key_exists($property, $objectOrArray));
+            (\is_array($objectOrArray) && \array_key_exists($property, $objectOrArray));
     }
 
     private function getValueByPath(array $array, string $path)
@@ -217,17 +217,17 @@ final class ArrayMatcher extends Matcher
 
     private function setMissingElementInError(string $place, string $path)
     {
-        $this->error = sprintf('There is no element under path %s in %s.', $path, $place);
+        $this->error = \sprintf('There is no element under path %s in %s.', $path, $place);
     }
 
     private function formatAccessPath($key) : string
     {
-        return sprintf('[%s]', $key);
+        return \sprintf('[%s]', $key);
     }
 
     private function formatFullPath(string $parentPath, string $path) : string
     {
-        return sprintf('%s%s', $parentPath, $path);
+        return \sprintf('%s%s', $parentPath, $path);
     }
 
     private function shouldSkippValueMatchingFor($lastPattern) : bool

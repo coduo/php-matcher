@@ -11,7 +11,7 @@ final class ScalarMatcher extends Matcher
     public function match($value, $pattern) : bool
     {
         if ($value !== $pattern) {
-            $this->error = sprintf('"%s" does not match "%s".', new StringConverter($value), new StringConverter($pattern));
+            $this->error = \sprintf('"%s" does not match "%s".', new StringConverter($value), new StringConverter($pattern));
             return false;
         }
 
@@ -20,6 +20,6 @@ final class ScalarMatcher extends Matcher
 
     public function canMatch($pattern) : bool
     {
-        return is_scalar($pattern);
+        return \is_scalar($pattern);
     }
 }

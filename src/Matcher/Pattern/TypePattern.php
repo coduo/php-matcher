@@ -20,12 +20,12 @@ final class TypePattern implements Pattern
 
     public function is(string $type)
     {
-        return strtolower($this->type) === strtolower($type);
+        return \strtolower($this->type) === \strtolower($type);
     }
 
     public function getType() : string
     {
-        return strtolower($this->type);
+        return \strtolower($this->type);
     }
 
     public function addExpander(PatternExpander $expander)

@@ -20,13 +20,13 @@ final class IsUrl implements PatternExpander
 
     public function match($value) : bool
     {
-        if (false === is_string($value)) {
-            $this->error = sprintf('IsUrl expander require "string", got "%s".', new StringConverter($value));
+        if (false === \is_string($value)) {
+            $this->error = \sprintf('IsUrl expander require "string", got "%s".', new StringConverter($value));
             return false;
         }
 
         if (false === $this->matchValue($value)) {
-            $this->error = sprintf('string "%s" is not a valid URL.', $value);
+            $this->error = \sprintf('string "%s" is not a valid URL.', $value);
             return false;
         }
 
@@ -41,7 +41,7 @@ final class IsUrl implements PatternExpander
     protected function matchValue(string $value) : bool
     {
         try {
-            return false !== filter_var($value, FILTER_VALIDATE_URL);
+            return false !== \filter_var($value, FILTER_VALIDATE_URL);
         } catch (\Exception $e) {
             return false;
         }

@@ -28,7 +28,7 @@ final class Expander implements Node
 
     public function hasArguments() : bool
     {
-        return (boolean) count($this->arguments);
+        return (boolean) \count($this->arguments);
     }
 
     public function getArguments() : array

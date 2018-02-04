@@ -42,17 +42,17 @@ final class Contains implements PatternExpander
 
     public function match($value) : bool
     {
-        if (!is_string($value)) {
-            $this->error = sprintf('Contains expander require "string", got "%s".', new StringConverter($value));
+        if (!\is_string($value)) {
+            $this->error = \sprintf('Contains expander require "string", got "%s".', new StringConverter($value));
             return false;
         }
 
         $contains = $this->ignoreCase
-            ? mb_strpos(mb_strtolower($value), mb_strtolower($this->string))
-            : mb_strpos($value, $this->string);
+            ? \mb_strpos(\mb_strtolower($value), \mb_strtolower($this->string))
+            : \mb_strpos($value, $this->string);
 
         if ($contains === false) {
-            $this->error = sprintf("String \"%s\" doesn't contains \"%s\".", $value, $this->string);
+            $this->error = \sprintf("String \"%s\" doesn't contains \"%s\".", $value, $this->string);
             return false;
         }
 

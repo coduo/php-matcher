@@ -16,7 +16,7 @@ final class NullMatcher extends Matcher
     public function match($value, $pattern) : bool
     {
         if (null !== $value) {
-            $this->error = sprintf('%s "%s" does not match null.', gettype($value), new StringConverter($value));
+            $this->error = \sprintf('%s "%s" does not match null.', \gettype($value), new StringConverter($value));
             return false;
         }
 
@@ -28,6 +28,6 @@ final class NullMatcher extends Matcher
      */
     public function canMatch($pattern) : bool
     {
-        return is_null($pattern) || (is_string($pattern) && 0 !== preg_match(self::MATCH_PATTERN, $pattern));
+        return \is_null($pattern) || (\is_string($pattern) && 0 !== \preg_match(self::MATCH_PATTERN, $pattern));
     }
 }

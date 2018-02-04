@@ -21,19 +21,19 @@ final class UuidMatcher extends Matcher
 
     public function match($value, $pattern) : bool
     {
-        if (!is_string($value)) {
-            $this->error = sprintf(
+        if (!\is_string($value)) {
+            $this->error = \sprintf(
                 '%s "%s" is not a valid UUID: not a string.',
-                gettype($value),
+                \gettype($value),
                 new StringConverter($value)
             );
             return false;
         }
 
-        if (1 !== preg_match(self::UUID_FORMAT_PATTERN, $value)) {
-            $this->error = sprintf(
+        if (1 !== \preg_match(self::UUID_FORMAT_PATTERN, $value)) {
+            $this->error = \sprintf(
                 '%s "%s" is not a valid UUID: invalid format.',
-                gettype($value),
+                \gettype($value),
                 $value
             );
             return false;
@@ -44,7 +44,7 @@ final class UuidMatcher extends Matcher
 
     public function canMatch($pattern) : bool
     {
-        if (!is_string($pattern)) {
+        if (!\is_string($pattern)) {
             return false;
         }
 

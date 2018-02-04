@@ -8,10 +8,10 @@ final class Xml
 {
     public static function isValid($value) : bool
     {
-        if (!is_string($value)) {
+        if (!\is_string($value)) {
             return false;
         }
-        $xml = @simplexml_load_string($value);
+        $xml = @\simplexml_load_string($value);
         if (!$xml instanceof \SimpleXMLElement) {
             return false;
         }

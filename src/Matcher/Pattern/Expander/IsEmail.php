@@ -20,13 +20,13 @@ final class IsEmail implements PatternExpander
 
     public function match($value) : bool
     {
-        if (false === is_string($value)) {
-            $this->error = sprintf('IsEmail expander require "string", got "%s".', new StringConverter($value));
+        if (false === \is_string($value)) {
+            $this->error = \sprintf('IsEmail expander require "string", got "%s".', new StringConverter($value));
             return false;
         }
 
         if (false === $this->matchValue($value)) {
-            $this->error = sprintf('string "%s" is not a valid e-mail address.', $value);
+            $this->error = \sprintf('string "%s" is not a valid e-mail address.', $value);
             return false;
         }
 
@@ -41,7 +41,7 @@ final class IsEmail implements PatternExpander
     protected function matchValue(string $value) : bool
     {
         try {
-            return false !== filter_var($value, FILTER_VALIDATE_EMAIL);
+            return false !== \filter_var($value, FILTER_VALIDATE_EMAIL);
         } catch (\Exception $e) {
             return false;
         }

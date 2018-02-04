@@ -11,11 +11,11 @@ final class Json
 
     public static function isValid($value) : bool
     {
-        if (!is_string($value)) {
+        if (!\is_string($value)) {
             return false;
         }
 
-        if (null === json_decode($value) && JSON_ERROR_NONE !== json_last_error()) {
+        if (null === \json_decode($value) && JSON_ERROR_NONE !== \json_last_error()) {
             return false;
         }
 
@@ -24,7 +24,7 @@ final class Json
 
     public static function isValidPattern($value) : bool
     {
-        if (!is_string($value)) {
+        if (!\is_string($value)) {
             return false;
         }
 
@@ -33,6 +33,6 @@ final class Json
 
     public static function transformPattern(string $pattern) : string
     {
-        return preg_replace(self::TRANSFORM_QUOTATION_PATTERN, self::TRANSFORM_QUOTATION_REPLACEMENT, $pattern);
+        return \preg_replace(self::TRANSFORM_QUOTATION_PATTERN, self::TRANSFORM_QUOTATION_REPLACEMENT, $pattern);
     }
 }
