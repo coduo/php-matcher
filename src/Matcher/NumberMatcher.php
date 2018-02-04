@@ -21,7 +21,7 @@ final class NumberMatcher extends Matcher
     public function match($value, $pattern) : bool
     {
         if (!is_numeric($value)) {
-            $this->error = sprintf("%s \"%s\" is not a valid number.", gettype($value), new StringConverter($value));
+            $this->error = sprintf('%s "%s" is not a valid number.', gettype($value), new StringConverter($value));
             return false;
         }
 

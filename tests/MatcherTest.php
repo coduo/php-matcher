@@ -275,7 +275,7 @@ XML;
 
     public function test_text_matcher()
     {
-        $value = "lorem ipsum 1234 random text";
+        $value = 'lorem ipsum 1234 random text';
         $pattern = "@string@.startsWith('lo') ipsum @number@.greaterThan(10) random text";
         $this->assertTrue($this->matcher->match($value, $pattern));
         $this->assertTrue(PHPMatcher::match($value, $pattern));
@@ -349,29 +349,29 @@ XML;
     public static function expanderExamples()
     {
         return [
-            ["lorem ipsum", "@string@.startsWith(\"lorem\")", true],
-            ["lorem ipsum", "@string@.startsWith(\"LOREM\", true)", true],
-            ["lorem ipsum", "@string@.endsWith(\"ipsum\")", true],
-            ["lorem ipsum", "@string@.endsWith(\"IPSUM\", true)", true],
-            ["lorem ipsum", "@string@.contains(\"lorem\")", true],
-            ["norbert@coduo.pl", "@string@.isEmail()", true],
-            ["lorem ipsum", "@string@.isEmail()", false],
-            ["http://coduo.pl/", "@string@.isUrl()", true],
-            ["lorem ipsum", "@string@.isUrl()", false],
-            ["2014-08-19", "@string@.isDateTime()", true],
-            [100, "@integer@.lowerThan(101).greaterThan(10)", true],
-            ["", "@string@.isNotEmpty()", false],
-            ["lorem ipsum", "@string@.isNotEmpty()", true],
-            ["", "@string@.isEmpty()", true],
-            [["foo", "bar"], "@array@.inArray(\"bar\")", true],
-            [[], "@array@.isEmpty()", true],
-            [['foo'], "@array@.isEmpty()", false],
-            [[1, 2, 3], "@array@.count(3)", true],
-            [[1, 2, 3], "@array@.count(4)", false],
-            ["lorem ipsum", "@string@.oneOf(contains(\"lorem\"), contains(\"test\"))", true],
-            ["lorem ipsum", "@string@.oneOf(contains(\"lorem\"), contains(\"test\")).endsWith(\"ipsum\")", true],
-            ["lorem ipsum", "@string@.matchRegex(\"/^lorem \\w+$/\")", true],
-            ["lorem ipsum", "@string@.matchRegex(\"/^foo/\")", false],
+            ['lorem ipsum', '@string@.startsWith("lorem")', true],
+            ['lorem ipsum', '@string@.startsWith("LOREM", true)', true],
+            ['lorem ipsum', '@string@.endsWith("ipsum")', true],
+            ['lorem ipsum', '@string@.endsWith("IPSUM", true)', true],
+            ['lorem ipsum', '@string@.contains("lorem")', true],
+            ['norbert@coduo.pl', '@string@.isEmail()', true],
+            ['lorem ipsum', '@string@.isEmail()', false],
+            ['http://coduo.pl/', '@string@.isUrl()', true],
+            ['lorem ipsum', '@string@.isUrl()', false],
+            ['2014-08-19', '@string@.isDateTime()', true],
+            [100, '@integer@.lowerThan(101).greaterThan(10)', true],
+            ['', '@string@.isNotEmpty()', false],
+            ['lorem ipsum', '@string@.isNotEmpty()', true],
+            ['', '@string@.isEmpty()', true],
+            [['foo', 'bar'], '@array@.inArray("bar")', true],
+            [[], '@array@.isEmpty()', true],
+            [['foo'], '@array@.isEmpty()', false],
+            [[1, 2, 3], '@array@.count(3)', true],
+            [[1, 2, 3], '@array@.count(4)', false],
+            ['lorem ipsum', '@string@.oneOf(contains("lorem"), contains("test"))', true],
+            ['lorem ipsum', '@string@.oneOf(contains("lorem"), contains("test")).endsWith("ipsum")', true],
+            ['lorem ipsum', '@string@.matchRegex("/^lorem \\w+$/")', true],
+            ['lorem ipsum', '@string@.matchRegex("/^foo/")', false],
             [[], ['unexistent_key' => '@array@.optional()'], true],
             [[], ['unexistent_key' => '@boolean@.optional()'], true],
             [[], ['unexistent_key' => '@double@.optional()'], true],
@@ -389,14 +389,14 @@ XML;
     public static function orExamples()
     {
         return [
-            ["lorem ipsum", "@string@.startsWith(\"lorem\")||@string@.contains(\"lorem\")", true],
-            ["ipsum lorem", "@string@.startsWith(\"lorem\")||@string@.contains(\"lorem\")", true],
-            ["norbert@coduo.pl", "@string@.isEmail()||@null@", true],
-            [null, "@string@.isEmail()||@null@", true],
-            [null, "@string@.isEmail()||@null@", true],
-            ["2014-08-19", "@string@.isDateTime()||@integer@", true],
-            [null, "@integer@||@string@", false],
-            [1, "@integer@.greaterThan(10)||@string@.contains(\"10\")", false],
+            ['lorem ipsum', '@string@.startsWith("lorem")||@string@.contains("lorem")', true],
+            ['ipsum lorem', '@string@.startsWith("lorem")||@string@.contains("lorem")', true],
+            ['norbert@coduo.pl', '@string@.isEmail()||@null@', true],
+            [null, '@string@.isEmail()||@null@', true],
+            [null, '@string@.isEmail()||@null@', true],
+            ['2014-08-19', '@string@.isDateTime()||@integer@', true],
+            [null, '@integer@||@string@', false],
+            [1, '@integer@.greaterThan(10)||@string@.contains("10")', false],
         ];
     }
 

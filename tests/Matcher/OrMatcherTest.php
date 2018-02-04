@@ -144,7 +144,7 @@ class OrMatcherTest extends TestCase
 
         return [
             [$simpleArr, $simpleDiff],
-            [["status" => "ok", "data" => [['foo']]], ["status" => "ok", "data" => []]],
+            [['status' => 'ok', 'data' => [['foo']]], ['status' => 'ok', 'data' => []]],
             [[1], []],
             [['key' => 'val'], ['key' => 'val2']],
             [[1], [2]],

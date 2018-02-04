@@ -21,10 +21,10 @@ class IsEmailTest extends TestCase
     public static function examplesEmailsProvider()
     {
         return [
-            ["valid@email.com", true],
-            ["valid+12345@email.com", true],
-            ["...@domain.com", false],
-            ["2222----###@domain.co", true]
+            ['valid@email.com', true],
+            ['valid+12345@email.com', true],
+            ['...@domain.com', false],
+            ['2222----###@domain.co', true]
         ];
     }
 }

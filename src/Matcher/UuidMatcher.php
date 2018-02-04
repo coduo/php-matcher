@@ -23,7 +23,7 @@ final class UuidMatcher extends Matcher
     {
         if (!is_string($value)) {
             $this->error = sprintf(
-                "%s \"%s\" is not a valid UUID: not a string.",
+                '%s "%s" is not a valid UUID: not a string.',
                 gettype($value),
                 new StringConverter($value)
             );
@@ -32,7 +32,7 @@ final class UuidMatcher extends Matcher
 
         if (1 !== preg_match(self::UUID_FORMAT_PATTERN, $value)) {
             $this->error = sprintf(
-                "%s \"%s\" is not a valid UUID: invalid format.",
+                '%s "%s" is not a valid UUID: invalid format.',
                 gettype($value),
                 $value
             );

@@ -20,7 +20,7 @@ final class EndsWith implements PatternExpander
     public function __construct(string $stringEnding, bool $ignoreCase = false)
     {
         if (!is_string($stringEnding)) {
-            throw new \InvalidArgumentException("String ending must be a valid string.");
+            throw new \InvalidArgumentException('String ending must be a valid string.');
         }
 
         $this->stringEnding = $stringEnding;
@@ -35,7 +35,7 @@ final class EndsWith implements PatternExpander
     public function match($value) : bool
     {
         if (!is_string($value)) {
-            $this->error = sprintf("EndsWith expander require \"string\", got \"%s\".", new StringConverter($value));
+            $this->error = sprintf('EndsWith expander require "string", got "%s".', new StringConverter($value));
             return false;
         }
 

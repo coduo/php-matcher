@@ -35,7 +35,7 @@ final class ArrayMatcher extends Matcher
         }
 
         if (!is_array($value)) {
-            $this->error = sprintf("%s \"%s\" is not a valid array.", gettype($value), new StringConverter($value));
+            $this->error = sprintf('%s "%s" is not a valid array.', gettype($value), new StringConverter($value));
             return false;
         }
 
@@ -64,7 +64,7 @@ final class ArrayMatcher extends Matcher
         return $this->parser->hasValidSyntax($pattern) && $this->parser->parse($pattern)->is(self::PATTERN);
     }
 
-    private function iterateMatch(array $values, array $patterns, string $parentPath = "") : bool
+    private function iterateMatch(array $values, array $patterns, string $parentPath = '') : bool
     {
         $pattern = null;
         foreach ($values as $key => $value) {
@@ -222,12 +222,12 @@ final class ArrayMatcher extends Matcher
 
     private function formatAccessPath($key) : string
     {
-        return sprintf("[%s]", $key);
+        return sprintf('[%s]', $key);
     }
 
     private function formatFullPath(string $parentPath, string $path) : string
     {
-        return sprintf("%s%s", $parentPath, $path);
+        return sprintf('%s%s', $parentPath, $path);
     }
 
     private function shouldSkippValueMatchingFor($lastPattern) : bool

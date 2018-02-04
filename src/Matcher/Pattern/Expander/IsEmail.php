@@ -21,12 +21,12 @@ final class IsEmail implements PatternExpander
     public function match($value) : bool
     {
         if (false === is_string($value)) {
-            $this->error = sprintf("IsEmail expander require \"string\", got \"%s\".", new StringConverter($value));
+            $this->error = sprintf('IsEmail expander require "string", got "%s".', new StringConverter($value));
             return false;
         }
 
         if (false === $this->matchValue($value)) {
-            $this->error = sprintf("string \"%s\" is not a valid e-mail address.", $value);
+            $this->error = sprintf('string "%s" is not a valid e-mail address.', $value);
             return false;
         }
 

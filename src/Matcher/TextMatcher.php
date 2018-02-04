@@ -16,7 +16,7 @@ final class TextMatcher extends Matcher
 {
     const PATTERN_REGEXP = "/@[a-zA-Z\\.]+@(\\.[a-zA-Z0-9_]+\\([a-zA-Z0-9{},:@\\.\"'\\(\\)]*\\))*/";
 
-    const PATTERN_REGEXP_PLACEHOLDER_TEMPLATE = "__PLACEHOLDER%d__";
+    const PATTERN_REGEXP_PLACEHOLDER_TEMPLATE = '__PLACEHOLDER%d__';
 
     /**
      * @var Parser
@@ -44,7 +44,7 @@ final class TextMatcher extends Matcher
     public function match($value, $pattern) : bool
     {
         if (!is_string($value)) {
-            $this->error = sprintf("%s \"%s\" is not a valid string.", gettype($value), new StringConverter($value));
+            $this->error = sprintf('%s "%s" is not a valid string.', gettype($value), new StringConverter($value));
             return false;
         }
 
@@ -54,19 +54,19 @@ final class TextMatcher extends Matcher
         try {
             $patternRegex = $this->replacePlaceholderWithPatternRegexes($patternRegex, $patternsReplacedWithRegex);
         } catch (UnknownTypeException $exception) {
-            $this->error = sprintf(sprintf("Type pattern \"%s\" is not supported by TextMatcher.", $exception->getType()));
+            $this->error = sprintf(sprintf('Type pattern "%s" is not supported by TextMatcher.', $exception->getType()));
             return false;
         }
 
         if (!preg_match($patternRegex, $value, $matchedValues)) {
-            $this->error = sprintf("\"%s\" does not match \"%s\" pattern", $value, $pattern);
+            $this->error = sprintf('"%s" does not match "%s" pattern', $value, $pattern);
             return false;
         }
 
         array_shift($matchedValues); // remove matched string
 
         if (count($patternsReplacedWithRegex) !== count($matchedValues)) {
-            $this->error = "Unexpected TextMatcher error.";
+            $this->error = 'Unexpected TextMatcher error.';
             return false;
         }
 
@@ -160,6 +160,6 @@ final class TextMatcher extends Matcher
      */
     private function prepareRegex(string $patternRegex) : string
     {
-        return "/^" . preg_quote($patternRegex, '/') . "$/";
+        return '/^' . preg_quote($patternRegex, '/') . '$/';
     }
 }

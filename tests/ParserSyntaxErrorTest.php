@@ -26,7 +26,7 @@ class ParserSyntaxErrorTest extends TestCase
      */
     public function test_unexpected_statement_at_type_position()
     {
-        $this->parser->getAST("not_valid_type");
+        $this->parser->getAST('not_valid_type');
     }
 
     /**
@@ -35,7 +35,7 @@ class ParserSyntaxErrorTest extends TestCase
      */
     public function test_unexpected_statement_instead_of_expander()
     {
-        $this->parser->getAST("@type@anything");
+        $this->parser->getAST('@type@anything');
     }
 
     /**
@@ -44,7 +44,7 @@ class ParserSyntaxErrorTest extends TestCase
      */
     public function test_end_of_string_after_opening_parenthesis()
     {
-        $this->parser->getAST("@type@.expander(");
+        $this->parser->getAST('@type@.expander(');
     }
 
     /**
@@ -53,7 +53,7 @@ class ParserSyntaxErrorTest extends TestCase
      */
     public function test_not_argument_after_opening_parenthesis()
     {
-        $this->parser->getAST("@type@.expander(not_argument");
+        $this->parser->getAST('@type@.expander(not_argument');
     }
 
     /**

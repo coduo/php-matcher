@@ -21,10 +21,10 @@ class IsNotEmptyTest extends TestCase
     public static function examplesProvider()
     {
         return [
-            ["lorem", true],
-            ["0", true],
+            ['lorem', true],
+            ['0', true],
             [new \DateTime(), true],
-            ["", false],
+            ['', false],
             [null, false],
             [[], false]
         ];

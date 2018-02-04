@@ -21,11 +21,11 @@ class EndsWithTest extends TestCase
     public static function notIgnoringCaseExamplesProvider()
     {
         return [
-            ["ipsum", "lorem ipsum", true],
-            ["ipsum", "Lorem IPSUM", false],
-            ["", "lorem ipsum", true],
-            ["ipsum", "lorem ipsum", true],
-            ["lorem", "lorem ipsum", false]
+            ['ipsum', 'lorem ipsum', true],
+            ['ipsum', 'Lorem IPSUM', false],
+            ['', 'lorem ipsum', true],
+            ['ipsum', 'lorem ipsum', true],
+            ['lorem', 'lorem ipsum', false]
         ];
     }
 
@@ -41,9 +41,9 @@ class EndsWithTest extends TestCase
     public static function ignoringCaseExamplesProvider()
     {
         return [
-            ["Ipsum", "Lorem ipsum", true],
-            ["iPsUm", "lorem ipsum", true],
-            ["IPSUM", "LoReM ipsum", true],
+            ['Ipsum', 'Lorem ipsum', true],
+            ['iPsUm', 'lorem ipsum', true],
+            ['IPSUM', 'LoReM ipsum', true],
         ];
     }
 
@@ -60,8 +60,8 @@ class EndsWithTest extends TestCase
     public static function invalidCasesProvider()
     {
         return [
-            ["ipsum", "ipsum lorem", "string \"ipsum lorem\" doesn't ends with string \"ipsum\"."],
-            ["lorem", new \DateTime(), "EndsWith expander require \"string\", got \"\\DateTime\"."],
+            ['ipsum', 'ipsum lorem', "string \"ipsum lorem\" doesn't ends with string \"ipsum\"."],
+            ['lorem', new \DateTime(), 'EndsWith expander require "string", got "\\DateTime".'],
         ];
     }
 }

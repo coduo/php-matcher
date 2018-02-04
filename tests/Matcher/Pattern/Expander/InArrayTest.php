@@ -21,9 +21,9 @@ class InArrayTest extends TestCase
     public static function examplesProvider()
     {
         return [
-            ["ipsum", ["ipsum"], true],
-            [1, ["foo", 1], true],
-            [["foo" => "bar"], [["foo" => "bar"]], true],
+            ['ipsum', ['ipsum'], true],
+            [1, ['foo', 1], true],
+            [['foo' => 'bar'], [['foo' => 'bar']], true],
         ];
     }
 
@@ -40,8 +40,8 @@ class InArrayTest extends TestCase
     public static function invalidCasesProvider()
     {
         return [
-            ["ipsum", ["ipsum lorem"], "Array(1) doesn't have \"ipsum\" element."],
-            ["lorem", new \DateTime(), "InArray expander require \"array\", got \"\\DateTime\"."],
+            ['ipsum', ['ipsum lorem'], "Array(1) doesn't have \"ipsum\" element."],
+            ['lorem', new \DateTime(), 'InArray expander require "array", got "\\DateTime".'],
         ];
     }
 }

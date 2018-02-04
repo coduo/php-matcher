@@ -18,7 +18,7 @@ final class ExpressionMatcher extends Matcher
         $expressionResult = $language->evaluate($matches[1], ['value' => $value]);
 
         if (!$expressionResult) {
-            $this->error = sprintf("\"%s\" expression fails for value \"%s\".", $pattern, new StringConverter($value));
+            $this->error = sprintf('"%s" expression fails for value "%s".', $pattern, new StringConverter($value));
         }
 
         return (bool) $expressionResult;

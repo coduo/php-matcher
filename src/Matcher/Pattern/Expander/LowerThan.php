@@ -19,7 +19,7 @@ final class LowerThan implements PatternExpander
     public function __construct($boundary)
     {
         if (!is_float($boundary) && !is_integer($boundary) && !is_double($boundary)) {
-            throw new \InvalidArgumentException(sprintf("Boundary value \"%s\" is not a valid number.", new StringConverter($boundary)));
+            throw new \InvalidArgumentException(sprintf('Boundary value "%s" is not a valid number.', new StringConverter($boundary)));
         }
 
         $this->boundary = $boundary;
@@ -33,12 +33,12 @@ final class LowerThan implements PatternExpander
     public function match($value) : bool
     {
         if (!is_float($value) && !is_integer($value) && !is_double($value)) {
-            $this->error = sprintf("Value \"%s\" is not a valid number.", new StringConverter($value));
+            $this->error = sprintf('Value "%s" is not a valid number.', new StringConverter($value));
             return false;
         }
 
         if ($value >= $this->boundary) {
-            $this->error = sprintf("Value \"%s\" is not lower than \"%s\".", new StringConverter($value), new StringConverter($this->boundary));
+            $this->error = sprintf('Value "%s" is not lower than "%s".', new StringConverter($value), new StringConverter($this->boundary));
             return false;
         }
 

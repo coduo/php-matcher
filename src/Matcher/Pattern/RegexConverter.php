@@ -14,13 +14,13 @@ final class RegexConverter
             case 'string':
             case 'wildcard':
             case '*':
-                return "(.+)";
+                return '(.+)';
             case 'number':
-                return "(\\-?[0-9]*[\\.|\\,]?[0-9]*)";
+                return '(\\-?[0-9]*[\\.|\\,]?[0-9]*)';
             case 'integer':
-                return "(\\-?[0-9]*)";
+                return '(\\-?[0-9]*)';
             case 'double':
-                return "(\\-?[0-9]*[\\.|\\,][0-9]*)";
+                return '(\\-?[0-9]*[\\.|\\,][0-9]*)';
             default:
                 throw new UnknownTypeException($typePattern->getType());
         }

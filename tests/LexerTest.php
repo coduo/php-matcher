@@ -48,12 +48,12 @@ class LexerTest extends TestCase
             [1, 1],
             [1.25, 1.25],
             [0, 0],
-            ["125", 125],
-            ["12.15", 12.15],
+            ['125', 125],
+            ['12.15', 12.15],
             [-10, -10],
             [-1.124, -1.124],
-            ["-10", -10],
-            ["-1.24", -1.24]
+            ['-10', -10],
+            ['-1.24', -1.24]
         ];
     }
 
@@ -72,10 +72,10 @@ class LexerTest extends TestCase
     public static function validBooleanValuesProvider()
     {
         return [
-            ["true", true],
-            ["false", false],
-            ["TRUE", true],
-            ["fAlSe", false]
+            ['true', true],
+            ['false', false],
+            ['TRUE', true],
+            ['fAlSe', false]
         ];
     }
 
@@ -94,9 +94,9 @@ class LexerTest extends TestCase
     public static function validNullValuesProvider()
     {
         return [
-            ["null"],
-            ["NULL"],
-            ["NuLl"],
+            ['null'],
+            ['NULL'],
+            ['NuLl'],
         ];
     }
 
@@ -114,10 +114,10 @@ class LexerTest extends TestCase
     public static function validNonTokenValuesProvider()
     {
         return [
-            ["@integer"],
-            ["integer@"],
-            ["test"],
-            ["@"]
+            ['@integer'],
+            ['integer@'],
+            ['test'],
+            ['@']
         ];
     }
 
@@ -170,18 +170,18 @@ class LexerTest extends TestCase
         $lexer->setInput($value);
         $lexer->moveNext();
         $this->assertEquals($lexer->lookahead['type'], Lexer::T_TYPE_PATTERN);
-        $this->assertEquals($lexer->lookahead['value'], trim($value, "@"));
+        $this->assertEquals($lexer->lookahead['value'], trim($value, '@'));
     }
 
     public static function validMatcherTypePatterns()
     {
         return [
-            ["@string@"],
-            ["@boolean@"],
-            ["@integer@"],
-            ["@number@"],
-            ["@*@"],
-            ["@wildcard@"]
+            ['@string@'],
+            ['@boolean@'],
+            ['@integer@'],
+            ['@number@'],
+            ['@*@'],
+            ['@wildcard@']
         ];
     }
 
@@ -200,15 +200,15 @@ class LexerTest extends TestCase
     public static function validExpanderNamesProvider()
     {
         return [
-            ["expanderName(", "expanderName"],
-            ["e(", "e"],
-            [".e(", "e"]
+            ['expanderName(', 'expanderName'],
+            ['e(', 'e'],
+            ['.e(', 'e']
         ];
     }
 
     public function test_ignore_whitespaces_between_parenthesis()
     {
-        $expectedTokens = ["type", "expander", "arg1", ",", 2, ",", "arg3", ",", 4, ")"];
+        $expectedTokens = ['type', 'expander', 'arg1', ',', 2, ',', 'arg3', ',', 4, ')'];
         $lexer = new Lexer();
         $lexer->setInput("@type@.expander( 'arg1',    2    ,'arg3',4)");
 

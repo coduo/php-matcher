@@ -65,22 +65,22 @@ class BooleanMatcherTest extends TestCase
     public static function positiveCanMatchData()
     {
         return [
-            ["@boolean@"]
+            ['@boolean@']
         ];
     }
 
     public static function positiveMatchData()
     {
         return [
-            [true, "@boolean@"],
+            [true, '@boolean@'],
         ];
     }
 
     public static function negativeCanMatchData()
     {
         return [
-            ["@boolean"],
-            ["boolean"],
+            ['@boolean'],
+            ['boolean'],
             [1]
         ];
     }
@@ -88,18 +88,18 @@ class BooleanMatcherTest extends TestCase
     public static function negativeMatchData()
     {
         return [
-            ["1", "@boolean@"],
-            [new \DateTime(),  "@boolean@"]
+            ['1', '@boolean@'],
+            [new \DateTime(),  '@boolean@']
         ];
     }
 
     public static function negativeMatchDescription()
     {
         return [
-            [new \stdClass,  "@boolean@", "object \"\\stdClass\" is not a valid boolean."],
-            [1.1, "@boolean@", "double \"1.1\" is not a valid boolean."],
-            ["true", "@string@", "string \"true\" is not a valid boolean."],
-            [['test'], "@boolean@", "array \"Array(1)\" is not a valid boolean."]
+            [new \stdClass,  '@boolean@', 'object "\\stdClass" is not a valid boolean.'],
+            [1.1, '@boolean@', 'double "1.1" is not a valid boolean.'],
+            ['true', '@string@', 'string "true" is not a valid boolean.'],
+            [['test'], '@boolean@', 'array "Array(1)" is not a valid boolean.']
         ];
     }
 }

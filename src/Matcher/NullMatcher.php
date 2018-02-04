@@ -8,7 +8,7 @@ use Coduo\ToString\StringConverter;
 
 final class NullMatcher extends Matcher
 {
-    const MATCH_PATTERN = "/^@null@$/";
+    const MATCH_PATTERN = '/^@null@$/';
 
     /**
      * {@inheritDoc}
@@ -16,7 +16,7 @@ final class NullMatcher extends Matcher
     public function match($value, $pattern) : bool
     {
         if (null !== $value) {
-            $this->error = sprintf("%s \"%s\" does not match null.", gettype($value), new StringConverter($value));
+            $this->error = sprintf('%s "%s" does not match null.', gettype($value), new StringConverter($value));
             return false;
         }
 

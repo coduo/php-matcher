@@ -4,12 +4,14 @@
 
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/coduo/php-matcher/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/coduo/php-matcher/?branch=master)
 
-* [![Build Status](https://travis-ci.org/coduo/php-matcher.svg)](https://travis-ci.org/coduo/php-matcher) - master (3.0.*)
+* [![Build Status](https://travis-ci.org/coduo/php-matcher.svg)](https://travis-ci.org/coduo/php-matcher) - master (3.1.*)
+* [![Build Status](https://travis-ci.org/coduo/php-matcher.svg?branch=3.0)](https://travis-ci.org/coduo/php-matcher) - 3.0.*
 * [![Build Status](https://travis-ci.org/coduo/php-matcher.svg?branch=2.2)](https://travis-ci.org/coduo/php-matcher) - 2.2.*
 * [![Build Status](https://travis-ci.org/coduo/php-matcher.svg?branch=2.1)](https://travis-ci.org/coduo/php-matcher) - 2.1.*
 * [![Build Status](https://travis-ci.org/coduo/php-matcher.svg?branch=2.0)](https://travis-ci.org/coduo/php-matcher) - 2.0.*
 
-[Readme for master (3.0) version](https://github.com/coduo/php-matcher/tree/master/README.md)  
+[Readme for master (3.1) version](https://github.com/coduo/php-matcher/tree/master/README.md)
+[Readme for 3.0 version](https://github.com/coduo/php-matcher/tree/3.0/README.md)  
 [Readme for 2.2 version](https://github.com/coduo/php-matcher/tree/2.2/README.md) 
 [Readme for 2.1 version](https://github.com/coduo/php-matcher/tree/2.1/README.md) 
 [Readme for 2.0 version](https://github.com/coduo/php-matcher/tree/2.0/README.md)  
@@ -100,7 +102,7 @@ $factory = new SimpleFactory();
 $matcher = $factory->createMatcher();
 
 $matcher->match(1, 1);
-$matcher->match('string', 'string')
+$matcher->match('string', 'string');
 ```
 
 ### String matching
@@ -114,7 +116,7 @@ $factory = new SimpleFactory();
 $matcher = $factory->createMatcher();
 
 $matcher->match('Norbert', '@string@');
-$matcher->match("lorem ipsum dolor", "@string@.startsWith('lorem').contains('ipsum').endsWith('dolor')")
+$matcher->match("lorem ipsum dolor", "@string@.startsWith('lorem').contains('ipsum').endsWith('dolor')");
 
 ```
 
@@ -188,12 +190,12 @@ use Coduo\PHPMatcher\Factory\SimpleFactory;
 $factory = new SimpleFactory();
 $matcher = $factory->createMatcher();
 
-$matcher->match("@integer@", "@*@"),
-$matcher->match("foobar", "@*@"),
-$matcher->match(true, "@*@"),
-$matcher->match(6.66, "@*@"),
-$matcher->match(array("bar"), "@wildcard@"),
-$matcher->match(new \stdClass, "@wildcard@"),
+$matcher->match("@integer@", "@*@");
+$matcher->match("foobar", "@*@");
+$matcher->match(true, "@*@");
+$matcher->match(6.66, "@*@");
+$matcher->match(array("bar"), "@wildcard@");
+$matcher->match(new \stdClass, "@wildcard@");
 ```
 
 ### Expression matching 
@@ -279,7 +281,7 @@ $matcher->match(
       '@boolean@',
       '@double@'
   )  
-)
+);
 ```
 
 ### Json matching 
@@ -313,8 +315,7 @@ $matcher->match(
       }
     ]
   }'
-)
-
+);
 ```
 
 ### Xml matching

@@ -21,7 +21,7 @@ final class DoubleMatcher extends Matcher
     public function match($value, $pattern) : bool
     {
         if (!is_double($value)) {
-            $this->error = sprintf("%s \"%s\" is not a valid double.", gettype($value), new StringConverter($value));
+            $this->error = sprintf('%s "%s" is not a valid double.', gettype($value), new StringConverter($value));
             return false;
         }
 

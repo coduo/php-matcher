@@ -28,7 +28,7 @@ final class InArray implements PatternExpander
     public function match($value) : bool
     {
         if (!is_array($value)) {
-            $this->error = sprintf("InArray expander require \"array\", got \"%s\".", new StringConverter($value));
+            $this->error = sprintf('InArray expander require "array", got "%s".', new StringConverter($value));
             return false;
         }
 

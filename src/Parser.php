@@ -59,7 +59,7 @@ final class Parser
                 $pattern = new AST\Pattern(new AST\Type($this->lexer->lookahead['value']));
                 break;
             default:
-                $this->unexpectedSyntaxError($this->lexer->lookahead, "@type@ pattern");
+                $this->unexpectedSyntaxError($this->lexer->lookahead, '@type@ pattern');
                 break;
         }
 
@@ -93,17 +93,17 @@ final class Parser
         $expander = new AST\Expander($this->getExpanderName());
 
         if ($this->endOfPattern()) {
-            $this->unexpectedEndOfString(")");
+            $this->unexpectedEndOfString(')');
         }
 
         $this->addArgumentValues($expander);
 
         if ($this->endOfPattern()) {
-            $this->unexpectedEndOfString(")");
+            $this->unexpectedEndOfString(')');
         }
 
         if (!$this->isNextCloseParenthesis()) {
-            $this->unexpectedSyntaxError($this->lexer->lookahead, ")");
+            $this->unexpectedSyntaxError($this->lexer->lookahead, ')');
         }
 
         return $expander;
@@ -112,7 +112,7 @@ final class Parser
     private function getExpanderName()
     {
         if ($this->lexer->lookahead['type'] !== Lexer::T_EXPANDER_NAME) {
-            $this->unexpectedSyntaxError($this->lexer->lookahead, ".expanderName(args) definition");
+            $this->unexpectedSyntaxError($this->lexer->lookahead, '.expanderName(args) definition');
         }
         $expander = $this->lexer->lookahead['value'];
         $this->lexer->moveNext();
@@ -137,7 +137,7 @@ final class Parser
             $this->lexer->moveNext();
 
             if ($this->lexer->isNextToken(Lexer::T_CLOSE_PARENTHESIS)) {
-                $this->unexpectedSyntaxError($this->lexer->lookahead, "string, number, boolean or null argument");
+                $this->unexpectedSyntaxError($this->lexer->lookahead, 'string, number, boolean or null argument');
             }
         }
     }
@@ -169,7 +169,7 @@ final class Parser
         }
 
         if (!$this->lexer->isNextTokenAny($validArgumentTypes)) {
-            $this->unexpectedSyntaxError($this->lexer->lookahead, "string, number, boolean or null argument");
+            $this->unexpectedSyntaxError($this->lexer->lookahead, 'string, number, boolean or null argument');
         }
 
         $tokenType = $this->lexer->lookahead['type'];
@@ -193,7 +193,7 @@ final class Parser
         }
 
         if (!$this->lexer->isNextToken(Lexer::T_CLOSE_CURLY_BRACE)) {
-            $this->unexpectedSyntaxError($this->lexer->lookahead, "}");
+            $this->unexpectedSyntaxError($this->lexer->lookahead, '}');
         }
 
         $this->lexer->moveNext();
@@ -209,11 +209,11 @@ final class Parser
 
         $key = $this->getNextArgumentValue();
         if ($key === self::NULL_VALUE) {
-            $key = "";
+            $key = '';
         }
 
         if (!$this->lexer->isNextToken(Lexer::T_COLON)) {
-            $this->unexpectedSyntaxError($this->lexer->lookahead, ":");
+            $this->unexpectedSyntaxError($this->lexer->lookahead, ':');
         }
 
         $this->lexer->moveNext();
@@ -248,9 +248,9 @@ final class Parser
     private function unexpectedSyntaxError(array $unexpectedToken, string $expected = null)
     {
         $tokenPos = (isset($unexpectedToken['position'])) ? $unexpectedToken['position'] : '-1';
-        $message  = sprintf("line 0, col %d: Error: ", $tokenPos);
-        $message .= (isset($expected)) ? sprintf("Expected \"%s\", got ", $expected) : "Unexpected";
-        $message .= sprintf("\"%s\"", $unexpectedToken['value']);
+        $message  = sprintf('line 0, col %d: Error: ', $tokenPos);
+        $message .= (isset($expected)) ? sprintf('Expected "%s", got ', $expected) : 'Unexpected';
+        $message .= sprintf('"%s"', $unexpectedToken['value']);
 
         throw PatternException::syntaxError($message);
     }
@@ -262,9 +262,9 @@ final class Parser
     private function unexpectedEndOfString(string $expected = null)
     {
         $tokenPos = (isset($this->lexer->token['position'])) ? $this->lexer->token['position'] + strlen((string) $this->lexer->token['value']) : '-1';
-        $message  = sprintf("line 0, col %d: Error: ", $tokenPos);
-        $message .= (isset($expected)) ? sprintf("Expected \"%s\", got end of string.", $expected) : "Unexpected";
-        $message .= "end of string";
+        $message  = sprintf('line 0, col %d: Error: ', $tokenPos);
+        $message .= (isset($expected)) ? sprintf('Expected "%s", got end of string.', $expected) : 'Unexpected';
+        $message .= 'end of string';
 
         throw PatternException::syntaxError($message);
     }

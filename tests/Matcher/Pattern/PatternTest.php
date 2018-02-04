@@ -37,11 +37,11 @@ class PatternTest extends TestCase
     public static function examplesProvider()
     {
         return [
-            ["isEmail", true],
-            ["isEmpty", true],
-            ["optional", true],
-            ["isUrl", false],
-            ["non existing expander", false],
+            ['isEmail', true],
+            ['isEmpty', true],
+            ['optional', true],
+            ['isUrl', false],
+            ['non existing expander', false],
         ];
     }
 }

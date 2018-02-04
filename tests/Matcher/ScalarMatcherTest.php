@@ -58,10 +58,10 @@ class ScalarMatcherTest extends TestCase
     public static function negativeMatches()
     {
         return [
-            [false, "false"],
+            [false, 'false'],
             [false, 0],
             [true, 1],
-            ["array", []],
+            ['array', []],
         ];
     }
 
@@ -69,7 +69,7 @@ class ScalarMatcherTest extends TestCase
     {
         return [
             [1, 1],
-            ["michal", "michal"],
+            ['michal', 'michal'],
             [false, false],
             [6.66, 6.66],
         ];
@@ -79,7 +79,7 @@ class ScalarMatcherTest extends TestCase
     {
         return [
             [1],
-            ["michal"],
+            ['michal'],
             [true],
             [false],
             [6.66],
@@ -97,10 +97,10 @@ class ScalarMatcherTest extends TestCase
     public static function negativeMatchDescription()
     {
         return [
-            ["test", "norbert", "\"test\" does not match \"norbert\"."],
-            [new \stdClass,  1, "\"\\stdClass\" does not match \"1\"."],
-            [1.1, false, "\"1.1\" does not match \"false\"."],
-            [false, ['foo', 'bar'], "\"false\" does not match \"Array(2)\"."],
+            ['test', 'norbert', '"test" does not match "norbert".'],
+            [new \stdClass,  1, '"\\stdClass" does not match "1".'],
+            [1.1, false, '"1.1" does not match "false".'],
+            [false, ['foo', 'bar'], '"false" does not match "Array(2)".'],
         ];
     }
 }

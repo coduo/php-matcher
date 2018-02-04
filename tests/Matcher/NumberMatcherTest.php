@@ -65,25 +65,25 @@ class NumberMatcherTest extends TestCase
     public static function positiveCanMatchData()
     {
         return [
-            ["@number@"]
+            ['@number@']
         ];
     }
 
     public static function positiveMatchData()
     {
         return [
-            [10.1, "@number@"],
-            [10, "@number@"],
-            ["25", "@number@"],
-            [10, "@number@.lowerThan(50).greaterThan(1)"],
+            [10.1, '@number@'],
+            [10, '@number@'],
+            ['25', '@number@'],
+            [10, '@number@.lowerThan(50).greaterThan(1)'],
         ];
     }
 
     public static function negativeCanMatchData()
     {
         return [
-            ["@number"],
-            ["number"],
+            ['@number'],
+            ['number'],
             [1]
         ];
     }
@@ -91,17 +91,17 @@ class NumberMatcherTest extends TestCase
     public static function negativeMatchData()
     {
         return [
-            [["test"], "@number@"],
-            [new \DateTime(),  "@number@"],
+            [['test'], '@number@'],
+            [new \DateTime(),  '@number@'],
         ];
     }
 
     public static function negativeMatchDescription()
     {
         return [
-            [new \stdClass,  "@number@", "object \"\\stdClass\" is not a valid number."],
-            [false, "@number@", "boolean \"false\" is not a valid number."],
-            [['test'], "@number@", "array \"Array(1)\" is not a valid number."]
+            [new \stdClass,  '@number@', 'object "\\stdClass" is not a valid number.'],
+            [false, '@number@', 'boolean "false" is not a valid number.'],
+            [['test'], '@number@', 'array "Array(1)" is not a valid number.']
         ];
     }
 }

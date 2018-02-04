@@ -21,7 +21,7 @@ final class BooleanMatcher extends Matcher
     public function match($value, $pattern) : bool
     {
         if (!is_bool($value)) {
-            $this->error = sprintf("%s \"%s\" is not a valid boolean.", gettype($value), new StringConverter($value));
+            $this->error = sprintf('%s "%s" is not a valid boolean.', gettype($value), new StringConverter($value));
             return false;
         }
 

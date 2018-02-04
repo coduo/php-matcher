@@ -25,6 +25,6 @@ class RegexConverterTest extends TestCase
      */
     public function test_convert_unknown_type()
     {
-        $this->converter->toRegex(new TypePattern("not_a_type"));
+        $this->converter->toRegex(new TypePattern('not_a_type'));
     }
 }

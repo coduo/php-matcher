@@ -27,12 +27,12 @@ final class Lexer extends AbstractLexer
     protected function getCatchablePatterns() : array
     {
         return [
-            "\\.?[a-zA-Z0-9_]+\\(", // expander name
-            "[a-zA-Z0-9.]*", // words
-            "\\-?[0-9]*\\.?[0-9]*", // numbers
+            '\\.?[a-zA-Z0-9_]+\\(', // expander name
+            '[a-zA-Z0-9.]*', // words
+            '\\-?[0-9]*\\.?[0-9]*', // numbers
             "'(?:[^']|'')*'", // string between ' character
-            "\"(?:[^\"]|\"\")*\"", // string between " character,
-            "@[a-zA-Z0-9\\*]+@", // type pattern
+            '"(?:[^"]|"")*"', // string between " character,
+            '@[a-zA-Z0-9\\*]+@', // type pattern
         ];
     }
 
@@ -42,7 +42,7 @@ final class Lexer extends AbstractLexer
     protected function getNonCatchablePatterns() : array
     {
         return [
-            "\\s+",
+            '\\s+',
         ];
     }
 
@@ -107,7 +107,7 @@ final class Lexer extends AbstractLexer
 
     protected function isStringToken(string $value) : bool
     {
-        return in_array(substr($value, 0, 1), ["\"", "'"]);
+        return in_array(substr($value, 0, 1), ['"', "'"]);
     }
 
     protected function isBooleanToken(string $value) : bool

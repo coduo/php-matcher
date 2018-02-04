@@ -21,13 +21,13 @@ class IsUrlTest extends TestCase
     public static function examplesUrlsProvider()
     {
         return [
-            ["http://example.com/test.html", true],
-            ["https://example.com/test.html", true],
-            ["https://example.com/user/{id}/", true],
-            ["mailto:email@example.com", true],
-            ["//example.com/test/", false],
-            ["example", false],
-            ["", false]
+            ['http://example.com/test.html', true],
+            ['https://example.com/test.html', true],
+            ['https://example.com/user/{id}/', true],
+            ['mailto:email@example.com', true],
+            ['//example.com/test/', false],
+            ['example', false],
+            ['', false]
         ];
     }
 }

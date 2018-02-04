@@ -25,29 +25,29 @@ class OneOfTest extends TestCase
      */
     public function test_invalid_argument_types()
     {
-        $expander = new OneOf("arg1", ["test"]);
+        $expander = new OneOf('arg1', ['test']);
     }
 
     public function test_positive_match()
     {
         $expander = new OneOf(
-            new Contains("lorem"),
-            new Contains("test")
+            new Contains('lorem'),
+            new Contains('test')
         );
 
-        $this->assertTrue($expander->match("lorem ipsum"));
+        $this->assertTrue($expander->match('lorem ipsum'));
     }
 
     public function test_negative_match()
     {
         $expander = new OneOf(
-            new Contains("lorem"),
-            new Contains("test")
+            new Contains('lorem'),
+            new Contains('test')
         );
 
-        $this->assertFalse($expander->match("this is random stiring"));
+        $this->assertFalse($expander->match('this is random stiring'));
         $this->assertSame(
-            "Any expander available in OneOf expander does not match \"this is random stiring\".",
+            'Any expander available in OneOf expander does not match "this is random stiring".',
             $expander->getError()
         );
     }

@@ -76,7 +76,7 @@ class ExpressionMatcherTest extends TestCase
     public static function positiveCanMatchData()
     {
         return [
-            ["expr(1 > 2)"],
+            ['expr(1 > 2)'],
             ["expr(value == 'foo')"],
         ];
     }
@@ -84,19 +84,19 @@ class ExpressionMatcherTest extends TestCase
     public static function negativeCanMatchData()
     {
         return [
-            ["@integer"],
-            ["expr("],
-            ["@string"],
+            ['@integer'],
+            ['expr('],
+            ['@string'],
             [new \stdClass],
-            [["foobar"]]
+            [['foobar']]
         ];
     }
 
     public static function positiveMatchData()
     {
         return [
-            [4, "expr(value > 2)"],
-            ["foo", "expr(value == 'foo')"],
+            [4, 'expr(value > 2)'],
+            ['foo', "expr(value == 'foo')"],
             [new \DateTime('2014-04-01'), "expr(value.format('Y-m-d') == '2014-04-01')"]
         ];
     }
@@ -104,15 +104,15 @@ class ExpressionMatcherTest extends TestCase
     public static function negativeMatchData()
     {
         return [
-            [4, "expr(value < 2)"],
-            ["foo", "expr(value != 'foo')"],
+            [4, 'expr(value < 2)'],
+            ['foo', "expr(value != 'foo')"],
         ];
     }
 
     public static function negativeMatchDescription()
     {
         return [
-            [4, "expr(value < 2)", "\"expr(value < 2)\" expression fails for value \"4\"."],
+            [4, 'expr(value < 2)', '"expr(value < 2)" expression fails for value "4".'],
             [
                 new \DateTime('2014-04-01'),
                 "expr(value.format('Y-m-d') == '2014-04-02')",

@@ -36,7 +36,7 @@ final class ExpanderInitializer
     public function setExpanderDefinition(string $expanderName, string $expanderFQCN)
     {
         if (!class_exists($expanderFQCN)) {
-            throw new UnknownExpanderClassException(sprintf("Class \"%s\" does not exists.", $expanderFQCN));
+            throw new UnknownExpanderClassException(sprintf('Class "%s" does not exists.', $expanderFQCN));
         }
 
         $this->expanderDefinitions[$expanderName] = $expanderFQCN;
@@ -50,7 +50,7 @@ final class ExpanderInitializer
     public function getExpanderDefinition(string $expanderName) : string
     {
         if (!$this->hasExpanderDefinition($expanderName)) {
-            throw new InvalidArgumentException(sprintf("Definition for \"%s\" expander does not exists.", $expanderName));
+            throw new InvalidArgumentException(sprintf('Definition for "%s" expander does not exists.', $expanderName));
         }
 
         return $this->expanderDefinitions[$expanderName];
@@ -59,7 +59,7 @@ final class ExpanderInitializer
     public function initialize(ExpanderNode $expanderNode) : PatternExpander
     {
         if (!array_key_exists($expanderNode->getName(), $this->expanderDefinitions)) {
-            throw new UnknownExpanderException(sprintf("Unknown expander \"%s\"", $expanderNode->getName()));
+            throw new UnknownExpanderException(sprintf('Unknown expander "%s"', $expanderNode->getName()));
         }
 
         $reflection = new \ReflectionClass($this->expanderDefinitions[$expanderNode->getName()]);

@@ -23,20 +23,20 @@ class RepeatTest extends TestCase
         $jsonPattern = '{"name": "@string@", "activated": "@boolean@"}';
 
         $jsonTest = [
-            ["name" => "toto", "activated" => true],
-            ["name" => "titi", "activated" => false],
-            ["name" => "tate", "activated" => true]
+            ['name' => 'toto', 'activated' => true],
+            ['name' => 'titi', 'activated' => false],
+            ['name' => 'tate', 'activated' => true]
         ];
 
-        $scalarPattern = "@string@";
+        $scalarPattern = '@string@';
         $scalarTest = [
-            "toto",
-            "titi",
-            "tata"
+            'toto',
+            'titi',
+            'tata'
         ];
 
         $strictTest = [
-            ["name" => "toto", "activated" => true, "offset" => "offset"]
+            ['name' => 'toto', 'activated' => true, 'offset' => 'offset']
         ];
 
         return [
@@ -61,22 +61,22 @@ class RepeatTest extends TestCase
         $pattern = '{"name": "@string@", "activated": "@boolean@"}';
 
         $valueTest = [
-            ["name" => 1, "activated" => "yes"]
+            ['name' => 1, 'activated' => 'yes']
         ];
 
         $keyTest = [
-            ["offset" => true, "foe" => "bar"]
+            ['offset' => true, 'foe' => 'bar']
         ];
 
         $strictTest = [
-            ["name" => 1, "activated" => "yes", "offset" => true]
+            ['name' => 1, 'activated' => 'yes', 'offset' => true]
         ];
 
         return [
             [$pattern, $valueTest, 'Repeat expander, entry n°0, key "name", find error : integer "1" is not a valid string.'],
             [$pattern, $keyTest, 'Repeat expander, entry n°0, require "array" to have key "name".'],
             [$pattern, $strictTest, 'Repeat expander expect to have 2 keys in array but get : 3'],
-            [$pattern, "", 'Repeat expander require "array", got "".']
+            [$pattern, '', 'Repeat expander require "array", got "".']
         ];
     }
 }

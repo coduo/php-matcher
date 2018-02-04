@@ -37,11 +37,11 @@ class WildcardMatcherTest extends TestCase
     public static function data()
     {
         return [
-            ["@integer@"],
-            ["foobar"],
+            ['@integer@'],
+            ['foobar'],
             [true],
             [6.66],
-            [["bar"]],
+            [['bar']],
             [new \stdClass],
         ];
     }
@@ -49,8 +49,8 @@ class WildcardMatcherTest extends TestCase
     public static function positivePatterns()
     {
         return [
-            ["@*@"],
-            ["@wildcard@"],
+            ['@*@'],
+            ['@wildcard@'],
         ];
     }
 }

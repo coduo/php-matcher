@@ -41,9 +41,9 @@ class LowerThanTest extends TestCase
     public static function invalidCasesProvider()
     {
         return [
-            [1, "ipsum lorem", "Value \"ipsum lorem\" is not a valid number."],
-            [5, 10, "Value \"10\" is not lower than \"5\"."],
-            [5, 5, "Value \"5\" is not lower than \"5\"."],
+            [1, 'ipsum lorem', 'Value "ipsum lorem" is not a valid number.'],
+            [5, 10, 'Value "10" is not lower than "5".'],
+            [5, 5, 'Value "5" is not lower than "5".'],
         ];
     }
 }

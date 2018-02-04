@@ -83,29 +83,29 @@ XML;
 
     public function test_error_when_unsupported_type_pattern_used()
     {
-        $pattern = "lorem ipsum @null@ bla bla";
-        $value = "lorem ipsum bla bla";
+        $pattern = 'lorem ipsum @null@ bla bla';
+        $value = 'lorem ipsum bla bla';
 
         $this->assertFalse($this->matcher->match($value, $pattern));
-        $this->assertSame("Type pattern \"@null@\" is not supported by TextMatcher.", $this->matcher->getError());
+        $this->assertSame('Type pattern "@null@" is not supported by TextMatcher.', $this->matcher->getError());
     }
 
     public function matchingData()
     {
         return [
             [
-                "lorem ipsum lol lorem 24 dolorem",
-                "lorem ipsum @string@.startsWith(\"lo\") lorem @number@ dolorem",
+                'lorem ipsum lol lorem 24 dolorem',
+                'lorem ipsum @string@.startsWith("lo") lorem @number@ dolorem',
                 true
             ],
             [
-                "lorem ipsum 24 dolorem",
-                "lorem ipsum @integer@",
+                'lorem ipsum 24 dolorem',
+                'lorem ipsum @integer@',
                 false
             ],
             [
-                "/users/12345/active",
-                "/users/@integer@.greaterThan(0)/active",
+                '/users/12345/active',
+                '/users/@integer@.greaterThan(0)/active',
                 true
             ]
         ];

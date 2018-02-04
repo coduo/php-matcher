@@ -43,7 +43,7 @@ final class Contains implements PatternExpander
     public function match($value) : bool
     {
         if (!is_string($value)) {
-            $this->error = sprintf("Contains expander require \"string\", got \"%s\".", new StringConverter($value));
+            $this->error = sprintf('Contains expander require "string", got "%s".', new StringConverter($value));
             return false;
         }
 

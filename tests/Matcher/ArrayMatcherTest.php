@@ -108,19 +108,19 @@ class ArrayMatcherTest extends TestCase
 
     public function test_error_message_when_matching_non_array_value()
     {
-        $this->assertFalse($this->matcher->match(new \DateTime(), "@array@"));
-        $this->assertEquals($this->matcher->getError(), "object \"\\DateTime\" is not a valid array.");
+        $this->assertFalse($this->matcher->match(new \DateTime(), '@array@'));
+        $this->assertEquals($this->matcher->getError(), 'object "\\DateTime" is not a valid array.');
     }
 
     public function test_matching_array_to_array_pattern()
     {
-        $this->assertTrue($this->matcher->match(["foo", "bar"], "@array@"));
-        $this->assertTrue($this->matcher->match(["foo"], "@array@.inArray(\"foo\")"));
+        $this->assertTrue($this->matcher->match(['foo', 'bar'], '@array@'));
+        $this->assertTrue($this->matcher->match(['foo'], '@array@.inArray("foo")'));
         $this->assertTrue($this->matcher->match(
-            ["foo", ["bar"]],
+            ['foo', ['bar']],
             [
-                "@string@",
-                "@array@.inArray(\"bar\")"
+                '@string@',
+                '@array@.inArray("bar")'
             ]
         ));
     }
@@ -163,7 +163,7 @@ class ArrayMatcherTest extends TestCase
             [$simpleArr, $simpleArrPattern],
             [[], []],
             [['foo' => null], ['foo' => null]],
-            [['foo' => null], ['foo' => "@null@"]],
+            [['foo' => null], ['foo' => '@null@']],
             [['key' => 'val'], ['key' => 'val']],
             [[1], [1]],
             [
@@ -226,7 +226,7 @@ class ArrayMatcherTest extends TestCase
 
         return [
             [$simpleArr, $simpleDiff],
-            [["status" => "ok", "data" => [['foo']]], ["status" => "ok", "data" => []]],
+            [['status' => 'ok', 'data' => [['foo']]], ['status' => 'ok', 'data' => []]],
             [[1], []],
             [['key' => 'val'], ['key' => 'val2']],
             [[1], [2]],

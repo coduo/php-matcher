@@ -21,8 +21,8 @@ class CountTest extends TestCase
     public static function examplesProvider()
     {
         return [
-            [1, ["ipsum"], true],
-            [2, ["foo", 1], true],
+            [1, ['ipsum'], true],
+            [2, ['foo', 1], true],
         ];
     }
 
@@ -39,8 +39,8 @@ class CountTest extends TestCase
     public static function invalidCasesProvider()
     {
         return [
-            [2, [1, 2, 3], "Expected count of Array(3) is 2."],
-            [2, new \DateTime(), "Count expander require \"array\", got \"\\DateTime\"."],
+            [2, [1, 2, 3], 'Expected count of Array(3) is 2.'],
+            [2, new \DateTime(), 'Count expander require "array", got "\\DateTime".'],
         ];
     }
 }

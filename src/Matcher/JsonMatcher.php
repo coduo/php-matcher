@@ -22,12 +22,12 @@ final class JsonMatcher extends Matcher
         }
 
         if (!Json::isValid($value)) {
-            $this->error = sprintf("Invalid given JSON of value. %s", $this->getErrorMessage());
+            $this->error = sprintf('Invalid given JSON of value. %s', $this->getErrorMessage());
             return false;
         }
 
         if (!Json::isValidPattern($pattern)) {
-            $this->error = sprintf("Invalid given JSON of pattern. %s", $this->getErrorMessage());
+            $this->error = sprintf('Invalid given JSON of pattern. %s', $this->getErrorMessage());
             return false;
         }
 

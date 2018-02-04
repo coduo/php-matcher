@@ -65,26 +65,26 @@ class StringMatcherTest extends TestCase
     public static function positiveCanMatchData()
     {
         return [
-            ["@string@"]
+            ['@string@']
         ];
     }
 
     public static function positiveMatchData()
     {
         return [
-            ["lorem ipsum", "@string@"],
-            ["lorem ipsum", "@string@.isNotEmpty()"],
-            ["lorem ipsum", "@string@.startsWith('lorem')"],
-            ["lorem ipsum", "@string@.endsWith('ipsum')"],
-            ["lorem ipsum dolor", "@string@.startsWith('lorem').contains('ipsum').endsWith('dolor')"],
+            ['lorem ipsum', '@string@'],
+            ['lorem ipsum', '@string@.isNotEmpty()'],
+            ['lorem ipsum', "@string@.startsWith('lorem')"],
+            ['lorem ipsum', "@string@.endsWith('ipsum')"],
+            ['lorem ipsum dolor', "@string@.startsWith('lorem').contains('ipsum').endsWith('dolor')"],
         ];
     }
 
     public static function negativeCanMatchData()
     {
         return [
-            ["@string"],
-            ["string"],
+            ['@string'],
+            ['string'],
             [1]
         ];
     }
@@ -92,19 +92,19 @@ class StringMatcherTest extends TestCase
     public static function negativeMatchData()
     {
         return [
-            [1, "@string@"],
-            [0,  "@string@"]
+            [1, '@string@'],
+            [0,  '@string@']
         ];
     }
 
     public static function negativeMatchDescription()
     {
         return [
-            [new \stdClass,  "@string@", "object \"\\stdClass\" is not a valid string."],
-            [1.1, "@integer@", "double \"1.1\" is not a valid string."],
-            [false, "@double@", "boolean \"false\" is not a valid string."],
-            [1, "@array@", "integer \"1\" is not a valid string."],
-            ["lorem ipsum", "@array@.startsWith('ipsum')", "string \"lorem ipsum\" doesn't starts with string \"ipsum\"."]
+            [new \stdClass,  '@string@', 'object "\\stdClass" is not a valid string.'],
+            [1.1, '@integer@', 'double "1.1" is not a valid string.'],
+            [false, '@double@', 'boolean "false" is not a valid string.'],
+            [1, '@array@', 'integer "1" is not a valid string.'],
+            ['lorem ipsum', "@array@.startsWith('ipsum')", "string \"lorem ipsum\" doesn't starts with string \"ipsum\"."]
         ];
     }
 }

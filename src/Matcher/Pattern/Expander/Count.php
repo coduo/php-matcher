@@ -28,12 +28,12 @@ final class Count implements PatternExpander
     public function match($value) :bool
     {
         if (!is_array($value)) {
-            $this->error = sprintf("Count expander require \"array\", got \"%s\".", new StringConverter($value));
+            $this->error = sprintf('Count expander require "array", got "%s".', new StringConverter($value));
             return false;
         }
 
         if (count($value) !== $this->value) {
-            $this->error = sprintf("Expected count of %s is %s.", new StringConverter($value), new StringConverter($this->value));
+            $this->error = sprintf('Expected count of %s is %s.', new StringConverter($value), new StringConverter($this->value));
             return false;
         }
 

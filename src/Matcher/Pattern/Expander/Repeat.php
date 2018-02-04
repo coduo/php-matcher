@@ -47,7 +47,7 @@ final class Repeat implements PatternExpander
     public function __construct(string $pattern, bool $isStrict = true)
     {
         if (!is_string($pattern)) {
-            throw new \InvalidArgumentException("Repeat pattern must be a string.");
+            throw new \InvalidArgumentException('Repeat pattern must be a string.');
         }
 
         $this->pattern = $pattern;
@@ -69,7 +69,7 @@ final class Repeat implements PatternExpander
     public function match($values) : bool
     {
         if (!is_array($values)) {
-            $this->error = sprintf("Repeat expander require \"array\", got \"%s\".", new StringConverter($values));
+            $this->error = sprintf('Repeat expander require "array", got "%s".', new StringConverter($values));
             return false;
         }
 
@@ -102,7 +102,7 @@ final class Repeat implements PatternExpander
             $match = $matcher->match($value, $this->pattern);
 
             if (!$match) {
-                $this->error = sprintf("Repeat expander, entry n°%d, find error : %s", $index, $matcher->getError());
+                $this->error = sprintf('Repeat expander, entry n°%d, find error : %s', $index, $matcher->getError());
                 return false;
             }
         }
@@ -125,20 +125,20 @@ final class Repeat implements PatternExpander
             $valueKeysLength = count($valueKeys);
 
             if ($this->isStrict && $patternKeysLength !== $valueKeysLength) {
-                $this->error = sprintf("Repeat expander expect to have %d keys in array but get : %d", $patternKeysLength, $valueKeysLength);
+                $this->error = sprintf('Repeat expander expect to have %d keys in array but get : %d', $patternKeysLength, $valueKeysLength);
                 return false;
             }
 
             foreach ($patternKeys as $key) {
                 if (!array_key_exists($key, $value)) {
-                    $this->error = sprintf("Repeat expander, entry n°%d, require \"array\" to have key \"%s\".", $index, $key);
+                    $this->error = sprintf('Repeat expander, entry n°%d, require "array" to have key "%s".', $index, $key);
                     return false;
                 }
 
                 $match = $matcher->match($value[$key], $this->pattern[$key]);
 
                 if (!$match) {
-                    $this->error = sprintf("Repeat expander, entry n°%d, key \"%s\", find error : %s", $index, $key, $matcher->getError());
+                    $this->error = sprintf('Repeat expander, entry n°%d, key "%s", find error : %s', $index, $key, $matcher->getError());
                     return false;
                 }
             }
