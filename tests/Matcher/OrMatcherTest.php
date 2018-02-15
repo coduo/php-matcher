@@ -40,6 +40,21 @@ class OrMatcherTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    public function test_whitespaces_trim_after_splitting()
+    {
+        $this->assertTrue(
+            $this->matcher->match(
+                [
+                    'test' => null
+                ],
+                [
+                    'test' => ' @integer@ || @null@ '
+                ]
+            ),
+            $this->matcher->getError()
+        );
+    }
+
     public static function positiveMatchData()
     {
         $simpleArr = array(
