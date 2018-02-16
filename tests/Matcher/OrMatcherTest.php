@@ -1,4 +1,5 @@
 <?php
+
 namespace Coduo\PHPMatcher\Tests\Matcher;
 
 use Coduo\PHPMatcher\Factory\SimpleFactory;
@@ -44,12 +45,12 @@ class OrMatcherTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertTrue(
             $this->matcher->match(
-                [
+                array(
                     'test' => null
-                ],
-                [
+                ),
+                array(
                     'test' => ' @integer@ || @null@ '
-                ]
+                )
             ),
             $this->matcher->getError()
         );
