@@ -1,25 +1,23 @@
 # PHP Matcher
 
-***PHP Matcher*** lets You assert like a gangster in Your test cases, where response can be something you cannot predict
+Library created for testing all kind of JSON/XML/TXT/Scalar values against patterns.  
 
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/coduo/php-matcher/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/coduo/php-matcher/?branch=master)
+```php
+PHPMatcher::match($value = '{"foo": "bar"}', $pattern = '{"foo": "@string@"}');
+```
+
+It was builded to simplify API functional testing. 
 
 * [![Build Status](https://travis-ci.org/coduo/php-matcher.svg)](https://travis-ci.org/coduo/php-matcher) - master (3.1.*)
 * [![Build Status](https://travis-ci.org/coduo/php-matcher.svg?branch=3.0)](https://travis-ci.org/coduo/php-matcher) - 3.0.*
-* [![Build Status](https://travis-ci.org/coduo/php-matcher.svg?branch=2.2)](https://travis-ci.org/coduo/php-matcher) - 2.2.*
-* [![Build Status](https://travis-ci.org/coduo/php-matcher.svg?branch=2.1)](https://travis-ci.org/coduo/php-matcher) - 2.1.*
-* [![Build Status](https://travis-ci.org/coduo/php-matcher.svg?branch=2.0)](https://travis-ci.org/coduo/php-matcher) - 2.0.*
 
 [Readme for master (3.1) version](https://github.com/coduo/php-matcher/tree/master/README.md)
 [Readme for 3.0 version](https://github.com/coduo/php-matcher/tree/3.0/README.md)  
-[Readme for 2.2 version](https://github.com/coduo/php-matcher/tree/2.2/README.md) 
-[Readme for 2.1 version](https://github.com/coduo/php-matcher/tree/2.1/README.md) 
-[Readme for 2.0 version](https://github.com/coduo/php-matcher/tree/2.0/README.md)  
 
 
 ## Installation
 
-Require new dev dependency using composer (assuming it's installed globally):
+Require new dev dependency using composer:
 
 ```
 composer require --dev "coduo/php-matcher"
