@@ -4,15 +4,11 @@
 
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/coduo/php-matcher/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/coduo/php-matcher/?branch=master)
 
-* [![Build Status](https://travis-ci.org/coduo/php-matcher.svg)](https://travis-ci.org/coduo/php-matcher) - master (2.1.*)
-* [![Build Status](https://travis-ci.org/coduo/php-matcher.svg?branch=2.0)](https://travis-ci.org/coduo/php-matcher) - 2.0.*
-* [![Build Status](https://travis-ci.org/coduo/php-matcher.svg?branch=1.1)](https://travis-ci.org/coduo/php-matcher) - 1.1.*
-* [![Build Status](https://travis-ci.org/coduo/php-matcher.svg?branch=1.0)](https://travis-ci.org/coduo/php-matcher) - 1.0.*
+* [![Build Status](https://travis-ci.org/coduo/php-matcher.svg)](https://travis-ci.org/coduo/php-matcher) - master (2.4.*)
+* [![Build Status](https://travis-ci.org/coduo/php-matcher.svg?branch=2.3)](https://travis-ci.org/coduo/php-matcher) - 2.3.*
 
-[Readme for master (2.1) version](https://github.com/coduo/php-matcher/tree/master/README.md)  
-[Readme for 2.0 version](https://github.com/coduo/php-matcher/tree/2.0/README.md)  
-[Readme for 1.1 version](https://github.com/coduo/php-matcher/tree/1.1/README.md)  
-[Readme for 1.0 version](https://github.com/coduo/php-matcher/tree/1.0/README.md)
+[Readme for master (2.4) version](https://github.com/coduo/php-matcher/tree/master/README.md)
+[Readme for 2.3 version](https://github.com/coduo/php-matcher/tree/2.3/README.md)  
 
 
 ##Installation
