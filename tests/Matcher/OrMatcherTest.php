@@ -1,4 +1,5 @@
 <?php
+
 namespace Coduo\PHPMatcher\Tests\Matcher;
 
 use Coduo\PHPMatcher\Factory\SimpleFactory;
@@ -36,6 +37,21 @@ class OrMatcherTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertFalse(
             $this->matcher->match($value, $pattern),
+            $this->matcher->getError()
+        );
+    }
+
+    public function test_whitespaces_trim_after_splitting()
+    {
+        $this->assertTrue(
+            $this->matcher->match(
+                array(
+                    'test' => null
+                ),
+                array(
+                    'test' => ' @integer@ || @null@ '
+                )
+            ),
             $this->matcher->getError()
         );
     }
