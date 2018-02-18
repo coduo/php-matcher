@@ -18,6 +18,8 @@ final class OrMatcher extends Matcher
     public function match($value, $pattern) : bool
     {
         $patterns = \explode('||', $pattern);
+        $patterns = \array_map('trim', $patterns);
+
         foreach ($patterns as $childPattern) {
             if ($this->matchChild($value, $childPattern)) {
                 return true;
