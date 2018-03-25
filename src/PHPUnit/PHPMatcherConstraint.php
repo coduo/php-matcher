@@ -27,7 +27,7 @@ final class PHPMatcherConstraint extends Constraint
         return 'matches the pattern';
     }
 
-    protected function additionalFailureDescription($other)
+    protected function additionalFailureDescription($other) : string
     {
         return $this->matcher->getError();
     }
