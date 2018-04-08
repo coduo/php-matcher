@@ -63,7 +63,7 @@ class MatcherTest extends TestCase
         ];
 
         $this->assertTrue($this->matcher->match($value, $expectation), $this->matcher->getError());
-        $this->assertTrue(PHPMatcher::match($value, $expectation, $error), $error);
+        $this->assertTrue(PHPMatcher::match($value, $expectation, $error), (string) $error);
     }
 
     /**
@@ -413,7 +413,7 @@ XML;
         $factory = new SimpleFactory();
         $matcher = $factory->createMatcher();
         $match = $matcher->match($value, $pattern);
-        $this->assertTrue($match, $matcher->getError());
+        $this->assertTrue($match, (string) $matcher->getError());
     }
 
     public static function nullExamples()

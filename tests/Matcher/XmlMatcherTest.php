@@ -63,7 +63,7 @@ class XmlMatcherTest extends TestCase
      */
     public function test_positive_matches($value, $pattern)
     {
-        $this->assertTrue($this->matcher->match($value, $pattern), $this->matcher->getError());
+        $this->assertTrue($this->matcher->match($value, $pattern), (string) $this->matcher->getError());
     }
 
     /**
@@ -71,7 +71,7 @@ class XmlMatcherTest extends TestCase
      */
     public function test_negative_matches($value, $pattern)
     {
-        $this->assertFalse($this->matcher->match($value, $pattern), $this->matcher->getError());
+        $this->assertFalse($this->matcher->match($value, $pattern), (string) $this->matcher->getError());
     }
 
     public static function positivePatterns()
