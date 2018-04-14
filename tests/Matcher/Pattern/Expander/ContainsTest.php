@@ -10,15 +10,15 @@ use PHPUnit\Framework\TestCase;
 class ContainsTest extends TestCase
 {
     /**
-     * @dataProvider examplesIgnoreCaseProvider
+     * @dataProvider examplesCaseSensitiveProvider
      */
-    public function test_matching_values_ignore_case($needle, $haystack, $expectedResult)
+    public function test_matching_values_case_sensitive($needle, $haystack, $expectedResult)
     {
         $expander = new Contains($needle);
         $this->assertEquals($expectedResult, $expander->match($haystack));
     }
 
-    public static function examplesIgnoreCaseProvider()
+    public static function examplesCaseSensitiveProvider()
     {
         return [
             ['ipsum', 'lorem ipsum', true],
@@ -29,15 +29,15 @@ class ContainsTest extends TestCase
     }
 
     /**
-     * @dataProvider examplesProvider
+     * @dataProvider examplesCaseInsensitiveProvider
      */
-    public function test_matching_values($needle, $haystack, $expectedResult)
+    public function test_matching_values_case_insensitive($needle, $haystack, $expectedResult)
     {
         $expander = new Contains($needle, true);
         $this->assertEquals($expectedResult, $expander->match($haystack));
     }
 
-    public static function examplesProvider()
+    public static function examplesCaseInsensitiveProvider()
     {
         return [
             ['IpSum', 'lorem ipsum', true],
