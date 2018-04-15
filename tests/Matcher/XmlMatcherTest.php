@@ -7,6 +7,7 @@ namespace Coduo\PHPMatcher\Tests\Matcher;
 use Coduo\PHPMatcher\Lexer;
 use Coduo\PHPMatcher\Matcher;
 use Coduo\PHPMatcher\Parser;
+use Coduo\PHPMatcher\Tests\TestParserFactory;
 use PHPUnit\Framework\TestCase;
 
 class XmlMatcherTest extends TestCase
@@ -18,7 +19,7 @@ class XmlMatcherTest extends TestCase
 
     public function setUp()
     {
-        $parser = new Parser(new Lexer(), new Parser\ExpanderInitializer());
+        $parser = TestParserFactory::get();
         $scalarMatchers = new Matcher\ChainMatcher([
             new Matcher\CallbackMatcher(),
             new Matcher\ExpressionMatcher(),

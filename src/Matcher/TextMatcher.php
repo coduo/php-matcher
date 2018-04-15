@@ -116,7 +116,7 @@ final class TextMatcher extends Matcher
         \preg_match_all(self::PATTERN_REGEXP, $patternRegex, $matches);
 
         foreach ($matches[0] as $index => $typePatternString) {
-            $typePattern = $this->parser->parse($typePatternString);
+            $typePattern = $this->parser->parseTypePattern($typePatternString);
             $patternsReplacedWithRegex[] = $typePattern;
             $patternRegex = \str_replace(
                 $typePatternString,

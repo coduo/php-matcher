@@ -21,12 +21,14 @@ class SimpleFactory implements Factory
         $scalarMatchers = $this->buildScalarMatchers();
         $orMatcher = $this->buildOrMatcher();
 
+        $parser = $this->buildParser();
+
         $chainMatcher = new Matcher\ChainMatcher([
             $scalarMatchers,
             $orMatcher,
-            new Matcher\JsonMatcher($orMatcher),
+            new Matcher\JsonMatcher($orMatcher, $parser),
             new Matcher\XmlMatcher($orMatcher),
-            new Matcher\TextMatcher($scalarMatchers, $this->buildParser())
+            new Matcher\TextMatcher($scalarMatchers, $parser)
         ]);
 
         return $chainMatcher;
@@ -76,6 +78,6 @@ class SimpleFactory implements Factory
 
     protected function buildParser() : Parser
     {
-        return new Parser(new Lexer(), new Parser\ExpanderInitializer());
+        return new Parser(new Lexer(), new Parser\ExpanderInitializer(), new Parser\ModifiersRegistry());
     }
 }

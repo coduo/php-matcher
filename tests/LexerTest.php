@@ -216,6 +216,45 @@ class LexerTest extends TestCase
     }
 
     /**
+     * @dataProvider validModifiersNamesProvider
+     */
+    public function test_modifiers_names(string $value)
+    {
+        $lexer = new Lexer();
+        $lexer->setInput($value);
+        $lexer->moveNext();
+        $this->assertEquals($lexer->lookahead['type'], Lexer::T_MODIFIERS_NAMES);
+        $this->assertEquals($lexer->lookahead['value'], $value);
+    }
+
+    public function validModifiersNamesProvider(): array
+    {
+        return [
+            ['|case_insensitive|'],
+            ['|foo,bar|']
+        ];
+    }
+
+    /**
+     * @dataProvider invalidModifiersNamesProvider
+     */
+    public function test_not_modifiers_names(string $value)
+    {
+        $lexer = new Lexer();
+        $lexer->setInput($value);
+        $lexer->moveNext();
+        $this->assertNotEquals($lexer->lookahead['type'], Lexer::T_MODIFIERS_NAMES);
+    }
+
+    public function invalidModifiersNamesProvider(): array
+    {
+        return [
+            ['||'],
+            ['foo,bar']
+        ];
+    }
+
+    /**
      * @param $lexer
      * @return array
      */

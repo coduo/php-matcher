@@ -49,6 +49,6 @@ final class UuidMatcher extends Matcher
             return false;
         }
 
-        return $this->parser->hasValidSyntax($pattern) && $this->parser->parse($pattern)->is(self::PATTERN);
+        return $this->parser->hasValidSyntax($pattern) && $this->parser->parseTypePattern($pattern)->is(self::PATTERN);
     }
 }

@@ -5,16 +5,24 @@ declare(strict_types=1);
 namespace Coduo\PHPMatcher\Matcher;
 
 use Coduo\PHPMatcher\Exception\Exception;
+use Coduo\PHPMatcher\Matcher\Modifier\CaseInsensitive;
+use Coduo\PHPMatcher\Matcher\Modifier\IgnoreExtraKeys;
+use Coduo\PHPMatcher\Matcher\Modifier\MatcherModifier;
 use Coduo\PHPMatcher\Parser;
 use Coduo\ToString\StringConverter;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 use Symfony\Component\PropertyAccess\PropertyPath;
 
-final class ArrayMatcher extends Matcher
+final class ArrayMatcher extends ModifiableMatcher
 {
     const PATTERN = 'array';
     const UNBOUNDED_PATTERN = '@...@';
+
+    const SUPPORTED_MODIFIERS = [
+        IgnoreExtraKeys::NAME,
+        CaseInsensitive::NAME
+    ];
 
     private $propertyMatcher;
 
@@ -22,10 +30,17 @@ final class ArrayMatcher extends Matcher
 
     private $parser;
 
+    /**
+     * @var bool
+     */
+    private $ignoreExtraKeys;
+
     public function __construct(ValueMatcher $propertyMatcher, Parser $parser)
     {
         $this->propertyMatcher = $propertyMatcher;
         $this->parser = $parser;
+
+        $this->ignoreExtraKeys = false;
     }
 
     public function match($value, $pattern) : bool
@@ -55,13 +70,32 @@ final class ArrayMatcher extends Matcher
         return \is_array($pattern) || $this->isArrayPattern($pattern);
     }
 
+    public function supportedModifiers(): array
+    {
+        return \array_keys(self::SUPPORTED_MODIFIERS);
+    }
+
+    public function getMatchers(): iterable
+    {
+        return [$this->propertyMatcher];
+    }
+
+    public function applyModifier(MatcherModifier $modifier): void
+    {
+        switch ($modifier->getName()) {
+            case IgnoreExtraKeys::NAME:
+                $this->ignoreExtraKeys = true;
+                break;
+        }
+    }
+
     private function isArrayPattern($pattern) : bool
     {
         if (!\is_string($pattern)) {
             return false;
         }
 
-        return $this->parser->hasValidSyntax($pattern) && $this->parser->parse($pattern)->is(self::PATTERN);
+        return $this->parser->hasValidSyntax($pattern) && $this->parser->parseTypePattern($pattern)->is(self::PATTERN);
     }
 
     private function iterateMatch(array $values, array $patterns, string $parentPath = '') : bool
@@ -126,7 +160,7 @@ final class ArrayMatcher extends Matcher
             );
 
             $notExistingKeys = $this->findNotExistingKeys($pattern, $values);
-            if (\count($notExistingKeys) > 0) {
+            if (\count($notExistingKeys) > 0 && !$this->ignoreExtraKeys) {
                 $keyNames = \array_keys($notExistingKeys);
                 $path = $this->formatFullPath($parentPath, $this->formatAccessPath($keyNames[0]));
                 $this->setMissingElementInError('value', $path);
@@ -148,7 +182,7 @@ final class ArrayMatcher extends Matcher
             }
 
             try {
-                $typePattern = $this->parser->parse($pattern);
+                $typePattern = $this->parser->parseTypePattern($pattern);
             } catch (Exception $e) {
                 return true;
             } catch (\Throwable $t) {
@@ -237,7 +271,7 @@ final class ArrayMatcher extends Matcher
 
     private function allExpandersMatch($value, $pattern) : bool
     {
-        $typePattern = $this->parser->parse($pattern);
+        $typePattern = $this->parser->parseTypePattern($pattern);
         if (!$typePattern->matchExpanders($value)) {
             $this->error = $typePattern->getError();
             return false;

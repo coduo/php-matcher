@@ -17,7 +17,7 @@ class ParserSyntaxErrorTest extends TestCase
 
     public function setUp()
     {
-        $this->parser = new Parser(new Lexer(), new Parser\ExpanderInitializer());
+        $this->parser = new Parser(new Lexer(), new Parser\ExpanderInitializer(), new Parser\ModifiersRegistry());
     }
 
     /**

@@ -7,6 +7,7 @@ namespace Coduo\PHPMatcher\Tests\Matcher;
 use Coduo\PHPMatcher\Lexer;
 use Coduo\PHPMatcher\Matcher;
 use Coduo\PHPMatcher\Parser;
+use Coduo\PHPMatcher\Tests\TestParserFactory;
 use PHPUnit\Framework\TestCase;
 
 class ArrayMatcherTest extends TestCase
@@ -18,7 +19,7 @@ class ArrayMatcherTest extends TestCase
 
     public function setUp()
     {
-        $parser = new Parser(new Lexer(), new Parser\ExpanderInitializer());
+        $parser = TestParserFactory::get();
         $this->matcher = new Matcher\ArrayMatcher(
             new Matcher\ChainMatcher([
                 new Matcher\CallbackMatcher(),
@@ -58,7 +59,7 @@ class ArrayMatcherTest extends TestCase
             new Matcher\ChainMatcher([
                 new Matcher\WildcardMatcher()
             ]),
-            $parser = new Parser(new Lexer(), new Parser\ExpanderInitializer())
+            $parser = TestParserFactory::get()
         );
 
         $this->assertTrue($matcher->match(['test' => 1], ['test' => 1]));
@@ -88,6 +89,34 @@ class ArrayMatcherTest extends TestCase
         $this->assertFalse($this->matcher->match($array, $pattern));
 
         $this->assertEquals($this->matcher->getError(), 'There is no element under path [bar] in value.');
+    }
+
+    public function test_pass_when_path_in_value_does_not_exist_and_ignore_extra_keys_modifier_applied()
+    {
+        $array = ['foo' => 'foo'];
+        $pattern = ['foo' => 'foo', 'bar' => 'bar'];
+
+        $this->matcher->modify(new Matcher\Modifier\IgnoreExtraKeys());
+        $this->assertTrue($this->matcher->match($array, $pattern), (string) $this->matcher->getError());
+    }
+
+    public function test_passes_modifiers_to_supporting_nested_matcher()
+    {
+        $interceptingMatcher = new InterceptingModifiableMatcher();
+        $matcher = new Matcher\ArrayMatcher($interceptingMatcher, TestParserFactory::get());
+
+        $matcher->modify(new Matcher\Modifier\IgnoreExtraKeys());
+        $matcher->modify(new Matcher\Modifier\CaseInsensitive());
+
+        $expected = [
+            new Matcher\Modifier\IgnoreExtraKeys(),
+            new Matcher\Modifier\CaseInsensitive()
+        ];
+
+        $applied = $interceptingMatcher->appliedModifiers();
+
+        $this->assertCount(2, $applied);
+        $this->assertEquals($expected, $applied);
     }
 
     public function test_error_when_path_in_nested_value_does_not_exist()

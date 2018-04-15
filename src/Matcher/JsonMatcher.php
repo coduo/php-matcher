@@ -4,15 +4,33 @@ declare(strict_types=1);
 
 namespace Coduo\PHPMatcher\Matcher;
 
+use Coduo\PHPMatcher\Matcher\Modifier\CaseInsensitive;
+use Coduo\PHPMatcher\Matcher\Modifier\IgnoreExtraKeys;
+use Coduo\PHPMatcher\Matcher\Modifier\MatcherModifier;
 use Coduo\PHPMatcher\Matcher\Pattern\Assert\Json;
+use Coduo\PHPMatcher\Parser;
 
-final class JsonMatcher extends Matcher
+final class JsonMatcher extends ModifiableMatcher
 {
+    const SUPPORTED_MODIFIERS = [
+        IgnoreExtraKeys::NAME,
+        CaseInsensitive::NAME
+    ];
+
+    /**
+     * @var ValueMatcher
+     */
     private $matcher;
 
-    public function __construct(ValueMatcher $matcher)
+    /**
+     * @var Parser
+     */
+    private $parser;
+
+    public function __construct(ValueMatcher $matcher, Parser $parser)
     {
         $this->matcher = $matcher;
+        $this->parser = $parser;
     }
 
     public function match($value, $pattern) : bool
@@ -20,6 +38,12 @@ final class JsonMatcher extends Matcher
         if (parent::match($value, $pattern)) {
             return true;
         }
+
+        foreach ($this->parser->parseModifiers($pattern) as $modifier) {
+            $this->modify($modifier);
+        }
+
+        $pattern = $this->parser->trimModifiers($pattern);
 
         if (!Json::isValid($value)) {
             $this->error = \sprintf('Invalid given JSON of value. %s', $this->getErrorMessage());
@@ -43,7 +67,25 @@ final class JsonMatcher extends Matcher
 
     public function canMatch($pattern) : bool
     {
+        if (\is_string($pattern)) {
+            $pattern = $this->parser->trimModifiers($pattern);
+        }
+
         return Json::isValidPattern($pattern);
+    }
+
+    public function supportedModifiers(): array
+    {
+        return \array_keys(self::SUPPORTED_MODIFIERS);
+    }
+
+    public function getMatchers(): iterable
+    {
+        return [$this->matcher];
+    }
+
+    public function applyModifier(MatcherModifier $modifier): void
+    {
     }
 
     private function getErrorMessage()

@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace Coduo\PHPMatcher\Matcher;
 
+use Coduo\PHPMatcher\Matcher\Modifier\MatcherModifier;
+use Coduo\PHPMatcher\Parser\ModifiersRegistry;
 use Coduo\ToString\StringConverter;
 
-final class ChainMatcher extends Matcher
+final class ChainMatcher extends ModifiableMatcher
 {
     /**
      * @var ValueMatcher[]
@@ -52,5 +54,20 @@ final class ChainMatcher extends Matcher
     public function canMatch($pattern) : bool
     {
         return true;
+    }
+
+    public function supportedModifiers(): array
+    {
+        return \array_keys(ModifiersRegistry::BUILT_IN_MODIFIERS);
+    }
+
+    public function getMatchers(): iterable
+    {
+        return $this->matchers;
+    }
+
+    public function applyModifier(MatcherModifier $modifier): void
+    {
+
     }
 }

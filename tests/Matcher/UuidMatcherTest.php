@@ -7,6 +7,7 @@ namespace Coduo\PHPMatcher\Tests\Matcher;
 use Coduo\PHPMatcher\Lexer;
 use Coduo\PHPMatcher\Parser;
 use Coduo\PHPMatcher\Matcher\UuidMatcher;
+use Coduo\PHPMatcher\Tests\TestParserFactory;
 use PHPUnit\Framework\TestCase;
 
 class UuidMatcherTest extends TestCase
@@ -18,7 +19,7 @@ class UuidMatcherTest extends TestCase
 
     public function setUp()
     {
-        $this->matcher = new UuidMatcher(new Parser(new Lexer(), new Parser\ExpanderInitializer()));
+        $this->matcher = new UuidMatcher(TestParserFactory::get());
     }
     /**
      * @dataProvider positiveCanMatchData

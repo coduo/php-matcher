@@ -7,6 +7,7 @@ namespace Coduo\PHPMatcher\Tests\Matcher;
 use Coduo\PHPMatcher\Lexer;
 use Coduo\PHPMatcher\Parser;
 use Coduo\PHPMatcher\Matcher\BooleanMatcher;
+use Coduo\PHPMatcher\Tests\TestParserFactory;
 use PHPUnit\Framework\TestCase;
 
 class BooleanMatcherTest extends TestCase
@@ -18,7 +19,7 @@ class BooleanMatcherTest extends TestCase
 
     public function setUp()
     {
-        $this->matcher = new BooleanMatcher(new Parser(new Lexer(), new Parser\ExpanderInitializer()));
+        $this->matcher = new BooleanMatcher(TestParserFactory::get());
     }
 
     /**

@@ -25,7 +25,7 @@ final class StringMatcher extends Matcher
             return false;
         }
 
-        $typePattern = $this->parser->parse($pattern);
+        $typePattern = $this->parser->parseTypePattern($pattern);
         if (!$typePattern->matchExpanders($value)) {
             $this->error = $typePattern->getError();
             return false;
@@ -40,6 +40,6 @@ final class StringMatcher extends Matcher
             return false;
         }
 
-        return $this->parser->hasValidSyntax($pattern) && $this->parser->parse($pattern)->is(self::PATTERN);
+        return $this->parser->hasValidSyntax($pattern) && $this->parser->parseTypePattern($pattern)->is(self::PATTERN);
     }
 }

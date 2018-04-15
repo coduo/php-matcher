@@ -6,6 +6,8 @@ namespace Coduo\PHPMatcher\Tests;
 
 use Coduo\PHPMatcher\AST\Expander;
 use Coduo\PHPMatcher\Lexer;
+use Coduo\PHPMatcher\Matcher\Modifier\CaseInsensitive;
+use Coduo\PHPMatcher\Matcher\Modifier\IgnoreExtraKeys;
 use Coduo\PHPMatcher\Parser;
 use PHPUnit\Framework\TestCase;
 
@@ -18,7 +20,7 @@ class ParserTest extends TestCase
 
     public function setUp()
     {
-        $this->parser = new Parser(new Lexer(), new Parser\ExpanderInitializer());
+        $this->parser = new Parser(new Lexer(), new Parser\ExpanderInitializer(), new Parser\ModifiersRegistry());
     }
 
     public function test_simple_pattern_without_expanders()
@@ -153,5 +155,56 @@ class ParserTest extends TestCase
                 $secondExpander
             ]
         );
+    }
+
+    /**
+     * @dataProvider trimmablePatterns
+     */
+    public function test_trims_modifiers_from_given_pattern(string $pattern, string $expected)
+    {
+        $trimmedPattern = $this->parser->trimModifiers($pattern);
+        $this->assertEquals($expected, $trimmedPattern);
+    }
+
+    public function trimmablePatterns(): array
+    {
+        return [
+            [
+                '|case_insensitive|{id: 12345, name:"Norbert Orzechowicz"}',
+                '{id: 12345, name:"Norbert Orzechowicz"}'
+            ],
+            [
+                '|case_insensitive,ignore_extra_keys|{id: 12345, name:"Norbert Orzechowicz"}',
+                '{id: 12345, name:"Norbert Orzechowicz"}'
+            ]
+        ];
+    }
+
+    /**
+     * @dataProvider parseablePatterns
+     */
+    public function test_parse_modifiers_from_given_pattern(string $pattern, array $expected)
+    {
+        $modifiers = $this->parser->parseModifiers($pattern);
+        $this->assertEquals($expected, $modifiers);
+    }
+
+    public function parseablePatterns(): array
+    {
+        return [
+            [
+                '|case_insensitive|{id: 12345, name:"Norbert Orzechowicz"}',
+                [
+                    new CaseInsensitive()
+                ]
+            ],
+            [
+                '|case_insensitive,ignore_extra_keys|{id: 12345, name:"Norbert Orzechowicz"}',
+                [
+                    new CaseInsensitive(),
+                    new IgnoreExtraKeys()
+                ]
+            ]
+        ];
     }
 }

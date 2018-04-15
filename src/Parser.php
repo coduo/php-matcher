@@ -6,21 +6,30 @@ namespace Coduo\PHPMatcher;
 
 use Coduo\PHPMatcher\Exception\Exception;
 use Coduo\PHPMatcher\Exception\PatternException;
+use Coduo\PHPMatcher\Matcher\Modifier\MatcherModifier;
 use Coduo\PHPMatcher\Matcher\Pattern;
 use Coduo\PHPMatcher\Parser\ExpanderInitializer;
+use Coduo\PHPMatcher\Parser\ModifiersRegistry;
 
 final class Parser
 {
     const NULL_VALUE = 'null';
+    const MODIFIERS_REGEX = '\|([a-zA-Z,_]+)\|';
 
     private $lexer;
 
     private $expanderInitializer;
 
-    public function __construct(Lexer $lexer, ExpanderInitializer $expanderInitializer)
+    /**
+     * @var ModifiersRegistry
+     */
+    private $modifiersRegistry;
+
+    public function __construct(Lexer $lexer, ExpanderInitializer $expanderInitializer, ModifiersRegistry $modifiersRegistry)
     {
         $this->lexer = $lexer;
         $this->expanderInitializer = $expanderInitializer;
+        $this->modifiersRegistry = $modifiersRegistry;
     }
 
     public function hasValidSyntax(string $pattern) : bool
@@ -33,7 +42,7 @@ final class Parser
         }
     }
 
-    public function parse(string $pattern) : Pattern\TypePattern
+    public function parseTypePattern(string $pattern) : Pattern\TypePattern
     {
         $AST = $this->getAST($pattern);
         $pattern = new Pattern\TypePattern((string) $AST->getType());
@@ -42,6 +51,31 @@ final class Parser
         }
 
         return $pattern;
+    }
+
+    public function trimModifiers(string $pattern) : string
+    {
+        $pattern = \preg_replace('/' . self::MODIFIERS_REGEX . '/', '', $pattern);
+
+        return $pattern;
+    }
+
+    /**
+     * @return array|MatcherModifier[]
+     */
+    public function parseModifiers(string $pattern) : array
+    {
+        \preg_match('/' . self::MODIFIERS_REGEX . '/', $pattern, $matches);
+
+        if (isset($matches[1])) {
+            $namesArray = \explode(',', $matches[1]);
+
+            return \array_map(function (string $name) {
+                return $this->modifiersRegistry->get($name);
+            }, $namesArray);
+        }
+
+        return [];
     }
 
     public function getAST(string $pattern) : AST\Pattern

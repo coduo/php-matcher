@@ -18,7 +18,7 @@ class NullMatcherTest extends TestCase
 
     public function setUp()
     {
-        $this->matcher = new NullMatcher(new Parser(new Lexer(), new Parser\ExpanderInitializer()));
+        $this->matcher = new NullMatcher();
     }
 
     /**

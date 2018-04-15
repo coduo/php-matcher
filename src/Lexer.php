@@ -20,6 +20,7 @@ final class Lexer extends AbstractLexer
     const T_COMMA  = 10;
     const T_COLON = 11;
     const T_TYPE_PATTERN = 12;
+    const T_MODIFIERS_NAMES = 13;
 
     /**
      * Lexical catchable patterns.
@@ -33,6 +34,7 @@ final class Lexer extends AbstractLexer
             "'(?:[^']|'')*'", // string between ' character
             '"(?:[^"]|"")*"', // string between " character,
             '@[a-zA-Z0-9\\*]+@', // type pattern
+            Parser::MODIFIERS_REGEX, // modifiers names
         ];
     }
 
@@ -102,6 +104,10 @@ final class Lexer extends AbstractLexer
             return self::T_EXPANDER_NAME;
         }
 
+        if ($this->isModifierNamesToken($value)) {
+            return self::T_MODIFIERS_NAMES;
+        }
+
         return $type;
     }
 
@@ -133,5 +139,10 @@ final class Lexer extends AbstractLexer
     protected function isTypePatternToken(string $value) : bool
     {
         return \substr($value, 0, 1) === '@' && \substr($value, \strlen($value) - 1, 1) === '@' && \strlen($value) > 1;
+    }
+
+    protected function isModifierNamesToken(string $value) : bool
+    {
+        return \substr($value, 0, 1) === '|' && \substr($value, \strlen($value) - 1, 1) === '|' && \strlen($value) > 2;
     }
 }

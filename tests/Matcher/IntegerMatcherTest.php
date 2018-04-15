@@ -7,6 +7,7 @@ namespace Coduo\PHPMatcher\Tests\Matcher;
 use Coduo\PHPMatcher\Lexer;
 use Coduo\PHPMatcher\Matcher\IntegerMatcher;
 use Coduo\PHPMatcher\Parser;
+use Coduo\PHPMatcher\Tests\TestParserFactory;
 use PHPUnit\Framework\TestCase;
 
 class IntegerMatcherTest extends TestCase
@@ -18,7 +19,7 @@ class IntegerMatcherTest extends TestCase
 
     public function setUp()
     {
-        $this->matcher = new IntegerMatcher(new Parser(new Lexer(), new Parser\ExpanderInitializer()));
+        $this->matcher = new IntegerMatcher(TestParserFactory::get());
     }
 
     /**
