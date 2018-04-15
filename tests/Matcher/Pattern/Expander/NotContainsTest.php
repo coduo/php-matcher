@@ -5,26 +5,27 @@ declare(strict_types=1);
 namespace Coduo\PHPMatcher\Tests\Matcher\Pattern\Expander;
 
 use Coduo\PHPMatcher\Matcher\Pattern\Expander\Contains;
+use Coduo\PHPMatcher\Matcher\Pattern\Expander\NotContains;
 use PHPUnit\Framework\TestCase;
 
-class ContainsTest extends TestCase
+class NotContainsTest extends TestCase
 {
     /**
      * @dataProvider examplesCaseSensitiveProvider
      */
     public function test_matching_values_case_sensitive($needle, $haystack, $expectedResult)
     {
-        $expander = new Contains($needle);
+        $expander = new NotContains($needle);
         $this->assertEquals($expectedResult, $expander->match($haystack));
     }
 
     public static function examplesCaseSensitiveProvider()
     {
         return [
-            ['ipsum', 'lorem ipsum', true],
-            ['wor', 'this is my hello world string', true],
-            ['lol', 'lorem ipsum', false],
-            ['NO', 'norbert', false]
+            ['ipsum', 'lorem ipsum', false],
+            ['wor', 'this is my hello world string', false],
+            ['lol', 'lorem ipsum', true],
+            ['NO', 'norbert', true]
         ];
     }
 
@@ -33,17 +34,17 @@ class ContainsTest extends TestCase
      */
     public function test_matching_values_case_insensitive($needle, $haystack, $expectedResult)
     {
-        $expander = new Contains($needle, true);
+        $expander = new NotContains($needle, true);
         $this->assertEquals($expectedResult, $expander->match($haystack));
     }
 
     public static function examplesCaseInsensitiveProvider()
     {
         return [
-            ['IpSum', 'lorem ipsum', true],
-            ['wor', 'this is my hello WORLD string', true],
-            ['lol', 'LOREM ipsum', false],
-            ['NO', 'NORBERT', true]
+            ['IpSum', 'lorem ipsum', false],
+            ['wor', 'this is my hello WORLD string', false],
+            ['lol', 'LOREM ipsum', true],
+            ['NO', 'NORBERT', false]
         ];
     }
 
@@ -52,7 +53,7 @@ class ContainsTest extends TestCase
      */
     public function test_error_when_matching_fail($string, $value, $errorMessage)
     {
-        $expander = new Contains($string);
+        $expander = new NotContains($string);
         $this->assertFalse($expander->match($value));
         $this->assertEquals($errorMessage, $expander->getError());
     }
@@ -60,8 +61,8 @@ class ContainsTest extends TestCase
     public static function invalidCasesProvider()
     {
         return [
-            ['ipsum', 'hello world', "String \"hello world\" doesn't contains \"ipsum\"."],
-            ['lorem', new \DateTime(), 'Contains expander require "string", got "\\DateTime".'],
+            ['ipsum', 'lorem ipsum', "String \"lorem ipsum\" contains \"ipsum\"."],
+            ['lorem', new \DateTime(), 'Not contains expander require "string", got "\\DateTime".'],
         ];
     }
 }

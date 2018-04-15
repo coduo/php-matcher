@@ -73,6 +73,7 @@ $matcher->getError(); // returns null or error message
 * ``startsWith($stringBeginning, $ignoreCase = false)``
 * ``endsWith($stringEnding, $ignoreCase = false)``
 * ``contains($string, $ignoreCase = false)``
+* ``notContains($string, $ignoreCase = false)``
 * ``isDateTime()``
 * ``isEmail()``
 * ``isUrl()``
