@@ -101,7 +101,7 @@ final class TextMatcher extends Matcher
     }
 
     /**
-     * Reaplce each type pattern (@string@.startsWith("lorem")) with placeholder, in order
+     * Replace each type pattern (@string@.startsWith("lorem")) with placeholder, in order
      * to use preg_quote without destroying pattern & expanders.
      *
      * before replacement: "/users/@integer@.greaterThan(200)/active"
