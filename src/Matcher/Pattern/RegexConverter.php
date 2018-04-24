@@ -21,6 +21,8 @@ final class RegexConverter
                 return '(\\-?[0-9]*)';
             case 'double':
                 return '(\\-?[0-9]*[\\.|\\,][0-9]*)';
+            case 'uuid':
+                return "([\da-f]{8}-[\da-f]{4}-[1-5][\da-f]{3}-[89ab][\da-f]{3}-[\da-f]{12})";
             default:
                 throw new UnknownTypeException($typePattern->getType());
         }
