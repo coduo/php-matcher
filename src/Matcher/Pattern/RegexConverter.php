@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Coduo\PHPMatcher\Matcher\Pattern;
 
 use Coduo\PHPMatcher\Exception\UnknownTypeException;
+use Coduo\PHPMatcher\Matcher\UuidMatcher;
 
 final class RegexConverter
 {
@@ -22,7 +23,7 @@ final class RegexConverter
             case 'double':
                 return '(\\-?[0-9]*[\\.|\\,][0-9]*)';
             case 'uuid':
-                return "([\da-f]{8}-[\da-f]{4}-[1-5][\da-f]{3}-[89ab][\da-f]{3}-[\da-f]{12})";
+                return '('.UuidMatcher::UUID_PATTERN.')';
             default:
                 throw new UnknownTypeException($typePattern->getType());
         }
