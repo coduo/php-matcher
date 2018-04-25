@@ -107,6 +107,16 @@ XML;
                 '/users/12345/active',
                 '/users/@integer@.greaterThan(0)/active',
                 true
+            ],
+            [
+                '/user/ebd1fb0e-45ae-11e8-842f-0ed5f89f718b/profile',
+                '/user/@uuid@/@string@',
+                true
+            ],
+            [
+                '/user/12345/profile',
+                '/user/@uuid@/@string@',
+                false
             ]
         ];
     }
