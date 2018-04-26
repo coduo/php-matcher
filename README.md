@@ -1,18 +1,18 @@
 # PHP Matcher
 
-Library created for testing all kind of JSON/XML/TXT/Scalar values against patterns.  
+Library created for testing all kinds of JSON/XML/TXT/Scalar values against patterns.  
 
 ```php
 PHPMatcher::match($value = '{"foo": "bar"}', $pattern = '{"foo": "@string@"}');
 ```
 
-It was builded to simplify API functional testing. 
+It was built to simplify API's functional testing. 
 
-* [![Build Status](https://travis-ci.org/coduo/php-matcher.svg)](https://travis-ci.org/coduo/php-matcher) - master (3.1.*)
-* [![Build Status](https://travis-ci.org/coduo/php-matcher.svg?branch=3.0)](https://travis-ci.org/coduo/php-matcher) - 3.0.*
+* [![Build Status](https://travis-ci.org/coduo/php-matcher.svg)](https://travis-ci.org/coduo/php-matcher) - master (3.2.*)
+* [![Build Status](https://travis-ci.org/coduo/php-matcher.svg?branch=3.1)](https://travis-ci.org/coduo/php-matcher) - 3.1.*
 
-[Readme for master (3.1) version](https://github.com/coduo/php-matcher/tree/master/README.md)
-[Readme for 3.0 version](https://github.com/coduo/php-matcher/tree/3.0/README.md)  
+[Readme for master (3.2) version](https://github.com/coduo/php-matcher/tree/master/README.md)
+[Readme for 3.1 version](https://github.com/coduo/php-matcher/tree/3.1/README.md)  
 
 
 ## Installation
