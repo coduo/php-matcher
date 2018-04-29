@@ -25,6 +25,7 @@ final class ExpanderInitializer
         Expander\IsEmpty::NAME => Expander\IsEmpty::class,
         Expander\IsNotEmpty::NAME => Expander\IsNotEmpty::class,
         Expander\IsUrl::NAME => Expander\IsUrl::class,
+        Expander\IsIp::NAME => Expander\IsIp::class,
         Expander\LowerThan::NAME => Expander\LowerThan::class,
         Expander\MatchRegex::NAME => Expander\MatchRegex::class,
         Expander\OneOf::NAME => Expander\OneOf::class,

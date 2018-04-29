@@ -77,6 +77,7 @@ $matcher->getError(); // returns null or error message
 * ``isDateTime()``
 * ``isEmail()``
 * ``isUrl()``
+* ``isIp()``
 * ``isEmpty()``
 * ``isNotEmpty()``
 * ``lowerThan($boundry)``
