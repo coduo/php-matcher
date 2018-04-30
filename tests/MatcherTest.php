@@ -384,6 +384,10 @@ XML;
             [[], ['unexistent_key' => '@uuid@.optional()'], true],
             [[], ['unexistent_key' => '@xml@.optional()'], true],
             [['Norbert', 'Michał'], '@array@.repeat("@string@")', true],
+            ['127.0.0.1', '@string@.isIp()', true],
+            ['2001:0db8:0000:42a1:0000:0000:ab1c:0001', '@string@.isIp()', true],
+            ['127.255.999.999', '@string@.isIp()', false],
+            ['foo:bar:42:42', '@string@.isIp()', false],
         ];
     }
 
