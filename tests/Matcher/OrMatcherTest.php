@@ -28,7 +28,7 @@ class OrMatcherTest extends TestCase
     {
         $this->assertTrue(
             $this->matcher->match($value, $pattern),
-            $this->matcher->getError()
+            (string) $this->matcher->getError()
         );
     }
 
@@ -39,7 +39,7 @@ class OrMatcherTest extends TestCase
     {
         $this->assertFalse(
             $this->matcher->match($value, $pattern),
-            $this->matcher->getError()
+            (string) $this->matcher->getError()
         );
     }
 
@@ -54,7 +54,7 @@ class OrMatcherTest extends TestCase
                     'test' => ' @integer@ || @null@ '
                 ]
             ),
-            $this->matcher->getError()
+            (string) $this->matcher->getError()
         );
     }
 
