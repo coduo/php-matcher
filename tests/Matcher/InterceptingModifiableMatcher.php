@@ -17,12 +17,12 @@ final class InterceptingModifiableMatcher extends ModifiableMatcher
         return \array_keys(ModifiersRegistry::BUILT_IN_MODIFIERS);
     }
 
-    public function getMatchers(): iterable
+    public function getMatchers(): array
     {
         return [];
     }
 
-    public function applyModifier(MatcherModifier $modifier): void
+    public function applyModifier(MatcherModifier $modifier)
     {
         $this->applied[] = $modifier;
     }

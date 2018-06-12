@@ -7,7 +7,10 @@ use Coduo\PHPMatcher\Matcher\Modifier\MatcherModifier;
 
 interface ModifiableValueMatcher extends ValueMatcher
 {
-    public function supportsModifier(MatcherModifier $modifier) : bool;
+    public function supportsModifier(MatcherModifier $modifier): bool;
 
-    public function modify(MatcherModifier $modifier) : void;
+    /**
+     * @return void
+     */
+    public function modify(MatcherModifier $modifier);
 }

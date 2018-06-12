@@ -79,12 +79,12 @@ final class JsonMatcher extends ModifiableMatcher
         return \array_keys(self::SUPPORTED_MODIFIERS);
     }
 
-    public function getMatchers(): iterable
+    public function getMatchers(): array
     {
         return [$this->matcher];
     }
 
-    public function applyModifier(MatcherModifier $modifier): void
+    public function applyModifier(MatcherModifier $modifier)
     {
     }
 

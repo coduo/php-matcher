@@ -61,12 +61,12 @@ final class ChainMatcher extends ModifiableMatcher
         return \array_keys(ModifiersRegistry::BUILT_IN_MODIFIERS);
     }
 
-    public function getMatchers(): iterable
+    public function getMatchers(): array
     {
         return $this->matchers;
     }
 
-    public function applyModifier(MatcherModifier $modifier): void
+    public function applyModifier(MatcherModifier $modifier)
     {
 
     }

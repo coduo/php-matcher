@@ -72,15 +72,15 @@ final class ArrayMatcher extends ModifiableMatcher
 
     public function supportedModifiers(): array
     {
-        return \array_keys(self::SUPPORTED_MODIFIERS);
+        return self::SUPPORTED_MODIFIERS;
     }
 
-    public function getMatchers(): iterable
+    public function getMatchers(): array
     {
         return [$this->propertyMatcher];
     }
 
-    public function applyModifier(MatcherModifier $modifier): void
+    public function applyModifier(MatcherModifier $modifier)
     {
         switch ($modifier->getName()) {
             case IgnoreExtraKeys::NAME:

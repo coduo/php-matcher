@@ -14,7 +14,7 @@ final class ModifiersRegistry
      */
     private $modifiers = [];
 
-    public const BUILT_IN_MODIFIERS = [
+    const BUILT_IN_MODIFIERS = [
         Modifier\IgnoreExtraKeys::NAME => Modifier\IgnoreExtraKeys::class,
         Modifier\CaseInsensitive::NAME => Modifier\CaseInsensitive::class
     ];
@@ -24,7 +24,10 @@ final class ModifiersRegistry
         $this->modifiers = self::BUILT_IN_MODIFIERS;
     }
 
-    public function register(string $name, string $class): void
+    /**
+     * @return void
+     */
+    public function register(string $name, string $class)
     {
         if (!\class_exists($class) || \is_a($class, Modifier\MatcherModifier::class, true)) {
             throw new UnknownModifierClassException($name, $class);

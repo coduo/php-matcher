@@ -34,7 +34,7 @@ abstract class ModifiableMatcher implements ModifiableValueMatcher
         return \in_array($modifier->getName(), $this->supportedModifiers(), true);
     }
 
-    public function modify(MatcherModifier $modifier): void
+    public function modify(MatcherModifier $modifier)
     {
         foreach ($this->getMatchers() as $matcher) {
             if ($matcher instanceof ModifiableValueMatcher && $matcher->supportsModifier($modifier)) {
@@ -47,9 +47,12 @@ abstract class ModifiableMatcher implements ModifiableValueMatcher
     abstract public function supportedModifiers(): array;
 
     /**
-     * @return iterable|ValueMatcher[]
+     * @return ValueMatcher[]
      */
-    abstract public function getMatchers(): iterable;
+    abstract public function getMatchers(): array;
 
-    abstract public function applyModifier(MatcherModifier $modifier): void;
+    /**
+     * @return void
+     */
+    abstract public function applyModifier(MatcherModifier $modifier);
 }
