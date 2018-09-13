@@ -311,7 +311,7 @@ $matcher->match(
         "lastName": @string@,
         "created": "@string@.isDateTime()",
         "roles": @array@,
-        "posiiton": "@string@.optional()"
+        "position": "@string@.optional()"
       }
     ]
   }'
