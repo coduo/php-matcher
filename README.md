@@ -1,18 +1,18 @@
 # PHP Matcher
 
-Library created for testing all kinds of JSON/XML/TXT/Scalar values against patterns.  
+Library created for testing all kinds of JSON/XML/TXT/Scalar values against patterns.
 
 ```php
 PHPMatcher::match($value = '{"foo": "bar"}', $pattern = '{"foo": "@string@"}');
 ```
 
-It was built to simplify API's functional testing. 
+It was built to simplify API's functional testing.
 
 * [![Build Status](https://travis-ci.org/coduo/php-matcher.svg)](https://travis-ci.org/coduo/php-matcher) - master (3.2.*)
 * [![Build Status](https://travis-ci.org/coduo/php-matcher.svg?branch=3.1)](https://travis-ci.org/coduo/php-matcher) - 3.1.*
 
 [Readme for master (3.2) version](https://github.com/coduo/php-matcher/tree/master/README.md)
-[Readme for 3.1 version](https://github.com/coduo/php-matcher/tree/3.1/README.md)  
+[Readme for 3.1 version](https://github.com/coduo/php-matcher/tree/3.1/README.md)
 
 
 ## Installation
@@ -32,7 +32,7 @@ composer require --dev "coduo/php-matcher"
 
 use Coduo\PHPMatcher\PHPMatcher;
 
-if (!PHPMatcher::match("lorem ipsum dolor", "@string@", $error)) { 
+if (!PHPMatcher::match("lorem ipsum dolor", "@string@", $error)) {
     echo $error; // in case of error message is set on $error variable via reference
 }
 
@@ -198,7 +198,7 @@ $matcher->match(array("bar"), "@wildcard@");
 $matcher->match(new \stdClass, "@wildcard@");
 ```
 
-### Expression matching 
+### Expression matching
 
 ```php
 <?php
@@ -225,7 +225,7 @@ $matcher = $factory->createMatcher();
 $matcher->match('9f4db639-0e87-4367-9beb-d64e3f42ae18', '@uuid@');
 ```
 
-### Array matching 
+### Array matching
 
 ```php
 <?php
@@ -280,11 +280,11 @@ $matcher->match(
       ),
       '@boolean@',
       '@double@'
-  )  
+  )
 );
 ```
 
-### Json matching 
+### Json matching
 
 ```php
 <?php
@@ -378,7 +378,7 @@ Feature: Listing user toys
   Scenario: Listing toys
     Given the following users exist:
       | firstName     | lastName     |
-      | Chuck         | Norris       | 
+      | Chuck         | Norris       |
 
     And the following toys user "Chuck Norris" exist:
       | name            |
@@ -409,7 +409,7 @@ Feature: Listing user toys
         }
       ]
     """
-``` 
+```
 
 ## PHPUnit integration
 
@@ -421,8 +421,9 @@ or extend the `Coduo\PHPMatcher\PHPUnit\PHPMatcherTestCase`:
 namespace Coduo\PHPMatcher\Tests\PHPUnit;
 
 use Coduo\PHPMatcher\PHPUnit\PHPMatcherAssertions;
+use PHPUnit\Framework\TestCase;
 
-class PHPMatcherAssertionsTest extends \PHPUnit_Framework_TestCase
+class PHPMatcherAssertionsTest extends TestCase
 {
     use PHPMatcherAssertions;
 
@@ -436,7 +437,7 @@ class PHPMatcherAssertionsTest extends \PHPUnit_Framework_TestCase
 The `matchesPattern()` method can be used in PHPUnit stubs or mocks:
 
 ```php
-$mock = $this->getMock(Foo::class);
+$mock = $this->createMock(Foo::class);
 $mock->method('bar')
     ->with($this->matchesPattern('@string@'))
     ->willReturn('foo');
@@ -450,4 +451,3 @@ This library is distributed under the MIT license. Please see the LICENSE file.
 
 This lib was inspired by [JSON Expressions gem](https://github.com/chancancode/json_expressions) &&
 [Behat RestExtension ](https://github.com/jakzal/RestExtension)
-
