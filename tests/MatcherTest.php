@@ -359,6 +359,8 @@ XML;
             ['http://coduo.pl/', '@string@.isUrl()', true],
             ['lorem ipsum', '@string@.isUrl()', false],
             ['2014-08-19', '@string@.isDateTime()', true],
+            ['3014-08-19', '@string@.lowerThan("today")', false],
+            ['1014-08-19', '@string@.lowerThan("+ 1day")', true],
             [100, '@integer@.lowerThan(101).greaterThan(10)', true],
             ['', '@string@.isNotEmpty()', false],
             ['lorem ipsum', '@string@.isNotEmpty()', true],

@@ -25,6 +25,9 @@ class LowerThanTest extends TestCase
             [-10.5, -20, true],
             [1, 10, false],
             [1, 1, false],
+            ['+ 2 day','today',true],
+            ['2018-02-06T04:20:33','2017-02-06T04:20:33',true],
+            ['2017-02-06T04:20:33','2018-02-06T04:20:33',false],
         ];
     }
 
@@ -41,9 +44,12 @@ class LowerThanTest extends TestCase
     public static function invalidCasesProvider()
     {
         return [
-            [1, 'ipsum lorem', 'Value "ipsum lorem" is not a valid number.'],
+            [1, 'ipsum lorem', 'Value "ipsum lorem" is not a valid number nor a date.'],
+            ['2017-02-06T04:20:33', 'ipsum lorem', 'Value "ipsum lorem" is not a valid number nor a date.'],
             [5, 10, 'Value "10" is not lower than "5".'],
             [5, 5, 'Value "5" is not lower than "5".'],
+            [5,'today', 'Value "today" is not the same type as "5", booth must date or a number.'],
+            ['today',5, 'Value "5" is not the same type as "today", booth must date or a number.'],
         ];
     }
 }
