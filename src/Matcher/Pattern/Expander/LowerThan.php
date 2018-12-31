@@ -18,7 +18,7 @@ final class LowerThan implements PatternExpander
 
     public function __construct($boundary)
     {
-        if (!\is_float($boundary) && !\is_integer($boundary) && !\is_double($boundary) && !$this->is_datetime($boundary)) {
+        if (!\is_numeric($boundary) && !$this->is_datetime($boundary)) {
             throw new \InvalidArgumentException(\sprintf('Boundary value "%s" is not a valid number nor a date.', new StringConverter($boundary)));
         }
 
@@ -32,7 +32,7 @@ final class LowerThan implements PatternExpander
 
     public function match($value) : bool
     {
-        if (!\is_float($value) && !\is_integer($value) && !\is_double($value) && !$this->is_datetime($value)) {
+        if (!\is_numeric($value) && !$this->is_datetime($value)) {
             $this->error = \sprintf('Value "%s" is not a valid number nor a date.', new StringConverter($value));
             return false;
         }
@@ -42,13 +42,11 @@ final class LowerThan implements PatternExpander
             return false;
         }
         
-        if($this->is_datetime($this->boundary))
-        {
+        if($this->is_datetime($this->boundary)) {
             $this->boundary = new \DateTime($this->boundary);
         }
 
-        if($this->is_datetime($value))
-        {
+        if($this->is_datetime($value)) {
             $value = new \DateTime($value);
         }
 
@@ -62,7 +60,7 @@ final class LowerThan implements PatternExpander
 
     private function is_datetime($value) : bool
     {
-        if(is_string($value) == false) return false;
+        if(is_numeric($value)) return false;
         try {
             new \DateTime($value);
             return true;

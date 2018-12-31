@@ -25,7 +25,10 @@ class GreaterThanTest extends TestCase
             [-20, -10.5, true],
             [10, 1, false],
             [1, 1, false],
-            [10, '20', true]
+            [10, '20', true],
+            ['+ 2 day','today',false],
+            ['2018-02-06T04:20:33','2017-02-06T04:20:33',false],
+            ['2017-02-06T04:20:33','2018-02-06T04:20:33',true],
         ];
     }
 
@@ -42,9 +45,11 @@ class GreaterThanTest extends TestCase
     public static function invalidCasesProvider()
     {
         return [
-            [1, 'ipsum lorem', 'Value "ipsum lorem" is not a valid number.'],
+            [1, 'ipsum lorem', 'Value "ipsum lorem" is not a valid number nor a date.'],
             [10, 5, 'Value "5" is not greater than "10".'],
             [5, 5, 'Value "5" is not greater than "5".'],
+            [5,'today', 'Value "today" is not the same type as "5", booth must date or a number.'],
+            ['today',5, 'Value "5" is not the same type as "today", booth must date or a number.'],
         ];
     }
 }

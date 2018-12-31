@@ -17,8 +17,8 @@ final class GreaterThan implements PatternExpander
 
     public function __construct($boundary)
     {
-        if (!\is_float($boundary) && !\is_int($boundary)) {
-            throw new \InvalidArgumentException(\sprintf('Boundary value "%s" is not a valid number.', new StringConverter($boundary)));
+        if (!\is_numeric($boundary) && !$this->is_datetime($boundary)) {
+            throw new \InvalidArgumentException(\sprintf('Boundary value "%s" is not a valid number nor a date.', new StringConverter($boundary)));
         }
 
         $this->boundary = $boundary;
@@ -31,9 +31,22 @@ final class GreaterThan implements PatternExpander
 
     public function match($value) : bool
     {
-        if (!\is_float($value) && !\is_int($value) && !\is_numeric($value)) {
-            $this->error = \sprintf('Value "%s" is not a valid number.', new StringConverter($value));
+        if (!\is_numeric($value) && !$this->is_datetime($value)) {
+            $this->error = \sprintf('Value "%s" is not a valid number nor a date.', new StringConverter($value));
             return false;
+        }
+
+        if($this->is_datetime($this->boundary) != $this->is_datetime($value)) {
+            $this->error = \sprintf('Value "%s" is not the same type as "%s", booth must date or a number.', new StringConverter($value), new StringConverter($this->boundary));
+            return false;
+        }
+        
+        if($this->is_datetime($this->boundary)) {
+            $this->boundary = new \DateTime($this->boundary);
+        }
+
+        if($this->is_datetime($value)) {
+            $value = new \DateTime($value);
         }
 
         if ($value <= $this->boundary) {
@@ -42,6 +55,17 @@ final class GreaterThan implements PatternExpander
         }
 
         return $value > $this->boundary;
+    }
+
+    private function is_datetime($value) : bool
+    {
+        if(is_numeric($value)) return false;
+        try {
+            new \DateTime($value);
+            return true;
+        } catch (\Exception $e) {
+            return false;
+        }
     }
 
     public function getError()

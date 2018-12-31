@@ -361,6 +361,8 @@ XML;
             ['2014-08-19', '@string@.isDateTime()', true],
             ['3014-08-19', '@string@.lowerThan("today")', false],
             ['1014-08-19', '@string@.lowerThan("+ 1day")', true],
+            ['3014-08-19', '@string@.greaterThan("today")', true],
+            ['1014-08-19', '@string@.greaterThan("+ 1day")', false],
             [100, '@integer@.lowerThan(101).greaterThan(10)', true],
             ['', '@string@.isNotEmpty()', false],
             ['lorem ipsum', '@string@.isNotEmpty()', true],
