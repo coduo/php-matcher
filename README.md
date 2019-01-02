@@ -120,6 +120,22 @@ $matcher->match("lorem ipsum dolor", "@string@.startsWith('lorem').contains('ips
 
 ```
 
+### Date matching
+
+```php
+<?php
+
+use Coduo\PHPMatcher\Factory\SimpleFactory;
+
+$factory = new SimpleFactory();
+$matcher = $factory->createMatcher();
+
+$matcher->match('2014-08-19', '@string@.isDateTime()');
+$matcher->match('2014-08-19', '@string@.isDateTime().before("2016-08-19")');
+$matcher->match('2014-08-19', '@string@.isDateTime().before("today").after("+ 100year")');
+
+```
+
 ### Integer matching
 
 ```php
