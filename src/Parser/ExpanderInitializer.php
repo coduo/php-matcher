@@ -15,6 +15,8 @@ use Coduo\PHPMatcher\Matcher\Pattern\Expander;
 final class ExpanderInitializer
 {
     private $expanderDefinitions = [
+        Expander\After::NAME => Expander\After::class,
+        Expander\Before::NAME => Expander\Before::class,
         Expander\Contains::NAME => Expander\Contains::class,
         Expander\Count::NAME => Expander\Count::class,
         Expander\EndsWith::NAME => Expander\EndsWith::class,
