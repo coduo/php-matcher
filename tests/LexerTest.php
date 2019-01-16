@@ -181,6 +181,7 @@ class LexerTest extends TestCase
             ['@integer@'],
             ['@number@'],
             ['@*@'],
+            ['@...@'],
             ['@wildcard@']
         ];
     }

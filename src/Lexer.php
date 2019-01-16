@@ -32,7 +32,7 @@ final class Lexer extends AbstractLexer
             '\\-?[0-9]*\\.?[0-9]*', // numbers
             "'(?:[^']|'')*'", // string between ' character
             '"(?:[^"]|"")*"', // string between " character,
-            '@[a-zA-Z0-9\\*]+@', // type pattern
+            '@[a-zA-Z0-9\\*.]+@', // type pattern
         ];
     }
 

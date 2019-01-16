@@ -15,6 +15,7 @@ final class ArrayMatcher extends Matcher
 {
     const PATTERN = 'array';
     const UNBOUNDED_PATTERN = '@...@';
+    const UNIVERSAL_KEY = '@*@';
 
     private $propertyMatcher;
 
@@ -70,18 +71,20 @@ final class ArrayMatcher extends Matcher
         foreach ($values as $key => $value) {
             $path = $this->formatAccessPath($key);
 
-            if ($this->shouldSkippValueMatchingFor($pattern)) {
+            if ($this->shouldSkipValueMatchingFor($pattern)) {
                 continue;
             }
 
             if ($this->valueExist($path, $patterns)) {
                 $pattern = $this->getValueByPath($patterns, $path);
+            } elseif (isset($patterns[self::UNIVERSAL_KEY])) {
+                $pattern = $patterns[self::UNIVERSAL_KEY];
             } else {
                 $this->setMissingElementInError('pattern', $this->formatFullPath($parentPath, $path));
                 return false;
             }
 
-            if ($this->shouldSkippValueMatchingFor($pattern)) {
+            if ($this->shouldSkipValueMatchingFor($pattern)) {
                 continue;
             }
 
@@ -127,6 +130,7 @@ final class ArrayMatcher extends Matcher
 
             $notExistingKeys = $this->findNotExistingKeys($pattern, $values);
             if (\count($notExistingKeys) > 0) {
+                dump($notExistingKeys);
                 $keyNames = \array_keys($notExistingKeys);
                 $path = $this->formatFullPath($parentPath, $this->formatAccessPath($keyNames[0]));
                 $this->setMissingElementInError('value', $path);
@@ -138,9 +142,13 @@ final class ArrayMatcher extends Matcher
         return true;
     }
 
-    private function findNotExistingKeys(array $pattern, array $values) : array
+    private function findNotExistingKeys(array $patterns, array $values) : array
     {
-        $notExistingKeys = \array_diff_key($pattern, $values);
+        if (isset($patterns[self::UNIVERSAL_KEY])) {
+            return [];
+        }
+
+        $notExistingKeys = \array_diff_key($patterns, $values);
 
         return \array_filter($notExistingKeys, function ($pattern) use ($values) {
             if (\is_array($pattern)) {
@@ -194,8 +202,7 @@ final class ArrayMatcher extends Matcher
 
     private function arrayPropertyExists(string $property, array $objectOrArray) : bool
     {
-        return ($objectOrArray instanceof \ArrayAccess && isset($objectOrArray[$property])) ||
-            (\is_array($objectOrArray) && \array_key_exists($property, $objectOrArray));
+        return ($objectOrArray instanceof \ArrayAccess || \is_array($objectOrArray)) && isset($objectOrArray[$property]);
     }
 
     private function getValueByPath(array $array, string $path)
@@ -217,6 +224,7 @@ final class ArrayMatcher extends Matcher
 
     private function setMissingElementInError(string $place, string $path)
     {
+        throw new \Exception(\sprintf('There is no element under path %s in %s.', $path, $place));
         $this->error = \sprintf('There is no element under path %s in %s.', $path, $place);
     }
 
@@ -230,7 +238,7 @@ final class ArrayMatcher extends Matcher
         return \sprintf('%s%s', $parentPath, $path);
     }
 
-    private function shouldSkippValueMatchingFor($lastPattern) : bool
+    private function shouldSkipValueMatchingFor($lastPattern) : bool
     {
         return $lastPattern === self::UNBOUNDED_PATTERN;
     }

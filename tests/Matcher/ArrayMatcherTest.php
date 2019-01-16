@@ -158,9 +158,39 @@ class ArrayMatcherTest extends TestCase
             6.66
         ];
 
+        $simpleArrPatternWithUniversalKey = [
+            'users' => [
+                [
+                    'firstName' => '@string@',
+                    Matcher\ArrayMatcher::UNIVERSAL_KEY => '@*@'
+                ],
+                Matcher\ArrayMatcher::UNBOUNDED_PATTERN
+            ],
+            true,
+            false,
+            1,
+            6.66
+        ];
+
+        $simpleArrPatternWithUniversalKeyAndStringValue = [
+            'users' => [
+                [
+                    'firstName' => '@string@',
+                    Matcher\ArrayMatcher::UNIVERSAL_KEY => '@string@'
+                ],
+                Matcher\ArrayMatcher::UNBOUNDED_PATTERN
+            ],
+            true,
+            false,
+            1,
+            6.66
+        ];
+
         return [
             [$simpleArr, $simpleArr],
             [$simpleArr, $simpleArrPattern],
+            [$simpleArr, $simpleArrPatternWithUniversalKey],
+            [$simpleArr, $simpleArrPatternWithUniversalKeyAndStringValue],
             [[], []],
             [['foo' => null], ['foo' => null]],
             [['foo' => null], ['foo' => '@null@']],
@@ -224,8 +254,23 @@ class ArrayMatcherTest extends TestCase
             6.66
         ];
 
+        $simpleArrPatternWithUniversalKeyAndIntegerValue = [
+            'users' => [
+                [
+                    'firstName' => '@string@',
+                    Matcher\ArrayMatcher::UNIVERSAL_KEY => '@integer@'
+                ],
+                Matcher\ArrayMatcher::UNBOUNDED_PATTERN
+            ],
+            true,
+            false,
+            1,
+            6.66
+        ];
+
         return [
             [$simpleArr, $simpleDiff],
+            [$simpleArr, $simpleArrPatternWithUniversalKeyAndIntegerValue],
             [['status' => 'ok', 'data' => [['foo']]], ['status' => 'ok', 'data' => []]],
             [[1], []],
             [['key' => 'val'], ['key' => 'val2']],
