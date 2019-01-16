@@ -189,6 +189,14 @@ class JsonMatcherTest extends TestCase
                 '{"username":null, "some_data": @string@}'
             ],
             [
+                '{"username":null,"some_data":"test"}',
+                '{"username":null, "some_data": "@string@"}'
+            ],
+            [
+                '{"username":null,"some_data":"test"}',
+                '{"username":null,"some_data":@string@}'
+            ],
+            [
                 '{"null":null}',
                 '{"null":null}'
             ],

@@ -201,7 +201,8 @@ final class ArrayMatcher extends Matcher
 
     private function arrayPropertyExists(string $property, array $objectOrArray) : bool
     {
-        return ($objectOrArray instanceof \ArrayAccess || \is_array($objectOrArray)) && isset($objectOrArray[$property]);
+        return ($objectOrArray instanceof \ArrayAccess && isset($objectOrArray[$property])) ||
+            (\is_array($objectOrArray) && \array_key_exists($property, $objectOrArray));
     }
 
     private function getValueByPath(array $array, string $path)
