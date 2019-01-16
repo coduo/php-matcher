@@ -224,7 +224,6 @@ final class ArrayMatcher extends Matcher
 
     private function setMissingElementInError(string $place, string $path)
     {
-        throw new \Exception(\sprintf('There is no element under path %s in %s.', $path, $place));
         $this->error = \sprintf('There is no element under path %s in %s.', $path, $place);
     }
 
