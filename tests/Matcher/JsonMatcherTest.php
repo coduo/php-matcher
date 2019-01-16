@@ -201,6 +201,10 @@ class JsonMatcherTest extends TestCase
                 '{"users":[{"firstName":"Norbert","lastName":"Orzechowicz","roles":"@wildcard@"}]}'
             ],
             [
+                '{"users":[{"firstName":"Norbert","lastName":"Orzechowicz","roles":["ROLE_USER", "ROLE_DEVELOPER"]}]}',
+                '{"users":[{"firstName":"Norbert","@*@":"@*@"}]}'
+            ],
+            [
                 '[{"name": "Norbert"},{"name":"Michał"},{"name":"Bob"},{"name":"Martin"}]',
                 '[{"name": "Norbert"},@...@]'
             ]

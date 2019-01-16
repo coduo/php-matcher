@@ -130,7 +130,6 @@ final class ArrayMatcher extends Matcher
 
             $notExistingKeys = $this->findNotExistingKeys($pattern, $values);
             if (\count($notExistingKeys) > 0) {
-                dump($notExistingKeys);
                 $keyNames = \array_keys($notExistingKeys);
                 $path = $this->formatFullPath($parentPath, $this->formatAccessPath($keyNames[0]));
                 $this->setMissingElementInError('value', $path);
