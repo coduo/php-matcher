@@ -17,7 +17,7 @@ final class After implements PatternExpander
 
 
     public function __construct($boundary)
-    {      
+    {
         if (false === \is_string($boundary)) {
             $this->error = \sprintf('After expander require "string", got "%s".', new StringConverter($boundary));
             return false;

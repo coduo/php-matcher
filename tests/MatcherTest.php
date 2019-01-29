@@ -360,7 +360,7 @@ XML;
             ['lorem ipsum', '@string@.isUrl()', false],
             ['2014-08-19', '@string@.isDateTime()', true],
             ['3014-08-19', '@string@.before("today")', false],
-            ['1014-08-19', '@string@.before("+ 1day")', true], 
+            ['1014-08-19', '@string@.before("+ 1day")', true],
             ['3014-08-19', '@string@.after("today")', true],
             ['1014-08-19', '@string@.after("+ 1day")', false],
             [100, '@integer@.lowerThan(101).greaterThan(10)', true],

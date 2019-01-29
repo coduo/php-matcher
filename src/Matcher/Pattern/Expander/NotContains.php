@@ -40,7 +40,7 @@ final class NotContains implements PatternExpander
             : \mb_strpos($value, $this->string);
 
         if ($contains !== false) {
-            $this->error = \sprintf("String \"%s\" contains \"%s\".", $value, $this->string);
+            $this->error = \sprintf('String "%s" contains "%s".', $value, $this->string);
 
             return false;
         }

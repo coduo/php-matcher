@@ -12,6 +12,7 @@ matrix:
       env: DEPENDENCIES='low'
     - php: 7.1
     - php: 7.2
+    - php: 7.3
 
 before_install:
   - composer self-update
@@ -23,3 +24,4 @@ install:
 
 script:
   - ./bin/phpunit
+  - ./bin/php-cs-fixer fix -v --dry-run
