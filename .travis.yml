@@ -23,3 +23,4 @@ install:
 
 script:
   - ./bin/phpunit
+  - ./bin/php-cs-fixer fix -v --dry-run

@@ -35,7 +35,7 @@ final class Before implements PatternExpander
     }
 
     public function match($value) : bool
-    {        
+    {
         if (!\is_string($value)) {
             $this->error = \sprintf('Before expander require "string", got "%s".', new StringConverter($value));
             return false;
