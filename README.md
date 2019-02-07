@@ -334,6 +334,64 @@ $matcher->match(
 );
 ```
 
+### Json matching with unbounded arrays and objects
+
+```php
+<?php
+
+use Coduo\PHPMatcher\Factory\SimpleFactory;
+
+$factory = new SimpleFactory();
+$matcher = $factory->createMatcher();
+
+$matcher->match(
+  '{
+    "users":[
+      {
+        "firstName": "Norbert",
+        "lastName": "Orzechowicz",
+        "created": "2014-01-01",
+        "roles":["ROLE_USER", "ROLE_DEVELOPER"]},
+        "attributes": {
+          "isAdmin": false,
+          "dateOfBirth" null,
+          "hasEmailVerified": true
+        }
+      },
+      {
+        "firstName": "Michał",
+        "lastName": "Dąbrowski",
+        "created": "2014-01-01",
+        "roles":["ROLE_USER", "ROLE_DEVELOPER", "ROLE_ADMIN"]},
+        "attributes": {
+          "isAdmin": true,
+          "dateOfBirth" null,
+          "hasEmailVerified": true
+        }
+      }
+    ]
+  }',
+  '{
+    "users":[
+      {
+        "firstName": @string@,
+        "lastName": @string@,
+        "created": "@string@.isDateTime()",
+        "roles": [
+            "ROLE_USER",
+            @...@
+        ],
+        "attributes": {
+          "isAdmin": @boolean@,
+          "@*@": "@*@"
+        }
+      }
+    ],
+    @...@
+  }'
+);
+```
+
 ### Xml matching
 
 ```php
