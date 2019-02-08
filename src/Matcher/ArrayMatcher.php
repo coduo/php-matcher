@@ -15,6 +15,7 @@ final class ArrayMatcher extends Matcher
 {
     const PATTERN = 'array';
     const UNBOUNDED_PATTERN = '@...@';
+    const UNIVERSAL_KEY = '@*@';
 
     private $propertyMatcher;
 
@@ -70,18 +71,20 @@ final class ArrayMatcher extends Matcher
         foreach ($values as $key => $value) {
             $path = $this->formatAccessPath($key);
 
-            if ($this->shouldSkippValueMatchingFor($pattern)) {
+            if ($this->shouldSkipValueMatchingFor($pattern)) {
                 continue;
             }
 
             if ($this->valueExist($path, $patterns)) {
                 $pattern = $this->getValueByPath($patterns, $path);
+            } elseif (isset($patterns[self::UNIVERSAL_KEY])) {
+                $pattern = $patterns[self::UNIVERSAL_KEY];
             } else {
                 $this->setMissingElementInError('pattern', $this->formatFullPath($parentPath, $path));
                 return false;
             }
 
-            if ($this->shouldSkippValueMatchingFor($pattern)) {
+            if ($this->shouldSkipValueMatchingFor($pattern)) {
                 continue;
             }
 
@@ -138,9 +141,13 @@ final class ArrayMatcher extends Matcher
         return true;
     }
 
-    private function findNotExistingKeys(array $pattern, array $values) : array
+    private function findNotExistingKeys(array $patterns, array $values) : array
     {
-        $notExistingKeys = \array_diff_key($pattern, $values);
+        if (isset($patterns[self::UNIVERSAL_KEY])) {
+            return [];
+        }
+
+        $notExistingKeys = \array_diff_key($patterns, $values);
 
         return \array_filter($notExistingKeys, function ($pattern) use ($values) {
             if (\is_array($pattern)) {
@@ -230,7 +237,7 @@ final class ArrayMatcher extends Matcher
         return \sprintf('%s%s', $parentPath, $path);
     }
 
-    private function shouldSkippValueMatchingFor($lastPattern) : bool
+    private function shouldSkipValueMatchingFor($lastPattern) : bool
     {
         return $lastPattern === self::UNBOUNDED_PATTERN;
     }
