@@ -54,7 +54,7 @@ final class TextMatcher extends Matcher
         try {
             $patternRegex = $this->replacePlaceholderWithPatternRegexes($patternRegex, $patternsReplacedWithRegex);
         } catch (UnknownTypeException $exception) {
-            $this->error = \sprintf(\sprintf('Type pattern "%s" is not supported by TextMatcher.', $exception->getType()));
+            $this->error = \sprintf('Type pattern "%s" is not supported by TextMatcher.', $exception->getType());
             return false;
         }
 
