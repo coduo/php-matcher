@@ -26,21 +26,25 @@ final class Repeat implements PatternExpander
         return self::NAME === $name;
     }
 
-    public function __construct(string $pattern, bool $isStrict = true)
+    /**
+     * @param array|string $pattern array to be matched or json-encoded string
+     */
+    public function __construct($pattern, bool $isStrict = true)
     {
-        if (!\is_string($pattern)) {
-            throw new \InvalidArgumentException('Repeat pattern must be a string.');
-        }
-
         $this->pattern = $pattern;
         $this->isStrict = $isStrict;
         $this->isScalar = true;
 
-        $json = \json_decode($pattern, true);
-
-        if ($json !== null && \json_last_error() === JSON_ERROR_NONE) {
-            $this->pattern = $json;
+        if (\is_string($pattern)) {
+            $json = \json_decode($pattern, true);
+            if ($json !== null && \json_last_error() === JSON_ERROR_NONE) {
+                $this->pattern = $json;
+                $this->isScalar = false;
+            }
+        } elseif (\is_array($pattern)) {
             $this->isScalar = false;
+        } else {
+            throw new \InvalidArgumentException('Repeat pattern must be a string or an array.');
         }
     }
 
@@ -80,11 +84,6 @@ final class Repeat implements PatternExpander
         return true;
     }
 
-    /**
-     * @param array $values
-     * @param Matcher $matcher
-     * @return bool
-     */
     private function matchJson(array $values, Matcher $matcher) : bool
     {
         $patternKeys = \array_keys($this->pattern);
