@@ -6,8 +6,6 @@
     <testsuites>
         <testsuite name="PHP Matcher Test Suite">
             <directory>./tests/</directory>
-            <exclude>tests/PHPUnit/PHPMatcherAssertionsTest.php</exclude>
-            <file phpVersion="7.0.0" phpVersionOperator=">=">tests/PHPUnit/PHPMatcherAssertionsTest.php</file>
         </testsuite>
     </testsuites>
     <filter>
