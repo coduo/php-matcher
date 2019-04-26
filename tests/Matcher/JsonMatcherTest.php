@@ -150,6 +150,7 @@ class JsonMatcherTest extends TestCase
         return [
             ['@string@'],
             ['["Norbert", '],
+            ['@array@.repeat({"name": "@string@", "value": "@array@"})']
         ];
     }
 
@@ -215,6 +216,10 @@ class JsonMatcherTest extends TestCase
             [
                 '[{"name": "Norbert","lastName":"Orzechowicz"},{"name":"Michał"},{"name":"Bob"},{"name":"Martin"}]',
                 '[{"name": "Norbert","@*@":"@*@"},@...@]'
+            ],
+            [
+                '[{"name": "Norbert"},{"name":"Michał"},{"name":"Bob"},{"name":"Martin"}]',
+                '"@array@.repeat({\"name\": \"@string@\"})"'
             ]
         ];
     }
@@ -241,6 +246,10 @@ class JsonMatcherTest extends TestCase
             [
                 '{"foo":"foo val","bar":"bar val"}',
                 '{"foo":"foo val"}'
+            ],
+            [
+                '[{"name": "Norbert","lastName":"Orzechowicz"},{"name":"Michał"},{"name":"Bob"},{"name":"Martin"}]',
+                '"@array@.repeat({\"name\": \"@string@\"})"'
             ],
             [
                 [],
