@@ -11,7 +11,8 @@ It was built to simplify API's functional testing.
 * [![Build Status](https://travis-ci.org/coduo/php-matcher.svg)](https://travis-ci.org/coduo/php-matcher) - master (3.2.*)
 * [![Build Status](https://travis-ci.org/coduo/php-matcher.svg?branch=3.1)](https://travis-ci.org/coduo/php-matcher) - 3.1.*
 
-[Readme for master (3.2) version](https://github.com/coduo/php-matcher/tree/master/README.md)
+[Readme for master (3.3) version](https://github.com/coduo/php-matcher/tree/master/README.md)
+[Readme for 3.2 version](https://github.com/coduo/php-matcher/tree/3.2/README.md)
 [Readme for 3.1 version](https://github.com/coduo/php-matcher/tree/3.1/README.md)
 
 
