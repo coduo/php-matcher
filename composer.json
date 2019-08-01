@@ -17,6 +17,7 @@
     "require": {
         "php": ">=7.0.0",
         "ext-filter": "*",
+        "ext-json": "*",
         "coduo/php-to-string": "^2",
         "symfony/property-access": "^2.3|^3.0|^4.0",
         "symfony/expression-language": "^2.3|^3.0|^4.0",
