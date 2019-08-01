@@ -7,12 +7,14 @@ namespace Coduo\PHPMatcher\PHPUnit;
 use Coduo\PHPMatcher\Factory\SimpleFactory;
 use Coduo\PHPMatcher\Matcher;
 use PHPUnit\Framework\Constraint\Constraint;
+use PHPUnit\Util\Json;
+use SebastianBergmann\Comparator\ComparisonFailure;
 
 final class PHPMatcherConstraint extends Constraint
 {
     private $pattern;
-
     private $matcher;
+    private $lastValue;
 
     public function __construct(string $pattern)
     {
@@ -24,6 +26,9 @@ final class PHPMatcherConstraint extends Constraint
         $this->matcher = $this->createMatcher();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function toString() : string
     {
         return 'matches the pattern';
@@ -36,7 +41,7 @@ final class PHPMatcherConstraint extends Constraint
 
     protected function matches($value) : bool
     {
-        return $this->matcher->match($value, $this->pattern);
+        return $this->matcher->match($this->lastValue = $value, $this->pattern);
     }
 
     private function createMatcher() : Matcher
@@ -44,5 +49,39 @@ final class PHPMatcherConstraint extends Constraint
         $factory = new SimpleFactory();
 
         return $factory->createMatcher();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function fail($other, $description, ComparisonFailure $comparisonFailure = null): void
+    {
+        if (null === $comparisonFailure
+            && \is_string($other)
+            && \class_exists(Json::class)
+        ) {
+            list($error) = Json::canonicalize($other);
+
+            if ($error) {
+                parent::fail($other, $description);
+            }
+
+            list($error) = Json::canonicalize($this->pattern);
+
+            if ($error) {
+                parent::fail($other, $description);
+            }
+
+            $comparisonFailure = new ComparisonFailure(
+                \json_decode($this->pattern),
+                \json_decode($other),
+                Json::prettify($this->pattern),
+                Json::prettify($other),
+                false,
+                'Failed asserting that the pattern matches the given value.'
+            );
+        }
+
+        parent::fail($other, $description, $comparisonFailure);
     }
 }
