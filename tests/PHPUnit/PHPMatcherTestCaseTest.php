@@ -38,4 +38,9 @@ class PHPMatcherTestCaseTest extends PHPMatcherTestCase
 
         $mock->getTitle(42);
     }
+
+    public function test_it_asserts_if_a_value_matches_the_array_pattern()
+    {
+        $this->assertMatchesPattern(['foo' => '@string@'], ['foo' => 'bar']);
+    }
 }
