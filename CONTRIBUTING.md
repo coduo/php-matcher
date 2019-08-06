@@ -4,7 +4,7 @@
 
 1.  Fork the repo
 2.  Clone the repo to local
-3.  Install dependencies: `composer update` (this assumes you have 'composer' aliased to whereever your composer.phar lives)
+3.  Install dependencies: `composer update` (this assumes you have 'composer' aliased to wherever your composer.phar lives)
 4.  Run the tests. We only take pull requests with passing tests, and it's great to know that you have a clean slate:
     `./bin/phpunit`
 
