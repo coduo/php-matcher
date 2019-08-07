@@ -62,7 +62,7 @@ class MatcherTest extends TestCase
             'data' => '@wildcard@',
         ];
 
-        $this->assertTrue($this->matcher->match($value, $expectation), $this->matcher->getError());
+        $this->assertTrue($this->matcher->match($value, $expectation), (string) $this->matcher->getError());
         $this->assertTrue(PHPMatcher::match($value, $expectation, $error), (string) $error);
     }
 

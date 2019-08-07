@@ -27,4 +27,9 @@ abstract class Matcher implements ValueMatcher
 
         return false;
     }
+
+    public function clearError() : void
+    {
+        $this->error = null;
+    }
 }

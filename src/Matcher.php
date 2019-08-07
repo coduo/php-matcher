@@ -17,7 +17,13 @@ final class Matcher
 
     public function match($value, $pattern) : bool
     {
-        return $this->matcher->match($value, $pattern);
+        $result = $this->matcher->match($value, $pattern);
+
+        if ($result === true) {
+            $this->matcher->clearError();
+        }
+
+        return $result;
     }
 
     /**

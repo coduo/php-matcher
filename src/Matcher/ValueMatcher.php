@@ -22,4 +22,9 @@ interface ValueMatcher
      * @return null|string
      */
     public function getError();
+
+    /**
+     * Clear last error
+     */
+    public function clearError() : void;
 }

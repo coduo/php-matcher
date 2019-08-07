@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Coduo\PHPMatcher\Tests\Matcher;
 
+use Coduo\PHPMatcher\Factory\SimpleFactory;
 use Coduo\PHPMatcher\Lexer;
 use Coduo\PHPMatcher\Matcher;
 use Coduo\PHPMatcher\Parser;
@@ -124,6 +125,15 @@ class JsonMatcherTest extends TestCase
         $this->assertFalse($this->matcher->match($value, $pattern));
 
         $this->assertEquals($this->matcher->getError(), 'Invalid given JSON of pattern. Syntax error, malformed JSON');
+    }
+
+    /**
+     * Solves https://github.com/coduo/php-matcher/issues/156
+     */
+    public function test_empty_error_after_successful_match()
+    {
+        $this->assertTrue($this->matcher->match($value = '{"foo": "bar"}', $pattern = '{"foo": "@string@"}'));
+        $this->assertNull($this->matcher->getError());
     }
 
     public function test_error_when_json_value_is_invalid()
