@@ -276,7 +276,9 @@ class ArrayMatcherTest extends TestCase
             [['key' => 'val'], ['key' => 'val2']],
             [[1], [2]],
             [['foo', 1, 3], ['foo', 2, 3]],
+            [[], ['foo' => []]],
             [[], ['foo' => 'bar']],
+            [[], ['foo' => ['bar' => []]]],
             'unbound array should match one or none elements' => [
                 [
                     'users' => [

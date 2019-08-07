@@ -113,6 +113,10 @@ final class ArrayMatcher extends Matcher
             return false;
         }
 
+        if (empty($values) && !empty($patterns)) {
+            return false;
+        }
+
         return true;
     }
 
