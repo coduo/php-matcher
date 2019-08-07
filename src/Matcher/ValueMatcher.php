@@ -26,5 +26,5 @@ interface ValueMatcher
     /**
      * Clear last error
      */
-    public function clearError() : void;
+    public function clearError();
 }
