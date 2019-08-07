@@ -16,8 +16,11 @@ final class PHPMatcherConstraint extends Constraint
     private $matcher;
     private $lastValue;
 
-    public function __construct(string $pattern)
+    public function __construct($pattern)
     {
+        if (!\in_array(\gettype($pattern), ['string', 'array'])) {
+            throw new \LogicException(\sprintf('The PHPMatcherConstraint pattern must be a string or an array, %s given.', \gettype($pattern)));
+        }
         if (\method_exists(Constraint::class, '__construct')) {
             parent::__construct();
         }

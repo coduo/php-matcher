@@ -49,4 +49,32 @@ class PHPMatcherConstraintTest extends TestCase
 
         $this->assertFalse($constraint->evaluate(42));
     }
+
+    public function test_that_pattern_could_be_an_array()
+    {
+        $constraint = new PHPMatcherConstraint(['foo' => '@string@']);
+
+        $this->assertTrue($constraint->evaluate(['foo' => 'foo value'], '', true));
+    }
+
+    /**
+     * @expectedException \LogicException
+     * @dataProvider invalidPatterns
+     */
+    public function test_that_pattern_could_be_only_a_string_or_an_array($pattern)
+    {
+        new PHPMatcherConstraint($pattern);
+    }
+
+    public function invalidPatterns()
+    {
+        return [
+            [true],
+            [1],
+            [1.1],
+            [new \StdClass],
+            [null],
+            [\fopen('php://memory', 'r')],
+        ];
+    }
 }
