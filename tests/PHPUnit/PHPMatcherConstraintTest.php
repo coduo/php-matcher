@@ -74,7 +74,7 @@ class PHPMatcherConstraintTest extends TestCase
             [1.1],
             [new \StdClass],
             [null],
-            [fopen("php://memory", "r")],
+            [\fopen('php://memory', 'r')],
         ];
     }
 }
