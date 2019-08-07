@@ -113,10 +113,6 @@ final class ArrayMatcher extends Matcher
             return false;
         }
 
-        if (empty($values) && !empty($patterns)) {
-            return false;
-        }
-
         return true;
     }
 
@@ -142,7 +138,7 @@ final class ArrayMatcher extends Matcher
             }
         }
 
-        return true;
+        return !empty($values) || empty($pattern);
     }
 
     private function findNotExistingKeys(array $patterns, array $values) : array
