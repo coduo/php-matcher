@@ -126,6 +126,15 @@ class JsonMatcherTest extends TestCase
         $this->assertEquals($this->matcher->getError(), 'Invalid given JSON of pattern. Syntax error, malformed JSON');
     }
 
+    /**
+     * Solves https://github.com/coduo/php-matcher/issues/156
+     */
+    public function test_empty_error_after_successful_match()
+    {
+        $this->assertTrue($this->matcher->match($value = '{"foo": "bar"}', $pattern = '{"foo": "@string@"}'));
+        $this->assertNull($this->matcher->getError());
+    }
+
     public function test_error_when_json_value_is_invalid()
     {
         $value = '{"test": "value",}';
