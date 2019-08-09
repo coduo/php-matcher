@@ -45,13 +45,8 @@ class LexerTest extends TestCase
     public static function validNumberValuesProvider()
     {
         return [
-            [1, 1],
-            [1.25, 1.25],
-            [0, 0],
             ['125', 125],
             ['12.15', 12.15],
-            [-10, -10],
-            [-1.124, -1.124],
             ['-10', -10],
             ['-1.24', -1.24]
         ];
