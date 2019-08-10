@@ -15,16 +15,15 @@ class RegexConverterTest extends TestCase
      */
     private $converter;
 
-    public function setUp()
+    public function setUp() : void
     {
         $this->converter = new RegexConverter();
     }
 
-    /**
-     * @expectedException \Coduo\PHPMatcher\Exception\UnknownTypeException
-     */
     public function test_convert_unknown_type()
     {
+        $this->expectException(\Coduo\PHPMatcher\Exception\UnknownTypeException::class);
+
         $this->converter->toRegex(new TypePattern('not_a_type'));
     }
 }

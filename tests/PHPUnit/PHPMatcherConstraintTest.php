@@ -28,23 +28,21 @@ class PHPMatcherConstraintTest extends TestCase
         $this->assertFalse($constraint->evaluate(42, '', true));
     }
 
-    /**
-     * @expectedException \PHPUnit\Framework\AssertionFailedError
-     * @expectedExceptionMessage Failed asserting that 42 matches the pattern
-     */
     public function test_it_sets_a_failure_description_if_not_given()
     {
+        $this->expectException(\PHPUnit\Framework\AssertionFailedError::class);
+        $this->expectExceptionMessage('Failed asserting that 42 matches the pattern');
+
         $constraint = new PHPMatcherConstraint('@string@');
 
         $this->assertFalse($constraint->evaluate(42));
     }
 
-    /**
-     * @expectedException \PHPUnit\Framework\AssertionFailedError
-     * @expectedExceptionMessage integer "42" is not a valid string
-     */
     public function test_it_sets_additional_failure_description()
     {
+        $this->expectException(\PHPUnit\Framework\AssertionFailedError::class);
+        $this->expectExceptionMessage('integer "42" is not a valid string');
+
         $constraint = new PHPMatcherConstraint('@string@');
 
         $this->assertFalse($constraint->evaluate(42));
@@ -58,11 +56,12 @@ class PHPMatcherConstraintTest extends TestCase
     }
 
     /**
-     * @expectedException \LogicException
      * @dataProvider invalidPatterns
      */
     public function test_that_pattern_could_be_only_a_string_or_an_array($pattern)
     {
+        $this->expectException(\LogicException::class);
+
         new PHPMatcherConstraint($pattern);
     }
 

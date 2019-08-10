@@ -28,21 +28,19 @@ class MatchRegexTest extends TestCase
         ];
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Regex pattern must be a string.
-     */
     public function test_that_it_only_work_with_string()
     {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Regex pattern must be a string.');
+
         new MatchRegex(null);
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Regex pattern must be a valid one.
-     */
     public function test_that_it_only_work_with_valid_pattern()
     {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Regex pattern must be a valid one.');
+
         new MatchRegex('///');
     }
 }

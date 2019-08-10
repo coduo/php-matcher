@@ -16,7 +16,7 @@ class DoubleMatcherTest extends TestCase
      */
     private $matcher;
 
-    public function setUp()
+    public function setUp() : void
     {
         $this->matcher = new DoubleMatcher(new Parser(new Lexer(), new Parser\ExpanderInitializer()));
     }

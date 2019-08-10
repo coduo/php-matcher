@@ -16,7 +16,7 @@ class MatcherTest extends TestCase
      */
     protected $matcher;
 
-    public function setUp()
+    public function setUp() : void
     {
         $factory = new SimpleFactory();
         $this->matcher = $factory->createMatcher();

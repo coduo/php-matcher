@@ -36,7 +36,6 @@ if (!PHPMatcher::match("lorem ipsum dolor", "@string@", $error)) {
 
 ```
 
-
 ### Using Factory
 
 ```php

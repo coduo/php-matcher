@@ -16,7 +16,7 @@ class JsonMatcherTest extends TestCase
      */
     private $matcher;
 
-    public function setUp()
+    public function setUp() : void
     {
         $parser = new Parser(new Lexer(), new Parser\ExpanderInitializer());
         $scalarMatchers = new Matcher\ChainMatcher([

@@ -29,7 +29,7 @@ final class Matcher
     /**
      * @return null|string
      */
-    public function getError()
+    public function getError() : ?string
     {
         return $this->matcher->getError();
     }

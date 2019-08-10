@@ -16,7 +16,7 @@ class NumberMatcherTest extends TestCase
      */
     private $matcher;
 
-    public function setUp()
+    public function setUp() : void
     {
         $this->matcher = new NumberMatcher(new Parser(new Lexer(), new Parser\ExpanderInitializer()));
     }

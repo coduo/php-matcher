@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 trait PHPMatcherAssertions
 {
-    protected function assertMatchesPattern($pattern, $value, string $message = '')
+    protected function assertMatchesPattern($pattern, $value, string $message = '') : void
     {
         TestCase::assertThat($value, self::matchesPattern($pattern), $message);
     }
