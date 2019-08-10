@@ -20,5 +20,4 @@ install:
   - if [ "$DEPENDENCIES" == "low" ]; then composer update --prefer-lowest; fi;
 
 script:
-  - ./bin/phpunit
-  - ./bin/php-cs-fixer fix -v --dry-run
+  - composer test

@@ -6,22 +6,22 @@
 2.  Clone the repo to local
 3.  Install dependencies: `composer update` (this assumes you have 'composer' aliased to wherever your composer.phar lives)
 4.  Run the tests. We only take pull requests with passing tests, and it's great to know that you have a clean slate:
-    `./bin/phpunit`
-
-## Coding Standards
-
-Try use similar coding standards to what you see in the project to keep things clear to the contributors. If you're unsure, it's always a safe bet to fall-back to the PSR standards.
-
-[PSR-1: Basic Coding Standard](http://www.php-fig.org/psr/psr-1/)
-
-[PSR-2: Coding Style Guide](http://www.php-fig.org/psr/psr-2/)
+    `composer test`
 
 ## Adding new features
 
 Pull requests with new features needs to be created against master branch. 
 
-If new feature require BC Breake please note that in your PR comment, it will added in next major version.
-New features that does not have any BC Breakes are going to be added in next minor version.
+If new feature require BC Break please note that in your PR comment, it will added in next major version.
+New features that does not have any BC Breaks are going to be added in next minor version.
+
+## Codding standards
+
+In order to fix codding standards please exeecute: 
+
+```
+composer cs:php:fix 
+```
 
 ## Patches and bugfixes 
 
