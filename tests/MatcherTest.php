@@ -131,6 +131,16 @@ class MatcherTest extends TestCase
                     "nextPage": "@string@"
                 }',
             ],
+            'matches json values with full text matcher' => [
+                /** @lang JSON */
+                '{
+                    "url": "/accounts/9a7dae2d-d135-4bd7-b202-b3e7e91aaecd"
+                }',
+                /** @lang JSON */
+                '{
+                    "url": "/accounts/@uuid@"
+                }',
+            ],
             'matches none elements - empty array' => [
                 /** @lang JSON */
                 '{
