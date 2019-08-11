@@ -6,8 +6,9 @@ namespace Coduo\PHPMatcher\Matcher\Pattern\Assert;
 
 final class Json
 {
-    const TRANSFORM_QUOTATION_PATTERN = '/([^"])@([a-zA-Z0-9\.]+)@([^"])/';
-    const TRANSFORM_QUOTATION_REPLACEMENT = '$1"@$2@"$3';
+    private const TRANSFORM_NEW_LINES = '/\r?\n|\r/';
+    private const TRANSFORM_QUOTATION_PATTERN = '/([^"])@([a-zA-Z0-9\.]+)@([^"])/';
+    private const TRANSFORM_QUOTATION_REPLACEMENT = '$1"@$2@"$3';
 
     public static function isValid($value) : bool
     {
@@ -33,6 +34,14 @@ final class Json
 
     public static function transformPattern(string $pattern) : string
     {
-        return \preg_replace(self::TRANSFORM_QUOTATION_PATTERN, self::TRANSFORM_QUOTATION_REPLACEMENT, $pattern);
+        return \preg_replace(
+            self::TRANSFORM_NEW_LINES,
+            '',
+            \preg_replace(
+                self::TRANSFORM_QUOTATION_PATTERN,
+                self::TRANSFORM_QUOTATION_REPLACEMENT,
+                $pattern
+            )
+        );
     }
 }
