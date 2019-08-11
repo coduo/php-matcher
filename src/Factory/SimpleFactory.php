@@ -11,6 +11,8 @@ use Coduo\PHPMatcher\Parser;
 
 class SimpleFactory implements Factory
 {
+    private $parser;
+
     public function createMatcher() : Matcher
     {
         return new Matcher($this->buildMatchers());
@@ -39,7 +41,8 @@ class SimpleFactory implements Factory
         $arrayMatcher = new Matcher\ArrayMatcher(
             new Matcher\ChainMatcher([
                 $orMatcher,
-                $scalarMatchers
+                $scalarMatchers,
+                new Matcher\TextMatcher($scalarMatchers, $this->buildParser())
             ]),
             $this->buildParser()
         );
@@ -76,6 +79,12 @@ class SimpleFactory implements Factory
 
     protected function buildParser() : Parser
     {
-        return new Parser(new Lexer(), new Parser\ExpanderInitializer());
+        if ($this->parser) {
+            return $this->parser;
+        }
+
+        $this->parser = new Parser(new Lexer(), new Parser\ExpanderInitializer());
+
+        return $this->parser;
     }
 }
