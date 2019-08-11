@@ -16,7 +16,7 @@ class BooleanMatcherTest extends TestCase
      */
     private $matcher;
 
-    public function setUp()
+    public function setUp() : void
     {
         $this->matcher = new BooleanMatcher(new Parser(new Lexer(), new Parser\ExpanderInitializer()));
     }

@@ -8,9 +8,9 @@ PHPMatcher::match($value = '{"foo": "bar"}', $pattern = '{"foo": "@string@"}');
 
 It was built to simplify API's functional testing.
 
-* [![Build Status](https://travis-ci.org/coduo/php-matcher.svg)](https://travis-ci.org/coduo/php-matcher) - [3.3 (master) README](https://github.com/coduo/php-matcher/tree/master/README.md)  
-* [![Build Status](https://travis-ci.org/coduo/php-matcher.svg?branch=3.2)](https://travis-ci.org/coduo/php-matcher) - [3.2.* README](https://github.com/coduo/php-matcher/tree/3.2/README.md)  
-* [![Build Status](https://travis-ci.org/coduo/php-matcher.svg?branch=3.1)](https://travis-ci.org/coduo/php-matcher) - [3.1.* README](https://github.com/coduo/php-matcher/tree/3.1/README.md)   
+* [![Build Status](https://travis-ci.org/coduo/php-matcher.svg)](https://travis-ci.org/coduo/php-matcher) - [4.0 (master) README](https://github.com/coduo/php-matcher/tree/master/README.md)  PHP >= 7.2
+* [![Build Status](https://travis-ci.org/coduo/php-matcher.svg?branch=3.2)](https://travis-ci.org/coduo/php-matcher) - [3.2.* README](https://github.com/coduo/php-matcher/tree/3.2/README.md) PHP >= 7.0 
+* [![Build Status](https://travis-ci.org/coduo/php-matcher.svg?branch=3.1)](https://travis-ci.org/coduo/php-matcher) - [3.1.* README](https://github.com/coduo/php-matcher/tree/3.1/README.md) PHP >= 7.0  
 
 
 ## Installation
@@ -35,7 +35,6 @@ if (!PHPMatcher::match("lorem ipsum dolor", "@string@", $error)) {
 }
 
 ```
-
 
 ### Using Factory
 
@@ -65,6 +64,7 @@ $matcher->getError(); // returns null or error message
 * ``@*@`` || ``@wildcard@``
 * ``expr(expression)``
 * ``@uuid@``
+* ``@strig@||@integer@`` - string OR integer
 
 ### Available pattern expanders
 
@@ -321,10 +321,10 @@ $matcher->match(
   '{
     "users":[
       {
-        "firstName": @string@,
-        "lastName": @string@,
+        "firstName": "@string@",
+        "lastName": "@string@",
         "created": "@string@.isDateTime()",
-        "roles": @array@,
+        "roles": "@array@",
         "position": "@string@.optional()"
       }
     ]
@@ -372,12 +372,12 @@ $matcher->match(
   '{
     "users":[
       {
-        "firstName": @string@,
-        "lastName": @string@,
+        "firstName": "@string@",
+        "lastName": "@string@",
         "created": "@string@.isDateTime()",
         "roles": [
             "ROLE_USER",
-            @...@
+            "@...@"
         ],
         "attributes": {
           "isAdmin": @boolean@,
@@ -465,17 +465,17 @@ Feature: Listing user toys
     """
       [
         {
-          "id": @string@,
+          "id": "@string@",
           "name": "Barbie",
           "_links: "@*@"
         },
         {
-          "id": @string@,
+          "id": "@string@",
           "name": "GI Joe",
           "_links": "@*@"
         },
         {
-          "id": @string@,
+          "id": "@string@",
           "name": "Optimus Prime",
           "_links": "@*@"
         }

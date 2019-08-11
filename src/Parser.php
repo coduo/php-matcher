@@ -76,7 +76,7 @@ final class Parser
         return $pattern;
     }
 
-    private function addExpanderNodes(AST\Pattern $pattern)
+    private function addExpanderNodes(AST\Pattern $pattern) : void
     {
         while (($expander = $this->getNextExpanderNode()) !== null) {
             $pattern->addExpander($expander);
@@ -85,13 +85,11 @@ final class Parser
 
     /**
      * Try to get next expander, return null if there is no expander left
-     *
-     * @return AST\Expander|null
      */
-    private function getNextExpanderNode()
+    private function getNextExpanderNode() : ?AST\Expander
     {
         if ($this->endOfPattern()) {
-            return ;
+            return null;
         }
 
         $expander = new AST\Expander($this->getExpanderName());
@@ -113,7 +111,7 @@ final class Parser
         return $expander;
     }
 
-    private function getExpanderName()
+    private function getExpanderName() : string
     {
         if ($this->lexer->lookahead['type'] !== Lexer::T_EXPANDER_NAME) {
             $this->unexpectedSyntaxError($this->lexer->lookahead, '.expanderName(args) definition');
@@ -126,8 +124,6 @@ final class Parser
 
     /**
      * Add arguments to expander
-     *
-     * @param AST\Expander $expander
      */
     private function addArgumentValues(AST\Expander $expander)
     {
@@ -148,8 +144,6 @@ final class Parser
 
     /**
      * Try to get next argument. Return false if there are no arguments left before ")"
-     *
-     * @return null|mixed
      */
     private function getNextArgumentValue()
     {
@@ -249,7 +243,7 @@ final class Parser
      * @param string $expected
      * @throws PatternException
      */
-    private function unexpectedSyntaxError(array $unexpectedToken, string $expected = null)
+    private function unexpectedSyntaxError(array $unexpectedToken, string $expected = null) : void
     {
         $tokenPos = (isset($unexpectedToken['position'])) ? $unexpectedToken['position'] : '-1';
         $message  = \sprintf('line 0, col %d: Error: ', $tokenPos);
@@ -263,7 +257,7 @@ final class Parser
      * @param string $expected
      * @throws PatternException
      */
-    private function unexpectedEndOfString(string $expected = null)
+    private function unexpectedEndOfString(string $expected = null) : void
     {
         $tokenPos = (isset($this->lexer->token['position'])) ? $this->lexer->token['position'] + \strlen((string) $this->lexer->token['value']) : '-1';
         $message  = \sprintf('line 0, col %d: Error: ', $tokenPos);

@@ -6,9 +6,8 @@ cache:
 
 matrix:
   include:
-    - php: 7.0
+    - php: 7.2
       env: DEPENDENCIES='low'
-    - php: 7.1
     - php: 7.2
     - php: 7.3
 
@@ -21,5 +20,4 @@ install:
   - if [ "$DEPENDENCIES" == "low" ]; then composer update --prefer-lowest; fi;
 
 script:
-  - ./bin/phpunit
-  - ./bin/php-cs-fixer fix -v --dry-run
+  - composer test

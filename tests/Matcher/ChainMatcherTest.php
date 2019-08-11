@@ -25,7 +25,7 @@ class ChainMatcherTest extends TestCase
      */
     private $secondMatcher;
 
-    public function setUp()
+    public function setUp() : void
     {
         $this->firstMatcher = $this->createMock('Coduo\PHPMatcher\Matcher\ValueMatcher');
         $this->secondMatcher = $this->createMock('Coduo\PHPMatcher\Matcher\ValueMatcher');
