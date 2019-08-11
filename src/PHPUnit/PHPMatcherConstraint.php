@@ -18,9 +18,14 @@ final class PHPMatcherConstraint extends Constraint
 
     public function __construct($pattern)
     {
-        if (!\in_array(\gettype($pattern), ['string', 'array'])) {
-            throw new \LogicException(\sprintf('The PHPMatcherConstraint pattern must be a string or an array, %s given.', \gettype($pattern)));
+        if (!\in_array(\gettype($pattern), ['string', 'array', 'object'])) {
+            throw new \LogicException(\sprintf('The PHPMatcherConstraint pattern must be a string, closure or an array, %s given.', \gettype($pattern)));
         }
+
+        if (\is_object($pattern) && !\is_callable($pattern)) {
+            throw new \LogicException(\sprintf('The PHPMatcherConstraint pattern must be a string, closure or an array, %s given.', \gettype($pattern)));
+        }
+
         if (\method_exists(Constraint::class, '__construct')) {
             parent::__construct();
         }
@@ -61,6 +66,7 @@ final class PHPMatcherConstraint extends Constraint
     {
         if (null === $comparisonFailure
             && \is_string($other)
+            && \is_string($this->pattern)
             && \class_exists(Json::class)
         ) {
             list($error) = Json::canonicalize($other);
