@@ -187,6 +187,15 @@ class JsonMatcherTest extends TestCase
                 '{"foobar":[@double@, @integer@, @string@]}'
             ],
             [
+                '{"entries":[{"id":1,"question":"test","answer":"test","os":"test"}]}',
+                '{"entries": "@array@.repeat({
+                    \"id\": \"@number@\",
+                    \"question\": \"@string@\",
+                    \"answer\": \"@string@\",
+                    \"os\": \"@*@\"
+                })"}'
+            ],
+            [
                 '{"null":[null]}',
                 '{"null":[@null@]}'
             ],

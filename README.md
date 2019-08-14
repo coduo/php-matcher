@@ -13,6 +13,10 @@ It was built to simplify API's functional testing.
 * [![Build Status](https://travis-ci.org/coduo/php-matcher.svg?branch=3.1)](https://travis-ci.org/coduo/php-matcher) - [3.1.* README](https://github.com/coduo/php-matcher/tree/3.1/README.md) PHP >= 7.0  
 
 
+## Sandbox
+
+Feel free to play first with [Sandbox](https://pattern-matcher.azurewebsites.net/)
+
 ## Installation
 
 Require new dev dependency using composer:
