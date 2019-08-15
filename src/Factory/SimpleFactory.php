@@ -11,17 +11,15 @@ use Coduo\PHPMatcher\Parser;
 
 class SimpleFactory implements Factory
 {
-    private $parser;
-
     public function createMatcher() : Matcher
     {
-        return new Matcher($this->buildMatchers());
+        return new Matcher($this->buildMatchers($this->buildParser()));
     }
 
-    protected function buildMatchers() : Matcher\ChainMatcher
+    protected function buildMatchers(Parser $parser) : Matcher\ChainMatcher
     {
-        $scalarMatchers = $this->buildScalarMatchers();
-        $arrayMatcher = $this->buildArrayMatcher();
+        $scalarMatchers = $this->buildScalarMatchers($parser);
+        $arrayMatcher = $this->buildArrayMatcher($scalarMatchers, $parser);
 
         $chainMatcher = new Matcher\ChainMatcher([
             $scalarMatchers,
@@ -29,36 +27,29 @@ class SimpleFactory implements Factory
             new Matcher\OrMatcher($scalarMatchers),
             new Matcher\JsonMatcher($arrayMatcher),
             new Matcher\XmlMatcher($arrayMatcher),
-            new Matcher\TextMatcher($scalarMatchers, $this->buildParser())
+            new Matcher\TextMatcher($scalarMatchers, $parser)
         ]);
 
         return $chainMatcher;
     }
 
-    protected function buildArrayMatcher() : Matcher\ArrayMatcher
+    protected function buildArrayMatcher(Matcher\ChainMatcher $scalarMatchers, Parser $parser) : Matcher\ArrayMatcher
     {
-        $scalarMatchers = $this->buildScalarMatchers();
         $orMatcher = new Matcher\OrMatcher($scalarMatchers);
         $arrayMatcher = new Matcher\ArrayMatcher(
             new Matcher\ChainMatcher([
                 $orMatcher,
                 $scalarMatchers,
-                new Matcher\TextMatcher($scalarMatchers, $this->buildParser())
+                new Matcher\TextMatcher($scalarMatchers, $parser)
             ]),
-            $this->buildParser()
+            $parser
         );
-
 
         return $arrayMatcher;
     }
 
-    /**
-     * @return Matcher\ChainMatcher
-     */
-    protected function buildScalarMatchers() : Matcher\ChainMatcher
+    protected function buildScalarMatchers(Parser $parser) : Matcher\ChainMatcher
     {
-        $parser = $this->buildParser();
-
         return new Matcher\ChainMatcher([
             new Matcher\CallbackMatcher(),
             new Matcher\ExpressionMatcher(),
@@ -77,12 +68,6 @@ class SimpleFactory implements Factory
 
     protected function buildParser() : Parser
     {
-        if ($this->parser) {
-            return $this->parser;
-        }
-
-        $this->parser = new Parser(new Lexer(), new Parser\ExpanderInitializer());
-
-        return $this->parser;
+        return new Parser(new Lexer(), new Parser\ExpanderInitializer());
     }
 }
