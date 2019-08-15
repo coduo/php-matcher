@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Coduo\PHPMatcher\Matcher;
 
 use Coduo\PHPMatcher\Backtrace;
+use Coduo\PHPMatcher\Value\SingleLineString;
 use Coduo\ToString\StringConverter;
 
 final class ChainMatcher extends Matcher
@@ -47,8 +48,8 @@ final class ChainMatcher extends Matcher
         if (!isset($this->error)) {
             $this->error = \sprintf(
                 'Any matcher from chain can\'t match value "%s" to pattern "%s"',
-                new StringConverter($value),
-                new StringConverter($pattern)
+                new SingleLineString((string) new StringConverter($value)),
+                new SingleLineString((string) new StringConverter($pattern))
             );
         }
 

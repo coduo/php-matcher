@@ -50,11 +50,6 @@ final class PHPMatcherConstraint extends Constraint
         return parent::failureDescription($other) . ".\nError: " . $this->matcher->getError();
     }
 
-    protected function additionalFailureDescription($other) : string
-    {
-        return  "Backtrace:\n" . (string) $this->backtrace;
-    }
-
     protected function matches($value) : bool
     {
         return $this->matcher->match($this->lastValue = $value, $this->pattern);

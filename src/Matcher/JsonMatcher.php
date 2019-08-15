@@ -50,8 +50,8 @@ final class JsonMatcher extends Matcher
         if (!$match) {
             $this->error = \sprintf(
                 'Value %s does not match pattern %s',
-                new StringConverter($value),
-                new StringConverter($pattern)
+                new StringConverter(Json::reformat($value)),
+                new StringConverter(Json::reformat($transformedPattern))
             );
 
             $this->backtrace->matcherFailed(self::class, $value, $pattern, $this->error);

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Coduo\PHPMatcher;
 
+use Coduo\PHPMatcher\Value\SingleLineString;
 use Coduo\ToString\StringConverter;
 
 final class Backtrace
@@ -22,7 +23,7 @@ final class Backtrace
             $this->entriesCount(),
             $matcherClass,
             $result ? 'can' : 'can\'t',
-            new StringConverter($value)
+            new SingleLineString((string) new StringConverter($value))
         );
     }
 
@@ -32,8 +33,8 @@ final class Backtrace
             '#%d Matcher %s matching value "%s" with "%s" pattern',
             $this->entriesCount(),
             $matcherClass,
-            new StringConverter($value),
-            new StringConverter($pattern)
+            new SingleLineString((string) new StringConverter($value)),
+            new SingleLineString((string) new StringConverter($pattern))
         );
     }
 
@@ -43,8 +44,8 @@ final class Backtrace
             '#%d Matcher %s successfully matched value "%s" with "%s" pattern',
             $this->entriesCount(),
             $matcherClass,
-            new StringConverter($value),
-            new StringConverter($pattern)
+            new SingleLineString((string) new StringConverter($value)),
+            new SingleLineString((string) new StringConverter($pattern))
         );
     }
 
@@ -54,14 +55,15 @@ final class Backtrace
             '#%d Matcher %s failed to match value "%s" with "%s" pattern',
             $this->entriesCount(),
             $matcherClass,
-            new StringConverter($value),
-            new StringConverter($pattern)
+            new SingleLineString((string) new StringConverter($value)),
+            new SingleLineString((string) new StringConverter($pattern))
         );
+
         $this->trace[] = \sprintf(
             '#%d Matcher %s error: %s',
-            \count($this->trace),
+            $this->entriesCount(),
             $matcherClass,
-            $error
+            new SingleLineString($error)
         );
     }
 
@@ -75,9 +77,6 @@ final class Backtrace
         return $this->trace;
     }
 
-    /**
-     * @return int
-     */
     private function entriesCount(): int
     {
         return \count($this->trace) + 1;

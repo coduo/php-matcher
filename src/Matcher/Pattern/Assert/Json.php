@@ -45,6 +45,11 @@ final class Json
         );
     }
 
+    public static function reformat(string $json) : string
+    {
+        return \json_encode(\json_decode($json, true));
+    }
+
     public static function getErrorMessage()
     {
         switch (\json_last_error()) {
