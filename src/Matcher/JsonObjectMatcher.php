@@ -24,7 +24,7 @@ final class JsonObjectMatcher extends Matcher
             return false;
         }
 
-        if (!Json::isValid($value) && !\is_null($value)) {
+        if (!Json::isValid($value) && !\is_null($value) && !\is_array($value)) {
             $this->error = \sprintf('Invalid given JSON of value. %s', $this->getErrorMessage());
             return false;
         }

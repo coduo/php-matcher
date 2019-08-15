@@ -52,6 +52,10 @@ final class JsonObjectMatcherTest extends TestCase
             [
                 '{"users":["Norbert","Michał"]}',
                 '@json@.contains("users")'
+            ],
+            [
+                [1, 2, 3],
+                '@json@',
             ]
         ];
     }
@@ -66,11 +70,6 @@ final class JsonObjectMatcherTest extends TestCase
             ],
             [
                 1,
-                '@json@',
-                'Invalid given JSON of value. Syntax error, malformed JSON'
-            ],
-            [
-                [1, 2, 3],
                 '@json@',
                 'Invalid given JSON of value. Syntax error, malformed JSON'
             ]

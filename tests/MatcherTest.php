@@ -211,7 +211,7 @@ XML;
     public function jsonDataProvider()
     {
         return [
-            'matches exactly' => [
+            [
                 /** @lang JSON */
                 '{
                     "users":[
@@ -255,7 +255,7 @@ XML;
                     "nextPage": "@string@"
                 }',
             ],
-            'matches json values with full text matcher' => [
+            [
                 /** @lang JSON */
                 '{
                     "url": "/accounts/9a7dae2d-d135-4bd7-b202-b3e7e91aaecd"
@@ -265,7 +265,7 @@ XML;
                     "url": "/accounts/@uuid@"
                 }',
             ],
-            'matches none elements - empty array' => [
+            [
                 /** @lang JSON */
                 '{
                     "users":[],
@@ -281,7 +281,7 @@ XML;
                     "nextPage": "@string@"
                 }',
             ],
-            'matches one element' => [
+            [
                 /** @lang JSON */
                 '{
                     "users":[
@@ -312,7 +312,7 @@ XML;
                     "nextPage": "@string@"
                 }',
             ],
-            'excludes missing property from match for optional property' => [
+            [
                 /** @lang JSON */
                 '{
                     "users":[],
@@ -329,7 +329,7 @@ XML;
                     "currPage": "@integer@.optional()"
                 }',
             ],
-            'matches json object' => [
+            [
                 /** @lang JSON */
                 '{
                     "user": {
@@ -345,7 +345,7 @@ XML;
                     "user": "@json@"
                 }',
             ],
-            'matches optional json object' => [
+            [
                 /** @lang JSON */
                 '{
                     "user": null
