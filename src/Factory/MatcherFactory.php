@@ -35,8 +35,8 @@ final class MatcherFactory implements Factory
             $backtrace,
             [
                 $scalarMatchers,
-                new Matcher\JsonMatcher($arrayMatcher),
-                new Matcher\XmlMatcher($arrayMatcher),
+                new Matcher\JsonMatcher($arrayMatcher, $backtrace),
+                new Matcher\XmlMatcher($arrayMatcher, $backtrace),
                 $arrayMatcher,
                 new Matcher\OrMatcher($backtrace, $scalarMatchers),
                 new Matcher\TextMatcher($scalarMatchers, $backtrace, $parser),
@@ -59,6 +59,7 @@ final class MatcherFactory implements Factory
                     new Matcher\TextMatcher($scalarMatchers, $backtrace, $parser)
                 ]
             ),
+            $backtrace,
             $parser
         );
     }

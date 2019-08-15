@@ -23,6 +23,8 @@ final class IntegerMatcher extends Matcher
 
     public function match($value, $pattern) : bool
     {
+        $this->backtrace->matcherEntrance(self::class, $value, $pattern);
+
         if (!\is_integer($value)) {
             $this->error = \sprintf('%s "%s" is not a valid integer.', \gettype($value), new StringConverter($value));
             $this->backtrace->matcherFailed(self::class, $value, $pattern, $this->error);

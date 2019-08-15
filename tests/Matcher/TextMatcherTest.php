@@ -40,7 +40,7 @@ class TextMatcherTest extends TestCase
                 $backtrace,
                 [
                     $scalarMatchers,
-                    new Matcher\ArrayMatcher($scalarMatchers, $parser)
+                    new Matcher\ArrayMatcher($scalarMatchers, $backtrace, $parser)
                 ]
             ),
             $backtrace,

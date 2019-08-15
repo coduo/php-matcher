@@ -36,6 +36,7 @@ class ArrayMatcherTest extends TestCase
                     new Matcher\WildcardMatcher($backtrace),
                 ]
             ),
+            $backtrace,
             $parser
         );
     }
@@ -62,6 +63,7 @@ class ArrayMatcherTest extends TestCase
             new Matcher\ChainMatcher($backtrace = new Backtrace(), [
                 new Matcher\WildcardMatcher($backtrace)
             ]),
+            $backtrace,
             $parser = new Parser(new Lexer(), new Parser\ExpanderInitializer())
         );
 

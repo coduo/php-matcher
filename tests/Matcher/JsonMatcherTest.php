@@ -36,7 +36,8 @@ class JsonMatcherTest extends TestCase
             ]
         );
         $this->matcher = new Matcher\JsonMatcher(
-            new Matcher\ArrayMatcher($scalarMatchers, $parser)
+            new Matcher\ArrayMatcher($scalarMatchers, $backtrace, $parser),
+            $backtrace
         );
     }
 
