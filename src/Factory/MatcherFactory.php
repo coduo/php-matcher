@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Coduo\PHPMatcher\Factory;
 
+use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Factory;
 use Coduo\PHPMatcher\Lexer;
 use Coduo\PHPMatcher\Matcher;
@@ -11,15 +12,17 @@ use Coduo\PHPMatcher\Parser;
 
 final class MatcherFactory implements Factory
 {
-    public function createMatcher() : Matcher
+    public function createMatcher(Backtrace $backtrace = null) : Matcher
     {
-        return new Matcher($this->buildMatchers($this->buildParser()));
+        $matcherBacktrace = $backtrace ? $backtrace : new Backtrace();
+
+        return new Matcher($this->buildMatchers($this->buildParser(), $matcherBacktrace), $matcherBacktrace);
     }
 
-    protected function buildMatchers(Parser $parser) : Matcher\ChainMatcher
+    protected function buildMatchers(Parser $parser, Backtrace $backtrace) : Matcher\ChainMatcher
     {
-        $scalarMatchers = $this->buildScalarMatchers($parser);
-        $arrayMatcher = $this->buildArrayMatcher($scalarMatchers, $parser);
+        $scalarMatchers = $this->buildScalarMatchers($parser, $backtrace);
+        $arrayMatcher = $this->buildArrayMatcher($scalarMatchers, $parser, $backtrace);
 
         // Matchers are registered in order of matching
         // 1) all scalars
@@ -28,48 +31,57 @@ final class MatcherFactory implements Factory
         // 4) or "||"
         // 5) full text
 
-        $chainMatcher = new Matcher\ChainMatcher([
-            $scalarMatchers,
-            new Matcher\JsonMatcher($arrayMatcher),
-            new Matcher\XmlMatcher($arrayMatcher),
-            $arrayMatcher,
-            new Matcher\OrMatcher($scalarMatchers),
-            new Matcher\TextMatcher($scalarMatchers, $parser),
-        ]);
+        $chainMatcher = new Matcher\ChainMatcher(
+            $backtrace,
+            [
+                $scalarMatchers,
+                new Matcher\JsonMatcher($arrayMatcher),
+                new Matcher\XmlMatcher($arrayMatcher),
+                $arrayMatcher,
+                new Matcher\OrMatcher($backtrace, $scalarMatchers),
+                new Matcher\TextMatcher($scalarMatchers, $backtrace, $parser),
+            ]
+        );
 
         return $chainMatcher;
     }
 
-    protected function buildArrayMatcher(Matcher\ChainMatcher $scalarMatchers, Parser $parser) : Matcher\ArrayMatcher
+    protected function buildArrayMatcher(Matcher\ChainMatcher $scalarMatchers, Parser $parser, Backtrace $backtrace) : Matcher\ArrayMatcher
     {
-        $orMatcher = new Matcher\OrMatcher($scalarMatchers);
+        $orMatcher = new Matcher\OrMatcher($backtrace, $scalarMatchers);
 
         return new Matcher\ArrayMatcher(
-            new Matcher\ChainMatcher([
-                $orMatcher,
-                $scalarMatchers,
-                new Matcher\TextMatcher($scalarMatchers, $parser)
-            ]),
+            new Matcher\ChainMatcher(
+                $backtrace,
+                [
+                    $orMatcher,
+                    $scalarMatchers,
+                    new Matcher\TextMatcher($scalarMatchers, $backtrace, $parser)
+                ]
+            ),
             $parser
         );
     }
 
-    protected function buildScalarMatchers(Parser $parser) : Matcher\ChainMatcher
+    protected function buildScalarMatchers(Parser $parser, Backtrace $backtrace) : Matcher\ChainMatcher
     {
-        return new Matcher\ChainMatcher([
-            new Matcher\CallbackMatcher(),
-            new Matcher\ExpressionMatcher(),
-            new Matcher\NullMatcher(),
-            new Matcher\StringMatcher($parser),
-            new Matcher\IntegerMatcher($parser),
-            new Matcher\BooleanMatcher($parser),
-            new Matcher\DoubleMatcher($parser),
-            new Matcher\NumberMatcher($parser),
-            new Matcher\ScalarMatcher(),
-            new Matcher\WildcardMatcher(),
-            new Matcher\UuidMatcher($parser),
-            new Matcher\JsonObjectMatcher($parser)
-        ]);
+        return new Matcher\ChainMatcher(
+            $backtrace,
+            [
+                new Matcher\CallbackMatcher($backtrace),
+                new Matcher\ExpressionMatcher($backtrace),
+                new Matcher\NullMatcher($backtrace),
+                new Matcher\StringMatcher($backtrace, $parser),
+                new Matcher\IntegerMatcher($backtrace, $parser),
+                new Matcher\BooleanMatcher($backtrace, $parser),
+                new Matcher\DoubleMatcher($backtrace, $parser),
+                new Matcher\NumberMatcher($backtrace, $parser),
+                new Matcher\ScalarMatcher($backtrace),
+                new Matcher\WildcardMatcher($backtrace),
+                new Matcher\UuidMatcher($backtrace, $parser),
+                new Matcher\JsonObjectMatcher($backtrace, $parser)
+            ]
+        );
     }
 
     protected function buildParser() : Parser

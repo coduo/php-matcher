@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Coduo\PHPMatcher\Tests\Matcher;
 
+use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Matcher\ExpressionMatcher;
 use PHPUnit\Framework\TestCase;
 
@@ -14,7 +15,7 @@ class ExpressionMatcherTest extends TestCase
      */
     public function test_positive_can_matches($pattern)
     {
-        $matcher = new ExpressionMatcher();
+        $matcher = new ExpressionMatcher(new Backtrace());
         $this->assertTrue($matcher->canMatch($pattern));
     }
 
@@ -23,7 +24,7 @@ class ExpressionMatcherTest extends TestCase
      */
     public function test_negative_can_matches($pattern)
     {
-        $matcher = new ExpressionMatcher();
+        $matcher = new ExpressionMatcher(new Backtrace());
         $this->assertFalse($matcher->canMatch($pattern));
     }
 
@@ -32,7 +33,7 @@ class ExpressionMatcherTest extends TestCase
      */
     public function test_positive_match($value, $pattern)
     {
-        $matcher = new ExpressionMatcher();
+        $matcher = new ExpressionMatcher(new Backtrace());
         $this->assertTrue($matcher->match($value, $pattern));
     }
 
@@ -41,7 +42,7 @@ class ExpressionMatcherTest extends TestCase
      */
     public function test_negative_match($value, $pattern)
     {
-        $matcher = new ExpressionMatcher();
+        $matcher = new ExpressionMatcher(new Backtrace());
         $this->assertFalse($matcher->match($value, $pattern));
     }
 
@@ -50,7 +51,7 @@ class ExpressionMatcherTest extends TestCase
      */
     public function test_negative_match_description($value, $pattern, $error)
     {
-        $matcher = new ExpressionMatcher();
+        $matcher = new ExpressionMatcher(new Backtrace());
         $matcher->match($value, $pattern);
         $this->assertEquals($error, $matcher->getError());
     }
@@ -60,7 +61,7 @@ class ExpressionMatcherTest extends TestCase
      */
     public function test_positive_regex_matches($value, $pattern)
     {
-        $matcher = new ExpressionMatcher();
+        $matcher = new ExpressionMatcher(new Backtrace());
         $this->assertTrue($matcher->match($value, $pattern));
     }
 
@@ -69,7 +70,7 @@ class ExpressionMatcherTest extends TestCase
      */
     public function test_negative_regex_matches($value, $pattern)
     {
-        $matcher = new ExpressionMatcher();
+        $matcher = new ExpressionMatcher(new Backtrace());
         $this->assertFalse($matcher->match($value, $pattern));
     }
 

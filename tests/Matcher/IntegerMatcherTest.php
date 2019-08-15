@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Coduo\PHPMatcher\Tests\Matcher;
 
+use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Lexer;
 use Coduo\PHPMatcher\Matcher\IntegerMatcher;
 use Coduo\PHPMatcher\Parser;
@@ -18,7 +19,7 @@ class IntegerMatcherTest extends TestCase
 
     public function setUp() : void
     {
-        $this->matcher = new IntegerMatcher(new Parser(new Lexer(), new Parser\ExpanderInitializer()));
+        $this->matcher = new IntegerMatcher(new Backtrace(), new Parser(new Lexer(), new Parser\ExpanderInitializer()));
     }
 
     /**

@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace Coduo\PHPMatcher\Tests\Matcher;
 
-use Coduo\PHPMatcher\Lexer;
-use Coduo\PHPMatcher\Parser;
+use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Matcher\NullMatcher;
 use PHPUnit\Framework\TestCase;
 
@@ -18,7 +17,7 @@ class NullMatcherTest extends TestCase
 
     public function setUp() : void
     {
-        $this->matcher = new NullMatcher(new Parser(new Lexer(), new Parser\ExpanderInitializer()));
+        $this->matcher = new NullMatcher(new Backtrace());
     }
 
     /**

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Coduo\PHPMatcher\Tests\Matcher;
 
+use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Lexer;
 use Coduo\PHPMatcher\Matcher;
 use Coduo\PHPMatcher\Parser;
@@ -20,18 +21,21 @@ class ArrayMatcherTest extends TestCase
     {
         $parser = new Parser(new Lexer(), new Parser\ExpanderInitializer());
         $this->matcher = new Matcher\ArrayMatcher(
-            new Matcher\ChainMatcher([
-                new Matcher\CallbackMatcher(),
-                new Matcher\ExpressionMatcher(),
-                new Matcher\NullMatcher(),
-                new Matcher\StringMatcher($parser),
-                new Matcher\IntegerMatcher($parser),
-                new Matcher\BooleanMatcher($parser),
-                new Matcher\DoubleMatcher($parser),
-                new Matcher\NumberMatcher($parser),
-                new Matcher\ScalarMatcher(),
-                new Matcher\WildcardMatcher(),
-            ]),
+            new Matcher\ChainMatcher(
+                $backtrace = new Backtrace(),
+                [
+                    new Matcher\CallbackMatcher($backtrace),
+                    new Matcher\ExpressionMatcher($backtrace),
+                    new Matcher\NullMatcher($backtrace),
+                    new Matcher\StringMatcher($backtrace, $parser),
+                    new Matcher\IntegerMatcher($backtrace, $parser),
+                    new Matcher\BooleanMatcher($backtrace, $parser),
+                    new Matcher\DoubleMatcher($backtrace, $parser),
+                    new Matcher\NumberMatcher($backtrace, $parser),
+                    new Matcher\ScalarMatcher($backtrace),
+                    new Matcher\WildcardMatcher($backtrace),
+                ]
+            ),
             $parser
         );
     }
@@ -55,8 +59,8 @@ class ArrayMatcherTest extends TestCase
     public function test_negative_match_when_cant_find_matcher_that_can_match_array_element()
     {
         $matcher = new Matcher\ArrayMatcher(
-            new Matcher\ChainMatcher([
-                new Matcher\WildcardMatcher()
+            new Matcher\ChainMatcher($backtrace = new Backtrace(), [
+                new Matcher\WildcardMatcher($backtrace)
             ]),
             $parser = new Parser(new Lexer(), new Parser\ExpanderInitializer())
         );
