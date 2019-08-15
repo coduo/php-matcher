@@ -27,7 +27,7 @@ final class ExpandersTest extends TestCase
      */
     public function test_expanders($value, $pattern, $expectedResult)
     {
-        $this->assertSame($expectedResult, $this->matcher->match($value, $pattern));
+        $this->assertSame($expectedResult, $this->matcher->match($value, $pattern), (string) $this->matcher->getError());
         $this->assertSame($expectedResult, PHPMatcher::match($value, $pattern));
     }
 
@@ -77,6 +77,7 @@ final class ExpandersTest extends TestCase
             ['2001:0db8:0000:42a1:0000:0000:ab1c:0001', '@string@.isIp()', true],
             ['127.255.999.999', '@string@.isIp()', false],
             ['foo:bar:42:42', '@string@.isIp()', false],
+            ['{"image":{"url":"http://image.com"}}', '{"image":"@json@.match({\"url\":\"@string@.isUrl()\"})"}', true],
         ];
     }
 }

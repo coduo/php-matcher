@@ -45,7 +45,7 @@ final class LowerThan implements PatternExpander
         return $value < $this->boundary;
     }
 
-    public function getError()
+    public function getError() : ?string
     {
         return $this->error;
     }

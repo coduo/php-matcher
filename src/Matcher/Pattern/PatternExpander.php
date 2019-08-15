@@ -10,5 +10,5 @@ interface PatternExpander
 
     public function match($value) : bool;
 
-    public function getError();
+    public function getError() : ?string;
 }

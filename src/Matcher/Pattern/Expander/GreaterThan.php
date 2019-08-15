@@ -44,7 +44,7 @@ final class GreaterThan implements PatternExpander
         return $value > $this->boundary;
     }
 
-    public function getError()
+    public function getError() : ?string
     {
         return $this->error;
     }

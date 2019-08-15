@@ -66,7 +66,7 @@ final class Before implements PatternExpander
         }
     }
 
-    public function getError()
+    public function getError() : ?string
     {
         return $this->error;
     }
