@@ -211,7 +211,7 @@ XML;
     public function jsonDataProvider()
     {
         return [
-            'matches exactly' => [
+            [
                 /** @lang JSON */
                 '{
                     "users":[
@@ -255,7 +255,7 @@ XML;
                     "nextPage": "@string@"
                 }',
             ],
-            'matches json values with full text matcher' => [
+            [
                 /** @lang JSON */
                 '{
                     "url": "/accounts/9a7dae2d-d135-4bd7-b202-b3e7e91aaecd"
@@ -265,7 +265,7 @@ XML;
                     "url": "/accounts/@uuid@"
                 }',
             ],
-            'matches none elements - empty array' => [
+            [
                 /** @lang JSON */
                 '{
                     "users":[],
@@ -275,13 +275,13 @@ XML;
                 /** @lang JSON */
                 '{
                     "users":[
-                        "@...@"                        
+                        "@...@"
                     ],
                     "prevPage": "@string@",
                     "nextPage": "@string@"
                 }',
             ],
-            'matches one element' => [
+            [
                 /** @lang JSON */
                 '{
                     "users":[
@@ -291,7 +291,7 @@ XML;
                             "lastName": "Orzechowicz",
                             "enabled": true,
                             "roles": ["ROLE_DEVELOPER"]
-                        }                       
+                        }
                     ],
                     "prevPage": "http:\/\/example.com\/api\/users\/1?limit=2",
                     "nextPage": "http:\/\/example.com\/api\/users\/3?limit=2"
@@ -312,7 +312,7 @@ XML;
                     "nextPage": "@string@"
                 }',
             ],
-            'excludes missing property from match for optional property' => [
+            [
                 /** @lang JSON */
                 '{
                     "users":[],
@@ -322,11 +322,37 @@ XML;
                 /** @lang JSON */
                 '{
                     "users":[
-                        "@...@"                        
+                        "@...@"
                     ],
                     "prevPage": "@string@.optional()",
                     "nextPage": "@string@.optional()",
                     "currPage": "@integer@.optional()"
+                }',
+            ],
+            [
+                /** @lang JSON */
+                '{
+                    "user": {
+                        "id": 131,
+                        "firstName": "Norbert",
+                        "lastName": "Orzechowicz",
+                        "enabled": true,
+                        "roles": ["ROLE_DEVELOPER"]
+                    }
+                }',
+                /** @lang JSON */
+                '{
+                    "user": "@json@"
+                }',
+            ],
+            [
+                /** @lang JSON */
+                '{
+                    "user": null
+                }',
+                /** @lang JSON */
+                '{
+                    "user": "@json@.optional()"
                 }',
             ],
         ];

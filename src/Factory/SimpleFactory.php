@@ -26,7 +26,7 @@ class SimpleFactory implements Factory
         $chainMatcher = new Matcher\ChainMatcher([
             $scalarMatchers,
             $orMatcher,
-            new Matcher\JsonMatcher($orMatcher),
+            new Matcher\JsonMatcher($orMatcher, $this->buildParser()),
             new Matcher\XmlMatcher($orMatcher),
             new Matcher\TextMatcher($scalarMatchers, $this->buildParser())
         ]);
@@ -74,6 +74,7 @@ class SimpleFactory implements Factory
             new Matcher\ScalarMatcher(),
             new Matcher\WildcardMatcher(),
             new Matcher\UuidMatcher($parser),
+            new Matcher\JsonObjectMatcher($parser)
         ]);
     }
 
