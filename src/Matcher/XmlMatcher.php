@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Coduo\PHPMatcher\Matcher;
 
 use Coduo\PHPMatcher\Matcher\Pattern\Assert\Xml;
+use Coduo\ToString\StringConverter;
 use LSS\XML2Array;
 
 final class XmlMatcher extends Matcher
@@ -31,7 +32,12 @@ final class XmlMatcher extends Matcher
 
         $match = $this->arrayMatcher->match($arrayValue, $arrayPattern);
         if (!$match) {
-            $this->error = $this->arrayMatcher->getError();
+            $this->error = \sprintf(
+                'Value %s does not match pattern %s',
+                new StringConverter($value),
+                new StringConverter($pattern)
+            );
+
             return false;
         }
 
