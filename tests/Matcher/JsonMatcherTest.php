@@ -31,10 +31,9 @@ class JsonMatcherTest extends TestCase
             new Matcher\ScalarMatcher(),
             new Matcher\WildcardMatcher(),
         ]);
-        $this->matcher = new Matcher\JsonMatcher(new Matcher\ChainMatcher([
-            $scalarMatchers,
+        $this->matcher = new Matcher\JsonMatcher(
             new Matcher\ArrayMatcher($scalarMatchers, $parser)
-        ]));
+        );
     }
 
     /**
@@ -93,7 +92,7 @@ class JsonMatcherTest extends TestCase
         ]);
 
         $this->assertFalse($this->matcher->match($value, $pattern));
-        $this->assertEquals($this->matcher->getError(), '"Michał" does not match "@boolean@".');
+        $this->assertEquals($this->matcher->getError(), 'Value {"users":[{"name":"Norbert"},{"name":"Micha\u0142"}]} does not match pattern {"users":[{"name":"@string@"},{"name":"@boolean@"}]}');
     }
 
     public function test_error_when_path_in_nested_pattern_does_not_exist()
@@ -103,7 +102,7 @@ class JsonMatcherTest extends TestCase
 
         $this->assertFalse($this->matcher->match($value, $pattern));
 
-        $this->assertEquals($this->matcher->getError(), 'There is no element under path [foo][bar][baz] in pattern.');
+        $this->assertEquals($this->matcher->getError(), 'Value {"foo":{"bar":{"baz":"bar value"}}} does not match pattern {"foo":{"bar":{"faz":"faz value"}}}');
     }
 
     public function test_error_when_path_in_nested_value_does_not_exist()
@@ -113,7 +112,7 @@ class JsonMatcherTest extends TestCase
 
         $this->assertFalse($this->matcher->match($value, $pattern));
 
-        $this->assertEquals($this->matcher->getError(), 'There is no element under path [foo][bar][faz] in value.');
+        $this->assertEquals($this->matcher->getError(), 'Value {"foo":{"bar":[]}} does not match pattern {"foo":{"bar":{"faz":"faz value"}}}');
     }
 
     public function test_error_when_json_pattern_is_invalid()

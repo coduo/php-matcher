@@ -45,9 +45,9 @@ if (!PHPMatcher::match("lorem ipsum dolor", "@string@", $error)) {
 ```php
 <?php
 
-use Coduo\PHPMatcher\Factory\SimpleFactory;
+use Coduo\PHPMatcher\Factory\MatcherFactory;
 
-$factory = new SimpleFactory();
+$factory = new MatcherFactory();
 $matcher = $factory->createMatcher();
 
 $match = $matcher->match("lorem ipsum dolor", "@string@");
@@ -98,9 +98,9 @@ $matcher->getError(); // returns null or error message
 ```php
 <?php
 
-use Coduo\PHPMatcher\Factory\SimpleFactory;
+use Coduo\PHPMatcher\Factory\MatcherFactory;
 
-$factory = new SimpleFactory();
+$factory = new MatcherFactory();
 $matcher = $factory->createMatcher();
 
 $matcher->match(1, 1);
@@ -112,9 +112,9 @@ $matcher->match('string', 'string');
 ```php
 <?php
 
-use Coduo\PHPMatcher\Factory\SimpleFactory;
+use Coduo\PHPMatcher\Factory\MatcherFactory;
 
-$factory = new SimpleFactory();
+$factory = new MatcherFactory();
 $matcher = $factory->createMatcher();
 
 $matcher->match('Norbert', '@string@');
@@ -127,9 +127,9 @@ $matcher->match("lorem ipsum dolor", "@string@.startsWith('lorem').contains('ips
 ```php
 <?php
 
-use Coduo\PHPMatcher\Factory\SimpleFactory;
+use Coduo\PHPMatcher\Factory\MatcherFactory;
 
-$factory = new SimpleFactory();
+$factory = new MatcherFactory();
 $matcher = $factory->createMatcher();
 
 $matcher->match('2014-08-19', '@string@.isDateTime()');
@@ -143,9 +143,9 @@ $matcher->match('2014-08-19', '@string@.isDateTime().before("today").after("+ 10
 ```php
 <?php
 
-use Coduo\PHPMatcher\Factory\SimpleFactory;
+use Coduo\PHPMatcher\Factory\MatcherFactory;
 
-$factory = new SimpleFactory();
+$factory = new MatcherFactory();
 $matcher = $factory->createMatcher();
 
 $matcher->match(100, '@integer@');
@@ -158,9 +158,9 @@ $matcher->match(100, '@integer@.lowerThan(200).greaterThan(10)');
 ```php
 <?php
 
-use Coduo\PHPMatcher\Factory\SimpleFactory;
+use Coduo\PHPMatcher\Factory\MatcherFactory;
 
-$factory = new SimpleFactory();
+$factory = new MatcherFactory();
 $matcher = $factory->createMatcher();
 
 $matcher->match(100, '@number@');
@@ -175,9 +175,9 @@ $matcher->match(0b10100111001, '@number@');
 ```php
 <?php
 
-use Coduo\PHPMatcher\Factory\SimpleFactory;
+use Coduo\PHPMatcher\Factory\MatcherFactory;
 
-$factory = new SimpleFactory();
+$factory = new MatcherFactory();
 $matcher = $factory->createMatcher();
 
 $matcher->match(10.1, "@double@");
@@ -189,9 +189,9 @@ $matcher->match(10.1, "@double@.lowerThan(50.12).greaterThan(10)");
 ```php
 <?php
 
-use Coduo\PHPMatcher\Factory\SimpleFactory;
+use Coduo\PHPMatcher\Factory\MatcherFactory;
 
-$factory = new SimpleFactory();
+$factory = new MatcherFactory();
 $matcher = $factory->createMatcher();
 
 $matcher->match(true, "@boolean@");
@@ -203,9 +203,9 @@ $matcher->match(false, "@boolean@");
 ```php
 <?php
 
-use Coduo\PHPMatcher\Factory\SimpleFactory;
+use Coduo\PHPMatcher\Factory\MatcherFactory;
 
-$factory = new SimpleFactory();
+$factory = new MatcherFactory();
 $matcher = $factory->createMatcher();
 
 $matcher->match("@integer@", "@*@");
@@ -221,9 +221,9 @@ $matcher->match(new \stdClass, "@wildcard@");
 ```php
 <?php
 
-use Coduo\PHPMatcher\Factory\SimpleFactory;
+use Coduo\PHPMatcher\Factory\MatcherFactory;
 
-$factory = new SimpleFactory();
+$factory = new MatcherFactory();
 $matcher = $factory->createMatcher();
 
 $matcher->match(new \DateTime('2014-04-01'), "expr(value.format('Y-m-d') == '2014-04-01'");
@@ -235,9 +235,9 @@ $matcher->match("Norbert", "expr(value === 'Norbert')");
 ```php
 <?php
 
-use Coduo\PHPMatcher\Factory\SimpleFactory;
+use Coduo\PHPMatcher\Factory\MatcherFactory;
 
-$factory = new SimpleFactory();
+$factory = new MatcherFactory();
 $matcher = $factory->createMatcher();
 
 $matcher->match('9f4db639-0e87-4367-9beb-d64e3f42ae18', '@uuid@');
@@ -248,9 +248,9 @@ $matcher->match('9f4db639-0e87-4367-9beb-d64e3f42ae18', '@uuid@');
 ```php
 <?php
 
-use Coduo\PHPMatcher\Factory\SimpleFactory;
+use Coduo\PHPMatcher\Factory\MatcherFactory;
 
-$factory = new SimpleFactory();
+$factory = new MatcherFactory();
 $matcher = $factory->createMatcher();
 
 $matcher->match(
@@ -307,9 +307,9 @@ $matcher->match(
 ```php
 <?php
 
-use Coduo\PHPMatcher\Factory\SimpleFactory;
+use Coduo\PHPMatcher\Factory\MatcherFactory;
 
-$factory = new SimpleFactory();
+$factory = new MatcherFactory();
 $matcher = $factory->createMatcher();
 
 $matcher->match(
@@ -341,9 +341,9 @@ $matcher->match(
 ```php
 <?php
 
-use Coduo\PHPMatcher\Factory\SimpleFactory;
+use Coduo\PHPMatcher\Factory\MatcherFactory;
 
-$factory = new SimpleFactory();
+$factory = new MatcherFactory();
 $matcher = $factory->createMatcher();
 
 $matcher->match(
@@ -399,9 +399,9 @@ $matcher->match(
 ```php
 <?php
 
-use Coduo\PHPMatcher\Factory\SimpleFactory;
+use Coduo\PHPMatcher\Factory\MatcherFactory;
 
-$factory = new SimpleFactory();
+$factory = new MatcherFactory();
 $matcher = $factory->createMatcher();
 
 $matcher->match(<<<XML

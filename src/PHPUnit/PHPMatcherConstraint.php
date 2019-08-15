@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Coduo\PHPMatcher\PHPUnit;
 
-use Coduo\PHPMatcher\Factory\SimpleFactory;
+use Coduo\PHPMatcher\Factory\MatcherFactory;
 use Coduo\PHPMatcher\Matcher;
 use PHPUnit\Framework\Constraint\Constraint;
 use PHPUnit\Util\Json;
@@ -54,7 +54,7 @@ final class PHPMatcherConstraint extends Constraint
 
     private function createMatcher() : Matcher
     {
-        $factory = new SimpleFactory();
+        $factory = new MatcherFactory();
 
         return $factory->createMatcher();
     }
