@@ -275,7 +275,7 @@ XML;
                 /** @lang JSON */
                 '{
                     "users":[
-                        "@...@"                        
+                        "@...@"
                     ],
                     "prevPage": "@string@",
                     "nextPage": "@string@"
@@ -291,7 +291,7 @@ XML;
                             "lastName": "Orzechowicz",
                             "enabled": true,
                             "roles": ["ROLE_DEVELOPER"]
-                        }                       
+                        }
                     ],
                     "prevPage": "http:\/\/example.com\/api\/users\/1?limit=2",
                     "nextPage": "http:\/\/example.com\/api\/users\/3?limit=2"
@@ -322,11 +322,37 @@ XML;
                 /** @lang JSON */
                 '{
                     "users":[
-                        "@...@"                        
+                        "@...@"
                     ],
                     "prevPage": "@string@.optional()",
                     "nextPage": "@string@.optional()",
                     "currPage": "@integer@.optional()"
+                }',
+            ],
+            'matches json object' => [
+                /** @lang JSON */
+                '{
+                    "user": {
+                        "id": 131,
+                        "firstName": "Norbert",
+                        "lastName": "Orzechowicz",
+                        "enabled": true,
+                        "roles": ["ROLE_DEVELOPER"]
+                    }
+                }',
+                /** @lang JSON */
+                '{
+                    "user": "@json@"
+                }',
+            ],
+            'matches optional json object' => [
+                /** @lang JSON */
+                '{
+                    "user": null
+                }',
+                /** @lang JSON */
+                '{
+                    "user": "@json@.optional()"
                 }',
             ],
         ];
