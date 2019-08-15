@@ -33,12 +33,7 @@ class XmlMatcherTest extends TestCase
         ]);
 
         $this->matcher = new Matcher\XmlMatcher(
-            new Matcher\ChainMatcher(
-                [
-                $scalarMatchers,
-                new Matcher\ArrayMatcher($scalarMatchers, $parser)
-                ]
-            )
+            new Matcher\ArrayMatcher($scalarMatchers, $parser)
         );
     }
 

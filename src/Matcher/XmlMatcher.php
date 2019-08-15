@@ -9,11 +9,11 @@ use LSS\XML2Array;
 
 final class XmlMatcher extends Matcher
 {
-    private $matcher;
+    private $arrayMatcher;
 
-    public function __construct(ValueMatcher $matcher)
+    public function __construct(ArrayMatcher $arrayMatcher)
     {
-        $this->matcher = $matcher;
+        $this->arrayMatcher = $arrayMatcher;
     }
 
     public function match($value, $pattern) : bool
@@ -29,9 +29,9 @@ final class XmlMatcher extends Matcher
         $arrayValue = XML2Array::createArray($value);
         $arrayPattern = XML2Array::createArray($pattern);
 
-        $match = $this->matcher->match($arrayValue, $arrayPattern);
+        $match = $this->arrayMatcher->match($arrayValue, $arrayPattern);
         if (!$match) {
-            $this->error = $this->matcher->getError();
+            $this->error = $this->arrayMatcher->getError();
             return false;
         }
 

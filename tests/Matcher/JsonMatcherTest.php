@@ -31,10 +31,9 @@ class JsonMatcherTest extends TestCase
             new Matcher\ScalarMatcher(),
             new Matcher\WildcardMatcher(),
         ]);
-        $this->matcher = new Matcher\JsonMatcher(new Matcher\ChainMatcher([
-            $scalarMatchers,
+        $this->matcher = new Matcher\JsonMatcher(
             new Matcher\ArrayMatcher($scalarMatchers, $parser)
-        ]));
+        );
     }
 
     /**
