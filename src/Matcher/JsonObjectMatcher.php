@@ -1,10 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Coduo\PHPMatcher\Matcher;
 
 use Coduo\PHPMatcher\Matcher\Pattern\Assert\Json;
 use Coduo\PHPMatcher\Parser;
-use Coduo\ToString\StringConverter;
 
 final class JsonObjectMatcher extends Matcher
 {
@@ -37,12 +38,12 @@ final class JsonObjectMatcher extends Matcher
 
     public function canMatch($pattern) : bool
     {
-        return is_string($pattern) && $this->isJsonPattern($pattern);
+        return \is_string($pattern) && $this->isJsonPattern($pattern);
     }
 
     private function isJsonPattern($pattern)
     {
-        if (!is_string($pattern)) {
+        if (!\is_string($pattern)) {
             return false;
         }
 
