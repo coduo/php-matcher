@@ -6,6 +6,7 @@ namespace Coduo\PHPMatcher\Matcher;
 
 use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Matcher\Pattern\Assert\Json;
+use Coduo\PHPMatcher\Value\SingleLineString;
 use Coduo\ToString\StringConverter;
 
 final class JsonMatcher extends Matcher
@@ -50,8 +51,8 @@ final class JsonMatcher extends Matcher
         if (!$match) {
             $this->error = \sprintf(
                 'Value %s does not match pattern %s',
-                new StringConverter(Json::reformat($value)),
-                new StringConverter(Json::reformat($transformedPattern))
+                new SingleLineString((string) new StringConverter($value)),
+                new SingleLineString((string) new StringConverter($transformedPattern))
             );
 
             $this->backtrace->matcherFailed(self::class, $value, $pattern, $this->error);
