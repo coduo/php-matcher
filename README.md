@@ -68,6 +68,7 @@ $matcher->getError(); // returns null or error message
 * ``@*@`` || ``@wildcard@``
 * ``expr(expression)``
 * ``@uuid@``
+* ``@json@``
 * ``@strig@||@integer@`` - string OR integer
 
 ### Available pattern expanders
@@ -85,11 +86,12 @@ $matcher->getError(); // returns null or error message
 * ``lowerThan($boundry)``
 * ``greaterThan($boundry)``
 * ``inArray($value)``
-* ``oneOf(...$expanders)`` - example usage ``"@string@.oneOf(contains('foo'), contains('bar'), contains('baz'))"``
-* ``matchRegex($regex)`` - example usage ``"@string@.matchRegex('/^lorem.+/')"``
+* ``oneOf(...$expanders)`` - example ``"@string@.oneOf(contains('foo'), contains('bar'), contains('baz'))"``
+* ``matchRegex($regex)`` - example ``"@string@.matchRegex('/^lorem.+/')"``
 * ``optional()`` - work's only with ``ArrayMatcher``, ``JsonMatcher`` and ``XmlMatcher``
-* ``count()`` - work's only with ``ArrayMatcher`` - example usage ``"@array@.count(5)"``
-* ``repeat($pattern, $isStrict = true)`` - example usage ``'@array@.repeat({"name": "foe"})'`` or ``"@array@.repeat('@string@')"``
+* ``count()`` - work's only with ``ArrayMatcher`` - example ``"@array@.count(5)"``
+* ``repeat($pattern, $isStrict = true)`` - example ``'@array@.repeat({"name": "foe"})'`` or ``"@array@.repeat('@string@')"``
+* ``match($pattern)`` - example ``{"image":"@json@.match({\"url\":\"@string@.isUrl()\"})"}``
 
 ## Example usage
 
@@ -358,6 +360,9 @@ $matcher->match(
           "isAdmin": false,
           "dateOfBirth" null,
           "hasEmailVerified": true
+        },
+        "avatar": {
+          "url": "http://avatar-image.com/avatar.png"
         }
       },
       {
@@ -369,7 +374,8 @@ $matcher->match(
           "isAdmin": true,
           "dateOfBirth" null,
           "hasEmailVerified": true
-        }
+        },
+        "avatar": null
       }
     ]
   }',
@@ -386,7 +392,8 @@ $matcher->match(
         "attributes": {
           "isAdmin": @boolean@,
           "@*@": "@*@"
-        }
+        },
+        "avatar": "@json@.match({\"url\":\"@string@.isUrl()\"})"
       }
     ],
     @...@

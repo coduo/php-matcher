@@ -21,13 +21,20 @@ final class MatcherFactory implements Factory
         $scalarMatchers = $this->buildScalarMatchers($parser);
         $arrayMatcher = $this->buildArrayMatcher($scalarMatchers, $parser);
 
+        // Matchers are registered in order of matching
+        // 1) all scalars
+        // 2) json/xml
+        // 3) array
+        // 4) or "||"
+        // 5) full text
+
         $chainMatcher = new Matcher\ChainMatcher([
             $scalarMatchers,
-            $arrayMatcher,
-            new Matcher\OrMatcher($scalarMatchers),
             new Matcher\JsonMatcher($arrayMatcher),
             new Matcher\XmlMatcher($arrayMatcher),
-            new Matcher\TextMatcher($scalarMatchers, $parser)
+            $arrayMatcher,
+            new Matcher\OrMatcher($scalarMatchers),
+            new Matcher\TextMatcher($scalarMatchers, $parser),
         ]);
 
         return $chainMatcher;
@@ -36,7 +43,8 @@ final class MatcherFactory implements Factory
     protected function buildArrayMatcher(Matcher\ChainMatcher $scalarMatchers, Parser $parser) : Matcher\ArrayMatcher
     {
         $orMatcher = new Matcher\OrMatcher($scalarMatchers);
-        $arrayMatcher = new Matcher\ArrayMatcher(
+
+        return new Matcher\ArrayMatcher(
             new Matcher\ChainMatcher([
                 $orMatcher,
                 $scalarMatchers,
@@ -44,8 +52,6 @@ final class MatcherFactory implements Factory
             ]),
             $parser
         );
-
-        return $arrayMatcher;
     }
 
     protected function buildScalarMatchers(Parser $parser) : Matcher\ChainMatcher

@@ -32,7 +32,7 @@ final class JsonMatcher extends Matcher
             return false;
         }
 
-        $transformedPattern = Json::transformPattern($pattern);
+        $transformedPattern = Json::isValid($pattern) ? $pattern : Json::transformPattern($pattern);
 
         $match = $this->arrayMatcher->match(\json_decode($value, true), \json_decode($transformedPattern, true));
 

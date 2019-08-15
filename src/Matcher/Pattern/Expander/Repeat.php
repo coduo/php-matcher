@@ -65,7 +65,7 @@ final class Repeat implements PatternExpander
         return $this->matchJson($values, $matcher);
     }
 
-    public function getError()
+    public function getError() : ?string
     {
         return $this->error;
     }

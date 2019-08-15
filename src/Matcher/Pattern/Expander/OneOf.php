@@ -49,7 +49,7 @@ final class OneOf implements PatternExpander
         return false;
     }
 
-    public function getError()
+    public function getError() : ?string
     {
         return $this->error;
     }

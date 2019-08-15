@@ -48,7 +48,7 @@ final class NotContains implements PatternExpander
         return true;
     }
 
-    public function getError()
+    public function getError() : ?string
     {
         return $this->error;
     }
