@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Coduo\PHPMatcher\Matcher\Pattern\Expander;
 
-use Coduo\PHPMatcher\Factory\SimpleFactory;
+use Coduo\PHPMatcher\Factory\MatcherFactory;
 use Coduo\PHPMatcher\Matcher;
 use Coduo\PHPMatcher\Matcher\Pattern\PatternExpander;
 use Coduo\ToString\StringConverter;
@@ -55,7 +55,7 @@ final class Repeat implements PatternExpander
             return false;
         }
 
-        $factory = new SimpleFactory();
+        $factory = new MatcherFactory();
         $matcher = $factory->createMatcher();
 
         if ($this->isScalar) {

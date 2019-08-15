@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Coduo\PHPMatcher\Tests\Matcher;
 
-use Coduo\PHPMatcher\Factory\SimpleFactory;
+use Coduo\PHPMatcher\Factory\MatcherFactory;
 use Coduo\PHPMatcher\Matcher;
 use PHPUnit\Framework\TestCase;
 
@@ -17,7 +17,7 @@ class OrMatcherTest extends TestCase
 
     public function setUp() : void
     {
-        $factory = new SimpleFactory();
+        $factory = new MatcherFactory();
         $this->matcher = $factory->createMatcher();
     }
 
