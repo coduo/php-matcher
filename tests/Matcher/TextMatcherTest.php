@@ -21,6 +21,7 @@ class TextMatcherTest extends TestCase
     {
         $parser = new Parser(new Lexer(), new Parser\ExpanderInitializer());
         $scalarMatchers = new Matcher\ChainMatcher(
+            self::class,
             $backtrace = new Backtrace(),
             [
                 new Matcher\CallbackMatcher($backtrace),
@@ -37,6 +38,7 @@ class TextMatcherTest extends TestCase
         );
         $this->matcher = new Matcher\TextMatcher(
             new Matcher\ChainMatcher(
+                self::class,
                 $backtrace,
                 [
                     $scalarMatchers,

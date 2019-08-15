@@ -22,6 +22,7 @@ class ArrayMatcherTest extends TestCase
         $parser = new Parser(new Lexer(), new Parser\ExpanderInitializer());
         $this->matcher = new Matcher\ArrayMatcher(
             new Matcher\ChainMatcher(
+                self::class,
                 $backtrace = new Backtrace(),
                 [
                     new Matcher\CallbackMatcher($backtrace),
@@ -60,9 +61,13 @@ class ArrayMatcherTest extends TestCase
     public function test_negative_match_when_cant_find_matcher_that_can_match_array_element()
     {
         $matcher = new Matcher\ArrayMatcher(
-            new Matcher\ChainMatcher($backtrace = new Backtrace(), [
-                new Matcher\WildcardMatcher($backtrace)
-            ]),
+            new Matcher\ChainMatcher(
+                self::class,
+                $backtrace = new Backtrace(),
+                [
+                    new Matcher\WildcardMatcher($backtrace)
+                ]
+            ),
             $backtrace,
             $parser = new Parser(new Lexer(), new Parser\ExpanderInitializer())
         );

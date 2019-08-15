@@ -28,9 +28,9 @@ final class BacktraceTest extends TestCase
         $this->assertSame(
             <<<FAILED_BACKTRACE
 #1 Matcher Coduo\PHPMatcher\Matcher matching value "100" with "@string@" pattern
-#2 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher matching value "100" with "@string@" pattern
-#3 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher can match pattern "@string@"
-#4 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher matching value "100" with "@string@" pattern
+#2 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (all) matching value "100" with "@string@" pattern
+#3 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) can match pattern "@string@"
+#4 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) matching value "100" with "@string@" pattern
 #5 Matcher Coduo\PHPMatcher\Matcher\CallbackMatcher can't match pattern "@string@"
 #6 Matcher Coduo\PHPMatcher\Matcher\ExpressionMatcher can't match pattern "@string@"
 #7 Matcher Coduo\PHPMatcher\Matcher\NullMatcher can't match pattern "@string@"
@@ -49,8 +49,8 @@ final class BacktraceTest extends TestCase
 #20 Matcher Coduo\PHPMatcher\Matcher\WildcardMatcher can't match pattern "@string@"
 #21 Matcher Coduo\PHPMatcher\Matcher\UuidMatcher can't match pattern "@string@"
 #22 Matcher Coduo\PHPMatcher\Matcher\JsonObjectMatcher can't match pattern "@string@"
-#23 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher failed to match value "100" with "@string@" pattern
-#24 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher error: "100" does not match "@string@".
+#23 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) failed to match value "100" with "@string@" pattern
+#24 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) error: "100" does not match "@string@".
 #25 Matcher Coduo\PHPMatcher\Matcher\JsonMatcher can't match pattern "@string@"
 #26 Matcher Coduo\PHPMatcher\Matcher\XmlMatcher can't match pattern "@string@"
 #27 Matcher Coduo\PHPMatcher\Matcher\OrMatcher can't match pattern "@string@"
@@ -58,8 +58,8 @@ final class BacktraceTest extends TestCase
 #29 Matcher Coduo\PHPMatcher\Matcher\TextMatcher matching value "100" with "@string@" pattern
 #30 Matcher Coduo\PHPMatcher\Matcher\TextMatcher failed to match value "100" with "@string@" pattern
 #31 Matcher Coduo\PHPMatcher\Matcher\TextMatcher error: integer "100" is not a valid string.
-#32 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher failed to match value "100" with "@string@" pattern
-#33 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher error: integer "100" is not a valid string.
+#32 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (all) failed to match value "100" with "@string@" pattern
+#33 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (all) error: integer "100" is not a valid string.
 #34 Matcher Coduo\PHPMatcher\Matcher failed to match value "100" with "@string@" pattern
 #35 Matcher Coduo\PHPMatcher\Matcher error: integer "100" is not a valid string.
 FAILED_BACKTRACE
@@ -75,17 +75,17 @@ FAILED_BACKTRACE
         $this->assertSame(
             <<<SUCCEED_BACKTRACE
 #1 Matcher Coduo\PHPMatcher\Matcher matching value "100" with "@string@" pattern
-#2 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher matching value "100" with "@string@" pattern
-#3 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher can match pattern "@string@"
-#4 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher matching value "100" with "@string@" pattern
+#2 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (all) matching value "100" with "@string@" pattern
+#3 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) can match pattern "@string@"
+#4 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) matching value "100" with "@string@" pattern
 #5 Matcher Coduo\PHPMatcher\Matcher\CallbackMatcher can't match pattern "@string@"
 #6 Matcher Coduo\PHPMatcher\Matcher\ExpressionMatcher can't match pattern "@string@"
 #7 Matcher Coduo\PHPMatcher\Matcher\NullMatcher can't match pattern "@string@"
 #8 Matcher Coduo\PHPMatcher\Matcher\StringMatcher can match pattern "@string@"
 #9 Matcher Coduo\PHPMatcher\Matcher\StringMatcher matching value "100" with "@string@" pattern
 #10 Matcher Coduo\PHPMatcher\Matcher\StringMatcher successfully matched value "100" with "@string@" pattern
-#11 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher successfully matched value "100" with "@string@" pattern
-#12 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher successfully matched value "100" with "@string@" pattern
+#11 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) successfully matched value "100" with "@string@" pattern
+#12 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (all) successfully matched value "100" with "@string@" pattern
 #13 Matcher Coduo\PHPMatcher\Matcher successfully matched value "100" with "@string@" pattern
 SUCCEED_BACKTRACE
             ,

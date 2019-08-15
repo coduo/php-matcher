@@ -10,34 +10,29 @@ use Coduo\ToString\StringConverter;
 
 final class ChainMatcher extends Matcher
 {
-    /**
-     * @var Backtrace
-     */
+    private $name;
     private $backtrace;
-
-    /**
-     * @var ValueMatcher[]
-     */
     private $matchers;
 
     /**
      * @param Backtrace $backtrace
      * @param ValueMatcher[] $matchers
      */
-    public function __construct(Backtrace $backtrace, array $matchers = [])
+    public function __construct(string $name, Backtrace $backtrace, array $matchers = [])
     {
         $this->backtrace = $backtrace;
         $this->matchers = $matchers;
+        $this->name = $name;
     }
 
     public function match($value, $pattern) : bool
     {
-        $this->backtrace->matcherEntrance(self::class, $value, $pattern);
+        $this->backtrace->matcherEntrance($this->matcherName(), $value, $pattern);
 
         foreach ($this->matchers as $propertyMatcher) {
             if ($propertyMatcher->canMatch($pattern)) {
                 if (true === $propertyMatcher->match($value, $pattern)) {
-                    $this->backtrace->matcherSucceed(self::class, $value, $pattern);
+                    $this->backtrace->matcherSucceed($this->matcherName(), $value, $pattern);
                     return true;
                 }
 
@@ -53,15 +48,23 @@ final class ChainMatcher extends Matcher
             );
         }
 
-        $this->backtrace->matcherFailed(self::class, $value, $pattern, $this->error);
+        $this->backtrace->matcherFailed($this->matcherName(), $value, $pattern, $this->error);
 
         return false;
     }
 
     public function canMatch($pattern) : bool
     {
-        $this->backtrace->matcherCanMatch(self::class, $pattern, true);
+        $this->backtrace->matcherCanMatch($this->matcherName(), $pattern, true);
 
         return true;
+    }
+
+    /**
+     * @return string
+     */
+    private function matcherName(): string
+    {
+        return \sprintf('%s (%s)', self::class, $this->name);
     }
 }

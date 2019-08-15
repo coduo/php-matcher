@@ -33,10 +33,14 @@ class ChainMatcherTest extends TestCase
         $this->firstMatcher = $this->createMock(ValueMatcher::class);
         $this->secondMatcher = $this->createMock(ValueMatcher::class);
 
-        $this->matcher = new ChainMatcher(new Backtrace(), [
-            $this->firstMatcher,
-            $this->secondMatcher
-        ]);
+        $this->matcher = new ChainMatcher(
+            self::class,
+            new Backtrace(),
+            [
+                $this->firstMatcher,
+                $this->secondMatcher
+            ]
+        );
     }
 
     public function test_only_one_matcher_can_match_but_none_matchers_match()

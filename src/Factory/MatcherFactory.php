@@ -32,6 +32,7 @@ final class MatcherFactory implements Factory
         // 5) full text
 
         $chainMatcher = new Matcher\ChainMatcher(
+            'all',
             $backtrace,
             [
                 $scalarMatchers,
@@ -52,6 +53,7 @@ final class MatcherFactory implements Factory
 
         return new Matcher\ArrayMatcher(
             new Matcher\ChainMatcher(
+                'array',
                 $backtrace,
                 [
                     $orMatcher,
@@ -67,6 +69,7 @@ final class MatcherFactory implements Factory
     protected function buildScalarMatchers(Parser $parser, Backtrace $backtrace) : Matcher\ChainMatcher
     {
         return new Matcher\ChainMatcher(
+            'scalars',
             $backtrace,
             [
                 new Matcher\CallbackMatcher($backtrace),

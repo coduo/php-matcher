@@ -21,6 +21,7 @@ class XmlMatcherTest extends TestCase
     {
         $parser = new Parser(new Lexer(), new Parser\ExpanderInitializer());
         $scalarMatchers = new Matcher\ChainMatcher(
+            self::class,
             $backtrace = new Backtrace(),
             [
                 new Matcher\CallbackMatcher($backtrace),
