@@ -78,6 +78,7 @@ final class ExpandersTest extends TestCase
             ['127.255.999.999', '@string@.isIp()', false],
             ['foo:bar:42:42', '@string@.isIp()', false],
             ['{"image":{"url":"http://image.com"}}', '{"image":"@json@.match({\"url\":\"@string@.isUrl()\"})"}', true],
+            ['{"image":{"url":null}}', '{"image":"@null@||@json@.match({\"url\":\"@string@.isUrl()\"})"}', true],
         ];
     }
 }
