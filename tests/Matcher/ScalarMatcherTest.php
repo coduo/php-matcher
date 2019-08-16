@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Coduo\PHPMatcher\Tests\Matcher;
 
+use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Matcher\ScalarMatcher;
 use PHPUnit\Framework\TestCase;
 
@@ -14,7 +15,7 @@ class ScalarMatcherTest extends TestCase
      */
     public function test_positive_can_matches($pattern)
     {
-        $matcher = new ScalarMatcher();
+        $matcher = new ScalarMatcher(new Backtrace());
         $this->assertTrue($matcher->canMatch($pattern));
     }
 
@@ -23,7 +24,7 @@ class ScalarMatcherTest extends TestCase
      */
     public function test_negative_can_matches($pattern)
     {
-        $matcher = new ScalarMatcher();
+        $matcher = new ScalarMatcher(new Backtrace());
         $this->assertFalse($matcher->canMatch($pattern));
     }
 
@@ -32,7 +33,7 @@ class ScalarMatcherTest extends TestCase
      */
     public function test_positive_matches($value, $pattern)
     {
-        $matcher = new ScalarMatcher();
+        $matcher = new ScalarMatcher(new Backtrace());
         $this->assertTrue($matcher->match($value, $pattern));
     }
 
@@ -41,7 +42,7 @@ class ScalarMatcherTest extends TestCase
      */
     public function test_negative_matches($value, $pattern)
     {
-        $matcher = new ScalarMatcher();
+        $matcher = new ScalarMatcher(new Backtrace());
         $this->assertFalse($matcher->match($value, $pattern));
     }
 
@@ -50,7 +51,7 @@ class ScalarMatcherTest extends TestCase
      */
     public function test_negative_match_description($value, $pattern, $error)
     {
-        $matcher = new ScalarMatcher();
+        $matcher = new ScalarMatcher(new Backtrace());
         $matcher->match($value, $pattern);
         $this->assertEquals($error, $matcher->getError());
     }

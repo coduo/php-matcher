@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Coduo\PHPMatcher\Matcher;
 
+use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Matcher\Pattern\Assert\Xml;
 use Coduo\ToString\StringConverter;
 use LSS\XML2Array;
@@ -11,19 +12,28 @@ use LSS\XML2Array;
 final class XmlMatcher extends Matcher
 {
     private $arrayMatcher;
+    private $backtrace;
 
-    public function __construct(ArrayMatcher $arrayMatcher)
+    public function __construct(ArrayMatcher $arrayMatcher, Backtrace $backtrace)
     {
         $this->arrayMatcher = $arrayMatcher;
+        $this->backtrace = $backtrace;
     }
 
     public function match($value, $pattern) : bool
     {
+        $this->backtrace->matcherEntrance(self::class, $value, $pattern);
+
         if (parent::match($value, $pattern)) {
+            $this->backtrace->matcherSucceed(self::class, $value, $pattern);
+
             return true;
         }
 
         if (!Xml::isValid($value) || !Xml::isValid($pattern)) {
+            $this->error = \sprintf('Value or pattern are not valid XML\'s');
+            $this->backtrace->matcherFailed(self::class, $value, $pattern, $this->error);
+
             return false;
         }
 
@@ -38,14 +48,21 @@ final class XmlMatcher extends Matcher
                 new StringConverter($pattern)
             );
 
+            $this->backtrace->matcherFailed(self::class, $value, $pattern, $this->error);
+
             return false;
         }
+
+        $this->backtrace->matcherSucceed(self::class, $value, $pattern);
 
         return true;
     }
 
     public function canMatch($pattern) : bool
     {
-        return Xml::isValid($pattern);
+        $result = Xml::isValid($pattern);
+        $this->backtrace->matcherCanMatch(self::class, $pattern, $result);
+
+        return $result;
     }
 }

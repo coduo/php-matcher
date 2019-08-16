@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace Coduo\PHPMatcher\Tests\Matcher;
 
+use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Matcher\ArrayMatcher;
 use Coduo\PHPMatcher\Matcher\ChainMatcher;
+use Coduo\PHPMatcher\Matcher\ValueMatcher;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 class ChainMatcherTest extends TestCase
@@ -16,24 +19,28 @@ class ChainMatcherTest extends TestCase
     private $matcher;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var MockObject
      */
     private $firstMatcher;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var MockObject
      */
     private $secondMatcher;
 
     public function setUp() : void
     {
-        $this->firstMatcher = $this->createMock('Coduo\PHPMatcher\Matcher\ValueMatcher');
-        $this->secondMatcher = $this->createMock('Coduo\PHPMatcher\Matcher\ValueMatcher');
+        $this->firstMatcher = $this->createMock(ValueMatcher::class);
+        $this->secondMatcher = $this->createMock(ValueMatcher::class);
 
-        $this->matcher = new ChainMatcher([
-            $this->firstMatcher,
-            $this->secondMatcher
-        ]);
+        $this->matcher = new ChainMatcher(
+            self::class,
+            new Backtrace(),
+            [
+                $this->firstMatcher,
+                $this->secondMatcher
+            ]
+        );
     }
 
     public function test_only_one_matcher_can_match_but_none_matchers_match()

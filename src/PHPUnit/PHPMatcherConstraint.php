@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Coduo\PHPMatcher\PHPUnit;
 
+use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Factory\MatcherFactory;
 use Coduo\PHPMatcher\Matcher;
 use PHPUnit\Framework\Constraint\Constraint;
@@ -14,6 +15,7 @@ final class PHPMatcherConstraint extends Constraint
 {
     private $pattern;
     private $matcher;
+    private $backtrace;
     private $lastValue;
 
     public function __construct($pattern)
@@ -31,6 +33,7 @@ final class PHPMatcherConstraint extends Constraint
         }
 
         $this->pattern = $pattern;
+        $this->backtrace = new Backtrace();
         $this->matcher = $this->createMatcher();
     }
 
@@ -42,9 +45,9 @@ final class PHPMatcherConstraint extends Constraint
         return 'matches the pattern';
     }
 
-    protected function additionalFailureDescription($other) : string
+    protected function failureDescription($other): string
     {
-        return $this->matcher->getError();
+        return parent::failureDescription($other) . ".\nError: " . $this->matcher->getError();
     }
 
     protected function matches($value) : bool
@@ -54,9 +57,7 @@ final class PHPMatcherConstraint extends Constraint
 
     private function createMatcher() : Matcher
     {
-        $factory = new MatcherFactory();
-
-        return $factory->createMatcher();
+        return (new MatcherFactory())->createMatcher($this->backtrace);
     }
 
     /**

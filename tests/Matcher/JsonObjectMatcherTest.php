@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Coduo\PHPMatcher\Tests\Matcher;
 
+use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Lexer;
 use Coduo\PHPMatcher\Matcher\JsonObjectMatcher;
 use Coduo\PHPMatcher\Parser;
@@ -18,7 +19,7 @@ final class JsonObjectMatcherTest extends TestCase
 
     public function setUp() : void
     {
-        $this->matcher = new JsonObjectMatcher(new Parser(new Lexer(), new Parser\ExpanderInitializer()));
+        $this->matcher = new JsonObjectMatcher(new Backtrace(), new Parser(new Lexer(), new Parser\ExpanderInitializer()));
     }
 
     /**
