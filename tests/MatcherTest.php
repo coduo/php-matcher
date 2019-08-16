@@ -365,6 +365,8 @@ XML;
             ['', '@string@.isEmpty()', true],
             [['foo', 'bar'], '@array@.inArray("bar")', true],
             [[], '@array@.isEmpty()', true],
+            [[], ['@string@'], false],
+            [[], ['@string@.optional()'], true],
             [['foo'], '@array@.isEmpty()', false],
             [[1, 2, 3], '@array@.count(3)', true],
             [[1, 2, 3], '@array@.count(4)', false],
@@ -383,6 +385,8 @@ XML;
             [[], ['unexistent_key' => '@text@.optional()'], true],
             [[], ['unexistent_key' => '@uuid@.optional()'], true],
             [[], ['unexistent_key' => '@xml@.optional()'], true],
+            [[], ['unexistent_key' => '@array@.optional()', 'unexistent_second_key' => '@string@.optional()'], true],
+            [[], ['unexistent_key' => '@array@.optional()', 'unexistent_second_key' => '@string@'], false],
             [['Norbert', 'Michał'], '@array@.repeat("@string@")', true],
         ];
     }
