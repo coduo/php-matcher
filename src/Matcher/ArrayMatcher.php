@@ -129,24 +129,22 @@ final class ArrayMatcher extends Matcher
 
     private function isPatternValid(array $pattern, array $values, string $parentPath) : bool
     {
-        if (\is_array($pattern)) {
-            $skipPattern = static::UNBOUNDED_PATTERN;
+        $skipPattern = static::UNBOUNDED_PATTERN;
 
-            $pattern = \array_filter(
-                $pattern,
-                function ($item) use ($skipPattern) {
-                    return $item !== $skipPattern;
-                }
-            );
-
-            $notExistingKeys = $this->findNotExistingKeys($pattern, $values);
-            if (\count($notExistingKeys) > 0) {
-                $keyNames = \array_keys($notExistingKeys);
-                $path = $this->formatFullPath($parentPath, $this->formatAccessPath($keyNames[0]));
-                $this->setMissingElementInError('value', $path);
-
-                return false;
+        $pattern = \array_filter(
+            $pattern,
+            function ($item) use ($skipPattern) {
+                return $item !== $skipPattern;
             }
+        );
+
+        $notExistingKeys = $this->findNotExistingKeys($pattern, $values);
+        if (\count($notExistingKeys) > 0) {
+            $keyNames = \array_keys($notExistingKeys);
+            $path = $this->formatFullPath($parentPath, $this->formatAccessPath($keyNames[0]));
+            $this->setMissingElementInError('value', $path);
+
+            return false;
         }
 
         return true;
