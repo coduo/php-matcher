@@ -165,9 +165,7 @@ final class ArrayMatcher extends Matcher
 
             try {
                 $typePattern = $this->parser->parse($pattern);
-            } catch (Exception $e) {
-                return true;
-            } catch (\Throwable $t) {
+            } catch (Exception | \Throwable $e) {
                 return true;
             }
 
