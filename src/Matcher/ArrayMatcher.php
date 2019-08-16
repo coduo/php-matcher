@@ -162,7 +162,7 @@ final class ArrayMatcher extends Matcher
 
         return \array_filter($notExistingKeys, function ($pattern) use ($values) {
             if (\is_array($pattern)) {
-                return !$this->match($values, $pattern);
+                return empty($pattern) || !$this->match($values, $pattern);
             }
 
             try {
