@@ -141,7 +141,6 @@ final class ArrayMatcher extends Matcher
         $notExistingKeys = \array_diff_key($pattern, $values);
 
         return \array_filter($notExistingKeys, function ($pattern) use ($values) {
-
             if (\is_array($pattern)) {
                 return empty($pattern) || !$this->match($values, $pattern);
             }
