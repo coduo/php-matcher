@@ -22,11 +22,16 @@ final class IsEmpty implements PatternExpander
 
     public function match($value) : bool
     {
+        $this->backtrace->expanderEntrance(self::NAME, $value);
+
         if (!empty($value)) {
             $this->error = \sprintf('Value %s is not empty.', new StringConverter($value));
+            $this->backtrace->expanderFailed(self::NAME, $value, $this->error);
 
             return false;
         }
+
+        $this->backtrace->expanderSucceed(self::NAME, $value);
 
         return true;
     }

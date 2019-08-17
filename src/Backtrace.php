@@ -87,7 +87,7 @@ final class Backtrace
         );
     }
 
-    public function expanderFailed(string $name, $value, $pattern, string $error) : void
+    public function expanderFailed(string $name, $value, string $error) : void
     {
         $this->trace[] = \sprintf(
             '#%d Expander %s failed to match value "%s"',

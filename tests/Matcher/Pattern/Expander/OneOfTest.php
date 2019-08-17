@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Coduo\PHPMatcher\Tests\Matcher\Pattern\Expander;
 
+use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Matcher\Pattern\Expander\Contains;
 use Coduo\PHPMatcher\Matcher\Pattern\Expander\OneOf;
 use PHPUnit\Framework\TestCase;
@@ -28,20 +29,34 @@ class OneOfTest extends TestCase
 
     public function test_positive_match()
     {
+        $backtrace = new Backtrace();
+        $contains = new Contains('lorem');
+        $contains->setBacktrace($backtrace);
+        $contains1 = new Contains('test');
+        $contains1->setBacktrace($backtrace);
+
         $expander = new OneOf(
-            new Contains('lorem'),
-            new Contains('test')
+            $contains,
+            $contains1
         );
+        $expander->setBacktrace(new Backtrace());
 
         $this->assertTrue($expander->match('lorem ipsum'));
     }
 
     public function test_negative_match()
     {
+        $backtrace = new Backtrace();
+        $contains = new Contains('lorem');
+        $contains->setBacktrace($backtrace);
+        $contains1 = new Contains('test');
+        $contains1->setBacktrace($backtrace);
+
         $expander = new OneOf(
-            new Contains('lorem'),
-            new Contains('test')
+            $contains,
+            $contains1
         );
+        $expander->setBacktrace($backtrace);
 
         $this->assertFalse($expander->match('this is random stiring'));
         $this->assertSame(

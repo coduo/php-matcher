@@ -28,15 +28,23 @@ final class InArray implements PatternExpander
 
     public function match($value) : bool
     {
+        $this->backtrace->expanderEntrance(self::NAME, $value);
+
         if (!\is_array($value)) {
             $this->error = \sprintf('InArray expander require "array", got "%s".', new StringConverter($value));
+            $this->backtrace->expanderFailed(self::NAME, $value, $this->error);
+
             return false;
         }
 
         if (!\in_array($this->value, $value, true)) {
             $this->error = \sprintf("%s doesn't have \"%s\" element.", new StringConverter($value), new StringConverter($this->value));
+            $this->backtrace->expanderFailed(self::NAME, $value, $this->error);
+
             return false;
         }
+
+        $this->backtrace->expanderSucceed(self::NAME, $value);
 
         return true;
     }

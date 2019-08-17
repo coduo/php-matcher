@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Coduo\PHPMatcher\Tests\Matcher\Pattern\Expander;
 
+use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Matcher\Pattern\Expander\StartsWith;
 use PHPUnit\Framework\TestCase;
 
@@ -15,6 +16,7 @@ class StartsWithTest extends TestCase
     public function test_examples_not_ignoring_case($stringBeginning, $value, $expectedResult)
     {
         $expander = new StartsWith($stringBeginning);
+        $expander->setBacktrace(new Backtrace());
         $this->assertEquals($expectedResult, $expander->match($value));
     }
 
@@ -32,9 +34,10 @@ class StartsWithTest extends TestCase
     /**
      * @dataProvider ignoringCaseExamplesProvider
      */
-    public function test_examples_ignoring_case($stringBeginning, $value, $expectedResult)
+    public function test_examples_ignoring_case($stringBeginning, $value)
     {
         $expander = new StartsWith($stringBeginning, true);
+        $expander->setBacktrace(new Backtrace());
         $this->assertTrue($expander->match($value));
     }
 
@@ -53,6 +56,7 @@ class StartsWithTest extends TestCase
     public function test_error_when_matching_fail($stringBeginning, $value, $errorMessage)
     {
         $expander = new StartsWith($stringBeginning);
+        $expander->setBacktrace(new Backtrace());
         $this->assertFalse($expander->match($value));
         $this->assertEquals($errorMessage, $expander->getError());
     }

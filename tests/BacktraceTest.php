@@ -104,7 +104,7 @@ SUCCEED_BACKTRACE
                         "firstName": "Norbert",
                         "lastName": "Orzechowicz",
                         "enabled": true,
-                        "roles": ["ROLE_DEVELOPER"]
+                        "roles": []
                     },
                     {
                         "id": 132,
@@ -125,7 +125,7 @@ SUCCEED_BACKTRACE
                         "firstName":"Norbert",
                         "lastName":"Orzechowicz",
                         "enabled": "@boolean@",
-                        "roles": "@array@"
+                        "roles": "@array@.isEmpty()"
                     },
                     {
                         "id": "@integer@",
@@ -160,7 +160,7 @@ SUCCEED_BACKTRACE
                         "firstName": "Norbert",
                         "lastName": "Orzechowicz",
                         "enabled": true,
-                        "roles": ["ROLE_DEVELOPER"]
+                        "roles": []
                     },
                     {
                         "id": 132,
@@ -181,7 +181,7 @@ SUCCEED_BACKTRACE
                         "firstName":"Norbert",
                         "lastName":"Orzechowicz",
                         "enabled": "@boolean@",
-                        "roles": "@array@"
+                        "roles": "@array@.isEmpty()"
                     },
                     {
                         "id": "@integer@",

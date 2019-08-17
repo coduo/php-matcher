@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Coduo\PHPMatcher\Tests\Matcher\Pattern\Expander;
 
+use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Matcher\Pattern\Expander\IsIp;
 use PHPUnit\Framework\TestCase;
 
@@ -15,6 +16,7 @@ class IsIpTest extends TestCase
     public function test_ip($ip, $expected)
     {
         $expander = new IsIp();
+        $expander->setBacktrace(new Backtrace());
         $this->assertEquals($expected, $expander->match($ip));
     }
 

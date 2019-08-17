@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Coduo\PHPMatcher\Tests\Matcher\Pattern\Expander;
 
+use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Matcher\Pattern\Expander\IsUrl;
 use PHPUnit\Framework\TestCase;
 
@@ -15,6 +16,7 @@ class IsUrlTest extends TestCase
     public function test_urls($url, $expectedResult)
     {
         $expander = new IsUrl();
+        $expander->setBacktrace(new Backtrace());
         $this->assertEquals($expectedResult, $expander->match($url));
     }
 

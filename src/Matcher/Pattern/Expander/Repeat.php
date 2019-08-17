@@ -47,10 +47,14 @@ final class Repeat implements PatternExpander
         }
     }
 
-    public function match($values) : bool
+    public function match($value) : bool
     {
-        if (!\is_array($values)) {
-            $this->error = \sprintf('Repeat expander require "array", got "%s".', new StringConverter($values));
+        $this->backtrace->expanderEntrance(self::NAME, $value);
+
+        if (!\is_array($value)) {
+            $this->error = \sprintf('Repeat expander require "array", got "%s".', new StringConverter($value));
+            $this->backtrace->expanderSucceed(self::NAME, $value);
+
             return false;
         }
 
@@ -58,10 +62,26 @@ final class Repeat implements PatternExpander
         $matcher = $factory->createMatcher();
 
         if ($this->isScalar) {
-            return $this->matchScalar($values, $matcher);
+            $result = $this->matchScalar($value, $matcher);
+
+            if ($result) {
+                $this->backtrace->expanderSucceed(self::NAME, $value);
+            } else {
+                $this->backtrace->expanderFailed(self::NAME, $value, '');
+            }
+
+            return $result;
         }
 
-        return $this->matchJson($values, $matcher);
+        $result = $this->matchJson($value, $matcher);
+
+        if ($result) {
+            $this->backtrace->expanderSucceed(self::NAME, $value);
+        } else {
+            $this->backtrace->expanderFailed(self::NAME, $value, '');
+        }
+
+        return $result;
     }
 
     public function getError() : ?string

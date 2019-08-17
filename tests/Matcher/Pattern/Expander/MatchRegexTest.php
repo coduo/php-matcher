@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Coduo\PHPMatcher\Tests\Matcher\Pattern\Expander;
 
+use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Matcher\Pattern\Expander\MatchRegex;
 use PHPUnit\Framework\TestCase;
 
@@ -15,6 +16,7 @@ class MatchRegexTest extends TestCase
     public function test_match_expander($expectedResult, $expectedError, $pattern, $value)
     {
         $expander = new MatchRegex($pattern);
+        $expander->setBacktrace(new Backtrace());
         $this->assertEquals($expectedResult, $expander->match($value));
         $this->assertSame($expectedError, $expander->getError());
     }

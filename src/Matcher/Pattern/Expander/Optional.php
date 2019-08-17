@@ -19,6 +19,9 @@ final class Optional implements PatternExpander
 
     public function match($value) : bool
     {
+        $this->backtrace->expanderEntrance(self::NAME, $value);
+        $this->backtrace->expanderSucceed(self::NAME, $value);
+
         return true;
     }
 
