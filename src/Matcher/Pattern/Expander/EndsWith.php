@@ -11,10 +11,10 @@ final class EndsWith implements PatternExpander
 {
     const NAME = 'endsWith';
 
+    use BacktraceBehavior;
+
     private $stringEnding;
-
     private $error;
-
     private $ignoreCase;
 
     public function __construct(string $stringEnding, bool $ignoreCase = false)
@@ -34,19 +34,29 @@ final class EndsWith implements PatternExpander
 
     public function match($value) : bool
     {
+        $this->backtrace->expanderEntrance(self::NAME, $value);
+
         if (!\is_string($value)) {
             $this->error = \sprintf('EndsWith expander require "string", got "%s".', new StringConverter($value));
+            $this->backtrace->expanderFailed(self::NAME, $value, $this->error);
+
             return false;
         }
 
         if (empty($this->stringEnding)) {
+            $this->backtrace->expanderSucceed(self::NAME, $value);
+
             return true;
         }
 
         if (!$this->matchValue($value)) {
             $this->error = \sprintf("string \"%s\" doesn't ends with string \"%s\".", $value, $this->stringEnding);
+            $this->backtrace->expanderFailed(self::NAME, $value, $this->error);
+
             return false;
         }
+
+        $this->backtrace->expanderSucceed(self::NAME, $value);
 
         return true;
     }

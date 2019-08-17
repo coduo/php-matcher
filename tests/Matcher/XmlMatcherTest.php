@@ -19,10 +19,11 @@ class XmlMatcherTest extends TestCase
 
     public function setUp() : void
     {
-        $parser = new Parser(new Lexer(), new Parser\ExpanderInitializer());
+        $backtrace = new Backtrace();
+        $parser = new Parser(new Lexer(), new Parser\ExpanderInitializer($backtrace));
         $scalarMatchers = new Matcher\ChainMatcher(
             self::class,
-            $backtrace = new Backtrace(),
+            $backtrace,
             [
                 new Matcher\CallbackMatcher($backtrace),
                 new Matcher\ExpressionMatcher($backtrace),

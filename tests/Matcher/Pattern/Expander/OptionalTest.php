@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Coduo\PHPMatcher\Tests\Matcher\Pattern\Expander;
 
+use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Matcher\Pattern\Expander\Optional;
 use PHPUnit\Framework\TestCase;
 
@@ -15,6 +16,7 @@ class OptionalTest extends TestCase
     public function test_optional_expander_match($value, $expectedResult)
     {
         $expander = new Optional();
+        $expander->setBacktrace(new Backtrace());
         $this->assertEquals($expectedResult, $expander->match($value));
     }
 

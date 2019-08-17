@@ -67,6 +67,43 @@ final class Backtrace
         );
     }
 
+    public function expanderEntrance(string $name, $value) : void
+    {
+        $this->trace[] = \sprintf(
+            '#%d Expander %s matching value "%s"',
+            $this->entriesCount(),
+            $name,
+            new SingleLineString((string) new StringConverter($value))
+        );
+    }
+
+    public function expanderSucceed(string $name, $value) : void
+    {
+        $this->trace[] = \sprintf(
+            '#%d Expander %s successfully matched value "%s"',
+            $this->entriesCount(),
+            $name,
+            new SingleLineString((string) new StringConverter($value))
+        );
+    }
+
+    public function expanderFailed(string $name, $value, string $error) : void
+    {
+        $this->trace[] = \sprintf(
+            '#%d Expander %s failed to match value "%s"',
+            $this->entriesCount(),
+            $name,
+            new SingleLineString((string) new StringConverter($value))
+        );
+
+        $this->trace[] = \sprintf(
+            '#%d Expander %s error: %s',
+            $this->entriesCount(),
+            $name,
+            new SingleLineString($error)
+        );
+    }
+
     public function __toString() : string
     {
         return \implode("\n", $this->trace);

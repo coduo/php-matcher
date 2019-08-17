@@ -10,6 +10,8 @@ final class Optional implements PatternExpander
 {
     const NAME = 'optional';
 
+    use BacktraceBehavior;
+
     public static function is(string $name) : bool
     {
         return self::NAME === $name;
@@ -17,6 +19,9 @@ final class Optional implements PatternExpander
 
     public function match($value) : bool
     {
+        $this->backtrace->expanderEntrance(self::NAME, $value);
+        $this->backtrace->expanderSucceed(self::NAME, $value);
+
         return true;
     }
 

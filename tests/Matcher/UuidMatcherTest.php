@@ -19,7 +19,10 @@ class UuidMatcherTest extends TestCase
 
     public function setUp() : void
     {
-        $this->matcher = new UuidMatcher(new Backtrace(), new Parser(new Lexer(), new Parser\ExpanderInitializer()));
+        $this->matcher = new UuidMatcher(
+            $backtrace = new Backtrace(),
+            new Parser(new Lexer(), new Parser\ExpanderInitializer($backtrace))
+        );
     }
     /**
      * @dataProvider positiveCanMatchData

@@ -11,8 +11,9 @@ final class Before implements PatternExpander
 {
     const NAME = 'before';
 
-    private $boundary;
+    use BacktraceBehavior;
 
+    private $boundary;
     private $error;
 
 
@@ -36,13 +37,19 @@ final class Before implements PatternExpander
 
     public function match($value) : bool
     {
+        $this->backtrace->expanderEntrance(self::NAME, $value);
+
         if (!\is_string($value)) {
             $this->error = \sprintf('Before expander require "string", got "%s".', new StringConverter($value));
+            $this->backtrace->expanderFailed(self::NAME, $value, $this->error);
+
             return false;
         }
 
         if (!$this->is_datetime($value)) {
             $this->error = \sprintf('Value "%s" is not a valid date.', new StringConverter($value));
+            $this->backtrace->expanderFailed(self::NAME, $value, $this->error);
+
             return false;
         }
 
@@ -50,10 +57,20 @@ final class Before implements PatternExpander
 
         if ($value >= $this->boundary) {
             $this->error = \sprintf('Value "%s" is before "%s".', new StringConverter($value), new StringConverter($this->boundary));
+            $this->backtrace->expanderFailed(self::NAME, $value, $this->error);
+
             return false;
         }
 
-        return $value < $this->boundary;
+        $result = $value < $this->boundary;
+
+        if ($result) {
+            $this->backtrace->expanderSucceed(self::NAME, $value);
+        } else {
+            $this->backtrace->expanderFailed(self::NAME, $value, '');
+        }
+
+        return $result;
     }
 
     private function is_datetime(string $value) : bool

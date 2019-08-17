@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Coduo\PHPMatcher\Parser;
 
 use Coduo\PHPMatcher\AST\Expander as ExpanderNode;
+use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Exception\InvalidArgumentException;
 use Coduo\PHPMatcher\Exception\InvalidExpanderTypeException;
 use Coduo\PHPMatcher\Exception\UnknownExpanderClassException;
@@ -36,6 +37,13 @@ final class ExpanderInitializer
         Expander\Repeat::NAME => Expander\Repeat::class,
         Expander\Match::NAME => Expander\Match::class
     ];
+
+    private $backtrace;
+
+    public function __construct(Backtrace $backtrace)
+    {
+        $this->backtrace = $backtrace;
+    }
 
     public function setExpanderDefinition(string $expanderName, string $expanderFQCN)
     {
@@ -84,6 +92,8 @@ final class ExpanderInitializer
         if (!$expander instanceof PatternExpander) {
             throw new InvalidExpanderTypeException();
         }
+
+        $expander->setBacktrace($this->backtrace);
 
         return $expander;
     }

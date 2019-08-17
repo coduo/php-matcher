@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Coduo\PHPMatcher\Tests;
 
+use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Lexer;
 use Coduo\PHPMatcher\Parser;
 use PHPUnit\Framework\TestCase;
@@ -17,7 +18,7 @@ class ParserSyntaxErrorTest extends TestCase
 
     public function setUp() : void
     {
-        $this->parser = new Parser(new Lexer(), new Parser\ExpanderInitializer());
+        $this->parser = new Parser(new Lexer(), new Parser\ExpanderInitializer(new Backtrace()));
     }
 
     public function test_unexpected_statement_at_type_position()

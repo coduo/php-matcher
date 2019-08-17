@@ -11,6 +11,8 @@ final class IsNotEmpty implements PatternExpander
 {
     const NAME = 'isNotEmpty';
 
+    use BacktraceBehavior;
+
     private $error;
 
     public static function is(string $name) : bool
@@ -20,10 +22,16 @@ final class IsNotEmpty implements PatternExpander
 
     public function match($value) : bool
     {
+        $this->backtrace->expanderEntrance(self::NAME, $value);
+
         if (false === $value || (empty($value) && '0' != $value)) {
             $this->error = \sprintf('Value %s is not blank.', new StringConverter($value));
+            $this->backtrace->expanderFailed(self::NAME, $value, $this->error);
+
             return false;
         }
+
+        $this->backtrace->expanderSucceed(self::NAME, $value);
 
         return true;
     }

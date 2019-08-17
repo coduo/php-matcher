@@ -19,7 +19,10 @@ class StringMatcherTest extends TestCase
 
     public function setUp() : void
     {
-        $this->matcher = new StringMatcher(new Backtrace(), new Parser(new Lexer(), new Parser\ExpanderInitializer()));
+        $this->matcher = new StringMatcher(
+            $backtrace = new Backtrace(),
+            new Parser(new Lexer(), new Parser\ExpanderInitializer($backtrace))
+        );
     }
     /**
      * @dataProvider positiveCanMatchData

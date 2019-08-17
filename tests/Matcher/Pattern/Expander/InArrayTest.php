@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Coduo\PHPMatcher\Tests\Matcher\Pattern\Expander;
 
+use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Matcher\Pattern\Expander\InArray;
 use PHPUnit\Framework\TestCase;
 
@@ -15,6 +16,7 @@ class InArrayTest extends TestCase
     public function test_matching_values($needle, $haystack, $expectedResult)
     {
         $expander = new InArray($needle);
+        $expander->setBacktrace(new Backtrace());
         $this->assertEquals($expectedResult, $expander->match($haystack));
     }
 
@@ -33,6 +35,7 @@ class InArrayTest extends TestCase
     public function test_error_when_matching_fail($boundary, $value, $errorMessage)
     {
         $expander = new InArray($boundary);
+        $expander->setBacktrace(new Backtrace());
         $this->assertFalse($expander->match($value));
         $this->assertEquals($errorMessage, $expander->getError());
     }

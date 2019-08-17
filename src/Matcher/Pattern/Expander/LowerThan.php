@@ -11,8 +11,9 @@ final class LowerThan implements PatternExpander
 {
     const NAME = 'lowerThan';
 
-    private $boundary;
+    use BacktraceBehavior;
 
+    private $boundary;
     private $error;
 
 
@@ -32,17 +33,31 @@ final class LowerThan implements PatternExpander
 
     public function match($value) : bool
     {
+        $this->backtrace->expanderEntrance(self::NAME, $value);
+
         if (!\is_float($value) && !\is_integer($value) && !\is_double($value)) {
             $this->error = \sprintf('Value "%s" is not a valid number.', new StringConverter($value));
+            $this->backtrace->expanderFailed(self::NAME, $value, $this->error);
+
             return false;
         }
 
         if ($value >= $this->boundary) {
             $this->error = \sprintf('Value "%s" is not lower than "%s".', new StringConverter($value), new StringConverter($this->boundary));
+            $this->backtrace->expanderFailed(self::NAME, $value, $this->error);
+
             return false;
         }
 
-        return $value < $this->boundary;
+        $result = $value < $this->boundary;
+
+        if ($result) {
+            $this->backtrace->expanderSucceed(self::NAME, $value);
+        } else {
+            $this->backtrace->expanderFailed(self::NAME, $value, '');
+        }
+
+        return $result;
     }
 
     public function getError() : ?string

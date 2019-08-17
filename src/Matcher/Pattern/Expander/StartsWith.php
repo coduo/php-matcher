@@ -11,10 +11,10 @@ final class StartsWith implements PatternExpander
 {
     const NAME = 'startsWith';
 
+    use BacktraceBehavior;
+
     private $stringBeginning;
-
     private $error;
-
     private $ignoreCase;
 
     public function __construct(string $stringBeginning, bool $ignoreCase = false)
@@ -35,19 +35,29 @@ final class StartsWith implements PatternExpander
 
     public function match($value) : bool
     {
+        $this->backtrace->expanderEntrance(self::NAME, $value);
+
         if (!\is_string($value)) {
             $this->error = \sprintf('StartsWith expander require "string", got "%s".', new StringConverter($value));
+            $this->backtrace->expanderSucceed(self::NAME, $value);
+
             return false;
         }
 
         if (empty($this->stringBeginning)) {
+            $this->backtrace->expanderSucceed(self::NAME, $value);
+
             return true;
         }
 
         if ($this->matchValue($value)) {
             $this->error = \sprintf("string \"%s\" doesn't starts with string \"%s\".", $value, $this->stringBeginning);
+            $this->backtrace->expanderFailed(self::NAME, $value, $this->error);
+
             return false;
         }
+
+        $this->backtrace->expanderSucceed(self::NAME, $value);
 
         return true;
     }

@@ -11,11 +11,12 @@ final class OneOf implements PatternExpander
 {
     const NAME = 'oneOf';
 
+    use BacktraceBehavior;
+
     /**
      * @var PatternExpander[]
      */
     private $expanders;
-
     private $error;
 
     public function __construct()
@@ -39,13 +40,19 @@ final class OneOf implements PatternExpander
 
     public function match($value) : bool
     {
+        $this->backtrace->expanderEntrance(self::NAME, $value);
+
         foreach ($this->expanders as $expander) {
             if ($expander->match($value)) {
+                $this->backtrace->expanderSucceed(self::NAME, $value);
+
                 return true;
             }
         }
 
         $this->error = \sprintf('Any expander available in OneOf expander does not match "%s".', new StringConverter($value));
+        $this->backtrace->expanderFailed(self::NAME, $value, $this->error);
+
         return false;
     }
 

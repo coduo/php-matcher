@@ -11,10 +11,10 @@ final class NotContains implements PatternExpander
 {
     const NAME = 'notContains';
 
+    use BacktraceBehavior;
+
     private $error;
-
     private $string;
-
     private $ignoreCase;
 
     public static function is(string $name) : bool
@@ -30,8 +30,12 @@ final class NotContains implements PatternExpander
 
     public function match($value) : bool
     {
+        $this->backtrace->expanderEntrance(self::NAME, $value);
+
         if (!\is_string($value)) {
             $this->error = \sprintf('Not contains expander require "string", got "%s".', new StringConverter($value));
+            $this->backtrace->expanderFailed(self::NAME, $value, $this->error);
+
             return false;
         }
 
@@ -41,9 +45,12 @@ final class NotContains implements PatternExpander
 
         if ($contains !== false) {
             $this->error = \sprintf('String "%s" contains "%s".', $value, $this->string);
+            $this->backtrace->expanderFailed(self::NAME, $value, $this->error);
 
             return false;
         }
+
+        $this->backtrace->expanderSucceed(self::NAME, $value);
 
         return true;
     }

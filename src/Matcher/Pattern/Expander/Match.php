@@ -11,6 +11,8 @@ final class Match implements Matcher\Pattern\PatternExpander
 {
     const NAME = 'match';
 
+    use BacktraceBehavior;
+
     /**
      * @var Matcher
      */
@@ -29,11 +31,21 @@ final class Match implements Matcher\Pattern\PatternExpander
 
     public function match($value) : bool
     {
+        $this->backtrace->expanderEntrance(self::NAME, $value);
+
         if (\is_null($this->matcher)) {
             $this->matcher = (new MatcherFactory())->createMatcher();
         }
 
-        return $this->matcher->match($value, $this->pattern);
+        $result = $this->matcher->match($value, $this->pattern);
+
+        if ($result) {
+            $this->backtrace->expanderSucceed(self::NAME, $value);
+        } else {
+            $this->backtrace->expanderFailed(self::NAME, $value, '');
+        }
+
+        return $result;
     }
 
     public function getError() : ?string
