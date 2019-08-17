@@ -203,6 +203,7 @@ class ArrayMatcherTest extends TestCase
             [$simpleArr, $simpleArrPatternWithUniversalKey],
             [$simpleArr, $simpleArrPatternWithUniversalKeyAndStringValue],
             [[], []],
+            [[], ['@boolean@.optional()']],
             [['foo' => null], ['foo' => null]],
             [['foo' => null], ['foo' => '@null@']],
             [['key' => 'val'], ['key' => 'val']],
@@ -287,7 +288,9 @@ class ArrayMatcherTest extends TestCase
             [['key' => 'val'], ['key' => 'val2']],
             [[1], [2]],
             [['foo', 1, 3], ['foo', 2, 3]],
+            [[], ['key' => []]],
             [[], ['foo' => 'bar']],
+            [[], ['foo' => ['bar' => []]]],
             'unbound array should match one or none elements' => [
                 [
                     'users' => [

@@ -129,24 +129,22 @@ final class ArrayMatcher extends Matcher
 
     private function isPatternValid(array $pattern, array $values, string $parentPath) : bool
     {
-        if (\is_array($pattern)) {
-            $skipPattern = static::UNBOUNDED_PATTERN;
+        $skipPattern = static::UNBOUNDED_PATTERN;
 
-            $pattern = \array_filter(
-                $pattern,
-                function ($item) use ($skipPattern) {
-                    return $item !== $skipPattern;
-                }
-            );
-
-            $notExistingKeys = $this->findNotExistingKeys($pattern, $values);
-            if (\count($notExistingKeys) > 0) {
-                $keyNames = \array_keys($notExistingKeys);
-                $path = $this->formatFullPath($parentPath, $this->formatAccessPath($keyNames[0]));
-                $this->setMissingElementInError('value', $path);
-
-                return false;
+        $pattern = \array_filter(
+            $pattern,
+            function ($item) use ($skipPattern) {
+                return $item !== $skipPattern;
             }
+        );
+
+        $notExistingKeys = $this->findNotExistingKeys($pattern, $values);
+        if (\count($notExistingKeys) > 0) {
+            $keyNames = \array_keys($notExistingKeys);
+            $path = $this->formatFullPath($parentPath, $this->formatAccessPath($keyNames[0]));
+            $this->setMissingElementInError('value', $path);
+
+            return false;
         }
 
         return true;
@@ -162,14 +160,12 @@ final class ArrayMatcher extends Matcher
 
         return \array_filter($notExistingKeys, function ($pattern) use ($values) {
             if (\is_array($pattern)) {
-                return !$this->match($values, $pattern);
+                return empty($pattern) || !$this->match($values, $pattern);
             }
 
             try {
                 $typePattern = $this->parser->parse($pattern);
-            } catch (Exception $e) {
-                return true;
-            } catch (\Throwable $t) {
+            } catch (Exception | \Throwable $e) {
                 return true;
             }
 
