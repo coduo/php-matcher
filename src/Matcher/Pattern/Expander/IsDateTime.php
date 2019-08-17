@@ -11,6 +11,8 @@ final class IsDateTime implements PatternExpander
 {
     const NAME = 'isDateTime';
 
+    use BacktraceBehavior;
+
     private $error;
 
     public static function is(string $name) : bool

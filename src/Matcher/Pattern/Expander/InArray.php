@@ -11,8 +11,9 @@ final class InArray implements PatternExpander
 {
     const NAME = 'inArray';
 
-    private $error;
+    use BacktraceBehavior;
 
+    private $error;
     private $value;
 
     public function __construct($value)

@@ -13,12 +13,11 @@ final class Repeat implements PatternExpander
 {
     const NAME = 'repeat';
 
+    use BacktraceBehavior;
+
     private $error;
-
     private $pattern;
-
     private $isStrict;
-
     private $isScalar;
 
     public static function is(string $name) : bool

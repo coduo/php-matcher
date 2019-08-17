@@ -11,6 +11,8 @@ final class IsEmpty implements PatternExpander
 {
     const NAME = 'isEmpty';
 
+    use BacktraceBehavior;
+
     private $error;
 
     public static function is(string $name) : bool

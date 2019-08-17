@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Coduo\PHPMatcher\Tests;
 
 use Coduo\PHPMatcher\AST\Expander;
+use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Lexer;
 use Coduo\PHPMatcher\Parser;
 use PHPUnit\Framework\TestCase;
@@ -18,7 +19,7 @@ class ParserTest extends TestCase
 
     public function setUp() : void
     {
-        $this->parser = new Parser(new Lexer(), new Parser\ExpanderInitializer());
+        $this->parser = new Parser(new Lexer(), new Parser\ExpanderInitializer(new Backtrace()));
     }
 
     public function test_simple_pattern_without_expanders()

@@ -11,10 +11,10 @@ final class NotContains implements PatternExpander
 {
     const NAME = 'notContains';
 
+    use BacktraceBehavior;
+
     private $error;
-
     private $string;
-
     private $ignoreCase;
 
     public static function is(string $name) : bool

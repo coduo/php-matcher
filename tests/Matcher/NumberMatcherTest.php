@@ -19,7 +19,10 @@ class NumberMatcherTest extends TestCase
 
     public function setUp() : void
     {
-        $this->matcher = new NumberMatcher(new Backtrace(), new Parser(new Lexer(), new Parser\ExpanderInitializer()));
+        $this->matcher = new NumberMatcher(
+            $backtrace = new Backtrace(),
+            new Parser(new Lexer(), new Parser\ExpanderInitializer($backtrace))
+        );
     }
 
     /**

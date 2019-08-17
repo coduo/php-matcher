@@ -11,10 +11,10 @@ final class EndsWith implements PatternExpander
 {
     const NAME = 'endsWith';
 
+    use BacktraceBehavior;
+
     private $stringEnding;
-
     private $error;
-
     private $ignoreCase;
 
     public function __construct(string $stringEnding, bool $ignoreCase = false)

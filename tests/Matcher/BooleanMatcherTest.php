@@ -19,7 +19,10 @@ class BooleanMatcherTest extends TestCase
 
     public function setUp() : void
     {
-        $this->matcher = new BooleanMatcher(new Backtrace(), new Parser(new Lexer(), new Parser\ExpanderInitializer()));
+        $this->matcher = new BooleanMatcher(
+            $backtrace = new Backtrace(),
+            new Parser(new Lexer(), new Parser\ExpanderInitializer($backtrace))
+        );
     }
 
     /**

@@ -19,7 +19,10 @@ class DoubleMatcherTest extends TestCase
 
     public function setUp() : void
     {
-        $this->matcher = new DoubleMatcher(new Backtrace(), new Parser(new Lexer(), new Parser\ExpanderInitializer()));
+        $this->matcher = new DoubleMatcher(
+            $backtrace = new Backtrace(),
+            new Parser(new Lexer(), new Parser\ExpanderInitializer($backtrace))
+        );
     }
 
     /**

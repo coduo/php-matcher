@@ -11,6 +11,8 @@ final class IsUrl implements PatternExpander
 {
     const NAME = 'isUrl';
 
+    use BacktraceBehavior;
+
     private $error;
 
     public static function is(string $name) : bool

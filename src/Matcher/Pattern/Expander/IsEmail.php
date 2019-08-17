@@ -11,6 +11,8 @@ final class IsEmail implements PatternExpander
 {
     const NAME = 'isEmail';
 
+    use BacktraceBehavior;
+
     private $error;
 
     public static function is(string $name) : bool

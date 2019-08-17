@@ -10,6 +10,8 @@ final class Optional implements PatternExpander
 {
     const NAME = 'optional';
 
+    use BacktraceBehavior;
+
     public static function is(string $name) : bool
     {
         return self::NAME === $name;

@@ -11,10 +11,10 @@ final class After implements PatternExpander
 {
     const NAME = 'after';
 
+    use BacktraceBehavior;
+
     private $boundary;
-
     private $error;
-
 
     public function __construct($boundary)
     {

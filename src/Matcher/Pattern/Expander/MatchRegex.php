@@ -11,8 +11,9 @@ final class MatchRegex implements PatternExpander
 {
     const NAME = 'matchRegex';
 
-    private $error;
+    use BacktraceBehavior;
 
+    private $error;
     private $pattern;
 
     public function __construct($pattern)

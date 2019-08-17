@@ -16,7 +16,7 @@ final class MatcherFactory implements Factory
     {
         $matcherBacktrace = $backtrace ? $backtrace : new Backtrace();
 
-        return new Matcher($this->buildMatchers($this->buildParser(), $matcherBacktrace), $matcherBacktrace);
+        return new Matcher($this->buildMatchers($this->buildParser($matcherBacktrace), $matcherBacktrace), $matcherBacktrace);
     }
 
     protected function buildMatchers(Parser $parser, Backtrace $backtrace) : Matcher\ChainMatcher
@@ -88,8 +88,8 @@ final class MatcherFactory implements Factory
         );
     }
 
-    protected function buildParser() : Parser
+    protected function buildParser(Backtrace $backtrace) : Parser
     {
-        return new Parser(new Lexer(), new Parser\ExpanderInitializer());
+        return new Parser(new Lexer(), new Parser\ExpanderInitializer($backtrace));
     }
 }

@@ -19,11 +19,13 @@ class ArrayMatcherTest extends TestCase
 
     public function setUp() : void
     {
-        $parser = new Parser(new Lexer(), new Parser\ExpanderInitializer());
+        $backtrace = new Backtrace();
+
+        $parser = new Parser(new Lexer(), new Parser\ExpanderInitializer($backtrace));
         $this->matcher = new Matcher\ArrayMatcher(
             new Matcher\ChainMatcher(
                 self::class,
-                $backtrace = new Backtrace(),
+                $backtrace,
                 [
                     new Matcher\CallbackMatcher($backtrace),
                     new Matcher\ExpressionMatcher($backtrace),
@@ -69,7 +71,7 @@ class ArrayMatcherTest extends TestCase
                 ]
             ),
             $backtrace,
-            $parser = new Parser(new Lexer(), new Parser\ExpanderInitializer())
+            $parser = new Parser(new Lexer(), new Parser\ExpanderInitializer($backtrace))
         );
 
         $this->assertTrue($matcher->match(['test' => 1], ['test' => 1]));

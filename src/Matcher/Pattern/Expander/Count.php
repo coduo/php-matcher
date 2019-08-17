@@ -11,8 +11,9 @@ final class Count implements PatternExpander
 {
     const NAME = 'count';
 
-    private $error;
+    use BacktraceBehavior;
 
+    private $error;
     private $value;
 
     public static function is(string $name) : bool

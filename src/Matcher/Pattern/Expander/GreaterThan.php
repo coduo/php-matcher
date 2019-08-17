@@ -11,8 +11,9 @@ final class GreaterThan implements PatternExpander
 {
     const NAME = 'greaterThan';
 
-    private $boundary;
+    use BacktraceBehavior;
 
+    private $boundary;
     private $error;
 
     public function __construct($boundary)

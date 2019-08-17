@@ -11,11 +11,12 @@ final class OneOf implements PatternExpander
 {
     const NAME = 'oneOf';
 
+    use BacktraceBehavior;
+
     /**
      * @var PatternExpander[]
      */
     private $expanders;
-
     private $error;
 
     public function __construct()

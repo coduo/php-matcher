@@ -19,7 +19,10 @@ final class JsonObjectMatcherTest extends TestCase
 
     public function setUp() : void
     {
-        $this->matcher = new JsonObjectMatcher(new Backtrace(), new Parser(new Lexer(), new Parser\ExpanderInitializer()));
+        $this->matcher = new JsonObjectMatcher(
+            $backtrace = new Backtrace(),
+            new Parser(new Lexer(), new Parser\ExpanderInitializer($backtrace))
+        );
     }
 
     /**

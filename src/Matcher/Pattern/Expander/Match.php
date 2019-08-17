@@ -11,6 +11,8 @@ final class Match implements Matcher\Pattern\PatternExpander
 {
     const NAME = 'match';
 
+    use BacktraceBehavior;
+
     /**
      * @var Matcher
      */

@@ -11,6 +11,8 @@ final class IsIp implements PatternExpander
 {
     const NAME = 'isIp';
 
+    use BacktraceBehavior;
+
     private $error;
 
     public static function is(string $name) : bool

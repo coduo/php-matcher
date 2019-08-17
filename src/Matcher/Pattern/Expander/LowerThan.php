@@ -11,8 +11,9 @@ final class LowerThan implements PatternExpander
 {
     const NAME = 'lowerThan';
 
-    private $boundary;
+    use BacktraceBehavior;
 
+    private $boundary;
     private $error;
 
 

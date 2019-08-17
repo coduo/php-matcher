@@ -11,10 +11,10 @@ final class StartsWith implements PatternExpander
 {
     const NAME = 'startsWith';
 
+    use BacktraceBehavior;
+
     private $stringBeginning;
-
     private $error;
-
     private $ignoreCase;
 
     public function __construct(string $stringBeginning, bool $ignoreCase = false)

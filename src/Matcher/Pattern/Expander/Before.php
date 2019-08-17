@@ -11,8 +11,9 @@ final class Before implements PatternExpander
 {
     const NAME = 'before';
 
-    private $boundary;
+    use BacktraceBehavior;
 
+    private $boundary;
     private $error;
 
 

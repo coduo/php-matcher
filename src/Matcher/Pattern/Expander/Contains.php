@@ -11,10 +11,10 @@ final class Contains implements PatternExpander
 {
     const NAME = 'contains';
 
+    use BacktraceBehavior;
+
     private $error;
-
     private $string;
-
     private $ignoreCase;
 
     public static function is(string $name) : bool
