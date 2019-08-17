@@ -285,6 +285,7 @@ class ArrayMatcherTest extends TestCase
             [$simpleArr, $simpleArrPatternWithUniversalKeyAndIntegerValue],
             [['status' => 'ok', 'data' => [['foo']]], ['status' => 'ok', 'data' => []]],
             [[1], []],
+            [[], ['key' => []]],
             [['key' => 'val'], ['key' => 'val2']],
             [[1], [2]],
             [['foo', 1, 3], ['foo', 2, 3]],
