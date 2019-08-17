@@ -29,7 +29,7 @@ final class IsEmpty implements PatternExpander
         return true;
     }
 
-    public function getError()
+    public function getError() : ?string
     {
         return $this->error;
     }

@@ -6,5 +6,5 @@ namespace Coduo\PHPMatcher;
 
 interface Factory
 {
-    public function createMatcher() : Matcher;
+    public function createMatcher(Backtrace $backtrace = null) : Matcher;
 }

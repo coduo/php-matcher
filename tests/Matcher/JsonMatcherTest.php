@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Coduo\PHPMatcher\Tests\Matcher;
 
+use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Lexer;
 use Coduo\PHPMatcher\Matcher;
 use Coduo\PHPMatcher\Parser;
@@ -16,25 +17,29 @@ class JsonMatcherTest extends TestCase
      */
     private $matcher;
 
-    public function setUp()
+    public function setUp() : void
     {
         $parser = new Parser(new Lexer(), new Parser\ExpanderInitializer());
-        $scalarMatchers = new Matcher\ChainMatcher([
-            new Matcher\CallbackMatcher(),
-            new Matcher\ExpressionMatcher(),
-            new Matcher\NullMatcher(),
-            new Matcher\StringMatcher($parser),
-            new Matcher\IntegerMatcher($parser),
-            new Matcher\BooleanMatcher($parser),
-            new Matcher\DoubleMatcher($parser),
-            new Matcher\NumberMatcher($parser),
-            new Matcher\ScalarMatcher(),
-            new Matcher\WildcardMatcher(),
-        ]);
-        $this->matcher = new Matcher\JsonMatcher(new Matcher\ChainMatcher([
-            $scalarMatchers,
-            new Matcher\ArrayMatcher($scalarMatchers, $parser)
-        ]));
+        $scalarMatchers = new Matcher\ChainMatcher(
+            self::class,
+            $backtrace = new Backtrace(),
+            [
+                new Matcher\CallbackMatcher($backtrace),
+                new Matcher\ExpressionMatcher($backtrace),
+                new Matcher\NullMatcher($backtrace),
+                new Matcher\StringMatcher($backtrace, $parser),
+                new Matcher\IntegerMatcher($backtrace, $parser),
+                new Matcher\BooleanMatcher($backtrace, $parser),
+                new Matcher\DoubleMatcher($backtrace, $parser),
+                new Matcher\NumberMatcher($backtrace, $parser),
+                new Matcher\ScalarMatcher($backtrace),
+                new Matcher\WildcardMatcher($backtrace),
+            ]
+        );
+        $this->matcher = new Matcher\JsonMatcher(
+            new Matcher\ArrayMatcher($scalarMatchers, $backtrace, $parser),
+            $backtrace
+        );
     }
 
     /**
@@ -93,7 +98,7 @@ class JsonMatcherTest extends TestCase
         ]);
 
         $this->assertFalse($this->matcher->match($value, $pattern));
-        $this->assertEquals($this->matcher->getError(), '"Michał" does not match "@boolean@".');
+        $this->assertEquals($this->matcher->getError(), 'Value {"users":[{"name":"Norbert"},{"name":"Micha\u0142"}]} does not match pattern {"users":[{"name":"@string@"},{"name":"@boolean@"}]}');
     }
 
     public function test_error_when_path_in_nested_pattern_does_not_exist()
@@ -103,7 +108,7 @@ class JsonMatcherTest extends TestCase
 
         $this->assertFalse($this->matcher->match($value, $pattern));
 
-        $this->assertEquals($this->matcher->getError(), 'There is no element under path [foo][bar][baz] in pattern.');
+        $this->assertEquals($this->matcher->getError(), 'Value {"foo":{"bar":{"baz":"bar value"}}} does not match pattern {"foo":{"bar":{"faz":"faz value"}}}');
     }
 
     public function test_error_when_path_in_nested_value_does_not_exist()
@@ -113,7 +118,7 @@ class JsonMatcherTest extends TestCase
 
         $this->assertFalse($this->matcher->match($value, $pattern));
 
-        $this->assertEquals($this->matcher->getError(), 'There is no element under path [foo][bar][faz] in value.');
+        $this->assertEquals($this->matcher->getError(), 'Value {"foo":{"bar":[]}} does not match pattern {"foo":{"bar":{"faz":"faz value"}}}');
     }
 
     public function test_error_when_json_pattern_is_invalid()
@@ -124,6 +129,15 @@ class JsonMatcherTest extends TestCase
         $this->assertFalse($this->matcher->match($value, $pattern));
 
         $this->assertEquals($this->matcher->getError(), 'Invalid given JSON of pattern. Syntax error, malformed JSON');
+    }
+
+    /**
+     * Solves https://github.com/coduo/php-matcher/issues/156
+     */
+    public function test_empty_error_after_successful_match()
+    {
+        $this->assertTrue($this->matcher->match($value = '{"foo": "bar"}', $pattern = '{"foo": "@string@"}'));
+        $this->assertNull($this->matcher->getError());
     }
 
     public function test_error_when_json_value_is_invalid()
@@ -150,6 +164,7 @@ class JsonMatcherTest extends TestCase
         return [
             ['@string@'],
             ['["Norbert", '],
+            ['@array@.repeat({"name": "@string@", "value": "@array@"})']
         ];
     }
 
@@ -175,6 +190,15 @@ class JsonMatcherTest extends TestCase
             [
                 '{"foobar":[1.22, 2, "hello"]}',
                 '{"foobar":[@double@, @integer@, @string@]}'
+            ],
+            [
+                '{"entries":[{"id":1,"question":"test","answer":"test","os":"test"}]}',
+                '{"entries": "@array@.repeat({
+                    \"id\": \"@number@\",
+                    \"question\": \"@string@\",
+                    \"answer\": \"@string@\",
+                    \"os\": \"@*@\"
+                })"}'
             ],
             [
                 '{"null":[null]}',
@@ -215,6 +239,10 @@ class JsonMatcherTest extends TestCase
             [
                 '[{"name": "Norbert","lastName":"Orzechowicz"},{"name":"Michał"},{"name":"Bob"},{"name":"Martin"}]',
                 '[{"name": "Norbert","@*@":"@*@"},@...@]'
+            ],
+            [
+                '[{"name": "Norbert"},{"name":"Michał"},{"name":"Bob"},{"name":"Martin"}]',
+                '"@array@.repeat({\"name\": \"@string@\"})"'
             ]
         ];
     }
@@ -241,6 +269,10 @@ class JsonMatcherTest extends TestCase
             [
                 '{"foo":"foo val","bar":"bar val"}',
                 '{"foo":"foo val"}'
+            ],
+            [
+                '[{"name": "Norbert","lastName":"Orzechowicz"},{"name":"Michał"},{"name":"Bob"},{"name":"Martin"}]',
+                '"@array@.repeat({\"name\": \"@string@\"})"'
             ],
             [
                 [],

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Coduo\PHPMatcher\Matcher;
 
+use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Exception\Exception;
 use Coduo\PHPMatcher\Parser;
 use Coduo\ToString\StringConverter;
@@ -18,25 +19,31 @@ final class ArrayMatcher extends Matcher
     const UNIVERSAL_KEY = '@*@';
 
     private $propertyMatcher;
-
     private $accessor;
-
     private $parser;
+    private $backtrace;
 
-    public function __construct(ValueMatcher $propertyMatcher, Parser $parser)
+    public function __construct(ValueMatcher $propertyMatcher, Backtrace $backtrace, Parser $parser)
     {
         $this->propertyMatcher = $propertyMatcher;
         $this->parser = $parser;
+        $this->backtrace = $backtrace;
     }
 
     public function match($value, $pattern) : bool
     {
+        $this->backtrace->matcherEntrance(self::class, $value, $pattern);
+
         if (parent::match($value, $pattern)) {
+            $this->backtrace->matcherSucceed(self::class, $value, $pattern);
+
             return true;
         }
 
         if (!\is_array($value)) {
             $this->error = \sprintf('%s "%s" is not a valid array.', \gettype($value), new StringConverter($value));
+            $this->backtrace->matcherFailed(self::class, $value, $pattern, $this->error);
+
             return false;
         }
 
@@ -45,8 +52,12 @@ final class ArrayMatcher extends Matcher
         }
 
         if (false === $this->iterateMatch($value, $pattern)) {
+            $this->backtrace->matcherFailed(self::class, $value, $pattern, $this->error);
+
             return false;
         }
+
+        $this->backtrace->matcherSucceed(self::class, $value, $pattern);
 
         return true;
     }
@@ -118,24 +129,22 @@ final class ArrayMatcher extends Matcher
 
     private function isPatternValid(array $pattern, array $values, string $parentPath) : bool
     {
-        if (\is_array($pattern)) {
-            $skipPattern = static::UNBOUNDED_PATTERN;
+        $skipPattern = static::UNBOUNDED_PATTERN;
 
-            $pattern = \array_filter(
-                $pattern,
-                function ($item) use ($skipPattern) {
-                    return $item !== $skipPattern;
-                }
-            );
-
-            $notExistingKeys = $this->findNotExistingKeys($pattern, $values);
-            if (\count($notExistingKeys) > 0) {
-                $keyNames = \array_keys($notExistingKeys);
-                $path = $this->formatFullPath($parentPath, $this->formatAccessPath($keyNames[0]));
-                $this->setMissingElementInError('value', $path);
-
-                return false;
+        $pattern = \array_filter(
+            $pattern,
+            function ($item) use ($skipPattern) {
+                return $item !== $skipPattern;
             }
+        );
+
+        $notExistingKeys = $this->findNotExistingKeys($pattern, $values);
+        if (\count($notExistingKeys) > 0) {
+            $keyNames = \array_keys($notExistingKeys);
+            $path = $this->formatFullPath($parentPath, $this->formatAccessPath($keyNames[0]));
+            $this->setMissingElementInError('value', $path);
+
+            return false;
         }
 
         return true;
@@ -151,14 +160,12 @@ final class ArrayMatcher extends Matcher
 
         return \array_filter($notExistingKeys, function ($pattern) use ($values) {
             if (\is_array($pattern)) {
-                return !$this->match($values, $pattern);
+                return empty($pattern) || !$this->match($values, $pattern);
             }
 
             try {
                 $typePattern = $this->parser->parse($pattern);
-            } catch (Exception $e) {
-                return true;
-            } catch (\Throwable $t) {
+            } catch (Exception | \Throwable $e) {
                 return true;
             }
 
@@ -247,8 +254,12 @@ final class ArrayMatcher extends Matcher
         $typePattern = $this->parser->parse($pattern);
         if (!$typePattern->matchExpanders($value)) {
             $this->error = $typePattern->getError();
+            $this->backtrace->matcherFailed(self::class, $value, $pattern, $this->error);
+
             return false;
         }
+
+        $this->backtrace->matcherSucceed(self::class, $value, $pattern);
 
         return true;
     }

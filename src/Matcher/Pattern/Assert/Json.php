@@ -6,8 +6,9 @@ namespace Coduo\PHPMatcher\Matcher\Pattern\Assert;
 
 final class Json
 {
-    const TRANSFORM_QUOTATION_PATTERN = '/([^"])@([a-zA-Z0-9\.]+)@([^"])/';
-    const TRANSFORM_QUOTATION_REPLACEMENT = '$1"@$2@"$3';
+    private const TRANSFORM_NEW_LINES = '/\r?\n|\r/';
+    private const TRANSFORM_QUOTATION_PATTERN = '/([^"])@([a-zA-Z0-9\.]+)@([^"])/';
+    private const TRANSFORM_QUOTATION_REPLACEMENT = '$1"@$2@"$3';
 
     public static function isValid($value) : bool
     {
@@ -28,11 +29,42 @@ final class Json
             return false;
         }
 
-        return self::isValid(self::transformPattern($value));
+        return self::isValid($value) || self::isValid(self::transformPattern($value));
     }
 
     public static function transformPattern(string $pattern) : string
     {
-        return \preg_replace(self::TRANSFORM_QUOTATION_PATTERN, self::TRANSFORM_QUOTATION_REPLACEMENT, $pattern);
+        return \preg_replace(
+            self::TRANSFORM_NEW_LINES,
+            '',
+            \preg_replace(
+                self::TRANSFORM_QUOTATION_PATTERN,
+                self::TRANSFORM_QUOTATION_REPLACEMENT,
+                $pattern
+            )
+        );
+    }
+
+    public static function reformat(string $json) : string
+    {
+        return \json_encode(\json_decode($json, true));
+    }
+
+    public static function getErrorMessage()
+    {
+        switch (\json_last_error()) {
+            case JSON_ERROR_DEPTH:
+                return 'Maximum stack depth exceeded';
+            case JSON_ERROR_STATE_MISMATCH:
+                return 'Underflow or the modes mismatch';
+            case JSON_ERROR_CTRL_CHAR:
+                return 'Unexpected control character found';
+            case JSON_ERROR_SYNTAX:
+                return 'Syntax error, malformed JSON';
+            case JSON_ERROR_UTF8:
+                return 'Malformed UTF-8 characters, possibly incorrectly encoded';
+            default:
+                return 'Unknown error';
+        }
     }
 }

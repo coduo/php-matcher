@@ -8,23 +8,42 @@ use Coduo\PHPMatcher\Matcher\ValueMatcher;
 
 final class Matcher
 {
-    private $matcher;
+    private $valueMatcher;
 
-    public function __construct(ValueMatcher $matcher)
+    private $backtrace;
+
+    public function __construct(ValueMatcher $valueMatcher, Backtrace $backtrace)
     {
-        $this->matcher = $matcher;
+        $this->valueMatcher = $valueMatcher;
+        $this->backtrace = $backtrace;
     }
 
     public function match($value, $pattern) : bool
     {
-        return $this->matcher->match($value, $pattern);
+        $this->backtrace->matcherEntrance(self::class, $value, $pattern);
+
+        $result = $this->valueMatcher->match($value, $pattern);
+
+        if ($result === true) {
+            $this->backtrace->matcherSucceed(self::class, $value, $pattern);
+            $this->valueMatcher->clearError();
+        } else {
+            $this->backtrace->matcherFailed(self::class, $value, $pattern, $this->valueMatcher->getError());
+        }
+
+        return $result;
     }
 
     /**
      * @return null|string
      */
-    public function getError()
+    public function getError() : ?string
     {
-        return $this->matcher->getError();
+        return $this->valueMatcher->getError();
+    }
+
+    public function backtrace(): Backtrace
+    {
+        return $this->backtrace;
     }
 }

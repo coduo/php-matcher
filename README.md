@@ -1,19 +1,21 @@
 # PHP Matcher
 
-Library created for testing all kinds of JSON/XML/TXT/Scalar values against patterns.  
+Library created for testing all kinds of JSON/XML/TXT/Scalar values against patterns.
 
 ```php
 PHPMatcher::match($value = '{"foo": "bar"}', $pattern = '{"foo": "@string@"}');
 ```
 
-It was built to simplify API's functional testing. 
+It was built to simplify API's functional testing.
 
-* [![Build Status](https://travis-ci.org/coduo/php-matcher.svg)](https://travis-ci.org/coduo/php-matcher) - master (3.2.*)
-* [![Build Status](https://travis-ci.org/coduo/php-matcher.svg?branch=3.1)](https://travis-ci.org/coduo/php-matcher) - 3.1.*
+* [![Build Status](https://travis-ci.org/coduo/php-matcher.svg)](https://travis-ci.org/coduo/php-matcher) - [4.0 (master) README](https://github.com/coduo/php-matcher/tree/master/README.md)  PHP >= 7.2
+* [![Build Status](https://travis-ci.org/coduo/php-matcher.svg?branch=3.2)](https://travis-ci.org/coduo/php-matcher) - [3.2.* README](https://github.com/coduo/php-matcher/tree/3.2/README.md) PHP >= 7.0 
+* [![Build Status](https://travis-ci.org/coduo/php-matcher.svg?branch=3.1)](https://travis-ci.org/coduo/php-matcher) - [3.1.* README](https://github.com/coduo/php-matcher/tree/3.1/README.md) PHP >= 7.0  
 
-[Readme for master (3.2) version](https://github.com/coduo/php-matcher/tree/master/README.md)
-[Readme for 3.1 version](https://github.com/coduo/php-matcher/tree/3.1/README.md)  
 
+## Sandbox
+
+Feel free to play first with [Sandbox](https://pattern-matcher.azurewebsites.net/)
 
 ## Installation
 
@@ -32,21 +34,20 @@ composer require --dev "coduo/php-matcher"
 
 use Coduo\PHPMatcher\PHPMatcher;
 
-if (!PHPMatcher::match("lorem ipsum dolor", "@string@", $error)) { 
+if (!PHPMatcher::match("lorem ipsum dolor", "@string@", $error)) {
     echo $error; // in case of error message is set on $error variable via reference
 }
 
 ```
-
 
 ### Using Factory
 
 ```php
 <?php
 
-use Coduo\PHPMatcher\Factory\SimpleFactory;
+use Coduo\PHPMatcher\Factory\MatcherFactory;
 
-$factory = new SimpleFactory();
+$factory = new MatcherFactory();
 $matcher = $factory->createMatcher();
 
 $match = $matcher->match("lorem ipsum dolor", "@string@");
@@ -67,6 +68,8 @@ $matcher->getError(); // returns null or error message
 * ``@*@`` || ``@wildcard@``
 * ``expr(expression)``
 * ``@uuid@``
+* ``@json@``
+* ``@strig@||@integer@`` - string OR integer
 
 ### Available pattern expanders
 
@@ -83,11 +86,12 @@ $matcher->getError(); // returns null or error message
 * ``lowerThan($boundry)``
 * ``greaterThan($boundry)``
 * ``inArray($value)``
-* ``oneOf(...$expanders)`` - example usage ``"@string@.oneOf(contains('foo'), contains('bar'), contains('baz'))"``
-* ``matchRegex($regex)`` - example usage ``"@string@.matchRegex('/^lorem.+/')"``
+* ``oneOf(...$expanders)`` - example ``"@string@.oneOf(contains('foo'), contains('bar'), contains('baz'))"``
+* ``matchRegex($regex)`` - example ``"@string@.matchRegex('/^lorem.+/')"``
 * ``optional()`` - work's only with ``ArrayMatcher``, ``JsonMatcher`` and ``XmlMatcher``
-* ``count()`` - work's only with ``ArrayMatcher`` - example usage ``"@array@.count(5)"``
-* ``repeat($pattern, $isStrict = true)`` - example usage ``'@array@.repeat({"name": "foe"})'`` or ``"@array@.repeat('@string@')"``
+* ``count()`` - work's only with ``ArrayMatcher`` - example ``"@array@.count(5)"``
+* ``repeat($pattern, $isStrict = true)`` - example ``'@array@.repeat({"name": "foe"})'`` or ``"@array@.repeat('@string@')"``
+* ``match($pattern)`` - example ``{"image":"@json@.match({\"url\":\"@string@.isUrl()\"})"}``
 
 ## Example usage
 
@@ -96,9 +100,9 @@ $matcher->getError(); // returns null or error message
 ```php
 <?php
 
-use Coduo\PHPMatcher\Factory\SimpleFactory;
+use Coduo\PHPMatcher\Factory\MatcherFactory;
 
-$factory = new SimpleFactory();
+$factory = new MatcherFactory();
 $matcher = $factory->createMatcher();
 
 $matcher->match(1, 1);
@@ -110,9 +114,9 @@ $matcher->match('string', 'string');
 ```php
 <?php
 
-use Coduo\PHPMatcher\Factory\SimpleFactory;
+use Coduo\PHPMatcher\Factory\MatcherFactory;
 
-$factory = new SimpleFactory();
+$factory = new MatcherFactory();
 $matcher = $factory->createMatcher();
 
 $matcher->match('Norbert', '@string@');
@@ -125,9 +129,9 @@ $matcher->match("lorem ipsum dolor", "@string@.startsWith('lorem').contains('ips
 ```php
 <?php
 
-use Coduo\PHPMatcher\Factory\SimpleFactory;
+use Coduo\PHPMatcher\Factory\MatcherFactory;
 
-$factory = new SimpleFactory();
+$factory = new MatcherFactory();
 $matcher = $factory->createMatcher();
 
 $matcher->match('2014-08-19', '@string@.isDateTime()');
@@ -141,9 +145,9 @@ $matcher->match('2014-08-19', '@string@.isDateTime().before("today").after("+ 10
 ```php
 <?php
 
-use Coduo\PHPMatcher\Factory\SimpleFactory;
+use Coduo\PHPMatcher\Factory\MatcherFactory;
 
-$factory = new SimpleFactory();
+$factory = new MatcherFactory();
 $matcher = $factory->createMatcher();
 
 $matcher->match(100, '@integer@');
@@ -156,9 +160,9 @@ $matcher->match(100, '@integer@.lowerThan(200).greaterThan(10)');
 ```php
 <?php
 
-use Coduo\PHPMatcher\Factory\SimpleFactory;
+use Coduo\PHPMatcher\Factory\MatcherFactory;
 
-$factory = new SimpleFactory();
+$factory = new MatcherFactory();
 $matcher = $factory->createMatcher();
 
 $matcher->match(100, '@number@');
@@ -173,9 +177,9 @@ $matcher->match(0b10100111001, '@number@');
 ```php
 <?php
 
-use Coduo\PHPMatcher\Factory\SimpleFactory;
+use Coduo\PHPMatcher\Factory\MatcherFactory;
 
-$factory = new SimpleFactory();
+$factory = new MatcherFactory();
 $matcher = $factory->createMatcher();
 
 $matcher->match(10.1, "@double@");
@@ -187,9 +191,9 @@ $matcher->match(10.1, "@double@.lowerThan(50.12).greaterThan(10)");
 ```php
 <?php
 
-use Coduo\PHPMatcher\Factory\SimpleFactory;
+use Coduo\PHPMatcher\Factory\MatcherFactory;
 
-$factory = new SimpleFactory();
+$factory = new MatcherFactory();
 $matcher = $factory->createMatcher();
 
 $matcher->match(true, "@boolean@");
@@ -201,9 +205,9 @@ $matcher->match(false, "@boolean@");
 ```php
 <?php
 
-use Coduo\PHPMatcher\Factory\SimpleFactory;
+use Coduo\PHPMatcher\Factory\MatcherFactory;
 
-$factory = new SimpleFactory();
+$factory = new MatcherFactory();
 $matcher = $factory->createMatcher();
 
 $matcher->match("@integer@", "@*@");
@@ -214,14 +218,14 @@ $matcher->match(array("bar"), "@wildcard@");
 $matcher->match(new \stdClass, "@wildcard@");
 ```
 
-### Expression matching 
+### Expression matching
 
 ```php
 <?php
 
-use Coduo\PHPMatcher\Factory\SimpleFactory;
+use Coduo\PHPMatcher\Factory\MatcherFactory;
 
-$factory = new SimpleFactory();
+$factory = new MatcherFactory();
 $matcher = $factory->createMatcher();
 
 $matcher->match(new \DateTime('2014-04-01'), "expr(value.format('Y-m-d') == '2014-04-01'");
@@ -233,22 +237,22 @@ $matcher->match("Norbert", "expr(value === 'Norbert')");
 ```php
 <?php
 
-use Coduo\PHPMatcher\Factory\SimpleFactory;
+use Coduo\PHPMatcher\Factory\MatcherFactory;
 
-$factory = new SimpleFactory();
+$factory = new MatcherFactory();
 $matcher = $factory->createMatcher();
 
 $matcher->match('9f4db639-0e87-4367-9beb-d64e3f42ae18', '@uuid@');
 ```
 
-### Array matching 
+### Array matching
 
 ```php
 <?php
 
-use Coduo\PHPMatcher\Factory\SimpleFactory;
+use Coduo\PHPMatcher\Factory\MatcherFactory;
 
-$factory = new SimpleFactory();
+$factory = new MatcherFactory();
 $matcher = $factory->createMatcher();
 
 $matcher->match(
@@ -296,18 +300,18 @@ $matcher->match(
       ),
       '@boolean@',
       '@double@'
-  )  
+  )
 );
 ```
 
-### Json matching 
+### Json matching
 
 ```php
 <?php
 
-use Coduo\PHPMatcher\Factory\SimpleFactory;
+use Coduo\PHPMatcher\Factory\MatcherFactory;
 
-$factory = new SimpleFactory();
+$factory = new MatcherFactory();
 $matcher = $factory->createMatcher();
 
 $matcher->match(
@@ -323,10 +327,10 @@ $matcher->match(
   '{
     "users":[
       {
-        "firstName": @string@,
-        "lastName": @string@,
+        "firstName": "@string@",
+        "lastName": "@string@",
         "created": "@string@.isDateTime()",
-        "roles": @array@,
+        "roles": "@array@",
         "position": "@string@.optional()"
       }
     ]
@@ -339,9 +343,9 @@ $matcher->match(
 ```php
 <?php
 
-use Coduo\PHPMatcher\Factory\SimpleFactory;
+use Coduo\PHPMatcher\Factory\MatcherFactory;
 
-$factory = new SimpleFactory();
+$factory = new MatcherFactory();
 $matcher = $factory->createMatcher();
 
 $matcher->match(
@@ -356,6 +360,9 @@ $matcher->match(
           "isAdmin": false,
           "dateOfBirth" null,
           "hasEmailVerified": true
+        },
+        "avatar": {
+          "url": "http://avatar-image.com/avatar.png"
         }
       },
       {
@@ -367,24 +374,26 @@ $matcher->match(
           "isAdmin": true,
           "dateOfBirth" null,
           "hasEmailVerified": true
-        }
+        },
+        "avatar": null
       }
     ]
   }',
   '{
     "users":[
       {
-        "firstName": @string@,
-        "lastName": @string@,
+        "firstName": "@string@",
+        "lastName": "@string@",
         "created": "@string@.isDateTime()",
         "roles": [
             "ROLE_USER",
-            @...@
+            "@...@"
         ],
         "attributes": {
           "isAdmin": @boolean@,
           "@*@": "@*@"
-        }
+        },
+        "avatar": "@json@.match({\"url\":\"@string@.isUrl()\"})"
       }
     ],
     @...@
@@ -397,9 +406,9 @@ $matcher->match(
 ```php
 <?php
 
-use Coduo\PHPMatcher\Factory\SimpleFactory;
+use Coduo\PHPMatcher\Factory\MatcherFactory;
 
-$factory = new SimpleFactory();
+$factory = new MatcherFactory();
 $matcher = $factory->createMatcher();
 
 $matcher->match(<<<XML
@@ -452,7 +461,7 @@ Feature: Listing user toys
   Scenario: Listing toys
     Given the following users exist:
       | firstName     | lastName     |
-      | Chuck         | Norris       | 
+      | Chuck         | Norris       |
 
     And the following toys user "Chuck Norris" exist:
       | name            |
@@ -467,23 +476,23 @@ Feature: Listing user toys
     """
       [
         {
-          "id": @string@,
+          "id": "@string@",
           "name": "Barbie",
           "_links: "@*@"
         },
         {
-          "id": @string@,
+          "id": "@string@",
           "name": "GI Joe",
           "_links": "@*@"
         },
         {
-          "id": @string@,
+          "id": "@string@",
           "name": "Optimus Prime",
           "_links": "@*@"
         }
       ]
     """
-``` 
+```
 
 ## PHPUnit integration
 
@@ -495,8 +504,9 @@ or extend the `Coduo\PHPMatcher\PHPUnit\PHPMatcherTestCase`:
 namespace Coduo\PHPMatcher\Tests\PHPUnit;
 
 use Coduo\PHPMatcher\PHPUnit\PHPMatcherAssertions;
+use PHPUnit\Framework\TestCase;
 
-class PHPMatcherAssertionsTest extends \PHPUnit_Framework_TestCase
+class PHPMatcherAssertionsTest extends TestCase
 {
     use PHPMatcherAssertions;
 
@@ -510,7 +520,7 @@ class PHPMatcherAssertionsTest extends \PHPUnit_Framework_TestCase
 The `matchesPattern()` method can be used in PHPUnit stubs or mocks:
 
 ```php
-$mock = $this->getMock(Foo::class);
+$mock = $this->createMock(Foo::class);
 $mock->method('bar')
     ->with($this->matchesPattern('@string@'))
     ->willReturn('foo');
@@ -524,4 +534,3 @@ This library is distributed under the MIT license. Please see the LICENSE file.
 
 This lib was inspired by [JSON Expressions gem](https://github.com/chancancode/json_expressions) &&
 [Behat RestExtension ](https://github.com/jakzal/RestExtension)
-

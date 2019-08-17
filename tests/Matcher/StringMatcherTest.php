@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Coduo\PHPMatcher\Tests\Matcher;
 
+use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Lexer;
 use Coduo\PHPMatcher\Matcher\StringMatcher;
 use Coduo\PHPMatcher\Parser;
@@ -16,10 +17,9 @@ class StringMatcherTest extends TestCase
      */
     private $matcher;
 
-    public function setUp()
+    public function setUp() : void
     {
-        $parser = new Parser(new Lexer(), new Parser\ExpanderInitializer());
-        $this->matcher = new StringMatcher($parser);
+        $this->matcher = new StringMatcher(new Backtrace(), new Parser(new Lexer(), new Parser\ExpanderInitializer()));
     }
     /**
      * @dataProvider positiveCanMatchData

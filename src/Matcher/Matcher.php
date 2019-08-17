@@ -11,7 +11,7 @@ abstract class Matcher implements ValueMatcher
     /**
      * @inheritdoc
      */
-    public function getError()
+    public function getError() : ?string
     {
         return $this->error;
     }
@@ -26,5 +26,10 @@ abstract class Matcher implements ValueMatcher
         }
 
         return false;
+    }
+
+    public function clearError() : void
+    {
+        $this->error = null;
     }
 }

@@ -34,6 +34,7 @@ final class ExpanderInitializer
         Expander\Optional::NAME => Expander\Optional::class,
         Expander\StartsWith::NAME => Expander\StartsWith::class,
         Expander\Repeat::NAME => Expander\Repeat::class,
+        Expander\Match::NAME => Expander\Match::class
     ];
 
     public function setExpanderDefinition(string $expanderName, string $expanderFQCN)
