@@ -19,6 +19,7 @@ final class ExpanderInitializer
         Expander\After::NAME => Expander\After::class,
         Expander\Before::NAME => Expander\Before::class,
         Expander\Contains::NAME => Expander\Contains::class,
+        Expander\NotContains::NAME => Expander\NotContains::class,
         Expander\Count::NAME => Expander\Count::class,
         Expander\EndsWith::NAME => Expander\EndsWith::class,
         Expander\GreaterThan::NAME => Expander\GreaterThan::class,
