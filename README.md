@@ -69,7 +69,7 @@ $matcher->getError(); // returns null or error message
 * ``expr(expression)``
 * ``@uuid@``
 * ``@json@``
-* ``@strig@||@integer@`` - string OR integer
+* ``@string@||@integer@`` - string OR integer
 
 ### Available pattern expanders
 
