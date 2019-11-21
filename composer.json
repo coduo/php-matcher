@@ -19,8 +19,8 @@
         "ext-filter": "*",
         "ext-json": "*",
         "coduo/php-to-string": "^2",
-        "symfony/property-access": "^2.3|^3.0|^4.0",
-        "symfony/expression-language": "^2.3|^3.0|^4.0",
+        "symfony/property-access": "^2.3|^3.0|^4.0|^5.0",
+        "symfony/expression-language": "^2.3|^3.0|^4.0|^5.0",
         "doctrine/lexer": "^1.0",
         "openlss/lib-array2xml": "^1.0"
     },
