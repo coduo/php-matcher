@@ -12,6 +12,10 @@ It was built to simplify API's functional testing.
 * [![Build Status](https://travis-ci.org/coduo/php-matcher.svg?branch=3.2)](https://travis-ci.org/coduo/php-matcher) - [3.2.* README](https://github.com/coduo/php-matcher/tree/3.2/README.md) PHP >= 7.0 
 * [![Build Status](https://travis-ci.org/coduo/php-matcher.svg?branch=3.1)](https://travis-ci.org/coduo/php-matcher) - [3.1.* README](https://github.com/coduo/php-matcher/tree/3.1/README.md) PHP >= 7.0  
 
+[![Latest Stable Version](https://poser.pugx.org/coduo/php-matcher/v/stable)](https://packagist.org/packages/coduo/php-matcher)
+[![Total Downloads](https://poser.pugx.org/coduo/php-matcher/downloads)](https://packagist.org/packages/coduo/php-matcher)
+[![Latest Unstable Version](https://poser.pugx.org/coduo/php-matcher/v/unstable)](https://packagist.org/packages/coduo/php-matcher)
+[![License](https://poser.pugx.org/coduo/php-matcher/license)](https://packagist.org/packages/coduo/php-matcher)
 
 ## Sandbox
 
