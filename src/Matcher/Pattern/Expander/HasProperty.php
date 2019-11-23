@@ -1,6 +1,6 @@
 <?php
 
-declare (strict_types=1);
+declare(strict_types=1);
 
 namespace Coduo\PHPMatcher\Matcher\Pattern\Expander;
 
@@ -32,7 +32,6 @@ final class HasProperty implements PatternExpander
         $this->backtrace->expanderEntrance(self::NAME, $value);
 
         if (\is_array($value)) {
-
             $hasProperty = \array_key_exists($this->propertyName, $value);
 
             if (!$hasProperty) {

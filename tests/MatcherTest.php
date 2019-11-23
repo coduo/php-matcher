@@ -237,7 +237,7 @@ XML;
                     "prevPage": "http:\/\/example.com\/api\/users\/1?limit=2",
                     "nextPage": "http:\/\/example.com\/api\/users\/3?limit=2"
                 }',
-                "@json@.hasProperty(\"users\")"
+                '@json@.hasProperty("users")'
             ],
             [
                 /** @lang JSON */
