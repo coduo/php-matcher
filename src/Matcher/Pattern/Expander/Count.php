@@ -9,7 +9,7 @@ use Coduo\ToString\StringConverter;
 
 final class Count implements PatternExpander
 {
-    const NAME = 'count';
+    public const NAME = 'count';
 
     use BacktraceBehavior;
 

@@ -9,7 +9,7 @@ use Coduo\ToString\StringConverter;
 
 final class Before implements PatternExpander
 {
-    const NAME = 'before';
+    public const NAME = 'before';
 
     use BacktraceBehavior;
 

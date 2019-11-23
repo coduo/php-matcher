@@ -58,6 +58,10 @@ final class JsonObjectMatcherTest extends TestCase
                 '@json@.contains("users")'
             ],
             [
+                '{"users":["Norbert","Michał"]}',
+                '@json@.hasProperty("users")'
+            ],
+            [
                 [1, 2, 3],
                 '@json@',
             ]

@@ -8,7 +8,7 @@ use Coduo\PHPMatcher\Matcher\Pattern\PatternExpander;
 
 final class Optional implements PatternExpander
 {
-    const NAME = 'optional';
+    public const NAME = 'optional';
 
     use BacktraceBehavior;
 

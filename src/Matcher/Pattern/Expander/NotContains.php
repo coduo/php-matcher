@@ -9,7 +9,7 @@ use Coduo\ToString\StringConverter;
 
 final class NotContains implements PatternExpander
 {
-    const NAME = 'notContains';
+    public const NAME = 'notContains';
 
     use BacktraceBehavior;
 

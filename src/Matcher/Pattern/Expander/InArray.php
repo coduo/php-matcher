@@ -9,7 +9,7 @@ use Coduo\ToString\StringConverter;
 
 final class InArray implements PatternExpander
 {
-    const NAME = 'inArray';
+    public const NAME = 'inArray';
 
     use BacktraceBehavior;
 

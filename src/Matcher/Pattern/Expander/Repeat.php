@@ -11,7 +11,7 @@ use Coduo\ToString\StringConverter;
 
 final class Repeat implements PatternExpander
 {
-    const NAME = 'repeat';
+    public const NAME = 'repeat';
 
     use BacktraceBehavior;
 

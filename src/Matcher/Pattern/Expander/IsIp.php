@@ -9,7 +9,7 @@ use Coduo\ToString\StringConverter;
 
 final class IsIp implements PatternExpander
 {
-    const NAME = 'isIp';
+    public const NAME = 'isIp';
 
     use BacktraceBehavior;
 

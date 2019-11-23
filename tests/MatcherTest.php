@@ -212,6 +212,34 @@ XML;
     {
         return [
             [
+                '{"data": {"createUserFormSchema":{"formData":"test","schema":"test","uiSchema":"test"}}}',
+                '{"data": {"createUserFormSchema":"@json@.hasProperty(\"formData\").hasProperty(\"schema\").hasProperty(\"uiSchema\")"}}'
+            ],
+            [
+                /** @lang JSON */
+                '{
+                    "users":[
+                        {
+                            "id": 131,
+                            "firstName": "Norbert",
+                            "lastName": "Orzechowicz",
+                            "enabled": true,
+                            "roles": ["ROLE_DEVELOPER"]
+                        },
+                        {
+                            "id": 132,
+                            "firstName": "Michał",
+                            "lastName": "Dąbrowski",
+                            "enabled": false,
+                            "roles": ["ROLE_DEVELOPER"]
+                        }
+                    ],
+                    "prevPage": "http:\/\/example.com\/api\/users\/1?limit=2",
+                    "nextPage": "http:\/\/example.com\/api\/users\/3?limit=2"
+                }',
+                '@json@.hasProperty("users")'
+            ],
+            [
                 /** @lang JSON */
                 '{
                     "users":[

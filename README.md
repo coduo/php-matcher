@@ -90,6 +90,7 @@ $matcher->getError(); // returns null or error message
 * ``lowerThan($boundry)``
 * ``greaterThan($boundry)``
 * ``inArray($value)``
+* ``hasProperty($propertyName)`` - example ``"@json@.hasProperty(\"property_name\")"``
 * ``oneOf(...$expanders)`` - example ``"@string@.oneOf(contains('foo'), contains('bar'), contains('baz'))"``
 * ``matchRegex($regex)`` - example ``"@string@.matchRegex('/^lorem.+/')"``
 * ``optional()`` - work's only with ``ArrayMatcher``, ``JsonMatcher`` and ``XmlMatcher``
