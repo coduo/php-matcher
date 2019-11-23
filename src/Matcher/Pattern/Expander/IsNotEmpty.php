@@ -9,7 +9,7 @@ use Coduo\ToString\StringConverter;
 
 final class IsNotEmpty implements PatternExpander
 {
-    const NAME = 'isNotEmpty';
+    public const NAME = 'isNotEmpty';
 
     use BacktraceBehavior;
 

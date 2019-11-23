@@ -9,7 +9,7 @@ use Coduo\ToString\StringConverter;
 
 final class LowerThan implements PatternExpander
 {
-    const NAME = 'lowerThan';
+    public const NAME = 'lowerThan';
 
     use BacktraceBehavior;
 

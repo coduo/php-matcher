@@ -9,7 +9,7 @@ use Coduo\ToString\StringConverter;
 
 final class Contains implements PatternExpander
 {
-    const NAME = 'contains';
+    public const NAME = 'contains';
 
     use BacktraceBehavior;
 
@@ -51,7 +51,7 @@ final class Contains implements PatternExpander
         }
 
         $this->backtrace->expanderSucceed(self::NAME, $value);
-        
+
         return true;
     }
 

@@ -9,7 +9,7 @@ use Coduo\ToString\StringConverter;
 
 final class IsEmail implements PatternExpander
 {
-    const NAME = 'isEmail';
+    public const NAME = 'isEmail';
 
     use BacktraceBehavior;
 

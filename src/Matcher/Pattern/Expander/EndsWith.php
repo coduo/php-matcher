@@ -9,7 +9,7 @@ use Coduo\ToString\StringConverter;
 
 final class EndsWith implements PatternExpander
 {
-    const NAME = 'endsWith';
+    public const NAME = 'endsWith';
 
     use BacktraceBehavior;
 

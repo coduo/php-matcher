@@ -9,7 +9,7 @@ use Coduo\ToString\StringConverter;
 
 final class IsDateTime implements PatternExpander
 {
-    const NAME = 'isDateTime';
+    public const NAME = 'isDateTime';
 
     use BacktraceBehavior;
 
@@ -39,7 +39,7 @@ final class IsDateTime implements PatternExpander
         }
 
         $this->backtrace->expanderSucceed(self::NAME, $value);
-        
+
         return true;
     }
 

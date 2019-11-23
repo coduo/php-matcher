@@ -9,7 +9,7 @@ use Coduo\PHPMatcher\Matcher;
 
 final class Match implements Matcher\Pattern\PatternExpander
 {
-    const NAME = 'match';
+    public const NAME = 'match';
 
     use BacktraceBehavior;
 

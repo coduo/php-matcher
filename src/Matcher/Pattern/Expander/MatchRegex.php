@@ -9,7 +9,7 @@ use Coduo\ToString\StringConverter;
 
 final class MatchRegex implements PatternExpander
 {
-    const NAME = 'matchRegex';
+    public const NAME = 'matchRegex';
 
     use BacktraceBehavior;
 

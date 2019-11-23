@@ -9,7 +9,7 @@ use Coduo\ToString\StringConverter;
 
 final class IsUrl implements PatternExpander
 {
-    const NAME = 'isUrl';
+    public const NAME = 'isUrl';
 
     use BacktraceBehavior;
 
