@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Coduo\PHPMatcher\Tests;
 
-use Coduo\PHPMatcher\PHPMatcher;
 use Coduo\PHPMatcher\PHPUnit\PHPMatcherTestCase;
 
 class MatcherTest extends PHPMatcherTestCase
@@ -15,7 +14,6 @@ class MatcherTest extends PHPMatcherTestCase
     public function test_matcher_with_scalar_values($value, $pattern)
     {
         $this->assertMatchesPattern($pattern, $value);
-        $this->assertTrue(PHPMatcher::match($value, $pattern));
     }
 
     public function test_matcher_with_array_value()
@@ -59,7 +57,6 @@ class MatcherTest extends PHPMatcherTestCase
         ];
 
         $this->assertMatchesPattern($pattern, $value);
-        $this->assertTrue(PHPMatcher::match($value, $pattern, $error), (string) $error);
     }
 
     /**
@@ -68,7 +65,6 @@ class MatcherTest extends PHPMatcherTestCase
     public function test_matcher_with_json($value, $pattern)
     {
         $this->assertMatchesPattern($pattern, $value);
-        $this->assertTrue(PHPMatcher::match($value, $pattern));
     }
 
     public function test_matcher_with_xml()
@@ -105,7 +101,6 @@ XML;
 XML;
 
         $this->assertMatchesPattern($pattern, $value);
-        $this->assertTrue(PHPMatcher::match($value, $pattern));
     }
 
     public function test_matcher_with_xml_including_optional_node()
@@ -143,7 +138,6 @@ XML;
 XML;
 
         $this->assertMatchesPattern($pattern, $value);
-        $this->assertTrue(PHPMatcher::match($value, $pattern));
     }
 
     public function test_full_text_matcher()
@@ -151,7 +145,6 @@ XML;
         $value = 'lorem ipsum 1234 random text';
         $pattern = "@string@.startsWith('lo') ipsum @number@.greaterThan(10) random text";
         $this->assertMatchesPattern($pattern, $value);
-        $this->assertTrue(PHPMatcher::match($value, $pattern));
     }
 
     public function test_matcher_with_callback()
@@ -162,20 +155,12 @@ XML;
             },
             'test'
         );
-        $this->assertTrue(PHPMatcher::match('test', function ($value) {
-            return $value === 'test';
-        }));
-        $this->assertFalse(PHPMatcher::match('test', function ($value) {
-            return $value !== 'test';
-        }));
     }
 
     public function test_matcher_with_wildcard()
     {
         $this->assertMatchesPattern('@*@', 'test');
-        $this->assertTrue(PHPMatcher::match('test', '@*@'));
         $this->assertMatchesPattern('@wildcard@', 'test');
-        $this->assertTrue(PHPMatcher::match('test', '@wildcard@'));
     }
 
     /**

@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace Coduo\PHPMatcher\PHPUnit;
 
-use Coduo\PHPMatcher\Backtrace;
-use Coduo\PHPMatcher\Factory\MatcherFactory;
-use Coduo\PHPMatcher\Matcher;
+use Coduo\PHPMatcher\PHPMatcher;
 use PHPUnit\Framework\Constraint\Constraint;
 use PHPUnit\Util\Json;
 use SebastianBergmann\Comparator\ComparisonFailure;
@@ -15,7 +13,6 @@ final class PHPMatcherConstraint extends Constraint
 {
     private $pattern;
     private $matcher;
-    private $backtrace;
     private $lastValue;
 
     public function __construct($pattern)
@@ -33,8 +30,7 @@ final class PHPMatcherConstraint extends Constraint
         }
 
         $this->pattern = $pattern;
-        $this->backtrace = new Backtrace();
-        $this->matcher = $this->createMatcher();
+        $this->matcher = new PHPMatcher();
     }
 
     /**
@@ -42,22 +38,20 @@ final class PHPMatcherConstraint extends Constraint
      */
     public function toString() : string
     {
-        return 'matches the pattern';
+        return 'matches given pattern.';
     }
 
     protected function failureDescription($other): string
     {
-        return parent::failureDescription($other) . ".\nError: " . $this->matcher->getError();
+        return parent::failureDescription($other)
+            . "\nPattern: " . $this->exporter()->export($this->pattern)
+            . "\nError: " . $this->matcher->error()
+            . "\nBacktrace: \n" . $this->matcher->backtrace();
     }
 
     protected function matches($value) : bool
     {
         return $this->matcher->match($this->lastValue = $value, $this->pattern);
-    }
-
-    private function createMatcher() : Matcher
-    {
-        return (new MatcherFactory())->createMatcher($this->backtrace);
     }
 
     /**

@@ -2,8 +2,12 @@
 
 Library created for testing all kinds of JSON/XML/TXT/Scalar values against patterns.
 
+API: 
+
 ```php
-PHPMatcher::match($value = '{"foo": "bar"}', $pattern = '{"foo": "@string@"}');
+PHPMatcher::match($value = '{"foo": "bar"}', $pattern = '{"foo": "@string@"}') : bool;
+PHPMatcher::backtrace() : Backtrace;
+PHPMatcher::error() : ?string;
 ```
 
 It was built to simplify API's functional testing.
@@ -31,32 +35,56 @@ composer require --dev "coduo/php-matcher"
 
 ## Basic usage
 
-### Using facade
+### Direct PHPMatcher usage
 
 ```php
 <?php
 
 use Coduo\PHPMatcher\PHPMatcher;
 
-if (!PHPMatcher::match("lorem ipsum dolor", "@string@", $error)) {
-    echo $error; // in case of error message is set on $error variable via reference
-}
+$matcher = new PHPMatcher();
+$match = $matcher->match("lorem ipsum dolor", "@string@");
 
+if (!$match) {
+    echo "Error: " . $matcher->error();
+    echo "Backtrace: \n";
+    echo (string) $matcher->backtrace();
+}
 ```
 
-### Using Factory
+### PHPUnit extending PHPMatcherTestCase
 
 ```php
 <?php
 
-use Coduo\PHPMatcher\Factory\MatcherFactory;
+use Coduo\PHPMatcher\PHPUnit\PHPMatcherTestCase;
 
-$factory = new MatcherFactory();
-$matcher = $factory->createMatcher();
+class MatcherTest extends PHPMatcherTestCase
+{
+    public function test_matcher_that_value_matches_pattern()
+    {
+        $this->assertMatchesPattern('{"name": "Norbert"}', '{"name": "@string@"}');
+    }
+}
+```
 
-$match = $matcher->match("lorem ipsum dolor", "@string@");
-// $match === true
-$matcher->getError(); // returns null or error message
+### PHPUnit using PHPMatcherAssertions trait
+
+```php
+<?php
+
+use Coduo\PHPMatcher\PHPUnit\PHPMatcherAssertions;
+use PHPUnit\Framework\TestCase;
+
+class MatcherTest extends TestCase
+{
+    use PHPMatcherAssertions;
+
+    public function test_matcher_that_value_matches_pattern()
+    {
+        $this->assertMatchesPattern('{"name": "Norbert"}', '{"name": "@string@"}');
+    }
+}
 ```
 
 ### Available patterns

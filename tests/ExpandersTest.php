@@ -4,22 +4,19 @@ declare(strict_types=1);
 
 namespace Coduo\PHPMatcher\Tests;
 
-use Coduo\PHPMatcher\Factory\MatcherFactory;
-use Coduo\PHPMatcher\Matcher;
 use Coduo\PHPMatcher\PHPMatcher;
 use PHPUnit\Framework\TestCase;
 
 final class ExpandersTest extends TestCase
 {
     /**
-     * @var Matcher
+     * @var PHPMatcher
      */
     protected $matcher;
 
     public function setUp() : void
     {
-        $factory = new MatcherFactory();
-        $this->matcher = $factory->createMatcher();
+        $this->matcher = new PHPMatcher();
     }
 
     /**
@@ -27,8 +24,7 @@ final class ExpandersTest extends TestCase
      */
     public function test_expanders($value, $pattern, $expectedResult)
     {
-        $this->assertSame($expectedResult, $this->matcher->match($value, $pattern), (string) $this->matcher->getError());
-        $this->assertSame($expectedResult, PHPMatcher::match($value, $pattern));
+        $this->assertSame($expectedResult, $this->matcher->match($value, $pattern), (string) $this->matcher->error());
     }
 
     public static function expanderExamples()

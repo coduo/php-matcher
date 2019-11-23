@@ -104,6 +104,11 @@ final class Backtrace
         );
     }
 
+    public function isEmpty() : bool
+    {
+        return \count($this->trace) === 0;
+    }
+
     public function __toString() : string
     {
         return \implode("\n", $this->trace);

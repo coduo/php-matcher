@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Coduo\PHPMatcher\Tests\PHPUnit;
 
 use Coduo\PHPMatcher\PHPUnit\PHPMatcherTestCase;
+use PHPUnit\Framework\AssertionFailedError;
 
 class PHPMatcherTestCaseTest extends PHPMatcherTestCase
 {
@@ -15,16 +16,16 @@ class PHPMatcherTestCaseTest extends PHPMatcherTestCase
 
     public function test_it_throws_an_expectation_failed_exception_if_a_value_does_not_match_the_pattern()
     {
-        $this->expectException(\PHPUnit\Framework\AssertionFailedError::class);
-        $this->expectExceptionMessage("Failed asserting that '{\"foo\":\"bar\"}' matches the pattern");
+        $this->expectException(AssertionFailedError::class);
+        $this->expectExceptionMessageMatches("/Failed asserting that '{\"foo\":\"bar\"}' matches given pattern(.*)/");
 
         $this->assertMatchesPattern('{"foo": "@integer@"}', \json_encode(['foo' => 'bar']));
     }
 
     public function test_it_creates_a_constraint_for_stubs()
     {
-        $this->expectException(\PHPUnit\Framework\AssertionFailedError::class);
-        $this->expectExceptionMessage('Failed asserting that 42 matches the pattern.');
+        $this->expectException(AssertionFailedError::class);
+        $this->expectExceptionMessageMatches('/Failed asserting that 42 matches given pattern(.*)/');
 
         $mock = $this->getMockBuilder('stdClass')
             ->setMethods(['getTitle'])
