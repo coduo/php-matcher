@@ -131,6 +131,12 @@ class MatcherTest extends TestCase
                     "nextPage": "@string@"
                 }',
             ],
+            'matches with txt matcher ' => [
+                /** @lang JSON */
+                '{"foo": "/foo/92ff9a6c-7fbd-47e5-b550-90b77e3284c7/bar"}',
+                /** @lang JSON */
+                '{"foo": "/foo/@uuid@/bar"}'
+            ],
             'matches json values with full text matcher' => [
                 /** @lang JSON */
                 '{

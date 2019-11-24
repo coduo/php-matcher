@@ -28,7 +28,7 @@ final class Json
             return false;
         }
 
-        return self::isValid(self::transformPattern($value));
+        return self::isValid($value) || self::isValid(self::transformPattern($value));
     }
 
     public static function transformPattern(string $pattern) : string

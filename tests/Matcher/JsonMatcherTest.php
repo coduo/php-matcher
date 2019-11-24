@@ -151,6 +151,7 @@ class JsonMatcherTest extends TestCase
             [\json_encode(['Norbert', 'Michał'])],
             [\json_encode(['Norbert', '@string@'])],
             [\json_encode('test')],
+            [\json_encode(['foo' => '/foo/@uuid@/bar'])],
         ];
     }
 
