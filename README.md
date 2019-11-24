@@ -326,8 +326,9 @@ $matcher->match(
         "firstName": "Norbert",
         "lastName": "Orzechowicz",
         "created": "2014-01-01",
-        "roles":["ROLE_USER", "ROLE_DEVELOPER"]}
-      ]
+        "roles":["ROLE_USER", "ROLE_DEVELOPER"]
+      }
+    ]
   }',
   '{
     "users":[
@@ -360,10 +361,10 @@ $matcher->match(
         "firstName": "Norbert",
         "lastName": "Orzechowicz",
         "created": "2014-01-01",
-        "roles":["ROLE_USER", "ROLE_DEVELOPER"]},
+        "roles":["ROLE_USER", "ROLE_DEVELOPER"],
         "attributes": {
           "isAdmin": false,
-          "dateOfBirth" null,
+          "dateOfBirth": null,
           "hasEmailVerified": true
         },
         "avatar": {
@@ -374,10 +375,10 @@ $matcher->match(
         "firstName": "Michał",
         "lastName": "Dąbrowski",
         "created": "2014-01-01",
-        "roles":["ROLE_USER", "ROLE_DEVELOPER", "ROLE_ADMIN"]},
+        "roles":["ROLE_USER", "ROLE_DEVELOPER", "ROLE_ADMIN"],
         "attributes": {
           "isAdmin": true,
-          "dateOfBirth" null,
+          "dateOfBirth": null,
           "hasEmailVerified": true
         },
         "avatar": null
@@ -400,8 +401,9 @@ $matcher->match(
         },
         "avatar": "@json@.match({\"url\":\"@string@.isUrl()\"})"
       }
-    ],
-    @...@
+      ,
+      @...@
+    ]
   }'
 );
 ```
