@@ -23,7 +23,7 @@ It was built to simplify API's functional testing.
 
 ## Sandbox
 
-Feel free to play first with [Sandbox](https://pattern-matcher.azurewebsites.net/)
+Feel free to play first with [Sandbox](https://php-matcher.norbert.tech/)
 
 ## Installation
 
