@@ -12,9 +12,9 @@ use Coduo\PHPMatcher\Parser;
 
 final class MatcherFactory implements Factory
 {
-    public function createMatcher(Backtrace $backtrace = null) : Matcher
+    public function createMatcher() : Matcher
     {
-        $matcherBacktrace = $backtrace ? $backtrace : new Backtrace();
+        $matcherBacktrace = new Backtrace();
 
         return new Matcher($this->buildMatchers($this->buildParser($matcherBacktrace), $matcherBacktrace), $matcherBacktrace);
     }

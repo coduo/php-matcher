@@ -8,27 +8,43 @@ use Coduo\PHPMatcher\Factory\MatcherFactory;
 
 final class PHPMatcher
 {
-    public static function match($value, $pattern, string &$error = null) : bool
+    private $matcher;
+
+    public function match($value, $pattern) : bool
     {
-        $matcher = (new MatcherFactory())->createMatcher();
+        $this->matcher = null;
 
-        if (!$matcher->match($value, $pattern)) {
-            $error = $matcher->getError();
-            return false;
-        }
-
-        return true;
+        return $this->getMatcher()->match($value, $pattern);
     }
 
-    public static function matchBacktrace($value, $pattern, Backtrace $backtrace, string &$error = null) : bool
+    /**
+     * Returns backtrace from last matching.
+     * When called before PHPMatcher::match() function it will return instance where Backtrace::isEmpty() will return true
+     *
+     * @return Backtrace
+     */
+    public function backtrace() : Backtrace
     {
-        $matcher = (new MatcherFactory())->createMatcher($backtrace);
+        return $this->getMatcher()->backtrace();
+    }
 
-        if (!$matcher->match($value, $pattern)) {
-            $error = $matcher->getError();
-            return false;
+    /**
+     * Returns error from last matching.
+     * If last matching was successful this function will return null.
+     *
+     * @return string|null
+     */
+    public function error() : ?string
+    {
+        return $this->getMatcher()->getError();
+    }
+
+    private function getMatcher() : Matcher
+    {
+        if (null === $this->matcher) {
+            $this->matcher = (new MatcherFactory())->createMatcher();
         }
 
-        return true;
+        return $this->matcher;
     }
 }
