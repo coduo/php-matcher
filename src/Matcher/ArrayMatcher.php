@@ -152,13 +152,13 @@ final class ArrayMatcher extends Matcher
 
     private function findNotExistingKeys(array $patterns, array $values) : array
     {
-        if (isset($patterns[self::UNIVERSAL_KEY])) {
-            return [];
-        }
-
         $notExistingKeys = \array_diff_key($patterns, $values);
 
-        return \array_filter($notExistingKeys, function ($pattern) use ($values) {
+        return \array_filter($notExistingKeys, function ($pattern, $key) use ($values) {
+            if ($key === self::UNIVERSAL_KEY) {
+                return false;
+            }
+
             if (\is_array($pattern)) {
                 return empty($pattern) || !$this->match($values, $pattern);
             }
@@ -170,7 +170,7 @@ final class ArrayMatcher extends Matcher
             }
 
             return !$typePattern->hasExpander('optional');
-        });
+        }, ARRAY_FILTER_USE_BOTH);
     }
 
     private function valueMatchPattern($value, $pattern) : bool
