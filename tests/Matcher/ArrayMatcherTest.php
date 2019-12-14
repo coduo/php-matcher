@@ -294,6 +294,7 @@ class ArrayMatcherTest extends TestCase
             [[], ['key' => []]],
             [[], ['foo' => 'bar']],
             [[], ['foo' => ['bar' => []]]],
+            [['key' => 'val', 'key2' => 'val2'], ['not key' => 'val', '@*@' => '@*@']],
             'unbound array should match one or none elements' => [
                 [
                     'users' => [
