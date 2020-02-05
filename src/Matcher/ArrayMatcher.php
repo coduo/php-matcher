@@ -8,9 +8,6 @@ use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Exception\Exception;
 use Coduo\PHPMatcher\Parser;
 use Coduo\ToString\StringConverter;
-use Symfony\Component\PropertyAccess\PropertyAccess;
-use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
-use Symfony\Component\PropertyAccess\PropertyPath;
 
 final class ArrayMatcher extends Matcher
 {
@@ -187,24 +184,8 @@ final class ArrayMatcher extends Matcher
 
     private function valueExist(string $path, array $haystack) : bool
     {
-        $propertyPath = new PropertyPath($path);
-        $length = $propertyPath->getLength();
-        $valueExist = true;
-        for ($i = 0; $i < $length; ++$i) {
-            $property = $propertyPath->getElement($i);
-            $isIndex = $propertyPath->isIndex($i);
-            $propertyExist = $this->arrayPropertyExists($property, $haystack);
-
-            if ($isIndex && !$propertyExist) {
-                $valueExist = false;
-                break;
-            }
-        }
-
-        unset($propertyPath);
-        return $valueExist;
+        return $this->arrayPropertyExists($this->getKeyFromAccessPath($path), $haystack);
     }
-
 
     private function arrayPropertyExists(string $property, array $objectOrArray) : bool
     {
@@ -214,19 +195,7 @@ final class ArrayMatcher extends Matcher
 
     private function getValueByPath(array $array, string $path)
     {
-        return $this->getPropertyAccessor()->getValue($array, $path);
-    }
-
-    private function getPropertyAccessor() : PropertyAccessorInterface
-    {
-        if (isset($this->accessor)) {
-            return $this->accessor;
-        }
-
-        $accessorBuilder = PropertyAccess::createPropertyAccessorBuilder();
-        $this->accessor = $accessorBuilder->getPropertyAccessor();
-
-        return $this->accessor;
+        return $array[$this->getKeyFromAccessPath($path)];
     }
 
     private function setMissingElementInError(string $place, string $path)
@@ -237,6 +206,11 @@ final class ArrayMatcher extends Matcher
     private function formatAccessPath($key) : string
     {
         return \sprintf('[%s]', $key);
+    }
+
+    private function getKeyFromAccessPath(string $path) : string
+    {
+        return \substr($path, 1, -1);
     }
 
     private function formatFullPath(string $parentPath, string $path) : string
