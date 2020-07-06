@@ -7,6 +7,7 @@ namespace Coduo\PHPMatcher\Tests\Matcher;
 use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Matcher\CallbackMatcher;
 use PHPUnit\Framework\TestCase;
+use DateTime;
 
 class CallbackMatcherTest extends TestCase
 {
@@ -21,7 +22,7 @@ class CallbackMatcherTest extends TestCase
     public function test_negative_can_match()
     {
         $matcher = new CallbackMatcher(new Backtrace());
-        $this->assertFalse($matcher->canMatch(new \DateTime()));
+        $this->assertFalse($matcher->canMatch(new DateTime()));
         $this->assertFalse($matcher->canMatch('SIN'));
     }
 

@@ -9,6 +9,7 @@ use Coduo\PHPMatcher\Lexer;
 use Coduo\PHPMatcher\Parser;
 use Coduo\PHPMatcher\Matcher\UuidMatcher;
 use PHPUnit\Framework\TestCase;
+use stdClass;
 
 class UuidMatcherTest extends TestCase
 {
@@ -24,6 +25,7 @@ class UuidMatcherTest extends TestCase
             new Parser(new Lexer(), new Parser\ExpanderInitializer($backtrace))
         );
     }
+
     /**
      * @dataProvider positiveCanMatchData
      */
@@ -110,7 +112,7 @@ class UuidMatcherTest extends TestCase
     public static function negativeMatchDescription()
     {
         return [
-            [new \stdClass,  '@uuid@', 'object "\\stdClass" is not a valid UUID: not a string.'],
+            [new stdClass,  '@uuid@', 'object "\\stdClass" is not a valid UUID: not a string.'],
             [1.1, '@uuid@', 'double "1.1" is not a valid UUID: not a string.'],
             [false, '@uuid@', 'boolean "false" is not a valid UUID: not a string.'],
             [1, '@uuid@', 'integer "1" is not a valid UUID: not a string.'],

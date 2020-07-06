@@ -8,13 +8,22 @@ use Coduo\PHPMatcher\Exception\Exception;
 use Coduo\PHPMatcher\Exception\PatternException;
 use Coduo\PHPMatcher\Matcher\Pattern;
 use Coduo\PHPMatcher\Parser\ExpanderInitializer;
+use function is_null;
+use function sprintf;
+use function strlen;
 
 final class Parser
 {
     const NULL_VALUE = 'null';
 
+    /**
+     * @var Lexer
+     */
     private $lexer;
 
+    /**
+     * @var ExpanderInitializer
+     */
     private $expanderInitializer;
 
     public function __construct(Lexer $lexer, ExpanderInitializer $expanderInitializer)
@@ -58,6 +67,8 @@ final class Parser
     {
         $this->lexer->moveNext();
 
+        $pattern = null;
+
         switch ($this->lexer->lookahead['type']) {
             case Lexer::T_TYPE_PATTERN:
                 $pattern = new AST\Pattern(new AST\Type($this->lexer->lookahead['value']));
@@ -69,7 +80,7 @@ final class Parser
 
         $this->lexer->moveNext();
 
-        if (!$this->endOfPattern()) {
+        if (!$this->endOfPattern() && $pattern instanceof AST\Pattern) {
             $this->addExpanderNodes($pattern);
         }
 
@@ -84,7 +95,7 @@ final class Parser
     }
 
     /**
-     * Try to get next expander, return null if there is no expander left
+     * Try to get next expander, return null if there is no expander left.
      */
     private function getNextExpanderNode() : ?AST\Expander
     {
@@ -123,9 +134,9 @@ final class Parser
     }
 
     /**
-     * Add arguments to expander
+     * Add arguments to expander.
      */
-    private function addArgumentValues(AST\Expander $expander)
+    private function addArgumentValues(AST\Expander $expander): void
     {
         while (($argument = $this->getNextArgumentValue()) !== null) {
             $argument = ($argument === self::NULL_VALUE) ? null : $argument;
@@ -143,7 +154,7 @@ final class Parser
     }
 
     /**
-     * Try to get next argument. Return false if there are no arguments left before ")"
+     * Try to get next argument. Return false if there are no arguments left before ")".
      */
     private function getNextArgumentValue()
     {
@@ -239,29 +250,31 @@ final class Parser
     }
 
     /**
-     * @param array $unexpectedToken
+     * @param array  $unexpectedToken
      * @param string $expected
+     *
      * @throws PatternException
      */
     private function unexpectedSyntaxError(array $unexpectedToken, string $expected = null) : void
     {
         $tokenPos = (isset($unexpectedToken['position'])) ? $unexpectedToken['position'] : '-1';
-        $message  = \sprintf('line 0, col %d: Error: ', $tokenPos);
-        $message .= (isset($expected)) ? \sprintf('Expected "%s", got ', $expected) : 'Unexpected';
-        $message .= \sprintf('"%s"', $unexpectedToken['value']);
+        $message  = sprintf('line 0, col %d: Error: ', $tokenPos);
+        $message .= (isset($expected)) ? sprintf('Expected "%s", got ', $expected) : 'Unexpected';
+        $message .= sprintf('"%s"', $unexpectedToken['value']);
 
         throw PatternException::syntaxError($message);
     }
 
     /**
      * @param string $expected
+     *
      * @throws PatternException
      */
     private function unexpectedEndOfString(string $expected = null) : void
     {
-        $tokenPos = (isset($this->lexer->token['position'])) ? $this->lexer->token['position'] + \strlen((string) $this->lexer->token['value']) : '-1';
-        $message  = \sprintf('line 0, col %d: Error: ', $tokenPos);
-        $message .= (isset($expected)) ? \sprintf('Expected "%s", got end of string.', $expected) : 'Unexpected';
+        $tokenPos = (isset($this->lexer->token['position'])) ? $this->lexer->token['position'] + strlen((string) $this->lexer->token['value']) : '-1';
+        $message  = sprintf('line 0, col %d: Error: ', $tokenPos);
+        $message .= (isset($expected)) ? sprintf('Expected "%s", got end of string.', $expected) : 'Unexpected';
         $message .= 'end of string';
 
         throw PatternException::syntaxError($message);
@@ -269,6 +282,6 @@ final class Parser
 
     private function endOfPattern() : bool
     {
-        return \is_null($this->lexer->lookahead);
+        return is_null($this->lexer->lookahead);
     }
 }

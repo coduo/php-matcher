@@ -7,10 +7,10 @@ namespace Coduo\PHPMatcher\Tests\Matcher;
 use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Matcher\WildcardMatcher;
 use PHPUnit\Framework\TestCase;
+use stdClass;
 
 class WildcardMatcherTest extends TestCase
 {
-
     /**
      * @dataProvider data
      */
@@ -43,7 +43,7 @@ class WildcardMatcherTest extends TestCase
             [true],
             [6.66],
             [['bar']],
-            [new \stdClass],
+            [new stdClass],
         ];
     }
 

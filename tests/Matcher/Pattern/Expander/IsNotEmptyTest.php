@@ -7,6 +7,7 @@ namespace Coduo\PHPMatcher\Tests\Matcher\Pattern\Expander;
 use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Matcher\Pattern\Expander\IsNotEmpty;
 use PHPUnit\Framework\TestCase;
+use DateTime;
 
 class IsNotEmptyTest extends TestCase
 {
@@ -25,7 +26,7 @@ class IsNotEmptyTest extends TestCase
         return [
             ['lorem', true],
             ['0', true],
-            [new \DateTime(), true],
+            [new DateTime(), true],
             ['', false],
             [null, false],
             [[], false]

@@ -7,6 +7,7 @@ namespace Coduo\PHPMatcher\Tests\Matcher\Pattern\Expander;
 use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Matcher\Pattern\Expander\StartsWith;
 use PHPUnit\Framework\TestCase;
+use DateTime;
 
 class StartsWithTest extends TestCase
 {
@@ -65,7 +66,7 @@ class StartsWithTest extends TestCase
     {
         return [
             ['lorem', 'ipsum lorem', "string \"ipsum lorem\" doesn't starts with string \"lorem\"."],
-            ['lorem', new \DateTime(), 'StartsWith expander require "string", got "\\DateTime".'],
+            ['lorem', new DateTime(), 'StartsWith expander require "string", got "\\DateTime".'],
         ];
     }
 }

@@ -4,10 +4,18 @@ declare(strict_types=1);
 
 namespace Coduo\PHPMatcher\AST;
 
+use function count;
+
 final class Expander implements Node
 {
+    /**
+     * @var string
+     */
     private $name;
 
+    /**
+     * @var mixed[]
+     */
     private $arguments;
 
     public function __construct(string $name)
@@ -21,14 +29,14 @@ final class Expander implements Node
         return $this->name;
     }
 
-    public function addArgument($argument)
+    public function addArgument($argument): void
     {
         $this->arguments[] = $argument;
     }
 
     public function hasArguments() : bool
     {
-        return (boolean) \count($this->arguments);
+        return (boolean) count($this->arguments);
     }
 
     public function getArguments() : array

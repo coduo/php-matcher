@@ -6,6 +6,9 @@ namespace Coduo\PHPMatcher\AST;
 
 final class Type implements Node
 {
+    /**
+     * @var string
+     */
     private $type;
 
     public function __construct(string $type)

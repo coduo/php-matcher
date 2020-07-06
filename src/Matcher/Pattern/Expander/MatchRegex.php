@@ -6,6 +6,10 @@ namespace Coduo\PHPMatcher\Matcher\Pattern\Expander;
 
 use Coduo\PHPMatcher\Matcher\Pattern\PatternExpander;
 use Coduo\ToString\StringConverter;
+use InvalidArgumentException;
+use function is_string;
+use function preg_match;
+use function sprintf;
 
 final class MatchRegex implements PatternExpander
 {
@@ -13,17 +17,24 @@ final class MatchRegex implements PatternExpander
 
     use BacktraceBehavior;
 
+    /**
+     * @var null|string
+     */
     private $error;
+
+    /**
+     * @var string
+     */
     private $pattern;
 
-    public function __construct($pattern)
+    public function __construct(string $pattern)
     {
-        if (!\is_string($pattern)) {
-            throw new \InvalidArgumentException('Regex pattern must be a string.');
+        if (!is_string($pattern)) {
+            throw new InvalidArgumentException('Regex pattern must be a string.');
         }
 
-        if (!\is_string($pattern) || @\preg_match($pattern, '') === false) {
-            throw new \InvalidArgumentException('Regex pattern must be a valid one.');
+        if (!is_string($pattern) || @preg_match($pattern, '') === false) {
+            throw new InvalidArgumentException('Regex pattern must be a valid one.');
         }
 
         $this->pattern = $pattern;
@@ -38,15 +49,15 @@ final class MatchRegex implements PatternExpander
     {
         $this->backtrace->expanderEntrance(self::NAME, $value);
 
-        if (false === \is_string($value)) {
-            $this->error = \sprintf('Match expander require "string", got "%s".', new StringConverter($value));
+        if (!is_string($value)) {
+            $this->error = sprintf('Match expander require "string", got "%s".', new StringConverter($value));
             $this->backtrace->expanderFailed(self::NAME, $value, $this->error);
 
             return false;
         }
 
-        if (1 !== \preg_match($this->pattern, $value)) {
-            $this->error = \sprintf("string \"%s\" don't match pattern %s.", $value, $this->pattern);
+        if (1 !== preg_match($this->pattern, $value)) {
+            $this->error = sprintf("string \"%s\" don't match pattern %s.", $value, $this->pattern);
             $this->backtrace->expanderFailed(self::NAME, $value, $this->error);
 
             return false;

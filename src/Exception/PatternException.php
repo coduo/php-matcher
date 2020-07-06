@@ -6,7 +6,7 @@ namespace Coduo\PHPMatcher\Exception;
 
 class PatternException extends Exception
 {
-    public static function syntaxError(string $message, Exception $previous = null)
+    public static function syntaxError(string $message, Exception $previous = null): PatternException
     {
         return new self('[Syntax Error] ' . $message, 0, $previous);
     }

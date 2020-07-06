@@ -9,6 +9,8 @@ use Coduo\PHPMatcher\Lexer;
 use Coduo\PHPMatcher\Matcher\IntegerMatcher;
 use Coduo\PHPMatcher\Parser;
 use PHPUnit\Framework\TestCase;
+use DateTime;
+use stdClass;
 
 class IntegerMatcherTest extends TestCase
 {
@@ -94,14 +96,14 @@ class IntegerMatcherTest extends TestCase
     {
         return [
             ['1', '@integer@'],
-            [new \DateTime(),  '@integer@']
+            [new DateTime(),  '@integer@']
         ];
     }
 
     public static function negativeMatchDescription()
     {
         return [
-            [new \stdClass,  '@integer@', 'object "\\stdClass" is not a valid integer.'],
+            [new stdClass,  '@integer@', 'object "\\stdClass" is not a valid integer.'],
             [1.1, '@integer@', 'double "1.1" is not a valid integer.'],
             [false, '@integer@', 'boolean "false" is not a valid integer.'],
             [['test'], '@integer@', 'array "Array(1)" is not a valid integer.']

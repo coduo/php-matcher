@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Coduo\PHPMatcher\Tests;
 
 use Coduo\PHPMatcher\PHPUnit\PHPMatcherTestCase;
+use stdClass;
 
 class MatcherTest extends PHPMatcherTestCase
 {
@@ -34,7 +35,7 @@ class MatcherTest extends PHPMatcherTestCase
                 ],
             ],
             'readyToUse' => true,
-            'data' => new \stdClass(),
+            'data' => new stdClass(),
         ];
 
         $pattern = [
@@ -201,7 +202,7 @@ XML;
                 '{"data": {"createUserFormSchema":"@json@.hasProperty(\"formData\").hasProperty(\"schema\").hasProperty(\"uiSchema\")"}}'
             ],
             [
-                /** @lang JSON */
+                /* @lang JSON */
                 '{
                     "users":[
                         {
@@ -225,7 +226,7 @@ XML;
                 '@json@.hasProperty("users")'
             ],
             [
-                /** @lang JSON */
+                /* @lang JSON */
                 '{
                     "users":[
                         {
@@ -246,7 +247,7 @@ XML;
                     "prevPage": "http:\/\/example.com\/api\/users\/1?limit=2",
                     "nextPage": "http:\/\/example.com\/api\/users\/3?limit=2"
                 }',
-                /** @lang JSON */
+                /* @lang JSON */
                 '{
                     "users":[
                         {
@@ -269,23 +270,23 @@ XML;
                 }',
             ],
             [
-                /** @lang JSON */
+                /* @lang JSON */
                 '{
                     "url": "/accounts/9a7dae2d-d135-4bd7-b202-b3e7e91aaecd"
                 }',
-                /** @lang JSON */
+                /* @lang JSON */
                 '{
                     "url": "/accounts/@uuid@"
                 }',
             ],
             [
-                /** @lang JSON */
+                /* @lang JSON */
                 '{
                     "users":[],
                     "prevPage": "http:\/\/example.com\/api\/users\/1?limit=2",
                     "nextPage": "http:\/\/example.com\/api\/users\/3?limit=2"
                 }',
-                /** @lang JSON */
+                /* @lang JSON */
                 '{
                     "users":[
                         "@...@"
@@ -295,7 +296,7 @@ XML;
                 }',
             ],
             [
-                /** @lang JSON */
+                /* @lang JSON */
                 '{
                     "users":[
                         {
@@ -309,7 +310,7 @@ XML;
                     "prevPage": "http:\/\/example.com\/api\/users\/1?limit=2",
                     "nextPage": "http:\/\/example.com\/api\/users\/3?limit=2"
                 }',
-                /** @lang JSON */
+                /* @lang JSON */
                 '{
                     "users":[
                         {
@@ -326,13 +327,13 @@ XML;
                 }',
             ],
             [
-                /** @lang JSON */
+                /* @lang JSON */
                 '{
                     "users":[],
                     "prevPage": "http:\/\/example.com\/api\/users\/1?limit=2",
                     "currPage": 2
                 }',
-                /** @lang JSON */
+                /* @lang JSON */
                 '{
                     "users":[
                         "@...@"
@@ -343,7 +344,7 @@ XML;
                 }',
             ],
             [
-                /** @lang JSON */
+                /* @lang JSON */
                 '{
                     "user": {
                         "id": 131,
@@ -353,17 +354,17 @@ XML;
                         "roles": ["ROLE_DEVELOPER"]
                     }
                 }',
-                /** @lang JSON */
+                /* @lang JSON */
                 '{
                     "user": "@json@"
                 }',
             ],
             [
-                /** @lang JSON */
+                /* @lang JSON */
                 '{
                     "user": null
                 }',
-                /** @lang JSON */
+                /* @lang JSON */
                 '{
                     "user": "@json@.optional()"
                 }',

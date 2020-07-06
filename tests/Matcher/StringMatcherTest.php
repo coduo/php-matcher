@@ -9,6 +9,7 @@ use Coduo\PHPMatcher\Lexer;
 use Coduo\PHPMatcher\Matcher\StringMatcher;
 use Coduo\PHPMatcher\Parser;
 use PHPUnit\Framework\TestCase;
+use stdClass;
 
 class StringMatcherTest extends TestCase
 {
@@ -24,6 +25,7 @@ class StringMatcherTest extends TestCase
             new Parser(new Lexer(), new Parser\ExpanderInitializer($backtrace))
         );
     }
+
     /**
      * @dataProvider positiveCanMatchData
      */
@@ -103,7 +105,7 @@ class StringMatcherTest extends TestCase
     public static function negativeMatchDescription()
     {
         return [
-            [new \stdClass,  '@string@', 'object "\\stdClass" is not a valid string.'],
+            [new stdClass,  '@string@', 'object "\\stdClass" is not a valid string.'],
             [1.1, '@integer@', 'double "1.1" is not a valid string.'],
             [false, '@double@', 'boolean "false" is not a valid string.'],
             [1, '@array@', 'integer "1" is not a valid string.'],

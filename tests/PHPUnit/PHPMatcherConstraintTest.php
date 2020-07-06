@@ -8,6 +8,9 @@ use Coduo\PHPMatcher\PHPUnit\PHPMatcherConstraint;
 use PHPUnit\Framework\AssertionFailedError;
 use PHPUnit\Framework\Constraint\Constraint;
 use PHPUnit\Framework\TestCase;
+use LogicException;
+use StdClass;
+use function fopen;
 
 class PHPMatcherConstraintTest extends TestCase
 {
@@ -62,7 +65,7 @@ class PHPMatcherConstraintTest extends TestCase
      */
     public function test_that_pattern_could_be_only_a_string_or_an_array($pattern)
     {
-        $this->expectException(\LogicException::class);
+        $this->expectException(LogicException::class);
 
         new PHPMatcherConstraint($pattern);
     }
@@ -73,9 +76,9 @@ class PHPMatcherConstraintTest extends TestCase
             [true],
             [1],
             [1.1],
-            [new \StdClass],
+            [new StdClass],
             [null],
-            [\fopen('php://memory', 'r')],
+            [fopen('php://memory', 'r')],
         ];
     }
 }

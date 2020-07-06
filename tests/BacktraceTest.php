@@ -6,6 +6,7 @@ namespace Coduo\PHPMatcher\Tests;
 
 use Coduo\PHPMatcher\PHPMatcher;
 use PHPUnit\Framework\TestCase;
+use function file_get_contents;
 
 final class BacktraceTest extends TestCase
 {
@@ -94,7 +95,7 @@ SUCCEED_BACKTRACE
     public function test_backtrace_in_failed_complex_matching()
     {
         $this->matcher->match(
-            /** @lang JSON */
+            /* @lang JSON */
             '{
                 "users":[
                     {
@@ -115,7 +116,7 @@ SUCCEED_BACKTRACE
                 "prevPage": "http:\/\/example.com\/api\/users\/1?limit=2",
                 "nextPage": "http:\/\/example.com\/api\/users\/3?limit=2"
             }',
-            /** @lang JSON */
+            /* @lang JSON */
             '{
                 "users":[
                     {
@@ -142,7 +143,7 @@ SUCCEED_BACKTRACE
         //\file_put_contents(__DIR__ . '/BacktraceTest/failed_complex_matching_expected_trace.txt', (string) $this->matcher->backtrace());
 
         $this->assertSame(
-            \file_get_contents(__DIR__ . '/BacktraceTest/failed_complex_matching_expected_trace.txt'),
+            file_get_contents(__DIR__ . '/BacktraceTest/failed_complex_matching_expected_trace.txt'),
             (string) $this->matcher->backtrace()
         );
     }
@@ -150,7 +151,7 @@ SUCCEED_BACKTRACE
     public function test_backtrace_in_succeed_complex_matching()
     {
         $this->matcher->match(
-        /** @lang JSON */
+        /* @lang JSON */
             '{
                 "users":[
                     {
@@ -171,7 +172,7 @@ SUCCEED_BACKTRACE
                 "prevPage": "http:\/\/example.com\/api\/users\/1?limit=2",
                 "nextPage": "http:\/\/example.com\/api\/users\/3?limit=2"
             }',
-            /** @lang JSON */
+            /* @lang JSON */
             '{
                 "users":[
                     {
@@ -198,7 +199,7 @@ SUCCEED_BACKTRACE
         //\file_put_contents(__DIR__ . '/BacktraceTest/succeed_complex_matching_expected_trace.txt', (string) $this->matcher->backtrace());
 
         $this->assertSame(
-            \file_get_contents(__DIR__ . '/BacktraceTest/succeed_complex_matching_expected_trace.txt'),
+            file_get_contents(__DIR__ . '/BacktraceTest/succeed_complex_matching_expected_trace.txt'),
             (string) $this->matcher->backtrace()
         );
     }

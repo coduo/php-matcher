@@ -7,6 +7,7 @@ namespace Coduo\PHPMatcher\Tests\Matcher\Pattern\Expander;
 use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Matcher\Pattern\Expander\InArray;
 use PHPUnit\Framework\TestCase;
+use DateTime;
 
 class InArrayTest extends TestCase
 {
@@ -44,7 +45,7 @@ class InArrayTest extends TestCase
     {
         return [
             ['ipsum', ['ipsum lorem'], "Array(1) doesn't have \"ipsum\" element."],
-            ['lorem', new \DateTime(), 'InArray expander require "array", got "\\DateTime".'],
+            ['lorem', new DateTime(), 'InArray expander require "array", got "\\DateTime".'],
         ];
     }
 }

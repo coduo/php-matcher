@@ -7,6 +7,7 @@ namespace Coduo\PHPMatcher\Tests\Matcher\Pattern\Expander;
 use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Matcher\Pattern\Expander\MatchRegex;
 use PHPUnit\Framework\TestCase;
+use InvalidArgumentException;
 
 class MatchRegexTest extends TestCase
 {
@@ -30,17 +31,9 @@ class MatchRegexTest extends TestCase
         ];
     }
 
-    public function test_that_it_only_work_with_string()
-    {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('Regex pattern must be a string.');
-
-        new MatchRegex(null);
-    }
-
     public function test_that_it_only_work_with_valid_pattern()
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Regex pattern must be a valid one.');
 
         new MatchRegex('///');

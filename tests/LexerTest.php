@@ -6,6 +6,7 @@ namespace Coduo\PHPMatcher\Tests;
 
 use Coduo\PHPMatcher\Lexer;
 use PHPUnit\Framework\TestCase;
+use function trim;
 
 class LexerTest extends TestCase
 {
@@ -18,7 +19,7 @@ class LexerTest extends TestCase
         $lexer->setInput($value);
         $lexer->moveNext();
         $this->assertEquals($lexer->lookahead['type'], Lexer::T_STRING);
-        $this->assertEquals($lexer->lookahead['value'], \trim(\trim($value, "'"), '"'));
+        $this->assertEquals($lexer->lookahead['value'], trim(trim($value, "'"), '"'));
     }
 
     public static function validStringValuesProvider()
@@ -28,7 +29,6 @@ class LexerTest extends TestCase
             ["'String'"],
         ];
     }
-
 
     /**
      * @dataProvider validNumberValuesProvider
@@ -165,7 +165,7 @@ class LexerTest extends TestCase
         $lexer->setInput($value);
         $lexer->moveNext();
         $this->assertEquals($lexer->lookahead['type'], Lexer::T_TYPE_PATTERN);
-        $this->assertEquals($lexer->lookahead['value'], \trim($value, '@'));
+        $this->assertEquals($lexer->lookahead['value'], trim($value, '@'));
     }
 
     public static function validMatcherTypePatterns()
@@ -213,6 +213,7 @@ class LexerTest extends TestCase
 
     /**
      * @param $lexer
+     *
      * @return array
      */
     protected function collectTokens(Lexer $lexer)

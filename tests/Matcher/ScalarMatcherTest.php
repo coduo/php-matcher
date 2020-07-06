@@ -7,6 +7,7 @@ namespace Coduo\PHPMatcher\Tests\Matcher;
 use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Matcher\ScalarMatcher;
 use PHPUnit\Framework\TestCase;
+use stdClass;
 
 class ScalarMatcherTest extends TestCase
 {
@@ -90,7 +91,7 @@ class ScalarMatcherTest extends TestCase
     public static function negativeCanMatches()
     {
         return [
-            [new \stdClass],
+            [new stdClass],
             [[]]
         ];
     }
@@ -99,7 +100,7 @@ class ScalarMatcherTest extends TestCase
     {
         return [
             ['test', 'norbert', '"test" does not match "norbert".'],
-            [new \stdClass,  1, '"\\stdClass" does not match "1".'],
+            [new stdClass,  1, '"\\stdClass" does not match "1".'],
             [1.1, false, '"1.1" does not match "false".'],
             [false, ['foo', 'bar'], '"false" does not match "Array(2)".'],
         ];

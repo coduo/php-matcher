@@ -18,6 +18,7 @@
         "php": ">=7.2",
         "ext-filter": "*",
         "ext-json": "*",
+        "ext-simplexml": "*",
         "coduo/php-to-string": "^3",
         "symfony/property-access": "^2.3|^3.0|^4.0|^5.0",
         "symfony/expression-language": "^2.3|^3.0|^4.0|^5.0",
@@ -27,8 +28,7 @@
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.4",
         "phpstan/phpstan": "^0.12.32",
-        "phpunit/phpunit": "^8.4",
-        "rector/rector-prefixed": "^0.7.43"
+        "phpunit/phpunit": "^8.4"
     },
     "autoload": {
         "psr-4": {

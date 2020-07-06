@@ -6,6 +6,11 @@ namespace Coduo\PHPMatcher\Matcher\Pattern\Expander;
 
 use Coduo\PHPMatcher\Matcher\Pattern\PatternExpander;
 use Coduo\ToString\StringConverter;
+use InvalidArgumentException;
+use function is_float;
+use function is_int;
+use function is_numeric;
+use function sprintf;
 
 final class GreaterThan implements PatternExpander
 {
@@ -13,13 +18,20 @@ final class GreaterThan implements PatternExpander
 
     use BacktraceBehavior;
 
+    /**
+     * @var float|int
+     */
     private $boundary;
+
+    /**
+     * @var null|string
+     */
     private $error;
 
     public function __construct($boundary)
     {
-        if (!\is_float($boundary) && !\is_int($boundary)) {
-            throw new \InvalidArgumentException(\sprintf('Boundary value "%s" is not a valid number.', new StringConverter($boundary)));
+        if (!is_float($boundary) && !is_int($boundary)) {
+            throw new InvalidArgumentException(sprintf('Boundary value "%s" is not a valid number.', new StringConverter($boundary)));
         }
 
         $this->boundary = $boundary;
@@ -34,15 +46,15 @@ final class GreaterThan implements PatternExpander
     {
         $this->backtrace->expanderEntrance(self::NAME, $value);
 
-        if (!\is_float($value) && !\is_int($value) && !\is_numeric($value)) {
-            $this->error = \sprintf('Value "%s" is not a valid number.', new StringConverter($value));
+        if (!is_float($value) && !is_int($value) && !is_numeric($value)) {
+            $this->error = sprintf('Value "%s" is not a valid number.', new StringConverter($value));
             $this->backtrace->expanderFailed(self::NAME, $value, $this->error);
 
             return false;
         }
 
         if ($value <= $this->boundary) {
-            $this->error = \sprintf('Value "%s" is not greater than "%s".', new StringConverter($value), new StringConverter($this->boundary));
+            $this->error = sprintf('Value "%s" is not greater than "%s".', new StringConverter($value), new StringConverter($this->boundary));
             $this->backtrace->expanderFailed(self::NAME, $value, $this->error);
 
             return false;

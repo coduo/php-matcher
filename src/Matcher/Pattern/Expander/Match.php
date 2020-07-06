@@ -17,6 +17,7 @@ final class Match implements Matcher\Pattern\PatternExpander
      * @var Matcher
      */
     private $matcher;
+
     private $pattern;
 
     public function __construct($pattern)
@@ -33,7 +34,7 @@ final class Match implements Matcher\Pattern\PatternExpander
     {
         $this->backtrace->expanderEntrance(self::NAME, $value);
 
-        if (\is_null($this->matcher)) {
+        if ($this->matcher === null) {
             $this->matcher = (new MatcherFactory())->createMatcher();
         }
 

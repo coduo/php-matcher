@@ -6,6 +6,7 @@ namespace Coduo\PHPMatcher\Tests\PHPUnit;
 
 use Coduo\PHPMatcher\PHPUnit\PHPMatcherTestCase;
 use PHPUnit\Framework\AssertionFailedError;
+use function json_encode;
 
 class PHPMatcherTestCaseTest extends PHPMatcherTestCase
 {
@@ -19,7 +20,7 @@ class PHPMatcherTestCaseTest extends PHPMatcherTestCase
         $this->expectException(AssertionFailedError::class);
         $this->expectExceptionMessageMatches("/Failed asserting that '{\"foo\":\"bar\"}' matches given pattern(.*)/");
 
-        $this->assertMatchesPattern('{"foo": "@integer@"}', \json_encode(['foo' => 'bar']));
+        $this->assertMatchesPattern('{"foo": "@integer@"}', json_encode(['foo' => 'bar']));
     }
 
     public function test_it_creates_a_constraint_for_stubs()

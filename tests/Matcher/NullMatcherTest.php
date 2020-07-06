@@ -7,6 +7,7 @@ namespace Coduo\PHPMatcher\Tests\Matcher;
 use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Matcher\NullMatcher;
 use PHPUnit\Framework\TestCase;
+use stdClass;
 
 class NullMatcherTest extends TestCase
 {
@@ -98,7 +99,7 @@ class NullMatcherTest extends TestCase
     {
         return [
             ['test', '@null@', 'string "test" does not match null.'],
-            [new \stdClass,  '@null@', 'object "\\stdClass" does not match null.'],
+            [new stdClass,  '@null@', 'object "\\stdClass" does not match null.'],
             [1.1, '@null@', 'double "1.1" does not match null.'],
             [false, '@null@', 'boolean "false" does not match null.'],
             [1, '@null@', 'integer "1" does not match null.']

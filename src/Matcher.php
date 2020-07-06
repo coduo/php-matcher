@@ -8,8 +8,14 @@ use Coduo\PHPMatcher\Matcher\ValueMatcher;
 
 final class Matcher
 {
+    /**
+     * @var ValueMatcher
+     */
     private $valueMatcher;
 
+    /**
+     * @var Backtrace
+     */
     private $backtrace;
 
     public function __construct(ValueMatcher $valueMatcher, Backtrace $backtrace)
@@ -24,7 +30,7 @@ final class Matcher
 
         $result = $this->valueMatcher->match($value, $pattern);
 
-        if ($result === true) {
+        if ($result) {
             $this->backtrace->matcherSucceed(self::class, $value, $pattern);
             $this->valueMatcher->clearError();
         } else {

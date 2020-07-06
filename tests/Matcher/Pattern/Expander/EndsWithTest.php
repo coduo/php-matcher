@@ -7,6 +7,7 @@ namespace Coduo\PHPMatcher\Tests\Matcher\Pattern\Expander;
 use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Matcher\Pattern\Expander\EndsWith;
 use PHPUnit\Framework\TestCase;
+use DateTime;
 
 class EndsWithTest extends TestCase
 {
@@ -65,7 +66,7 @@ class EndsWithTest extends TestCase
     {
         return [
             ['ipsum', 'ipsum lorem', "string \"ipsum lorem\" doesn't ends with string \"ipsum\"."],
-            ['lorem', new \DateTime(), 'EndsWith expander require "string", got "\\DateTime".'],
+            ['lorem', new DateTime(), 'EndsWith expander require "string", got "\\DateTime".'],
         ];
     }
 }

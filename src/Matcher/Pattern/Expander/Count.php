@@ -6,6 +6,9 @@ namespace Coduo\PHPMatcher\Matcher\Pattern\Expander;
 
 use Coduo\PHPMatcher\Matcher\Pattern\PatternExpander;
 use Coduo\ToString\StringConverter;
+use function is_array;
+use function count;
+use function sprintf;
 
 final class Count implements PatternExpander
 {
@@ -13,7 +16,14 @@ final class Count implements PatternExpander
 
     use BacktraceBehavior;
 
+    /**
+     * @var null|string
+     */
     private $error;
+
+    /**
+     * @var int
+     */
     private $value;
 
     public static function is(string $name) : bool
@@ -30,15 +40,15 @@ final class Count implements PatternExpander
     {
         $this->backtrace->expanderEntrance(self::NAME, $value);
 
-        if (!\is_array($value)) {
-            $this->error = \sprintf('Count expander require "array", got "%s".', new StringConverter($value));
+        if (!is_array($value)) {
+            $this->error = sprintf('Count expander require "array", got "%s".', new StringConverter($value));
             $this->backtrace->expanderFailed(self::NAME, $value, $this->error);
 
             return false;
         }
 
-        if (\count($value) !== $this->value) {
-            $this->error = \sprintf('Expected count of %s is %s.', new StringConverter($value), new StringConverter($this->value));
+        if (count($value) !== $this->value) {
+            $this->error = sprintf('Expected count of %s is %s.', new StringConverter($value), new StringConverter($this->value));
             $this->backtrace->expanderFailed(self::NAME, $value, $this->error);
 
             return false;
@@ -48,6 +58,7 @@ final class Count implements PatternExpander
 
         return true;
     }
+
     public function getError() : ?string
     {
         return $this->error;

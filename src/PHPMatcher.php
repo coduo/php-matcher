@@ -8,6 +8,9 @@ use Coduo\PHPMatcher\Factory\MatcherFactory;
 
 final class PHPMatcher
 {
+    /**
+     * @var null|Matcher
+     */
     private $matcher;
 
     public function match($value, $pattern) : bool
@@ -19,7 +22,7 @@ final class PHPMatcher
 
     /**
      * Returns backtrace from last matching.
-     * When called before PHPMatcher::match() function it will return instance where Backtrace::isEmpty() will return true
+     * When called before PHPMatcher::match() function it will return instance where Backtrace::isEmpty() will return true.
      *
      * @return Backtrace
      */
@@ -32,7 +35,7 @@ final class PHPMatcher
      * Returns error from last matching.
      * If last matching was successful this function will return null.
      *
-     * @return string|null
+     * @return null|string
      */
     public function error() : ?string
     {

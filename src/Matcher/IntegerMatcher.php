@@ -7,12 +7,23 @@ namespace Coduo\PHPMatcher\Matcher;
 use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Parser;
 use Coduo\ToString\StringConverter;
+use function gettype;
+use function is_integer;
+use function is_string;
+use function sprintf;
 
 final class IntegerMatcher extends Matcher
 {
     const PATTERN = 'integer';
 
+    /**
+     * @var Backtrace
+     */
     private $backtrace;
+
+    /**
+     * @var Parser
+     */
     private $parser;
 
     public function __construct(Backtrace $backtrace, Parser $parser)
@@ -25,8 +36,8 @@ final class IntegerMatcher extends Matcher
     {
         $this->backtrace->matcherEntrance(self::class, $value, $pattern);
 
-        if (!\is_integer($value)) {
-            $this->error = \sprintf('%s "%s" is not a valid integer.', \gettype($value), new StringConverter($value));
+        if (!is_integer($value)) {
+            $this->error = sprintf('%s "%s" is not a valid integer.', gettype($value), new StringConverter($value));
             $this->backtrace->matcherFailed(self::class, $value, $pattern, $this->error);
             return false;
         }
@@ -46,7 +57,7 @@ final class IntegerMatcher extends Matcher
 
     public function canMatch($pattern) : bool
     {
-        if (!\is_string($pattern)) {
+        if (!is_string($pattern)) {
             $this->backtrace->matcherCanMatch(self::class, $pattern, false);
 
             return false;

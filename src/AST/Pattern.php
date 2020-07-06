@@ -4,10 +4,18 @@ declare(strict_types=1);
 
 namespace Coduo\PHPMatcher\AST;
 
+use function count;
+
 final class Pattern implements Node
 {
+    /**
+     * @var Type
+     */
     private $type;
 
+    /**
+     * @var mixed[]
+     */
     private $expanders;
 
     public function __construct(Type $type)
@@ -23,7 +31,7 @@ final class Pattern implements Node
 
     public function hasExpanders() : bool
     {
-        return (boolean) \count($this->expanders);
+        return (boolean) count($this->expanders);
     }
 
     /**
@@ -34,7 +42,7 @@ final class Pattern implements Node
         return $this->expanders;
     }
 
-    public function addExpander(Expander $expander)
+    public function addExpander(Expander $expander): void
     {
         $this->expanders[] = $expander;
     }

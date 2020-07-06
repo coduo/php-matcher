@@ -6,6 +6,9 @@ namespace Coduo\PHPMatcher\Matcher;
 
 use Coduo\PHPMatcher\Backtrace;
 use Coduo\ToString\StringConverter;
+use function sprintf;
+use function is_object;
+use function is_callable;
 
 final class CallbackMatcher extends Matcher
 {
@@ -27,7 +30,7 @@ final class CallbackMatcher extends Matcher
         if ($result) {
             $this->backtrace->matcherSucceed(self::class, $value, $pattern);
         } else {
-            $this->error = \sprintf('Callback matcher failed for value %s', new StringConverter($value));
+            $this->error = sprintf('Callback matcher failed for value %s', new StringConverter($value));
             $this->backtrace->matcherFailed(self::class, $value, $pattern, $this->error);
         }
 
@@ -36,7 +39,7 @@ final class CallbackMatcher extends Matcher
 
     public function canMatch($pattern) : bool
     {
-        $result = \is_object($pattern) && \is_callable($pattern);
+        $result = is_object($pattern) && is_callable($pattern);
         $this->backtrace->matcherCanMatch(self::class, $pattern, $result);
 
         return $result;

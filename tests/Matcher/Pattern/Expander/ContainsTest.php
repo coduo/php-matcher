@@ -7,6 +7,7 @@ namespace Coduo\PHPMatcher\Tests\Matcher\Pattern\Expander;
 use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Matcher\Pattern\Expander\Contains;
 use PHPUnit\Framework\TestCase;
+use DateTime;
 
 class ContainsTest extends TestCase
 {
@@ -65,7 +66,7 @@ class ContainsTest extends TestCase
     {
         return [
             ['ipsum', 'hello world', "String \"hello world\" doesn't contains \"ipsum\"."],
-            ['lorem', new \DateTime(), 'Contains expander require "string", got "\\DateTime".'],
+            ['lorem', new DateTime(), 'Contains expander require "string", got "\\DateTime".'],
         ];
     }
 }

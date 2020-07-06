@@ -8,12 +8,13 @@ use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Matcher\Pattern\Expander\Contains;
 use Coduo\PHPMatcher\Matcher\Pattern\Expander\OneOf;
 use PHPUnit\Framework\TestCase;
+use InvalidArgumentException;
 
 class OneOfTest extends TestCase
 {
     public function test_not_enough_arguments()
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('OneOf expander require at least two expanders.');
 
         $expander = new OneOf();
@@ -21,7 +22,7 @@ class OneOfTest extends TestCase
 
     public function test_invalid_argument_types()
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('OneOf expander require each argument to be a valid PatternExpander.');
 
         $expander = new OneOf('arg1', ['test']);

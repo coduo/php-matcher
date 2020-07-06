@@ -8,25 +8,35 @@ use Coduo\PHPMatcher\PHPMatcher;
 use PHPUnit\Framework\Constraint\Constraint;
 use PHPUnit\Util\Json;
 use SebastianBergmann\Comparator\ComparisonFailure;
+use LogicException;
+use function class_exists;
+use function gettype;
+use function in_array;
+use function is_callable;
+use function is_object;
+use function is_string;
+use function json_decode;
+use function sprintf;
 
 final class PHPMatcherConstraint extends Constraint
 {
     private $pattern;
+
+    /**
+     * @var PHPMatcher
+     */
     private $matcher;
+
     private $lastValue;
 
     public function __construct($pattern)
     {
-        if (!\in_array(\gettype($pattern), ['string', 'array', 'object'])) {
-            throw new \LogicException(\sprintf('The PHPMatcherConstraint pattern must be a string, closure or an array, %s given.', \gettype($pattern)));
+        if (!in_array(gettype($pattern), ['string', 'array', 'object'])) {
+            throw new LogicException(sprintf('The PHPMatcherConstraint pattern must be a string, closure or an array, %s given.', gettype($pattern)));
         }
 
-        if (\is_object($pattern) && !\is_callable($pattern)) {
-            throw new \LogicException(\sprintf('The PHPMatcherConstraint pattern must be a string, closure or an array, %s given.', \gettype($pattern)));
-        }
-
-        if (\method_exists(Constraint::class, '__construct')) {
-            parent::__construct();
+        if (is_object($pattern) && !is_callable($pattern)) {
+            throw new LogicException(sprintf('The PHPMatcherConstraint pattern must be a string, closure or an array, %s given.', gettype($pattern)));
         }
 
         $this->pattern = $pattern;
@@ -60,9 +70,9 @@ final class PHPMatcherConstraint extends Constraint
     protected function fail($other, $description, ComparisonFailure $comparisonFailure = null) : void
     {
         if (null === $comparisonFailure
-            && \is_string($other)
-            && \is_string($this->pattern)
-            && \class_exists(Json::class)
+            && is_string($other)
+            && is_string($this->pattern)
+            && class_exists(Json::class)
         ) {
             list($error) = Json::canonicalize($other);
 
@@ -77,8 +87,8 @@ final class PHPMatcherConstraint extends Constraint
             }
 
             $comparisonFailure = new ComparisonFailure(
-                \json_decode($this->pattern),
-                \json_decode($other),
+                json_decode($this->pattern),
+                json_decode($other),
                 Json::prettify($this->pattern),
                 Json::prettify($other),
                 false,

@@ -9,6 +9,8 @@ use Coduo\PHPMatcher\Lexer;
 use Coduo\PHPMatcher\Parser;
 use Coduo\PHPMatcher\Matcher\BooleanMatcher;
 use PHPUnit\Framework\TestCase;
+use DateTime;
+use stdClass;
 
 class BooleanMatcherTest extends TestCase
 {
@@ -93,14 +95,14 @@ class BooleanMatcherTest extends TestCase
     {
         return [
             ['1', '@boolean@'],
-            [new \DateTime(),  '@boolean@']
+            [new DateTime(),  '@boolean@']
         ];
     }
 
     public static function negativeMatchDescription()
     {
         return [
-            [new \stdClass,  '@boolean@', 'object "\\stdClass" is not a valid boolean.'],
+            [new stdClass,  '@boolean@', 'object "\\stdClass" is not a valid boolean.'],
             [1.1, '@boolean@', 'double "1.1" is not a valid boolean.'],
             ['true', '@string@', 'string "true" is not a valid boolean.'],
             [['test'], '@boolean@', 'array "Array(1)" is not a valid boolean.']

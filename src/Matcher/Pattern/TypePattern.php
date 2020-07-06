@@ -4,10 +4,18 @@ declare(strict_types=1);
 
 namespace Coduo\PHPMatcher\Matcher\Pattern;
 
+use function strtolower;
+
 final class TypePattern implements Pattern
 {
+    /**
+     * @var string
+     */
     private $type;
 
+    /**
+     * @var PatternExpander[]
+     */
     private $expanders;
 
     private $error;
@@ -18,17 +26,17 @@ final class TypePattern implements Pattern
         $this->expanders = [];
     }
 
-    public function is(string $type)
+    public function is(string $type): bool
     {
-        return \strtolower($this->type) === \strtolower($type);
+        return strtolower($this->type) === strtolower($type);
     }
 
     public function getType() : string
     {
-        return \strtolower($this->type);
+        return strtolower($this->type);
     }
 
-    public function addExpander(PatternExpander $expander)
+    public function addExpander(PatternExpander $expander): void
     {
         $this->expanders[] = $expander;
     }

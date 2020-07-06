@@ -6,6 +6,9 @@ namespace Coduo\PHPMatcher\Matcher;
 
 abstract class Matcher implements ValueMatcher
 {
+    /**
+     * @var null|string
+     */
     protected $error;
 
     /**
@@ -19,13 +22,9 @@ abstract class Matcher implements ValueMatcher
     /**
      * @inheritdoc
      */
-    public function match($value, $pattern) : bool
+    public function match($value, $pattern): bool
     {
-        if ($value === $pattern) {
-            return true;
-        }
-
-        return false;
+        return $value === $pattern;
     }
 
     public function clearError() : void

@@ -7,6 +7,7 @@ namespace Coduo\PHPMatcher\Tests\Matcher\Pattern\Expander;
 use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Matcher\Pattern\Expander\Count;
 use PHPUnit\Framework\TestCase;
+use DateTime;
 
 class CountTest extends TestCase
 {
@@ -43,7 +44,7 @@ class CountTest extends TestCase
     {
         return [
             [2, [1, 2, 3], 'Expected count of Array(3) is 2.'],
-            [2, new \DateTime(), 'Count expander require "array", got "\\DateTime".'],
+            [2, new DateTime(), 'Count expander require "array", got "\\DateTime".'],
         ];
     }
 }

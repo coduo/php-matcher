@@ -6,6 +6,7 @@ namespace Coduo\PHPMatcher\Matcher\Pattern\Expander;
 
 use Coduo\PHPMatcher\Matcher\Pattern\PatternExpander;
 use Coduo\ToString\StringConverter;
+use function sprintf;
 
 final class IsEmpty implements PatternExpander
 {
@@ -13,6 +14,9 @@ final class IsEmpty implements PatternExpander
 
     use BacktraceBehavior;
 
+    /**
+     * @var null|string
+     */
     private $error;
 
     public static function is(string $name) : bool
@@ -25,7 +29,7 @@ final class IsEmpty implements PatternExpander
         $this->backtrace->expanderEntrance(self::NAME, $value);
 
         if (!empty($value)) {
-            $this->error = \sprintf('Value %s is not empty.', new StringConverter($value));
+            $this->error = sprintf('Value %s is not empty.', new StringConverter($value));
             $this->backtrace->expanderFailed(self::NAME, $value, $this->error);
 
             return false;

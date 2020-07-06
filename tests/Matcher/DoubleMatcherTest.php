@@ -9,6 +9,8 @@ use Coduo\PHPMatcher\Lexer;
 use Coduo\PHPMatcher\Matcher\DoubleMatcher;
 use Coduo\PHPMatcher\Parser;
 use PHPUnit\Framework\TestCase;
+use DateTime;
+use stdClass;
 
 class DoubleMatcherTest extends TestCase
 {
@@ -94,7 +96,7 @@ class DoubleMatcherTest extends TestCase
     {
         return [
             ['1', '@double@'],
-            [new \DateTime(),  '@double@'],
+            [new DateTime(),  '@double@'],
             [10,  '@double@'],
             [4.9, '@double@.greaterThan(5)'],
             [4.9, '@double@.lowerThan(20).greaterThan(5)'],
@@ -104,7 +106,7 @@ class DoubleMatcherTest extends TestCase
     public static function negativeMatchDescription()
     {
         return [
-            [new \stdClass,  '@integer@', 'object "\\stdClass" is not a valid double.'],
+            [new stdClass,  '@integer@', 'object "\\stdClass" is not a valid double.'],
             [25, '@integer@', 'integer "25" is not a valid double.'],
             [false, '@integer@', 'boolean "false" is not a valid double.'],
             [['test'], '@integer@', 'array "Array(1)" is not a valid double.']

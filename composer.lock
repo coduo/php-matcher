@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d1adedf96631e8bce73c362d23db074a",
+    "content-hash": "074a7b7d67fba0bae6c3d6886feb7398",
     "packages": [
         {
             "name": "coduo/php-to-string",
@@ -3065,45 +3065,6 @@
             "time": "2019-01-08T18:20:26+00:00"
         },
         {
-            "name": "rector/rector-prefixed",
-            "version": "v0.7.43",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/rectorphp/rector-prefixed.git",
-                "reference": "ade2b797aff4050deb50f4021b3d0230c9a14151"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector-prefixed/zipball/ade2b797aff4050deb50f4021b3d0230c9a14151",
-                "reference": "ade2b797aff4050deb50f4021b3d0230c9a14151",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.2"
-            },
-            "conflict": {
-                "nikic/php-parser": "<4.3",
-                "phpstan/phpstan": "<0.12"
-            },
-            "replace": {
-                "rector/rector": "self.version"
-            },
-            "require-dev": {
-                "doctrine/orm": "^2.7"
-            },
-            "bin": [
-                "rector",
-                "rector.phar"
-            ],
-            "type": "library",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Prefixed version of Rector compiled in PHAR",
-            "time": "2020-07-05T21:40:41+00:00"
-        },
-        {
             "name": "sebastian/code-unit-reverse-lookup",
             "version": "1.0.1",
             "source": {
@@ -4663,7 +4624,8 @@
     "platform": {
         "php": ">=7.2",
         "ext-filter": "*",
-        "ext-json": "*"
+        "ext-json": "*",
+        "ext-simplexml": "*"
     },
     "platform-dev": [],
     "plugin-api-version": "1.1.0"

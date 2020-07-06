@@ -6,6 +6,10 @@ namespace Coduo\PHPMatcher\Matcher\Pattern\Expander;
 
 use Coduo\PHPMatcher\Matcher\Pattern\PatternExpander;
 use Coduo\ToString\StringConverter;
+use DateTime;
+use Exception;
+use function is_string;
+use function sprintf;
 
 final class IsDateTime implements PatternExpander
 {
@@ -13,6 +17,9 @@ final class IsDateTime implements PatternExpander
 
     use BacktraceBehavior;
 
+    /**
+     * @var null|string
+     */
     private $error;
 
     public static function is(string $name) : bool
@@ -24,15 +31,15 @@ final class IsDateTime implements PatternExpander
     {
         $this->backtrace->expanderEntrance(self::NAME, $value);
 
-        if (false === \is_string($value)) {
-            $this->error = \sprintf('IsDateTime expander require "string", got "%s".', new StringConverter($value));
+        if (!is_string($value)) {
+            $this->error = sprintf('IsDateTime expander require "string", got "%s".', new StringConverter($value));
             $this->backtrace->expanderFailed(self::NAME, $value, $this->error);
 
             return false;
         }
 
-        if (false === $this->matchValue($value)) {
-            $this->error = \sprintf('string "%s" is not a valid date.', $value);
+        if (!$this->matchValue($value)) {
+            $this->error = sprintf('string "%s" is not a valid date.', $value);
             $this->backtrace->expanderFailed(self::NAME, $value, $this->error);
 
             return false;
@@ -51,9 +58,9 @@ final class IsDateTime implements PatternExpander
     private function matchValue(string $value) : bool
     {
         try {
-            new \DateTime($value);
+            new DateTime($value);
             return true;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return false;
         }
     }

@@ -9,6 +9,7 @@ use Coduo\PHPMatcher\Lexer;
 use Coduo\PHPMatcher\Matcher;
 use Coduo\PHPMatcher\Parser;
 use PHPUnit\Framework\TestCase;
+use function json_encode;
 
 class JsonMatcherTest extends TestCase
 {
@@ -85,13 +86,13 @@ class JsonMatcherTest extends TestCase
 
     public function test_error_when_matching_fail()
     {
-        $value = \json_encode([
+        $value = json_encode([
             'users' => [
                 ['name' => 'Norbert'],
                 ['name' => 'Michał']
             ]
         ]);
-        $pattern = \json_encode([
+        $pattern = json_encode([
             'users' => [
                 ['name' => '@string@'],
                 ['name' => '@boolean@']
@@ -104,8 +105,8 @@ class JsonMatcherTest extends TestCase
 
     public function test_error_when_path_in_nested_pattern_does_not_exist()
     {
-        $value = \json_encode(['foo' => ['bar' => ['baz' => 'bar value']]]);
-        $pattern = \json_encode(['foo' => ['bar' => ['faz' => 'faz value']]]);
+        $value = json_encode(['foo' => ['bar' => ['baz' => 'bar value']]]);
+        $pattern = json_encode(['foo' => ['bar' => ['faz' => 'faz value']]]);
 
         $this->assertFalse($this->matcher->match($value, $pattern));
 
@@ -114,8 +115,8 @@ class JsonMatcherTest extends TestCase
 
     public function test_error_when_path_in_nested_value_does_not_exist()
     {
-        $value = \json_encode(['foo' => ['bar' => []]]);
-        $pattern = \json_encode(['foo' => ['bar' => ['faz' => 'faz value']]]);
+        $value = json_encode(['foo' => ['bar' => []]]);
+        $pattern = json_encode(['foo' => ['bar' => ['faz' => 'faz value']]]);
 
         $this->assertFalse($this->matcher->match($value, $pattern));
 
@@ -133,7 +134,7 @@ class JsonMatcherTest extends TestCase
     }
 
     /**
-     * Solves https://github.com/coduo/php-matcher/issues/156
+     * Solves https://github.com/coduo/php-matcher/issues/156.
      */
     public function test_empty_error_after_successful_match()
     {
@@ -154,9 +155,9 @@ class JsonMatcherTest extends TestCase
     public static function positivePatterns()
     {
         return [
-            [\json_encode(['Norbert', 'Michał'])],
-            [\json_encode(['Norbert', '@string@'])],
-            [\json_encode('test')],
+            [json_encode(['Norbert', 'Michał'])],
+            [json_encode(['Norbert', '@string@'])],
+            [json_encode('test')],
         ];
     }
 

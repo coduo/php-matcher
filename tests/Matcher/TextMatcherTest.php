@@ -9,6 +9,7 @@ use Coduo\PHPMatcher\Lexer;
 use Coduo\PHPMatcher\Matcher;
 use Coduo\PHPMatcher\Parser;
 use PHPUnit\Framework\TestCase;
+use function json_encode;
 
 class TextMatcherTest extends TestCase
 {
@@ -62,7 +63,7 @@ class TextMatcherTest extends TestCase
 
     public function test_ignore_valid_json_patterns()
     {
-        $jsonPattern = \json_encode([
+        $jsonPattern = json_encode([
             'users' => [
                 ['id' => '@number@', 'name' => 'Norbert'],
                 ['id' => '@number@', 'name' => 'Michal']

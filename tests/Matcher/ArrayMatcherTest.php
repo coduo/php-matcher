@@ -9,6 +9,7 @@ use Coduo\PHPMatcher\Lexer;
 use Coduo\PHPMatcher\Matcher;
 use Coduo\PHPMatcher\Parser;
 use PHPUnit\Framework\TestCase;
+use DateTime;
 
 class ArrayMatcherTest extends TestCase
 {
@@ -121,7 +122,7 @@ class ArrayMatcherTest extends TestCase
 
     public function test_error_message_when_matching_non_array_value()
     {
-        $this->assertFalse($this->matcher->match(new \DateTime(), '@array@'));
+        $this->assertFalse($this->matcher->match(new DateTime(), '@array@'));
         $this->assertEquals($this->matcher->getError(), 'object "\\DateTime" is not a valid array.');
     }
 

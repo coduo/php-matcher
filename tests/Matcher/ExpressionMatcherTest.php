@@ -7,6 +7,8 @@ namespace Coduo\PHPMatcher\Tests\Matcher;
 use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Matcher\ExpressionMatcher;
 use PHPUnit\Framework\TestCase;
+use stdClass;
+use DateTime;
 
 class ExpressionMatcherTest extends TestCase
 {
@@ -88,7 +90,7 @@ class ExpressionMatcherTest extends TestCase
             ['@integer'],
             ['expr('],
             ['@string'],
-            [new \stdClass],
+            [new stdClass],
             [['foobar']]
         ];
     }
@@ -98,7 +100,7 @@ class ExpressionMatcherTest extends TestCase
         return [
             [4, 'expr(value > 2)'],
             ['foo', "expr(value == 'foo')"],
-            [new \DateTime('2014-04-01'), "expr(value.format('Y-m-d') == '2014-04-01')"]
+            [new DateTime('2014-04-01'), "expr(value.format('Y-m-d') == '2014-04-01')"]
         ];
     }
 
@@ -115,7 +117,7 @@ class ExpressionMatcherTest extends TestCase
         return [
             [4, 'expr(value < 2)', '"expr(value < 2)" expression fails for value "4".'],
             [
-                new \DateTime('2014-04-01'),
+                new DateTime('2014-04-01'),
                 "expr(value.format('Y-m-d') == '2014-04-02')",
                 "\"expr(value.format('Y-m-d') == '2014-04-02')\" expression fails for value \"\\DateTime\"."
             ],
