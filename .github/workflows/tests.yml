@@ -26,7 +26,6 @@ jobs:
           - "7.2"
         operating-system:
           - "ubuntu-latest"
-          - "windows-latest"
 
     steps:
       - name: "Checkout"
