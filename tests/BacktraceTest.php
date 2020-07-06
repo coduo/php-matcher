@@ -24,7 +24,7 @@ final class BacktraceTest extends TestCase
     {
         $this->matcher->match(100, '@string@');
 
-        $this->assertSame(
+        $this->assertEquals(
             <<<FAILED_BACKTRACE
 #1 Matcher Coduo\PHPMatcher\Matcher matching value "100" with "@string@" pattern
 #2 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (all) matching value "100" with "@string@" pattern
@@ -71,7 +71,7 @@ FAILED_BACKTRACE
     {
         $this->matcher->match('100', '@string@');
 
-        $this->assertSame(
+        $this->assertEquals(
             <<<SUCCEED_BACKTRACE
 #1 Matcher Coduo\PHPMatcher\Matcher matching value "100" with "@string@" pattern
 #2 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (all) matching value "100" with "@string@" pattern
@@ -142,7 +142,7 @@ SUCCEED_BACKTRACE
         // Uncomment when backtrace logic changes, run tests and then commit again.
         //\file_put_contents(__DIR__ . '/BacktraceTest/failed_complex_matching_expected_trace.txt', (string) $this->matcher->backtrace());
 
-        $this->assertSame(
+        $this->assertEquals(
             file_get_contents(__DIR__ . '/BacktraceTest/failed_complex_matching_expected_trace.txt'),
             (string) $this->matcher->backtrace()
         );
@@ -198,7 +198,7 @@ SUCCEED_BACKTRACE
         // Uncomment when backtrace logic changes, run tests and then commit again.
         //\file_put_contents(__DIR__ . '/BacktraceTest/succeed_complex_matching_expected_trace.txt', (string) $this->matcher->backtrace());
 
-        $this->assertSame(
+        $this->assertEquals(
             file_get_contents(__DIR__ . '/BacktraceTest/succeed_complex_matching_expected_trace.txt'),
             (string) $this->matcher->backtrace()
         );
