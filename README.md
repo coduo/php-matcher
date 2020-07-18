@@ -99,7 +99,7 @@ class MatcherTest extends TestCase
 * ``@...@`` - *unbounded array*
 * ``@null@``
 * ``@*@`` || ``@wildcard@``
-* ``expr(expression)``
+* ``expr(expression)`` - **optional**, requires `symfony/expression-language: ^2.3|^3.0|^4.0|^5.0` to be present
 * ``@uuid@``
 * ``@json@``
 * ``@string@||@integer@`` - string OR integer
@@ -425,6 +425,8 @@ $matcher->match(
 ```
 
 ### Xml matching
+
+**Optional** - requires `openlss/lib-array2xml: ^1.0` to be present. 
 
 ```php
 <?php
