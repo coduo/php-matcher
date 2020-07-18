@@ -30,7 +30,7 @@ class OneOfTest extends TestCase
 
     public function test_positive_match()
     {
-        $backtrace = new Backtrace();
+        $backtrace = new Backtrace\InMemoryBacktrace();
         $contains = new Contains('lorem');
         $contains->setBacktrace($backtrace);
         $contains1 = new Contains('test');
@@ -40,14 +40,14 @@ class OneOfTest extends TestCase
             $contains,
             $contains1
         );
-        $expander->setBacktrace(new Backtrace());
+        $expander->setBacktrace(new Backtrace\InMemoryBacktrace());
 
         $this->assertTrue($expander->match('lorem ipsum'));
     }
 
     public function test_negative_match()
     {
-        $backtrace = new Backtrace();
+        $backtrace = new Backtrace\InMemoryBacktrace();
         $contains = new Contains('lorem');
         $contains->setBacktrace($backtrace);
         $contains1 = new Contains('test');

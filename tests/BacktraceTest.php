@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Coduo\PHPMatcher\Tests;
 
+use Coduo\PHPMatcher\Backtrace\InMemoryBacktrace;
 use Coduo\PHPMatcher\PHPMatcher;
 use PHPUnit\Framework\TestCase;
 use function file_get_contents;
@@ -17,7 +18,7 @@ final class BacktraceTest extends TestCase
 
     public function setUp() : void
     {
-        $this->matcher = new PHPMatcher();
+        $this->matcher = new PHPMatcher(new InMemoryBacktrace());
     }
 
     public function test_backtrace_in_failed_simple_matching()

@@ -16,7 +16,7 @@ class RepeatTest extends TestCase
     public function test_matching_values($needle, $haystack, $expectedResult, $isStrict = true)
     {
         $expander = new Repeat($needle, $isStrict);
-        $expander->setBacktrace(new Backtrace());
+        $expander->setBacktrace(new Backtrace\InMemoryBacktrace());
         $this->assertEquals($expectedResult, $expander->match($haystack));
     }
 
@@ -54,7 +54,7 @@ class RepeatTest extends TestCase
     public function test_error_when_matching_fail($boundary, $value, $errorMessage)
     {
         $expander = new Repeat($boundary);
-        $expander->setBacktrace(new Backtrace());
+        $expander->setBacktrace(new Backtrace\InMemoryBacktrace());
         $this->assertFalse($expander->match($value));
         $this->assertEquals($errorMessage, $expander->getError());
     }

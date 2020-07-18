@@ -16,7 +16,7 @@ class ScalarMatcherTest extends TestCase
      */
     public function test_positive_can_matches($pattern)
     {
-        $matcher = new ScalarMatcher(new Backtrace());
+        $matcher = new ScalarMatcher(new Backtrace\InMemoryBacktrace());
         $this->assertTrue($matcher->canMatch($pattern));
     }
 
@@ -25,7 +25,7 @@ class ScalarMatcherTest extends TestCase
      */
     public function test_negative_can_matches($pattern)
     {
-        $matcher = new ScalarMatcher(new Backtrace());
+        $matcher = new ScalarMatcher(new Backtrace\InMemoryBacktrace());
         $this->assertFalse($matcher->canMatch($pattern));
     }
 
@@ -34,7 +34,7 @@ class ScalarMatcherTest extends TestCase
      */
     public function test_positive_matches($value, $pattern)
     {
-        $matcher = new ScalarMatcher(new Backtrace());
+        $matcher = new ScalarMatcher(new Backtrace\InMemoryBacktrace());
         $this->assertTrue($matcher->match($value, $pattern));
     }
 
@@ -43,7 +43,7 @@ class ScalarMatcherTest extends TestCase
      */
     public function test_negative_matches($value, $pattern)
     {
-        $matcher = new ScalarMatcher(new Backtrace());
+        $matcher = new ScalarMatcher(new Backtrace\InMemoryBacktrace());
         $this->assertFalse($matcher->match($value, $pattern));
     }
 
@@ -52,7 +52,7 @@ class ScalarMatcherTest extends TestCase
      */
     public function test_negative_match_description($value, $pattern, $error)
     {
-        $matcher = new ScalarMatcher(new Backtrace());
+        $matcher = new ScalarMatcher(new Backtrace\InMemoryBacktrace());
         $matcher->match($value, $pattern);
         $this->assertEquals($error, $matcher->getError());
     }

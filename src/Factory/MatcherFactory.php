@@ -13,11 +13,9 @@ use function class_exists;
 
 final class MatcherFactory implements Factory
 {
-    public function createMatcher() : Matcher
+    public function createMatcher(Backtrace $backtrace) : Matcher
     {
-        $matcherBacktrace = new Backtrace();
-
-        return new Matcher($this->buildMatchers($this->buildParser($matcherBacktrace), $matcherBacktrace), $matcherBacktrace);
+        return new Matcher($this->buildMatchers($this->buildParser($backtrace), $backtrace), $backtrace);
     }
 
     protected function buildMatchers(Parser $parser, Backtrace $backtrace) : Matcher\ChainMatcher

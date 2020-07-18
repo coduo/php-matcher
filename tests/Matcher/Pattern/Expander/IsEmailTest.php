@@ -16,7 +16,7 @@ class IsEmailTest extends TestCase
     public function test_emails($email, $expectedResult)
     {
         $expander = new IsEmail();
-        $expander->setBacktrace(new Backtrace());
+        $expander->setBacktrace(new Backtrace\InMemoryBacktrace());
         $this->assertEquals($expectedResult, $expander->match($email));
     }
 

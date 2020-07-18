@@ -17,7 +17,7 @@ class CountTest extends TestCase
     public function test_matching_values($needle, $haystack, $expectedResult)
     {
         $expander = new Count($needle);
-        $expander->setBacktrace(new Backtrace());
+        $expander->setBacktrace(new Backtrace\InMemoryBacktrace());
         $this->assertEquals($expectedResult, $expander->match($haystack));
     }
 
@@ -35,7 +35,7 @@ class CountTest extends TestCase
     public function test_error_when_matching_fail($boundary, $value, $errorMessage)
     {
         $expander = new Count($boundary);
-        $expander->setBacktrace(new Backtrace());
+        $expander->setBacktrace(new Backtrace\InMemoryBacktrace());
         $this->assertFalse($expander->match($value));
         $this->assertEquals($errorMessage, $expander->getError());
     }

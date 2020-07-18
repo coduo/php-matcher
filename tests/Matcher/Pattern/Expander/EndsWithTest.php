@@ -17,7 +17,7 @@ class EndsWithTest extends TestCase
     public function test_examples_not_ignoring_case($stringEnding, $value, $expectedResult)
     {
         $expander = new EndsWith($stringEnding);
-        $expander->setBacktrace(new Backtrace());
+        $expander->setBacktrace(new Backtrace\InMemoryBacktrace());
         $this->assertEquals($expectedResult, $expander->match($value));
     }
 
@@ -38,7 +38,7 @@ class EndsWithTest extends TestCase
     public function test_examples_ignoring_case($stringEnding, $value, $expectedResult)
     {
         $expander = new EndsWith($stringEnding, true);
-        $expander->setBacktrace(new Backtrace());
+        $expander->setBacktrace(new Backtrace\InMemoryBacktrace());
         $this->assertEquals($expectedResult, $expander->match($value));
     }
 
@@ -57,7 +57,7 @@ class EndsWithTest extends TestCase
     public function test_error_when_matching_fail($stringBeginning, $value, $errorMessage)
     {
         $expander = new EndsWith($stringBeginning);
-        $expander->setBacktrace(new Backtrace());
+        $expander->setBacktrace(new Backtrace\InMemoryBacktrace());
         $this->assertFalse($expander->match($value));
         $this->assertEquals($errorMessage, $expander->getError());
     }

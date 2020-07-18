@@ -19,7 +19,7 @@ class ParserSyntaxErrorTest extends TestCase
 
     public function setUp() : void
     {
-        $this->parser = new Parser(new Lexer(), new Parser\ExpanderInitializer(new Backtrace()));
+        $this->parser = new Parser(new Lexer(), new Parser\ExpanderInitializer(new Backtrace\InMemoryBacktrace()));
     }
 
     public function test_unexpected_statement_at_type_position()

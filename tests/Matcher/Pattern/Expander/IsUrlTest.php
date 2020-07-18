@@ -16,7 +16,7 @@ class IsUrlTest extends TestCase
     public function test_urls($url, $expectedResult)
     {
         $expander = new IsUrl();
-        $expander->setBacktrace(new Backtrace());
+        $expander->setBacktrace(new Backtrace\InMemoryBacktrace());
         $this->assertEquals($expectedResult, $expander->match($url));
     }
 

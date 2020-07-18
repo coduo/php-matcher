@@ -13,7 +13,7 @@ class CallbackMatcherTest extends TestCase
 {
     public function test_positive_can_match()
     {
-        $matcher = new CallbackMatcher(new Backtrace());
+        $matcher = new CallbackMatcher(new Backtrace\InMemoryBacktrace());
         $this->assertTrue($matcher->canMatch(function () {
             return true;
         }));
@@ -21,14 +21,14 @@ class CallbackMatcherTest extends TestCase
 
     public function test_negative_can_match()
     {
-        $matcher = new CallbackMatcher(new Backtrace());
+        $matcher = new CallbackMatcher(new Backtrace\InMemoryBacktrace());
         $this->assertFalse($matcher->canMatch(new DateTime()));
         $this->assertFalse($matcher->canMatch('SIN'));
     }
 
     public function test_positive_matches()
     {
-        $matcher = new CallbackMatcher(new Backtrace());
+        $matcher = new CallbackMatcher(new Backtrace\InMemoryBacktrace());
         $this->assertTrue($matcher->match(2, function ($value) {
             return true;
         }));
@@ -39,7 +39,7 @@ class CallbackMatcherTest extends TestCase
 
     public function test_negative_matches()
     {
-        $matcher = new CallbackMatcher(new Backtrace());
+        $matcher = new CallbackMatcher(new Backtrace\InMemoryBacktrace());
         $this->assertFalse($matcher->match(2, function ($value) {
             return false;
         }));

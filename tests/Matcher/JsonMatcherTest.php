@@ -20,7 +20,7 @@ class JsonMatcherTest extends TestCase
 
     public function setUp() : void
     {
-        $backtrace = new Backtrace();
+        $backtrace = new Backtrace\InMemoryBacktrace();
         $parser = new Parser(new Lexer(), new Parser\ExpanderInitializer($backtrace));
         $scalarMatchers = new Matcher\ChainMatcher(
             self::class,

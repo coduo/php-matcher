@@ -21,7 +21,7 @@ class ArrayMatcherTest extends TestCase
 
     public function setUp() : void
     {
-        $backtrace = new Backtrace();
+        $backtrace = new Backtrace\InMemoryBacktrace();
         $parser = new Parser(new Lexer(), new Parser\ExpanderInitializer($backtrace));
 
         $matchers = [
@@ -68,7 +68,7 @@ class ArrayMatcherTest extends TestCase
         $matcher = new Matcher\ArrayMatcher(
             new Matcher\ChainMatcher(
                 self::class,
-                $backtrace = new Backtrace(),
+                $backtrace = new Backtrace\InMemoryBacktrace(),
                 [
                     new Matcher\WildcardMatcher($backtrace)
                 ]

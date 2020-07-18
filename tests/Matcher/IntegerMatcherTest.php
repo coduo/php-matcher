@@ -22,7 +22,7 @@ class IntegerMatcherTest extends TestCase
     public function setUp() : void
     {
         $this->matcher = new IntegerMatcher(
-            $backtrace = new Backtrace(),
+            $backtrace = new Backtrace\InMemoryBacktrace(),
             new Parser(new Lexer(), new Parser\ExpanderInitializer($backtrace))
         );
     }

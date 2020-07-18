@@ -16,7 +16,7 @@ class IsEmptyTest extends TestCase
     public function test_is_empty_expander_match($value, $expectedResult)
     {
         $expander = new IsEmpty();
-        $expander->setBacktrace(new Backtrace());
+        $expander->setBacktrace(new Backtrace\InMemoryBacktrace());
         $this->assertEquals($expectedResult, $expander->match($value));
     }
 

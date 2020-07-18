@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Coduo\PHPMatcher\Tests\Matcher;
 
+use Coduo\PHPMatcher\Backtrace\VoidBacktrace;
 use Coduo\PHPMatcher\Factory\MatcherFactory;
 use Coduo\PHPMatcher\Matcher;
 use PHPUnit\Framework\TestCase;
@@ -18,7 +19,7 @@ class OrMatcherTest extends TestCase
     public function setUp() : void
     {
         $factory = new MatcherFactory();
-        $this->matcher = $factory->createMatcher();
+        $this->matcher = $factory->createMatcher(new VoidBacktrace());
     }
 
     /**

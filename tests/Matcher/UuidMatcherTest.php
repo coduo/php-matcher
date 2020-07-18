@@ -21,7 +21,7 @@ class UuidMatcherTest extends TestCase
     public function setUp() : void
     {
         $this->matcher = new UuidMatcher(
-            $backtrace = new Backtrace(),
+            $backtrace = new Backtrace\InMemoryBacktrace(),
             new Parser(new Lexer(), new Parser\ExpanderInitializer($backtrace))
         );
     }

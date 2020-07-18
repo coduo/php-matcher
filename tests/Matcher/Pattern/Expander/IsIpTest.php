@@ -16,7 +16,7 @@ class IsIpTest extends TestCase
     public function test_ip($ip, $expected)
     {
         $expander = new IsIp();
-        $expander->setBacktrace(new Backtrace());
+        $expander->setBacktrace(new Backtrace\InMemoryBacktrace());
         $this->assertEquals($expected, $expander->match($ip));
     }
 
