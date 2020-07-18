@@ -55,10 +55,5 @@
             "tools/phpstan analyze -c phpstan.neon",
             "tools/php-cs-fixer fix --dry-run"
         ]
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "5.0-dev"
-        }
     }
 }
