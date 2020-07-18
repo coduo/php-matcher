@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Coduo\PHPMatcher;
 
+use Coduo\PHPMatcher\Backtrace\VoidBacktrace;
 use Coduo\PHPMatcher\Factory\MatcherFactory;
 
 final class PHPMatcher
@@ -12,6 +13,18 @@ final class PHPMatcher
      * @var null|Matcher
      */
     private $matcher;
+
+    /**
+     * @var Backtrace
+     */
+    private $backtrace;
+
+    public function __construct(?Backtrace $backtrace = null)
+    {
+        $this->backtrace = $backtrace !== null
+            ? $backtrace
+            : new VoidBacktrace();
+    }
 
     public function match($value, $pattern) : bool
     {
@@ -28,7 +41,7 @@ final class PHPMatcher
      */
     public function backtrace() : Backtrace
     {
-        return $this->getMatcher()->backtrace();
+        return $this->backtrace;
     }
 
     /**
@@ -45,7 +58,7 @@ final class PHPMatcher
     private function getMatcher() : Matcher
     {
         if (null === $this->matcher) {
-            $this->matcher = (new MatcherFactory())->createMatcher();
+            $this->matcher = (new MatcherFactory())->createMatcher($this->backtrace());
         }
 
         return $this->matcher;

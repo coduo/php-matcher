@@ -19,7 +19,7 @@ class ParserTest extends TestCase
 
     public function setUp() : void
     {
-        $this->parser = new Parser(new Lexer(), new Parser\ExpanderInitializer(new Backtrace()));
+        $this->parser = new Parser(new Lexer(), new Parser\ExpanderInitializer(new Backtrace\InMemoryBacktrace()));
     }
 
     public function test_simple_pattern_without_expanders()

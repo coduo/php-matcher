@@ -16,7 +16,7 @@ class IsDateTimeTest extends TestCase
     public function test_dates($date, $expectedResult)
     {
         $expander = new IsDateTime();
-        $expander->setBacktrace(new Backtrace());
+        $expander->setBacktrace(new Backtrace\InMemoryBacktrace());
         $this->assertEquals($expectedResult, $expander->match($date));
     }
 

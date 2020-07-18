@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Coduo\PHPMatcher\PHPUnit;
 
+use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\PHPMatcher;
 use PHPUnit\Framework\Constraint\Constraint;
 use PHPUnit\Util\Json;
@@ -29,7 +30,7 @@ final class PHPMatcherConstraint extends Constraint
 
     private $lastValue;
 
-    public function __construct($pattern)
+    public function __construct($pattern, Backtrace $backtrace = null)
     {
         if (!in_array(gettype($pattern), ['string', 'array', 'object'])) {
             throw new LogicException(sprintf('The PHPMatcherConstraint pattern must be a string, closure or an array, %s given.', gettype($pattern)));
@@ -40,7 +41,7 @@ final class PHPMatcherConstraint extends Constraint
         }
 
         $this->pattern = $pattern;
-        $this->matcher = new PHPMatcher();
+        $this->matcher = new PHPMatcher($backtrace);
     }
 
     /**

@@ -16,7 +16,7 @@ class OptionalTest extends TestCase
     public function test_optional_expander_match($value, $expectedResult)
     {
         $expander = new Optional();
-        $expander->setBacktrace(new Backtrace());
+        $expander->setBacktrace(new Backtrace\InMemoryBacktrace());
         $this->assertEquals($expectedResult, $expander->match($value));
     }
 

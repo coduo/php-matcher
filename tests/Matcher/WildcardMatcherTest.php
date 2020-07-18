@@ -16,7 +16,7 @@ class WildcardMatcherTest extends TestCase
      */
     public function test_positive_match($pattern)
     {
-        $matcher = new WildcardMatcher(new Backtrace());
+        $matcher = new WildcardMatcher(new Backtrace\InMemoryBacktrace());
         $this->assertTrue($matcher->match('*', $pattern));
     }
 
@@ -25,13 +25,13 @@ class WildcardMatcherTest extends TestCase
      */
     public function test_positive_can_match($pattern)
     {
-        $matcher = new WildcardMatcher(new Backtrace());
+        $matcher = new WildcardMatcher(new Backtrace\InMemoryBacktrace());
         $this->assertTrue($matcher->canMatch($pattern));
     }
 
     public function test_negative_can_match()
     {
-        $matcher = new WildcardMatcher(new Backtrace());
+        $matcher = new WildcardMatcher(new Backtrace\InMemoryBacktrace());
         $this->assertFalse($matcher->canMatch('*'));
     }
 

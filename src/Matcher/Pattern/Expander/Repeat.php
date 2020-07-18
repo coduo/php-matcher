@@ -83,7 +83,7 @@ final class Repeat implements PatternExpander
         }
 
         $factory = new MatcherFactory();
-        $matcher = $factory->createMatcher();
+        $matcher = $factory->createMatcher($this->backtrace);
 
         if ($this->isScalar) {
             $result = $this->matchScalar($value, $matcher);

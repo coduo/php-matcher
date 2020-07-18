@@ -17,7 +17,7 @@ class MatchRegexTest extends TestCase
     public function test_match_expander($expectedResult, $expectedError, $pattern, $value)
     {
         $expander = new MatchRegex($pattern);
-        $expander->setBacktrace(new Backtrace());
+        $expander->setBacktrace(new Backtrace\InMemoryBacktrace());
         $this->assertEquals($expectedResult, $expander->match($value));
         $this->assertSame($expectedError, $expander->getError());
     }

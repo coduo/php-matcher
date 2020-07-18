@@ -35,7 +35,7 @@ final class Match implements Matcher\Pattern\PatternExpander
         $this->backtrace->expanderEntrance(self::NAME, $value);
 
         if ($this->matcher === null) {
-            $this->matcher = (new MatcherFactory())->createMatcher();
+            $this->matcher = (new MatcherFactory())->createMatcher($this->backtrace);
         }
 
         $result = $this->matcher->match($value, $this->pattern);

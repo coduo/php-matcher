@@ -35,7 +35,7 @@ class ChainMatcherTest extends TestCase
 
         $this->matcher = new ChainMatcher(
             self::class,
-            new Backtrace(),
+            new Backtrace\InMemoryBacktrace(),
             [
                 $this->firstMatcher,
                 $this->secondMatcher

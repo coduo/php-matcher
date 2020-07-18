@@ -16,7 +16,7 @@ class BeforeTest extends TestCase
     public function test_examples($boundary, $value, $expectedResult)
     {
         $expander = new Before($boundary);
-        $expander->setBacktrace(new Backtrace());
+        $expander->setBacktrace(new Backtrace\InMemoryBacktrace());
         $this->assertEquals($expectedResult, $expander->match($value));
     }
 
@@ -35,7 +35,7 @@ class BeforeTest extends TestCase
     public function test_error_when_matching_fail($boundary, $value, $errorMessage)
     {
         $expander = new Before($boundary);
-        $expander->setBacktrace(new Backtrace());
+        $expander->setBacktrace(new Backtrace\InMemoryBacktrace());
         $this->assertFalse($expander->match($value));
         $this->assertEquals($errorMessage, $expander->getError());
     }

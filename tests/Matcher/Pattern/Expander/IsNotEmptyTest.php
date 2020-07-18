@@ -17,7 +17,7 @@ class IsNotEmptyTest extends TestCase
     public function test_examples_not_ignoring_case($value, $expectedResult)
     {
         $expander = new IsNotEmpty();
-        $expander->setBacktrace(new Backtrace());
+        $expander->setBacktrace(new Backtrace\InMemoryBacktrace());
         $this->assertEquals($expectedResult, $expander->match($value));
     }
 

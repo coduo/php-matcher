@@ -17,7 +17,7 @@ class ContainsTest extends TestCase
     public function test_matching_values_case_sensitive($needle, $haystack, $expectedResult)
     {
         $expander = new Contains($needle);
-        $expander->setBacktrace(new Backtrace());
+        $expander->setBacktrace(new Backtrace\InMemoryBacktrace());
         $this->assertEquals($expectedResult, $expander->match($haystack));
     }
 
@@ -37,7 +37,7 @@ class ContainsTest extends TestCase
     public function test_matching_values_case_insensitive($needle, $haystack, $expectedResult)
     {
         $expander = new Contains($needle, true);
-        $expander->setBacktrace(new Backtrace());
+        $expander->setBacktrace(new Backtrace\InMemoryBacktrace());
         $this->assertEquals($expectedResult, $expander->match($haystack));
     }
 
@@ -57,7 +57,7 @@ class ContainsTest extends TestCase
     public function test_error_when_matching_fail($string, $value, $errorMessage)
     {
         $expander = new Contains($string);
-        $expander->setBacktrace(new Backtrace());
+        $expander->setBacktrace(new Backtrace\InMemoryBacktrace());
         $this->assertFalse($expander->match($value));
         $this->assertEquals($errorMessage, $expander->getError());
     }

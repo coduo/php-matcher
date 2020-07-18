@@ -18,7 +18,7 @@ class NullMatcherTest extends TestCase
 
     public function setUp() : void
     {
-        $this->matcher = new NullMatcher(new Backtrace());
+        $this->matcher = new NullMatcher(new Backtrace\InMemoryBacktrace());
     }
 
     /**

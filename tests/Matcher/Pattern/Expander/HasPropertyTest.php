@@ -16,7 +16,7 @@ class HasPropertyTest extends TestCase
     public function test_examples($propertyName, $value, $expectedResult)
     {
         $expander = new HasProperty($propertyName);
-        $expander->setBacktrace(new Backtrace());
+        $expander->setBacktrace(new Backtrace\InMemoryBacktrace());
         $this->assertEquals($expectedResult, $expander->match($value));
     }
 
