@@ -10,6 +10,7 @@ use Coduo\PHPMatcher\Matcher;
 use Coduo\PHPMatcher\Parser;
 use PHPUnit\Framework\TestCase;
 use DateTime;
+use function class_exists;
 
 class ArrayMatcherTest extends TestCase
 {
@@ -21,25 +22,26 @@ class ArrayMatcherTest extends TestCase
     public function setUp() : void
     {
         $backtrace = new Backtrace();
-
         $parser = new Parser(new Lexer(), new Parser\ExpanderInitializer($backtrace));
+
+        $matchers = [
+            new Matcher\CallbackMatcher($backtrace),
+            new Matcher\NullMatcher($backtrace),
+            new Matcher\StringMatcher($backtrace, $parser),
+            new Matcher\IntegerMatcher($backtrace, $parser),
+            new Matcher\BooleanMatcher($backtrace, $parser),
+            new Matcher\DoubleMatcher($backtrace, $parser),
+            new Matcher\NumberMatcher($backtrace, $parser),
+            new Matcher\ScalarMatcher($backtrace),
+            new Matcher\WildcardMatcher($backtrace),
+        ];
+
+        if (class_exists('Symfony\\Component\\ExpressionLanguage\\ExpressionLanguage')) {
+            $matchers[] = new Matcher\ExpressionMatcher($backtrace);
+        }
+
         $this->matcher = new Matcher\ArrayMatcher(
-            new Matcher\ChainMatcher(
-                self::class,
-                $backtrace,
-                [
-                    new Matcher\CallbackMatcher($backtrace),
-                    new Matcher\ExpressionMatcher($backtrace),
-                    new Matcher\NullMatcher($backtrace),
-                    new Matcher\StringMatcher($backtrace, $parser),
-                    new Matcher\IntegerMatcher($backtrace, $parser),
-                    new Matcher\BooleanMatcher($backtrace, $parser),
-                    new Matcher\DoubleMatcher($backtrace, $parser),
-                    new Matcher\NumberMatcher($backtrace, $parser),
-                    new Matcher\ScalarMatcher($backtrace),
-                    new Matcher\WildcardMatcher($backtrace),
-                ]
-            ),
+            new Matcher\ChainMatcher(self::class, $backtrace, $matchers),
             $backtrace,
             $parser
         );
@@ -230,6 +232,7 @@ class ArrayMatcherTest extends TestCase
                 ],
                 $simpleArrPattern,
             ],
+            [['foo[key]' => 'value'], ['foo[key]' => '@string@']]
         ];
     }
 

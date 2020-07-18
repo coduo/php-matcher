@@ -9,6 +9,7 @@ use Coduo\PHPMatcher\Factory;
 use Coduo\PHPMatcher\Lexer;
 use Coduo\PHPMatcher\Matcher;
 use Coduo\PHPMatcher\Parser;
+use function class_exists;
 
 final class MatcherFactory implements Factory
 {
@@ -31,17 +32,21 @@ final class MatcherFactory implements Factory
         // 4) or "||"
         // 5) full text
 
+        $matchers = [$scalarMatchers];
+        $matchers[] = new Matcher\JsonMatcher($arrayMatcher, $backtrace);
+
+        if (class_exists('LSS\XML2Array')) {
+            $matchers[] = new Matcher\XmlMatcher($arrayMatcher, $backtrace);
+        }
+
+        $matchers[] = $arrayMatcher;
+        $matchers[] = new Matcher\OrMatcher($backtrace, $scalarMatchers);
+        $matchers[] = new Matcher\TextMatcher($scalarMatchers, $backtrace, $parser);
+
         $chainMatcher = new Matcher\ChainMatcher(
             'all',
             $backtrace,
-            [
-                $scalarMatchers,
-                new Matcher\JsonMatcher($arrayMatcher, $backtrace),
-                new Matcher\XmlMatcher($arrayMatcher, $backtrace),
-                $arrayMatcher,
-                new Matcher\OrMatcher($backtrace, $scalarMatchers),
-                new Matcher\TextMatcher($scalarMatchers, $backtrace, $parser),
-            ]
+            $matchers
         );
 
         return $chainMatcher;

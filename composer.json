@@ -20,15 +20,18 @@
         "ext-json": "*",
         "ext-simplexml": "*",
         "coduo/php-to-string": "^3",
-        "symfony/property-access": "^3.0|^4.0|^5.0",
-        "symfony/expression-language": "^2.3|^3.0|^4.0|^5.0",
-        "doctrine/lexer": "^1.0",
-        "openlss/lib-array2xml": "^1.0"
+        "doctrine/lexer": "^1.0"
     },
     "require-dev": {
+        "symfony/expression-language": "^2.3|^3.0|^4.0|^5.0",
+        "openlss/lib-array2xml": "^1.0",
         "friendsofphp/php-cs-fixer": "^2.4",
         "phpstan/phpstan": "^0.12.32",
         "phpunit/phpunit": "^8.5"
+    },
+    "suggest": {
+        "openlss/lib-array2xml": "In order ot use Coduo\\PHPMatcher\\Matcher\\XmlMatcher",
+        "symfony/expression-language" : "In order to use Coduo\\PHPMatcher\\Matcher\\ExpressionMatcher"
     },
     "autoload": {
         "psr-4": {
