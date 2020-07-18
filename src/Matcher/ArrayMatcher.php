@@ -8,7 +8,6 @@ use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Exception\Exception;
 use Coduo\PHPMatcher\Parser;
 use Coduo\ToString\StringConverter;
-use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 use Throwable;
 use function array_diff_key;
 use function array_filter;
@@ -19,6 +18,7 @@ use function gettype;
 use function is_array;
 use function is_string;
 use function sprintf;
+use function substr;
 
 final class ArrayMatcher extends Matcher
 {
@@ -32,11 +32,6 @@ final class ArrayMatcher extends Matcher
      * @var ValueMatcher
      */
     private $propertyMatcher;
-
-    /**
-     * @var PropertyAccessorInterface
-     */
-    private $accessor;
 
     /**
      * @var Parser
@@ -233,7 +228,7 @@ final class ArrayMatcher extends Matcher
 
     private function getKeyFromAccessPath(string $path) : string
     {
-        return \substr($path, 1, -1);
+        return substr($path, 1, -1);
     }
 
     private function formatFullPath(string $parentPath, string $path) : string
