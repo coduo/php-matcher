@@ -51,6 +51,9 @@
         "test" : [
             "phpunit"
         ],
+        "test:mutation": [
+            "tools/infection -vvv --test-framework-options='--testsuite=unit' --only-covered --log-verbosity=default --min-covered-msi=75 --threads=2"
+        ],
         "static:analyze": [
             "tools/psalm --shepherd --stats",
             "tools/phpstan analyze -c phpstan.neon",

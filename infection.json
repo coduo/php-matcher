@@ -1,0 +1,19 @@
+{
+  "timeout": 5,
+  "source": {
+    "directories": [
+      "src"
+    ]
+  },
+  "logs": {
+    "text": "var/logs/infection.log",
+    "summary": "var/logs/infection_summary.log",
+    "debug": "var/logs/infection_summary.log"
+  },
+  "mutators": {
+    "@default": true,
+    "PublicVisibility": false
+  },
+  "testFramework": "phpunit",
+  "bootstrap": "./vendor/autoload.php"
+}
