@@ -23,11 +23,9 @@
         "doctrine/lexer": "^1.0"
     },
     "require-dev": {
-        "symfony/expression-language": "^2.3|^3.0|^4.0|^5.0",
         "openlss/lib-array2xml": "^1.0",
-        "friendsofphp/php-cs-fixer": "^2.4",
-        "phpstan/phpstan": "^0.12.32",
-        "phpunit/phpunit": "^8.5"
+        "phpunit/phpunit": "^8.5",
+        "symfony/expression-language": "^2.3|^3.0|^4.0|^5.0"
     },
     "suggest": {
         "openlss/lib-array2xml": "In order ot use Coduo\\PHPMatcher\\Matcher\\XmlMatcher",
@@ -54,8 +52,8 @@
             "phpunit"
         ],
         "static:analyze": [
-            "phpstan analyze -c phpstan.neon",
-            "php-cs-fixer fix --dry-run"
+            "tools/phpstan analyze -c phpstan.neon",
+            "tools/php-cs-fixer fix --dry-run"
         ]
     },
     "extra": {
