@@ -10,16 +10,6 @@ use PHPUnit\Framework\TestCase;
 
 class LowerThanTest extends TestCase
 {
-    /**
-     * @dataProvider examplesProvider
-     */
-    public function test_examples($boundary, $value, $expectedResult)
-    {
-        $expander = new LowerThan($boundary);
-        $expander->setBacktrace(new Backtrace\InMemoryBacktrace());
-        $this->assertEquals($expectedResult, $expander->match($value));
-    }
-
     public static function examplesProvider()
     {
         return [
@@ -30,17 +20,6 @@ class LowerThanTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider invalidCasesProvider
-     */
-    public function test_error_when_matching_fail($boundary, $value, $errorMessage)
-    {
-        $expander = new LowerThan($boundary);
-        $expander->setBacktrace(new Backtrace\InMemoryBacktrace());
-        $this->assertFalse($expander->match($value));
-        $this->assertEquals($errorMessage, $expander->getError());
-    }
-
     public static function invalidCasesProvider()
     {
         return [
@@ -48,5 +27,26 @@ class LowerThanTest extends TestCase
             [5, 10, 'Value "10" is not lower than "5".'],
             [5, 5, 'Value "5" is not lower than "5".'],
         ];
+    }
+
+    /**
+     * @dataProvider examplesProvider
+     */
+    public function test_examples($boundary, $value, $expectedResult) : void
+    {
+        $expander = new LowerThan($boundary);
+        $expander->setBacktrace(new Backtrace\InMemoryBacktrace());
+        $this->assertEquals($expectedResult, $expander->match($value));
+    }
+
+    /**
+     * @dataProvider invalidCasesProvider
+     */
+    public function test_error_when_matching_fail($boundary, $value, $errorMessage) : void
+    {
+        $expander = new LowerThan($boundary);
+        $expander->setBacktrace(new Backtrace\InMemoryBacktrace());
+        $this->assertFalse($expander->match($value));
+        $this->assertEquals($errorMessage, $expander->getError());
     }
 }

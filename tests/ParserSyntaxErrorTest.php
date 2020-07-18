@@ -22,7 +22,7 @@ class ParserSyntaxErrorTest extends TestCase
         $this->parser = new Parser(new Lexer(), new Parser\ExpanderInitializer(new Backtrace\InMemoryBacktrace()));
     }
 
-    public function test_unexpected_statement_at_type_position()
+    public function test_unexpected_statement_at_type_position() : void
     {
         $this->expectException(PatternException::class);
         $this->expectExceptionMessage('[Syntax Error] line 0, col 0: Error: Expected "@type@ pattern", got "not"');
@@ -30,7 +30,7 @@ class ParserSyntaxErrorTest extends TestCase
         $this->parser->getAST('not_valid_type');
     }
 
-    public function test_unexpected_statement_instead_of_expander()
+    public function test_unexpected_statement_instead_of_expander() : void
     {
         $this->expectException(PatternException::class);
         $this->expectExceptionMessage('[Syntax Error] line 0, col 6: Error: Expected ".expanderName(args) definition", got "anything"');
@@ -38,7 +38,7 @@ class ParserSyntaxErrorTest extends TestCase
         $this->parser->getAST('@type@anything');
     }
 
-    public function test_end_of_string_after_opening_parenthesis()
+    public function test_end_of_string_after_opening_parenthesis() : void
     {
         $this->expectException(PatternException::class);
         $this->expectExceptionMessage('[Syntax Error] line 0, col 14: Error: Expected ")", got end of string.end of string');
@@ -46,7 +46,7 @@ class ParserSyntaxErrorTest extends TestCase
         $this->parser->getAST('@type@.expander(');
     }
 
-    public function test_not_argument_after_opening_parenthesis()
+    public function test_not_argument_after_opening_parenthesis() : void
     {
         $this->expectException(PatternException::class);
         $this->expectExceptionMessage('[Syntax Error] line 0, col 16: Error: Expected "string, number, boolean or null argument", got "not"');
@@ -54,7 +54,7 @@ class ParserSyntaxErrorTest extends TestCase
         $this->parser->getAST('@type@.expander(not_argument');
     }
 
-    public function test_missing_close_parenthesis_after_single_argument()
+    public function test_missing_close_parenthesis_after_single_argument() : void
     {
         $this->expectException(PatternException::class);
         $this->expectExceptionMessage('[Syntax Error] line 0, col 22: Error: Expected ")", got end of string.end of string');
@@ -62,7 +62,7 @@ class ParserSyntaxErrorTest extends TestCase
         $this->parser->getAST("@type@.expander('string'");
     }
 
-    public function test_missing_close_parenthesis_after_multiple_arguments()
+    public function test_missing_close_parenthesis_after_multiple_arguments() : void
     {
         $this->expectException(PatternException::class);
         $this->expectExceptionMessage('[Syntax Error] line 0, col 26: Error: Expected ")", got end of string.end of string');
@@ -70,7 +70,7 @@ class ParserSyntaxErrorTest extends TestCase
         $this->parser->getAST("@type@.expander('string',1");
     }
 
-    public function test_missing_argument_after_comma()
+    public function test_missing_argument_after_comma() : void
     {
         $this->expectException(PatternException::class);
         $this->expectExceptionMessage('[Syntax Error] line 0, col 25: Error: Expected "string, number, boolean or null argument", got ")"');
@@ -78,7 +78,7 @@ class ParserSyntaxErrorTest extends TestCase
         $this->parser->getAST("@type@.expander('string',)");
     }
 
-    public function test_not_argument_after_comma()
+    public function test_not_argument_after_comma() : void
     {
         $this->expectException(PatternException::class);
         $this->expectExceptionMessage('[Syntax Error] line 0, col 25: Error: Expected "string, number, boolean or null argument", got "not"');

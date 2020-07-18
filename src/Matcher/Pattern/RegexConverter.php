@@ -23,7 +23,8 @@ final class RegexConverter
             case 'double':
                 return '(\\-?[0-9]*[\\.|\\,][0-9]*)';
             case 'uuid':
-                return '('.UuidMatcher::UUID_PATTERN.')';
+                return '(' . UuidMatcher::UUID_PATTERN . ')';
+
             default:
                 throw new UnknownTypeException($typePattern->getType());
         }

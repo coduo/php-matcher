@@ -6,22 +6,9 @@ namespace Coduo\PHPMatcher\Tests;
 
 use Coduo\PHPMatcher\Lexer;
 use PHPUnit\Framework\TestCase;
-use function trim;
 
 class LexerTest extends TestCase
 {
-    /**
-     * @dataProvider validStringValuesProvider
-     */
-    public function test_string_values(string $value)
-    {
-        $lexer = new Lexer();
-        $lexer->setInput($value);
-        $lexer->moveNext();
-        $this->assertEquals($lexer->lookahead['type'], Lexer::T_STRING);
-        $this->assertEquals($lexer->lookahead['value'], trim(trim($value, "'"), '"'));
-    }
-
     public static function validStringValuesProvider()
     {
         return [
@@ -30,38 +17,14 @@ class LexerTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider validNumberValuesProvider
-     */
-    public function test_number_values($value, $expectedValue)
-    {
-        $lexer = new Lexer();
-        $lexer->setInput($value);
-        $lexer->moveNext();
-        $this->assertEquals($lexer->lookahead['type'], Lexer::T_NUMBER);
-        $this->assertEquals($expectedValue, $lexer->lookahead['value']);
-    }
-
     public static function validNumberValuesProvider()
     {
         return [
             ['125', 125],
             ['12.15', 12.15],
             ['-10', -10],
-            ['-1.24', -1.24]
+            ['-1.24', -1.24],
         ];
-    }
-
-    /**
-     * @dataProvider validBooleanValuesProvider
-     */
-    public function test_boolean_values($value, $expectedValue)
-    {
-        $lexer = new Lexer();
-        $lexer->setInput($value);
-        $lexer->moveNext();
-        $this->assertEquals($lexer->lookahead['type'], Lexer::T_BOOLEAN);
-        $this->assertEquals($lexer->lookahead['value'], $expectedValue);
     }
 
     public static function validBooleanValuesProvider()
@@ -70,20 +33,8 @@ class LexerTest extends TestCase
             ['true', true],
             ['false', false],
             ['TRUE', true],
-            ['fAlSe', false]
+            ['fAlSe', false],
         ];
-    }
-
-    /**
-     * @dataProvider validNullValuesProvider
-     */
-    public function test_null_values($value)
-    {
-        $lexer = new Lexer();
-        $lexer->setInput($value);
-        $lexer->moveNext();
-        $this->assertEquals($lexer->lookahead['type'], Lexer::T_NULL);
-        $this->assertNull($lexer->lookahead['value']);
     }
 
     public static function validNullValuesProvider()
@@ -95,77 +46,14 @@ class LexerTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider validNonTokenValuesProvider
-     */
-    public function test_non_token_values($value)
-    {
-        $lexer = new Lexer();
-        $lexer->setInput($value);
-        $lexer->moveNext();
-        $this->assertEquals($lexer->lookahead['type'], Lexer::T_NONE);
-    }
-
     public static function validNonTokenValuesProvider()
     {
         return [
             ['@integer'],
             ['integer@'],
             ['test'],
-            ['@']
+            ['@'],
         ];
-    }
-
-    public function test_close_parenthesis()
-    {
-        $lexer = new Lexer();
-        $lexer->setInput(')');
-        $lexer->moveNext();
-        $this->assertEquals($lexer->lookahead['type'], Lexer::T_CLOSE_PARENTHESIS);
-    }
-
-    public function test_close_open_brace()
-    {
-        $lexer = new Lexer();
-        $lexer->setInput('{');
-        $lexer->moveNext();
-        $this->assertEquals($lexer->lookahead['type'], Lexer::T_OPEN_CURLY_BRACE);
-    }
-
-    public function test_close_curly_brace()
-    {
-        $lexer = new Lexer();
-        $lexer->setInput('}');
-        $lexer->moveNext();
-        $this->assertEquals($lexer->lookahead['type'], Lexer::T_CLOSE_CURLY_BRACE);
-    }
-
-    public function test_colon()
-    {
-        $lexer = new Lexer();
-        $lexer->setInput(':');
-        $lexer->moveNext();
-        $this->assertEquals($lexer->lookahead['type'], Lexer::T_COLON);
-    }
-
-    public function test_comma()
-    {
-        $lexer = new Lexer();
-        $lexer->setInput(',');
-        $lexer->moveNext();
-        $this->assertEquals($lexer->lookahead['type'], Lexer::T_COMMA);
-    }
-
-    /**
-     * @dataProvider validMatcherTypePatterns
-     */
-    public function test_type_pattern($value)
-    {
-        $lexer = new Lexer();
-        $lexer->setInput($value);
-        $lexer->moveNext();
-        $this->assertEquals($lexer->lookahead['type'], Lexer::T_TYPE_PATTERN);
-        $this->assertEquals($lexer->lookahead['value'], trim($value, '@'));
     }
 
     public static function validMatcherTypePatterns()
@@ -177,14 +65,134 @@ class LexerTest extends TestCase
             ['@number@'],
             ['@*@'],
             ['@...@'],
-            ['@wildcard@']
+            ['@wildcard@'],
         ];
+    }
+
+    public static function validExpanderNamesProvider()
+    {
+        return [
+            ['expanderName(', 'expanderName'],
+            ['e(', 'e'],
+            ['.e(', 'e'],
+        ];
+    }
+
+    /**
+     * @dataProvider validStringValuesProvider
+     */
+    public function test_string_values(string $value) : void
+    {
+        $lexer = new Lexer();
+        $lexer->setInput($value);
+        $lexer->moveNext();
+        $this->assertEquals($lexer->lookahead['type'], Lexer::T_STRING);
+        $this->assertEquals($lexer->lookahead['value'], \trim(\trim($value, "'"), '"'));
+    }
+
+    /**
+     * @dataProvider validNumberValuesProvider
+     */
+    public function test_number_values($value, $expectedValue) : void
+    {
+        $lexer = new Lexer();
+        $lexer->setInput($value);
+        $lexer->moveNext();
+        $this->assertEquals($lexer->lookahead['type'], Lexer::T_NUMBER);
+        $this->assertEquals($expectedValue, $lexer->lookahead['value']);
+    }
+
+    /**
+     * @dataProvider validBooleanValuesProvider
+     */
+    public function test_boolean_values($value, $expectedValue) : void
+    {
+        $lexer = new Lexer();
+        $lexer->setInput($value);
+        $lexer->moveNext();
+        $this->assertEquals($lexer->lookahead['type'], Lexer::T_BOOLEAN);
+        $this->assertEquals($lexer->lookahead['value'], $expectedValue);
+    }
+
+    /**
+     * @dataProvider validNullValuesProvider
+     */
+    public function test_null_values($value) : void
+    {
+        $lexer = new Lexer();
+        $lexer->setInput($value);
+        $lexer->moveNext();
+        $this->assertEquals($lexer->lookahead['type'], Lexer::T_NULL);
+        $this->assertNull($lexer->lookahead['value']);
+    }
+
+    /**
+     * @dataProvider validNonTokenValuesProvider
+     */
+    public function test_non_token_values($value) : void
+    {
+        $lexer = new Lexer();
+        $lexer->setInput($value);
+        $lexer->moveNext();
+        $this->assertEquals($lexer->lookahead['type'], Lexer::T_NONE);
+    }
+
+    public function test_close_parenthesis() : void
+    {
+        $lexer = new Lexer();
+        $lexer->setInput(')');
+        $lexer->moveNext();
+        $this->assertEquals($lexer->lookahead['type'], Lexer::T_CLOSE_PARENTHESIS);
+    }
+
+    public function test_close_open_brace() : void
+    {
+        $lexer = new Lexer();
+        $lexer->setInput('{');
+        $lexer->moveNext();
+        $this->assertEquals($lexer->lookahead['type'], Lexer::T_OPEN_CURLY_BRACE);
+    }
+
+    public function test_close_curly_brace() : void
+    {
+        $lexer = new Lexer();
+        $lexer->setInput('}');
+        $lexer->moveNext();
+        $this->assertEquals($lexer->lookahead['type'], Lexer::T_CLOSE_CURLY_BRACE);
+    }
+
+    public function test_colon() : void
+    {
+        $lexer = new Lexer();
+        $lexer->setInput(':');
+        $lexer->moveNext();
+        $this->assertEquals($lexer->lookahead['type'], Lexer::T_COLON);
+    }
+
+    public function test_comma() : void
+    {
+        $lexer = new Lexer();
+        $lexer->setInput(',');
+        $lexer->moveNext();
+        $this->assertEquals($lexer->lookahead['type'], Lexer::T_COMMA);
+    }
+
+    /**
+     * @dataProvider validMatcherTypePatterns
+     */
+    public function test_type_pattern($value) : void
+    {
+        $lexer = new Lexer();
+        $lexer->setInput($value);
+        $lexer->moveNext();
+        $this->assertEquals($lexer->lookahead['type'], Lexer::T_TYPE_PATTERN);
+        $this->assertEquals($lexer->lookahead['value'], \trim($value, '@'));
     }
 
     /**
      * @dataProvider validExpanderNamesProvider
      */
-    public function test_expander_name($value, $expectedTokenValue)
+    public function test_expander_name($value, $expectedTokenValue) : void
     {
         $lexer = new Lexer();
         $lexer->setInput($value);
@@ -193,16 +201,7 @@ class LexerTest extends TestCase
         $this->assertEquals($lexer->lookahead['value'], $expectedTokenValue);
     }
 
-    public static function validExpanderNamesProvider()
-    {
-        return [
-            ['expanderName(', 'expanderName'],
-            ['e(', 'e'],
-            ['.e(', 'e']
-        ];
-    }
-
-    public function test_ignore_whitespaces_between_parenthesis()
+    public function test_ignore_whitespaces_between_parenthesis() : void
     {
         $expectedTokens = ['type', 'expander', 'arg1', ',', 2, ',', 'arg3', ',', 4, ')'];
         $lexer = new Lexer();
@@ -219,9 +218,11 @@ class LexerTest extends TestCase
     protected function collectTokens(Lexer $lexer)
     {
         $tokens = [];
+
         while ($lexer->moveNext()) {
             $tokens[] = $lexer->lookahead['value'];
         }
+
         return $tokens;
     }
 }

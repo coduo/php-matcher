@@ -7,14 +7,10 @@ namespace Coduo\PHPMatcher\Matcher;
 use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Parser;
 use Coduo\ToString\StringConverter;
-use function is_bool;
-use function sprintf;
-use function gettype;
-use function is_string;
 
 final class BooleanMatcher extends Matcher
 {
-    const PATTERN = 'boolean';
+    public const PATTERN = 'boolean';
 
     /**
      * @var Backtrace
@@ -36,8 +32,8 @@ final class BooleanMatcher extends Matcher
     {
         $this->backtrace->matcherEntrance(self::class, $value, $pattern);
 
-        if (!is_bool($value)) {
-            $this->error = sprintf('%s "%s" is not a valid boolean.', gettype($value), new StringConverter($value));
+        if (!\is_bool($value)) {
+            $this->error = \sprintf('%s "%s" is not a valid boolean.', \gettype($value), new StringConverter($value));
             $this->backtrace->matcherFailed(self::class, $value, $pattern, $this->error);
 
             return false;
@@ -50,7 +46,7 @@ final class BooleanMatcher extends Matcher
 
     public function canMatch($pattern) : bool
     {
-        if (!is_string($pattern)) {
+        if (!\is_string($pattern)) {
             $this->backtrace->matcherCanMatch(self::class, $pattern, false);
 
             return false;

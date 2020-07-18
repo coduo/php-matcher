@@ -4,12 +4,6 @@ declare(strict_types=1);
 
 namespace Coduo\PHPMatcher\Matcher\Pattern\Assert;
 
-use function is_string;
-use function preg_replace;
-use function json_encode;
-use function json_decode;
-use function json_last_error;
-
 final class Json
 {
     private const TRANSFORM_NEW_LINES = '/\r?\n|\r/';
@@ -20,11 +14,11 @@ final class Json
 
     public static function isValid($value) : bool
     {
-        if (!is_string($value)) {
+        if (!\is_string($value)) {
             return false;
         }
 
-        if (null === json_decode($value) && JSON_ERROR_NONE !== json_last_error()) {
+        if (null === \json_decode($value) && JSON_ERROR_NONE !== \json_last_error()) {
             return false;
         }
 
@@ -33,7 +27,7 @@ final class Json
 
     public static function isValidPattern($value) : bool
     {
-        if (!is_string($value)) {
+        if (!\is_string($value)) {
             return false;
         }
 
@@ -42,10 +36,10 @@ final class Json
 
     public static function transformPattern(string $pattern) : string
     {
-        return preg_replace(
+        return \preg_replace(
             self::TRANSFORM_NEW_LINES,
             '',
-            preg_replace(
+            \preg_replace(
                 self::TRANSFORM_QUOTATION_PATTERN,
                 self::TRANSFORM_QUOTATION_REPLACEMENT,
                 $pattern
@@ -55,12 +49,12 @@ final class Json
 
     public static function reformat(string $json) : string
     {
-        return json_encode(json_decode($json, true));
+        return \json_encode(\json_decode($json, true));
     }
 
-    public static function getErrorMessage(): string
+    public static function getErrorMessage() : string
     {
-        switch (json_last_error()) {
+        switch (\json_last_error()) {
             case JSON_ERROR_DEPTH:
                 return 'Maximum stack depth exceeded';
             case JSON_ERROR_STATE_MISMATCH:
@@ -71,6 +65,7 @@ final class Json
                 return 'Syntax error, malformed JSON';
             case JSON_ERROR_UTF8:
                 return 'Malformed UTF-8 characters, possibly incorrectly encoded';
+
             default:
                 return 'Unknown error';
         }

@@ -6,16 +6,12 @@ namespace Coduo\PHPMatcher\Matcher\Pattern\Expander;
 
 use Coduo\PHPMatcher\Matcher\Pattern\PatternExpander;
 use Coduo\ToString\StringConverter;
-use function is_string;
-use function mb_stripos;
-use function mb_strpos;
-use function sprintf;
 
 final class NotContains implements PatternExpander
 {
-    public const NAME = 'notContains';
-
     use BacktraceBehavior;
+
+    public const NAME = 'notContains';
 
     /**
      * @var null|string
@@ -29,34 +25,34 @@ final class NotContains implements PatternExpander
 
     private $ignoreCase;
 
-    public static function is(string $name) : bool
-    {
-        return self::NAME === $name;
-    }
-
     public function __construct(string $string, $ignoreCase = false)
     {
         $this->string = $string;
         $this->ignoreCase = $ignoreCase;
     }
 
+    public static function is(string $name) : bool
+    {
+        return self::NAME === $name;
+    }
+
     public function match($value) : bool
     {
         $this->backtrace->expanderEntrance(self::NAME, $value);
 
-        if (!is_string($value)) {
-            $this->error = sprintf('Not contains expander require "string", got "%s".', new StringConverter($value));
+        if (!\is_string($value)) {
+            $this->error = \sprintf('Not contains expander require "string", got "%s".', new StringConverter($value));
             $this->backtrace->expanderFailed(self::NAME, $value, $this->error);
 
             return false;
         }
 
         $contains = $this->ignoreCase
-            ? mb_stripos($value, $this->string)
-            : mb_strpos($value, $this->string);
+            ? \mb_stripos($value, $this->string)
+            : \mb_strpos($value, $this->string);
 
         if ($contains !== false) {
-            $this->error = sprintf('String "%s" contains "%s".', $value, $this->string);
+            $this->error = \sprintf('String "%s" contains "%s".', $value, $this->string);
             $this->backtrace->expanderFailed(self::NAME, $value, $this->error);
 
             return false;

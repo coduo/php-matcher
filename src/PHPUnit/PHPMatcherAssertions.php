@@ -12,7 +12,7 @@ trait PHPMatcherAssertions
     /**
      * @var null|Backtrace
      */
-    protected $backtrace = null;
+    protected $backtrace;
 
     protected function setBacktrace(Backtrace $backtrace) : void
     {

@@ -9,7 +9,6 @@ use Coduo\PHPMatcher\Lexer;
 use Coduo\PHPMatcher\Matcher;
 use Coduo\PHPMatcher\Parser;
 use PHPUnit\Framework\TestCase;
-use function json_encode;
 
 class TextMatcherTest extends TestCase
 {
@@ -45,7 +44,7 @@ class TextMatcherTest extends TestCase
                 $backtrace,
                 [
                     $scalarMatchers,
-                    new Matcher\ArrayMatcher($scalarMatchers, $backtrace, $parser)
+                    new Matcher\ArrayMatcher($scalarMatchers, $backtrace, $parser),
                 ]
             ),
             $backtrace,
@@ -56,26 +55,26 @@ class TextMatcherTest extends TestCase
     /**
      * @dataProvider matchingData
      */
-    public function test_positive_matches($value, $pattern, $expectedResult)
+    public function test_positive_matches($value, $pattern, $expectedResult) : void
     {
         $this->assertEquals($expectedResult, $this->matcher->match($value, $pattern));
     }
 
-    public function test_ignore_valid_json_patterns()
+    public function test_ignore_valid_json_patterns() : void
     {
-        $jsonPattern = json_encode([
+        $jsonPattern = \json_encode([
             'users' => [
                 ['id' => '@number@', 'name' => 'Norbert'],
-                ['id' => '@number@', 'name' => 'Michal']
-            ]
+                ['id' => '@number@', 'name' => 'Michal'],
+            ],
         ]);
 
         $this->assertFalse($this->matcher->canMatch($jsonPattern));
     }
 
-    public function test_ignore_valid_xml_patterns()
+    public function test_ignore_valid_xml_patterns() : void
     {
-        $xmlPattern = <<<XML
+        $xmlPattern = <<<'XML'
 <?xml version="1.0"?>
 <soap:Envelope
 xmlns:soap="http://www.w3.org/2001/12/soap-envelope"
@@ -94,7 +93,7 @@ XML;
         $this->assertFalse($this->matcher->canMatch($xmlPattern));
     }
 
-    public function test_error_when_unsupported_type_pattern_used()
+    public function test_error_when_unsupported_type_pattern_used() : void
     {
         $pattern = 'lorem ipsum @null@ bla bla';
         $value = 'lorem ipsum bla bla';
@@ -109,28 +108,28 @@ XML;
             [
                 'lorem ipsum lol lorem 24 dolorem',
                 'lorem ipsum @string@.startsWith("lo") lorem @number@ dolorem',
-                true
+                true,
             ],
             [
                 'lorem ipsum 24 dolorem',
                 'lorem ipsum @integer@',
-                false
+                false,
             ],
             [
                 '/users/12345/active',
                 '/users/@integer@.greaterThan(0)/active',
-                true
+                true,
             ],
             [
                 '/user/ebd1fb0e-45ae-11e8-842f-0ed5f89f718b/profile',
                 '/user/@uuid@/@string@',
-                true
+                true,
             ],
             [
                 '/user/12345/profile',
                 '/user/@uuid@/@string@',
-                false
-            ]
+                false,
+            ],
         ];
     }
 }

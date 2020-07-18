@@ -8,32 +8,29 @@ use Coduo\PHPMatcher\PHPUnit\PHPMatcherConstraint;
 use PHPUnit\Framework\AssertionFailedError;
 use PHPUnit\Framework\Constraint\Constraint;
 use PHPUnit\Framework\TestCase;
-use LogicException;
-use StdClass;
-use function fopen;
 
 class PHPMatcherConstraintTest extends TestCase
 {
-    public function test_it_is_a_phpunit_constraint()
+    public function test_it_is_a_phpunit_constraint() : void
     {
         $this->assertInstanceOf(Constraint::class, new PHPMatcherConstraint('@string@'));
     }
 
-    public function test_it_returns_true_if_a_value_matches_the_pattern()
+    public function test_it_returns_true_if_a_value_matches_the_pattern() : void
     {
         $constraint = new PHPMatcherConstraint('@string@');
 
         $this->assertTrue($constraint->evaluate('foo', '', true));
     }
 
-    public function test_it_returns_false_if_a_value_does_not_match_the_pattern()
+    public function test_it_returns_false_if_a_value_does_not_match_the_pattern() : void
     {
         $constraint = new PHPMatcherConstraint('@string@');
 
         $this->assertFalse($constraint->evaluate(42, '', true));
     }
 
-    public function test_it_sets_a_failure_description_if_not_given()
+    public function test_it_sets_a_failure_description_if_not_given() : void
     {
         $this->expectException(AssertionFailedError::class);
         $this->expectExceptionMessageMatches('/Failed asserting that 42 matches given pattern(.*)/');
@@ -43,7 +40,7 @@ class PHPMatcherConstraintTest extends TestCase
         $this->assertFalse($constraint->evaluate(42));
     }
 
-    public function test_it_sets_additional_failure_description()
+    public function test_it_sets_additional_failure_description() : void
     {
         $this->expectException(AssertionFailedError::class);
         $this->expectExceptionMessage('integer "42" is not a valid string');
@@ -53,7 +50,7 @@ class PHPMatcherConstraintTest extends TestCase
         $this->assertFalse($constraint->evaluate(42));
     }
 
-    public function test_that_pattern_could_be_an_array()
+    public function test_that_pattern_could_be_an_array() : void
     {
         $constraint = new PHPMatcherConstraint(['foo' => '@string@']);
 
@@ -63,9 +60,9 @@ class PHPMatcherConstraintTest extends TestCase
     /**
      * @dataProvider invalidPatterns
      */
-    public function test_that_pattern_could_be_only_a_string_or_an_array($pattern)
+    public function test_that_pattern_could_be_only_a_string_or_an_array($pattern) : void
     {
-        $this->expectException(LogicException::class);
+        $this->expectException(\LogicException::class);
 
         new PHPMatcherConstraint($pattern);
     }
@@ -76,9 +73,9 @@ class PHPMatcherConstraintTest extends TestCase
             [true],
             [1],
             [1.1],
-            [new StdClass],
+            [new \StdClass],
             [null],
-            [fopen('php://memory', 'r')],
+            [\fopen('php://memory', 'r')],
         ];
     }
 }

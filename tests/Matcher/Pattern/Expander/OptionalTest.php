@@ -10,16 +10,6 @@ use PHPUnit\Framework\TestCase;
 
 class OptionalTest extends TestCase
 {
-    /**
-     * @dataProvider examplesProvider
-     */
-    public function test_optional_expander_match($value, $expectedResult)
-    {
-        $expander = new Optional();
-        $expander->setBacktrace(new Backtrace\InMemoryBacktrace());
-        $this->assertEquals($expectedResult, $expander->match($value));
-    }
-
     public static function examplesProvider()
     {
         return [
@@ -32,5 +22,15 @@ class OptionalTest extends TestCase
             [true, true],
             ['Lorem ipsum', true],
         ];
+    }
+
+    /**
+     * @dataProvider examplesProvider
+     */
+    public function test_optional_expander_match($value, $expectedResult) : void
+    {
+        $expander = new Optional();
+        $expander->setBacktrace(new Backtrace\InMemoryBacktrace());
+        $this->assertEquals($expectedResult, $expander->match($value));
     }
 }

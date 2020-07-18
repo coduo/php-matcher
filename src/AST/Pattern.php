@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Coduo\PHPMatcher\AST;
 
-use function count;
-
 final class Pattern implements Node
 {
     /**
@@ -31,7 +29,7 @@ final class Pattern implements Node
 
     public function hasExpanders() : bool
     {
-        return (boolean) count($this->expanders);
+        return (bool) \count($this->expanders);
     }
 
     /**
@@ -42,7 +40,7 @@ final class Pattern implements Node
         return $this->expanders;
     }
 
-    public function addExpander(Expander $expander): void
+    public function addExpander(Expander $expander) : void
     {
         $this->expanders[] = $expander;
     }

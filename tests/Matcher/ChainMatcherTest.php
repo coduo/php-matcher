@@ -38,12 +38,12 @@ class ChainMatcherTest extends TestCase
             new Backtrace\InMemoryBacktrace(),
             [
                 $this->firstMatcher,
-                $this->secondMatcher
+                $this->secondMatcher,
             ]
         );
     }
 
-    public function test_only_one_matcher_can_match_but_none_matchers_match()
+    public function test_only_one_matcher_can_match_but_none_matchers_match() : void
     {
         $this->firstMatcher->expects($this->once())->method('canMatch')->will($this->returnValue(false));
         $this->firstMatcher->expects($this->never())->method('match');
@@ -53,7 +53,7 @@ class ChainMatcherTest extends TestCase
         $this->assertEquals($this->matcher->match('foo', 'foo_pattern'), false);
     }
 
-    public function test_none_matchers_can_match()
+    public function test_none_matchers_can_match() : void
     {
         $this->firstMatcher->expects($this->once())->method('canMatch')->will($this->returnValue(false));
         $this->firstMatcher->expects($this->never())->method('match');
@@ -63,7 +63,7 @@ class ChainMatcherTest extends TestCase
         $this->assertEquals($this->matcher->match('foo', 'foo_pattern'), false);
     }
 
-    public function test_first_matcher_match()
+    public function test_first_matcher_match() : void
     {
         $this->firstMatcher->expects($this->once())->method('canMatch')->will($this->returnValue(true));
         $this->firstMatcher->expects($this->once())->method('match')->will($this->returnValue(true));
@@ -73,7 +73,7 @@ class ChainMatcherTest extends TestCase
         $this->assertEquals($this->matcher->match('foo', 'foo_pattern'), true);
     }
 
-    public function test_if_there_is_error_description_only_from_last_matcher_that_fails()
+    public function test_if_there_is_error_description_only_from_last_matcher_that_fails() : void
     {
         $this->firstMatcher->expects($this->once())->method('canMatch')->will($this->returnValue(true));
         $this->firstMatcher->expects($this->once())->method('match')->will($this->returnValue(false));
@@ -89,7 +89,7 @@ class ChainMatcherTest extends TestCase
         $this->assertEquals($this->matcher->getError(), 'Second matcher error');
     }
 
-    public function test_error_description_when_any_matcher_can_match()
+    public function test_error_description_when_any_matcher_can_match() : void
     {
         $this->firstMatcher->expects($this->once())->method('canMatch')->will($this->returnValue(false));
         $this->secondMatcher->expects($this->once())->method('canMatch')->will($this->returnValue(false));

@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Coduo\PHPMatcher\Exception;
 
-use function sprintf;
-
 class UnknownTypeException extends Exception
 {
     /**
@@ -16,7 +14,7 @@ class UnknownTypeException extends Exception
     public function __construct(string $type)
     {
         $this->type = '@' . $type . '@';
-        parent::__construct(sprintf('Type pattern "%s" is not supported.', $this->type), 0, null);
+        parent::__construct(\sprintf('Type pattern "%s" is not supported.', $this->type), 0, null);
     }
 
     public function getType() : string

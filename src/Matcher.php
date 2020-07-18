@@ -48,7 +48,7 @@ final class Matcher
         return $this->valueMatcher->getError();
     }
 
-    public function backtrace(): Backtrace
+    public function backtrace() : Backtrace
     {
         return $this->backtrace;
     }

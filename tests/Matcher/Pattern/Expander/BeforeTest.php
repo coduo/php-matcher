@@ -10,34 +10,13 @@ use PHPUnit\Framework\TestCase;
 
 class BeforeTest extends TestCase
 {
-    /**
-     * @dataProvider examplesProvider
-     */
-    public function test_examples($boundary, $value, $expectedResult)
-    {
-        $expander = new Before($boundary);
-        $expander->setBacktrace(new Backtrace\InMemoryBacktrace());
-        $this->assertEquals($expectedResult, $expander->match($value));
-    }
-
     public static function examplesProvider()
     {
         return [
-            ['+ 2 day','today',true],
-            ['2018-02-06T04:20:33','2017-02-06T04:20:33',true],
-            ['2017-02-06T04:20:33','2018-02-06T04:20:33',false],
+            ['+ 2 day', 'today', true],
+            ['2018-02-06T04:20:33', '2017-02-06T04:20:33', true],
+            ['2017-02-06T04:20:33', '2018-02-06T04:20:33', false],
         ];
-    }
-
-    /**
-     * @dataProvider invalidCasesProvider
-     */
-    public function test_error_when_matching_fail($boundary, $value, $errorMessage)
-    {
-        $expander = new Before($boundary);
-        $expander->setBacktrace(new Backtrace\InMemoryBacktrace());
-        $this->assertFalse($expander->match($value));
-        $this->assertEquals($errorMessage, $expander->getError());
     }
 
     public static function invalidCasesProvider()
@@ -45,7 +24,28 @@ class BeforeTest extends TestCase
         return [
             ['today', 'ipsum lorem', 'Value "ipsum lorem" is not a valid date.'],
             ['2017-02-06T04:20:33', 'ipsum lorem', 'Value "ipsum lorem" is not a valid date.'],
-            ['today',5, 'Before expander require "string", got "5".'],
+            ['today', 5, 'Before expander require "string", got "5".'],
         ];
+    }
+
+    /**
+     * @dataProvider examplesProvider
+     */
+    public function test_examples($boundary, $value, $expectedResult) : void
+    {
+        $expander = new Before($boundary);
+        $expander->setBacktrace(new Backtrace\InMemoryBacktrace());
+        $this->assertEquals($expectedResult, $expander->match($value));
+    }
+
+    /**
+     * @dataProvider invalidCasesProvider
+     */
+    public function test_error_when_matching_fail($boundary, $value, $errorMessage) : void
+    {
+        $expander = new Before($boundary);
+        $expander->setBacktrace(new Backtrace\InMemoryBacktrace());
+        $this->assertFalse($expander->match($value));
+        $this->assertEquals($errorMessage, $expander->getError());
     }
 }

@@ -6,24 +6,23 @@ namespace Coduo\PHPMatcher\Tests\PHPUnit;
 
 use Coduo\PHPMatcher\PHPUnit\PHPMatcherTestCase;
 use PHPUnit\Framework\AssertionFailedError;
-use function json_encode;
 
 class PHPMatcherTestCaseTest extends PHPMatcherTestCase
 {
-    public function test_it_asserts_if_a_value_matches_the_pattern()
+    public function test_it_asserts_if_a_value_matches_the_pattern() : void
     {
         $this->assertMatchesPattern('@string@', 'foo');
     }
 
-    public function test_it_throws_an_expectation_failed_exception_if_a_value_does_not_match_the_pattern()
+    public function test_it_throws_an_expectation_failed_exception_if_a_value_does_not_match_the_pattern() : void
     {
         $this->expectException(AssertionFailedError::class);
         $this->expectExceptionMessageMatches("/Failed asserting that '{\"foo\":\"bar\"}' matches given pattern(.*)/");
 
-        $this->assertMatchesPattern('{"foo": "@integer@"}', json_encode(['foo' => 'bar']));
+        $this->assertMatchesPattern('{"foo": "@integer@"}', \json_encode(['foo' => 'bar']));
     }
 
-    public function test_it_creates_a_constraint_for_stubs()
+    public function test_it_creates_a_constraint_for_stubs() : void
     {
         $this->expectException(AssertionFailedError::class);
         $this->expectExceptionMessageMatches('/Failed asserting that 42 matches given pattern(.*)/');
@@ -39,7 +38,7 @@ class PHPMatcherTestCaseTest extends PHPMatcherTestCase
         $mock->getTitle(42);
     }
 
-    public function test_it_asserts_if_a_value_matches_the_array_pattern()
+    public function test_it_asserts_if_a_value_matches_the_array_pattern() : void
     {
         $this->assertMatchesPattern(['foo' => '@string@'], ['foo' => 'bar']);
     }

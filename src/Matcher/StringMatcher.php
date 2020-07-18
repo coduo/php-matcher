@@ -7,13 +7,10 @@ namespace Coduo\PHPMatcher\Matcher;
 use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Parser;
 use Coduo\ToString\StringConverter;
-use function gettype;
-use function is_string;
-use function sprintf;
 
 final class StringMatcher extends Matcher
 {
-    const PATTERN = 'string';
+    public const PATTERN = 'string';
 
     /**
      * @var Backtrace
@@ -35,8 +32,8 @@ final class StringMatcher extends Matcher
     {
         $this->backtrace->matcherEntrance(self::class, $value, $pattern);
 
-        if (!is_string($value)) {
-            $this->error = sprintf('%s "%s" is not a valid string.', gettype($value), new StringConverter($value));
+        if (!\is_string($value)) {
+            $this->error = \sprintf('%s "%s" is not a valid string.', \gettype($value), new StringConverter($value));
             $this->backtrace->matcherFailed(self::class, $value, $pattern, $this->error);
 
             return false;
@@ -58,7 +55,7 @@ final class StringMatcher extends Matcher
 
     public function canMatch($pattern) : bool
     {
-        if (!is_string($pattern)) {
+        if (!\is_string($pattern)) {
             $this->backtrace->matcherCanMatch(self::class, $pattern, false);
 
             return false;

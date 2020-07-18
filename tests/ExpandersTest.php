@@ -14,19 +14,6 @@ final class ExpandersTest extends TestCase
      */
     protected $matcher;
 
-    public function setUp() : void
-    {
-        $this->matcher = new PHPMatcher();
-    }
-
-    /**
-     * @dataProvider expanderExamples()
-     */
-    public function test_expanders($value, $pattern, $expectedResult)
-    {
-        $this->assertSame($expectedResult, $this->matcher->match($value, $pattern), (string) $this->matcher->error());
-    }
-
     public static function expanderExamples()
     {
         return [
@@ -81,5 +68,18 @@ final class ExpandersTest extends TestCase
             ['{"image":null}', '{"image":"@null@||@json@.match({\"url\":\"@string@.isUrl()\"})"}', true],
             ['{"image":null}', '{"image":"@json@.oneOf(optional(), match({\"url\":\"@string@.isUrl()\"}) )"}', true],
         ];
+    }
+
+    public function setUp() : void
+    {
+        $this->matcher = new PHPMatcher();
+    }
+
+    /**
+     * @dataProvider expanderExamples()
+     */
+    public function test_expanders($value, $pattern, $expectedResult) : void
+    {
+        $this->assertSame($expectedResult, $this->matcher->match($value, $pattern), (string) $this->matcher->error());
     }
 }

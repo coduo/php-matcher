@@ -6,10 +6,9 @@ namespace Coduo\PHPMatcher\Tests\Matcher;
 
 use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Lexer;
-use Coduo\PHPMatcher\Parser;
 use Coduo\PHPMatcher\Matcher\UuidMatcher;
+use Coduo\PHPMatcher\Parser;
 use PHPUnit\Framework\TestCase;
-use stdClass;
 
 class UuidMatcherTest extends TestCase
 {
@@ -17,55 +16,6 @@ class UuidMatcherTest extends TestCase
      * @var UuidMatcher
      */
     private $matcher;
-
-    public function setUp() : void
-    {
-        $this->matcher = new UuidMatcher(
-            $backtrace = new Backtrace\InMemoryBacktrace(),
-            new Parser(new Lexer(), new Parser\ExpanderInitializer($backtrace))
-        );
-    }
-
-    /**
-     * @dataProvider positiveCanMatchData
-     */
-    public function test_positive_can_matches($pattern)
-    {
-        $this->assertTrue($this->matcher->canMatch($pattern));
-    }
-
-    /**
-     * @dataProvider negativeCanMatchData
-     */
-    public function test_negative_can_matches($pattern)
-    {
-        $this->assertFalse($this->matcher->canMatch($pattern));
-    }
-
-    /**
-     * @dataProvider positiveMatchData
-     */
-    public function test_positive_match($value, $pattern)
-    {
-        $this->assertTrue($this->matcher->match($value, $pattern));
-    }
-
-    /**
-     * @dataProvider negativeMatchData
-     */
-    public function test_negative_match($value, $pattern)
-    {
-        $this->assertFalse($this->matcher->match($value, $pattern));
-    }
-
-    /**
-     * @dataProvider negativeMatchDescription
-     */
-    public function test_negative_match_description($value, $pattern, $error)
-    {
-        $this->matcher->match($value, $pattern);
-        $this->assertEquals($error, $this->matcher->getError());
-    }
 
     public static function positiveCanMatchData()
     {
@@ -112,12 +62,61 @@ class UuidMatcherTest extends TestCase
     public static function negativeMatchDescription()
     {
         return [
-            [new stdClass,  '@uuid@', 'object "\\stdClass" is not a valid UUID: not a string.'],
+            [new \stdClass,  '@uuid@', 'object "\\stdClass" is not a valid UUID: not a string.'],
             [1.1, '@uuid@', 'double "1.1" is not a valid UUID: not a string.'],
             [false, '@uuid@', 'boolean "false" is not a valid UUID: not a string.'],
             [1, '@uuid@', 'integer "1" is not a valid UUID: not a string.'],
             ['lorem ipsum', '@uuid@', 'string "lorem ipsum" is not a valid UUID: invalid format.'],
             ['9f4db639-0e87-4367-9beb-d64e3f42ae1z', '@uuid@', 'string "9f4db639-0e87-4367-9beb-d64e3f42ae1z" is not a valid UUID: invalid format.'],
         ];
+    }
+
+    public function setUp() : void
+    {
+        $this->matcher = new UuidMatcher(
+            $backtrace = new Backtrace\InMemoryBacktrace(),
+            new Parser(new Lexer(), new Parser\ExpanderInitializer($backtrace))
+        );
+    }
+
+    /**
+     * @dataProvider positiveCanMatchData
+     */
+    public function test_positive_can_matches($pattern) : void
+    {
+        $this->assertTrue($this->matcher->canMatch($pattern));
+    }
+
+    /**
+     * @dataProvider negativeCanMatchData
+     */
+    public function test_negative_can_matches($pattern) : void
+    {
+        $this->assertFalse($this->matcher->canMatch($pattern));
+    }
+
+    /**
+     * @dataProvider positiveMatchData
+     */
+    public function test_positive_match($value, $pattern) : void
+    {
+        $this->assertTrue($this->matcher->match($value, $pattern));
+    }
+
+    /**
+     * @dataProvider negativeMatchData
+     */
+    public function test_negative_match($value, $pattern) : void
+    {
+        $this->assertFalse($this->matcher->match($value, $pattern));
+    }
+
+    /**
+     * @dataProvider negativeMatchDescription
+     */
+    public function test_negative_match_description($value, $pattern, $error) : void
+    {
+        $this->matcher->match($value, $pattern);
+        $this->assertEquals($error, $this->matcher->getError());
     }
 }

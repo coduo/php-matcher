@@ -7,56 +7,9 @@ namespace Coduo\PHPMatcher\Tests\Matcher;
 use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Matcher\ScalarMatcher;
 use PHPUnit\Framework\TestCase;
-use stdClass;
 
 class ScalarMatcherTest extends TestCase
 {
-    /**
-     * @dataProvider positiveCanMatches
-     */
-    public function test_positive_can_matches($pattern)
-    {
-        $matcher = new ScalarMatcher(new Backtrace\InMemoryBacktrace());
-        $this->assertTrue($matcher->canMatch($pattern));
-    }
-
-    /**
-     * @dataProvider negativeCanMatches
-     */
-    public function test_negative_can_matches($pattern)
-    {
-        $matcher = new ScalarMatcher(new Backtrace\InMemoryBacktrace());
-        $this->assertFalse($matcher->canMatch($pattern));
-    }
-
-    /**
-     * @dataProvider positiveMatches
-     */
-    public function test_positive_matches($value, $pattern)
-    {
-        $matcher = new ScalarMatcher(new Backtrace\InMemoryBacktrace());
-        $this->assertTrue($matcher->match($value, $pattern));
-    }
-
-    /**
-     * @dataProvider negativeMatches
-     */
-    public function test_negative_matches($value, $pattern)
-    {
-        $matcher = new ScalarMatcher(new Backtrace\InMemoryBacktrace());
-        $this->assertFalse($matcher->match($value, $pattern));
-    }
-
-    /**
-     * @dataProvider negativeMatchDescription
-     */
-    public function test_negative_match_description($value, $pattern, $error)
-    {
-        $matcher = new ScalarMatcher(new Backtrace\InMemoryBacktrace());
-        $matcher->match($value, $pattern);
-        $this->assertEquals($error, $matcher->getError());
-    }
-
     public static function negativeMatches()
     {
         return [
@@ -91,8 +44,8 @@ class ScalarMatcherTest extends TestCase
     public static function negativeCanMatches()
     {
         return [
-            [new stdClass],
-            [[]]
+            [new \stdClass],
+            [[]],
         ];
     }
 
@@ -100,9 +53,55 @@ class ScalarMatcherTest extends TestCase
     {
         return [
             ['test', 'norbert', '"test" does not match "norbert".'],
-            [new stdClass,  1, '"\\stdClass" does not match "1".'],
+            [new \stdClass,  1, '"\\stdClass" does not match "1".'],
             [1.1, false, '"1.1" does not match "false".'],
             [false, ['foo', 'bar'], '"false" does not match "Array(2)".'],
         ];
+    }
+
+    /**
+     * @dataProvider positiveCanMatches
+     */
+    public function test_positive_can_matches($pattern) : void
+    {
+        $matcher = new ScalarMatcher(new Backtrace\InMemoryBacktrace());
+        $this->assertTrue($matcher->canMatch($pattern));
+    }
+
+    /**
+     * @dataProvider negativeCanMatches
+     */
+    public function test_negative_can_matches($pattern) : void
+    {
+        $matcher = new ScalarMatcher(new Backtrace\InMemoryBacktrace());
+        $this->assertFalse($matcher->canMatch($pattern));
+    }
+
+    /**
+     * @dataProvider positiveMatches
+     */
+    public function test_positive_matches($value, $pattern) : void
+    {
+        $matcher = new ScalarMatcher(new Backtrace\InMemoryBacktrace());
+        $this->assertTrue($matcher->match($value, $pattern));
+    }
+
+    /**
+     * @dataProvider negativeMatches
+     */
+    public function test_negative_matches($value, $pattern) : void
+    {
+        $matcher = new ScalarMatcher(new Backtrace\InMemoryBacktrace());
+        $this->assertFalse($matcher->match($value, $pattern));
+    }
+
+    /**
+     * @dataProvider negativeMatchDescription
+     */
+    public function test_negative_match_description($value, $pattern, $error) : void
+    {
+        $matcher = new ScalarMatcher(new Backtrace\InMemoryBacktrace());
+        $matcher->match($value, $pattern);
+        $this->assertEquals($error, $matcher->getError());
     }
 }

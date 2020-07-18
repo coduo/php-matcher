@@ -6,6 +6,8 @@ namespace Coduo\PHPMatcher;
 
 interface Backtrace
 {
+    public function __toString() : string;
+
     public function matcherCanMatch(string $name, $value, bool $result) : void;
 
     public function matcherEntrance(string $name, $value, $pattern) : void;
@@ -21,8 +23,6 @@ interface Backtrace
     public function expanderFailed(string $name, $value, string $error) : void;
 
     public function isEmpty() : bool;
-
-    public function __toString() : string;
 
     public function raw() : array;
 }

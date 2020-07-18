@@ -8,21 +8,12 @@ use Coduo\PHPMatcher\Factory\MatcherFactory;
 use Coduo\PHPMatcher\Matcher;
 use Coduo\PHPMatcher\Matcher\Pattern\PatternExpander;
 use Coduo\ToString\StringConverter;
-use InvalidArgumentException;
-use function is_string;
-use function json_decode;
-use function json_last_error;
-use function is_array;
-use function array_keys;
-use function count;
-use function array_key_exists;
-use function sprintf;
 
 final class Repeat implements PatternExpander
 {
-    public const NAME = 'repeat';
-
     use BacktraceBehavior;
+
+    public const NAME = 'repeat';
 
     /**
      * @var null|string
@@ -44,11 +35,6 @@ final class Repeat implements PatternExpander
      */
     private $isScalar;
 
-    public static function is(string $name) : bool
-    {
-        return self::NAME === $name;
-    }
-
     /**
      * @param array|string $pattern array to be matched or json-encoded string
      */
@@ -58,25 +44,31 @@ final class Repeat implements PatternExpander
         $this->isStrict = $isStrict;
         $this->isScalar = true;
 
-        if (is_string($pattern)) {
-            $json = json_decode($pattern, true);
-            if ($json !== null && json_last_error() === JSON_ERROR_NONE) {
+        if (\is_string($pattern)) {
+            $json = \json_decode($pattern, true);
+
+            if ($json !== null && \json_last_error() === JSON_ERROR_NONE) {
                 $this->pattern = $json;
                 $this->isScalar = false;
             }
-        } elseif (is_array($pattern)) {
+        } elseif (\is_array($pattern)) {
             $this->isScalar = false;
         } else {
-            throw new InvalidArgumentException('Repeat pattern must be a string or an array.');
+            throw new \InvalidArgumentException('Repeat pattern must be a string or an array.');
         }
+    }
+
+    public static function is(string $name) : bool
+    {
+        return self::NAME === $name;
     }
 
     public function match($value) : bool
     {
         $this->backtrace->expanderEntrance(self::NAME, $value);
 
-        if (!is_array($value)) {
-            $this->error = sprintf('Repeat expander require "array", got "%s".', new StringConverter($value));
+        if (!\is_array($value)) {
+            $this->error = \sprintf('Repeat expander require "array", got "%s".', new StringConverter($value));
             $this->backtrace->expanderSucceed(self::NAME, $value);
 
             return false;
@@ -119,7 +111,8 @@ final class Repeat implements PatternExpander
             $match = $matcher->match($value, $this->pattern);
 
             if (!$match) {
-                $this->error = sprintf('Repeat expander, entry n°%d, find error : %s', $index, $matcher->getError());
+                $this->error = \sprintf('Repeat expander, entry n°%d, find error : %s', $index, $matcher->getError());
+
                 return false;
             }
         }
@@ -129,28 +122,31 @@ final class Repeat implements PatternExpander
 
     private function matchJson(array $values, Matcher $matcher) : bool
     {
-        $patternKeys = array_keys($this->pattern);
-        $patternKeysLength = count($patternKeys);
+        $patternKeys = \array_keys($this->pattern);
+        $patternKeysLength = \count($patternKeys);
 
         foreach ($values as $index => $value) {
-            $valueKeys = array_keys($value);
-            $valueKeysLength = count($valueKeys);
+            $valueKeys = \array_keys($value);
+            $valueKeysLength = \count($valueKeys);
 
             if ($this->isStrict && $patternKeysLength !== $valueKeysLength) {
-                $this->error = sprintf('Repeat expander expect to have %d keys in array but get : %d', $patternKeysLength, $valueKeysLength);
+                $this->error = \sprintf('Repeat expander expect to have %d keys in array but get : %d', $patternKeysLength, $valueKeysLength);
+
                 return false;
             }
 
             foreach ($patternKeys as $key) {
-                if (!array_key_exists($key, $value)) {
-                    $this->error = sprintf('Repeat expander, entry n°%d, require "array" to have key "%s".', $index, $key);
+                if (!\array_key_exists($key, $value)) {
+                    $this->error = \sprintf('Repeat expander, entry n°%d, require "array" to have key "%s".', $index, $key);
+
                     return false;
                 }
 
                 $match = $matcher->match($value[$key], $this->pattern[$key]);
 
                 if (!$match) {
-                    $this->error = sprintf('Repeat expander, entry n°%d, key "%s", find error : %s', $index, $key, $matcher->getError());
+                    $this->error = \sprintf('Repeat expander, entry n°%d, key "%s", find error : %s', $index, $key, $matcher->getError());
+
                     return false;
                 }
             }

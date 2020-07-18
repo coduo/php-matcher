@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Coduo\PHPMatcher\Value;
 
 use Coduo\PHPMatcher\Matcher\Pattern\Assert\Json;
-use function str_replace;
 
 final class SingleLineString
 {
@@ -29,6 +28,6 @@ final class SingleLineString
             $normalized = Json::reformat(Json::transformPattern($this->raw));
         }
 
-        return str_replace(["\r\n", "\r", "\n"], ' ', $normalized);
+        return \str_replace(["\r\n", "\r", "\n"], ' ', $normalized);
     }
 }

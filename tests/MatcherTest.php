@@ -5,19 +5,29 @@ declare(strict_types=1);
 namespace Coduo\PHPMatcher\Tests;
 
 use Coduo\PHPMatcher\PHPUnit\PHPMatcherTestCase;
-use stdClass;
 
 class MatcherTest extends PHPMatcherTestCase
 {
+    public static function nullExamples()
+    {
+        return [
+            [
+                '{"proformaInvoiceLink":null}', '{"proformaInvoiceLink":null}',
+                '{"proformaInvoiceLink":null, "test":"test"}', '{"proformaInvoiceLink":null, "test":"@string@"}',
+                '{"proformaInvoiceLink":null, "test":"test"}', '{"proformaInvoiceLink":@null@, "test":"@string@"}',
+            ],
+        ];
+    }
+
     /**
      * @dataProvider scalarValueExamples
      */
-    public function test_matcher_with_scalar_values($value, $pattern)
+    public function test_matcher_with_scalar_values($value, $pattern) : void
     {
         $this->assertMatchesPattern($pattern, $value);
     }
 
-    public function test_matcher_with_array_value()
+    public function test_matcher_with_array_value() : void
     {
         $value = [
             'users' => [
@@ -35,7 +45,7 @@ class MatcherTest extends PHPMatcherTestCase
                 ],
             ],
             'readyToUse' => true,
-            'data' => new stdClass(),
+            'data' => new \stdClass(),
         ];
 
         $pattern = [
@@ -63,14 +73,14 @@ class MatcherTest extends PHPMatcherTestCase
     /**
      * @dataProvider jsonDataProvider
      */
-    public function test_matcher_with_json($value, $pattern)
+    public function test_matcher_with_json($value, $pattern) : void
     {
         $this->assertMatchesPattern($pattern, $value);
     }
 
-    public function test_matcher_with_xml()
+    public function test_matcher_with_xml() : void
     {
-        $value = <<<XML
+        $value = <<<'XML'
 <?xml version="1.0"?>
 <soap:Envelope
 xmlns:soap="http://www.w3.org/2001/12/soap-envelope"
@@ -85,7 +95,7 @@ soap:encodingStyle="http://www.w3.org/2001/12/soap-encoding">
 
 </soap:Envelope>
 XML;
-        $pattern = <<<XML
+        $pattern = <<<'XML'
 <?xml version="1.0"?>
 <soap:Envelope
     xmlns:soap="@string@"
@@ -104,9 +114,9 @@ XML;
         $this->assertMatchesPattern($pattern, $value);
     }
 
-    public function test_matcher_with_xml_including_optional_node()
+    public function test_matcher_with_xml_including_optional_node() : void
     {
-        $value = <<<XML
+        $value = <<<'XML'
 <?xml version="1.0"?>
 <soap:Envelope
 xmlns:soap="http://www.w3.org/2001/12/soap-envelope"
@@ -121,7 +131,7 @@ soap:encodingStyle="http://www.w3.org/2001/12/soap-encoding">
 
 </soap:Envelope>
 XML;
-        $pattern = <<<XML
+        $pattern = <<<'XML'
 <?xml version="1.0"?>
 <soap:Envelope
     xmlns:soap="@string@"
@@ -141,14 +151,14 @@ XML;
         $this->assertMatchesPattern($pattern, $value);
     }
 
-    public function test_full_text_matcher()
+    public function test_full_text_matcher() : void
     {
         $value = 'lorem ipsum 1234 random text';
         $pattern = "@string@.startsWith('lo') ipsum @number@.greaterThan(10) random text";
         $this->assertMatchesPattern($pattern, $value);
     }
 
-    public function test_matcher_with_callback()
+    public function test_matcher_with_callback() : void
     {
         $this->assertMatchesPattern(
             function ($value) {
@@ -158,7 +168,7 @@ XML;
         );
     }
 
-    public function test_matcher_with_wildcard()
+    public function test_matcher_with_wildcard() : void
     {
         $this->assertMatchesPattern('@*@', 'test');
         $this->assertMatchesPattern('@wildcard@', 'test');
@@ -167,7 +177,7 @@ XML;
     /**
      * @dataProvider nullExamples
      */
-    public function test_null_value_in_the_json(string $value, string $pattern)
+    public function test_null_value_in_the_json(string $value, string $pattern) : void
     {
         $this->assertMatchesPattern($pattern, $value);
     }
@@ -183,23 +193,12 @@ XML;
         ];
     }
 
-    public static function nullExamples()
-    {
-        return [
-            [
-                '{"proformaInvoiceLink":null}', '{"proformaInvoiceLink":null}',
-                '{"proformaInvoiceLink":null, "test":"test"}', '{"proformaInvoiceLink":null, "test":"@string@"}',
-                '{"proformaInvoiceLink":null, "test":"test"}', '{"proformaInvoiceLink":@null@, "test":"@string@"}',
-            ],
-        ];
-    }
-
     public function jsonDataProvider()
     {
         return [
             [
                 '{"data": {"createUserFormSchema":{"formData":"test","schema":"test","uiSchema":"test"}}}',
-                '{"data": {"createUserFormSchema":"@json@.hasProperty(\"formData\").hasProperty(\"schema\").hasProperty(\"uiSchema\")"}}'
+                '{"data": {"createUserFormSchema":"@json@.hasProperty(\"formData\").hasProperty(\"schema\").hasProperty(\"uiSchema\")"}}',
             ],
             [
                 /* @lang JSON */
@@ -223,7 +222,7 @@ XML;
                     "prevPage": "http:\/\/example.com\/api\/users\/1?limit=2",
                     "nextPage": "http:\/\/example.com\/api\/users\/3?limit=2"
                 }',
-                '@json@.hasProperty("users")'
+                '@json@.hasProperty("users")',
             ],
             [
                 /* @lang JSON */

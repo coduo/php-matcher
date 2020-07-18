@@ -6,13 +6,12 @@ namespace Coduo\PHPMatcher\Matcher\Pattern\Expander;
 
 use Coduo\PHPMatcher\Matcher\Pattern\PatternExpander;
 use Coduo\ToString\StringConverter;
-use function sprintf;
 
 final class IsEmpty implements PatternExpander
 {
-    public const NAME = 'isEmpty';
-
     use BacktraceBehavior;
+
+    public const NAME = 'isEmpty';
 
     /**
      * @var null|string
@@ -29,7 +28,7 @@ final class IsEmpty implements PatternExpander
         $this->backtrace->expanderEntrance(self::NAME, $value);
 
         if (!empty($value)) {
-            $this->error = sprintf('Value %s is not empty.', new StringConverter($value));
+            $this->error = \sprintf('Value %s is not empty.', new StringConverter($value));
             $this->backtrace->expanderFailed(self::NAME, $value, $this->error);
 
             return false;

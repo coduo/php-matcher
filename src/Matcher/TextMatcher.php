@@ -4,29 +4,21 @@ declare(strict_types=1);
 
 namespace Coduo\PHPMatcher\Matcher;
 
+use function preg_quote;
 use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Exception\UnknownTypeException;
 use Coduo\PHPMatcher\Matcher\Pattern\Assert\Json;
 use Coduo\PHPMatcher\Matcher\Pattern\Assert\Xml;
+use Coduo\PHPMatcher\Matcher\Pattern\RegexConverter;
 use Coduo\PHPMatcher\Matcher\Pattern\TypePattern;
 use Coduo\PHPMatcher\Parser;
-use Coduo\PHPMatcher\Matcher\Pattern\RegexConverter;
 use Coduo\ToString\StringConverter;
-use function array_shift;
-use function count;
-use function gettype;
-use function is_string;
-use function preg_match;
-use function preg_match_all;
-use function preg_quote;
-use function sprintf;
-use function str_replace;
 
 final class TextMatcher extends Matcher
 {
-    const PATTERN_REGEXP = "/@[a-zA-Z\\.]+@(\\.\\w+\\([a-zA-Z0-9{},:@\\.\"'\\(\\)]*\\))*/";
+    public const PATTERN_REGEXP = "/@[a-zA-Z\\.]+@(\\.\\w+\\([a-zA-Z0-9{},:@\\.\"'\\(\\)]*\\))*/";
 
-    const PATTERN_REGEXP_PLACEHOLDER_TEMPLATE = '__PLACEHOLDER%d__';
+    public const PATTERN_REGEXP_PLACEHOLDER_TEMPLATE = '__PLACEHOLDER%d__';
 
     /**
      * @var Parser
@@ -57,8 +49,8 @@ final class TextMatcher extends Matcher
     {
         $this->backtrace->matcherEntrance(self::class, $value, $pattern);
 
-        if (!is_string($value)) {
-            $this->error = sprintf('%s "%s" is not a valid string.', gettype($value), new StringConverter($value));
+        if (!\is_string($value)) {
+            $this->error = \sprintf('%s "%s" is not a valid string.', \gettype($value), new StringConverter($value));
             $this->backtrace->matcherFailed(self::class, $value, $pattern, (string) $this->error);
 
             return false;
@@ -67,25 +59,26 @@ final class TextMatcher extends Matcher
         $patternRegex = $pattern;
         $patternsReplacedWithRegex = $this->replaceTypePatternsWithPlaceholders($patternRegex);
         $patternRegex = $this->prepareRegex($patternRegex);
+
         try {
             $patternRegex = $this->replacePlaceholderWithPatternRegexes($patternRegex, $patternsReplacedWithRegex);
         } catch (UnknownTypeException $exception) {
-            $this->error = sprintf('Type pattern "%s" is not supported by TextMatcher.', $exception->getType());
+            $this->error = \sprintf('Type pattern "%s" is not supported by TextMatcher.', $exception->getType());
             $this->backtrace->matcherFailed(self::class, $value, $pattern, (string) $this->error);
 
             return false;
         }
 
-        if (!preg_match($patternRegex, $value, $matchedValues)) {
-            $this->error = sprintf('"%s" does not match "%s" pattern', $value, $pattern);
+        if (!\preg_match($patternRegex, $value, $matchedValues)) {
+            $this->error = \sprintf('"%s" does not match "%s" pattern', $value, $pattern);
             $this->backtrace->matcherFailed(self::class, $value, $pattern, (string) $this->error);
 
             return false;
         }
 
-        array_shift($matchedValues); // remove matched string
+        \array_shift($matchedValues); // remove matched string
 
-        if (count($patternsReplacedWithRegex) !== count($matchedValues)) {
+        if (\count($patternsReplacedWithRegex) !== \count($matchedValues)) {
             $this->error = 'Unexpected TextMatcher error.';
             $this->backtrace->matcherFailed(self::class, $value, $pattern, (string) $this->error);
 
@@ -111,7 +104,7 @@ final class TextMatcher extends Matcher
      */
     public function canMatch($pattern) : bool
     {
-        if (!is_string($pattern)) {
+        if (!\is_string($pattern)) {
             $this->backtrace->matcherCanMatch(self::class, $pattern, false);
 
             return false;
@@ -148,14 +141,14 @@ final class TextMatcher extends Matcher
     private function replaceTypePatternsWithPlaceholders(string &$patternRegex) : array
     {
         $patternsReplacedWithRegex = [];
-        preg_match_all(self::PATTERN_REGEXP, $patternRegex, $matches);
+        \preg_match_all(self::PATTERN_REGEXP, $patternRegex, $matches);
 
         foreach ($matches[0] as $index => $typePatternString) {
             $typePattern = $this->parser->parse($typePatternString);
             $patternsReplacedWithRegex[] = $typePattern;
-            $patternRegex = str_replace(
+            $patternRegex = \str_replace(
                 $typePatternString,
-                sprintf(self::PATTERN_REGEXP_PLACEHOLDER_TEMPLATE, $index),
+                \sprintf(self::PATTERN_REGEXP_PLACEHOLDER_TEMPLATE, $index),
                 $patternRegex
             );
         }
@@ -177,9 +170,10 @@ final class TextMatcher extends Matcher
     private function replacePlaceholderWithPatternRegexes(string $patternRegex, array $patternsReplacedWithRegex) : string
     {
         $regexConverter = new RegexConverter();
+
         foreach ($patternsReplacedWithRegex as $index => $typePattern) {
-            $patternRegex = str_replace(
-                sprintf(self::PATTERN_REGEXP_PLACEHOLDER_TEMPLATE, $index),
+            $patternRegex = \str_replace(
+                \sprintf(self::PATTERN_REGEXP_PLACEHOLDER_TEMPLATE, $index),
                 $regexConverter->toRegex($typePattern),
                 $patternRegex
             );
@@ -197,6 +191,6 @@ final class TextMatcher extends Matcher
      */
     private function prepareRegex(string $patternRegex) : string
     {
-        return '/^' . preg_quote($patternRegex, '/') . '$/';
+        return '/^' . \preg_quote($patternRegex, '/') . '$/';
     }
 }

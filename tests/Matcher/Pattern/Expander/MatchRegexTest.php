@@ -7,21 +7,9 @@ namespace Coduo\PHPMatcher\Tests\Matcher\Pattern\Expander;
 use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Matcher\Pattern\Expander\MatchRegex;
 use PHPUnit\Framework\TestCase;
-use InvalidArgumentException;
 
 class MatchRegexTest extends TestCase
 {
-    /**
-     * @dataProvider examplesProvider
-     */
-    public function test_match_expander($expectedResult, $expectedError, $pattern, $value)
-    {
-        $expander = new MatchRegex($pattern);
-        $expander->setBacktrace(new Backtrace\InMemoryBacktrace());
-        $this->assertEquals($expectedResult, $expander->match($value));
-        $this->assertSame($expectedError, $expander->getError());
-    }
-
     public static function examplesProvider()
     {
         return [
@@ -31,9 +19,20 @@ class MatchRegexTest extends TestCase
         ];
     }
 
-    public function test_that_it_only_work_with_valid_pattern()
+    /**
+     * @dataProvider examplesProvider
+     */
+    public function test_match_expander($expectedResult, $expectedError, $pattern, $value) : void
     {
-        $this->expectException(InvalidArgumentException::class);
+        $expander = new MatchRegex($pattern);
+        $expander->setBacktrace(new Backtrace\InMemoryBacktrace());
+        $this->assertEquals($expectedResult, $expander->match($value));
+        $this->assertSame($expectedError, $expander->getError());
+    }
+
+    public function test_that_it_only_work_with_valid_pattern() : void
+    {
+        $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Regex pattern must be a valid one.');
 
         new MatchRegex('///');

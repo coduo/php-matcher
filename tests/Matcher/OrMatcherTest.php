@@ -16,80 +16,37 @@ class OrMatcherTest extends TestCase
      */
     private $matcher;
 
-    public function setUp() : void
-    {
-        $factory = new MatcherFactory();
-        $this->matcher = $factory->createMatcher(new VoidBacktrace());
-    }
-
-    /**
-     * @dataProvider positiveMatchData
-     */
-    public function test_positive_match_arrays($value, $pattern)
-    {
-        $this->assertTrue(
-            $this->matcher->match($value, $pattern),
-            (string) $this->matcher->getError()
-        );
-    }
-
-    /**
-     * @dataProvider negativeMatchData
-     */
-    public function test_negative_match_arrays($value, $pattern)
-    {
-        $this->assertFalse(
-            $this->matcher->match($value, $pattern),
-            (string) $this->matcher->getError()
-        );
-    }
-
-    public function test_whitespaces_trim_after_splitting()
-    {
-        $this->assertTrue(
-            $this->matcher->match(
-                [
-                    'test' => null
-                ],
-                [
-                    'test' => ' @integer@ || @null@ '
-                ]
-            ),
-            (string) $this->matcher->getError()
-        );
-    }
-
     public static function positiveMatchData()
     {
         $simpleArr = [
             'users' => [
                 [
                     'firstName' => 'Norbert',
-                    'lastName' => 'Orzechowicz'
+                    'lastName' => 'Orzechowicz',
                 ],
                 [
                     'firstName' => 1,
-                    'lastName' => 2
-                ]
+                    'lastName' => 2,
+                ],
             ],
             true,
             false,
             1,
-            6.66
+            6.66,
         ];
 
         $simpleArrPattern = [
             'users' => [
                 [
                     'firstName' => '@string@',
-                    'lastName' => '@null@||@string@||@integer@'
+                    'lastName' => '@null@||@string@||@integer@',
                 ],
-                '@...@'
+                '@...@',
             ],
             true,
             false,
             1,
-            6.66
+            6.66,
         ];
 
         return [
@@ -97,25 +54,25 @@ class OrMatcherTest extends TestCase
             [null, '@array@||@string@||@null@'],
             [
                 [
-                    'test' => 1
+                    'test' => 1,
                 ],
                 [
-                    'test' => '@integer@'
-                ]
+                    'test' => '@integer@',
+                ],
             ],
             [
                 [
-                    'test' => null
+                    'test' => null,
                 ],
                 [
-                    'test' => '@integer@||@null@'
-                ]
+                    'test' => '@integer@||@null@',
+                ],
             ],
             [
                 [
-                    'first_level' => ['second_level', ['third_level']]
+                    'first_level' => ['second_level', ['third_level']],
                 ],
-                '@array@||@null@||@*@'
+                '@array@||@null@||@*@',
             ],
             [$simpleArr, $simpleArr],
             [$simpleArr, $simpleArrPattern],
@@ -128,34 +85,34 @@ class OrMatcherTest extends TestCase
             'users' => [
                 [
                     'firstName' => 'Norbert',
-                    'lastName' => 'Orzechowicz'
+                    'lastName' => 'Orzechowicz',
                 ],
                 [
                     'firstName' => 'Michał',
-                    'lastName' => 'Dąbrowski'
-                ]
+                    'lastName' => 'Dąbrowski',
+                ],
             ],
             true,
             false,
             1,
-            6.66
+            6.66,
         ];
 
         $simpleDiff = [
             'users' => [
                 [
                     'firstName' => 'Norbert',
-                    'lastName' => 'Orzechowicz'
+                    'lastName' => 'Orzechowicz',
                 ],
                 [
                     'firstName' => 'Pablo',
-                    'lastName' => '@integer@||@null@||@double@'
-                ]
+                    'lastName' => '@integer@||@null@||@double@',
+                ],
             ],
             true,
             false,
             1,
-            6.66
+            6.66,
         ];
 
         return [
@@ -168,5 +125,48 @@ class OrMatcherTest extends TestCase
             [[], ['foo' => 'bar']],
             [10, '@null@||@integer@.greaterThan(10)'],
         ];
+    }
+
+    public function setUp() : void
+    {
+        $factory = new MatcherFactory();
+        $this->matcher = $factory->createMatcher(new VoidBacktrace());
+    }
+
+    /**
+     * @dataProvider positiveMatchData
+     */
+    public function test_positive_match_arrays($value, $pattern) : void
+    {
+        $this->assertTrue(
+            $this->matcher->match($value, $pattern),
+            (string) $this->matcher->getError()
+        );
+    }
+
+    /**
+     * @dataProvider negativeMatchData
+     */
+    public function test_negative_match_arrays($value, $pattern) : void
+    {
+        $this->assertFalse(
+            $this->matcher->match($value, $pattern),
+            (string) $this->matcher->getError()
+        );
+    }
+
+    public function test_whitespaces_trim_after_splitting() : void
+    {
+        $this->assertTrue(
+            $this->matcher->match(
+                [
+                    'test' => null,
+                ],
+                [
+                    'test' => ' @integer@ || @null@ ',
+                ]
+            ),
+            (string) $this->matcher->getError()
+        );
     }
 }

@@ -7,29 +7,28 @@ namespace Coduo\PHPMatcher\Tests\Matcher\Pattern\Expander;
 use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Matcher\Pattern\Expander\IsNotEmpty;
 use PHPUnit\Framework\TestCase;
-use DateTime;
 
 class IsNotEmptyTest extends TestCase
 {
-    /**
-     * @dataProvider examplesProvider
-     */
-    public function test_examples_not_ignoring_case($value, $expectedResult)
-    {
-        $expander = new IsNotEmpty();
-        $expander->setBacktrace(new Backtrace\InMemoryBacktrace());
-        $this->assertEquals($expectedResult, $expander->match($value));
-    }
-
     public static function examplesProvider()
     {
         return [
             ['lorem', true],
             ['0', true],
-            [new DateTime(), true],
+            [new \DateTime(), true],
             ['', false],
             [null, false],
-            [[], false]
+            [[], false],
         ];
+    }
+
+    /**
+     * @dataProvider examplesProvider
+     */
+    public function test_examples_not_ignoring_case($value, $expectedResult) : void
+    {
+        $expander = new IsNotEmpty();
+        $expander->setBacktrace(new Backtrace\InMemoryBacktrace());
+        $this->assertEquals($expectedResult, $expander->match($value));
     }
 }

@@ -7,11 +7,10 @@ namespace Coduo\PHPMatcher\Tests\Matcher;
 use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Matcher\CallbackMatcher;
 use PHPUnit\Framework\TestCase;
-use DateTime;
 
 class CallbackMatcherTest extends TestCase
 {
-    public function test_positive_can_match()
+    public function test_positive_can_match() : void
     {
         $matcher = new CallbackMatcher(new Backtrace\InMemoryBacktrace());
         $this->assertTrue($matcher->canMatch(function () {
@@ -19,14 +18,14 @@ class CallbackMatcherTest extends TestCase
         }));
     }
 
-    public function test_negative_can_match()
+    public function test_negative_can_match() : void
     {
         $matcher = new CallbackMatcher(new Backtrace\InMemoryBacktrace());
-        $this->assertFalse($matcher->canMatch(new DateTime()));
+        $this->assertFalse($matcher->canMatch(new \DateTime()));
         $this->assertFalse($matcher->canMatch('SIN'));
     }
 
-    public function test_positive_matches()
+    public function test_positive_matches() : void
     {
         $matcher = new CallbackMatcher(new Backtrace\InMemoryBacktrace());
         $this->assertTrue($matcher->match(2, function ($value) {
@@ -37,7 +36,7 @@ class CallbackMatcherTest extends TestCase
         }));
     }
 
-    public function test_negative_matches()
+    public function test_negative_matches() : void
     {
         $matcher = new CallbackMatcher(new Backtrace\InMemoryBacktrace());
         $this->assertFalse($matcher->match(2, function ($value) {

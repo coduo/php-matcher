@@ -7,8 +7,6 @@ namespace Coduo\PHPMatcher\Matcher;
 use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Value\SingleLineString;
 use Coduo\ToString\StringConverter;
-use function is_scalar;
-use function sprintf;
 
 final class ScalarMatcher extends Matcher
 {
@@ -27,7 +25,7 @@ final class ScalarMatcher extends Matcher
         $this->backtrace->matcherEntrance(self::class, $value, $pattern);
 
         if ($value !== $pattern) {
-            $this->error = sprintf(
+            $this->error = \sprintf(
                 '"%s" does not match "%s".',
                 new SingleLineString((string) new StringConverter($value)),
                 new SingleLineString((string) new StringConverter($pattern))
@@ -44,7 +42,7 @@ final class ScalarMatcher extends Matcher
 
     public function canMatch($pattern) : bool
     {
-        $result = is_scalar($pattern);
+        $result = \is_scalar($pattern);
         $this->backtrace->matcherCanMatch(self::class, $pattern, $result);
 
         return $result;

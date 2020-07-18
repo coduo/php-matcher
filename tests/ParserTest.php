@@ -17,12 +17,66 @@ class ParserTest extends TestCase
      */
     private $parser;
 
+    public static function expandersWithArrayArguments()
+    {
+        return [
+            [
+                '@type@.expander({"foo":"bar"})',
+                [['foo' => 'bar']],
+            ],
+            [
+                '@type@.expander({1 : "bar"})',
+                [[1 => 'bar']],
+            ],
+            [
+                '@type@.expander({"foo":"bar"}, {"foz" : "baz"})',
+                [['foo' => 'bar'], ['foz' => 'baz']],
+            ],
+            [
+                '@type@.expander({1 : 1})',
+                [[1 => 1]],
+            ],
+            [
+                '@type@.expander({1 : true})',
+                [[1 => true]],
+            ],
+            [
+                '@type@.expander({1 : 1}, {1 : 1})',
+                [[1 => 1], [1 => 1]],
+            ],
+            [
+                '@type@.expander({1 : {"foo" : "bar"}}, {1 : 1})',
+                [[1 => ['foo' => 'bar']], [1 => 1]],
+            ],
+            [
+                '@type@.expander({null: "bar"})',
+                [['' => 'bar']],
+            ],
+            [
+                '@type@.expander({"foo": null})',
+                [['foo' => null]],
+            ],
+            [
+                '@type@.expander({"foo" : "bar", "foz" : "baz"})',
+                [['foo' => 'bar', 'foz' => 'baz']],
+            ],
+            [
+                '@type@.expander({"foo" : "bar", "foo" : "baz"})',
+                [['foo' => 'baz']],
+            ],
+            [
+                '@type@.expander({"foo" : "bar", 1 : {"first" : 1, "second" : 2}})',
+                [['foo' => 'bar', 1 => ['first' => 1, 'second' => 2]]],
+            ],
+        ];
+    }
+
     public function setUp() : void
     {
         $this->parser = new Parser(new Lexer(), new Parser\ExpanderInitializer(new Backtrace\InMemoryBacktrace()));
     }
 
-    public function test_simple_pattern_without_expanders()
+    public function test_simple_pattern_without_expanders() : void
     {
         $pattern = '@type@';
 
@@ -30,7 +84,7 @@ class ParserTest extends TestCase
         $this->assertFalse($this->parser->getAST($pattern)->hasExpanders());
     }
 
-    public function test_single_expander_without_args()
+    public function test_single_expander_without_args() : void
     {
         $pattern = '@type@.expander()';
 
@@ -40,7 +94,7 @@ class ParserTest extends TestCase
         $this->assertFalse($expanders[0]->hasArguments());
     }
 
-    public function test_single_expander_with_arguments()
+    public function test_single_expander_with_arguments() : void
     {
         $pattern = "@type@.expander('arg1', 2, 2.24, \"arg3\")";
         $this->assertEquals('type', $this->parser->getAST($pattern)->getType());
@@ -49,18 +103,18 @@ class ParserTest extends TestCase
             'arg1',
             2,
             2.24,
-            'arg3'
+            'arg3',
         ];
         $this->assertEquals($expectedArguments, $expanders[0]->getArguments());
     }
 
-    public function test_many_expanders()
+    public function test_many_expanders() : void
     {
         $pattern = "@type@.expander('arg1', 2, 2.24, \"arg3\", null, false).expander1().expander(1,2,3, true, null)";
         $expanderArguments = [
             ['arg1', 2, 2.24, 'arg3', null, false],
             [],
-            [1, 2, 3, true, null]
+            [1, 2, 3, true, null],
         ];
 
         $expanders = $this->parser->getAST($pattern)->getExpanders();
@@ -77,67 +131,13 @@ class ParserTest extends TestCase
     /**
      * @dataProvider expandersWithArrayArguments
      */
-    public function test_single_array_argument_with_string_key_value($pattern, $expectedArgument)
+    public function test_single_array_argument_with_string_key_value($pattern, $expectedArgument) : void
     {
         $expanders = $this->parser->getAST($pattern)->getExpanders();
         $this->assertEquals($expectedArgument, $expanders[0]->getArguments());
     }
 
-    public static function expandersWithArrayArguments()
-    {
-        return [
-            [
-                '@type@.expander({"foo":"bar"})',
-                [['foo' => 'bar']]
-            ],
-            [
-                '@type@.expander({1 : "bar"})',
-                [[1 => 'bar']]
-            ],
-            [
-                '@type@.expander({"foo":"bar"}, {"foz" : "baz"})',
-                [['foo' => 'bar'], ['foz' => 'baz']]
-            ],
-            [
-                '@type@.expander({1 : 1})',
-                [[1 => 1]]
-            ],
-            [
-                '@type@.expander({1 : true})',
-                [[1 => true]]
-            ],
-            [
-                '@type@.expander({1 : 1}, {1 : 1})',
-                [[1 => 1], [1 => 1]]
-            ],
-            [
-                '@type@.expander({1 : {"foo" : "bar"}}, {1 : 1})',
-                [[1 => ['foo' => 'bar']], [1 => 1]]
-            ],
-            [
-                '@type@.expander({null: "bar"})',
-                [['' => 'bar']]
-            ],
-            [
-                '@type@.expander({"foo": null})',
-                [['foo' => null]]
-            ],
-            [
-                '@type@.expander({"foo" : "bar", "foz" : "baz"})',
-                [['foo' => 'bar', 'foz' => 'baz']]
-            ],
-            [
-                '@type@.expander({"foo" : "bar", "foo" : "baz"})',
-                [['foo' => 'baz']]
-            ],
-            [
-                '@type@.expander({"foo" : "bar", 1 : {"first" : 1, "second" : 2}})',
-                [['foo' => 'bar', 1 => ['first' => 1, 'second' => 2]]]
-            ]
-        ];
-    }
-
-    public function test_expanders_that_takes_other_expanders_as_arguments()
+    public function test_expanders_that_takes_other_expanders_as_arguments() : void
     {
         $pattern = '@type@.expander(expander("test"), expander(1))';
         $expanders = $this->parser->getAST($pattern)->getExpanders();
@@ -151,7 +151,7 @@ class ParserTest extends TestCase
             $expanders[0]->getArguments(),
             [
                 $firstExpander,
-                $secondExpander
+                $secondExpander,
             ]
         );
     }

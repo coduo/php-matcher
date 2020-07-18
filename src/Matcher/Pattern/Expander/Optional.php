@@ -8,9 +8,9 @@ use Coduo\PHPMatcher\Matcher\Pattern\PatternExpander;
 
 final class Optional implements PatternExpander
 {
-    public const NAME = 'optional';
-
     use BacktraceBehavior;
+
+    public const NAME = 'optional';
 
     public static function is(string $name) : bool
     {

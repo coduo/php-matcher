@@ -5,42 +5,32 @@ declare(strict_types=1);
 namespace Coduo\PHPMatcher;
 
 use Doctrine\Common\Lexer\AbstractLexer;
-use function is_numeric;
-use function is_string;
-use function strpos;
-use function rtrim;
-use function ltrim;
-use function in_array;
-use function strtolower;
-use function trim;
-use function substr;
-use function strlen;
 
 final class Lexer extends AbstractLexer
 {
-    const T_NONE = 1;
+    public const T_NONE = 1;
 
-    const T_EXPANDER_NAME = 2;
+    public const T_EXPANDER_NAME = 2;
 
-    const T_CLOSE_PARENTHESIS = 3;
+    public const T_CLOSE_PARENTHESIS = 3;
 
-    const T_OPEN_CURLY_BRACE    = 4;
+    public const T_OPEN_CURLY_BRACE    = 4;
 
-    const T_CLOSE_CURLY_BRACE   = 5;
+    public const T_CLOSE_CURLY_BRACE   = 5;
 
-    const T_STRING = 6;
+    public const T_STRING = 6;
 
-    const T_NUMBER = 7;
+    public const T_NUMBER = 7;
 
-    const T_BOOLEAN = 8;
+    public const T_BOOLEAN = 8;
 
-    const T_NULL = 9;
+    public const T_NULL = 9;
 
-    const T_COMMA  = 10;
+    public const T_COMMA  = 10;
 
-    const T_COLON = 11;
+    public const T_COLON = 11;
 
-    const T_TYPE_PATTERN = 12;
+    public const T_TYPE_PATTERN = 12;
 
     /**
      * Lexical catchable patterns.
@@ -77,49 +67,58 @@ final class Lexer extends AbstractLexer
         if (')' === $value) {
             return self::T_CLOSE_PARENTHESIS;
         }
+
         if ('{' === $value) {
             return self::T_OPEN_CURLY_BRACE;
         }
+
         if ('}' === $value) {
             return self::T_CLOSE_CURLY_BRACE;
         }
+
         if (':' === $value) {
             return self::T_COLON;
         }
+
         if (',' === $value) {
             return self::T_COMMA;
         }
 
         if ($this->isTypePatternToken($value)) {
-            $value = trim($value, '@');
+            $value = \trim($value, '@');
+
             return self::T_TYPE_PATTERN;
         }
 
         if ($this->isStringToken($value)) {
             $value = $this->extractStringValue($value);
+
             return self::T_STRING;
         }
 
         if ($this->isBooleanToken($value)) {
-            $value = strtolower($value) === 'true';
+            $value = \strtolower($value) === 'true';
+
             return self::T_BOOLEAN;
         }
 
         if ($this->isNullToken($value)) {
             $value = null;
+
             return self::T_NULL;
         }
 
-        if (is_numeric($value)) {
-            if (is_string($value)) {
-                $value = (strpos($value, '.') === false) ? (int) $value : (float) $value;
+        if (\is_numeric($value)) {
+            if (\is_string($value)) {
+                $value = (\strpos($value, '.') === false) ? (int) $value : (float) $value;
             }
 
             return self::T_NUMBER;
         }
 
         if ($this->isExpanderNameToken($value)) {
-            $value = rtrim(ltrim($value, '.'), '(');
+            $value = \rtrim(\ltrim($value, '.'), '(');
+
             return self::T_EXPANDER_NAME;
         }
 
@@ -128,31 +127,31 @@ final class Lexer extends AbstractLexer
 
     protected function isStringToken(string $value) : bool
     {
-        return in_array(substr($value, 0, 1), ['"', "'"]);
+        return \in_array(\substr($value, 0, 1), ['"', "'"], true);
     }
 
     protected function isBooleanToken(string $value) : bool
     {
-        return in_array(strtolower($value), ['true', 'false'], true);
+        return \in_array(\strtolower($value), ['true', 'false'], true);
     }
 
     protected function isNullToken(string $value) : bool
     {
-        return strtolower($value) === 'null';
+        return \strtolower($value) === 'null';
     }
 
     protected function extractStringValue(string $value) : string
     {
-        return trim(trim($value, "'"), '"');
+        return \trim(\trim($value, "'"), '"');
     }
 
     protected function isExpanderNameToken(string $value) : bool
     {
-        return substr($value, -1) === '(' && strlen($value) > 1;
+        return \substr($value, -1) === '(' && \strlen($value) > 1;
     }
 
     protected function isTypePatternToken(string $value) : bool
     {
-        return substr($value, 0, 1) === '@' && substr($value, strlen($value) - 1, 1) === '@' && strlen($value) > 1;
+        return \substr($value, 0, 1) === '@' && \substr($value, \strlen($value) - 1, 1) === '@' && \strlen($value) > 1;
     }
 }

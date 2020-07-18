@@ -9,9 +9,9 @@ use Coduo\PHPMatcher\Matcher;
 
 final class Match implements Matcher\Pattern\PatternExpander
 {
-    public const NAME = 'match';
-
     use BacktraceBehavior;
+
+    public const NAME = 'match';
 
     /**
      * @var Matcher

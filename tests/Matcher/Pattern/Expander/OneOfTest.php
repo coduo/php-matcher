@@ -8,27 +8,26 @@ use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Matcher\Pattern\Expander\Contains;
 use Coduo\PHPMatcher\Matcher\Pattern\Expander\OneOf;
 use PHPUnit\Framework\TestCase;
-use InvalidArgumentException;
 
 class OneOfTest extends TestCase
 {
-    public function test_not_enough_arguments()
+    public function test_not_enough_arguments() : void
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('OneOf expander require at least two expanders.');
 
         $expander = new OneOf();
     }
 
-    public function test_invalid_argument_types()
+    public function test_invalid_argument_types() : void
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('OneOf expander require each argument to be a valid PatternExpander.');
 
         $expander = new OneOf('arg1', ['test']);
     }
 
-    public function test_positive_match()
+    public function test_positive_match() : void
     {
         $backtrace = new Backtrace\InMemoryBacktrace();
         $contains = new Contains('lorem');
@@ -45,7 +44,7 @@ class OneOfTest extends TestCase
         $this->assertTrue($expander->match('lorem ipsum'));
     }
 
-    public function test_negative_match()
+    public function test_negative_match() : void
     {
         $backtrace = new Backtrace\InMemoryBacktrace();
         $contains = new Contains('lorem');

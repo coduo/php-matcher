@@ -14,20 +14,6 @@ final class EmptyPatternsTest extends TestCase
      */
     protected $matcher;
 
-    public function setUp() : void
-    {
-        $this->matcher = new PHPMatcher();
-    }
-
-    /**
-     * @dataProvider emptyPatternString
-     */
-    public function test_empty_pattern_in_the_json($value, $pattern, $expectedResult)
-    {
-        $match = $this->matcher->match($value, $pattern);
-        $this->assertSame($expectedResult, $match);
-    }
-
     public static function emptyPatternString()
     {
         return [
@@ -42,5 +28,19 @@ final class EmptyPatternsTest extends TestCase
                 '{"name": ""}', '{"name": ""}', true,
             ],
         ];
+    }
+
+    public function setUp() : void
+    {
+        $this->matcher = new PHPMatcher();
+    }
+
+    /**
+     * @dataProvider emptyPatternString
+     */
+    public function test_empty_pattern_in_the_json($value, $pattern, $expectedResult) : void
+    {
+        $match = $this->matcher->match($value, $pattern);
+        $this->assertSame($expectedResult, $match);
     }
 }

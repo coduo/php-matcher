@@ -7,7 +7,6 @@ namespace Coduo\PHPMatcher\Tests;
 use Coduo\PHPMatcher\Backtrace\InMemoryBacktrace;
 use Coduo\PHPMatcher\PHPMatcher;
 use PHPUnit\Framework\TestCase;
-use function file_get_contents;
 
 final class BacktraceTest extends TestCase
 {
@@ -21,7 +20,7 @@ final class BacktraceTest extends TestCase
         $this->matcher = new PHPMatcher(new InMemoryBacktrace());
     }
 
-    public function test_backtrace_in_failed_simple_matching()
+    public function test_backtrace_in_failed_simple_matching() : void
     {
         $this->matcher->match(100, '@string@');
 
@@ -68,7 +67,7 @@ FAILED_BACKTRACE
         );
     }
 
-    public function test_backtrace_in_succeed_simple_matching()
+    public function test_backtrace_in_succeed_simple_matching() : void
     {
         $this->matcher->match('100', '@string@');
 
@@ -93,7 +92,7 @@ SUCCEED_BACKTRACE
         );
     }
 
-    public function test_backtrace_in_failed_complex_matching()
+    public function test_backtrace_in_failed_complex_matching() : void
     {
         $this->matcher->match(
             /* @lang JSON */
@@ -144,12 +143,12 @@ SUCCEED_BACKTRACE
         //\file_put_contents(__DIR__ . '/BacktraceTest/failed_complex_matching_expected_trace.txt', (string) $this->matcher->backtrace());
 
         $this->assertEquals(
-            file_get_contents(__DIR__ . '/BacktraceTest/failed_complex_matching_expected_trace.txt'),
+            \file_get_contents(__DIR__ . '/BacktraceTest/failed_complex_matching_expected_trace.txt'),
             (string) $this->matcher->backtrace()
         );
     }
 
-    public function test_backtrace_in_succeed_complex_matching()
+    public function test_backtrace_in_succeed_complex_matching() : void
     {
         $this->matcher->match(
         /* @lang JSON */
@@ -200,7 +199,7 @@ SUCCEED_BACKTRACE
         //\file_put_contents(__DIR__ . '/BacktraceTest/succeed_complex_matching_expected_trace.txt', (string) $this->matcher->backtrace());
 
         $this->assertEquals(
-            file_get_contents(__DIR__ . '/BacktraceTest/succeed_complex_matching_expected_trace.txt'),
+            \file_get_contents(__DIR__ . '/BacktraceTest/succeed_complex_matching_expected_trace.txt'),
             (string) $this->matcher->backtrace()
         );
     }

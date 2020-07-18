@@ -10,16 +10,6 @@ use PHPUnit\Framework\TestCase;
 
 class GreaterThanTest extends TestCase
 {
-    /**
-     * @dataProvider examplesProvider
-     */
-    public function test_examples($boundary, $value, $expectedResult)
-    {
-        $expander = new GreaterThan($boundary);
-        $expander->setBacktrace(new Backtrace\InMemoryBacktrace());
-        $this->assertEquals($expectedResult, $expander->match($value));
-    }
-
     public static function examplesProvider()
     {
         return [
@@ -27,19 +17,8 @@ class GreaterThanTest extends TestCase
             [-20, -10.5, true],
             [10, 1, false],
             [1, 1, false],
-            [10, '20', true]
+            [10, '20', true],
         ];
-    }
-
-    /**
-     * @dataProvider invalidCasesProvider
-     */
-    public function test_error_when_matching_fail($boundary, $value, $errorMessage)
-    {
-        $expander = new GreaterThan($boundary);
-        $expander->setBacktrace(new Backtrace\InMemoryBacktrace());
-        $this->assertFalse($expander->match($value));
-        $this->assertEquals($errorMessage, $expander->getError());
     }
 
     public static function invalidCasesProvider()
@@ -49,5 +28,26 @@ class GreaterThanTest extends TestCase
             [10, 5, 'Value "5" is not greater than "10".'],
             [5, 5, 'Value "5" is not greater than "5".'],
         ];
+    }
+
+    /**
+     * @dataProvider examplesProvider
+     */
+    public function test_examples($boundary, $value, $expectedResult) : void
+    {
+        $expander = new GreaterThan($boundary);
+        $expander->setBacktrace(new Backtrace\InMemoryBacktrace());
+        $this->assertEquals($expectedResult, $expander->match($value));
+    }
+
+    /**
+     * @dataProvider invalidCasesProvider
+     */
+    public function test_error_when_matching_fail($boundary, $value, $errorMessage) : void
+    {
+        $expander = new GreaterThan($boundary);
+        $expander->setBacktrace(new Backtrace\InMemoryBacktrace());
+        $this->assertFalse($expander->match($value));
+        $this->assertEquals($errorMessage, $expander->getError());
     }
 }

@@ -18,6 +18,17 @@ class PatternTest extends TestCase
      */
     private $pattern;
 
+    public static function examplesProvider()
+    {
+        return [
+            ['isEmail', true],
+            ['isEmpty', true],
+            ['optional', true],
+            ['isUrl', false],
+            ['non existing expander', false],
+        ];
+    }
+
     public function setUp() : void
     {
         $this->pattern = new TypePattern('dummy');
@@ -29,19 +40,8 @@ class PatternTest extends TestCase
     /**
      * @dataProvider examplesProvider
      */
-    public function test_has_expander($expander, $expectedResult)
+    public function test_has_expander($expander, $expectedResult) : void
     {
         $this->assertEquals($expectedResult, $this->pattern->hasExpander($expander));
-    }
-
-    public static function examplesProvider()
-    {
-        return [
-            ['isEmail', true],
-            ['isEmpty', true],
-            ['optional', true],
-            ['isUrl', false],
-            ['non existing expander', false],
-        ];
     }
 }

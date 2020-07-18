@@ -10,16 +10,6 @@ use PHPUnit\Framework\TestCase;
 
 class IsEmptyTest extends TestCase
 {
-    /**
-     * @dataProvider examplesProvider
-     */
-    public function test_is_empty_expander_match($value, $expectedResult)
-    {
-        $expander = new IsEmpty();
-        $expander->setBacktrace(new Backtrace\InMemoryBacktrace());
-        $this->assertEquals($expectedResult, $expander->match($value));
-    }
-
     public static function examplesProvider()
     {
         return [
@@ -29,5 +19,15 @@ class IsEmptyTest extends TestCase
             [0, true],
             [null, true],
         ];
+    }
+
+    /**
+     * @dataProvider examplesProvider
+     */
+    public function test_is_empty_expander_match($value, $expectedResult) : void
+    {
+        $expander = new IsEmpty();
+        $expander->setBacktrace(new Backtrace\InMemoryBacktrace());
+        $this->assertEquals($expectedResult, $expander->match($value));
     }
 }

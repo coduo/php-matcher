@@ -14,19 +14,6 @@ final class OrMatcherTest extends TestCase
      */
     protected $matcher;
 
-    public function setUp() : void
-    {
-        $this->matcher = new PHPMatcher();
-    }
-
-    /**
-     * @dataProvider orExamples()
-     */
-    public function test_matcher_with_or($value, $pattern, $expectedResult)
-    {
-        $this->assertSame($expectedResult, $this->matcher->match($value, $pattern));
-    }
-
     public static function orExamples()
     {
         return [
@@ -39,5 +26,18 @@ final class OrMatcherTest extends TestCase
             [null, '@integer@||@string@', false],
             [1, '@integer@.greaterThan(10)||@string@.contains("10")', false],
         ];
+    }
+
+    public function setUp() : void
+    {
+        $this->matcher = new PHPMatcher();
+    }
+
+    /**
+     * @dataProvider orExamples()
+     */
+    public function test_matcher_with_or($value, $pattern, $expectedResult) : void
+    {
+        $this->assertSame($expectedResult, $this->matcher->match($value, $pattern));
     }
 }

@@ -6,15 +6,12 @@ namespace Coduo\PHPMatcher\Matcher\Pattern\Expander;
 
 use Coduo\PHPMatcher\Matcher\Pattern\PatternExpander;
 use Coduo\ToString\StringConverter;
-use function is_array;
-use function in_array;
-use function sprintf;
 
 final class InArray implements PatternExpander
 {
-    public const NAME = 'inArray';
-
     use BacktraceBehavior;
+
+    public const NAME = 'inArray';
 
     /**
      * @var null|string
@@ -37,15 +34,15 @@ final class InArray implements PatternExpander
     {
         $this->backtrace->expanderEntrance(self::NAME, $value);
 
-        if (!is_array($value)) {
-            $this->error = sprintf('InArray expander require "array", got "%s".', new StringConverter($value));
+        if (!\is_array($value)) {
+            $this->error = \sprintf('InArray expander require "array", got "%s".', new StringConverter($value));
             $this->backtrace->expanderFailed(self::NAME, $value, $this->error);
 
             return false;
         }
 
-        if (!in_array($this->value, $value, true)) {
-            $this->error = sprintf("%s doesn't have \"%s\" element.", new StringConverter($value), new StringConverter($this->value));
+        if (!\in_array($this->value, $value, true)) {
+            $this->error = \sprintf("%s doesn't have \"%s\" element.", new StringConverter($value), new StringConverter($this->value));
             $this->backtrace->expanderFailed(self::NAME, $value, $this->error);
 
             return false;

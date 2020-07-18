@@ -8,8 +8,6 @@ use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Matcher\Pattern\Assert\Json;
 use Coduo\PHPMatcher\Value\SingleLineString;
 use Coduo\ToString\StringConverter;
-use function json_decode;
-use function sprintf;
 
 final class JsonMatcher extends Matcher
 {
@@ -40,14 +38,14 @@ final class JsonMatcher extends Matcher
         }
 
         if (!Json::isValid($value)) {
-            $this->error = sprintf('Invalid given JSON of value. %s', Json::getErrorMessage());
+            $this->error = \sprintf('Invalid given JSON of value. %s', Json::getErrorMessage());
             $this->backtrace->matcherFailed(self::class, $value, $pattern, $this->error);
 
             return false;
         }
 
         if (!Json::isValidPattern($pattern)) {
-            $this->error = sprintf('Invalid given JSON of pattern. %s', Json::getErrorMessage());
+            $this->error = \sprintf('Invalid given JSON of pattern. %s', Json::getErrorMessage());
             $this->backtrace->matcherFailed(self::class, $value, $pattern, $this->error);
 
             return false;
@@ -55,10 +53,10 @@ final class JsonMatcher extends Matcher
 
         $transformedPattern = Json::isValid($pattern) ? $pattern : Json::transformPattern($pattern);
 
-        $match = $this->arrayMatcher->match(json_decode($value, true), json_decode($transformedPattern, true));
+        $match = $this->arrayMatcher->match(\json_decode($value, true), \json_decode($transformedPattern, true));
 
         if (!$match) {
-            $this->error = sprintf(
+            $this->error = \sprintf(
                 'Value %s does not match pattern %s',
                 new SingleLineString((string) new StringConverter($value)),
                 new SingleLineString((string) new StringConverter($transformedPattern))

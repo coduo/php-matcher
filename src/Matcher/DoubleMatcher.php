@@ -7,14 +7,10 @@ namespace Coduo\PHPMatcher\Matcher;
 use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Parser;
 use Coduo\ToString\StringConverter;
-use function is_double;
-use function sprintf;
-use function gettype;
-use function is_string;
 
 final class DoubleMatcher extends Matcher
 {
-    const PATTERN = 'double';
+    public const PATTERN = 'double';
 
     /**
      * @var Backtrace
@@ -36,14 +32,15 @@ final class DoubleMatcher extends Matcher
     {
         $this->backtrace->matcherEntrance(self::class, $value, $pattern);
 
-        if (!is_double($value)) {
-            $this->error = sprintf('%s "%s" is not a valid double.', gettype($value), new StringConverter($value));
+        if (!\is_float($value)) {
+            $this->error = \sprintf('%s "%s" is not a valid double.', \gettype($value), new StringConverter($value));
             $this->backtrace->matcherFailed(self::class, $value, $pattern, $this->error);
 
             return false;
         }
 
         $typePattern = $this->parser->parse($pattern);
+
         if (!$typePattern->matchExpanders($value)) {
             $this->error = $typePattern->getError();
             $this->backtrace->matcherFailed(self::class, $value, $pattern, $this->error);
@@ -58,7 +55,7 @@ final class DoubleMatcher extends Matcher
 
     public function canMatch($pattern) : bool
     {
-        if (!is_string($pattern)) {
+        if (!\is_string($pattern)) {
             $this->backtrace->matcherCanMatch(self::class, $pattern, false);
 
             return false;

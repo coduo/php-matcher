@@ -21,7 +21,7 @@ interface ValueMatcher
      *
      * @return null|string
      */
-    public function getError() :?string;
+    public function getError() : ?string;
 
     /**
      * Clear last error.

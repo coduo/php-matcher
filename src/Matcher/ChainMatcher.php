@@ -7,7 +7,6 @@ namespace Coduo\PHPMatcher\Matcher;
 use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Value\SingleLineString;
 use Coduo\ToString\StringConverter;
-use function sprintf;
 
 final class ChainMatcher extends Matcher
 {
@@ -27,7 +26,7 @@ final class ChainMatcher extends Matcher
     private $matchers;
 
     /**
-     * @param Backtrace      $backtrace
+     * @param Backtrace $backtrace
      * @param ValueMatcher[] $matchers
      */
     public function __construct(string $name, Backtrace $backtrace, array $matchers = [])
@@ -45,6 +44,7 @@ final class ChainMatcher extends Matcher
             if ($propertyMatcher->canMatch($pattern)) {
                 if ($propertyMatcher->match($value, $pattern)) {
                     $this->backtrace->matcherSucceed($this->matcherName(), $value, $pattern);
+
                     return true;
                 }
 
@@ -53,7 +53,7 @@ final class ChainMatcher extends Matcher
         }
 
         if (!isset($this->error)) {
-            $this->error = sprintf(
+            $this->error = \sprintf(
                 'Any matcher from chain can\'t match value "%s" to pattern "%s"',
                 new SingleLineString((string) new StringConverter($value)),
                 new SingleLineString((string) new StringConverter($pattern))
@@ -75,8 +75,8 @@ final class ChainMatcher extends Matcher
     /**
      * @return string
      */
-    private function matcherName(): string
+    private function matcherName() : string
     {
-        return sprintf('%s (%s)', self::class, $this->name);
+        return \sprintf('%s (%s)', self::class, $this->name);
     }
 }

@@ -6,16 +6,12 @@ namespace Coduo\PHPMatcher\Matcher\Pattern\Expander;
 
 use Coduo\PHPMatcher\Matcher\Pattern\PatternExpander;
 use Coduo\ToString\StringConverter;
-use Exception;
-use function is_string;
-use function sprintf;
-use function filter_var;
 
 final class IsUrl implements PatternExpander
 {
-    public const NAME = 'isUrl';
-
     use BacktraceBehavior;
+
+    public const NAME = 'isUrl';
 
     /**
      * @var null|string
@@ -31,15 +27,15 @@ final class IsUrl implements PatternExpander
     {
         $this->backtrace->expanderEntrance(self::NAME, $value);
 
-        if (!is_string($value)) {
-            $this->error = sprintf('IsUrl expander require "string", got "%s".', new StringConverter($value));
+        if (!\is_string($value)) {
+            $this->error = \sprintf('IsUrl expander require "string", got "%s".', new StringConverter($value));
             $this->backtrace->expanderFailed(self::NAME, $value, $this->error);
 
             return false;
         }
 
         if (!$this->matchValue($value)) {
-            $this->error = sprintf('string "%s" is not a valid URL.', $value);
+            $this->error = \sprintf('string "%s" is not a valid URL.', $value);
             $this->backtrace->expanderFailed(self::NAME, $value, $this->error);
 
             return false;
@@ -58,8 +54,8 @@ final class IsUrl implements PatternExpander
     private function matchValue(string $value) : bool
     {
         try {
-            return false !== filter_var($value, FILTER_VALIDATE_URL);
-        } catch (Exception $e) {
+            return false !== \filter_var($value, FILTER_VALIDATE_URL);
+        } catch (\Exception $e) {
             return false;
         }
     }

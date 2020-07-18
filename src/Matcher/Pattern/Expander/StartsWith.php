@@ -6,17 +6,12 @@ namespace Coduo\PHPMatcher\Matcher\Pattern\Expander;
 
 use Coduo\PHPMatcher\Matcher\Pattern\PatternExpander;
 use Coduo\ToString\StringConverter;
-use InvalidArgumentException;
-use function is_string;
-use function sprintf;
-use function mb_stripos;
-use function mb_strpos;
 
 final class StartsWith implements PatternExpander
 {
-    public const NAME = 'startsWith';
-
     use BacktraceBehavior;
+
+    public const NAME = 'startsWith';
 
     /**
      * @var string
@@ -35,8 +30,8 @@ final class StartsWith implements PatternExpander
 
     public function __construct(string $stringBeginning, bool $ignoreCase = false)
     {
-        if (!is_string($stringBeginning)) {
-            throw new InvalidArgumentException('String beginning must be a valid string.');
+        if (!\is_string($stringBeginning)) {
+            throw new \InvalidArgumentException('String beginning must be a valid string.');
         }
 
         $this->stringBeginning = $stringBeginning;
@@ -52,8 +47,8 @@ final class StartsWith implements PatternExpander
     {
         $this->backtrace->expanderEntrance(self::NAME, $value);
 
-        if (!is_string($value)) {
-            $this->error = sprintf('StartsWith expander require "string", got "%s".', new StringConverter($value));
+        if (!\is_string($value)) {
+            $this->error = \sprintf('StartsWith expander require "string", got "%s".', new StringConverter($value));
             $this->backtrace->expanderSucceed(self::NAME, $value);
 
             return false;
@@ -66,7 +61,7 @@ final class StartsWith implements PatternExpander
         }
 
         if ($this->matchValue($value)) {
-            $this->error = sprintf("string \"%s\" doesn't starts with string \"%s\".", $value, $this->stringBeginning);
+            $this->error = \sprintf("string \"%s\" doesn't starts with string \"%s\".", $value, $this->stringBeginning);
             $this->backtrace->expanderFailed(self::NAME, $value, $this->error);
 
             return false;
@@ -85,7 +80,7 @@ final class StartsWith implements PatternExpander
     private function matchValue(string $value) : bool
     {
         return $this->ignoreCase
-            ? mb_stripos($value, $this->stringBeginning) !== 0
-            : mb_strpos($value, $this->stringBeginning) !== 0;
+            ? \mb_stripos($value, $this->stringBeginning) !== 0
+            : \mb_strpos($value, $this->stringBeginning) !== 0;
     }
 }

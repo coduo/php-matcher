@@ -9,7 +9,6 @@ use Coduo\PHPMatcher\Factory;
 use Coduo\PHPMatcher\Lexer;
 use Coduo\PHPMatcher\Matcher;
 use Coduo\PHPMatcher\Parser;
-use function class_exists;
 
 final class MatcherFactory implements Factory
 {
@@ -18,7 +17,7 @@ final class MatcherFactory implements Factory
         return new Matcher($this->buildMatchers($this->buildParser($backtrace), $backtrace), $backtrace);
     }
 
-    protected function buildMatchers(Parser $parser, Backtrace $backtrace) : Matcher\ChainMatcher
+    private function buildMatchers(Parser $parser, Backtrace $backtrace) : Matcher\ChainMatcher
     {
         $scalarMatchers = $this->buildScalarMatchers($parser, $backtrace);
         $arrayMatcher = $this->buildArrayMatcher($scalarMatchers, $parser, $backtrace);
@@ -33,7 +32,7 @@ final class MatcherFactory implements Factory
         $matchers = [$scalarMatchers];
         $matchers[] = new Matcher\JsonMatcher($arrayMatcher, $backtrace);
 
-        if (class_exists('LSS\XML2Array')) {
+        if (\class_exists('LSS\XML2Array')) {
             $matchers[] = new Matcher\XmlMatcher($arrayMatcher, $backtrace);
         }
 
@@ -41,16 +40,14 @@ final class MatcherFactory implements Factory
         $matchers[] = new Matcher\OrMatcher($backtrace, $scalarMatchers);
         $matchers[] = new Matcher\TextMatcher($scalarMatchers, $backtrace, $parser);
 
-        $chainMatcher = new Matcher\ChainMatcher(
+        return new Matcher\ChainMatcher(
             'all',
             $backtrace,
             $matchers
         );
-
-        return $chainMatcher;
     }
 
-    protected function buildArrayMatcher(Matcher\ChainMatcher $scalarMatchers, Parser $parser, Backtrace $backtrace) : Matcher\ArrayMatcher
+    private function buildArrayMatcher(Matcher\ChainMatcher $scalarMatchers, Parser $parser, Backtrace $backtrace) : Matcher\ArrayMatcher
     {
         $orMatcher = new Matcher\OrMatcher($backtrace, $scalarMatchers);
 
@@ -61,7 +58,7 @@ final class MatcherFactory implements Factory
                 [
                     $orMatcher,
                     $scalarMatchers,
-                    new Matcher\TextMatcher($scalarMatchers, $backtrace, $parser)
+                    new Matcher\TextMatcher($scalarMatchers, $backtrace, $parser),
                 ]
             ),
             $backtrace,
@@ -69,7 +66,7 @@ final class MatcherFactory implements Factory
         );
     }
 
-    protected function buildScalarMatchers(Parser $parser, Backtrace $backtrace) : Matcher\ChainMatcher
+    private function buildScalarMatchers(Parser $parser, Backtrace $backtrace) : Matcher\ChainMatcher
     {
         return new Matcher\ChainMatcher(
             'scalars',
@@ -86,12 +83,12 @@ final class MatcherFactory implements Factory
                 new Matcher\ScalarMatcher($backtrace),
                 new Matcher\WildcardMatcher($backtrace),
                 new Matcher\UuidMatcher($backtrace, $parser),
-                new Matcher\JsonObjectMatcher($backtrace, $parser)
+                new Matcher\JsonObjectMatcher($backtrace, $parser),
             ]
         );
     }
 
-    protected function buildParser(Backtrace $backtrace) : Parser
+    private function buildParser(Backtrace $backtrace) : Parser
     {
         return new Parser(new Lexer(), new Parser\ExpanderInitializer($backtrace));
     }

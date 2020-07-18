@@ -10,16 +10,6 @@ use PHPUnit\Framework\TestCase;
 
 class IsUrlTest extends TestCase
 {
-    /**
-     * @dataProvider examplesUrlsProvider
-     */
-    public function test_urls($url, $expectedResult)
-    {
-        $expander = new IsUrl();
-        $expander->setBacktrace(new Backtrace\InMemoryBacktrace());
-        $this->assertEquals($expectedResult, $expander->match($url));
-    }
-
     public static function examplesUrlsProvider()
     {
         return [
@@ -29,7 +19,17 @@ class IsUrlTest extends TestCase
             ['mailto:email@example.com', true],
             ['//example.com/test/', false],
             ['example', false],
-            ['', false]
+            ['', false],
         ];
+    }
+
+    /**
+     * @dataProvider examplesUrlsProvider
+     */
+    public function test_urls($url, $expectedResult) : void
+    {
+        $expander = new IsUrl();
+        $expander->setBacktrace(new Backtrace\InMemoryBacktrace());
+        $this->assertEquals($expectedResult, $expander->match($url));
     }
 }

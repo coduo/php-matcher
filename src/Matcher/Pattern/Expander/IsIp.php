@@ -6,16 +6,12 @@ namespace Coduo\PHPMatcher\Matcher\Pattern\Expander;
 
 use Coduo\PHPMatcher\Matcher\Pattern\PatternExpander;
 use Coduo\ToString\StringConverter;
-use Exception;
-use function is_string;
-use function sprintf;
-use function filter_var;
 
 final class IsIp implements PatternExpander
 {
-    public const NAME = 'isIp';
-
     use BacktraceBehavior;
+
+    public const NAME = 'isIp';
 
     /**
      * @var null|string
@@ -31,15 +27,15 @@ final class IsIp implements PatternExpander
     {
         $this->backtrace->expanderEntrance(self::NAME, $value);
 
-        if (!is_string($value)) {
-            $this->error = sprintf('IsIp expander require "string", got "%s".', new StringConverter($value));
+        if (!\is_string($value)) {
+            $this->error = \sprintf('IsIp expander require "string", got "%s".', new StringConverter($value));
             $this->backtrace->expanderFailed(self::NAME, $value, $this->error);
 
             return false;
         }
 
         if (!$this->matchValue($value)) {
-            $this->error = sprintf('string "%s" is not a valid IP address.', $value);
+            $this->error = \sprintf('string "%s" is not a valid IP address.', $value);
             $this->backtrace->expanderFailed(self::NAME, $value, $this->error);
 
             return false;
@@ -58,8 +54,8 @@ final class IsIp implements PatternExpander
     private function matchValue(string $value) : bool
     {
         try {
-            return false !== filter_var($value, FILTER_VALIDATE_IP);
-        } catch (Exception $e) {
+            return false !== \filter_var($value, FILTER_VALIDATE_IP);
+        } catch (\Exception $e) {
             return false;
         }
     }

@@ -9,8 +9,6 @@ use Coduo\PHPMatcher\Lexer;
 use Coduo\PHPMatcher\Matcher\IntegerMatcher;
 use Coduo\PHPMatcher\Parser;
 use PHPUnit\Framework\TestCase;
-use DateTime;
-use stdClass;
 
 class IntegerMatcherTest extends TestCase
 {
@@ -19,59 +17,10 @@ class IntegerMatcherTest extends TestCase
      */
     private $matcher;
 
-    public function setUp() : void
-    {
-        $this->matcher = new IntegerMatcher(
-            $backtrace = new Backtrace\InMemoryBacktrace(),
-            new Parser(new Lexer(), new Parser\ExpanderInitializer($backtrace))
-        );
-    }
-
-    /**
-     * @dataProvider positiveCanMatchData
-     */
-    public function test_positive_can_matches($pattern)
-    {
-        $this->assertTrue($this->matcher->canMatch($pattern));
-    }
-
-    /**
-     * @dataProvider negativeCanMatchData
-     */
-    public function test_negative_can_matches($pattern)
-    {
-        $this->assertFalse($this->matcher->canMatch($pattern));
-    }
-
-    /**
-     * @dataProvider positiveMatchData
-     */
-    public function test_positive_match($value, $pattern)
-    {
-        $this->assertTrue($this->matcher->match($value, $pattern));
-    }
-
-    /**
-     * @dataProvider negativeMatchData
-     */
-    public function test_negative_match($value, $pattern)
-    {
-        $this->assertFalse($this->matcher->match($value, $pattern));
-    }
-
-    /**
-     * @dataProvider negativeMatchDescription
-     */
-    public function test_negative_match_description($value, $pattern, $error)
-    {
-        $this->matcher->match($value, $pattern);
-        $this->assertEquals($error, $this->matcher->getError());
-    }
-
     public static function positiveCanMatchData()
     {
         return [
-            ['@integer@']
+            ['@integer@'],
         ];
     }
 
@@ -88,7 +37,7 @@ class IntegerMatcherTest extends TestCase
         return [
             ['@integer'],
             ['integer'],
-            [1]
+            [1],
         ];
     }
 
@@ -96,17 +45,66 @@ class IntegerMatcherTest extends TestCase
     {
         return [
             ['1', '@integer@'],
-            [new DateTime(),  '@integer@']
+            [new \DateTime(),  '@integer@'],
         ];
     }
 
     public static function negativeMatchDescription()
     {
         return [
-            [new stdClass,  '@integer@', 'object "\\stdClass" is not a valid integer.'],
+            [new \stdClass,  '@integer@', 'object "\\stdClass" is not a valid integer.'],
             [1.1, '@integer@', 'double "1.1" is not a valid integer.'],
             [false, '@integer@', 'boolean "false" is not a valid integer.'],
-            [['test'], '@integer@', 'array "Array(1)" is not a valid integer.']
+            [['test'], '@integer@', 'array "Array(1)" is not a valid integer.'],
         ];
+    }
+
+    public function setUp() : void
+    {
+        $this->matcher = new IntegerMatcher(
+            $backtrace = new Backtrace\InMemoryBacktrace(),
+            new Parser(new Lexer(), new Parser\ExpanderInitializer($backtrace))
+        );
+    }
+
+    /**
+     * @dataProvider positiveCanMatchData
+     */
+    public function test_positive_can_matches($pattern) : void
+    {
+        $this->assertTrue($this->matcher->canMatch($pattern));
+    }
+
+    /**
+     * @dataProvider negativeCanMatchData
+     */
+    public function test_negative_can_matches($pattern) : void
+    {
+        $this->assertFalse($this->matcher->canMatch($pattern));
+    }
+
+    /**
+     * @dataProvider positiveMatchData
+     */
+    public function test_positive_match($value, $pattern) : void
+    {
+        $this->assertTrue($this->matcher->match($value, $pattern));
+    }
+
+    /**
+     * @dataProvider negativeMatchData
+     */
+    public function test_negative_match($value, $pattern) : void
+    {
+        $this->assertFalse($this->matcher->match($value, $pattern));
+    }
+
+    /**
+     * @dataProvider negativeMatchDescription
+     */
+    public function test_negative_match_description($value, $pattern, $error) : void
+    {
+        $this->matcher->match($value, $pattern);
+        $this->assertEquals($error, $this->matcher->getError());
     }
 }

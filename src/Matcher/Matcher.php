@@ -22,7 +22,7 @@ abstract class Matcher implements ValueMatcher
     /**
      * @inheritdoc
      */
-    public function match($value, $pattern): bool
+    public function match($value, $pattern) : bool
     {
         return $value === $pattern;
     }

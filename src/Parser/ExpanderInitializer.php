@@ -10,12 +10,8 @@ use Coduo\PHPMatcher\Exception\InvalidArgumentException;
 use Coduo\PHPMatcher\Exception\InvalidExpanderTypeException;
 use Coduo\PHPMatcher\Exception\UnknownExpanderClassException;
 use Coduo\PHPMatcher\Exception\UnknownExpanderException;
-use Coduo\PHPMatcher\Matcher\Pattern\PatternExpander;
 use Coduo\PHPMatcher\Matcher\Pattern\Expander;
-use ReflectionClass;
-use function class_exists;
-use function array_key_exists;
-use function sprintf;
+use Coduo\PHPMatcher\Matcher\Pattern\PatternExpander;
 
 final class ExpanderInitializer
 {
@@ -44,7 +40,7 @@ final class ExpanderInitializer
         Expander\StartsWith::NAME => Expander\StartsWith::class,
         Expander\Repeat::NAME => Expander\Repeat::class,
         Expander\Match::NAME => Expander\Match::class,
-        Expander\HasProperty::NAME => Expander\HasProperty::class
+        Expander\HasProperty::NAME => Expander\HasProperty::class,
     ];
 
     /**
@@ -57,10 +53,10 @@ final class ExpanderInitializer
         $this->backtrace = $backtrace;
     }
 
-    public function setExpanderDefinition(string $expanderName, string $expanderFQCN): void
+    public function setExpanderDefinition(string $expanderName, string $expanderFQCN) : void
     {
-        if (!class_exists($expanderFQCN)) {
-            throw new UnknownExpanderClassException(sprintf('Class "%s" does not exists.', $expanderFQCN));
+        if (!\class_exists($expanderFQCN)) {
+            throw new UnknownExpanderClassException(\sprintf('Class "%s" does not exists.', $expanderFQCN));
         }
 
         $this->expanderDefinitions[$expanderName] = $expanderFQCN;
@@ -68,13 +64,13 @@ final class ExpanderInitializer
 
     public function hasExpanderDefinition(string $expanderName) : bool
     {
-        return array_key_exists($expanderName, $this->expanderDefinitions);
+        return \array_key_exists($expanderName, $this->expanderDefinitions);
     }
 
     public function getExpanderDefinition(string $expanderName) : string
     {
         if (!$this->hasExpanderDefinition($expanderName)) {
-            throw new InvalidArgumentException(sprintf('Definition for "%s" expander does not exists.', $expanderName));
+            throw new InvalidArgumentException(\sprintf('Definition for "%s" expander does not exists.', $expanderName));
         }
 
         return $this->expanderDefinitions[$expanderName];
@@ -82,14 +78,15 @@ final class ExpanderInitializer
 
     public function initialize(ExpanderNode $expanderNode) : PatternExpander
     {
-        if (!array_key_exists($expanderNode->getName(), $this->expanderDefinitions)) {
-            throw new UnknownExpanderException(sprintf('Unknown expander "%s"', $expanderNode->getName()));
+        if (!\array_key_exists($expanderNode->getName(), $this->expanderDefinitions)) {
+            throw new UnknownExpanderException(\sprintf('Unknown expander "%s"', $expanderNode->getName()));
         }
 
-        $reflection = new ReflectionClass($this->expanderDefinitions[$expanderNode->getName()]);
+        $reflection = new \ReflectionClass($this->expanderDefinitions[$expanderNode->getName()]);
 
         if ($expanderNode->hasArguments()) {
             $arguments = [];
+
             foreach ($expanderNode->getArguments() as $argument) {
                 $arguments[] = ($argument instanceof ExpanderNode)
                     ? $this->initialize($argument)
