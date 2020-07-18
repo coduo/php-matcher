@@ -1,5 +1,7 @@
 # PHP Matcher
 
+[![Type Coverage](https://shepherd.dev/github/coduo/php-matcher/coverage.svg)](https://shepherd.dev/coduo/php-matcher)
+
 Library created for testing all kinds of JSON/XML/TXT/Scalar values against patterns.
 
 API: 

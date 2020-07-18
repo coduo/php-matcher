@@ -6,6 +6,9 @@
          bootstrap="vendor/autoload.php"
          cacheResultFile="var/phpunit/.result.cache"
 >
+    <logging>
+        <log type="coverage-html" target="var/phpunit/coverage/html" lowUpperBound="80" highLowerBound="100"/>
+    </logging>
     <testsuites>
         <testsuite name="PHP Matcher Test Suite">
             <directory>./tests/</directory>

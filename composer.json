@@ -52,7 +52,7 @@
             "phpunit"
         ],
         "static:analyze": [
-            "tools/psalm",
+            "tools/psalm --shepherd --stats",
             "tools/phpstan analyze -c phpstan.neon",
             "tools/php-cs-fixer fix --dry-run"
         ]
