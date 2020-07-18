@@ -10,9 +10,10 @@
     "summary": "var/logs/infection_summary.log",
     "debug": "var/logs/infection_summary.log"
   },
+  "minMsi": 65,
+  "minCoveredMsi": 70,
   "mutators": {
-    "@default": true,
-    "PublicVisibility": false
+    "@default": true
   },
   "testFramework": "phpunit",
   "bootstrap": "./vendor/autoload.php"

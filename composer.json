@@ -52,7 +52,7 @@
             "phpunit"
         ],
         "test:mutation": [
-            "tools/infection -vvv --test-framework-options='--testsuite=unit' --only-covered --log-verbosity=default --min-covered-msi=75 --threads=2"
+            "tools/infection"
         ],
         "static:analyze": [
             "tools/psalm --shepherd --stats",
