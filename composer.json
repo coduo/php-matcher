@@ -52,6 +52,7 @@
             "phpunit"
         ],
         "static:analyze": [
+            "tools/psalm",
             "tools/phpstan analyze -c phpstan.neon",
             "tools/php-cs-fixer fix --dry-run"
         ]
