@@ -232,6 +232,7 @@ class ArrayMatcherTest extends TestCase
                 ],
                 $simpleArrPattern,
             ],
+            [['foo[key]' => 'value'], ['foo[key]' => '@string@']]
         ];
     }
 
