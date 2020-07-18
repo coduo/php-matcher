@@ -51,6 +51,9 @@
         "test" : [
             "phpunit"
         ],
+        "test:mutation": [
+            "tools/infection"
+        ],
         "static:analyze": [
             "tools/psalm --shepherd --stats",
             "tools/phpstan analyze -c phpstan.neon",

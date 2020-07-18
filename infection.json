@@ -1,0 +1,20 @@
+{
+  "timeout": 5,
+  "source": {
+    "directories": [
+      "src"
+    ]
+  },
+  "logs": {
+    "text": "var/logs/infection.log",
+    "summary": "var/logs/infection_summary.log",
+    "debug": "var/logs/infection_summary.log"
+  },
+  "minMsi": 65,
+  "minCoveredMsi": 70,
+  "mutators": {
+    "@default": true
+  },
+  "testFramework": "phpunit",
+  "bootstrap": "./vendor/autoload.php"
+}

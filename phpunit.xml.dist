@@ -10,7 +10,7 @@
         <log type="coverage-html" target="var/phpunit/coverage/html" lowUpperBound="80" highLowerBound="100"/>
     </logging>
     <testsuites>
-        <testsuite name="PHP Matcher Test Suite">
+        <testsuite name="unit">
             <directory>./tests/</directory>
         </testsuite>
     </testsuites>
