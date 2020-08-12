@@ -7,6 +7,7 @@ namespace Coduo\PHPMatcher\Tests\PHPUnit;
 use Coduo\PHPMatcher\PHPUnit\PHPMatcherConstraint;
 use PHPUnit\Framework\AssertionFailedError;
 use PHPUnit\Framework\Constraint\Constraint;
+use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\TestCase;
 
 class PHPMatcherConstraintTest extends TestCase
@@ -48,6 +49,50 @@ class PHPMatcherConstraintTest extends TestCase
         $constraint = new PHPMatcherConstraint('@string@');
 
         $this->assertFalse($constraint->evaluate(42));
+    }
+
+    public function test_expected_as_string_is_sorted() : void
+    {
+        $constraint = new PHPMatcherConstraint('{"b": 2, "a": 1}');
+
+        try {
+            $constraint->evaluate('null');
+
+            $this->fail();
+        } catch (ExpectationFailedException $exception) {
+            $this->assertSame(
+                <<<'JSON'
+{
+    "a": 1,
+    "b": 2
+}
+JSON
+                ,
+                $exception->getComparisonFailure()->getExpectedAsString()
+            );
+        }
+    }
+
+    public function test_actual_as_string_is_sorted() : void
+    {
+        $constraint = new PHPMatcherConstraint('{}');
+
+        try {
+            $constraint->evaluate('{"b": 2, "a": 1}');
+
+            $this->fail();
+        } catch (ExpectationFailedException $exception) {
+            $this->assertSame(
+                <<<'JSON'
+{
+    "a": 1,
+    "b": 2
+}
+JSON
+                ,
+                $exception->getComparisonFailure()->getActualAsString()
+            );
+        }
     }
 
     public function test_that_pattern_could_be_an_array() : void
