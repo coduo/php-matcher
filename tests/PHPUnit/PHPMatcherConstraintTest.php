@@ -66,7 +66,8 @@ class PHPMatcherConstraintTest extends TestCase
     "a": 1,
     "b": 2
 }
-JSON,
+JSON
+                ,
                 $exception->getComparisonFailure()->getExpectedAsString()
             );
         }
@@ -87,7 +88,8 @@ JSON,
     "a": 1,
     "b": 2
 }
-JSON,
+JSON
+                ,
                 $exception->getComparisonFailure()->getActualAsString()
             );
         }
