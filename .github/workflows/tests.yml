@@ -57,7 +57,7 @@ jobs:
       - name: "Install locked dependencies"
         if: ${{ matrix.dependencies == 'locked' }}
         run: "composer install --no-interaction --no-progress --no-suggest"
-        continue-on-error: ${{ matrix.php-version == '8.0' }}
+        continue-on-error: ${{ matrix.php-version != '7.4' }}
 
       - name: "Tests"
         run: "composer test"
