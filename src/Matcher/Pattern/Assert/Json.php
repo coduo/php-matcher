@@ -16,7 +16,13 @@ final class Json
             return false;
         }
 
-        if (null === \json_decode($value) && JSON_ERROR_NONE !== \json_last_error()) {
+        $result = \json_decode($value);
+
+        if (\is_float($result) && \is_infinite($result)) {
+            return false;
+        }
+
+        if (null === $result && JSON_ERROR_NONE !== \json_last_error()) {
             return false;
         }
 
