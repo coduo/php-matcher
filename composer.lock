@@ -8,30 +8,29 @@
     "packages": [
         {
             "name": "coduo/php-to-string",
-            "version": "3.0.0",
+            "version": "3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/coduo/php-to-string.git",
-                "reference": "06afb7365634466287bd6b55a26fa462c28377e0"
+                "reference": "5eab40b901e89484f3ea586c08099162e89f81ce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/coduo/php-to-string/zipball/06afb7365634466287bd6b55a26fa462c28377e0",
-                "reference": "06afb7365634466287bd6b55a26fa462c28377e0",
+                "url": "https://api.github.com/repos/coduo/php-to-string/zipball/5eab40b901e89484f3ea586c08099162e89f81ce",
+                "reference": "5eab40b901e89484f3ea586c08099162e89f81ce",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2",
+                "php": ">=7.2",
                 "symfony/intl": "^3.4|^4.0|^5.0"
             },
             "require-dev": {
-                "coduo/phpspec-data-provider-extension": "^1.0.3",
-                "phpspec/phpspec": "^2"
+                "phpspec/phpspec": "^6"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.1-dev"
+                    "dev-master": "4.0-dev"
                 }
             },
             "autoload": {
@@ -62,9 +61,9 @@
             ],
             "support": {
                 "issues": "https://github.com/coduo/php-to-string/issues",
-                "source": "https://github.com/coduo/php-to-string/tree/master"
+                "source": "https://github.com/coduo/php-to-string/tree/3.1.0"
             },
-            "time": "2019-11-23T10:30:04+00:00"
+            "time": "2020-09-27T10:31:58+00:00"
         },
         {
             "name": "doctrine/lexer",
