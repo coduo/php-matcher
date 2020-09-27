@@ -46,7 +46,7 @@
     },
     "scripts": {
         "cs:php:fix": [
-            "php-cs-fixer fix --using-cache=no"
+            "tools/php-cs-fixer fix --using-cache=no"
         ],
         "test" : [
             "phpunit"
