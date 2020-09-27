@@ -113,8 +113,8 @@ class JsonMatcherTest extends TestCase
             ],
             [
                 '{"something": "5e61188283825"}',
-                '{"something": "@string@"}'
-            ]
+                '{"something": "@string@"}',
+            ],
         ];
     }
 
@@ -148,7 +148,7 @@ class JsonMatcherTest extends TestCase
             [
                 [],
                 '[]',
-            ]
+            ],
         ];
     }
 
