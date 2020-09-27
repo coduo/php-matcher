@@ -14,7 +14,7 @@ PHPMatcher::error() : ?string;
 
 It was built to simplify API's functional testing.
 
-* [![Build Status](https://github.com/coduo/php-matcher/workflows/Tests/badge.svg?branch=5.x)](https://github.com/coduo/php-matcher/actions?query=workflow%3ATests) - [5.x README](https://github.com/coduo/php-matcher/tree/5.x/README.md)  PHP >= 7.3
+* [![Build Status](https://github.com/coduo/php-matcher/workflows/Tests/badge.svg?branch=5.x)](https://github.com/coduo/php-matcher/actions?query=workflow%3ATests) - [5.x README](https://github.com/coduo/php-matcher/tree/5.x/README.md)  PHP >= 7.2
 * [![Build Status](https://travis-ci.org/coduo/php-matcher.svg?branch=4.0)](https://travis-ci.org/coduo/php-matcher) - [4.0.* README](https://github.com/coduo/php-matcher/tree/4.0/README.md)  PHP >= 7.2
 * [![Build Status](https://travis-ci.org/coduo/php-matcher.svg?branch=3.2)](https://travis-ci.org/coduo/php-matcher) - [3.2.* README](https://github.com/coduo/php-matcher/tree/3.2/README.md) PHP >= 7.0 
 * [![Build Status](https://travis-ci.org/coduo/php-matcher.svg?branch=3.1)](https://travis-ci.org/coduo/php-matcher) - [3.1.* README](https://github.com/coduo/php-matcher/tree/3.1/README.md) PHP >= 7.0  
