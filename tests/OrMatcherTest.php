@@ -25,6 +25,8 @@ final class OrMatcherTest extends TestCase
             ['2014-08-19', '@string@.isDateTime()||@integer@', true],
             [null, '@integer@||@string@', false],
             [1, '@integer@.greaterThan(10)||@string@.contains("10")', false],
+            [[], '@array@||@null@', true],
+            [null, '@array@||@null@', true],
         ];
     }
 
