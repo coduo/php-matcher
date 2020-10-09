@@ -37,7 +37,7 @@ final class MatcherFactory implements Factory
         }
 
         $matchers[] = $arrayMatcher;
-        $matchers[] = new Matcher\OrMatcher($backtrace, $scalarMatchers);
+        $matchers[] = $this->buildOrMatcher($backtrace, $matchers);
         $matchers[] = new Matcher\TextMatcher($scalarMatchers, $backtrace, $parser);
 
         return new Matcher\ChainMatcher(
@@ -85,6 +85,18 @@ final class MatcherFactory implements Factory
                 new Matcher\UuidMatcher($backtrace, $parser),
                 new Matcher\JsonObjectMatcher($backtrace, $parser),
             ]
+        );
+    }
+
+    private function buildOrMatcher(Backtrace $backtrace, array $orMatchers) : Matcher\OrMatcher
+    {
+        return new Matcher\OrMatcher(
+            $backtrace,
+            new Matcher\ChainMatcher(
+                'or',
+                $backtrace,
+                $orMatchers
+            )
         );
     }
 
