@@ -23,6 +23,7 @@ final class MatcherFactory implements Factory
     {
         $scalarMatchers = $this->buildScalarMatchers($parser, $backtrace);
         $arrayMatcher = $this->buildArrayMatcher($scalarMatchers, $parser, $backtrace);
+        $orMatcher = $this->buildOrMatcher([$scalarMatchers, $arrayMatcher], $backtrace);
 
         // Matchers are registered in order of matching
         // 1) all scalars
@@ -39,7 +40,7 @@ final class MatcherFactory implements Factory
                 new Matcher\JsonMatcher($arrayMatcher, $backtrace),
                 new Matcher\XmlMatcher($arrayMatcher, $backtrace),
                 $arrayMatcher,
-                new Matcher\OrMatcher($backtrace, $scalarMatchers),
+                $orMatcher,
                 new Matcher\TextMatcher($scalarMatchers, $backtrace, $parser),
             ]
         );
@@ -88,7 +89,19 @@ final class MatcherFactory implements Factory
         );
     }
 
-    protected function buildParser(Backtrace $backtrace) : Parser
+    private function buildOrMatcher(array $orMatchers, Backtrace $backtrace) : Matcher\OrMatcher
+    {
+        return new Matcher\OrMatcher(
+            $backtrace,
+            new Matcher\ChainMatcher(
+                'or',
+                $backtrace,
+                $orMatchers
+            )
+        );
+    }
+
+    private function buildParser(Backtrace $backtrace) : Parser
     {
         return new Parser(new Lexer(), new Parser\ExpanderInitializer($backtrace));
     }
