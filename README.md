@@ -14,11 +14,12 @@ PHPMatcher::error() : ?string;
 
 It was built to simplify API's functional testing.
 
-* [![Build Status](https://github.com/coduo/php-matcher/workflows/Tests/badge.svg?branch=5.x)](https://github.com/coduo/php-matcher/actions?query=workflow%3ATests) - [5.x README](https://github.com/coduo/php-matcher/tree/5.x/README.md)  PHP >= 7.2
-* [![Build Status](https://github.com/coduo/php-matcher/workflows/Tests/badge.svg?branch=5.0)](https://github.com/coduo/php-matcher/actions?query=workflow%3ATests) - [5.0 README](https://github.com/coduo/php-matcher/tree/5.0/README.md)  PHP >= 7.2
-* [![Build Status](https://travis-ci.org/coduo/php-matcher.svg?branch=4.0)](https://travis-ci.org/coduo/php-matcher) - [4.0.* README](https://github.com/coduo/php-matcher/tree/4.0/README.md)  PHP >= 7.2
-* [![Build Status](https://travis-ci.org/coduo/php-matcher.svg?branch=3.2)](https://travis-ci.org/coduo/php-matcher) - [3.2.* README](https://github.com/coduo/php-matcher/tree/3.2/README.md) PHP >= 7.0 
-* [![Build Status](https://travis-ci.org/coduo/php-matcher.svg?branch=3.1)](https://travis-ci.org/coduo/php-matcher) - [3.1.* README](https://github.com/coduo/php-matcher/tree/3.1/README.md) PHP >= 7.0  
+* [![Build Status](https://github.com/coduo/php-matcher/workflows/Tests/badge.svg?branch=6.x)](https://github.com/coduo/php-matcher/actions?query=workflow%3ATests) - [6.x README](https://github.com/coduo/php-matcher/tree/6.x/README.md)  PHP >= 7.4
+* [![Build Status](https://github.com/coduo/php-matcher/workflows/Tests/badge.svg?branch=5.x)](https://github.com/coduo/php-matcher/actions?query=workflow%3ATests) - [5.x README](https://github.com/coduo/php-matcher/tree/5.x/README.md)  PHP >= 7.2 < 8.0
+* [![Build Status](https://github.com/coduo/php-matcher/workflows/Tests/badge.svg?branch=5.0)](https://github.com/coduo/php-matcher/actions?query=workflow%3ATests) - [5.0 README](https://github.com/coduo/php-matcher/tree/5.0/README.md)  PHP >= 7.2 < 8.0
+* [![Build Status](https://travis-ci.org/coduo/php-matcher.svg?branch=4.0)](https://travis-ci.org/coduo/php-matcher) - [4.0.* README](https://github.com/coduo/php-matcher/tree/4.0/README.md)  PHP >= 7.2 < 8.0
+* [![Build Status](https://travis-ci.org/coduo/php-matcher.svg?branch=3.2)](https://travis-ci.org/coduo/php-matcher) - [3.2.* README](https://github.com/coduo/php-matcher/tree/3.2/README.md) PHP >= 7.0 < 8.0
+* [![Build Status](https://travis-ci.org/coduo/php-matcher.svg?branch=3.1)](https://travis-ci.org/coduo/php-matcher) - [3.1.* README](https://github.com/coduo/php-matcher/tree/3.1/README.md) PHP >= 7.0 < 8.0
 
 [![Latest Stable Version](https://poser.pugx.org/coduo/php-matcher/v/stable)](https://packagist.org/packages/coduo/php-matcher)
 [![Total Downloads](https://poser.pugx.org/coduo/php-matcher/downloads)](https://packagist.org/packages/coduo/php-matcher)
