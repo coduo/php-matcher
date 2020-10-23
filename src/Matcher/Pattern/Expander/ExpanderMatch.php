@@ -19,12 +19,12 @@ final class ExpanderMatch implements Matcher\Pattern\PatternExpander
     private $matcher;
 
     /**
-     * @var string|null
+     * @var null|string
      */
     private $pattern;
 
     /**
-     * @param string|null $pattern
+     * @param null|string $pattern
      */
     public function __construct($pattern)
     {
