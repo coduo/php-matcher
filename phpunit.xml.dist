@@ -6,17 +6,19 @@
          bootstrap="vendor/autoload.php"
          cacheResultFile="var/phpunit/.result.cache"
 >
-    <logging>
-        <log type="coverage-html" target="var/phpunit/coverage/html" lowUpperBound="80" highLowerBound="100"/>
-    </logging>
     <testsuites>
         <testsuite name="unit">
             <directory>./tests/</directory>
         </testsuite>
     </testsuites>
-    <filter>
-        <whitelist>
-            <directory>./src/</directory>
-        </whitelist>
-    </filter>
+
+    <coverage processUncoveredFiles="true">
+        <include>
+            <directory suffix=".php">./src/</directory>
+        </include>
+
+        <report>
+            <html outputDirectory="var/phpunit/coverage/html" lowUpperBound="80" highLowerBound="100"/>
+        </report>
+    </coverage>
 </phpunit>
