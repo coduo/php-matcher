@@ -39,7 +39,7 @@ final class ExpanderInitializer
         Expander\Optional::NAME => Expander\Optional::class,
         Expander\StartsWith::NAME => Expander\StartsWith::class,
         Expander\Repeat::NAME => Expander\Repeat::class,
-        Expander\Match::NAME => Expander\Match::class,
+        Expander\ExpanderMatch::NAME => Expander\ExpanderMatch::class,
         Expander\HasProperty::NAME => Expander\HasProperty::class,
     ];
 

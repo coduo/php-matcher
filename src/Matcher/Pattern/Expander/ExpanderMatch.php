@@ -7,7 +7,7 @@ namespace Coduo\PHPMatcher\Matcher\Pattern\Expander;
 use Coduo\PHPMatcher\Factory\MatcherFactory;
 use Coduo\PHPMatcher\Matcher;
 
-final class Match implements Matcher\Pattern\PatternExpander
+final class ExpanderMatch implements Matcher\Pattern\PatternExpander
 {
     use BacktraceBehavior;
 
@@ -18,8 +18,14 @@ final class Match implements Matcher\Pattern\PatternExpander
      */
     private $matcher;
 
+    /**
+     * @var string|null
+     */
     private $pattern;
 
+    /**
+     * @param string|null $pattern
+     */
     public function __construct($pattern)
     {
         $this->pattern = $pattern;
@@ -30,6 +36,9 @@ final class Match implements Matcher\Pattern\PatternExpander
         return self::NAME === $name;
     }
 
+    /**
+     * @param mixed $value
+     */
     public function match($value) : bool
     {
         $this->backtrace->expanderEntrance(self::NAME, $value);
