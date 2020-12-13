@@ -4,8 +4,64 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "44dbc4ec869f7615c68fa2a28370ae11",
+    "content-hash": "1bdaed3f1a81bd92107ed553341edd57",
     "packages": [
+        {
+            "name": "aeon-php/calendar",
+            "version": "0.12.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/aeon-php/calendar.git",
+                "reference": "f122821e890fcb8c2bd71ab550e0c2bad51a1982"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/aeon-php/calendar/zipball/f122821e890fcb8c2bd71ab550e0c2bad51a1982",
+                "reference": "f122821e890fcb8c2bd71ab550e0c2bad51a1982",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.4.2"
+            },
+            "require-dev": {
+                "ext-bcmath": "*",
+                "phpunit/phpunit": "^9.3"
+            },
+            "suggest": {
+                "ext-bcmath": "Compare time units with high precision"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Aeon\\": [
+                        "src/Aeon"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "PHP type safe, immutable calendar library",
+            "keywords": [
+                "calendar",
+                "date",
+                "datetime",
+                "immutable",
+                "time"
+            ],
+            "support": {
+                "issues": "https://github.com/aeon-php/calendar/issues",
+                "source": "https://github.com/aeon-php/calendar/tree/0.12.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/norberttech",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-11-22T15:36:23+00:00"
+        },
         {
             "name": "coduo/php-to-string",
             "version": "3.1.0",

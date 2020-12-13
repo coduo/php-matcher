@@ -115,6 +115,8 @@ class MatcherTest extends TestCase
 * ``contains($string, $ignoreCase = false)``
 * ``notContains($string, $ignoreCase = false)``
 * ``isDateTime()``
+* ``before(string $date)`` - example ``"@string@.isDateTime().before(\"2020-01-01 00:00:00\")"``
+* ``after(string $date)`` - example ``"@string@.isDateTime().after(\"2020-01-01 00:00:00\")"``
 * ``isEmail()``
 * ``isUrl()``
 * ``isIp()``
