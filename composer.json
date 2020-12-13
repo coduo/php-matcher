@@ -52,6 +52,7 @@
             "phpunit"
         ],
         "test:mutation": [
+            "Composer\\Config::disableProcessTimeout",
             "tools/infection"
         ],
         "static:analyze": [
