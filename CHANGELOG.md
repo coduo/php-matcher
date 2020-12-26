@@ -13,14 +13,14 @@ Types of changes:
 - `Fixed` for any bug fixes.
 - `Security` in case of vulnerabilities.
 
-## [Unreleased] - 2020-12-13
+## Unreleased - 2020-12-13
 ### Changed
  - [1f32aa](https://github.com/coduo/php-matcher/commit/1f32aa7c5e5dee773710aed1c2485610eedacbee) - **Update composer.json** - [@norberttech](https://github.com/norberttech)
  - [54594c](https://github.com/coduo/php-matcher/commit/54594c2874f12579b12dcc346de9d86a5c89fd23) - **Updated phar dependencies, increased timeout for infection, changed default branch for scheduled jobs** - [@norberttech](https://github.com/norberttech)
  - [e3eab6](https://github.com/coduo/php-matcher/commit/e3eab6a6cf57c849d436d38bf79f5a0040f16491) - **Update README.md** - [@norberttech](https://github.com/norberttech)
  - [#215](https://github.com/coduo/php-matcher/pull/215) - **PHP 8.0 compability.** - [@dotdevru](https://github.com/dotdevru)
 
-## [5.0.0] - 2020-09-27
+## 5.0.0 - 2020-09-27
 ### Changed
  - [6d54bc](https://github.com/coduo/php-matcher/commit/6d54bc01ad882774fb04bf6d4e77a9b71838e1e7) - **Fixed version triggering mutation tests in github workflow** - [@norberttech](https://github.com/norberttech)
  - [#209](https://github.com/coduo/php-matcher/pull/209) - **Fixed issue with false positive detection of valid json string** - [@norberttech](https://github.com/norberttech)
@@ -49,7 +49,7 @@ Types of changes:
  - [78ff3c](https://github.com/coduo/php-matcher/commit/78ff3cd862c4fedd6491bb17a99b00597abd2d96) - **Updated dependencies** - [@norberttech](https://github.com/norberttech)
  - [1e6e82](https://github.com/coduo/php-matcher/commit/1e6e8295c589c531d57e76bbb904e4fb2d76be25) - **Added 4.0 version to README** - [@norberttech](https://github.com/norberttech)
 
-## [4.0.0] - 2019-12-22
+## 4.0.0 - 2019-12-22
 ### Changed
  - [aaa336](https://github.com/coduo/php-matcher/commit/aaa33639fe03d5883e0ccfbeea3d02a65ebc567c) - **Bumped dev-master alias to 5.0-dev** - [@norberttech](https://github.com/norberttech)
  - [#193](https://github.com/coduo/php-matcher/pull/193) - **Fixed issue where unbound key matching would not validate keys in pat…** - [@raing3](https://github.com/raing3)
@@ -74,11 +74,11 @@ Types of changes:
  - [#168](https://github.com/coduo/php-matcher/pull/168) - **Testsuite cleanups** - [@norberttech](https://github.com/norberttech)
  - [#166](https://github.com/coduo/php-matcher/pull/166) - **Update minimum required php version to 7.2** - [@norberttech](https://github.com/norberttech)
 
-## [3.2.2] - 2019-08-11
+## 3.2.2 - 2019-08-11
 ### Changed
  - [#167](https://github.com/coduo/php-matcher/pull/167) - **JSON full text matching fixed** - [@norberttech](https://github.com/norberttech)
 
-## [3.2.1] - 2019-08-09
+## 3.2.1 - 2019-08-09
 ### Changed
  - [1cf313](https://github.com/coduo/php-matcher/commit/1cf3132acd0e013c74d3cd5ec83fb38848aefde8) - **Update README.md** - [@norberttech](https://github.com/norberttech)
  - [94af14](https://github.com/coduo/php-matcher/commit/94af14a69d65814381787994edd8f4defcb0e22a) - **Update README.md** - [@norberttech](https://github.com/norberttech)
@@ -95,11 +95,11 @@ Types of changes:
  - [#152](https://github.com/coduo/php-matcher/pull/152) - **Enhance PHPUnit setting** - [@peter279k](https://github.com/peter279k)
  - [#149](https://github.com/coduo/php-matcher/pull/149) - **Remove a double call to sprintf** - [@nclsHart](https://github.com/nclsHart)
 
-## [3.1.2] - 2019-02-08
+## 3.1.2 - 2019-02-08
 ### Changed
  - [#143](https://github.com/coduo/php-matcher/pull/143) - **Array universal key** - [@JarJak](https://github.com/JarJak)
 
-## [3.1.1] - 2019-01-29
+## 3.1.1 - 2019-01-29
 ### Changed
  - [#145](https://github.com/coduo/php-matcher/pull/145) - **CS Fixes & additional validation during tests** - [@norberttech](https://github.com/norberttech)
  - [#141](https://github.com/coduo/php-matcher/pull/141) - **add expanders 'After' and 'Before' for date comparaison** - [@Canadadry](https://github.com/Canadadry)
@@ -109,7 +109,7 @@ Types of changes:
  - [#131](https://github.com/coduo/php-matcher/pull/131) - **Added isIp() pattern expander** - [@thomasbisignani](https://github.com/thomasbisignani)
  - [a9d0f0](https://github.com/coduo/php-matcher/commit/a9d0f0b76685876b9f23c837361e97d3b1ad108c) - **updated branch-alias in composer.json** - [@norberttech](https://github.com/norberttech)
 
-## [3.1.0] - 2018-04-26
+## 3.1.0 - 2018-04-26
 ### Changed
  - [f0c89f](https://github.com/coduo/php-matcher/commit/f0c89f1d4d7b1f401f1de00720de73b3ce8ef8c5) - **Updated README after 3.1 release** - [@norberttech](https://github.com/norberttech)
  - [#130](https://github.com/coduo/php-matcher/pull/130) - **Added UUID pattern support for the TextMatcher** - [@thomasbisignani](https://github.com/thomasbisignani)
@@ -121,7 +121,7 @@ Types of changes:
  - [#119](https://github.com/coduo/php-matcher/pull/119) - **Matcher fails when trying to use empty string as a pattern** - [@jkobus](https://github.com/jkobus)
  - [#122](https://github.com/coduo/php-matcher/pull/122) - **Trim whitespaces around the matchers after `OR` splitting** - [@partikus](https://github.com/partikus)
 
-## [3.0.0] - 2018-02-04
+## 3.0.0 - 2018-02-04
 ### Changed
  - [01ec0d](https://github.com/coduo/php-matcher/commit/01ec0dbf6f4923ac9a86c43d1b54e914489a38fc) - **Added repeat patter expander test** - [@norberttech](https://github.com/norberttech)
  - [ae1bb3](https://github.com/coduo/php-matcher/commit/ae1bb3771b012b52d603eccaa23c5d8379ea3043) - **Code cleanup** - [@norberttech](https://github.com/norberttech)
@@ -140,25 +140,25 @@ Types of changes:
  - [#100](https://github.com/coduo/php-matcher/pull/100) - **update deps to phpunit 6.x, fix code and tests** - [@andreasschacht](https://github.com/andreasschacht)
  - [34afc2](https://github.com/coduo/php-matcher/commit/34afc2c030374e5be64a4170a5f98eefd880ff94) - **Prepare matcher for 3.0 release** - [@norberttech](https://github.com/norberttech)
 
-## [2.2.0] - 2016-12-11
+## 2.2.0 - 2016-12-11
 ### Changed
  - [#91](https://github.com/coduo/php-matcher/pull/91) - **add support for all versions of UUID [1-5]** - [@adam187](https://github.com/adam187)
  - [bb201a](https://github.com/coduo/php-matcher/commit/bb201ad6e0d6275c6e87fc91818e7aa29bd05505) - **Update README.md** - [@norberttech](https://github.com/norberttech)
  - [b02fc6](https://github.com/coduo/php-matcher/commit/b02fc68b28212067b6784a6b1598b3efb5368339) - **Update README.md** - [@norberttech](https://github.com/norberttech)
 
-## [2.1.0] - 2016-10-20
+## 2.1.0 - 2016-10-20
 ### Changed
  - [#89](https://github.com/coduo/php-matcher/pull/89) - **Added UUID matcher.** - [@jmfeurprier](https://github.com/jmfeurprier)
  - [#85](https://github.com/coduo/php-matcher/pull/85) - **#58 Added error message if JSON decode failed for both pattern and v…** - [@partikus](https://github.com/partikus)
  - [#86](https://github.com/coduo/php-matcher/pull/86) - **Added count pattern expander** - [@norberttech](https://github.com/norberttech)
  - [#84](https://github.com/coduo/php-matcher/pull/84) - **#82 Null not work correctly - added test case** - [@partikus](https://github.com/partikus)
 
-## [2.0.1] - 2016-04-12
+## 2.0.1 - 2016-04-12
 ### Changed
  - [#78](https://github.com/coduo/php-matcher/pull/78) - **work around bug https://bugs.php.net/bug.php?id=71964** - [@bendavies](https://github.com/bendavies)
  - [#76](https://github.com/coduo/php-matcher/pull/76) - **Update README.md** - [@yosmanyga](https://github.com/yosmanyga)
 
-## [2.0.0] - 2016-03-18
+## 2.0.0 - 2016-03-18
 ### Changed
  - [fddefe](https://github.com/coduo/php-matcher/commit/fddefee866d44f673f68d2bc7716b7fa824b6942) - **Update CHANGELOG.md** - [@norzechowicz](https://github.com/norzechowicz)
  - [63de6d](https://github.com/coduo/php-matcher/commit/63de6d22e95a14f86c97ae396d085f5d7fb794f3) - **Merge pull request #74 from partikus/feature/or-matcher** - [@norzechowicz](https://github.com/norzechowicz)
@@ -193,36 +193,36 @@ Types of changes:
  - [fd87d9](https://github.com/coduo/php-matcher/commit/fd87d91bbf028112fffb84b80cac11f18e59e51f) - **Merge pull request #57 from hamuhamu/master** - [@norzechowicz](https://github.com/norzechowicz)
  - [#57](https://github.com/coduo/php-matcher/pull/57) - **the Content had been duplicated.** - [@hamuhamu](https://github.com/hamuhamu)
 
-## [1.1.7] - 2015-07-14
+## 1.1.7 - 2015-07-14
 ### Changed
  - [54d740](https://github.com/coduo/php-matcher/commit/54d74000b9bab2eba3c393fe6e0a5433e06d902f) - **Merge pull request #54 from norzechowicz/lowest-dependencies** - [@norzechowicz](https://github.com/norzechowicz)
  - [#54](https://github.com/coduo/php-matcher/pull/54) - **Added test for lowest versions of dependnecies** - [@norberttech](https://github.com/norberttech)
  - [51f48d](https://github.com/coduo/php-matcher/commit/51f48df18b618248abed13dee3a1a332b41d2e01) - **Merge pull request #51 from rpalladino/isUrl** - [@norzechowicz](https://github.com/norzechowicz)
  - [#51](https://github.com/coduo/php-matcher/pull/51) - **Add isUrl() pattern expander** - [@rpalladino](https://github.com/rpalladino)
 
-## [1.1.6] - 2015-02-05
+## 1.1.6 - 2015-02-05
 ### Changed
  - [3fcfd6](https://github.com/coduo/php-matcher/commit/3fcfd66ab8cff8b68e92baa7f7d94f69e9003f96) - **Merge pull request #50 from pskt/callback-matcher-on-function-names** - [@norzechowicz](https://github.com/norzechowicz)
  - [#50](https://github.com/coduo/php-matcher/pull/50) - **CallbackMatcher should not be executed for internal function names** - [@pskt](https://github.com/pskt)
 
-## [1.1.5] - 2015-01-26
+## 1.1.5 - 2015-01-26
 ### Changed
  - [272f53](https://github.com/coduo/php-matcher/commit/272f5361930ba2a1a6ac558d693d7d01ae619d53) - **Merge pull request #49 from norzechowicz/fix-text-matcher-null** - [@norzechowicz](https://github.com/norzechowicz)
  - [#49](https://github.com/coduo/php-matcher/pull/49) - **Ignore strings that can be matched by other matchers in TextMatcher** - [@norberttech](https://github.com/norberttech)
 
-## [1.1.4] - 2014-12-14
+## 1.1.4 - 2014-12-14
 ### Changed
  - [cb8144](https://github.com/coduo/php-matcher/commit/cb814458d7716599d7193d1c65b19b8dc8bec1ae) - **Merge pull request #44 from norzechowicz/text-matcher** - [@norzechowicz](https://github.com/norzechowicz)
  - [#44](https://github.com/coduo/php-matcher/pull/44) - **Added text matcher** - [@norberttech](https://github.com/norberttech)
 
-## [1.1.3] - 2014-12-11
+## 1.1.3 - 2014-12-11
 ### Changed
  - [d761fb](https://github.com/coduo/php-matcher/commit/d761fb6a45f42f91a3c0d2d6d107df570f27ca3b) - **Merge pull request #42 from cakper/patch-1** - [@norzechowicz](https://github.com/norzechowicz)
  - [#42](https://github.com/coduo/php-matcher/pull/42) - **Update installation instructions** - [@cakper](https://github.com/cakper)
  - [6298c3](https://github.com/coduo/php-matcher/commit/6298c3ce41979238f5e64d47e216f44f69998f72) - **Merge pull request #41 from cakper/fix-regex-matcher-edge-case** - [@norzechowicz](https://github.com/norzechowicz)
  - [#41](https://github.com/coduo/php-matcher/pull/41) - **Add casting to bool for expression regex matches** - [@cakper](https://github.com/cakper)
 
-## [1.1.1] - 2014-11-11
+## 1.1.1 - 2014-11-11
 ### Changed
  - [4e37e2](https://github.com/coduo/php-matcher/commit/4e37e27669eb56e7fe1198976ff519197b9cac52) - **Merge pull request #38 from norzechowicz/json-normalizer** - [@norberttech](https://github.com/norberttech)
  - [#38](https://github.com/coduo/php-matcher/pull/38) - **Expanded TRANSFORM_QUOTATION_PATTERN in Json matcher to handle new type matchers** - [@norberttech](https://github.com/norberttech)
@@ -233,7 +233,7 @@ Types of changes:
  - [#36](https://github.com/coduo/php-matcher/pull/36) - **Datetime email expander** - [@piotrjura](https://github.com/piotrjura)
  - [59de4b](https://github.com/coduo/php-matcher/commit/59de4b03fa0821a3887b9265f03bbdedf911131a) - **Update README.md** - [@norberttech](https://github.com/norberttech)
 
-## [1.1.0] - 2014-10-18
+## 1.1.0 - 2014-10-18
 ### Changed
  - [206217](https://github.com/coduo/php-matcher/commit/206217e2a4decb6cfd1c759d15abb7d342874131) - **Merge pull request #31 from norzechowicz/aggregate-expanders** - [@norberttech](https://github.com/norberttech)
  - [#31](https://github.com/coduo/php-matcher/pull/31) - **Aggregate expanders** - [@norberttech](https://github.com/norberttech)
@@ -253,12 +253,12 @@ Types of changes:
  - [f92fb3](https://github.com/coduo/php-matcher/commit/f92fb38524b7704748898ba294d216c91a67b810) - **Merge pull request #24 from mmoreram/patch-1** - [@norberttech](https://github.com/norberttech)
  - [#24](https://github.com/coduo/php-matcher/pull/24) - **Fixed minor typo issue** - [@mmoreram](https://github.com/mmoreram)
 
-## [1.0.5] - 2014-07-27
+## 1.0.5 - 2014-07-27
 ### Changed
  - [741c7b](https://github.com/coduo/php-matcher/commit/741c7b25fb799df5cfbd1aa043c4f58101811d36) - **Merge pull request #23 from leettastic/master** - [@norberttech](https://github.com/norberttech)
  - [#23](https://github.com/coduo/php-matcher/pull/23) - **Update phpunit.xml.dist** - [@leettastic](https://github.com/leettastic)
 
-## [1.0.4] - 2014-06-22
+## 1.0.4 - 2014-06-22
 ### Changed
  - [f944b7](https://github.com/coduo/php-matcher/commit/f944b791635c851cd02ec4de447dfbe2ae6c99e6) - **Update README.md** - [@norberttech](https://github.com/norberttech)
  - [58a634](https://github.com/coduo/php-matcher/commit/58a6348ee30e25651c16fafe9733fa0ca9bd59f8) - **Merge pull request #20 from norzechowicz/unbounded_array** - [@defrag](https://github.com/defrag)
@@ -266,14 +266,14 @@ Types of changes:
  - [f8d46c](https://github.com/coduo/php-matcher/commit/f8d46c8cfb7065ad2ad3cb03fa2c27f1ffbc226e) - **Merge pull request #17 from K-Phoen/dev-unbounded-arrays** - [@norberttech](https://github.com/norberttech)
  - [#17](https://github.com/coduo/php-matcher/pull/17) - **Added unbounded array patterns** - [@K-Phoen](https://github.com/K-Phoen)
 
-## [1.0.3] - 2014-06-19
+## 1.0.3 - 2014-06-19
 ### Changed
  - [4f9bf6](https://github.com/coduo/php-matcher/commit/4f9bf642da60e6808e69b896681283982bf2184d) - **Merge pull request #18 from norzechowicz/factory** - [@defrag](https://github.com/defrag)
  - [#18](https://github.com/coduo/php-matcher/pull/18) - **Matcher factory introduction** - [@norberttech](https://github.com/norberttech)
  - [70f00b](https://github.com/coduo/php-matcher/commit/70f00bca956ef01b6e8cf8324f3973e5367ec763) - **Merge pull request #19 from RobinvdVleuten/master** - [@norberttech](https://github.com/norberttech)
  - [#19](https://github.com/coduo/php-matcher/pull/19) - **A null value can be matched.** - [@robinvdvleuten](https://github.com/robinvdvleuten)
 
-## [1.0.2] - 2014-05-29
+## 1.0.2 - 2014-05-29
 ### Changed
  - [3bb08a](https://github.com/coduo/php-matcher/commit/3bb08a8bb4da7d54bfa27e76d179d46e4458be16) - **Merge pull request #16 from norzechowicz/array-fix** - [@defrag](https://github.com/defrag)
  - [#16](https://github.com/coduo/php-matcher/pull/16) - **Fixed nested arrays error messages** - [@norberttech](https://github.com/norberttech)
@@ -284,14 +284,14 @@ Types of changes:
  - [a9d72c](https://github.com/coduo/php-matcher/commit/a9d72c05e1b7bcfb2d4438afa046426f7aa2a15f) - **Merge branch 'norzechowicz-callback-matcher'** - [@defrag](https://github.com/defrag)
  - [40ba9b](https://github.com/coduo/php-matcher/commit/40ba9b74a95dcaba869c71fb824148e6d4112323) - **Resolving conflicts** - [@defrag](https://github.com/defrag)
 
-## [1.0.1] - 2014-05-22
+## 1.0.1 - 2014-05-22
 ### Changed
  - [f6d7b7](https://github.com/coduo/php-matcher/commit/f6d7b7baeb491dd9635a61f2a17d6527befd3954) - **Merge pull request #11 from defrag/fix/removing-2-4-deps** - [@norberttech](https://github.com/norberttech)
  - [#11](https://github.com/coduo/php-matcher/pull/11) - **Removing 2.4 dependency on property accessor** - [@defrag](https://github.com/defrag)
  - [030b88](https://github.com/coduo/php-matcher/commit/030b888ee3a494173160d6b51d98ff301c433adb) - **Update composer.json** - [@norberttech](https://github.com/norberttech)
  - [1dd30b](https://github.com/coduo/php-matcher/commit/1dd30b74bfc6b4d62095dc9540a7edcaf786a443) - **Update README.md** - [@norberttech](https://github.com/norberttech)
 
-## [v1.0.0] - 2014-05-08
+## v1.0.0 - 2014-05-08
 ### Changed
  - [29e02d](https://github.com/coduo/php-matcher/commit/29e02debb5f2b8b5bb84b983a0df9e1e1c0b3d5a) - **Use stable version of php-to-string** - [@norberttech](https://github.com/norberttech)
  - [16176b](https://github.com/coduo/php-matcher/commit/16176b7d44adb46634b3f53b63a79ac27ba4a156) - **Merge pull request #8 from norzechowicz/errors** - [@defrag](https://github.com/defrag)
