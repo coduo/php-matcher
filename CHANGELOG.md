@@ -1,9 +1,11 @@
-## [Unreleased] - 2020-12-26
+## [Unreleased] - 2021-01-21
 
 ### Added
+  - [#218](https://github.com/coduo/php-matcher/pull/218) - **Added integration with aeon-php/automation** - [@norberttech](https://github.com/norberttech)
   - [1d14f8](https://github.com/coduo/php-matcher/commit/1d14f866a298e3c514e0ecaff874553b42fc8cac) - **changelog file** - [@norberttech](https://github.com/norberttech)
 
 ### Changed
+  - [313372](https://github.com/coduo/php-matcher/commit/31337201f117dbb46af3c6dafb351eebb6909124) - **Update changelog-update.yml** - [@norberttech](https://github.com/norberttech)
   - [fd4903](https://github.com/coduo/php-matcher/commit/fd49031e7cc8f0e350884c3466a034b4d8eaa2ef) - **Update CHANGELOG.md** - [@norberttech](https://github.com/norberttech)
   - [1f32aa](https://github.com/coduo/php-matcher/commit/1f32aa7c5e5dee773710aed1c2485610eedacbee) - **Update composer.json** - [@norberttech](https://github.com/norberttech)
   - [54594c](https://github.com/coduo/php-matcher/commit/54594c2874f12579b12dcc346de9d86a5c89fd23) - **phar dependencies, increased timeout for infection, changed default branch for scheduled jobs** - [@norberttech](https://github.com/norberttech)
@@ -13,7 +15,7 @@
 ## [5.0.1] - 2020-10-09
 
 ### Changed
-  - [#213](https://github.com/coduo/php-matcher/pull/213) - **include ArrayMatcher in OrMatcher to fix issues with `@null@||@array@`** - [@mtomala](https://github.com/mtomala)
+  - [#213](https://github.com/coduo/php-matcher/pull/213) - **include ArrayMatcher in OrMatcher to fix issues with <code>@null@||@array@</code>** - [@mtomala](https://github.com/mtomala)
   - [efd3b2](https://github.com/coduo/php-matcher/commit/efd3b2fcbaf9e1b44881a329d4b57fb5708be73e) - **Update README.md** - [@norberttech](https://github.com/norberttech)
 
 ## [5.0.0] - 2020-09-27
@@ -55,7 +57,7 @@
 ## [4.0.2] - 2020-10-09
 
 ### Changed
-  - [#214](https://github.com/coduo/php-matcher/pull/214) - **include ArrayMatcher in OrMatcher to fix issues with `@null@||@array@` pattern** - [@mtomala](https://github.com/mtomala)
+  - [#214](https://github.com/coduo/php-matcher/pull/214) - **include ArrayMatcher in OrMatcher to fix issues with <code>@null@||@array@</code> pattern** - [@mtomala](https://github.com/mtomala)
 
 ## [4.0.1] - 2020-09-27
 
@@ -146,7 +148,7 @@
   - [#131](https://github.com/coduo/php-matcher/pull/131) - **isIp() pattern expander** - [@thomasbisignani](https://github.com/thomasbisignani)
 
 ### Changed
-  - [#145](https://github.com/coduo/php-matcher/pull/145) - **CS Fixes & additional validation during tests** - [@norberttech](https://github.com/norberttech)
+  - [#145](https://github.com/coduo/php-matcher/pull/145) - **CS Fixes &amp; additional validation during tests** - [@norberttech](https://github.com/norberttech)
   - [#137](https://github.com/coduo/php-matcher/pull/137) - **Update copyright** - [@samnela](https://github.com/samnela)
   - [#135](https://github.com/coduo/php-matcher/pull/135) - **Correct typo in readme** - [@athos7933](https://github.com/athos7933)
   - [#126](https://github.com/coduo/php-matcher/pull/126) - **PHPUnit 7 support, php 7.1 requirement** - [@kejwmen](https://github.com/kejwmen)
@@ -163,7 +165,7 @@
   - [#128](https://github.com/coduo/php-matcher/pull/128) - **Include php 7.2 in travis matrix** - [@kejwmen](https://github.com/kejwmen)
   - [61b92b](https://github.com/coduo/php-matcher/commit/61b92b80374f6d5d46914bf305bf45d12807004d) - **Update README.md** - [@norberttech](https://github.com/norberttech)
   - [#119](https://github.com/coduo/php-matcher/pull/119) - **Matcher fails when trying to use empty string as a pattern** - [@jkobus](https://github.com/jkobus)
-  - [#122](https://github.com/coduo/php-matcher/pull/122) - **Trim whitespaces around the matchers after `OR` splitting** - [@partikus](https://github.com/partikus)
+  - [#122](https://github.com/coduo/php-matcher/pull/122) - **Trim whitespaces around the matchers after <code>OR</code> splitting** - [@partikus](https://github.com/partikus)
 
 ### Fixed
   - [#129](https://github.com/coduo/php-matcher/pull/129) - **typo** - [@thomasbisignani](https://github.com/thomasbisignani)
@@ -190,7 +192,7 @@
   - [#110](https://github.com/coduo/php-matcher/pull/110) - **3.0 - Add repeat expander feature** - [@LeaklessGfy](https://github.com/LeaklessGfy)
   - [#105](https://github.com/coduo/php-matcher/pull/105) - **Possibility to use expanders for multiple matchers** - [@SpartakusMd](https://github.com/SpartakusMd)
   - [#104](https://github.com/coduo/php-matcher/pull/104) - **Implement PHP 7.0 features** - [@norberttech](https://github.com/norberttech)
-  - [#102](https://github.com/coduo/php-matcher/pull/102) - **Allow to mark JSON properties & XML nodes as optional** - [@teklakct](https://github.com/teklakct)
+  - [#102](https://github.com/coduo/php-matcher/pull/102) - **Allow to mark JSON properties &amp; XML nodes as optional** - [@teklakct](https://github.com/teklakct)
   - [#97](https://github.com/coduo/php-matcher/pull/97) - **Allow @...@ to match none or more elements** - [@Gamesh](https://github.com/Gamesh)
   - [#100](https://github.com/coduo/php-matcher/pull/100) - **update deps to phpunit 6.x, fix code and tests** - [@andreasschacht](https://github.com/andreasschacht)
   - [34afc2](https://github.com/coduo/php-matcher/commit/34afc2c030374e5be64a4170a5f98eefd880ff94) - **Prepare matcher for 3.0 release** - [@norberttech](https://github.com/norberttech)
@@ -208,7 +210,7 @@
 ## [2.3.0] - 2017-09-04
 
 ### Changed
-  - [#107](https://github.com/coduo/php-matcher/pull/107) - **Allow to mark JSON properties & XML nodes as optional (#102)** - [@norberttech](https://github.com/norberttech)
+  - [#107](https://github.com/coduo/php-matcher/pull/107) - **Allow to mark JSON properties &amp; XML nodes as optional (#102)** - [@norberttech](https://github.com/norberttech)
   - [5be920](https://github.com/coduo/php-matcher/commit/5be920e15d57e17bda96350638e56d426c2cab10) - **composer.json** - [@norberttech](https://github.com/norberttech)
   - [6c60f4](https://github.com/coduo/php-matcher/commit/6c60f49bc3af5055e4e77864547534bd88cfe603) - **hhvm with php 7.1 env at travis** - [@norberttech](https://github.com/norberttech)
 
@@ -234,7 +236,7 @@
 ## [2.0.1] - 2016-04-12
 
 ### Changed
-  - [#78](https://github.com/coduo/php-matcher/pull/78) - **work around bug https://bugs.php.net/bug.php?id=71964** - [@bendavies](https://github.com/bendavies)
+  - [#78](https://github.com/coduo/php-matcher/pull/78) - **work around bug <a href="https://bugs.php.net/bug.php?id=71964">https://bugs.php.net/bug.php?id=71964</a>** - [@ttps://bugs.php.net/bug.php?id=71964](https://bugs.php.net/bug.php?id=71964)
   - [#76](https://github.com/coduo/php-matcher/pull/76) - **Update README.md** - [@yosmanyga](https://github.com/yosmanyga)
 
 ## [2.0.0] - 2016-03-18
@@ -254,7 +256,7 @@
   - [#73](https://github.com/coduo/php-matcher/pull/73) - **Allow to use null with matcher** - [@blazarecki](https://github.com/blazarecki)
   - [5fc822](https://github.com/coduo/php-matcher/commit/5fc8221869aa54200bba709310f3383c3d6f404c) - **Merge pull request #73 from blazarecki/allow-null** - [@norzechowicz](https://github.com/norzechowicz)
   - [914c18](https://github.com/coduo/php-matcher/commit/914c18436a4c68006dd8ca7281566f7eb3fc561d) - **Update CHANGELOG.md** - [@norzechowicz](https://github.com/norzechowicz)
-  - [cbf6f3](https://github.com/coduo/php-matcher/commit/cbf6f3ba4d1a0bd09e46c239d652e67c10d8c0ba) - **openlss/lib-array2xml version to >=0.0.9** - [@benjamin.lazarecki@sensiolabs.com](#)
+  - [cbf6f3](https://github.com/coduo/php-matcher/commit/cbf6f3ba4d1a0bd09e46c239d652e67c10d8c0ba) - **openlss/lib-array2xml version to &gt;=0.0.9** - [@benjamin.lazarecki@sensiolabs.com](#)
   - [1fd194](https://github.com/coduo/php-matcher/commit/1fd194e40eb282fb18ec1c2beae02f744384f5fa) - **Update CHANGELOG.md** - [@norzechowicz](https://github.com/norzechowicz)
   - [8709d9](https://github.com/coduo/php-matcher/commit/8709d93ac4944f6d915032cfd92cbc98cfb81b2f) - **Merge pull request #68 from jakzal/phpunit-integration** - [@norzechowicz](https://github.com/norzechowicz)
   - [#68](https://github.com/coduo/php-matcher/pull/68) - **PHPUnit integration** - [@jakzal](https://github.com/jakzal)
@@ -276,7 +278,7 @@
 ## [1.1.8] - 2016-02-05
 
 ### Changed
-  - [973e13](https://github.com/coduo/php-matcher/commit/973e136747d9a9063c34987cc9f02fb38e0915e5) - **openlss/lib-array2xml version to >=0.0.9** - [@benjamin.lazarecki@sensiolabs.com](#)
+  - [973e13](https://github.com/coduo/php-matcher/commit/973e136747d9a9063c34987cc9f02fb38e0915e5) - **openlss/lib-array2xml version to &gt;=0.0.9** - [@benjamin.lazarecki@sensiolabs.com](#)
   - [fd87d9](https://github.com/coduo/php-matcher/commit/fd87d91bbf028112fffb84b80cac11f18e59e51f) - **Merge pull request #57 from hamuhamu/master** - [@norzechowicz](https://github.com/norzechowicz)
   - [#57](https://github.com/coduo/php-matcher/pull/57) - **the Content had been duplicated.** - [@hamuhamu](https://github.com/hamuhamu)
 
@@ -364,7 +366,7 @@
 ## [1.0.9] - 2016-02-08
 
 ### Changed
-  - [#70](https://github.com/coduo/php-matcher/pull/70) - **openlss/lib-array2xml version to >= 0.0.9** - [@blazarecki](https://github.com/blazarecki)
+  - [#70](https://github.com/coduo/php-matcher/pull/70) - **openlss/lib-array2xml version to &gt;= 0.0.9** - [@blazarecki](https://github.com/blazarecki)
   - [3b6c98](https://github.com/coduo/php-matcher/commit/3b6c98a7a44328e4f04e85f8ed0a6a849002a8fd) - **Merge pull request #70 from blazarecki/change-lib-array2xml-version** - [@norzechowicz](https://github.com/norzechowicz)
 
 ## [1.0.8] - 2015-07-14
@@ -386,7 +388,7 @@
 ## [1.0.6] - 2014-09-15
 
 ### Changed
-  - [64642a](https://github.com/coduo/php-matcher/commit/64642abe4fa813303b55cd624ab4643105b47980) - **version 0.1.* into 1.0.* of php-to-string** - [@norberttech](https://github.com/norberttech)
+  - [64642a](https://github.com/coduo/php-matcher/commit/64642abe4fa813303b55cd624ab4643105b47980) - **version 0.1.<em> into 1.0.</em> of php-to-string** - [@norberttech](https://github.com/norberttech)
 
 ## [1.0.5] - 2014-07-27
 
@@ -405,7 +407,7 @@
   - [f8d46c](https://github.com/coduo/php-matcher/commit/f8d46c8cfb7065ad2ad3cb03fa2c27f1ffbc226e) - **Merge pull request #17 from K-Phoen/dev-unbounded-arrays** - [@norberttech](https://github.com/norberttech)
 
 ### Fixed
-  - [#20](https://github.com/coduo/php-matcher/pull/20) - **unbouded array to work with objects & iterateMatch matehod refactoring** - [@norberttech](https://github.com/norberttech)
+  - [#20](https://github.com/coduo/php-matcher/pull/20) - **unbouded array to work with objects &amp; iterateMatch matehod refactoring** - [@norberttech](https://github.com/norberttech)
 
 ## [1.0.3] - 2014-06-19
 
