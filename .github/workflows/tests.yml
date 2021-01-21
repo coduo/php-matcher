@@ -38,6 +38,29 @@ jobs:
           ini-values: memory_limit=-1
           tools: phive, composer:v2
 
+      - name: "Cache Phive dependencies"
+        uses: "actions/cache@v2"
+        with:
+          path: |
+            ~/.phive
+          key: "${{ runner.os }}-phive-${{ hashFiles('**/phars.xml') }}"
+          restore-keys: |
+            ${{ runner.os }}-phive-
+
+      - name: "Get Composer Cache Directory"
+        id: composer-cache
+        run: |
+          echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: "Cache Composer dependencies"
+        uses: "actions/cache@v2"
+        with:
+          path: |
+            ${{ steps.composer-cache.outputs.dir }}
+          key: "php-${{ matrix.php-version }}-${{ matrix.dependencies }}-composer-${{ hashFiles('**/composer.lock') }}"
+          restore-keys: |
+            php-${{ matrix.php-version }}-${{ matrix.dependencies }}-composer-
+
       - name: "Install tools"
         run: "phive install --trust-gpg-keys E82B2FB314E9906E,CF1A108D0E7AE720,8A03EA3B385DBAA1,C5095986493B4AA0 --force-accept-unsigned"
 
