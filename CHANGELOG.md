@@ -1,6 +1,7 @@
 ## [Unreleased] - 2021-01-23
 
 ### Added
+  - [14b49d](https://github.com/coduo/php-matcher/commit/14b49d8d6efcfaf3a03bfdb5cd7d34884b4939d9) - **dependabot** - [@norberttech](https://github.com/norberttech)
   - [#219](https://github.com/coduo/php-matcher/pull/219) - **`@date@` - matcher** - [@norberttech](https://github.com/norberttech)
   - [#219](https://github.com/coduo/php-matcher/pull/219) - **`@time@` - matcher** - [@norberttech](https://github.com/norberttech)
   - [#219](https://github.com/coduo/php-matcher/pull/219) - **`@timezone@` or `@tz@` - matcher** - [@norberttech](https://github.com/norberttech)
@@ -244,7 +245,7 @@
 ## [2.0.1] - 2016-04-12
 
 ### Changed
-  - [#78](https://github.com/coduo/php-matcher/pull/78) - **work around bug <a href="https://bugs.php.net/bug.php?id=71964"></a><a href="https://bugs.php.net/bug.php?id=71964"></a><a href="https://bugs.php.net/bug.php?id=71964">https://bugs.php.net/bug.php?id=71964</a>** - [@ttps://bugs.php.net/bug.php?id=71964](https://bugs.php.net/bug.php?id=71964)
+  - [#78](https://github.com/coduo/php-matcher/pull/78) - **work around bug <a href="https://bugs.php.net/bug.php?id=71964"></a><a href="https://bugs.php.net/bug.php?id=71964"></a><a href="https://bugs.php.net/bug.php?id=71964"></a><a href="https://bugs.php.net/bug.php?id=71964">https://bugs.php.net/bug.php?id=71964</a>** - [@ttps://bugs.php.net/bug.php?id=71964](https://bugs.php.net/bug.php?id=71964)
   - [#76](https://github.com/coduo/php-matcher/pull/76) - **Update README.md** - [@yosmanyga](https://github.com/yosmanyga)
 
 ## [2.0.0] - 2016-03-18
