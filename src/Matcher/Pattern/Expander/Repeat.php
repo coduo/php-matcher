@@ -13,6 +13,9 @@ final class Repeat implements PatternExpander
 {
     use BacktraceBehavior;
 
+    /**
+     * @var string
+     */
     public const NAME = 'repeat';
 
     private ?string $error = null;

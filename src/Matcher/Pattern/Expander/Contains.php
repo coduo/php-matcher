@@ -11,6 +11,9 @@ final class Contains implements PatternExpander
 {
     use BacktraceBehavior;
 
+    /**
+     * @var string
+     */
     public const NAME = 'contains';
 
     private ?string $error = null;

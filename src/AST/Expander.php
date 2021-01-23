@@ -11,7 +11,7 @@ final class Expander implements Node
     /**
      * @var mixed[]
      */
-    private array $arguments;
+    private array $arguments = [];
 
     public function __construct(string $name)
     {

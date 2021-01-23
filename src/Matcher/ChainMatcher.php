@@ -17,7 +17,7 @@ final class ChainMatcher extends Matcher
     /**
      * @var ValueMatcher[]
      */
-    private array $matchers;
+    private array $matchers = [];
 
     /**
      * @param Backtrace $backtrace

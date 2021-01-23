@@ -11,6 +11,9 @@ final class IsDateTime implements PatternExpander
 {
     use BacktraceBehavior;
 
+    /**
+     * @var string
+     */
     public const NAME = 'isDateTime';
 
     private ?string $error = null;
@@ -54,7 +57,7 @@ final class IsDateTime implements PatternExpander
             new \DateTime($value);
 
             return true;
-        } catch (\Exception $e) {
+        } catch (\Exception $exception) {
             return false;
         }
     }

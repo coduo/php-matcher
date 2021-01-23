@@ -11,6 +11,9 @@ final class EndsWith implements PatternExpander
 {
     use BacktraceBehavior;
 
+    /**
+     * @var string
+     */
     public const NAME = 'endsWith';
 
     private string $stringEnding;

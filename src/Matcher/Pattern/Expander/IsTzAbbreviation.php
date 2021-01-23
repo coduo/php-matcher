@@ -12,6 +12,9 @@ final class IsTzAbbreviation implements PatternExpander
 {
     use BacktraceBehavior;
 
+    /**
+     * @var string
+     */
     public const NAME = 'isTzAbbreviation';
 
     private ?string $error;
@@ -48,7 +51,7 @@ final class IsTzAbbreviation implements PatternExpander
             }
 
             return $result;
-        } catch (\Exception $e) {
+        } catch (\Exception $exception) {
             $this->error = \sprintf('Timezone expander require valid timezone, got "%s".', new StringConverter($value));
             $this->backtrace->expanderFailed(self::NAME, $value, $this->error);
 

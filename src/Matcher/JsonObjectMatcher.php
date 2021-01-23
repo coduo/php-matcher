@@ -11,6 +11,9 @@ use Coduo\ToString\StringConverter;
 
 final class JsonObjectMatcher extends Matcher
 {
+    /**
+     * @var string
+     */
     public const JSON_PATTERN = 'json';
 
     private \Coduo\PHPMatcher\Backtrace $backtrace;

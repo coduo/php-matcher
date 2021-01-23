@@ -11,6 +11,9 @@ final class IsEmail implements PatternExpander
 {
     use BacktraceBehavior;
 
+    /**
+     * @var string
+     */
     public const NAME = 'isEmail';
 
     private ?string $error = null;
@@ -52,7 +55,7 @@ final class IsEmail implements PatternExpander
     {
         try {
             return false !== \filter_var($value, FILTER_VALIDATE_EMAIL);
-        } catch (\Exception $e) {
+        } catch (\Exception $exception) {
             return false;
         }
     }

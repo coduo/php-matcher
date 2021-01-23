@@ -10,6 +10,9 @@ use Coduo\ToString\StringConverter;
 
 final class IntegerMatcher extends Matcher
 {
+    /**
+     * @var string
+     */
     public const PATTERN = 'integer';
 
     private \Coduo\PHPMatcher\Backtrace $backtrace;

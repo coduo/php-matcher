@@ -11,6 +11,9 @@ use Coduo\ToString\StringConverter;
 
 final class DateMatcher extends Matcher
 {
+    /**
+     * @var string
+     */
     public const PATTERN = 'date';
 
     private Backtrace $backtrace;

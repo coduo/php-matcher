@@ -12,6 +12,9 @@ final class Count implements PatternExpander
 {
     use BacktraceBehavior;
 
+    /**
+     * @var string
+     */
     public const NAME = 'count';
 
     private ?string $error = null;

@@ -11,6 +11,9 @@ use Coduo\PHPMatcher\Parser\ExpanderInitializer;
 
 final class Parser
 {
+    /**
+     * @var string
+     */
     public const NULL_VALUE = 'null';
 
     private \Coduo\PHPMatcher\Lexer $lexer;
@@ -29,7 +32,7 @@ final class Parser
             $this->getAST($pattern);
 
             return true;
-        } catch (Exception $e) {
+        } catch (Exception $exception) {
             return false;
         }
     }
@@ -63,14 +66,10 @@ final class Parser
 
         $pattern = null;
 
-        switch ($this->lexer->lookahead['type']) {
-            case Lexer::T_TYPE_PATTERN:
-                $pattern = new AST\Pattern(new AST\Type($this->lexer->lookahead['value']));
-
-                break;
-
-            default:
-                throw PatternException::syntaxError($this->unexpectedSyntaxError($this->lexer->lookahead, '@type@ pattern'));
+        if ($this->lexer->lookahead['type'] == Lexer::T_TYPE_PATTERN) {
+            $pattern = new AST\Pattern(new AST\Type($this->lexer->lookahead['value']));
+        } else {
+            throw PatternException::syntaxError($this->unexpectedSyntaxError($this->lexer->lookahead, '@type@ pattern'));
         }
 
         $this->lexer->moveNext();

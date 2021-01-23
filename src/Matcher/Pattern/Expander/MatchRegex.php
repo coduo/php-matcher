@@ -11,6 +11,9 @@ final class MatchRegex implements PatternExpander
 {
     use BacktraceBehavior;
 
+    /**
+     * @var string
+     */
     public const NAME = 'matchRegex';
 
     private ?string $error = null;

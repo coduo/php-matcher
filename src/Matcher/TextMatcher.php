@@ -16,8 +16,14 @@ use Coduo\ToString\StringConverter;
 
 final class TextMatcher extends Matcher
 {
+    /**
+     * @var string
+     */
     public const PATTERN_REGEXP = "/@[a-zA-Z\\.]+@(\\.\\w+\\([a-zA-Z0-9{},:@\\.\"'\\(\\)]*\\))*/";
 
+    /**
+     * @var string
+     */
     public const PATTERN_REGEXP_PLACEHOLDER_TEMPLATE = '__PLACEHOLDER%d__';
 
     private \Coduo\PHPMatcher\Parser $parser;
@@ -53,8 +59,8 @@ final class TextMatcher extends Matcher
 
         try {
             $patternRegex = $this->replacePlaceholderWithPatternRegexes($patternRegex, $patternsReplacedWithRegex);
-        } catch (UnknownTypeException $exception) {
-            $this->error = \sprintf('Type pattern "%s" is not supported by TextMatcher.', $exception->getType());
+        } catch (UnknownTypeException $unknownTypeException) {
+            $this->error = \sprintf('Type pattern "%s" is not supported by TextMatcher.', $unknownTypeException->getType());
             $this->backtrace->matcherFailed(self::class, $value, $pattern, (string) $this->error);
 
             return false;

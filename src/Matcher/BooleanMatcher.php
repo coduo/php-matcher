@@ -10,6 +10,9 @@ use Coduo\ToString\StringConverter;
 
 final class BooleanMatcher extends Matcher
 {
+    /**
+     * @var string
+     */
     public const PATTERN = 'boolean';
 
     private \Coduo\PHPMatcher\Backtrace $backtrace;

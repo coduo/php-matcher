@@ -11,6 +11,9 @@ final class NotContains implements PatternExpander
 {
     use BacktraceBehavior;
 
+    /**
+     * @var string
+     */
     public const NAME = 'notContains';
 
     private ?string $error = null;

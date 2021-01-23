@@ -11,6 +11,9 @@ final class OneOf implements PatternExpander
 {
     use BacktraceBehavior;
 
+    /**
+     * @var string
+     */
     public const NAME = 'oneOf';
 
     /**

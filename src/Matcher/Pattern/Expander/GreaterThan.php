@@ -11,6 +11,9 @@ final class GreaterThan implements PatternExpander
 {
     use BacktraceBehavior;
 
+    /**
+     * @var string
+     */
     public const NAME = 'greaterThan';
 
     /**

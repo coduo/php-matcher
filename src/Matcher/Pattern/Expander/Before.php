@@ -13,6 +13,9 @@ final class Before implements PatternExpander
 {
     use BacktraceBehavior;
 
+    /**
+     * @var string
+     */
     public const NAME = 'before';
 
     private ?DateTime $boundaryDateTime;
@@ -33,10 +36,10 @@ final class Before implements PatternExpander
 
         try {
             $this->boundaryDateTime = DateTime::fromString($boundary);
-        } catch (\Exception $e) {
+        } catch (\Exception $exception) {
             try {
                 $this->boundaryTime = Time::fromString($boundary);
-            } catch (\Exception $e) {
+            } catch (\Exception $exception) {
                 throw new \InvalidArgumentException(\sprintf('Boundary value "%s" is not a valid date, date time or time.', new StringConverter($boundary)));
             }
         }

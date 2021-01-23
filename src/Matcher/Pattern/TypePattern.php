@@ -11,7 +11,7 @@ final class TypePattern implements Pattern
     /**
      * @var PatternExpander[]
      */
-    private array $expanders;
+    private array $expanders = [];
 
     private ?string $error = null;
 

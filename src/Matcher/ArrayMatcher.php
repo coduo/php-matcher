@@ -11,10 +11,19 @@ use Coduo\ToString\StringConverter;
 
 final class ArrayMatcher extends Matcher
 {
+    /**
+     * @var string
+     */
     public const PATTERN = 'array';
 
+    /**
+     * @var string
+     */
     public const UNBOUNDED_PATTERN = '@...@';
 
+    /**
+     * @var string
+     */
     public const UNIVERSAL_KEY = '@*@';
 
     private \Coduo\PHPMatcher\Matcher\ValueMatcher $propertyMatcher;

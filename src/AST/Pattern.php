@@ -11,7 +11,7 @@ final class Pattern implements Node
     /**
      * @var mixed[]
      */
-    private array $expanders;
+    private array $expanders = [];
 
     public function __construct(Type $type)
     {

@@ -8,6 +8,9 @@ use Coduo\PHPMatcher\Backtrace;
 
 final class OrMatcher extends Matcher
 {
+    /**
+     * @var string
+     */
     public const MATCH_PATTERN = "/\|\|/";
 
     private \Coduo\PHPMatcher\Backtrace $backtrace;

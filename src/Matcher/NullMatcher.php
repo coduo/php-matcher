@@ -9,6 +9,9 @@ use Coduo\ToString\StringConverter;
 
 final class NullMatcher extends Matcher
 {
+    /**
+     * @var string
+     */
     public const MATCH_PATTERN = '/^@null@$/';
 
     private \Coduo\PHPMatcher\Backtrace $backtrace;

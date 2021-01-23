@@ -11,8 +11,14 @@ use Coduo\ToString\StringConverter;
 
 final class TimeZoneMatcher extends Matcher
 {
+    /**
+     * @var string
+     */
     public const PATTERN = 'timezone';
 
+    /**
+     * @var string
+     */
     public const PATTERN_SHORT = 'tz';
 
     private Backtrace $backtrace;

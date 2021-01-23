@@ -8,6 +8,9 @@ use Coduo\PHPMatcher\Backtrace;
 
 final class WildcardMatcher extends Matcher
 {
+    /**
+     * @var string
+     */
     public const MATCH_PATTERN = "/^@(\*|wildcard)@$/";
 
     private \Coduo\PHPMatcher\Backtrace $backtrace;

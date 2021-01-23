@@ -11,6 +11,9 @@ final class StartsWith implements PatternExpander
 {
     use BacktraceBehavior;
 
+    /**
+     * @var string
+     */
     public const NAME = 'startsWith';
 
     private string $stringBeginning;

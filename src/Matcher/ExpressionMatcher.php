@@ -10,6 +10,9 @@ use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
 final class ExpressionMatcher extends Matcher
 {
+    /**
+     * @var string
+     */
     public const MATCH_PATTERN = "/^expr\((.*?)\)$/";
 
     private \Coduo\PHPMatcher\Backtrace $backtrace;

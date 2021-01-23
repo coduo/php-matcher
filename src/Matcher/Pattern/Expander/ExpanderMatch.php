@@ -11,6 +11,9 @@ final class ExpanderMatch implements Matcher\Pattern\PatternExpander
 {
     use BacktraceBehavior;
 
+    /**
+     * @var string
+     */
     public const NAME = 'match';
 
     private ?\Coduo\PHPMatcher\Matcher $matcher = null;

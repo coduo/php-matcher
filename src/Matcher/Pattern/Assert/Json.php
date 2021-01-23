@@ -6,10 +6,19 @@ namespace Coduo\PHPMatcher\Matcher\Pattern\Assert;
 
 final class Json
 {
+    /**
+     * @var string
+     */
     private const TRANSFORM_NEW_LINES = '/\r?\n|\r/';
 
+    /**
+     * @var string
+     */
     private const TRANSFORM_QUOTATION_PATTERN = '/([^"])@([a-zA-Z0-9\.]+)@([^"])/';
 
+    /**
+     * @var string
+     */
     private const TRANSFORM_QUOTATION_REPLACEMENT = '$1"@$2@"$3';
 
     public static function isValid($value) : bool

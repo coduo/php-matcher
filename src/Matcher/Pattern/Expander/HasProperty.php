@@ -12,6 +12,9 @@ final class HasProperty implements PatternExpander
 {
     use BacktraceBehavior;
 
+    /**
+     * @var string
+     */
     public const NAME = 'hasProperty';
 
     private $propertyName;

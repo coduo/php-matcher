@@ -13,7 +13,7 @@ final class InMemoryBacktrace implements Backtrace
     /**
      * @var mixed[]
      */
-    private array $trace;
+    private array $trace = [];
 
     public function __construct()
     {
@@ -31,7 +31,7 @@ final class InMemoryBacktrace implements Backtrace
             '#%d Matcher %s %s match pattern "%s"',
             $this->entriesCount(),
             $name,
-            $result ? 'can' : 'can\'t',
+            $result ? 'can' : "can't",
             new SingleLineString((string) new StringConverter($value))
         );
     }
