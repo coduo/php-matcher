@@ -29,6 +29,8 @@ class DateTimeMatcherTest extends TestCase
             ['2020-01-01 00:00:00', '@datetime@.isDateTime()'],
             ['2020-01-01 01:00:00', '@datetime@.after("2020-01-01 00:00:00")'],
             ['2020-01-01 01:00:00', '@datetime@.before("2021-01-01 00:00:00")'],
+            ['yesterday', '@datetime@.after("-5 days")'],
+            ['tomorrow', '@datetime@.before("+2 days")'],
         ];
     }
 
