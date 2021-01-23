@@ -11,7 +11,7 @@ use Coduo\ToString\StringConverter;
 final class InMemoryBacktrace implements Backtrace
 {
     /**
-     * @var mixed[]
+     * @var string[]
      */
     private array $trace = [];
 

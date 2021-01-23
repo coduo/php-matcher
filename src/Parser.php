@@ -211,9 +211,6 @@ final class Parser
         return $arrayArgument;
     }
 
-    /**
-     * @return bool|void
-     */
     private function getNextArrayElement(array &$array) : ?bool
     {
         if ($this->lexer->isNextToken(Lexer::T_CLOSE_CURLY_BRACE)) {

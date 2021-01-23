@@ -7,7 +7,6 @@ namespace Coduo\PHPMatcher\Tests\Matcher\Pattern;
 use Coduo\PHPMatcher\Matcher\Pattern\Expander\IsEmail;
 use Coduo\PHPMatcher\Matcher\Pattern\Expander\IsEmpty;
 use Coduo\PHPMatcher\Matcher\Pattern\Expander\Optional;
-use Coduo\PHPMatcher\Matcher\Pattern\Pattern;
 use Coduo\PHPMatcher\Matcher\Pattern\TypePattern;
 use PHPUnit\Framework\TestCase;
 

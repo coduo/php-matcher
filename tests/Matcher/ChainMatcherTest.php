@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Coduo\PHPMatcher\Tests\Matcher;
 
 use Coduo\PHPMatcher\Backtrace;
-use Coduo\PHPMatcher\Matcher\ArrayMatcher;
 use Coduo\PHPMatcher\Matcher\ChainMatcher;
 use Coduo\PHPMatcher\Matcher\ValueMatcher;
 use PHPUnit\Framework\MockObject\MockObject;
