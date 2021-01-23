@@ -10,8 +10,8 @@
     "summary": "var/logs/infection_summary.log",
     "debug": "var/logs/infection_summary.log"
   },
-  "minMsi": 65,
-  "minCoveredMsi": 70,
+  "minMsi": 60,
+  "minCoveredMsi": 65,
   "mutators": {
     "@default": true
   },

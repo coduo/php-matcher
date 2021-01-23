@@ -6,35 +6,38 @@ namespace Coduo\PHPMatcher\Tests\Matcher;
 
 use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Lexer;
-use Coduo\PHPMatcher\Matcher\BooleanMatcher;
+use Coduo\PHPMatcher\Matcher\TimeMatcher;
 use Coduo\PHPMatcher\Parser;
 use PHPUnit\Framework\TestCase;
 
-class BooleanMatcherTest extends TestCase
+class TimeMatcherTest extends TestCase
 {
-    private BooleanMatcher $matcher;
+    private TimeMatcher $matcher;
 
     private Backtrace $backtrace;
 
     public static function positiveCanMatchData()
     {
         return [
-            ['@boolean@'],
+            ['@time@'],
         ];
     }
 
     public static function positiveMatchData()
     {
         return [
-            [true, '@boolean@'],
+            ['00:00:00', '@time@'],
+            ['00:01:00.000000', '@time@'],
+            ['00:01:00', '@time@.after("00:00:00")'],
+            ['00:00:00', '@time@.before("01:00:00")'],
         ];
     }
 
     public static function negativeCanMatchData()
     {
         return [
-            ['@boolean'],
-            ['boolean'],
+            ['@string'],
+            ['string'],
             [1],
         ];
     }
@@ -42,24 +45,27 @@ class BooleanMatcherTest extends TestCase
     public static function negativeMatchData()
     {
         return [
-            ['1', '@boolean@'],
-            [new \DateTime(),  '@boolean@'],
+            [1, '@time@'],
+            [0,  '@time@'],
+            ['2020-01-01',  '@time@'],
+            ['00:01:00', '@time@.after("00:05:00")'],
         ];
     }
 
     public static function negativeMatchDescription()
     {
         return [
-            [new \stdClass,  '@boolean@', 'object "\\stdClass" is not a valid boolean.'],
-            [1.1, '@boolean@', 'double "1.1" is not a valid boolean.'],
-            ['true', '@string@', 'string "true" is not a valid boolean.'],
-            [['test'], '@boolean@', 'array "Array(1)" is not a valid boolean.'],
+            [new \stdClass,  '@dat@', 'object "\\stdClass" is not a valid string.'],
+            [1.1, '@integer@', 'double "1.1" is not a valid string.'],
+            [false, '@double@', 'boolean "false" is not a valid string.'],
+            [1, '@array@', 'integer "1" is not a valid string.'],
+            ['lorem ipsum', "@array@.startsWith('ipsum')", 'lorem ipsum "lorem ipsum" is not a valid time.'],
         ];
     }
 
     public function setUp() : void
     {
-        $this->matcher = new BooleanMatcher(
+        $this->matcher = new TimeMatcher(
             $this->backtrace = new Backtrace\InMemoryBacktrace(),
             new Parser(new Lexer(), new Parser\ExpanderInitializer($this->backtrace))
         );

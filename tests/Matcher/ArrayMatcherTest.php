@@ -12,10 +12,9 @@ use PHPUnit\Framework\TestCase;
 
 class ArrayMatcherTest extends TestCase
 {
-    /**
-     * @var Matcher\ArrayMatcher
-     */
-    private $matcher;
+    private Matcher\ArrayMatcher $matcher;
+
+    private Backtrace $backtrace;
 
     public static function positiveMatchData()
     {
@@ -195,28 +194,29 @@ class ArrayMatcherTest extends TestCase
 
     public function setUp() : void
     {
-        $backtrace = new Backtrace\InMemoryBacktrace();
-        $parser = new Parser(new Lexer(), new Parser\ExpanderInitializer($backtrace));
+        $this->backtrace = new Backtrace\InMemoryBacktrace();
+        $parser = new Parser(new Lexer(), new Parser\ExpanderInitializer($this->backtrace));
 
         $matchers = [
-            new Matcher\CallbackMatcher($backtrace),
-            new Matcher\NullMatcher($backtrace),
-            new Matcher\StringMatcher($backtrace, $parser),
-            new Matcher\IntegerMatcher($backtrace, $parser),
-            new Matcher\BooleanMatcher($backtrace, $parser),
-            new Matcher\DoubleMatcher($backtrace, $parser),
-            new Matcher\NumberMatcher($backtrace, $parser),
-            new Matcher\ScalarMatcher($backtrace),
-            new Matcher\WildcardMatcher($backtrace),
+            new Matcher\CallbackMatcher($this->backtrace),
+            new Matcher\NullMatcher($this->backtrace),
+            new Matcher\StringMatcher($this->backtrace, $parser),
+            new Matcher\IntegerMatcher($this->backtrace, $parser),
+            new Matcher\BooleanMatcher($this->backtrace, $parser),
+            new Matcher\DoubleMatcher($this->backtrace, $parser),
+            new Matcher\NumberMatcher($this->backtrace, $parser),
+            new Matcher\DateMatcher($this->backtrace, $parser),
+            new Matcher\ScalarMatcher($this->backtrace),
+            new Matcher\WildcardMatcher($this->backtrace),
         ];
 
         if (\class_exists('Symfony\\Component\\ExpressionLanguage\\ExpressionLanguage')) {
-            $matchers[] = new Matcher\ExpressionMatcher($backtrace);
+            $matchers[] = new Matcher\ExpressionMatcher($this->backtrace);
         }
 
         $this->matcher = new Matcher\ArrayMatcher(
-            new Matcher\ChainMatcher(self::class, $backtrace, $matchers),
-            $backtrace,
+            new Matcher\ChainMatcher(self::class, $this->backtrace, $matchers),
+            $this->backtrace,
             $parser
         );
     }
@@ -252,12 +252,14 @@ class ArrayMatcherTest extends TestCase
         );
 
         $this->assertTrue($matcher->match(['test' => 1], ['test' => 1]));
+        $this->assertFalse($backtrace->isEmpty());
     }
 
     public function test_error_when_path_in_pattern_does_not_exist() : void
     {
         $this->assertFalse($this->matcher->match(['foo' => 'foo value'], ['bar' => 'bar value']));
         $this->assertEquals($this->matcher->getError(), 'There is no element under path [foo] in pattern.');
+        $this->assertFalse($this->backtrace->isEmpty());
     }
 
     public function test_error_when_path_in_nested_pattern_does_not_exist() : void
@@ -268,6 +270,7 @@ class ArrayMatcherTest extends TestCase
         $this->assertFalse($this->matcher->match($array, $pattern));
 
         $this->assertEquals($this->matcher->getError(), 'There is no element under path [foo][bar][baz] in pattern.');
+        $this->assertFalse($this->backtrace->isEmpty());
     }
 
     public function test_error_when_path_in_value_does_not_exist() : void
@@ -278,6 +281,7 @@ class ArrayMatcherTest extends TestCase
         $this->assertFalse($this->matcher->match($array, $pattern));
 
         $this->assertEquals($this->matcher->getError(), 'There is no element under path [bar] in value.');
+        $this->assertFalse($this->backtrace->isEmpty());
     }
 
     public function test_error_when_path_in_nested_value_does_not_exist() : void
@@ -288,18 +292,21 @@ class ArrayMatcherTest extends TestCase
         $this->assertFalse($this->matcher->match($array, $pattern));
 
         $this->assertEquals($this->matcher->getError(), 'There is no element under path [foo][bar][faz] in value.');
+        $this->assertFalse($this->backtrace->isEmpty());
     }
 
     public function test_error_when_matching_fail() : void
     {
         $this->assertFalse($this->matcher->match(['foo' => 'foo value'], ['foo' => 'bar value']));
         $this->assertEquals($this->matcher->getError(), '"foo value" does not match "bar value".');
+        $this->assertFalse($this->backtrace->isEmpty());
     }
 
     public function test_error_message_when_matching_non_array_value() : void
     {
         $this->assertFalse($this->matcher->match(new \DateTime(), '@array@'));
         $this->assertEquals($this->matcher->getError(), 'object "\\DateTime" is not a valid array.');
+        $this->assertFalse($this->backtrace->isEmpty());
     }
 
     public function test_matching_array_to_array_pattern() : void
@@ -313,5 +320,6 @@ class ArrayMatcherTest extends TestCase
                 '@array@.inArray("bar")',
             ]
         ));
+        $this->assertFalse($this->backtrace->isEmpty());
     }
 }

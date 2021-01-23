@@ -6,35 +6,41 @@ namespace Coduo\PHPMatcher\Tests\Matcher;
 
 use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Lexer;
-use Coduo\PHPMatcher\Matcher\BooleanMatcher;
+use Coduo\PHPMatcher\Matcher\DateMatcher;
 use Coduo\PHPMatcher\Parser;
 use PHPUnit\Framework\TestCase;
 
-class BooleanMatcherTest extends TestCase
+class DateMatcherTest extends TestCase
 {
-    private BooleanMatcher $matcher;
+    private DateMatcher $matcher;
 
     private Backtrace $backtrace;
 
     public static function positiveCanMatchData()
     {
         return [
-            ['@boolean@'],
+            ['@date@'],
         ];
     }
 
     public static function positiveMatchData()
     {
         return [
-            [true, '@boolean@'],
+            ['2020-01-01', '@date@'],
+            ['2020-01-01', '@date@'],
+            ['2020-01-01', '@date@.isDateTime()'],
+            ['2020-01-02', '@date@.after("2020-01-01")'],
+            ['2020-01-01', '@date@.before("2021-01-03")'],
+            ['-2 hours', '@date@.after("-5 hours")'],
+            ['+3 hours', '@date@.before("+1 day")'],
         ];
     }
 
     public static function negativeCanMatchData()
     {
         return [
-            ['@boolean'],
-            ['boolean'],
+            ['@string'],
+            ['string'],
             [1],
         ];
     }
@@ -42,24 +48,26 @@ class BooleanMatcherTest extends TestCase
     public static function negativeMatchData()
     {
         return [
-            ['1', '@boolean@'],
-            [new \DateTime(),  '@boolean@'],
+            [1, '@date@'],
+            [0,  '@date@'],
+            ['01:00',  '@date@'],
         ];
     }
 
     public static function negativeMatchDescription()
     {
         return [
-            [new \stdClass,  '@boolean@', 'object "\\stdClass" is not a valid boolean.'],
-            [1.1, '@boolean@', 'double "1.1" is not a valid boolean.'],
-            ['true', '@string@', 'string "true" is not a valid boolean.'],
-            [['test'], '@boolean@', 'array "Array(1)" is not a valid boolean.'],
+            [new \stdClass,  '@dat@', 'object "\\stdClass" is not a valid string.'],
+            [1.1, '@integer@', 'double "1.1" is not a valid string.'],
+            [false, '@double@', 'boolean "false" is not a valid string.'],
+            [1, '@array@', 'integer "1" is not a valid string.'],
+            ['lorem ipsum', "@array@.startsWith('ipsum')", 'lorem ipsum "lorem ipsum" is not a valid date.'],
         ];
     }
 
     public function setUp() : void
     {
-        $this->matcher = new BooleanMatcher(
+        $this->matcher = new DateMatcher(
             $this->backtrace = new Backtrace\InMemoryBacktrace(),
             new Parser(new Lexer(), new Parser\ExpanderInitializer($this->backtrace))
         );
@@ -108,6 +116,5 @@ class BooleanMatcherTest extends TestCase
     {
         $this->matcher->match($value, $pattern);
         $this->assertEquals($error, $this->matcher->getError());
-        $this->assertFalse($this->backtrace->isEmpty());
     }
 }

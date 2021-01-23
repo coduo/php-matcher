@@ -13,7 +13,7 @@ class BeforeTest extends TestCase
     public static function examplesProvider()
     {
         return [
-            ['+ 2 day', 'today', true],
+            ['+2 day', 'today', true],
             ['2018-02-06T04:20:33', '2017-02-06T04:20:33', true],
             ['2017-02-06T04:20:33', '2018-02-06T04:20:33', false],
         ];

@@ -123,6 +123,15 @@ final class InMemoryBacktrace implements Backtrace
         return $this->trace;
     }
 
+    public function last() : ?string
+    {
+        if ($this->entriesCount()) {
+            return \end($this->trace);
+        }
+
+        return null;
+    }
+
     private function entriesCount() : int
     {
         return \count($this->trace) + 1;
