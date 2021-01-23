@@ -25,4 +25,6 @@ interface Backtrace
     public function isEmpty() : bool;
 
     public function raw() : array;
+
+    public function last() : ?string;
 }

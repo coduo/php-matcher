@@ -83,6 +83,7 @@ final class MatcherFactory implements Factory
                 new Matcher\TimeMatcher($backtrace, $parser),
                 new Matcher\DateMatcher($backtrace, $parser),
                 new Matcher\DateTimeMatcher($backtrace, $parser),
+                new Matcher\TimeZoneMatcher($backtrace, $parser),
                 new Matcher\ScalarMatcher($backtrace),
                 new Matcher\WildcardMatcher($backtrace),
                 new Matcher\UuidMatcher($backtrace, $parser),

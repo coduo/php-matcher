@@ -50,4 +50,9 @@ final class VoidBacktrace implements Backtrace
     {
         return [];
     }
+
+    public function last() : ?string
+    {
+        return null;
+    }
 }

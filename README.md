@@ -99,7 +99,10 @@ class MatcherTest extends TestCase
 * ``@number@``
 * ``@double@``
 * ``@boolean@``
+* ``@time@``
+* ``@date@``
 * ``@datetime@``
+* ``@timezone@`` || ``@tz``
 * ``@array@``
 * ``@...@`` - *unbounded array*
 * ``@null@``
@@ -118,6 +121,9 @@ class MatcherTest extends TestCase
 * ``isDateTime()``
 * ``before(string $date)`` - example ``"@string@.isDateTime().before(\"2020-01-01 00:00:00\")"``
 * ``after(string $date)`` - example ``"@string@.isDateTime().after(\"2020-01-01 00:00:00\")"``
+* ``isTzOffset()``
+* ``isTzIdentifier()``
+* ``isTzAbbreviation()``
 * ``isEmail()``
 * ``isUrl()``
 * ``isIp()``
@@ -209,6 +215,24 @@ $matcher->match('2020-01-11 00:00:00', '@datetime@');
 $matcher->match('2014-08-19', '@datetime@.before("2016-08-19")');
 $matcher->match('2014-08-19', '@datetime@.before("today").after("+ 100year")');
 
+```
+
+### TimeZone matching
+
+```php
+<?php
+
+use Coduo\PHPMatcher\PHPMatcher;
+
+$matcher = new PHPMatcher();
+
+$matcher->match('Europe/Warsaw', '@timezone@');
+$matcher->match('Europe/Warsaw', '@tz@');
+$matcher->match('GMT', '@tz@');
+$matcher->match('01:00', '@tz@');
+$matcher->match('01:00', '@tz@.isTzOffset()');
+$matcher->match('GMT', '@tz@.isTzAbbreviation()');
+$matcher->match('Europe/Warsaw', '@tz@.isTzIdentifier()');
 ```
 
 ### Integer matching
