@@ -6,17 +6,14 @@ namespace Coduo\PHPMatcher\Matcher\Pattern;
 
 final class TypePattern implements Pattern
 {
-    /**
-     * @var string
-     */
-    private $type;
+    private string $type;
 
     /**
      * @var PatternExpander[]
      */
-    private $expanders;
+    private array $expanders;
 
-    private $error;
+    private ?string $error = null;
 
     public function __construct(string $type)
     {

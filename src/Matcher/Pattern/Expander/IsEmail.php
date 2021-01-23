@@ -13,10 +13,7 @@ final class IsEmail implements PatternExpander
 
     public const NAME = 'isEmail';
 
-    /**
-     * @var null|string
-     */
-    private $error;
+    private ?string $error = null;
 
     public static function is(string $name) : bool
     {

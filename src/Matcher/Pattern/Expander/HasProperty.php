@@ -16,10 +16,7 @@ final class HasProperty implements PatternExpander
 
     private $propertyName;
 
-    /**
-     * @var null|string
-     */
-    private $error;
+    private ?string $error = null;
 
     public function __construct($propertyName)
     {

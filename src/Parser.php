@@ -13,15 +13,9 @@ final class Parser
 {
     public const NULL_VALUE = 'null';
 
-    /**
-     * @var Lexer
-     */
-    private $lexer;
+    private \Coduo\PHPMatcher\Lexer $lexer;
 
-    /**
-     * @var ExpanderInitializer
-     */
-    private $expanderInitializer;
+    private \Coduo\PHPMatcher\Parser\ExpanderInitializer $expanderInitializer;
 
     public function __construct(Lexer $lexer, ExpanderInitializer $expanderInitializer)
     {

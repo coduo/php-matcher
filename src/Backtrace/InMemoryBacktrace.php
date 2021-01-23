@@ -13,7 +13,7 @@ final class InMemoryBacktrace implements Backtrace
     /**
      * @var mixed[]
      */
-    private $trace;
+    private array $trace;
 
     public function __construct()
     {

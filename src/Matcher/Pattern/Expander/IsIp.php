@@ -13,10 +13,7 @@ final class IsIp implements PatternExpander
 
     public const NAME = 'isIp';
 
-    /**
-     * @var null|string
-     */
-    private $error;
+    private ?string $error = null;
 
     public static function is(string $name) : bool
     {

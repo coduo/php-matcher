@@ -6,15 +6,12 @@ namespace Coduo\PHPMatcher\AST;
 
 final class Pattern implements Node
 {
-    /**
-     * @var Type
-     */
-    private $type;
+    private \Coduo\PHPMatcher\AST\Type $type;
 
     /**
      * @var mixed[]
      */
-    private $expanders;
+    private array $expanders;
 
     public function __construct(Type $type)
     {

@@ -10,10 +10,7 @@ use Coduo\ToString\StringConverter;
 
 final class ScalarMatcher extends Matcher
 {
-    /**
-     * @var Backtrace
-     */
-    private $backtrace;
+    private \Coduo\PHPMatcher\Backtrace $backtrace;
 
     public function __construct(Backtrace $backtrace)
     {

@@ -12,10 +12,7 @@ final class ExpressionMatcher extends Matcher
 {
     public const MATCH_PATTERN = "/^expr\((.*?)\)$/";
 
-    /**
-     * @var Backtrace
-     */
-    private $backtrace;
+    private \Coduo\PHPMatcher\Backtrace $backtrace;
 
     public function __construct(Backtrace $backtrace)
     {

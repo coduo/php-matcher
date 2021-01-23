@@ -11,15 +11,9 @@ use Coduo\ToString\StringConverter;
 
 final class JsonMatcher extends Matcher
 {
-    /**
-     * @var ArrayMatcher
-     */
-    private $arrayMatcher;
+    private \Coduo\PHPMatcher\Matcher\ArrayMatcher $arrayMatcher;
 
-    /**
-     * @var Backtrace
-     */
-    private $backtrace;
+    private \Coduo\PHPMatcher\Backtrace $backtrace;
 
     public function __construct(ArrayMatcher $arrayMatcher, Backtrace $backtrace)
     {

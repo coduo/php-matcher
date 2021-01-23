@@ -13,20 +13,11 @@ final class EndsWith implements PatternExpander
 
     public const NAME = 'endsWith';
 
-    /**
-     * @var string
-     */
-    private $stringEnding;
+    private string $stringEnding;
 
-    /**
-     * @var null|string
-     */
-    private $error;
+    private ?string $error = null;
 
-    /**
-     * @var bool
-     */
-    private $ignoreCase;
+    private bool $ignoreCase;
 
     public function __construct(string $stringEnding, bool $ignoreCase = false)
     {

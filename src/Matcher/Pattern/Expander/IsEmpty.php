@@ -13,10 +13,7 @@ final class IsEmpty implements PatternExpander
 
     public const NAME = 'isEmpty';
 
-    /**
-     * @var null|string
-     */
-    private $error;
+    private ?string $error = null;
 
     public static function is(string $name) : bool
     {

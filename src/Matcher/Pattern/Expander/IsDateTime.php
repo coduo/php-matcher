@@ -13,10 +13,7 @@ final class IsDateTime implements PatternExpander
 
     public const NAME = 'isDateTime';
 
-    /**
-     * @var null|string
-     */
-    private $error;
+    private ?string $error = null;
 
     public static function is(string $name) : bool
     {

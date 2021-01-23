@@ -16,12 +16,9 @@ final class OneOf implements PatternExpander
     /**
      * @var PatternExpander[]
      */
-    private $expanders;
+    private ?array $expanders = null;
 
-    /**
-     * @var null|string
-     */
-    private $error;
+    private ?string $error = null;
 
     public function __construct()
     {

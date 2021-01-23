@@ -13,20 +13,11 @@ final class StartsWith implements PatternExpander
 
     public const NAME = 'startsWith';
 
-    /**
-     * @var string
-     */
-    private $stringBeginning;
+    private string $stringBeginning;
 
-    /**
-     * @var null|string
-     */
-    private $error;
+    private ?string $error = null;
 
-    /**
-     * @var bool
-     */
-    private $ignoreCase;
+    private bool $ignoreCase;
 
     public function __construct(string $stringBeginning, bool $ignoreCase = false)
     {

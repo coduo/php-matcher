@@ -18,7 +18,7 @@ final class ExpanderInitializer
     /**
      * @var class-string[]
      */
-    private $expanderDefinitions = [
+    private array $expanderDefinitions = [
         Expander\After::NAME => Expander\After::class,
         Expander\Before::NAME => Expander\Before::class,
         Expander\Contains::NAME => Expander\Contains::class,
@@ -46,10 +46,7 @@ final class ExpanderInitializer
         Expander\HasProperty::NAME => Expander\HasProperty::class,
     ];
 
-    /**
-     * @var \Coduo\PHPMatcher\Backtrace
-     */
-    private $backtrace;
+    private \Coduo\PHPMatcher\Backtrace $backtrace;
 
     public function __construct(Backtrace $backtrace)
     {

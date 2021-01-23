@@ -13,10 +13,7 @@ final class InArray implements PatternExpander
 
     public const NAME = 'inArray';
 
-    /**
-     * @var null|string
-     */
-    private $error;
+    private ?string $error = null;
 
     private $value;
 

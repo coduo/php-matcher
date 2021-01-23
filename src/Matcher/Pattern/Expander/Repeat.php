@@ -15,25 +15,16 @@ final class Repeat implements PatternExpander
 
     public const NAME = 'repeat';
 
-    /**
-     * @var null|string
-     */
-    private $error;
+    private ?string $error = null;
 
     /**
      * @var mixed[]|string
      */
     private $pattern;
 
-    /**
-     * @var bool
-     */
-    private $isStrict;
+    private bool $isStrict;
 
-    /**
-     * @var bool
-     */
-    private $isScalar;
+    private bool $isScalar;
 
     /**
      * @param array|string $pattern array to be matched or json-encoded string

@@ -16,15 +16,9 @@ final class UuidMatcher extends Matcher
 
     public const UUID_FORMAT_PATTERN = '|^' . self::UUID_PATTERN . '$|';
 
-    /**
-     * @var Backtrace
-     */
-    private $backtrace;
+    private \Coduo\PHPMatcher\Backtrace $backtrace;
 
-    /**
-     * @var Parser
-     */
-    private $parser;
+    private \Coduo\PHPMatcher\Parser $parser;
 
     public function __construct(Backtrace $backtrace, Parser $parser)
     {

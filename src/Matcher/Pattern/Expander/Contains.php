@@ -13,15 +13,9 @@ final class Contains implements PatternExpander
 
     public const NAME = 'contains';
 
-    /**
-     * @var null|string
-     */
-    private $error;
+    private ?string $error = null;
 
-    /**
-     * @var string
-     */
-    private $string;
+    private string $string;
 
     private $ignoreCase;
 

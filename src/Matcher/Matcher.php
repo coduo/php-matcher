@@ -6,10 +6,7 @@ namespace Coduo\PHPMatcher\Matcher;
 
 abstract class Matcher implements ValueMatcher
 {
-    /**
-     * @var null|string
-     */
-    protected $error;
+    protected ?string $error = null;
 
     /**
      * @inheritdoc

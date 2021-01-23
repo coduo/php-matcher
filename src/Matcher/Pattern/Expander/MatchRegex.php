@@ -13,15 +13,9 @@ final class MatchRegex implements PatternExpander
 
     public const NAME = 'matchRegex';
 
-    /**
-     * @var null|string
-     */
-    private $error;
+    private ?string $error = null;
 
-    /**
-     * @var string
-     */
-    private $pattern;
+    private string $pattern;
 
     public function __construct(string $pattern)
     {

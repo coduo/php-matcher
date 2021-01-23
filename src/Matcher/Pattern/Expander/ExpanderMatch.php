@@ -13,18 +13,15 @@ final class ExpanderMatch implements Matcher\Pattern\PatternExpander
 
     public const NAME = 'match';
 
-    /**
-     * @var Matcher
-     */
-    private $matcher;
+    private ?\Coduo\PHPMatcher\Matcher $matcher = null;
 
     /**
-     * @var null|string
+     * @var null|string|array
      */
     private $pattern;
 
     /**
-     * @param null|string $pattern
+     * @param null|string|array $pattern
      */
     public function __construct($pattern)
     {

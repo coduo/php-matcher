@@ -8,10 +8,7 @@ use Coduo\PHPMatcher\Matcher\Pattern\Assert\Json;
 
 final class SingleLineString
 {
-    /**
-     * @var string
-     */
-    private $raw;
+    private string $raw;
 
     public function __construct(string $raw)
     {

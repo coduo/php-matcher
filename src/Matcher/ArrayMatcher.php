@@ -17,20 +17,11 @@ final class ArrayMatcher extends Matcher
 
     public const UNIVERSAL_KEY = '@*@';
 
-    /**
-     * @var ValueMatcher
-     */
-    private $propertyMatcher;
+    private \Coduo\PHPMatcher\Matcher\ValueMatcher $propertyMatcher;
 
-    /**
-     * @var Parser
-     */
-    private $parser;
+    private \Coduo\PHPMatcher\Parser $parser;
 
-    /**
-     * @var Backtrace
-     */
-    private $backtrace;
+    private \Coduo\PHPMatcher\Backtrace $backtrace;
 
     public function __construct(ValueMatcher $propertyMatcher, Backtrace $backtrace, Parser $parser)
     {
@@ -140,9 +131,7 @@ final class ArrayMatcher extends Matcher
 
         $pattern = \array_filter(
             $pattern,
-            function ($item) use ($skipPattern) {
-                return $item !== $skipPattern;
-            }
+            fn($item) => $item !== $skipPattern
         );
 
         $notExistingKeys = $this->findNotExistingKeys($pattern, $values);

@@ -18,10 +18,7 @@ final class LowerThan implements PatternExpander
      */
     private $boundary;
 
-    /**
-     * @var null|string
-     */
-    private $error;
+    private ?string $error = null;
 
     public function __construct($boundary)
     {
