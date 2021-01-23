@@ -6,10 +6,7 @@ namespace Coduo\PHPMatcher\Exception;
 
 class UnknownTypeException extends Exception
 {
-    /**
-     * @var string
-     */
-    private $type;
+    private string $type;
 
     public function __construct(string $type)
     {

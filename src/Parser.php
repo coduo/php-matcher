@@ -11,17 +11,14 @@ use Coduo\PHPMatcher\Parser\ExpanderInitializer;
 
 final class Parser
 {
+    /**
+     * @var string
+     */
     public const NULL_VALUE = 'null';
 
-    /**
-     * @var Lexer
-     */
-    private $lexer;
+    private Lexer $lexer;
 
-    /**
-     * @var ExpanderInitializer
-     */
-    private $expanderInitializer;
+    private ExpanderInitializer $expanderInitializer;
 
     public function __construct(Lexer $lexer, ExpanderInitializer $expanderInitializer)
     {
@@ -35,7 +32,7 @@ final class Parser
             $this->getAST($pattern);
 
             return true;
-        } catch (Exception $e) {
+        } catch (Exception $exception) {
             return false;
         }
     }
@@ -69,14 +66,10 @@ final class Parser
 
         $pattern = null;
 
-        switch ($this->lexer->lookahead['type']) {
-            case Lexer::T_TYPE_PATTERN:
-                $pattern = new AST\Pattern(new AST\Type($this->lexer->lookahead['value']));
-
-                break;
-
-            default:
-                throw PatternException::syntaxError($this->unexpectedSyntaxError($this->lexer->lookahead, '@type@ pattern'));
+        if ($this->lexer->lookahead['type'] == Lexer::T_TYPE_PATTERN) {
+            $pattern = new AST\Pattern(new AST\Type($this->lexer->lookahead['value']));
+        } else {
+            throw PatternException::syntaxError($this->unexpectedSyntaxError($this->lexer->lookahead, '@type@ pattern'));
         }
 
         $this->lexer->moveNext();
@@ -218,10 +211,10 @@ final class Parser
         return $arrayArgument;
     }
 
-    private function getNextArrayElement(array &$array)
+    private function getNextArrayElement(array &$array) : ?bool
     {
         if ($this->lexer->isNextToken(Lexer::T_CLOSE_CURLY_BRACE)) {
-            return;
+            return null;
         }
 
         $key = $this->getNextArgumentValue();
@@ -245,7 +238,7 @@ final class Parser
         $array[$key] = $value;
 
         if (!$this->lexer->isNextToken(Lexer::T_COMMA)) {
-            return;
+            return null;
         }
 
         return true;

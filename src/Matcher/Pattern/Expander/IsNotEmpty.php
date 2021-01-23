@@ -11,12 +11,12 @@ final class IsNotEmpty implements PatternExpander
 {
     use BacktraceBehavior;
 
+    /**
+     * @var string
+     */
     public const NAME = 'isNotEmpty';
 
-    /**
-     * @var null|string
-     */
-    private $error;
+    private ?string $error = null;
 
     public static function is(string $name) : bool
     {

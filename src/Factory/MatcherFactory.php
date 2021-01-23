@@ -32,7 +32,7 @@ final class MatcherFactory implements Factory
         $matchers = [$scalarMatchers];
         $matchers[] = new Matcher\JsonMatcher($arrayMatcher, $backtrace);
 
-        if (\class_exists('LSS\XML2Array')) {
+        if (\class_exists(\LSS\XML2Array::class)) {
             $matchers[] = new Matcher\XmlMatcher($arrayMatcher, $backtrace);
         }
 

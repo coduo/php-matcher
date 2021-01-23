@@ -11,17 +11,14 @@ use Coduo\ToString\StringConverter;
 
 final class JsonObjectMatcher extends Matcher
 {
+    /**
+     * @var string
+     */
     public const JSON_PATTERN = 'json';
 
-    /**
-     * @var Backtrace
-     */
-    private $backtrace;
+    private Backtrace $backtrace;
 
-    /**
-     * @var Parser
-     */
-    private $parser;
+    private Parser $parser;
 
     public function __construct(Backtrace $backtrace, Parser $parser)
     {

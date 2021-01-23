@@ -9,10 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 final class OrMatcherTest extends TestCase
 {
-    /**
-     * @var PHPMatcher
-     */
-    protected $matcher;
+    protected ?PHPMatcher $matcher = null;
 
     public static function orExamples()
     {

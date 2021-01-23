@@ -12,10 +12,7 @@ use PHPUnit\Framework\TestCase;
 
 class ParserTest extends TestCase
 {
-    /**
-     * @var Parser
-     */
-    private $parser;
+    private ?Parser $parser = null;
 
     public static function expandersWithArrayArguments()
     {

@@ -11,12 +11,12 @@ final class InArray implements PatternExpander
 {
     use BacktraceBehavior;
 
+    /**
+     * @var string
+     */
     public const NAME = 'inArray';
 
-    /**
-     * @var null|string
-     */
-    private $error;
+    private ?string $error = null;
 
     private $value;
 

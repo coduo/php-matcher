@@ -11,20 +11,20 @@ final class ExpanderMatch implements Matcher\Pattern\PatternExpander
 {
     use BacktraceBehavior;
 
+    /**
+     * @var string
+     */
     public const NAME = 'match';
 
-    /**
-     * @var Matcher
-     */
-    private $matcher;
+    private ?Matcher $matcher = null;
 
     /**
-     * @var null|string
+     * @var null|array|string
      */
     private $pattern;
 
     /**
-     * @param null|string $pattern
+     * @param null|array|string $pattern
      */
     public function __construct($pattern)
     {

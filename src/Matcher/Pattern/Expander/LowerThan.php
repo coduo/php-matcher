@@ -11,6 +11,9 @@ final class LowerThan implements PatternExpander
 {
     use BacktraceBehavior;
 
+    /**
+     * @var string
+     */
     public const NAME = 'lowerThan';
 
     /**
@@ -18,10 +21,7 @@ final class LowerThan implements PatternExpander
      */
     private $boundary;
 
-    /**
-     * @var null|string
-     */
-    private $error;
+    private ?string $error = null;
 
     public function __construct($boundary)
     {

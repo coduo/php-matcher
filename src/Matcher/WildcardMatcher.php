@@ -8,12 +8,12 @@ use Coduo\PHPMatcher\Backtrace;
 
 final class WildcardMatcher extends Matcher
 {
+    /**
+     * @var string
+     */
     public const MATCH_PATTERN = "/^@(\*|wildcard)@$/";
 
-    /**
-     * @var Backtrace
-     */
-    private $backtrace;
+    private Backtrace $backtrace;
 
     public function __construct(Backtrace $backtrace)
     {

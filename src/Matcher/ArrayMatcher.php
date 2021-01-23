@@ -11,26 +11,26 @@ use Coduo\ToString\StringConverter;
 
 final class ArrayMatcher extends Matcher
 {
+    /**
+     * @var string
+     */
     public const PATTERN = 'array';
 
+    /**
+     * @var string
+     */
     public const UNBOUNDED_PATTERN = '@...@';
 
+    /**
+     * @var string
+     */
     public const UNIVERSAL_KEY = '@*@';
 
-    /**
-     * @var ValueMatcher
-     */
-    private $propertyMatcher;
+    private ValueMatcher $propertyMatcher;
 
-    /**
-     * @var Parser
-     */
-    private $parser;
+    private Parser $parser;
 
-    /**
-     * @var Backtrace
-     */
-    private $backtrace;
+    private Backtrace $backtrace;
 
     public function __construct(ValueMatcher $propertyMatcher, Backtrace $backtrace, Parser $parser)
     {
@@ -140,9 +140,7 @@ final class ArrayMatcher extends Matcher
 
         $pattern = \array_filter(
             $pattern,
-            function ($item) use ($skipPattern) {
-                return $item !== $skipPattern;
-            }
+            fn ($item) => $item !== $skipPattern
         );
 
         $notExistingKeys = $this->findNotExistingKeys($pattern, $values);
@@ -158,11 +156,14 @@ final class ArrayMatcher extends Matcher
         return true;
     }
 
+    /**
+     * @return mixed[]
+     */
     private function findNotExistingKeys(array $patterns, array $values) : array
     {
         $notExistingKeys = \array_diff_key($patterns, $values);
 
-        return \array_filter($notExistingKeys, function ($pattern, $key) use ($values) {
+        return \array_filter($notExistingKeys, function ($pattern, $key) use ($values) : bool {
             if ($key === self::UNIVERSAL_KEY) {
                 return false;
             }

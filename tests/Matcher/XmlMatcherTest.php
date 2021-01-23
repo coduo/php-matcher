@@ -12,10 +12,7 @@ use PHPUnit\Framework\TestCase;
 
 class XmlMatcherTest extends TestCase
 {
-    /**
-     * @var Matcher\XmlMatcher
-     */
-    private $matcher;
+    private ?\Coduo\PHPMatcher\Matcher\XmlMatcher $matcher = null;
 
     public static function positivePatterns()
     {

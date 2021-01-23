@@ -11,12 +11,12 @@ final class IsIp implements PatternExpander
 {
     use BacktraceBehavior;
 
+    /**
+     * @var string
+     */
     public const NAME = 'isIp';
 
-    /**
-     * @var null|string
-     */
-    private $error;
+    private ?string $error = null;
 
     public static function is(string $name) : bool
     {
@@ -55,7 +55,7 @@ final class IsIp implements PatternExpander
     {
         try {
             return false !== \filter_var($value, FILTER_VALIDATE_IP);
-        } catch (\Exception $e) {
+        } catch (\Exception $exception) {
             return false;
         }
     }

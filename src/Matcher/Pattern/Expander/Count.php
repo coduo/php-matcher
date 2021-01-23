@@ -12,17 +12,14 @@ final class Count implements PatternExpander
 {
     use BacktraceBehavior;
 
+    /**
+     * @var string
+     */
     public const NAME = 'count';
 
-    /**
-     * @var null|string
-     */
-    private $error;
+    private ?string $error = null;
 
-    /**
-     * @var int
-     */
-    private $value;
+    private int $value;
 
     public function __construct(int $value)
     {

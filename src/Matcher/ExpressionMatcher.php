@@ -10,12 +10,12 @@ use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
 final class ExpressionMatcher extends Matcher
 {
+    /**
+     * @var string
+     */
     public const MATCH_PATTERN = "/^expr\((.*?)\)$/";
 
-    /**
-     * @var Backtrace
-     */
-    private $backtrace;
+    private Backtrace $backtrace;
 
     public function __construct(Backtrace $backtrace)
     {

@@ -10,20 +10,14 @@ use Coduo\ToString\StringConverter;
 
 final class ChainMatcher extends Matcher
 {
-    /**
-     * @var string
-     */
-    private $name;
+    private string $name;
 
-    /**
-     * @var Backtrace
-     */
-    private $backtrace;
+    private Backtrace $backtrace;
 
     /**
      * @var ValueMatcher[]
      */
-    private $matchers;
+    private array $matchers = [];
 
     /**
      * @param Backtrace $backtrace

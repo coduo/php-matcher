@@ -6,15 +6,12 @@ namespace Coduo\PHPMatcher\AST;
 
 final class Expander implements Node
 {
-    /**
-     * @var string
-     */
-    private $name;
+    private string $name;
 
     /**
      * @var mixed[]
      */
-    private $arguments;
+    private array $arguments = [];
 
     public function __construct(string $name)
     {
@@ -37,6 +34,9 @@ final class Expander implements Node
         return (bool) \count($this->arguments);
     }
 
+    /**
+     * @return mixed[]
+     */
     public function getArguments() : array
     {
         return $this->arguments;

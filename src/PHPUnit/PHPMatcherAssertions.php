@@ -9,10 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 trait PHPMatcherAssertions
 {
-    /**
-     * @var null|Backtrace
-     */
-    protected $backtrace;
+    protected ?Backtrace $backtrace = null;
 
     protected function setBacktrace(Backtrace $backtrace) : void
     {

@@ -9,10 +9,7 @@ use Coduo\ToString\StringConverter;
 
 final class CallbackMatcher extends Matcher
 {
-    /**
-     * @var Backtrace
-     */
-    private $backtrace;
+    private Backtrace $backtrace;
 
     public function __construct(Backtrace $backtrace)
     {

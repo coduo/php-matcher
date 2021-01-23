@@ -9,10 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 final class EmptyPatternsTest extends TestCase
 {
-    /**
-     * @var PHPMatcher
-     */
-    protected $matcher;
+    protected ?PHPMatcher $matcher = null;
 
     public static function emptyPatternString()
     {

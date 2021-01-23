@@ -11,15 +11,9 @@ use LSS\XML2Array;
 
 final class XmlMatcher extends Matcher
 {
-    /**
-     * @var ArrayMatcher
-     */
-    private $arrayMatcher;
+    private ArrayMatcher $arrayMatcher;
 
-    /**
-     * @var Backtrace
-     */
-    private $backtrace;
+    private Backtrace $backtrace;
 
     public function __construct(ArrayMatcher $arrayMatcher, Backtrace $backtrace)
     {
@@ -38,7 +32,7 @@ final class XmlMatcher extends Matcher
         }
 
         if (!Xml::isValid($value) || !Xml::isValid($pattern)) {
-            $this->error = \sprintf('Value or pattern are not valid XML\'s');
+            $this->error = \sprintf("Value or pattern are not valid XML's");
             $this->backtrace->matcherFailed(self::class, $value, $pattern, $this->error);
 
             return false;

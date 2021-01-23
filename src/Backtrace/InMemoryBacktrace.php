@@ -11,9 +11,9 @@ use Coduo\ToString\StringConverter;
 final class InMemoryBacktrace implements Backtrace
 {
     /**
-     * @var mixed[]
+     * @var string[]
      */
-    private $trace;
+    private array $trace = [];
 
     public function __construct()
     {
@@ -31,7 +31,7 @@ final class InMemoryBacktrace implements Backtrace
             '#%d Matcher %s %s match pattern "%s"',
             $this->entriesCount(),
             $name,
-            $result ? 'can' : 'can\'t',
+            $result ? 'can' : "can't",
             new SingleLineString((string) new StringConverter($value))
         );
     }
@@ -118,6 +118,9 @@ final class InMemoryBacktrace implements Backtrace
         return \count($this->trace) === 0;
     }
 
+    /**
+     * @return mixed[]
+     */
     public function raw() : array
     {
         return $this->trace;

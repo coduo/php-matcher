@@ -11,22 +11,16 @@ final class EndsWith implements PatternExpander
 {
     use BacktraceBehavior;
 
-    public const NAME = 'endsWith';
-
     /**
      * @var string
      */
-    private $stringEnding;
+    public const NAME = 'endsWith';
 
-    /**
-     * @var null|string
-     */
-    private $error;
+    private string $stringEnding;
 
-    /**
-     * @var bool
-     */
-    private $ignoreCase;
+    private ?string $error = null;
+
+    private bool $ignoreCase;
 
     public function __construct(string $stringEnding, bool $ignoreCase = false)
     {

@@ -11,21 +11,18 @@ final class Contains implements PatternExpander
 {
     use BacktraceBehavior;
 
-    public const NAME = 'contains';
-
-    /**
-     * @var null|string
-     */
-    private $error;
-
     /**
      * @var string
      */
-    private $string;
+    public const NAME = 'contains';
 
-    private $ignoreCase;
+    private ?string $error = null;
 
-    public function __construct(string $string, $ignoreCase = false)
+    private string $string;
+
+    private bool $ignoreCase;
+
+    public function __construct(string $string, bool $ignoreCase = false)
     {
         $this->string = $string;
         $this->ignoreCase = $ignoreCase;

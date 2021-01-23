@@ -10,17 +10,14 @@ use Coduo\ToString\StringConverter;
 
 final class IntegerMatcher extends Matcher
 {
+    /**
+     * @var string
+     */
     public const PATTERN = 'integer';
 
-    /**
-     * @var Backtrace
-     */
-    private $backtrace;
+    private Backtrace $backtrace;
 
-    /**
-     * @var Parser
-     */
-    private $parser;
+    private Parser $parser;
 
     public function __construct(Backtrace $backtrace, Parser $parser)
     {

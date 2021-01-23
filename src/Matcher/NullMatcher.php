@@ -9,12 +9,12 @@ use Coduo\ToString\StringConverter;
 
 final class NullMatcher extends Matcher
 {
+    /**
+     * @var string
+     */
     public const MATCH_PATTERN = '/^@null@$/';
 
-    /**
-     * @var Backtrace
-     */
-    private $backtrace;
+    private Backtrace $backtrace;
 
     public function __construct(Backtrace $backtrace)
     {

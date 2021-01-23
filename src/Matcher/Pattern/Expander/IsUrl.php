@@ -11,12 +11,12 @@ final class IsUrl implements PatternExpander
 {
     use BacktraceBehavior;
 
+    /**
+     * @var string
+     */
     public const NAME = 'isUrl';
 
-    /**
-     * @var null|string
-     */
-    private $error;
+    private ?string $error = null;
 
     public static function is(string $name) : bool
     {
@@ -55,7 +55,7 @@ final class IsUrl implements PatternExpander
     {
         try {
             return false !== \filter_var($value, FILTER_VALIDATE_URL);
-        } catch (\Exception $e) {
+        } catch (\Exception $exception) {
             return false;
         }
     }

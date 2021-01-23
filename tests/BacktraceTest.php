@@ -10,10 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 final class BacktraceTest extends TestCase
 {
-    /**
-     * @var PHPMatcher
-     */
-    protected $matcher;
+    protected ?PHPMatcher $matcher = null;
 
     public function setUp() : void
     {

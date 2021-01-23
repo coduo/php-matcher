@@ -9,15 +9,9 @@ use Coduo\PHPMatcher\Factory\MatcherFactory;
 
 final class PHPMatcher
 {
-    /**
-     * @var null|Matcher
-     */
-    private $matcher;
+    private ?Matcher $matcher = null;
 
-    /**
-     * @var Backtrace
-     */
-    private $backtrace;
+    private Backtrace $backtrace;
 
     public function __construct(?Backtrace $backtrace = null)
     {

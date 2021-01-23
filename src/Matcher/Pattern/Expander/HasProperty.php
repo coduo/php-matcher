@@ -12,16 +12,16 @@ final class HasProperty implements PatternExpander
 {
     use BacktraceBehavior;
 
+    /**
+     * @var string
+     */
     public const NAME = 'hasProperty';
 
-    private $propertyName;
+    private string $propertyName;
 
-    /**
-     * @var null|string
-     */
-    private $error;
+    private ?string $error = null;
 
-    public function __construct($propertyName)
+    public function __construct(string $propertyName)
     {
         $this->propertyName = $propertyName;
     }

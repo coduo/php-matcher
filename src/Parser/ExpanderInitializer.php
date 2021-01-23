@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Coduo\PHPMatcher\Parser;
 
-use Coduo\PHPMatcher\AST\Expander as ExpanderNode;
+use Coduo\PHPMatcher\AST\Expander;
 use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Exception\InvalidArgumentException;
 use Coduo\PHPMatcher\Exception\InvalidExpanderTypeException;
 use Coduo\PHPMatcher\Exception\UnknownExpanderClassException;
 use Coduo\PHPMatcher\Exception\UnknownExpanderException;
-use Coduo\PHPMatcher\Matcher\Pattern\Expander;
+use Coduo\PHPMatcher\Matcher\Pattern;
 use Coduo\PHPMatcher\Matcher\Pattern\PatternExpander;
 
 final class ExpanderInitializer
@@ -18,38 +18,35 @@ final class ExpanderInitializer
     /**
      * @var class-string[]
      */
-    private $expanderDefinitions = [
-        Expander\After::NAME => Expander\After::class,
-        Expander\Before::NAME => Expander\Before::class,
-        Expander\Contains::NAME => Expander\Contains::class,
-        Expander\NotContains::NAME => Expander\NotContains::class,
-        Expander\Count::NAME => Expander\Count::class,
-        Expander\EndsWith::NAME => Expander\EndsWith::class,
-        Expander\GreaterThan::NAME => Expander\GreaterThan::class,
-        Expander\InArray::NAME => Expander\InArray::class,
-        Expander\IsDateTime::NAME => Expander\IsDateTime::class,
-        Expander\IsEmail::NAME => Expander\IsEmail::class,
-        Expander\IsEmpty::NAME => Expander\IsEmpty::class,
-        Expander\IsNotEmpty::NAME => Expander\IsNotEmpty::class,
-        Expander\IsUrl::NAME => Expander\IsUrl::class,
-        Expander\IsIp::NAME => Expander\IsIp::class,
-        Expander\IsTzOffset::NAME => Expander\IsTzOffset::class,
-        Expander\IsTzAbbreviation::NAME => Expander\IsTzAbbreviation::class,
-        Expander\IsTzIdentifier::NAME => Expander\IsTzIdentifier::class,
-        Expander\LowerThan::NAME => Expander\LowerThan::class,
-        Expander\MatchRegex::NAME => Expander\MatchRegex::class,
-        Expander\OneOf::NAME => Expander\OneOf::class,
-        Expander\Optional::NAME => Expander\Optional::class,
-        Expander\StartsWith::NAME => Expander\StartsWith::class,
-        Expander\Repeat::NAME => Expander\Repeat::class,
-        Expander\ExpanderMatch::NAME => Expander\ExpanderMatch::class,
-        Expander\HasProperty::NAME => Expander\HasProperty::class,
+    private array $expanderDefinitions = [
+        Pattern\Expander\After::NAME => Pattern\Expander\After::class,
+        Pattern\Expander\Before::NAME => Pattern\Expander\Before::class,
+        Pattern\Expander\Contains::NAME => Pattern\Expander\Contains::class,
+        Pattern\Expander\NotContains::NAME => Pattern\Expander\NotContains::class,
+        Pattern\Expander\Count::NAME => Pattern\Expander\Count::class,
+        Pattern\Expander\EndsWith::NAME => Pattern\Expander\EndsWith::class,
+        Pattern\Expander\GreaterThan::NAME => Pattern\Expander\GreaterThan::class,
+        Pattern\Expander\InArray::NAME => Pattern\Expander\InArray::class,
+        Pattern\Expander\IsDateTime::NAME => Pattern\Expander\IsDateTime::class,
+        Pattern\Expander\IsEmail::NAME => Pattern\Expander\IsEmail::class,
+        Pattern\Expander\IsEmpty::NAME => Pattern\Expander\IsEmpty::class,
+        Pattern\Expander\IsNotEmpty::NAME => Pattern\Expander\IsNotEmpty::class,
+        Pattern\Expander\IsUrl::NAME => Pattern\Expander\IsUrl::class,
+        Pattern\Expander\IsIp::NAME => Pattern\Expander\IsIp::class,
+        Pattern\Expander\IsTzOffset::NAME => Pattern\Expander\IsTzOffset::class,
+        Pattern\Expander\IsTzAbbreviation::NAME => Pattern\Expander\IsTzAbbreviation::class,
+        Pattern\Expander\IsTzIdentifier::NAME => Pattern\Expander\IsTzIdentifier::class,
+        Pattern\Expander\LowerThan::NAME => Pattern\Expander\LowerThan::class,
+        Pattern\Expander\MatchRegex::NAME => Pattern\Expander\MatchRegex::class,
+        Pattern\Expander\OneOf::NAME => Pattern\Expander\OneOf::class,
+        Pattern\Expander\Optional::NAME => Pattern\Expander\Optional::class,
+        Pattern\Expander\StartsWith::NAME => Pattern\Expander\StartsWith::class,
+        Pattern\Expander\Repeat::NAME => Pattern\Expander\Repeat::class,
+        Pattern\Expander\ExpanderMatch::NAME => Pattern\Expander\ExpanderMatch::class,
+        Pattern\Expander\HasProperty::NAME => Pattern\Expander\HasProperty::class,
     ];
 
-    /**
-     * @var \Coduo\PHPMatcher\Backtrace
-     */
-    private $backtrace;
+    private Backtrace $backtrace;
 
     public function __construct(Backtrace $backtrace)
     {
@@ -79,7 +76,7 @@ final class ExpanderInitializer
         return $this->expanderDefinitions[$expanderName];
     }
 
-    public function initialize(ExpanderNode $expanderNode) : PatternExpander
+    public function initialize(Expander $expanderNode) : PatternExpander
     {
         if (!\array_key_exists($expanderNode->getName(), $this->expanderDefinitions)) {
             throw new UnknownExpanderException(\sprintf('Unknown expander "%s"', $expanderNode->getName()));
@@ -91,7 +88,7 @@ final class ExpanderInitializer
             $arguments = [];
 
             foreach ($expanderNode->getArguments() as $argument) {
-                $arguments[] = ($argument instanceof ExpanderNode)
+                $arguments[] = ($argument instanceof Expander)
                     ? $this->initialize($argument)
                     : $argument;
             }

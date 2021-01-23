@@ -14,10 +14,7 @@ final class PHPMatcherConstraint extends Constraint
 {
     private $pattern;
 
-    /**
-     * @var PHPMatcher
-     */
-    private $matcher;
+    private PHPMatcher $matcher;
 
     private $lastValue;
 

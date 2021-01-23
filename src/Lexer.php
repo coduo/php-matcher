@@ -8,28 +8,64 @@ use Doctrine\Common\Lexer\AbstractLexer;
 
 final class Lexer extends AbstractLexer
 {
+    /**
+     * @var int
+     */
     public const T_NONE = 1;
 
+    /**
+     * @var int
+     */
     public const T_EXPANDER_NAME = 2;
 
+    /**
+     * @var int
+     */
     public const T_CLOSE_PARENTHESIS = 3;
 
+    /**
+     * @var int
+     */
     public const T_OPEN_CURLY_BRACE    = 4;
 
+    /**
+     * @var int
+     */
     public const T_CLOSE_CURLY_BRACE   = 5;
 
+    /**
+     * @var int
+     */
     public const T_STRING = 6;
 
+    /**
+     * @var int
+     */
     public const T_NUMBER = 7;
 
+    /**
+     * @var int
+     */
     public const T_BOOLEAN = 8;
 
+    /**
+     * @var int
+     */
     public const T_NULL = 9;
 
+    /**
+     * @var int
+     */
     public const T_COMMA  = 10;
 
+    /**
+     * @var int
+     */
     public const T_COLON = 11;
 
+    /**
+     * @var int
+     */
     public const T_TYPE_PATTERN = 12;
 
     /**
@@ -49,6 +85,8 @@ final class Lexer extends AbstractLexer
 
     /**
      * Lexical non-catchable patterns.
+     *
+     * @return string[]
      */
     protected function getNonCatchablePatterns() : array
     {

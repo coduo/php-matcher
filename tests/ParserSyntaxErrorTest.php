@@ -12,10 +12,7 @@ use PHPUnit\Framework\TestCase;
 
 class ParserSyntaxErrorTest extends TestCase
 {
-    /**
-     * @var Parser
-     */
-    private $parser;
+    private ?Parser $parser = null;
 
     public function setUp() : void
     {

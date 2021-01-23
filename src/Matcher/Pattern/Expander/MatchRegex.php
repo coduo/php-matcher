@@ -11,17 +11,14 @@ final class MatchRegex implements PatternExpander
 {
     use BacktraceBehavior;
 
-    public const NAME = 'matchRegex';
-
-    /**
-     * @var null|string
-     */
-    private $error;
-
     /**
      * @var string
      */
-    private $pattern;
+    public const NAME = 'matchRegex';
+
+    private ?string $error = null;
+
+    private string $pattern;
 
     public function __construct(string $pattern)
     {

@@ -10,7 +10,7 @@ interface Pattern
 
     public function matchExpanders($value) : bool;
 
-    public function getError();
+    public function getError() : ?string;
 
     public function hasExpander(string $expanderName) : bool;
 }

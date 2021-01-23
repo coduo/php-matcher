@@ -46,6 +46,9 @@ final class VoidBacktrace implements Backtrace
         return true;
     }
 
+    /**
+     * @return mixed[]
+     */
     public function raw() : array
     {
         return [];

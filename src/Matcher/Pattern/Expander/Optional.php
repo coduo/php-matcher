@@ -10,6 +10,9 @@ final class Optional implements PatternExpander
 {
     use BacktraceBehavior;
 
+    /**
+     * @var string
+     */
     public const NAME = 'optional';
 
     public static function is(string $name) : bool

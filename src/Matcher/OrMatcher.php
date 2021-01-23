@@ -8,17 +8,14 @@ use Coduo\PHPMatcher\Backtrace;
 
 final class OrMatcher extends Matcher
 {
+    /**
+     * @var string
+     */
     public const MATCH_PATTERN = "/\|\|/";
 
-    /**
-     * @var Backtrace
-     */
-    private $backtrace;
+    private Backtrace $backtrace;
 
-    /**
-     * @var ChainMatcher
-     */
-    private $chainMatcher;
+    private ChainMatcher $chainMatcher;
 
     public function __construct(Backtrace $backtrace, ChainMatcher $chainMatcher)
     {
