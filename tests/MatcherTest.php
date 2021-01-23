@@ -209,14 +209,16 @@ XML;
                             "firstName": "Norbert",
                             "lastName": "Orzechowicz",
                             "enabled": true,
-                            "roles": ["ROLE_DEVELOPER"]
+                            "roles": ["ROLE_DEVELOPER"],
+                            "createdAt" : "2020-01-01 00:00:00"
                         },
                         {
                             "id": 132,
                             "firstName": "Michał",
                             "lastName": "Dąbrowski",
                             "enabled": false,
-                            "roles": ["ROLE_DEVELOPER"]
+                            "roles": ["ROLE_DEVELOPER"],
+                            "createdAt" : "2020-01-01 00:00:00"
                         }
                     ],
                     "prevPage": "http:\/\/example.com\/api\/users\/1?limit=2",
@@ -233,14 +235,16 @@ XML;
                             "firstName": "Norbert",
                             "lastName": "Orzechowicz",
                             "enabled": true,
-                            "roles": ["ROLE_DEVELOPER"]
+                            "roles": ["ROLE_DEVELOPER"],
+                            "createdAt" : "2020-01-01 00:00:00"
                         },
                         {
                             "id": 132,
                             "firstName": "Michał",
                             "lastName": "Dąbrowski",
                             "enabled": false,
-                            "roles": ["ROLE_DEVELOPER"]
+                            "roles": ["ROLE_DEVELOPER"],
+                            "createdAt" : "2020-01-01 00:00:00"
                         }
                     ],
                     "prevPage": "http:\/\/example.com\/api\/users\/1?limit=2",
@@ -254,14 +258,16 @@ XML;
                             "firstName":"Norbert",
                             "lastName":"Orzechowicz",
                             "enabled": "@boolean@",
-                            "roles": "@array@"
+                            "roles": "@array@",
+                            "createdAt" : "@datetime@"
                         },
                         {
                             "id": "@integer@",
                             "firstName": "Michał",
                             "lastName": "Dąbrowski",
                             "enabled": "expr(value == false)",
-                            "roles": "@array@"
+                            "roles": "@array@",
+                            "createdAt" : "@datetime@"
                         }
                     ],
                     "prevPage": "@string@",

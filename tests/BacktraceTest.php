@@ -41,26 +41,29 @@ final class BacktraceTest extends TestCase
 #13 Matcher Coduo\PHPMatcher\Matcher\BooleanMatcher can't match pattern "@string@"
 #14 Matcher Coduo\PHPMatcher\Matcher\DoubleMatcher can't match pattern "@string@"
 #15 Matcher Coduo\PHPMatcher\Matcher\NumberMatcher can't match pattern "@string@"
-#16 Matcher Coduo\PHPMatcher\Matcher\ScalarMatcher can match pattern "@string@"
-#17 Matcher Coduo\PHPMatcher\Matcher\ScalarMatcher matching value "100" with "@string@" pattern
-#18 Matcher Coduo\PHPMatcher\Matcher\ScalarMatcher failed to match value "100" with "@string@" pattern
-#19 Matcher Coduo\PHPMatcher\Matcher\ScalarMatcher error: "100" does not match "@string@".
-#20 Matcher Coduo\PHPMatcher\Matcher\WildcardMatcher can't match pattern "@string@"
-#21 Matcher Coduo\PHPMatcher\Matcher\UuidMatcher can't match pattern "@string@"
-#22 Matcher Coduo\PHPMatcher\Matcher\JsonObjectMatcher can't match pattern "@string@"
-#23 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) failed to match value "100" with "@string@" pattern
-#24 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) error: "100" does not match "@string@".
-#25 Matcher Coduo\PHPMatcher\Matcher\JsonMatcher can't match pattern "@string@"
-#26 Matcher Coduo\PHPMatcher\Matcher\XmlMatcher can't match pattern "@string@"
-#27 Matcher Coduo\PHPMatcher\Matcher\OrMatcher can't match pattern "@string@"
-#28 Matcher Coduo\PHPMatcher\Matcher\TextMatcher can match pattern "@string@"
-#29 Matcher Coduo\PHPMatcher\Matcher\TextMatcher matching value "100" with "@string@" pattern
-#30 Matcher Coduo\PHPMatcher\Matcher\TextMatcher failed to match value "100" with "@string@" pattern
-#31 Matcher Coduo\PHPMatcher\Matcher\TextMatcher error: integer "100" is not a valid string.
-#32 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (all) failed to match value "100" with "@string@" pattern
-#33 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (all) error: integer "100" is not a valid string.
-#34 Matcher Coduo\PHPMatcher\Matcher failed to match value "100" with "@string@" pattern
-#35 Matcher Coduo\PHPMatcher\Matcher error: integer "100" is not a valid string.
+#16 Matcher Coduo\PHPMatcher\Matcher\TimeMatcher can't match pattern "@string@"
+#17 Matcher Coduo\PHPMatcher\Matcher\DateMatcher can't match pattern "@string@"
+#18 Matcher Coduo\PHPMatcher\Matcher\DateTimeMatcher can't match pattern "@string@"
+#19 Matcher Coduo\PHPMatcher\Matcher\ScalarMatcher can match pattern "@string@"
+#20 Matcher Coduo\PHPMatcher\Matcher\ScalarMatcher matching value "100" with "@string@" pattern
+#21 Matcher Coduo\PHPMatcher\Matcher\ScalarMatcher failed to match value "100" with "@string@" pattern
+#22 Matcher Coduo\PHPMatcher\Matcher\ScalarMatcher error: "100" does not match "@string@".
+#23 Matcher Coduo\PHPMatcher\Matcher\WildcardMatcher can't match pattern "@string@"
+#24 Matcher Coduo\PHPMatcher\Matcher\UuidMatcher can't match pattern "@string@"
+#25 Matcher Coduo\PHPMatcher\Matcher\JsonObjectMatcher can't match pattern "@string@"
+#26 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) failed to match value "100" with "@string@" pattern
+#27 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) error: "100" does not match "@string@".
+#28 Matcher Coduo\PHPMatcher\Matcher\JsonMatcher can't match pattern "@string@"
+#29 Matcher Coduo\PHPMatcher\Matcher\XmlMatcher can't match pattern "@string@"
+#30 Matcher Coduo\PHPMatcher\Matcher\OrMatcher can't match pattern "@string@"
+#31 Matcher Coduo\PHPMatcher\Matcher\TextMatcher can match pattern "@string@"
+#32 Matcher Coduo\PHPMatcher\Matcher\TextMatcher matching value "100" with "@string@" pattern
+#33 Matcher Coduo\PHPMatcher\Matcher\TextMatcher failed to match value "100" with "@string@" pattern
+#34 Matcher Coduo\PHPMatcher\Matcher\TextMatcher error: integer "100" is not a valid string.
+#35 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (all) failed to match value "100" with "@string@" pattern
+#36 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (all) error: integer "100" is not a valid string.
+#37 Matcher Coduo\PHPMatcher\Matcher failed to match value "100" with "@string@" pattern
+#38 Matcher Coduo\PHPMatcher\Matcher error: integer "100" is not a valid string.
 FAILED_BACKTRACE
             ,
             (string) $this->matcher->backtrace()
@@ -140,7 +143,7 @@ SUCCEED_BACKTRACE
         );
 
         // Uncomment when backtrace logic changes, run tests and then commit again.
-        //\file_put_contents(__DIR__ . '/BacktraceTest/failed_complex_matching_expected_trace.txt', (string) $this->matcher->backtrace());
+        \file_put_contents(__DIR__ . '/BacktraceTest/failed_complex_matching_expected_trace.txt', (string) $this->matcher->backtrace());
 
         $this->assertEquals(
             \file_get_contents(__DIR__ . '/BacktraceTest/failed_complex_matching_expected_trace.txt'),
@@ -196,7 +199,7 @@ SUCCEED_BACKTRACE
         );
 
         // Uncomment when backtrace logic changes, run tests and then commit again.
-        //\file_put_contents(__DIR__ . '/BacktraceTest/succeed_complex_matching_expected_trace.txt', (string) $this->matcher->backtrace());
+        \file_put_contents(__DIR__ . '/BacktraceTest/succeed_complex_matching_expected_trace.txt', (string) $this->matcher->backtrace());
 
         $this->assertEquals(
             \file_get_contents(__DIR__ . '/BacktraceTest/succeed_complex_matching_expected_trace.txt'),

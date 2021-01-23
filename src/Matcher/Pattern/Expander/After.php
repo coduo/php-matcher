@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Coduo\PHPMatcher\Matcher\Pattern\Expander;
 
 use Aeon\Calendar\Gregorian\DateTime;
+use Aeon\Calendar\Gregorian\Time;
 use Coduo\PHPMatcher\Matcher\Pattern\PatternExpander;
 use Coduo\ToString\StringConverter;
 
@@ -14,22 +15,30 @@ final class After implements PatternExpander
 
     public const NAME = 'after';
 
-    private DateTime $boundary;
+    private ?DateTime $boundaryDateTime;
+
+    private ?Time $boundaryTime;
 
     private ?string $error;
 
     public function __construct($boundary)
     {
         $this->error = null;
+        $this->boundaryTime = null;
+        $this->boundaryDateTime = null;
 
         if (!\is_string($boundary)) {
             $this->error = \sprintf('After expander require "string", got "%s".', new StringConverter($boundary));
         }
 
         try {
-            $this->boundary = DateTime::fromString($boundary);
+            $this->boundaryDateTime = DateTime::fromString($boundary);
         } catch (\Exception $e) {
-            throw new \InvalidArgumentException(\sprintf('Boundary value "%s" is not a valid date.', new StringConverter($boundary)));
+            try {
+                $this->boundaryTime = Time::fromString($boundary);
+            } catch (\Exception $e) {
+                throw new \InvalidArgumentException(\sprintf('Boundary value "%s" is not a valid date, date time or time.', new StringConverter($boundary)));
+            }
         }
     }
 
@@ -49,17 +58,36 @@ final class After implements PatternExpander
             return false;
         }
 
+        if ($this->boundaryDateTime instanceof DateTime) {
+            return $this->compareDateTime($value);
+        }
+
+        return $this->compareTime($value);
+    }
+
+    public function getError() : ?string
+    {
+        return $this->error;
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return bool
+     */
+    private function compareDateTime(string $value) : bool
+    {
         try {
             $datetime = DateTime::fromString($value);
 
-            if ($datetime->isBefore($this->boundary)) {
-                $this->error = \sprintf('Value "%s" is after "%s".', new StringConverter($value), new StringConverter($this->boundary));
+            if ($datetime->isBefore($this->boundaryDateTime)) {
+                $this->error = \sprintf('Value "%s" is after "%s".', new StringConverter($value), new StringConverter($this->boundaryDateTime));
                 $this->backtrace->expanderFailed(self::NAME, $value, $this->error);
 
                 return false;
             }
 
-            $result = $datetime->isAfter($this->boundary);
+            $result = $datetime->isAfter($this->boundaryDateTime);
 
             if ($result) {
                 $this->backtrace->expanderSucceed(self::NAME, $value);
@@ -76,8 +104,37 @@ final class After implements PatternExpander
         }
     }
 
-    public function getError() : ?string
+    /**
+     * @param string $value
+     *
+     * @return bool
+     */
+    private function compareTime(string $value) : bool
     {
-        return $this->error;
+        try {
+            $datetime = Time::fromString($value);
+
+            if ($datetime->isLessThan($this->boundaryTime)) {
+                $this->error = \sprintf('Value "%s" is after "%s".', new StringConverter($value), new StringConverter($this->boundaryTime));
+                $this->backtrace->expanderFailed(self::NAME, $value, $this->error);
+
+                return false;
+            }
+
+            $result = $datetime->isGreaterThan($this->boundaryTime);
+
+            if ($result) {
+                $this->backtrace->expanderSucceed(self::NAME, $value);
+            } else {
+                $this->backtrace->expanderFailed(self::NAME, $value, '');
+            }
+
+            return $result;
+        } catch (\Exception $e) {
+            $this->error = \sprintf('Value "%s" is not a valid time.', new StringConverter($value));
+            $this->backtrace->expanderFailed(self::NAME, $value, $this->error);
+
+            return false;
+        }
     }
 }

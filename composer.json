@@ -19,7 +19,7 @@
         "ext-filter": "*",
         "ext-json": "*",
         "ext-simplexml": "*",
-        "aeon-php/calendar": "^0.12.0",
+        "aeon-php/calendar": "^0.14.0",
         "coduo/php-to-string": "^3",
         "doctrine/lexer": "^1.0"
     },

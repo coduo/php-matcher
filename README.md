@@ -99,6 +99,7 @@ class MatcherTest extends TestCase
 * ``@number@``
 * ``@double@``
 * ``@boolean@``
+* ``@datetime@``
 * ``@array@``
 * ``@...@`` - *unbounded array*
 * ``@null@``
@@ -162,7 +163,7 @@ $matcher->match("lorem ipsum dolor", "@string@.startsWith('lorem').contains('ips
 
 ```
 
-### Date matching
+### DateTime matching
 
 ```php
 <?php
@@ -171,9 +172,10 @@ use Coduo\PHPMatcher\PHPMatcher;
 
 $matcher = new PHPMatcher();
 
-$matcher->match('2014-08-19', '@string@.isDateTime()');
-$matcher->match('2014-08-19', '@string@.isDateTime().before("2016-08-19")');
-$matcher->match('2014-08-19', '@string@.isDateTime().before("today").after("+ 100year")');
+$matcher->match('2014-08-19', '@datetime@');
+$matcher->match('2020-01-11 00:00:00', '@datetime@');
+$matcher->match('2014-08-19', '@datetime@.before("2016-08-19")');
+$matcher->match('2014-08-19', '@datetime@.before("today").after("+ 100year")');
 
 ```
 

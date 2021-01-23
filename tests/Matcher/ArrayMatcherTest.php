@@ -206,6 +206,7 @@ class ArrayMatcherTest extends TestCase
             new Matcher\BooleanMatcher($backtrace, $parser),
             new Matcher\DoubleMatcher($backtrace, $parser),
             new Matcher\NumberMatcher($backtrace, $parser),
+            new Matcher\DateMatcher($backtrace, $parser),
             new Matcher\ScalarMatcher($backtrace),
             new Matcher\WildcardMatcher($backtrace),
         ];
