@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
 
 class IntegerMatcherTest extends TestCase
 {
-    private ?\Coduo\PHPMatcher\Matcher\IntegerMatcher $matcher = null;
+    private ?IntegerMatcher $matcher = null;
 
     public static function positiveCanMatchData()
     {

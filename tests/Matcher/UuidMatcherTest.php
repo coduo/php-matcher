@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
 
 class UuidMatcherTest extends TestCase
 {
-    private ?\Coduo\PHPMatcher\Matcher\UuidMatcher $matcher = null;
+    private ?UuidMatcher $matcher = null;
 
     public static function positiveCanMatchData()
     {

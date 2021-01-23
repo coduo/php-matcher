@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 class NullMatcherTest extends TestCase
 {
-    private ?\Coduo\PHPMatcher\Matcher\NullMatcher $matcher = null;
+    private ?NullMatcher $matcher = null;
 
     public static function positiveCanMatchData()
     {

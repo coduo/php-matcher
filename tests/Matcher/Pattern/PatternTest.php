@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
 
 class PatternTest extends TestCase
 {
-    private ?\Coduo\PHPMatcher\Matcher\Pattern\TypePattern $pattern = null;
+    private ?TypePattern $pattern = null;
 
     public static function examplesProvider()
     {

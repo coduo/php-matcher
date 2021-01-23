@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
 
 class ChainMatcherTest extends TestCase
 {
-    private ?\Coduo\PHPMatcher\Matcher\ChainMatcher $matcher = null;
+    private ?ChainMatcher $matcher = null;
 
     /**
      * @var MockObject

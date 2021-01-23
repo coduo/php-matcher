@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
 
 class DoubleMatcherTest extends TestCase
 {
-    private ?\Coduo\PHPMatcher\Matcher\DoubleMatcher $matcher = null;
+    private ?DoubleMatcher $matcher = null;
 
     public static function positiveCanMatchData()
     {

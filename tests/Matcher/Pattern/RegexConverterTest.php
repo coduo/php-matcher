@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 class RegexConverterTest extends TestCase
 {
-    private ?\Coduo\PHPMatcher\Matcher\Pattern\RegexConverter $converter = null;
+    private ?RegexConverter $converter = null;
 
     public function setUp() : void
     {
