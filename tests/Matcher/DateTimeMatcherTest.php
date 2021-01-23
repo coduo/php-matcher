@@ -14,6 +14,8 @@ class DateTimeMatcherTest extends TestCase
 {
     private DateTimeMatcher $matcher;
 
+    private Backtrace $backtrace;
+
     public static function positiveCanMatchData()
     {
         return [
@@ -66,8 +68,8 @@ class DateTimeMatcherTest extends TestCase
     public function setUp() : void
     {
         $this->matcher = new DateTimeMatcher(
-            $backtrace = new Backtrace\InMemoryBacktrace(),
-            new Parser(new Lexer(), new Parser\ExpanderInitializer($backtrace))
+            $this->backtrace = new Backtrace\InMemoryBacktrace(),
+            new Parser(new Lexer(), new Parser\ExpanderInitializer($this->backtrace))
         );
     }
 
@@ -77,6 +79,7 @@ class DateTimeMatcherTest extends TestCase
     public function test_positive_can_matches($pattern) : void
     {
         $this->assertTrue($this->matcher->canMatch($pattern));
+        $this->assertFalse($this->backtrace->isEmpty());
     }
 
     /**
@@ -85,6 +88,7 @@ class DateTimeMatcherTest extends TestCase
     public function test_negative_can_matches($pattern) : void
     {
         $this->assertFalse($this->matcher->canMatch($pattern));
+        $this->assertFalse($this->backtrace->isEmpty());
     }
 
     /**
@@ -93,6 +97,7 @@ class DateTimeMatcherTest extends TestCase
     public function test_positive_match($value, $pattern) : void
     {
         $this->assertTrue($this->matcher->match($value, $pattern));
+        $this->assertFalse($this->backtrace->isEmpty());
     }
 
     /**
@@ -101,6 +106,7 @@ class DateTimeMatcherTest extends TestCase
     public function test_negative_match($value, $pattern) : void
     {
         $this->assertFalse($this->matcher->match($value, $pattern));
+        $this->assertFalse($this->backtrace->isEmpty());
     }
 
     /**
