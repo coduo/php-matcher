@@ -11,10 +11,7 @@ use PHPUnit\Framework\TestCase;
 
 class OrMatcherTest extends TestCase
 {
-    /**
-     * @var Matcher\OrMatcher
-     */
-    private $matcher;
+    private ?\Coduo\PHPMatcher\Matcher $matcher = null;
 
     public static function positiveMatchData()
     {

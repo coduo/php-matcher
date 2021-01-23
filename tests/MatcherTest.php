@@ -161,9 +161,7 @@ XML;
     public function test_matcher_with_callback() : void
     {
         $this->assertMatchesPattern(
-            function ($value) {
-                return $value === 'test';
-            },
+            fn($value) => $value === 'test',
             'test'
         );
     }

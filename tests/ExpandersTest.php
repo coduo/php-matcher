@@ -9,10 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 final class ExpandersTest extends TestCase
 {
-    /**
-     * @var PHPMatcher
-     */
-    protected $matcher;
+    protected ?\Coduo\PHPMatcher\PHPMatcher $matcher = null;
 
     public static function expanderExamples()
     {

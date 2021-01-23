@@ -12,10 +12,7 @@ use PHPUnit\Framework\TestCase;
 
 final class JsonObjectMatcherTest extends TestCase
 {
-    /**
-     * @var JsonObjectMatcher
-     */
-    private $matcher;
+    private ?\Coduo\PHPMatcher\Matcher\JsonObjectMatcher $matcher = null;
 
     public static function positiveMatches()
     {
