@@ -15,9 +15,9 @@ final class StringMatcher extends Matcher
      */
     public const PATTERN = 'string';
 
-    private \Coduo\PHPMatcher\Backtrace $backtrace;
+    private Backtrace $backtrace;
 
-    private \Coduo\PHPMatcher\Parser $parser;
+    private Parser $parser;
 
     public function __construct(Backtrace $backtrace, Parser $parser)
     {

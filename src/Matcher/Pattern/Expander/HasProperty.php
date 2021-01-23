@@ -17,11 +17,11 @@ final class HasProperty implements PatternExpander
      */
     public const NAME = 'hasProperty';
 
-    private $propertyName;
+    private string $propertyName;
 
     private ?string $error = null;
 
-    public function __construct($propertyName)
+    public function __construct(string $propertyName)
     {
         $this->propertyName = $propertyName;
     }

@@ -9,7 +9,7 @@ use Coduo\ToString\StringConverter;
 
 final class CallbackMatcher extends Matcher
 {
-    private \Coduo\PHPMatcher\Backtrace $backtrace;
+    private Backtrace $backtrace;
 
     public function __construct(Backtrace $backtrace)
     {

@@ -14,7 +14,7 @@ final class PHPMatcherConstraint extends Constraint
 {
     private $pattern;
 
-    private \Coduo\PHPMatcher\PHPMatcher $matcher;
+    private PHPMatcher $matcher;
 
     private $lastValue;
 

@@ -6,7 +6,7 @@ namespace Coduo\PHPMatcher\AST;
 
 final class Pattern implements Node
 {
-    private \Coduo\PHPMatcher\AST\Type $type;
+    private Type $type;
 
     /**
      * @var mixed[]

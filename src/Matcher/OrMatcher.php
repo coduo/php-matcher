@@ -13,9 +13,9 @@ final class OrMatcher extends Matcher
      */
     public const MATCH_PATTERN = "/\|\|/";
 
-    private \Coduo\PHPMatcher\Backtrace $backtrace;
+    private Backtrace $backtrace;
 
-    private \Coduo\PHPMatcher\Matcher\ChainMatcher $chainMatcher;
+    private ChainMatcher $chainMatcher;
 
     public function __construct(Backtrace $backtrace, ChainMatcher $chainMatcher)
     {

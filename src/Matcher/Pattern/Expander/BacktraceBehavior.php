@@ -8,7 +8,7 @@ use Coduo\PHPMatcher\Backtrace;
 
 trait BacktraceBehavior
 {
-    protected \Coduo\PHPMatcher\Backtrace $backtrace;
+    protected Backtrace $backtrace;
 
     public function setBacktrace(Backtrace $backtrace) : void
     {

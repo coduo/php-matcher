@@ -16,9 +16,9 @@ final class JsonObjectMatcher extends Matcher
      */
     public const JSON_PATTERN = 'json';
 
-    private \Coduo\PHPMatcher\Backtrace $backtrace;
+    private Backtrace $backtrace;
 
-    private \Coduo\PHPMatcher\Parser $parser;
+    private Parser $parser;
 
     public function __construct(Backtrace $backtrace, Parser $parser)
     {

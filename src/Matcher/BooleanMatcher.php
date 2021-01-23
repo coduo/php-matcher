@@ -15,9 +15,9 @@ final class BooleanMatcher extends Matcher
      */
     public const PATTERN = 'boolean';
 
-    private \Coduo\PHPMatcher\Backtrace $backtrace;
+    private Backtrace $backtrace;
 
-    private \Coduo\PHPMatcher\Parser $parser;
+    private Parser $parser;
 
     public function __construct(Backtrace $backtrace, Parser $parser)
     {

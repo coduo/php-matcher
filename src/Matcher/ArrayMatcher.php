@@ -26,11 +26,11 @@ final class ArrayMatcher extends Matcher
      */
     public const UNIVERSAL_KEY = '@*@';
 
-    private \Coduo\PHPMatcher\Matcher\ValueMatcher $propertyMatcher;
+    private ValueMatcher $propertyMatcher;
 
-    private \Coduo\PHPMatcher\Parser $parser;
+    private Parser $parser;
 
-    private \Coduo\PHPMatcher\Backtrace $backtrace;
+    private Backtrace $backtrace;
 
     public function __construct(ValueMatcher $propertyMatcher, Backtrace $backtrace, Parser $parser)
     {

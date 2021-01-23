@@ -16,7 +16,7 @@ final class ExpanderMatch implements Matcher\Pattern\PatternExpander
      */
     public const NAME = 'match';
 
-    private ?\Coduo\PHPMatcher\Matcher $matcher = null;
+    private ?Matcher $matcher = null;
 
     /**
      * @var null|array|string

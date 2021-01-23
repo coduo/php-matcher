@@ -14,7 +14,7 @@ final class NullMatcher extends Matcher
      */
     public const MATCH_PATTERN = '/^@null@$/';
 
-    private \Coduo\PHPMatcher\Backtrace $backtrace;
+    private Backtrace $backtrace;
 
     public function __construct(Backtrace $backtrace)
     {

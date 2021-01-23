@@ -26,11 +26,11 @@ final class TextMatcher extends Matcher
      */
     public const PATTERN_REGEXP_PLACEHOLDER_TEMPLATE = '__PLACEHOLDER%d__';
 
-    private \Coduo\PHPMatcher\Parser $parser;
+    private Parser $parser;
 
-    private \Coduo\PHPMatcher\Backtrace $backtrace;
+    private Backtrace $backtrace;
 
-    private \Coduo\PHPMatcher\Matcher\ValueMatcher $matcher;
+    private ValueMatcher $matcher;
 
     public function __construct(ValueMatcher $matcher, Backtrace $backtrace, Parser $parser)
     {

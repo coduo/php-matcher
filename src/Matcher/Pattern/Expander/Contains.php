@@ -20,9 +20,9 @@ final class Contains implements PatternExpander
 
     private string $string;
 
-    private $ignoreCase;
+    private bool $ignoreCase;
 
-    public function __construct(string $string, $ignoreCase = false)
+    public function __construct(string $string, bool $ignoreCase = false)
     {
         $this->string = $string;
         $this->ignoreCase = $ignoreCase;

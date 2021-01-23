@@ -16,9 +16,9 @@ final class Parser
      */
     public const NULL_VALUE = 'null';
 
-    private \Coduo\PHPMatcher\Lexer $lexer;
+    private Lexer $lexer;
 
-    private \Coduo\PHPMatcher\Parser\ExpanderInitializer $expanderInitializer;
+    private ExpanderInitializer $expanderInitializer;
 
     public function __construct(Lexer $lexer, ExpanderInitializer $expanderInitializer)
     {
@@ -214,10 +214,10 @@ final class Parser
     /**
      * @return bool|void
      */
-    private function getNextArrayElement(array &$array)
+    private function getNextArrayElement(array &$array) : ?bool
     {
         if ($this->lexer->isNextToken(Lexer::T_CLOSE_CURLY_BRACE)) {
-            return;
+            return null;
         }
 
         $key = $this->getNextArgumentValue();
@@ -241,7 +241,7 @@ final class Parser
         $array[$key] = $value;
 
         if (!$this->lexer->isNextToken(Lexer::T_COMMA)) {
-            return;
+            return null;
         }
 
         return true;

@@ -13,7 +13,7 @@ final class WildcardMatcher extends Matcher
      */
     public const MATCH_PATTERN = "/^@(\*|wildcard)@$/";
 
-    private \Coduo\PHPMatcher\Backtrace $backtrace;
+    private Backtrace $backtrace;
 
     public function __construct(Backtrace $backtrace)
     {

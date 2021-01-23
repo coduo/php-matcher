@@ -46,7 +46,7 @@ final class ExpanderInitializer
         Pattern\Expander\HasProperty::NAME => Pattern\Expander\HasProperty::class,
     ];
 
-    private \Coduo\PHPMatcher\Backtrace $backtrace;
+    private Backtrace $backtrace;
 
     public function __construct(Backtrace $backtrace)
     {

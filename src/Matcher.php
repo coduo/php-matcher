@@ -8,9 +8,9 @@ use Coduo\PHPMatcher\Matcher\ValueMatcher;
 
 final class Matcher
 {
-    private \Coduo\PHPMatcher\Matcher\ValueMatcher $valueMatcher;
+    private ValueMatcher $valueMatcher;
 
-    private \Coduo\PHPMatcher\Backtrace $backtrace;
+    private Backtrace $backtrace;
 
     public function __construct(ValueMatcher $valueMatcher, Backtrace $backtrace)
     {

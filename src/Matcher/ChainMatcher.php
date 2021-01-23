@@ -12,7 +12,7 @@ final class ChainMatcher extends Matcher
 {
     private string $name;
 
-    private \Coduo\PHPMatcher\Backtrace $backtrace;
+    private Backtrace $backtrace;
 
     /**
      * @var ValueMatcher[]
