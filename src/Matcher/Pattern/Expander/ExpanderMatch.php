@@ -16,12 +16,12 @@ final class ExpanderMatch implements Matcher\Pattern\PatternExpander
     private ?\Coduo\PHPMatcher\Matcher $matcher = null;
 
     /**
-     * @var null|string|array
+     * @var null|array|string
      */
     private $pattern;
 
     /**
-     * @param null|string|array $pattern
+     * @param null|array|string $pattern
      */
     public function __construct($pattern)
     {

@@ -131,7 +131,7 @@ final class ArrayMatcher extends Matcher
 
         $pattern = \array_filter(
             $pattern,
-            fn($item) => $item !== $skipPattern
+            fn ($item) => $item !== $skipPattern
         );
 
         $notExistingKeys = $this->findNotExistingKeys($pattern, $values);
@@ -154,7 +154,7 @@ final class ArrayMatcher extends Matcher
     {
         $notExistingKeys = \array_diff_key($patterns, $values);
 
-        return \array_filter($notExistingKeys, function ($pattern, $key) use ($values): bool {
+        return \array_filter($notExistingKeys, function ($pattern, $key) use ($values) : bool {
             if ($key === self::UNIVERSAL_KEY) {
                 return false;
             }

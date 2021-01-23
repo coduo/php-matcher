@@ -213,7 +213,7 @@ final class Parser
     }
 
     /**
-     * @return void|bool
+     * @return bool|void
      */
     private function getNextArrayElement(array &$array)
     {

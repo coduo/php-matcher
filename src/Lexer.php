@@ -49,6 +49,7 @@ final class Lexer extends AbstractLexer
 
     /**
      * Lexical non-catchable patterns.
+     *
      * @return string[]
      */
     protected function getNonCatchablePatterns() : array
