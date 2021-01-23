@@ -163,6 +163,38 @@ $matcher->match("lorem ipsum dolor", "@string@.startsWith('lorem').contains('ips
 
 ```
 
+### Time matching
+
+```php
+<?php
+
+use Coduo\PHPMatcher\PHPMatcher;
+
+$matcher = new PHPMatcher();
+
+$matcher->match('00:00:00', '@time@');
+$matcher->match('00:01:00.000000', '@time@');
+$matcher->match('00:01:00', '@time@.after("00:00:00")');
+$matcher->match('00:00:00', '@time@.before("01:00:00")');
+
+```
+
+### Date matching
+
+```php
+<?php
+
+use Coduo\PHPMatcher\PHPMatcher;
+
+$matcher = new PHPMatcher();
+
+$matcher->match('2014-08-19', '@date@');
+$matcher->match('2020-01-11', '@date@');
+$matcher->match('2014-08-19', '@date@.before("2016-08-19")');
+$matcher->match('2014-08-19', '@date@.before("today").after("+ 100year")');
+
+```
+
 ### DateTime matching
 
 ```php
