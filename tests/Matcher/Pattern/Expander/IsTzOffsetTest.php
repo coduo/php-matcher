@@ -30,6 +30,7 @@ class IsTzOffsetTest extends TestCase
         $expander = new IsTzOffset();
         $expander->setBacktrace(new Backtrace\InMemoryBacktrace());
         $this->assertSame($expectedResult, $expander->match($date));
+
         if ($expectedResult === false) {
             $this->assertSame($expander->getError(), $errorMessage);
         }

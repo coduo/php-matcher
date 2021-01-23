@@ -29,6 +29,7 @@ class IsTzAbbreviationTest extends TestCase
         $expander = new IsTzAbbreviation();
         $expander->setBacktrace(new Backtrace\InMemoryBacktrace());
         $this->assertSame($expectedResult, $expander->match($date));
+
         if ($expectedResult === false) {
             $this->assertSame($expander->getError(), $errorMessage);
         }
