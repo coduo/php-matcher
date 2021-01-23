@@ -12,6 +12,7 @@
   - [1d14f8](https://github.com/coduo/php-matcher/commit/1d14f866a298e3c514e0ecaff874553b42fc8cac) - **changelog file** - [@norberttech](https://github.com/norberttech)
 
 ### Changed
+  - [#220](https://github.com/coduo/php-matcher/pull/220) - **Improve code quality with Rector PHP** - [@norberttech](https://github.com/norberttech)
   - [313372](https://github.com/coduo/php-matcher/commit/31337201f117dbb46af3c6dafb351eebb6909124) - **Update changelog-update.yml** - [@norberttech](https://github.com/norberttech)
   - [fd4903](https://github.com/coduo/php-matcher/commit/fd49031e7cc8f0e350884c3466a034b4d8eaa2ef) - **Update CHANGELOG.md** - [@norberttech](https://github.com/norberttech)
   - [1f32aa](https://github.com/coduo/php-matcher/commit/1f32aa7c5e5dee773710aed1c2485610eedacbee) - **Update composer.json** - [@norberttech](https://github.com/norberttech)
@@ -22,7 +23,7 @@
 ## [5.0.1] - 2020-10-09
 
 ### Changed
-  - [#213](https://github.com/coduo/php-matcher/pull/213) - **include ArrayMatcher in OrMatcher to fix issues with <a href="mailto:code&gt;@null@%7C%7C@array@&lt;/code">code&gt;@null@||@array@&lt;/code</a>** - [@ode&gt;@null@||@array@&lt;/code](mailto:code&gt;@null@||@array@&lt;/code)
+  - [#213](https://github.com/coduo/php-matcher/pull/213) - **include ArrayMatcher in OrMatcher to fix issues with <a href="mailto:code&gt;@null@%7C%7C@array@&lt;/code">code&gt;@null@||@array@&lt;/code</a>** - [@ode&gt;@null@||@array@&lt;/code](mailto:code&gt;@null@%7C%7C@array@&lt;/code)
   - [efd3b2](https://github.com/coduo/php-matcher/commit/efd3b2fcbaf9e1b44881a329d4b57fb5708be73e) - **Update README.md** - [@norberttech](https://github.com/norberttech)
 
 ## [5.0.0] - 2020-09-27
@@ -64,7 +65,7 @@
 ## [4.0.2] - 2020-10-09
 
 ### Changed
-  - [#214](https://github.com/coduo/php-matcher/pull/214) - **include ArrayMatcher in OrMatcher to fix issues with <a href="mailto:code&gt;@null@%7C%7C@array@&lt;/code">code&gt;@null@||@array@&lt;/code</a> pattern** - [@ode&gt;@null@||@array@&lt;/code](mailto:code&gt;@null@||@array@&lt;/code)
+  - [#214](https://github.com/coduo/php-matcher/pull/214) - **include ArrayMatcher in OrMatcher to fix issues with <a href="mailto:code&gt;@null@%7C%7C@array@&lt;/code">code&gt;@null@||@array@&lt;/code</a> pattern** - [@ode&gt;@null@||@array@&lt;/code](mailto:code&gt;@null@%7C%7C@array@&lt;/code)
 
 ## [4.0.1] - 2020-09-27
 
@@ -243,7 +244,7 @@
 ## [2.0.1] - 2016-04-12
 
 ### Changed
-  - [#78](https://github.com/coduo/php-matcher/pull/78) - **work around bug <a href="https://bugs.php.net/bug.php?id=71964"></a><a href="https://bugs.php.net/bug.php?id=71964">https://bugs.php.net/bug.php?id=71964</a>** - [@ttps://bugs.php.net/bug.php?id=71964](https://bugs.php.net/bug.php?id=71964)
+  - [#78](https://github.com/coduo/php-matcher/pull/78) - **work around bug <a href="https://bugs.php.net/bug.php?id=71964"></a><a href="https://bugs.php.net/bug.php?id=71964"></a><a href="https://bugs.php.net/bug.php?id=71964">https://bugs.php.net/bug.php?id=71964</a>** - [@ttps://bugs.php.net/bug.php?id=71964](https://bugs.php.net/bug.php?id=71964)
   - [#76](https://github.com/coduo/php-matcher/pull/76) - **Update README.md** - [@yosmanyga](https://github.com/yosmanyga)
 
 ## [2.0.0] - 2016-03-18
