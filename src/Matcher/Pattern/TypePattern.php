@@ -49,7 +49,7 @@ final class TypePattern implements Pattern
         return true;
     }
 
-    public function getError()
+    public function getError(): ?string
     {
         return $this->error;
     }

@@ -40,7 +40,7 @@ final class Json
         return self::isValid($value) || self::isValid(self::transformPattern($value));
     }
 
-    public static function transformPattern(string $pattern) : string
+    public static function transformPattern(string $pattern) : ?string
     {
         return \preg_replace(
             self::TRANSFORM_NEW_LINES,

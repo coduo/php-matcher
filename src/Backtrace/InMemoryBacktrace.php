@@ -118,6 +118,9 @@ final class InMemoryBacktrace implements Backtrace
         return \count($this->trace) === 0;
     }
 
+    /**
+     * @return mixed[]
+     */
     public function raw() : array
     {
         return $this->trace;

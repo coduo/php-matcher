@@ -147,11 +147,14 @@ final class ArrayMatcher extends Matcher
         return true;
     }
 
+    /**
+     * @return mixed[]
+     */
     private function findNotExistingKeys(array $patterns, array $values) : array
     {
         $notExistingKeys = \array_diff_key($patterns, $values);
 
-        return \array_filter($notExistingKeys, function ($pattern, $key) use ($values) {
+        return \array_filter($notExistingKeys, function ($pattern, $key) use ($values): bool {
             if ($key === self::UNIVERSAL_KEY) {
                 return false;
             }

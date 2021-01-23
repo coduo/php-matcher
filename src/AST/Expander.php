@@ -34,6 +34,9 @@ final class Expander implements Node
         return (bool) \count($this->arguments);
     }
 
+    /**
+     * @return mixed[]
+     */
     public function getArguments() : array
     {
         return $this->arguments;
