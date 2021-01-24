@@ -9,5 +9,6 @@
       "break": ["benchmark"],
       "sort": {"mean": "asc"}
     }
-  }
+  },
+  "xml_storage_path": "./var/phpbench"
 }
