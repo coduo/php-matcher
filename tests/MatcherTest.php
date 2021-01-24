@@ -698,7 +698,7 @@ XML;
     "author_association": "@string@",
     "active_lock_reason": null
   },
-  "@...@"
+  "@array_previous_repeat@"
 ]
 PATTERN,
             \file_get_contents(__DIR__ . '/fixtures/github_pulls.json'),
