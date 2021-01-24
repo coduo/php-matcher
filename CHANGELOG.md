@@ -32,7 +32,7 @@
 ## [5.0.1] - 2020-10-09
 
 ### Changed
-  - [#213](https://github.com/coduo/php-matcher/pull/213) - **include ArrayMatcher in OrMatcher to fix issues with <a href="mailto:code&gt;@null@%7C%7C@array@&lt;/code">code&gt;@null@||@array@&lt;/code</a>** - [@ode&gt;@null@||@array@&lt;/code](mailto:code&gt;@null@%7C%7C@array@&lt;/code)
+  - [#213](https://github.com/coduo/php-matcher/pull/213) - **include ArrayMatcher in OrMatcher to fix issues with `@null@||@array@`** - [@mtomala](https://github.com/mtomala)
   - [efd3b2](https://github.com/coduo/php-matcher/commit/efd3b2fcbaf9e1b44881a329d4b57fb5708be73e) - **Update README.md** - [@norberttech](https://github.com/norberttech)
 
 ## [5.0.0] - 2020-09-27
