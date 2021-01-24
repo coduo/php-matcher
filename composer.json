@@ -39,13 +39,18 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Coduo\\PHPMatcher\\Tests\\": "tests/"
+            "Coduo\\PHPMatcher\\Tests\\": "tests/",
+            "Coduo\\PHPMatcher\\Benchmark\\": "benchmark/Coduo/PHPMatcher/Benchmark/"
         }
     },
     "config": {
         "sort-packages": true
     },
     "scripts": {
+        "benchmark": [
+            "Composer\\Config::disableProcessTimeout",
+            "tools\/phpbench run --report=matcher"
+        ],
         "cs:php:fix": [
             "tools/php-cs-fixer fix --using-cache=no"
         ],

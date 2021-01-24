@@ -26,6 +26,10 @@ final class ArrayMatcher extends Matcher
      */
     public const UNIVERSAL_KEY = '@*@';
 
+    public const ARRAY_PREVIOUS_PATTERN = '@array_previous@';
+
+    public const ARRAY_PREVIOUS_PATTERN_REPEAT = '@array_previous_repeat@';
+
     private ValueMatcher $propertyMatcher;
 
     private Parser $parser;
@@ -88,6 +92,14 @@ final class ArrayMatcher extends Matcher
     private function iterateMatch(array $values, array $patterns, string $parentPath = '') : bool
     {
         $pattern = null;
+        $previousPattern = null;
+
+        if (\in_array(self::ARRAY_PREVIOUS_PATTERN_REPEAT, $patterns, true)) {
+            $patterns = \array_merge(
+                \array_replace($patterns, [\array_search(self::ARRAY_PREVIOUS_PATTERN_REPEAT, $patterns, true) => self::ARRAY_PREVIOUS_PATTERN]),
+                \array_fill(0, \count($values) - \count($patterns), self::ARRAY_PREVIOUS_PATTERN)
+            );
+        }
 
         foreach ($values as $key => $value) {
             $path = $this->formatAccessPath($key);
@@ -104,6 +116,10 @@ final class ArrayMatcher extends Matcher
                 $this->setMissingElementInError('pattern', $this->formatFullPath($parentPath, $path));
 
                 return false;
+            }
+
+            if ($pattern === self::ARRAY_PREVIOUS_PATTERN) {
+                $pattern = $previousPattern;
             }
 
             if ($this->shouldSkipValueMatchingFor($pattern)) {
@@ -129,6 +145,8 @@ final class ArrayMatcher extends Matcher
             if (!$this->iterateMatch($value, $pattern, $this->formatFullPath($parentPath, $path))) {
                 return false;
             }
+
+            $previousPattern = $pattern;
         }
 
         return $this->isPatternValid($patterns, $values, $parentPath);

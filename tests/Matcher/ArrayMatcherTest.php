@@ -322,4 +322,82 @@ class ArrayMatcherTest extends TestCase
         ));
         $this->assertFalse($this->backtrace->isEmpty());
     }
+
+    public function test_array_previous_pattern() : void
+    {
+        $this->assertTrue(
+            $this->matcher->match(
+                [
+                    ['id' => 1, 'unique' => \uniqid()],
+                    ['id' => 2, 'unique' => \uniqid()],
+                    ['id' => 3, 'unique' => \uniqid()],
+                    ['id' => 4, 'unique' => \uniqid()],
+                    ['id' => '5', 'unique' => \uniqid()],
+                    ['id' => '6', 'unique' => \uniqid()],
+                    ['id' => '7', 'unique' => \uniqid()],
+                ],
+                [
+                    ['id' => '@integer@', 'unique' => '@string@'],
+                    '@array_previous@',
+                    '@array_previous@',
+                    '@array_previous@',
+                    ['id' => '@string@', 'unique' => '@string@'],
+                    '@array_previous@',
+                    '@array_previous@',
+                ]
+            ),
+            $this->matcher->getError()
+        );
+    }
+
+    public function test_array_previous_repeat_pattern() : void
+    {
+        $this->assertTrue(
+            $this->matcher->match(
+                [
+                    ['id' => 1, 'unique' => \uniqid()],
+                    ['id' => 2, 'unique' => \uniqid()],
+                    ['id' => '3', 'unique' => \uniqid()],
+                    ['id' => 4, 'unique' => \uniqid()],
+                    ['id' => 5, 'unique' => \uniqid()],
+                    ['id' => 6, 'unique' => \uniqid()],
+                    ['id' => 7, 'unique' => \uniqid()],
+                ],
+                [
+                    ['id' => '@integer@', 'unique' => '@string@'],
+                    '@array_previous@',
+                    ['id' => '@string@', 'unique' => '@string@'],
+                    ['id' => '@integer@', 'unique' => '@string@'],
+                    '@array_previous_repeat@',
+                ]
+            ),
+            $this->matcher->getError()
+        );
+    }
+
+    public function test_invalid_array_previous_repeat_pattern() : void
+    {
+        $this->matcher->match(
+            [
+                ['id' => 1, 'unique' => \uniqid()],
+                ['id' => 2, 'unique' => \uniqid()],
+                ['id' => '3', 'unique' => \uniqid()],
+                ['id' => 4, 'unique' => \uniqid()],
+                ['id' => 5, 'unique' => \uniqid()],
+                ['id' => 6, 'unique' => \uniqid()],
+                ['id' => 7, 'unique' => \uniqid()],
+            ],
+            [
+                ['id' => '@integer@', 'unique' => '@string@'],
+                '@array_previous@',
+                ['id' => '@string@', 'unique' => '@string@'],
+                '@array_previous_repeat@',
+            ]
+        );
+
+        $this->assertSame(
+            '"4" does not match "@string@".',
+            $this->matcher->getError()
+        );
+    }
 }

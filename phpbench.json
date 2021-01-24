@@ -1,0 +1,14 @@
+{
+  "bootstrap": "./vendor/autoload.php",
+  "path": "benchmark",
+  "retry_threshold": 5,
+  "progress": "dots",
+  "reports": {
+    "matcher": {
+      "generator": "table",
+      "break": ["benchmark"],
+      "sort": {"mean": "asc"}
+    }
+  },
+  "xml_storage_path": "./var/phpbench"
+}

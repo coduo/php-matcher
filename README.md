@@ -104,7 +104,9 @@ class MatcherTest extends TestCase
 * ``@datetime@``
 * ``@timezone@`` || ``@tz``
 * ``@array@``
-* ``@...@`` - *unbounded array*
+* ``@array_previous@`` - match next array element using pattern from previous element
+* ``@array_previous_repeat@`` - match all remaining array elements using pattern from previous element
+* ``@...@`` - *unbounded array*, once used matcher will skip any further array elements
 * ``@null@``
 * ``@*@`` || ``@wildcard@``
 * ``expr(expression)`` - **optional**, requires `symfony/expression-language: ^2.3|^3.0|^4.0|^5.0` to be present
@@ -384,6 +386,115 @@ $matcher->match(
               'roles' => '@array@'
           ),
           '@...@'
+      ),
+      '@boolean@',
+      '@double@'
+  )
+);
+```
+
+### Array Previous
+
+> @array_previous@ can also be used when matching JSON's and XML's
+
+```php
+<?php
+
+use Coduo\PHPMatcher\PHPMatcher;
+
+$matcher = new PHPMatcher();
+
+$matcher->match(
+   array(
+      'users' => array(
+          array(
+              'id' => 1,
+              'firstName' => 'Norbert',
+              'lastName' => 'Orzechowicz',
+              'roles' => array('ROLE_USER'),
+              'position' => 'Developer',
+          ),
+          array(
+              'id' => 2,
+              'firstName' => 'Michał',
+              'lastName' => 'Dąbrowski',
+              'roles' => array('ROLE_USER')
+          ),
+          array(
+              'id' => 3,
+              'firstName' => 'Johnny',
+              'lastName' => 'DąbrowsBravoki',
+              'roles' => array('ROLE_HANDSOME_GUY')
+          )
+      ),
+      true,
+      6.66
+  ),
+   array(
+      'users' => array(
+          array(
+              'id' => '@integer@.greaterThan(0)',
+              'firstName' => '@string@',
+              'lastName' => 'Orzechowicz',
+              'roles' => '@array@',
+              'position' => '@string@.optional()'
+          ),
+          '@array_previous@',
+          '@array_previous@'
+      ),
+      '@boolean@',
+      '@double@'
+  )
+);
+```
+
+### Array Previous Repeat
+
+> @array_previous_repeat@ can also be used when matching JSON's and XML's
+
+```php
+<?php
+
+use Coduo\PHPMatcher\PHPMatcher;
+
+$matcher = new PHPMatcher();
+
+$matcher->match(
+   array(
+      'users' => array(
+          array(
+              'id' => 1,
+              'firstName' => 'Norbert',
+              'lastName' => 'Orzechowicz',
+              'roles' => array('ROLE_USER'),
+              'position' => 'Developer',
+          ),
+          array(
+              'id' => 2,
+              'firstName' => 'Michał',
+              'lastName' => 'Dąbrowski',
+              'roles' => array('ROLE_USER')
+          ),
+          array(
+              'id' => 3,
+              'firstName' => 'Johnny',
+              'lastName' => 'DąbrowsBravoki',
+              'roles' => array('ROLE_HANDSOME_GUY')
+          )
+      ),
+      true,
+      6.66
+  ),
+   array(
+      'users' => array(
+          array(
+              'id' => '@integer@.greaterThan(0)',
+              'firstName' => '@string@',
+              'lastName' => 'Orzechowicz',
+              'roles' => '@array@',
+              'position' => '@string@.optional()'
+          ),
+          '@array_previous_repeat@'
       ),
       '@boolean@',
       '@double@'
