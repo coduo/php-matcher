@@ -28,6 +28,8 @@ final class ArrayMatcher extends Matcher
 
     public const ARRAY_PREVIOUS_PATTERN = '@array_previous@';
 
+    public const ARRAY_PREVIOUS_PATTERN_REPEAT = '@array_previous_repeat@';
+
     private ValueMatcher $propertyMatcher;
 
     private Parser $parser;
@@ -91,6 +93,13 @@ final class ArrayMatcher extends Matcher
     {
         $pattern = null;
         $previousPattern = null;
+
+        if (\in_array(self::ARRAY_PREVIOUS_PATTERN_REPEAT, $patterns, true)) {
+            $patterns = \array_merge(
+                \array_replace($patterns, [\array_search(self::ARRAY_PREVIOUS_PATTERN_REPEAT, $patterns) => self::ARRAY_PREVIOUS_PATTERN]),
+                \array_fill(0, \count($values) - \count($patterns), self::ARRAY_PREVIOUS_PATTERN)
+            );
+        }
 
         foreach ($values as $key => $value) {
             $path = $this->formatAccessPath($key);
