@@ -1,6 +1,7 @@
 ## [Unreleased] - 2021-01-24
 
 ### Changed
+  - [a7c2bb](https://github.com/coduo/php-matcher/commit/a7c2bba788ecbfd700a53405b7cfeb4a9960501c) - **Update CHANGELOG.md** - [@norberttech](https://github.com/norberttech)
   - [ff0a34](https://github.com/coduo/php-matcher/commit/ff0a34de82311a76de0b6141ab2bc35fb7322b01) - **Update CHANGELOG.md** - [@norberttech](https://github.com/norberttech)
 
 ## [6.0.0] - 2021-01-24
@@ -32,7 +33,7 @@
 ## [5.0.1] - 2020-10-09
 
 ### Changed
-  - [#213](https://github.com/coduo/php-matcher/pull/213) - **include ArrayMatcher in OrMatcher to fix issues with `@null@||@array@`** - [@mtomala](https://github.com/mtomala)
+  - [#213](https://github.com/coduo/php-matcher/pull/213) - **include ArrayMatcher in OrMatcher to fix issues with <code>@null@||@array@</code>** - [@mtomala](https://github.com/mtomala)
   - [efd3b2](https://github.com/coduo/php-matcher/commit/efd3b2fcbaf9e1b44881a329d4b57fb5708be73e) - **Update README.md** - [@norberttech](https://github.com/norberttech)
 
 ## [5.0.0] - 2020-09-27
@@ -74,7 +75,7 @@
 ## [4.0.2] - 2020-10-09
 
 ### Changed
-  - [#214](https://github.com/coduo/php-matcher/pull/214) - **include ArrayMatcher in OrMatcher to fix issues with <code>@null@||@array@</code> pattern** - [@mtomala](https://github.com/mtomala)
+  - [#214](https://github.com/coduo/php-matcher/pull/214) - **include ArrayMatcher in OrMatcher to fix issues with <a href="mailto:code&gt;@null@%7C%7C@array@&lt;/code">code&gt;@null@||@array@&lt;/code</a> pattern** - [@ode&gt;@null@||@array@&lt;/code](mailto:code&gt;@null@||@array@&lt;/code)
 
 ## [4.0.1] - 2020-09-27
 
@@ -253,7 +254,7 @@
 ## [2.0.1] - 2016-04-12
 
 ### Changed
-  - [#78](https://github.com/coduo/php-matcher/pull/78) - **work around bug <a href="https://bugs.php.net/bug.php?id=71964"></a><a href="https://bugs.php.net/bug.php?id=71964"></a><a href="https://bugs.php.net/bug.php?id=71964"></a><a href="https://bugs.php.net/bug.php?id=71964"></a><a href="https://bugs.php.net/bug.php?id=71964"></a><a href="https://bugs.php.net/bug.php?id=71964"></a><a href="https://bugs.php.net/bug.php?id=71964">https://bugs.php.net/bug.php?id=71964</a>** - [@ttps://bugs.php.net/bug.php?id=71964](https://bugs.php.net/bug.php?id=71964)
+  - [#78](https://github.com/coduo/php-matcher/pull/78) - **work around bug <a href="https://bugs.php.net/bug.php?id=71964"></a><a href="https://bugs.php.net/bug.php?id=71964"></a><a href="https://bugs.php.net/bug.php?id=71964"></a><a href="https://bugs.php.net/bug.php?id=71964"></a><a href="https://bugs.php.net/bug.php?id=71964"></a><a href="https://bugs.php.net/bug.php?id=71964"></a><a href="https://bugs.php.net/bug.php?id=71964"></a><a href="https://bugs.php.net/bug.php?id=71964">https://bugs.php.net/bug.php?id=71964</a>** - [@ttps://bugs.php.net/bug.php?id=71964](https://bugs.php.net/bug.php?id=71964)
   - [#76](https://github.com/coduo/php-matcher/pull/76) - **Update README.md** - [@yosmanyga](https://github.com/yosmanyga)
 
 ## [2.0.0] - 2016-03-18
