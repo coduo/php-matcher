@@ -1,3 +1,8 @@
+## [Unreleased] - 2021-01-24
+
+### Changed
+  - [ff0a34](https://github.com/coduo/php-matcher/commit/ff0a34de82311a76de0b6141ab2bc35fb7322b01) - **Update CHANGELOG.md** - [@norberttech](https://github.com/norberttech)
+
 ## [6.0.0] - 2021-01-24
 
 ### Added
@@ -5,9 +10,9 @@
   - [#221](https://github.com/coduo/php-matcher/pull/221) - **@array_previous_repeat@ pattern** - [@norberttech](https://github.com/norberttech)
   - [#221](https://github.com/coduo/php-matcher/pull/221) - **Benchmark by phpbench** - [@norberttech](https://github.com/norberttech)
   - [14b49d](https://github.com/coduo/php-matcher/commit/14b49d8d6efcfaf3a03bfdb5cd7d34884b4939d9) - **dependabot** - [@norberttech](https://github.com/norberttech)
-  - [#219](https://github.com/coduo/php-matcher/pull/219) - **<code>@date@</code> - matcher** - [@norberttech](https://github.com/norberttech)
-  - [#219](https://github.com/coduo/php-matcher/pull/219) - **<code>@time@</code> - matcher** - [@norberttech](https://github.com/norberttech)
-  - [#219](https://github.com/coduo/php-matcher/pull/219) - **<code>@timezone@</code> or <code>@tz@</code> - matcher** - [@norberttech](https://github.com/norberttech)
+  - [#219](https://github.com/coduo/php-matcher/pull/219) - **<a href="mailto:code&gt;@date@&lt;/code">code&gt;@date@&lt;/code</a> - matcher** - [@ode&gt;@date@&lt;/code](mailto:code&gt;@date@&lt;/code)
+  - [#219](https://github.com/coduo/php-matcher/pull/219) - **<a href="mailto:code&gt;@time@&lt;/code">code&gt;@time@&lt;/code</a> - matcher** - [@ode&gt;@time@&lt;/code](mailto:code&gt;@time@&lt;/code)
+  - [#219](https://github.com/coduo/php-matcher/pull/219) - **<a href="mailto:code&gt;@timezone@&lt;/code">code&gt;@timezone@&lt;/code</a> or <a href="mailto:code&gt;@tz@&lt;/code">code&gt;@tz@&lt;/code</a> - matcher** - [@ode&gt;@tz@&lt;/code](mailto:code&gt;@tz@&lt;/code)
   - [#219](https://github.com/coduo/php-matcher/pull/219) - **<code>isTzOffset()</code> - expander** - [@norberttech](https://github.com/norberttech)
   - [#219](https://github.com/coduo/php-matcher/pull/219) - **<code>isTzIdentifier()</code> - expander** - [@norberttech](https://github.com/norberttech)
   - [#219](https://github.com/coduo/php-matcher/pull/219) - **<code>isTzAbbreviation()</code> - expander** - [@norberttech](https://github.com/norberttech)
@@ -69,7 +74,7 @@
 ## [4.0.2] - 2020-10-09
 
 ### Changed
-  - [#214](https://github.com/coduo/php-matcher/pull/214) - **include ArrayMatcher in OrMatcher to fix issues with `@null@||@array@` pattern** - [@mtomala](https://github.com/mtomala)
+  - [#214](https://github.com/coduo/php-matcher/pull/214) - **include ArrayMatcher in OrMatcher to fix issues with <code>@null@||@array@</code> pattern** - [@mtomala](https://github.com/mtomala)
 
 ## [4.0.1] - 2020-09-27
 
@@ -248,7 +253,7 @@
 ## [2.0.1] - 2016-04-12
 
 ### Changed
-  - [#78](https://github.com/coduo/php-matcher/pull/78) - **work around bug <a href="https://bugs.php.net/bug.php?id=71964"></a><a href="https://bugs.php.net/bug.php?id=71964"></a><a href="https://bugs.php.net/bug.php?id=71964"></a><a href="https://bugs.php.net/bug.php?id=71964"></a><a href="https://bugs.php.net/bug.php?id=71964"></a><a href="https://bugs.php.net/bug.php?id=71964">https://bugs.php.net/bug.php?id=71964</a>** - [@ttps://bugs.php.net/bug.php?id=71964](https://bugs.php.net/bug.php?id=71964)
+  - [#78](https://github.com/coduo/php-matcher/pull/78) - **work around bug <a href="https://bugs.php.net/bug.php?id=71964"></a><a href="https://bugs.php.net/bug.php?id=71964"></a><a href="https://bugs.php.net/bug.php?id=71964"></a><a href="https://bugs.php.net/bug.php?id=71964"></a><a href="https://bugs.php.net/bug.php?id=71964"></a><a href="https://bugs.php.net/bug.php?id=71964"></a><a href="https://bugs.php.net/bug.php?id=71964">https://bugs.php.net/bug.php?id=71964</a>** - [@ttps://bugs.php.net/bug.php?id=71964](https://bugs.php.net/bug.php?id=71964)
   - [#76](https://github.com/coduo/php-matcher/pull/76) - **Update README.md** - [@yosmanyga](https://github.com/yosmanyga)
 
 ## [2.0.0] - 2016-03-18
