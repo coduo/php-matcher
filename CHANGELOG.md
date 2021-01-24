@@ -1,17 +1,17 @@
-## [Unreleased] - 2021-01-24
+## [6.0.0] - 2021-01-24
 
 ### Added
   - [#221](https://github.com/coduo/php-matcher/pull/221) - **@array_previous@ pattern** - [@norberttech](https://github.com/norberttech)
   - [#221](https://github.com/coduo/php-matcher/pull/221) - **@array_previous_repeat@ pattern** - [@norberttech](https://github.com/norberttech)
   - [#221](https://github.com/coduo/php-matcher/pull/221) - **Benchmark by phpbench** - [@norberttech](https://github.com/norberttech)
   - [14b49d](https://github.com/coduo/php-matcher/commit/14b49d8d6efcfaf3a03bfdb5cd7d34884b4939d9) - **dependabot** - [@norberttech](https://github.com/norberttech)
-  - [#219](https://github.com/coduo/php-matcher/pull/219) - **`@date@` - matcher** - [@norberttech](https://github.com/norberttech)
-  - [#219](https://github.com/coduo/php-matcher/pull/219) - **`@time@` - matcher** - [@norberttech](https://github.com/norberttech)
-  - [#219](https://github.com/coduo/php-matcher/pull/219) - **`@timezone@` or `@tz@` - matcher** - [@norberttech](https://github.com/norberttech)
-  - [#219](https://github.com/coduo/php-matcher/pull/219) - **`isTzOffset()` - expander** - [@norberttech](https://github.com/norberttech)
-  - [#219](https://github.com/coduo/php-matcher/pull/219) - **`isTzIdentifier()` - expander** - [@norberttech](https://github.com/norberttech)
-  - [#219](https://github.com/coduo/php-matcher/pull/219) - **`isTzAbbreviation()` - expander** - [@norberttech](https://github.com/norberttech)
-  - [#219](https://github.com/coduo/php-matcher/pull/219) - **`Backtrace::last()` : ?string - method** - [@norberttech](https://github.com/norberttech)
+  - [#219](https://github.com/coduo/php-matcher/pull/219) - **<code>@date@</code> - matcher** - [@norberttech](https://github.com/norberttech)
+  - [#219](https://github.com/coduo/php-matcher/pull/219) - **<code>@time@</code> - matcher** - [@norberttech](https://github.com/norberttech)
+  - [#219](https://github.com/coduo/php-matcher/pull/219) - **<code>@timezone@</code> or <code>@tz@</code> - matcher** - [@norberttech](https://github.com/norberttech)
+  - [#219](https://github.com/coduo/php-matcher/pull/219) - **<code>isTzOffset()</code> - expander** - [@norberttech](https://github.com/norberttech)
+  - [#219](https://github.com/coduo/php-matcher/pull/219) - **<code>isTzIdentifier()</code> - expander** - [@norberttech](https://github.com/norberttech)
+  - [#219](https://github.com/coduo/php-matcher/pull/219) - **<code>isTzAbbreviation()</code> - expander** - [@norberttech](https://github.com/norberttech)
+  - [#219](https://github.com/coduo/php-matcher/pull/219) - **<code>Backtrace::last()</code> : ?string - method** - [@norberttech](https://github.com/norberttech)
   - [#218](https://github.com/coduo/php-matcher/pull/218) - **Added integration with aeon-php/automation** - [@norberttech](https://github.com/norberttech)
   - [1d14f8](https://github.com/coduo/php-matcher/commit/1d14f866a298e3c514e0ecaff874553b42fc8cac) - **changelog file** - [@norberttech](https://github.com/norberttech)
 
@@ -248,7 +248,7 @@
 ## [2.0.1] - 2016-04-12
 
 ### Changed
-  - [#78](https://github.com/coduo/php-matcher/pull/78) - **work around bug <a href="https://bugs.php.net/bug.php?id=71964"></a><a href="https://bugs.php.net/bug.php?id=71964"></a><a href="https://bugs.php.net/bug.php?id=71964"></a><a href="https://bugs.php.net/bug.php?id=71964"></a><a href="https://bugs.php.net/bug.php?id=71964">https://bugs.php.net/bug.php?id=71964</a>** - [@ttps://bugs.php.net/bug.php?id=71964](https://bugs.php.net/bug.php?id=71964)
+  - [#78](https://github.com/coduo/php-matcher/pull/78) - **work around bug <a href="https://bugs.php.net/bug.php?id=71964"></a><a href="https://bugs.php.net/bug.php?id=71964"></a><a href="https://bugs.php.net/bug.php?id=71964"></a><a href="https://bugs.php.net/bug.php?id=71964"></a><a href="https://bugs.php.net/bug.php?id=71964"></a><a href="https://bugs.php.net/bug.php?id=71964">https://bugs.php.net/bug.php?id=71964</a>** - [@ttps://bugs.php.net/bug.php?id=71964](https://bugs.php.net/bug.php?id=71964)
   - [#76](https://github.com/coduo/php-matcher/pull/76) - **Update README.md** - [@yosmanyga](https://github.com/yosmanyga)
 
 ## [2.0.0] - 2016-03-18
