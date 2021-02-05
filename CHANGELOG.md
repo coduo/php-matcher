@@ -1,4 +1,4 @@
-## [Unreleased] - 2021-02-05
+## [6.0.1] - 2021-02-05
 
 ### Changed
 - [#222](https://github.com/coduo/php-matcher/pull/222) - **updated dependencies** - [@norberttech](https://github.com/norberttech)
