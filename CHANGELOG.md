@@ -1,4 +1,4 @@
-## [Unreleased] - 2021-02-23
+## [6.0.2] - 2021-02-23
 
 ### Added
 - [#224](https://github.com/coduo/php-matcher/pull/224) - **isInDateFormat pattern expander** - [@norberttech](https://github.com/norberttech)
