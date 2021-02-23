@@ -121,6 +121,7 @@ class MatcherTest extends TestCase
 * ``contains($string, $ignoreCase = false)``
 * ``notContains($string, $ignoreCase = false)``
 * ``isDateTime()``
+* ``isInDateFormat($format)`` - example `"@datetime@.isInDateFormat('Y-m-d H:i:s')`
 * ``before(string $date)`` - example ``"@string@.isDateTime().before(\"2020-01-01 00:00:00\")"``
 * ``after(string $date)`` - example ``"@string@.isDateTime().after(\"2020-01-01 00:00:00\")"``
 * ``isTzOffset()``
