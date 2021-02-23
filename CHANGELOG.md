@@ -1,3 +1,15 @@
+## [Unreleased] - 2021-02-23
+
+### Added
+- [#224](https://github.com/coduo/php-matcher/pull/224) - **isInDateFormat pattern expander** - [@norberttech](https://github.com/norberttech)
+- [#224](https://github.com/coduo/php-matcher/pull/224) - **support for aeon-php/calendar ^0.16.0** - [@norberttech](https://github.com/norberttech)
+
+### Changed
+- [#224](https://github.com/coduo/php-matcher/pull/224) - **LICENSE file** - [@norberttech](https://github.com/norberttech)
+
+### Removed
+- [#224](https://github.com/coduo/php-matcher/pull/224) - **symfony/intl dependency that was coming from coduo/php-to-string dependency** - [@norberttech](https://github.com/norberttech)
+
 ## [6.0.1] - 2021-02-05
 
 ### Changed
