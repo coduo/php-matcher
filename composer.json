@@ -53,7 +53,8 @@
         ],
         "build": [
             "@static:analyze",
-            "@test"
+            "@test",
+            "@test:mutation"
         ],
         "cs:php:fix": [
             "tools/php-cs-fixer fix --using-cache=no"
