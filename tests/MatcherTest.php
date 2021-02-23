@@ -265,7 +265,7 @@ XML;
                             "lastName": "Dąbrowski",
                             "enabled": "expr(value == false)",
                             "roles": "@array@",
-                            "createdAt" : "@datetime@"
+                            "createdAt" : "@datetime@.isInDateFormat(\'Y-m-d H:i:s\')"
                         }
                     ],
                     "prevPage": "@string@",

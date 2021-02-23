@@ -28,6 +28,7 @@ final class ExpanderInitializer
         Pattern\Expander\GreaterThan::NAME => Pattern\Expander\GreaterThan::class,
         Pattern\Expander\InArray::NAME => Pattern\Expander\InArray::class,
         Pattern\Expander\IsDateTime::NAME => Pattern\Expander\IsDateTime::class,
+        Pattern\Expander\IsInDateFormat::NAME => Pattern\Expander\IsInDateFormat::class,
         Pattern\Expander\IsEmail::NAME => Pattern\Expander\IsEmail::class,
         Pattern\Expander\IsEmpty::NAME => Pattern\Expander\IsEmpty::class,
         Pattern\Expander\IsNotEmpty::NAME => Pattern\Expander\IsNotEmpty::class,
