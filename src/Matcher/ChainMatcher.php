@@ -21,7 +21,7 @@ final class ChainMatcher extends Matcher
     private array $matchers = [];
 
     /**
-     * @var array<string>
+     * @var array<string, string>
      */
     private array $matcherErrors;
 
@@ -48,7 +48,7 @@ final class ChainMatcher extends Matcher
                     return true;
                 }
 
-                $this->matcherErrors[\get_class($propertyMatcher)] = $propertyMatcher->getError();
+                $this->matcherErrors[\get_class($propertyMatcher)] = (string) $propertyMatcher->getError();
                 $this->error = $propertyMatcher->getError();
             }
         }
