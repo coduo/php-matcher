@@ -7,14 +7,49 @@ namespace Coduo\PHPMatcher\Tests\Matcher;
 use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Lexer;
 use Coduo\PHPMatcher\Matcher;
+use Coduo\PHPMatcher\Matcher\JsonMatcher;
 use Coduo\PHPMatcher\Parser;
 use PHPUnit\Framework\TestCase;
 
 class JsonMatcherTest extends TestCase
 {
-    private ?\Coduo\PHPMatcher\Matcher\JsonMatcher $matcher = null;
+    private ?JsonMatcher $matcher = null;
 
-    public static function positivePatterns()
+    public function setUp() : void
+    {
+        $backtrace = new Backtrace\InMemoryBacktrace();
+        $parser = new Parser(new Lexer(), new Parser\ExpanderInitializer($backtrace));
+        $scalarMatchers = new Matcher\ChainMatcher(
+            self::class,
+            $backtrace,
+            [
+                new Matcher\CallbackMatcher($backtrace),
+                new Matcher\ExpressionMatcher($backtrace),
+                new Matcher\NullMatcher($backtrace),
+                new Matcher\StringMatcher($backtrace, $parser),
+                new Matcher\IntegerMatcher($backtrace, $parser),
+                new Matcher\BooleanMatcher($backtrace, $parser),
+                new Matcher\DoubleMatcher($backtrace, $parser),
+                new Matcher\NumberMatcher($backtrace, $parser),
+                new Matcher\ScalarMatcher($backtrace),
+                new Matcher\WildcardMatcher($backtrace),
+            ]
+        );
+        $this->matcher = new JsonMatcher(
+            new Matcher\ArrayMatcher($scalarMatchers, $backtrace, $parser),
+            $backtrace
+        );
+    }
+
+    /**
+     * @dataProvider positivePatterns
+     */
+    public function test_positive_can_match($pattern) : void
+    {
+        $this->assertTrue($this->matcher->canMatch($pattern));
+    }
+
+    public function positivePatterns()
     {
         return [
             [\json_encode(['Norbert', 'Michał'])],
@@ -23,7 +58,15 @@ class JsonMatcherTest extends TestCase
         ];
     }
 
-    public static function negativePatterns()
+    /**
+     * @dataProvider negativePatterns
+     */
+    public function test_negative_can_match($pattern) : void
+    {
+        $this->assertFalse($this->matcher->canMatch($pattern));
+    }
+
+    public function negativePatterns()
     {
         return [
             ['@string@'],
@@ -32,7 +75,15 @@ class JsonMatcherTest extends TestCase
         ];
     }
 
-    public static function positiveMatches()
+    /**
+     * @dataProvider positiveMatches
+     */
+    public function test_positive_matches($value, $pattern) : void
+    {
+        $this->assertTrue($this->matcher->match($value, $pattern), (string) $this->matcher->getError());
+    }
+
+    public function positiveMatches()
     {
         return [
             [
@@ -115,41 +166,15 @@ class JsonMatcherTest extends TestCase
         ];
     }
 
-    public static function negativeMatches()
+    /**
+     * @dataProvider normalizationRequiredDataProvider
+     */
+    public function test_positive_matches_after_normalization($value, $pattern) : void
     {
-        return [
-            [
-                '{"users":["Norbert","Michał"]}',
-                '{"users":["Michał","@string@"]}',
-            ],
-            [
-                '{"users":["Norbert","Michał", "John"], "stuff": [1, 2, 3]}',
-                '{"users":["@string@", @...@], "stuff": [1, 2]}',
-            ],
-            [
-                '{this_is_not_valid_json',
-                '{"users":["Michał","@string@"]}',
-            ],
-            [
-                '{"status":"ok","data":[]}',
-                '{"status":"ok","data":[{"id": 4,"code":"123987","name":"Anvill","short_description":"ACME Anvill","url":"http://test-store.example.com/p/123987","image":{"url":"http://test-store.example.com/i/123987-0.jpg","description":"ACME Anvill"},"price":95,"promotion_description":"Anvills sale"},{"id": 5,"code":"123988","name":"Red Anvill","short_description":"Red ACME Anvill","url":"http://test-store.example.com/p/123988","image":{"url":"http://test-store.example.com/i/123988-0.jpg","description":"ACME Anvill"},"price":44.99,"promotion_description":"Red is cheap"}]}',
-            ],
-            [
-                '{"foo":"foo val","bar":"bar val"}',
-                '{"foo":"foo val"}',
-            ],
-            [
-                '[{"name": "Norbert","lastName":"Orzechowicz"},{"name":"Michał"},{"name":"Bob"},{"name":"Martin"}]',
-                '"@array@.repeat({\"name\": \"@string@\"})"',
-            ],
-            [
-                [],
-                '[]',
-            ],
-        ];
+        $this->assertTrue($this->matcher->match($value, $pattern), (string) $this->matcher->getError());
     }
 
-    public static function normalizationRequiredDataProvider()
+    public function normalizationRequiredDataProvider()
     {
         return [
             [
@@ -179,70 +204,54 @@ class JsonMatcherTest extends TestCase
         ];
     }
 
-    public function setUp() : void
-    {
-        $backtrace = new Backtrace\InMemoryBacktrace();
-        $parser = new Parser(new Lexer(), new Parser\ExpanderInitializer($backtrace));
-        $scalarMatchers = new Matcher\ChainMatcher(
-            self::class,
-            $backtrace,
-            [
-                new Matcher\CallbackMatcher($backtrace),
-                new Matcher\ExpressionMatcher($backtrace),
-                new Matcher\NullMatcher($backtrace),
-                new Matcher\StringMatcher($backtrace, $parser),
-                new Matcher\IntegerMatcher($backtrace, $parser),
-                new Matcher\BooleanMatcher($backtrace, $parser),
-                new Matcher\DoubleMatcher($backtrace, $parser),
-                new Matcher\NumberMatcher($backtrace, $parser),
-                new Matcher\ScalarMatcher($backtrace),
-                new Matcher\WildcardMatcher($backtrace),
-            ]
-        );
-        $this->matcher = new Matcher\JsonMatcher(
-            new Matcher\ArrayMatcher($scalarMatchers, $backtrace, $parser),
-            $backtrace
-        );
-    }
-
-    /**
-     * @dataProvider positivePatterns
-     */
-    public function test_positive_can_match($pattern) : void
-    {
-        $this->assertTrue($this->matcher->canMatch($pattern));
-    }
-
-    /**
-     * @dataProvider negativePatterns
-     */
-    public function test_negative_can_match($pattern) : void
-    {
-        $this->assertFalse($this->matcher->canMatch($pattern));
-    }
-
-    /**
-     * @dataProvider positiveMatches
-     */
-    public function test_positive_matches($value, $pattern) : void
-    {
-        $this->assertTrue($this->matcher->match($value, $pattern), (string) $this->matcher->getError());
-    }
-
-    /**
-     * @dataProvider normalizationRequiredDataProvider
-     */
-    public function test_positive_matches_after_normalization($value, $pattern) : void
-    {
-        $this->assertTrue($this->matcher->match($value, $pattern), (string) $this->matcher->getError());
-    }
-
     /**
      * @dataProvider negativeMatches
      */
-    public function test_negative_matches($value, $pattern) : void
+    public function test_negative_matches($value, $pattern, string $error) : void
     {
         $this->assertFalse($this->matcher->match($value, $pattern), (string) $this->matcher->getError());
+        $this->assertSame($error, $this->matcher->getError());
+    }
+
+    public function negativeMatches()
+    {
+        return [
+            [
+                '{"users":["Norbert","Michał"]}',
+                '{"users":["Michał","@string@"]}',
+                'Value "Norbert" does not match pattern "Michał" at path: "[users][0]"',
+            ],
+            [
+                '{"users":["Norbert","Michał", "John"], "stuff": [1, 2, 3]}',
+                '{"users":["@string@", @...@], "stuff": [1, 2]}',
+                'There is no element under path [stuff][2] in pattern.',
+            ],
+            [
+                '{this_is_not_valid_json',
+                '{"users":["Michał","@string@"]}',
+                'Invalid given JSON of value. Syntax error, malformed JSON',
+            ],
+            [
+                '{"status":"ok","data":[]}',
+                '{"status":"ok","data":[{"id": 4,"code":"123987","name":"Anvill","short_description":"ACME Anvill","url":"http://test-store.example.com/p/123987","image":{"url":"http://test-store.example.com/i/123987-0.jpg","description":"ACME Anvill"},"price":95,"promotion_description":"Anvills sale"},{"id": 5,"code":"123988","name":"Red Anvill","short_description":"Red ACME Anvill","url":"http://test-store.example.com/p/123988","image":{"url":"http://test-store.example.com/i/123988-0.jpg","description":"ACME Anvill"},"price":44.99,"promotion_description":"Red is cheap"}]}',
+                "There is no element under path [url] in value.\nThere is no element under path [id] in value.\nThere is no element under path [url] in value.\nThere is no element under path [id] in value.\nThere is no element under path [data][0] in value.",
+            ],
+            [
+                '{"foo":"foo val","bar":"bar val"}',
+                '{"foo":"foo val"}',
+                'There is no element under path [bar] in pattern.',
+            ],
+            [
+                '[{"name": "Norbert","lastName":"Orzechowicz"},{"name":"Michał"},{"name":"Bob"},{"name":"Martin"}]',
+                '"@array@.repeat({\"name\": \"@string@\"})"',
+                'Value "Array(4)" does not match pattern "@array@.repeat({"name": "@string@"})" at path: "root"',
+            ],
+            [
+                [],
+                '[]',
+                'Invalid given JSON of value. Unknown error',
+            ],
+        ];
     }
 
     public function test_error_when_matching_fail() : void
@@ -261,7 +270,7 @@ class JsonMatcherTest extends TestCase
         ]);
 
         $this->assertFalse($this->matcher->match($value, $pattern));
-        $this->assertEquals($this->matcher->getError(), 'Value {"users":[{"name":"Norbert"},{"name":"Micha\u0142"}]} does not match pattern {"users":[{"name":"@string@"},{"name":"@boolean@"}]}');
+        $this->assertEquals('Value "Michał" does not match pattern "@boolean@" at path: "[users][1][name]"', $this->matcher->getError());
     }
 
     public function test_error_when_path_in_nested_pattern_does_not_exist() : void
@@ -271,7 +280,7 @@ class JsonMatcherTest extends TestCase
 
         $this->assertFalse($this->matcher->match($value, $pattern));
 
-        $this->assertEquals($this->matcher->getError(), 'Value {"foo":{"bar":{"baz":"bar value"}}} does not match pattern {"foo":{"bar":{"faz":"faz value"}}}');
+        $this->assertEquals('There is no element under path [foo][bar][baz] in pattern.', $this->matcher->getError());
     }
 
     public function test_error_when_path_in_nested_value_does_not_exist() : void
@@ -281,7 +290,7 @@ class JsonMatcherTest extends TestCase
 
         $this->assertFalse($this->matcher->match($value, $pattern));
 
-        $this->assertEquals($this->matcher->getError(), 'Value {"foo":{"bar":[]}} does not match pattern {"foo":{"bar":{"faz":"faz value"}}}');
+        $this->assertEquals('There is no element under path [foo][bar][faz] in value.', $this->matcher->getError());
     }
 
     public function test_error_when_json_pattern_is_invalid() : void
@@ -291,7 +300,7 @@ class JsonMatcherTest extends TestCase
 
         $this->assertFalse($this->matcher->match($value, $pattern));
 
-        $this->assertEquals($this->matcher->getError(), 'Invalid given JSON of pattern. Syntax error, malformed JSON');
+        $this->assertEquals('Invalid given JSON of pattern. Syntax error, malformed JSON', $this->matcher->getError());
     }
 
     /**
@@ -310,6 +319,6 @@ class JsonMatcherTest extends TestCase
 
         $this->assertFalse($this->matcher->match($value, $pattern));
 
-        $this->assertEquals($this->matcher->getError(), 'Invalid given JSON of value. Syntax error, malformed JSON');
+        $this->assertEquals('Invalid given JSON of value. Syntax error, malformed JSON', $this->matcher->getError());
     }
 }

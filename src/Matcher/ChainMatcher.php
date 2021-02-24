@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Coduo\PHPMatcher\Matcher;
 
 use Coduo\PHPMatcher\Backtrace;
+use Coduo\PHPMatcher\Matcher\Pattern\Assert\Json;
 use Coduo\PHPMatcher\Value\SingleLineString;
 use Coduo\ToString\StringConverter;
 
@@ -18,6 +19,11 @@ final class ChainMatcher extends Matcher
      * @var ValueMatcher[]
      */
     private array $matchers = [];
+
+    /**
+     * @var array<string>
+     */
+    private array $matcherErrors;
 
     /**
      * @param Backtrace $backtrace
@@ -42,16 +48,23 @@ final class ChainMatcher extends Matcher
                     return true;
                 }
 
+                $this->matcherErrors[\get_class($propertyMatcher)] = $propertyMatcher->getError();
                 $this->error = $propertyMatcher->getError();
             }
         }
 
         if (!isset($this->error)) {
-            $this->error = \sprintf(
-                'Any matcher from chain can\'t match value "%s" to pattern "%s"',
-                new SingleLineString((string) new StringConverter($value)),
-                new SingleLineString((string) new StringConverter($pattern))
-            );
+            if (\is_array($value) && isset($this->matcherErrors[ArrayMatcher::class])) {
+                $this->error = $this->matcherErrors[ArrayMatcher::class];
+            } elseif (Json::isValidPattern($pattern) && isset($this->matcherErrors[JsonMatcher::class])) {
+                $this->error = $this->matcherErrors[JsonMatcher::class];
+            } else {
+                $this->error = \sprintf(
+                    'Any matcher from chain can\'t match value "%s" to pattern "%s"',
+                    new SingleLineString((string) new StringConverter($value)),
+                    new SingleLineString((string) new StringConverter($pattern))
+                );
+            }
         }
 
         $this->backtrace->matcherFailed($this->matcherName(), $value, $pattern, $this->error);

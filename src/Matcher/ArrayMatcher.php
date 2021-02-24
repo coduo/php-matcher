@@ -6,6 +6,10 @@ namespace Coduo\PHPMatcher\Matcher;
 
 use Coduo\PHPMatcher\Backtrace;
 use Coduo\PHPMatcher\Exception\Exception;
+use Coduo\PHPMatcher\Matcher\ArrayMatcher\Diff;
+use Coduo\PHPMatcher\Matcher\ArrayMatcher\Difference;
+use Coduo\PHPMatcher\Matcher\ArrayMatcher\StringDifference;
+use Coduo\PHPMatcher\Matcher\ArrayMatcher\ValuePatternDifference;
 use Coduo\PHPMatcher\Parser;
 use Coduo\ToString\StringConverter;
 
@@ -36,8 +40,11 @@ final class ArrayMatcher extends Matcher
 
     private Backtrace $backtrace;
 
+    private Diff $diff;
+
     public function __construct(ValueMatcher $propertyMatcher, Backtrace $backtrace, Parser $parser)
     {
+        $this->diff = new Diff();
         $this->propertyMatcher = $propertyMatcher;
         $this->parser = $parser;
         $this->backtrace = $backtrace;
@@ -54,8 +61,9 @@ final class ArrayMatcher extends Matcher
         }
 
         if (!\is_array($value)) {
-            $this->error = \sprintf('%s "%s" is not a valid array.', \gettype($value), new StringConverter($value));
-            $this->backtrace->matcherFailed(self::class, $value, $pattern, $this->error);
+            $this->addValuePatternDifference($value, $pattern);
+
+            $this->backtrace->matcherFailed(self::class, $value, $pattern, $this->getError());
 
             return false;
         }
@@ -65,7 +73,7 @@ final class ArrayMatcher extends Matcher
         }
 
         if (!$this->iterateMatch($value, $pattern)) {
-            $this->backtrace->matcherFailed(self::class, $value, $pattern, $this->error);
+            $this->backtrace->matcherFailed(self::class, $value, $pattern, $this->getError());
 
             return false;
         }
@@ -78,6 +86,20 @@ final class ArrayMatcher extends Matcher
     public function canMatch($pattern) : bool
     {
         return \is_array($pattern) || $this->isArrayPattern($pattern);
+    }
+
+    public function getError() : ?string
+    {
+        if (!$this->diff->count()) {
+            return null;
+        }
+
+        return \implode("\n", \array_map(fn (Difference $difference) : string => $difference->format(), $this->diff->all()));
+    }
+
+    public function clearError() : void
+    {
+        $this->diff = new Diff();
     }
 
     private function isArrayPattern($pattern) : bool
@@ -126,7 +148,7 @@ final class ArrayMatcher extends Matcher
                 continue;
             }
 
-            if ($this->valueMatchPattern($value, $pattern)) {
+            if ($this->valueMatchPattern($value, $pattern, $this->formatFullPath($parentPath, $path))) {
                 continue;
             }
 
@@ -135,7 +157,9 @@ final class ArrayMatcher extends Matcher
             }
 
             if ($this->isArrayPattern($pattern)) {
-                if (!$this->allExpandersMatch($value, $pattern)) {
+                if (!$this->allExpandersMatch($value, $pattern, $parentPath)) {
+                    $this->addValuePatternDifference($value, $parentPath, $this->formatFullPath($parentPath, $path));
+
                     return false;
                 }
 
@@ -200,13 +224,15 @@ final class ArrayMatcher extends Matcher
         }, ARRAY_FILTER_USE_BOTH);
     }
 
-    private function valueMatchPattern($value, $pattern) : bool
+    private function valueMatchPattern($value, $pattern, $parentPath) : bool
     {
         $match = $this->propertyMatcher->canMatch($pattern) &&
             $this->propertyMatcher->match($value, $pattern);
 
         if (!$match) {
-            $this->error = $this->propertyMatcher->getError();
+            if (!\is_array($value)) {
+                $this->addValuePatternDifference($value, $pattern, $parentPath);
+            }
         }
 
         return $match;
@@ -230,7 +256,7 @@ final class ArrayMatcher extends Matcher
 
     private function setMissingElementInError(string $place, string $path) : void
     {
-        $this->error = \sprintf('There is no element under path %s in %s.', $path, $place);
+        $this->diff = $this->diff->add(new StringDifference(\sprintf('There is no element under path %s in %s.', $path, $place)));
     }
 
     private function formatAccessPath($key) : string
@@ -253,13 +279,14 @@ final class ArrayMatcher extends Matcher
         return $lastPattern === self::UNBOUNDED_PATTERN;
     }
 
-    private function allExpandersMatch($value, $pattern) : bool
+    private function allExpandersMatch($value, $pattern, $parentPath = '') : bool
     {
         $typePattern = $this->parser->parse($pattern);
 
         if (!$typePattern->matchExpanders($value)) {
-            $this->error = $typePattern->getError();
-            $this->backtrace->matcherFailed(self::class, $value, $pattern, $this->error);
+            $this->addValuePatternDifference($value, $pattern, $parentPath);
+
+            $this->backtrace->matcherFailed(self::class, $value, $pattern, $this->getError());
 
             return false;
         }
@@ -267,5 +294,14 @@ final class ArrayMatcher extends Matcher
         $this->backtrace->matcherSucceed(self::class, $value, $pattern);
 
         return true;
+    }
+
+    private function addValuePatternDifference($value, $pattern, string $path = '') : void
+    {
+        $this->diff = $this->diff->add(new ValuePatternDifference(
+            (string) new StringConverter($value),
+            (string) new StringConverter($pattern),
+            $path ? $path : 'root'
+        ));
     }
 }
