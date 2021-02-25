@@ -16,7 +16,44 @@ class ArrayMatcherTest extends TestCase
 
     private Backtrace $backtrace;
 
-    public static function positiveMatchData()
+    public function setUp() : void
+    {
+        $this->backtrace = new Backtrace\InMemoryBacktrace();
+        $parser = new Parser(new Lexer(), new Parser\ExpanderInitializer($this->backtrace));
+
+        $matchers = [
+            new Matcher\CallbackMatcher($this->backtrace),
+            new Matcher\NullMatcher($this->backtrace),
+            new Matcher\StringMatcher($this->backtrace, $parser),
+            new Matcher\IntegerMatcher($this->backtrace, $parser),
+            new Matcher\BooleanMatcher($this->backtrace, $parser),
+            new Matcher\DoubleMatcher($this->backtrace, $parser),
+            new Matcher\NumberMatcher($this->backtrace, $parser),
+            new Matcher\DateMatcher($this->backtrace, $parser),
+            new Matcher\ScalarMatcher($this->backtrace),
+            new Matcher\WildcardMatcher($this->backtrace),
+        ];
+
+        if (\class_exists('Symfony\\Component\\ExpressionLanguage\\ExpressionLanguage')) {
+            $matchers[] = new Matcher\ExpressionMatcher($this->backtrace);
+        }
+
+        $this->matcher = new Matcher\ArrayMatcher(
+            new Matcher\ChainMatcher(self::class, $this->backtrace, $matchers),
+            $this->backtrace,
+            $parser
+        );
+    }
+
+    /**
+     * @dataProvider positiveMatchData
+     */
+    public function test_positive_match_arrays($value, $pattern) : void
+    {
+        $this->assertTrue($this->matcher->match($value, $pattern));
+    }
+
+    public function positiveMatchData()
     {
         $simpleArr = [
             'users' => [
@@ -111,7 +148,16 @@ class ArrayMatcherTest extends TestCase
         ];
     }
 
-    public static function negativeMatchData()
+    /**
+     * @dataProvider negativeMatchData
+     */
+    public function test_negative_match_arrays($value, $pattern, string $error) : void
+    {
+        $this->assertFalse($this->matcher->match($value, $pattern));
+        $this->assertSame($error, $this->matcher->getError());
+    }
+
+    public function negativeMatchData()
     {
         $simpleArr = [
             'users' => [
@@ -162,18 +208,22 @@ class ArrayMatcherTest extends TestCase
         ];
 
         return [
-            [$simpleArr, $simpleDiff],
-            [$simpleArr, $simpleArrPatternWithUniversalKeyAndIntegerValue],
-            [['status' => 'ok', 'data' => [['foo']]], ['status' => 'ok', 'data' => []]],
-            [[1], []],
-            [[], ['key' => []]],
-            [['key' => 'val'], ['key' => 'val2']],
-            [[1], [2]],
-            [['foo', 1, 3], ['foo', 2, 3]],
-            [[], ['key' => []]],
-            [[], ['foo' => 'bar']],
-            [[], ['foo' => ['bar' => []]]],
-            [['key' => 'val', 'key2' => 'val2'], ['not key' => 'val', '@*@' => '@*@']],
+            [$simpleArr, $simpleDiff, 'Value "Michał" does not match pattern "Pablo" at path: "[users][1][firstName]"'],
+            [$simpleArr, $simpleArrPatternWithUniversalKeyAndIntegerValue, 'Value "Orzechowicz" does not match pattern "@integer@" at path: "[users][0][lastName]"'],
+            [['status' => 'ok', 'data' => [['foo']]], ['status' => 'ok', 'data' => []], 'There is no element under path [data][0] in pattern.'],
+            [[1], [], 'There is no element under path [0] in pattern.'],
+            [[], ['key' => []], 'There is no element under path [key] in value.'],
+            [['key' => 'val'], ['key' => 'val2'], 'Value "val" does not match pattern "val2" at path: "[key]"'],
+            [[1], [2], 'Value "1" does not match pattern "2" at path: "[0]"'],
+            [['foo', 1, 3], ['foo', 2, 3], 'Value "1" does not match pattern "2" at path: "[1]"'],
+            [[], ['key' => []], 'There is no element under path [key] in value.'],
+            [[], ['foo' => 'bar'], 'There is no element under path [foo] in value.'],
+            [
+                [],
+                ['foo' => ['bar' => []]],
+                "There is no element under path [bar] in value.\nThere is no element under path [foo] in value.",
+            ],
+            [['key' => 'val', 'key2' => 'val2'], ['not key' => 'val', '@*@' => '@*@'], 'There is no element under path [not key] in value.'],
             'unbound array should match one or none elements' => [
                 [
                     'users' => [
@@ -188,53 +238,9 @@ class ArrayMatcherTest extends TestCase
                     6.66,
                 ],
                 $simpleDiff,
+                'Value "Foobar" does not match pattern "Orzechowicz" at path: "[users][0][lastName]"',
             ],
         ];
-    }
-
-    public function setUp() : void
-    {
-        $this->backtrace = new Backtrace\InMemoryBacktrace();
-        $parser = new Parser(new Lexer(), new Parser\ExpanderInitializer($this->backtrace));
-
-        $matchers = [
-            new Matcher\CallbackMatcher($this->backtrace),
-            new Matcher\NullMatcher($this->backtrace),
-            new Matcher\StringMatcher($this->backtrace, $parser),
-            new Matcher\IntegerMatcher($this->backtrace, $parser),
-            new Matcher\BooleanMatcher($this->backtrace, $parser),
-            new Matcher\DoubleMatcher($this->backtrace, $parser),
-            new Matcher\NumberMatcher($this->backtrace, $parser),
-            new Matcher\DateMatcher($this->backtrace, $parser),
-            new Matcher\ScalarMatcher($this->backtrace),
-            new Matcher\WildcardMatcher($this->backtrace),
-        ];
-
-        if (\class_exists('Symfony\\Component\\ExpressionLanguage\\ExpressionLanguage')) {
-            $matchers[] = new Matcher\ExpressionMatcher($this->backtrace);
-        }
-
-        $this->matcher = new Matcher\ArrayMatcher(
-            new Matcher\ChainMatcher(self::class, $this->backtrace, $matchers),
-            $this->backtrace,
-            $parser
-        );
-    }
-
-    /**
-     * @dataProvider positiveMatchData
-     */
-    public function test_positive_match_arrays($value, $pattern) : void
-    {
-        $this->assertTrue($this->matcher->match($value, $pattern));
-    }
-
-    /**
-     * @dataProvider negativeMatchData
-     */
-    public function test_negative_match_arrays($value, $pattern) : void
-    {
-        $this->assertFalse($this->matcher->match($value, $pattern));
     }
 
     public function test_negative_match_when_cant_find_matcher_that_can_match_array_element() : void
@@ -298,14 +304,14 @@ class ArrayMatcherTest extends TestCase
     public function test_error_when_matching_fail() : void
     {
         $this->assertFalse($this->matcher->match(['foo' => 'foo value'], ['foo' => 'bar value']));
-        $this->assertEquals($this->matcher->getError(), '"foo value" does not match "bar value".');
+        $this->assertEquals($this->matcher->getError(), 'Value "foo value" does not match pattern "bar value" at path: "[foo]"');
         $this->assertFalse($this->backtrace->isEmpty());
     }
 
     public function test_error_message_when_matching_non_array_value() : void
     {
         $this->assertFalse($this->matcher->match(new \DateTime(), '@array@'));
-        $this->assertEquals($this->matcher->getError(), 'object "\\DateTime" is not a valid array.');
+        $this->assertEquals($this->matcher->getError(), 'Value "\DateTime" does not match pattern "@array@" at path: "root"');
         $this->assertFalse($this->backtrace->isEmpty());
     }
 
@@ -346,7 +352,7 @@ class ArrayMatcherTest extends TestCase
                     '@array_previous@',
                 ]
             ),
-            $this->matcher->getError()
+            (string) $this->matcher->getError()
         );
     }
 
@@ -371,7 +377,7 @@ class ArrayMatcherTest extends TestCase
                     '@array_previous_repeat@',
                 ]
             ),
-            $this->matcher->getError()
+            (string) $this->matcher->getError()
         );
     }
 
@@ -396,7 +402,7 @@ class ArrayMatcherTest extends TestCase
         );
 
         $this->assertSame(
-            '"4" does not match "@string@".',
+            'Value "4" does not match pattern "@string@" at path: "[3][id]"',
             $this->matcher->getError()
         );
     }

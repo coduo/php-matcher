@@ -71,14 +71,14 @@ class ChainMatcherTest extends TestCase
 
     public function test_if_there_is_error_description_only_from_last_matcher_that_fails() : void
     {
-        $this->firstMatcher->expects($this->once())->method('canMatch')->will($this->returnValue(true));
-        $this->firstMatcher->expects($this->once())->method('match')->will($this->returnValue(false));
-        $this->firstMatcher->expects($this->once())->method('getError')
+        $this->firstMatcher->expects($this->any())->method('canMatch')->will($this->returnValue(true));
+        $this->firstMatcher->expects($this->any())->method('match')->will($this->returnValue(false));
+        $this->firstMatcher->expects($this->any())->method('getError')
             ->will($this->returnValue('First matcher error'));
 
-        $this->secondMatcher->expects($this->once())->method('canMatch')->will($this->returnValue(true));
-        $this->secondMatcher->expects($this->once())->method('match')->will($this->returnValue(false));
-        $this->secondMatcher->expects($this->once())->method('getError')
+        $this->secondMatcher->expects($this->any())->method('canMatch')->will($this->returnValue(true));
+        $this->secondMatcher->expects($this->any())->method('match')->will($this->returnValue(false));
+        $this->secondMatcher->expects($this->any())->method('getError')
             ->will($this->returnValue('Second matcher error'));
 
         $this->assertEquals($this->matcher->match('foo', 'foo_pattern'), false);
