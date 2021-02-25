@@ -1,4 +1,4 @@
-## [Unreleased] - 2021-02-25
+## [6.0.3] - 2021-02-25
 
 ### Changed
 - [#225](https://github.com/coduo/php-matcher/pull/225) - **error message for json/array/chain matchers are now more precise** - [@norberttech](https://github.com/norberttech)
