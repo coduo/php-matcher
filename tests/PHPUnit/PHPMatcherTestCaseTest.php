@@ -17,7 +17,7 @@ class PHPMatcherTestCaseTest extends PHPMatcherTestCase
     public function test_it_throws_an_expectation_failed_exception_if_a_value_does_not_match_the_pattern() : void
     {
         $this->expectException(AssertionFailedError::class);
-        $this->expectExceptionMessageMatches("/Failed asserting that '{\"foo\":\"bar\"}' matches given pattern(.*)/");
+        $this->expectExceptionMessageMatches('/Failed asserting that Value "bar" does not match pattern "@integer@" at path: "\\[foo\\]"./');
 
         $this->assertMatchesPattern('{"foo": "@integer@"}', \json_encode(['foo' => 'bar']));
     }
@@ -25,7 +25,7 @@ class PHPMatcherTestCaseTest extends PHPMatcherTestCase
     public function test_it_creates_a_constraint_for_stubs() : void
     {
         $this->expectException(AssertionFailedError::class);
-        $this->expectExceptionMessageMatches('/Failed asserting that 42 matches given pattern(.*)/');
+        $this->expectExceptionMessageMatches('/Failed asserting that integer "42" is not a valid string../');
 
         $mock = $this->getMockBuilder('stdClass')
             ->setMethods(['getTitle'])

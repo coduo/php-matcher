@@ -34,7 +34,7 @@ class PHPMatcherConstraintTest extends TestCase
     public function test_it_sets_a_failure_description_if_not_given() : void
     {
         $this->expectException(AssertionFailedError::class);
-        $this->expectExceptionMessageMatches('/Failed asserting that 42 matches given pattern(.*)/');
+        $this->expectExceptionMessageMatches('/Failed asserting that integer "42" is not a valid string../');
 
         $constraint = new PHPMatcherConstraint('@string@');
 

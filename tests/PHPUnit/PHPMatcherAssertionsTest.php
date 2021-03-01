@@ -25,11 +25,7 @@ class PHPMatcherAssertionsTest extends TestCase
         } catch (\Exception $e) {
             $this->assertSame(
                 <<<'ERROR'
-Failed asserting that '{"foo":"bar"}' matches given pattern.
-Pattern: '{"foo": "@integer@"}'
-Error: Value "bar" does not match pattern "@integer@" at path: "[foo]"
-Backtrace: 
-Empty.
+Failed asserting that Value "bar" does not match pattern "@integer@" at path: "[foo]".
 ERROR,
                 $e->getMessage()
             );
@@ -45,10 +41,8 @@ ERROR,
         } catch (\Exception $e) {
             $this->assertSame(
                 <<<ERROR
-Failed asserting that '{"foo":"bar"}' matches given pattern.
-Pattern: '{"foo": "@integer@"}'
-Error: Value "bar" does not match pattern "@integer@" at path: "[foo]"
-Backtrace: 
+Failed asserting that Value "bar" does not match pattern "@integer@" at path: "[foo]"
+Backtrace:
 #1 Matcher Coduo\PHPMatcher\Matcher matching value "{"foo":"bar"}" with "{"foo":"@integer@"}" pattern
 #2 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (all) matching value "{"foo":"bar"}" with "{"foo":"@integer@"}" pattern
 #3 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) can match pattern "{"foo":"@integer@"}"
@@ -150,7 +144,7 @@ ERROR,
          *  #...
          *  #35 Matcher Coduo\PHPMatcher\Matcher error: integer "42" is not a valid string.
          */
-        $this->expectExceptionMessageMatches("/Expectation failed for method name is \"getTitle\" when invoked zero or more times\nParameter 0 for invocation stdClass::getTitle\(42\) does not match expected value.\nFailed asserting that 42 matches given pattern.\nPattern: '@string@'\nError: integer \"42\" is not a valid string.\nBacktrace: \n(.*)/");
+        $this->expectExceptionMessageMatches("/Expectation failed for method name is \"getTitle\" when invoked zero or more times\nParameter 0 for invocation stdClass::getTitle\(42\) does not match expected value.\nFailed asserting that integer \"42\" is not a valid string../");
 
         $mock = $this->getMockBuilder('stdClass')
             ->setMethods(['getTitle'])
