@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Coduo\PHPMatcher\PHPUnit;
 
 use Coduo\PHPMatcher\Backtrace;
+use Coduo\PHPMatcher\Backtrace\VoidBacktrace;
 use Coduo\PHPMatcher\PHPMatcher;
 use PHPUnit\Framework\Constraint\Constraint;
 use PHPUnit\Util\Json;
@@ -42,10 +43,13 @@ final class PHPMatcherConstraint extends Constraint
 
     protected function failureDescription($other) : string
     {
-        return parent::failureDescription($other)
-            . "\nPattern: " . $this->exporter()->export($this->pattern)
-            . "\nError: " . $this->matcher->error()
-            . "\nBacktrace: \n" . $this->matcher->backtrace();
+        $errorDescription = $this->matcher->error() ?: 'Value does not match given pattern';
+        $backtrace = $this->matcher->backtrace();
+
+        return $backtrace instanceof VoidBacktrace
+            ? $errorDescription
+            : $errorDescription
+                . "\nBacktrace:\n" . $this->matcher->backtrace();
     }
 
     protected function matches($value) : bool
