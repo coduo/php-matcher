@@ -1,3 +1,8 @@
+## [Unreleased] - 2021-03-01
+
+### Changed
+- [#226](https://github.com/coduo/php-matcher/pull/226) - **Omit pattern and empty backtrace in failure description returned by PHPMatcherConstraint** - [@nnatter](https://github.com/nnatter)
+
 ## [6.0.3] - 2021-02-25
 
 ### Changed
