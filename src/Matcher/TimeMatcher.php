@@ -38,6 +38,7 @@ final class TimeMatcher extends Matcher
         }
 
         try {
+            /** @phpstan-ignore-next-line  */
             Time::fromString($value);
         } catch (\Exception $exception) {
             $this->error = \sprintf('%s "%s" is not a valid time.', $value, new StringConverter($value));
