@@ -1,4 +1,4 @@
-## [Unreleased] - 2021-05-03
+## [6.0.5] - 2021-05-03
 
 ### Changed
 - [#228](https://github.com/coduo/php-matcher/pull/228) - **allow aeon-php/calendar to be used in ^0.17.0 and ^0.180** - [@kasn](https://github.com/kasn)
