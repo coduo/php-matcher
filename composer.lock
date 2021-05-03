@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b6e7d4891ceaeb22f9b218dbe5776739",
+    "content-hash": "5c20cbfa0e98863a26e463745a8bbc7d",
     "packages": [
         {
             "name": "aeon-php/calendar",
-            "version": "0.17.0",
+            "version": "0.18.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aeon-php/calendar.git",
-                "reference": "a35eff5a6a3700ab2294e0ccdfa7e98de8641a5f"
+                "reference": "61c1582fac59275287cbe3f256ac86226ddce3d1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aeon-php/calendar/zipball/a35eff5a6a3700ab2294e0ccdfa7e98de8641a5f",
-                "reference": "a35eff5a6a3700ab2294e0ccdfa7e98de8641a5f",
+                "url": "https://api.github.com/repos/aeon-php/calendar/zipball/61c1582fac59275287cbe3f256ac86226ddce3d1",
+                "reference": "61c1582fac59275287cbe3f256ac86226ddce3d1",
                 "shasum": ""
             },
             "require": {
@@ -51,7 +51,7 @@
             ],
             "support": {
                 "issues": "https://github.com/aeon-php/calendar/issues",
-                "source": "https://github.com/aeon-php/calendar/tree/0.17.0"
+                "source": "https://github.com/aeon-php/calendar/tree/0.18.0"
             },
             "funding": [
                 {
@@ -59,7 +59,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-04-24T16:16:37+00:00"
+            "time": "2021-05-01T20:04:37+00:00"
         },
         {
             "name": "coduo/php-to-string",
