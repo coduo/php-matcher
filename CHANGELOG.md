@@ -1,3 +1,14 @@
+## [Unreleased] - 2021-05-03
+
+### Added
+- [#229](https://github.com/coduo/php-matcher/pull/229) - **additional composer to install tools** - [@norberttech](https://github.com/norberttech)
+
+### Fixed
+- [#229](https://github.com/coduo/php-matcher/pull/229) - **scheduled github workflows jobs cron defintitions** - [@norberttech](https://github.com/norberttech)
+
+### Removed
+- [#229](https://github.com/coduo/php-matcher/pull/229) - **phive to install tools** - [@norberttech](https://github.com/norberttech)
+
 ## [6.0.5] - 2021-05-03
 
 ### Changed
