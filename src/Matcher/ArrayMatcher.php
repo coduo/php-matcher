@@ -116,6 +116,7 @@ final class ArrayMatcher extends Matcher
         $pattern = null;
         $previousPattern = null;
 
+        /** @psalm-suppress InvalidArrayOffset */
         if (\in_array(self::ARRAY_PREVIOUS_PATTERN_REPEAT, $patterns, true)) {
             $patterns = \array_merge(
                 \array_replace($patterns, [\array_search(self::ARRAY_PREVIOUS_PATTERN_REPEAT, $patterns, true) => self::ARRAY_PREVIOUS_PATTERN]),

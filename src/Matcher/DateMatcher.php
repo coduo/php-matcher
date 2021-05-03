@@ -38,6 +38,7 @@ final class DateMatcher extends Matcher
         }
 
         try {
+            /** @phpstan-ignore-next-line  */
             Day::fromString($value);
         } catch (\Exception $exception) {
             $this->error = \sprintf('%s "%s" is not a valid date.', $value, new StringConverter($value));

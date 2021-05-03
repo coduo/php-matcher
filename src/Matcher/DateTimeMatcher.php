@@ -38,6 +38,7 @@ final class DateTimeMatcher extends Matcher
         }
 
         try {
+            /** @phpstan-ignore-next-line  */
             DateTime::fromString($value);
         } catch (\Exception $exception) {
             $this->error = \sprintf('%s "%s" is not a valid date time.', $value, new StringConverter($value));

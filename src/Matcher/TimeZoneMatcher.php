@@ -43,6 +43,7 @@ final class TimeZoneMatcher extends Matcher
         }
 
         try {
+            /** @phpstan-ignore-next-line  */
             TimeZone::fromString($value);
         } catch (\Exception $exception) {
             $this->error = \sprintf('%s "%s" is not a valid timezone.', $value, new StringConverter($value));

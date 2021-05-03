@@ -25,7 +25,6 @@
     },
     "require-dev": {
         "openlss/lib-array2xml": "^1.0",
-        "phpunit/phpunit": "^9.4",
         "symfony/expression-language": "^2.3|^3.0|^4.0|^5.0"
     },
     "suggest": {
@@ -57,19 +56,26 @@
             "@test:mutation"
         ],
         "cs:php:fix": [
-            "tools/php-cs-fixer fix --using-cache=no"
+            "tools\/vendor\/bin\/php-cs-fixer fix --using-cache=no"
         ],
         "test" : [
-            "phpunit"
+            "tools\/vendor\/bin\/phpunit"
         ],
         "test:mutation": [
             "Composer\\Config::disableProcessTimeout",
-            "tools/infection"
+            "tools\/vendor\/bin\/infection"
         ],
         "static:analyze": [
-            "tools/psalm --shepherd --stats",
-            "tools/phpstan analyze -c phpstan.neon",
-            "tools/php-cs-fixer fix --dry-run"
+            "tools\/vendor\/bin\/psalm --shepherd --stats",
+            "tools\/vendor\/bin\/phpstan analyze -c phpstan.neon",
+            "tools\/vendor\/bin\/php-cs-fixer fix --dry-run"
+        ],
+        "tools:install": "composer install --working-dir=./tools",
+        "post-install-cmd": [
+            "@tools:install"
+        ],
+        "post-update-cmd": [
+            "@tools:install"
         ]
     }
 }
