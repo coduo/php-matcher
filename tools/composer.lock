@@ -1743,16 +1743,16 @@
         },
         {
             "name": "phpbench/phpbench",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpbench/phpbench.git",
-                "reference": "60d94f4ff0a318fc857f15941d4e86f0090bc77c"
+                "reference": "a00ab7957b18fd8f65ab41b643c5a77c96f2006a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpbench/phpbench/zipball/60d94f4ff0a318fc857f15941d4e86f0090bc77c",
-                "reference": "60d94f4ff0a318fc857f15941d4e86f0090bc77c",
+                "url": "https://api.github.com/repos/phpbench/phpbench/zipball/a00ab7957b18fd8f65ab41b643c5a77c96f2006a",
+                "reference": "a00ab7957b18fd8f65ab41b643c5a77c96f2006a",
                 "shasum": ""
             },
             "require": {
@@ -1817,9 +1817,9 @@
             "description": "PHP Benchmarking Framework",
             "support": {
                 "issues": "https://github.com/phpbench/phpbench/issues",
-                "source": "https://github.com/phpbench/phpbench/tree/1.0.0"
+                "source": "https://github.com/phpbench/phpbench/tree/1.0.1"
             },
-            "time": "2021-05-09T10:31:28+00:00"
+            "time": "2021-05-11T21:42:05+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
