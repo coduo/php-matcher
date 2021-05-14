@@ -18,7 +18,7 @@ final class UuidMatcher extends Matcher
     /**
      * @var string
      */
-    public const UUID_PATTERN = '[\da-f]{8}-[\da-f]{4}-[1-5][\da-f]{3}-[89ab][\da-f]{3}-[\da-f]{12}';
+    public const UUID_PATTERN = '[\da-f]{8}-[\da-f]{4}-[1-6][\da-f]{3}-[89ab][\da-f]{3}-[\da-f]{12}';
 
     /**
      * @var string
