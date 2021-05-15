@@ -29,6 +29,7 @@ class UuidMatcherTest extends TestCase
             ['7b368038-a5ca-3aa3-b0db-1177d1761c9e', '@uuid@'],
             ['9f4db639-0e87-4367-9beb-d64e3f42ae18', '@uuid@'],
             ['1f2b1a18-81a0-5685-bca7-f23022ed7c7b', '@uuid@'],
+            ['1ebb5050-b028-616a-9180-0a00ac070060', '@uuid@'],
         ];
     }
 
