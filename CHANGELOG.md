@@ -1,6 +1,7 @@
-## [Unreleased] - 2021-05-03
+## [Unreleased] - 2021-05-15
 
 ### Added
+- [#236](https://github.com/coduo/php-matcher/pull/236) - **support for UUID v6** - [@vudaltsov](https://github.com/vudaltsov)
 - [#229](https://github.com/coduo/php-matcher/pull/229) - **additional composer to install tools** - [@norberttech](https://github.com/norberttech)
 
 ### Fixed
