@@ -53,6 +53,7 @@ final class ExpandersTest extends TestCase
             [[], ['unexistent_key' => '@string@.optional()'], true],
             [[], ['unexistent_key' => '@text@.optional()'], true],
             [[], ['unexistent_key' => '@uuid@.optional()'], true],
+            [[], ['unexistent_key' => '@ulid@.optional()'], true],
             [[], ['unexistent_key' => '@xml@.optional()'], true],
             [[], ['unexistent_key' => '@array@.optional()', 'unexistent_second_key' => '@string@.optional()'], true],
             [[], ['unexistent_key' => '@array@.optional()', 'unexistent_second_key' => '@string@'], false],

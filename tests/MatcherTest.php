@@ -25,6 +25,7 @@ class MatcherTest extends PHPMatcherTestCase
             [1, '@integer@'],
             [['foo'], '@array@'],
             ['9f4db639-0e87-4367-9beb-d64e3f42ae18', '@uuid@'],
+            ['01BX5ZZKBKACTAV9WEVGEMMVS0', '@ulid@'],
         ];
     }
 
@@ -168,6 +169,16 @@ class MatcherTest extends PHPMatcherTestCase
                 /* @lang JSON */
                 '{
                     "url": "/accounts/@uuid@"
+                }',
+            ],
+            [
+                /* @lang JSON */
+                '{
+                    "url": "/profile/01BX5ZZKBKACTAV9WEVGEMMVS0"
+                }',
+                /* @lang JSON */
+                '{
+                    "url": "/profile/@ulid@"
                 }',
             ],
             [

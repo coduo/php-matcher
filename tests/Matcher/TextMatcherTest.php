@@ -127,6 +127,21 @@ XML;
                 '/user/@uuid@/@string@',
                 false,
             ],
+            [
+                '/user/01BX5ZZKBKACTAV9WEVGEMMVS0/profile',
+                '/user/@ulid@/@string@',
+                true,
+            ],
+            [
+                '/user/12345/profile',
+                '/user/@ulid@/@string@',
+                false,
+            ],
+            [
+                '/user/8ZZZZZZZZZZZZZZZZZZZZZZZZZ/profile',
+                '/user/@ulid@/@string@',
+                false,
+            ],
         ];
     }
 }

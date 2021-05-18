@@ -111,6 +111,7 @@ class MatcherTest extends TestCase
 * ``@*@`` || ``@wildcard@``
 * ``expr(expression)`` - **optional**, requires `symfony/expression-language: ^2.3|^3.0|^4.0|^5.0` to be present
 * ``@uuid@``
+* ``@ulid@``
 * ``@json@``
 * ``@string@||@integer@`` - string OR integer
 
@@ -334,6 +335,18 @@ use Coduo\PHPMatcher\PHPMatcher;
 $matcher = new PHPMatcher();
 
 $matcher->match('9f4db639-0e87-4367-9beb-d64e3f42ae18', '@uuid@');
+```
+
+### ULID matching
+
+```php
+<?php
+
+use Coduo\PHPMatcher\PHPMatcher;
+
+$matcher = new PHPMatcher();
+
+$matcher->match('01BX5ZZKBKACTAV9WEVGEMMVS0', '@ulid@');
 ```
 
 ### Array matching
