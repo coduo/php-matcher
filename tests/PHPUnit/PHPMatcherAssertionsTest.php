@@ -65,58 +65,60 @@ Backtrace:
 #20 Matcher Coduo\PHPMatcher\Matcher\ScalarMatcher error: "{"foo":"bar"}" does not match "{"foo":"@integer@"}".
 #21 Matcher Coduo\PHPMatcher\Matcher\WildcardMatcher can't match pattern "{"foo":"@integer@"}"
 #22 Matcher Coduo\PHPMatcher\Matcher\UuidMatcher can't match pattern "{"foo":"@integer@"}"
-#23 Matcher Coduo\PHPMatcher\Matcher\JsonObjectMatcher can't match pattern "{"foo":"@integer@"}"
-#24 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) failed to match value "{"foo":"bar"}" with "{"foo":"@integer@"}" pattern
-#25 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) error: "{"foo":"bar"}" does not match "{"foo":"@integer@"}".
-#26 Matcher Coduo\PHPMatcher\Matcher\JsonMatcher can match pattern "{"foo":"@integer@"}"
-#27 Matcher Coduo\PHPMatcher\Matcher\JsonMatcher matching value "{"foo":"bar"}" with "{"foo":"@integer@"}" pattern
-#28 Matcher Coduo\PHPMatcher\Matcher\ArrayMatcher matching value "Array(1)" with "Array(1)" pattern
-#29 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (array) can match pattern "@integer@"
-#30 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (array) matching value "bar" with "@integer@" pattern
-#31 Matcher Coduo\PHPMatcher\Matcher\OrMatcher can't match pattern "@integer@"
-#32 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) can match pattern "@integer@"
-#33 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) matching value "bar" with "@integer@" pattern
-#34 Matcher Coduo\PHPMatcher\Matcher\CallbackMatcher can't match pattern "@integer@"
-#35 Matcher Coduo\PHPMatcher\Matcher\ExpressionMatcher can't match pattern "@integer@"
-#36 Matcher Coduo\PHPMatcher\Matcher\NullMatcher can't match pattern "@integer@"
-#37 Matcher Coduo\PHPMatcher\Matcher\StringMatcher can't match pattern "@integer@"
-#38 Matcher Coduo\PHPMatcher\Matcher\IntegerMatcher can match pattern "@integer@"
-#39 Matcher Coduo\PHPMatcher\Matcher\IntegerMatcher matching value "bar" with "@integer@" pattern
-#40 Matcher Coduo\PHPMatcher\Matcher\IntegerMatcher failed to match value "bar" with "@integer@" pattern
-#41 Matcher Coduo\PHPMatcher\Matcher\IntegerMatcher error: string "bar" is not a valid integer.
-#42 Matcher Coduo\PHPMatcher\Matcher\BooleanMatcher can't match pattern "@integer@"
-#43 Matcher Coduo\PHPMatcher\Matcher\DoubleMatcher can't match pattern "@integer@"
-#44 Matcher Coduo\PHPMatcher\Matcher\NumberMatcher can't match pattern "@integer@"
-#45 Matcher Coduo\PHPMatcher\Matcher\TimeMatcher can't match pattern "@integer@"
-#46 Matcher Coduo\PHPMatcher\Matcher\DateMatcher can't match pattern "@integer@"
-#47 Matcher Coduo\PHPMatcher\Matcher\DateTimeMatcher can't match pattern "@integer@"
-#48 Matcher Coduo\PHPMatcher\Matcher\TimeZoneMatcher can't match pattern "@integer@"
-#49 Matcher Coduo\PHPMatcher\Matcher\ScalarMatcher can match pattern "@integer@"
-#50 Matcher Coduo\PHPMatcher\Matcher\ScalarMatcher matching value "bar" with "@integer@" pattern
-#51 Matcher Coduo\PHPMatcher\Matcher\ScalarMatcher failed to match value "bar" with "@integer@" pattern
-#52 Matcher Coduo\PHPMatcher\Matcher\ScalarMatcher error: "bar" does not match "@integer@".
-#53 Matcher Coduo\PHPMatcher\Matcher\WildcardMatcher can't match pattern "@integer@"
-#54 Matcher Coduo\PHPMatcher\Matcher\UuidMatcher can't match pattern "@integer@"
-#55 Matcher Coduo\PHPMatcher\Matcher\JsonObjectMatcher can't match pattern "@integer@"
-#56 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) failed to match value "bar" with "@integer@" pattern
-#57 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) error: "bar" does not match "@integer@".
-#58 Matcher Coduo\PHPMatcher\Matcher\TextMatcher can match pattern "@integer@"
-#59 Matcher Coduo\PHPMatcher\Matcher\TextMatcher matching value "bar" with "@integer@" pattern
-#60 Matcher Coduo\PHPMatcher\Matcher\TextMatcher failed to match value "bar" with "@integer@" pattern
-#61 Matcher Coduo\PHPMatcher\Matcher\TextMatcher error: "bar" does not match "@integer@" pattern
-#62 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (array) failed to match value "bar" with "@integer@" pattern
-#63 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (array) error: "bar" does not match "@integer@" pattern
-#64 Matcher Coduo\PHPMatcher\Matcher\ArrayMatcher failed to match value "Array(1)" with "Array(1)" pattern
-#65 Matcher Coduo\PHPMatcher\Matcher\ArrayMatcher error: Value "bar" does not match pattern "@integer@" at path: "[foo]"
-#66 Matcher Coduo\PHPMatcher\Matcher\JsonMatcher failed to match value "{"foo":"bar"}" with "{"foo":"@integer@"}" pattern
-#67 Matcher Coduo\PHPMatcher\Matcher\JsonMatcher error: Value "bar" does not match pattern "@integer@" at path: "[foo]"
-#68 Matcher Coduo\PHPMatcher\Matcher\XmlMatcher can't match pattern "{"foo":"@integer@"}"
-#69 Matcher Coduo\PHPMatcher\Matcher\OrMatcher can't match pattern "{"foo":"@integer@"}"
-#70 Matcher Coduo\PHPMatcher\Matcher\TextMatcher can't match pattern "{"foo":"@integer@"}"
-#71 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (all) failed to match value "{"foo":"bar"}" with "{"foo":"@integer@"}" pattern
-#72 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (all) error: Value "bar" does not match pattern "@integer@" at path: "[foo]"
-#73 Matcher Coduo\PHPMatcher\Matcher failed to match value "{"foo":"bar"}" with "{"foo":"@integer@"}" pattern
-#74 Matcher Coduo\PHPMatcher\Matcher error: Value "bar" does not match pattern "@integer@" at path: "[foo]".
+#23 Matcher Coduo\PHPMatcher\Matcher\UlidMatcher can't match pattern "{"foo":"@integer@"}"
+#24 Matcher Coduo\PHPMatcher\Matcher\JsonObjectMatcher can't match pattern "{"foo":"@integer@"}"
+#25 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) failed to match value "{"foo":"bar"}" with "{"foo":"@integer@"}" pattern
+#26 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) error: "{"foo":"bar"}" does not match "{"foo":"@integer@"}".
+#27 Matcher Coduo\PHPMatcher\Matcher\JsonMatcher can match pattern "{"foo":"@integer@"}"
+#28 Matcher Coduo\PHPMatcher\Matcher\JsonMatcher matching value "{"foo":"bar"}" with "{"foo":"@integer@"}" pattern
+#29 Matcher Coduo\PHPMatcher\Matcher\ArrayMatcher matching value "Array(1)" with "Array(1)" pattern
+#30 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (array) can match pattern "@integer@"
+#31 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (array) matching value "bar" with "@integer@" pattern
+#32 Matcher Coduo\PHPMatcher\Matcher\OrMatcher can't match pattern "@integer@"
+#33 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) can match pattern "@integer@"
+#34 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) matching value "bar" with "@integer@" pattern
+#35 Matcher Coduo\PHPMatcher\Matcher\CallbackMatcher can't match pattern "@integer@"
+#36 Matcher Coduo\PHPMatcher\Matcher\ExpressionMatcher can't match pattern "@integer@"
+#37 Matcher Coduo\PHPMatcher\Matcher\NullMatcher can't match pattern "@integer@"
+#38 Matcher Coduo\PHPMatcher\Matcher\StringMatcher can't match pattern "@integer@"
+#39 Matcher Coduo\PHPMatcher\Matcher\IntegerMatcher can match pattern "@integer@"
+#40 Matcher Coduo\PHPMatcher\Matcher\IntegerMatcher matching value "bar" with "@integer@" pattern
+#41 Matcher Coduo\PHPMatcher\Matcher\IntegerMatcher failed to match value "bar" with "@integer@" pattern
+#42 Matcher Coduo\PHPMatcher\Matcher\IntegerMatcher error: string "bar" is not a valid integer.
+#43 Matcher Coduo\PHPMatcher\Matcher\BooleanMatcher can't match pattern "@integer@"
+#44 Matcher Coduo\PHPMatcher\Matcher\DoubleMatcher can't match pattern "@integer@"
+#45 Matcher Coduo\PHPMatcher\Matcher\NumberMatcher can't match pattern "@integer@"
+#46 Matcher Coduo\PHPMatcher\Matcher\TimeMatcher can't match pattern "@integer@"
+#47 Matcher Coduo\PHPMatcher\Matcher\DateMatcher can't match pattern "@integer@"
+#48 Matcher Coduo\PHPMatcher\Matcher\DateTimeMatcher can't match pattern "@integer@"
+#49 Matcher Coduo\PHPMatcher\Matcher\TimeZoneMatcher can't match pattern "@integer@"
+#50 Matcher Coduo\PHPMatcher\Matcher\ScalarMatcher can match pattern "@integer@"
+#51 Matcher Coduo\PHPMatcher\Matcher\ScalarMatcher matching value "bar" with "@integer@" pattern
+#52 Matcher Coduo\PHPMatcher\Matcher\ScalarMatcher failed to match value "bar" with "@integer@" pattern
+#53 Matcher Coduo\PHPMatcher\Matcher\ScalarMatcher error: "bar" does not match "@integer@".
+#54 Matcher Coduo\PHPMatcher\Matcher\WildcardMatcher can't match pattern "@integer@"
+#55 Matcher Coduo\PHPMatcher\Matcher\UuidMatcher can't match pattern "@integer@"
+#56 Matcher Coduo\PHPMatcher\Matcher\UlidMatcher can't match pattern "@integer@"
+#57 Matcher Coduo\PHPMatcher\Matcher\JsonObjectMatcher can't match pattern "@integer@"
+#58 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) failed to match value "bar" with "@integer@" pattern
+#59 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) error: "bar" does not match "@integer@".
+#60 Matcher Coduo\PHPMatcher\Matcher\TextMatcher can match pattern "@integer@"
+#61 Matcher Coduo\PHPMatcher\Matcher\TextMatcher matching value "bar" with "@integer@" pattern
+#62 Matcher Coduo\PHPMatcher\Matcher\TextMatcher failed to match value "bar" with "@integer@" pattern
+#63 Matcher Coduo\PHPMatcher\Matcher\TextMatcher error: "bar" does not match "@integer@" pattern
+#64 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (array) failed to match value "bar" with "@integer@" pattern
+#65 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (array) error: "bar" does not match "@integer@" pattern
+#66 Matcher Coduo\PHPMatcher\Matcher\ArrayMatcher failed to match value "Array(1)" with "Array(1)" pattern
+#67 Matcher Coduo\PHPMatcher\Matcher\ArrayMatcher error: Value "bar" does not match pattern "@integer@" at path: "[foo]"
+#68 Matcher Coduo\PHPMatcher\Matcher\JsonMatcher failed to match value "{"foo":"bar"}" with "{"foo":"@integer@"}" pattern
+#69 Matcher Coduo\PHPMatcher\Matcher\JsonMatcher error: Value "bar" does not match pattern "@integer@" at path: "[foo]"
+#70 Matcher Coduo\PHPMatcher\Matcher\XmlMatcher can't match pattern "{"foo":"@integer@"}"
+#71 Matcher Coduo\PHPMatcher\Matcher\OrMatcher can't match pattern "{"foo":"@integer@"}"
+#72 Matcher Coduo\PHPMatcher\Matcher\TextMatcher can't match pattern "{"foo":"@integer@"}"
+#73 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (all) failed to match value "{"foo":"bar"}" with "{"foo":"@integer@"}" pattern
+#74 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (all) error: Value "bar" does not match pattern "@integer@" at path: "[foo]"
+#75 Matcher Coduo\PHPMatcher\Matcher failed to match value "{"foo":"bar"}" with "{"foo":"@integer@"}" pattern
+#76 Matcher Coduo\PHPMatcher\Matcher error: Value "bar" does not match pattern "@integer@" at path: "[foo]".
 ERROR,
                 $e->getMessage()
             );

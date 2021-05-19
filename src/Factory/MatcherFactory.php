@@ -87,6 +87,7 @@ final class MatcherFactory implements Factory
                 new Matcher\ScalarMatcher($backtrace),
                 new Matcher\WildcardMatcher($backtrace),
                 new Matcher\UuidMatcher($backtrace, $parser),
+                new Matcher\UlidMatcher($backtrace, $parser),
                 new Matcher\JsonObjectMatcher($backtrace, $parser),
             ]
         );
