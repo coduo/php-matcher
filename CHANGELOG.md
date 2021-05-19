@@ -1,3 +1,8 @@
+## [Unreleased] - 2021-05-19
+
+### Added
+- [#238](https://github.com/coduo/php-matcher/pull/238) - **@ulid@ - matcher** - [@WengerK](https://github.com/WengerK)
+
 ## [6.0.6] - 2021-05-15
 
 ### Added
