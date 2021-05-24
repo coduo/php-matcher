@@ -1,7 +1,10 @@
-## [Unreleased] - 2021-05-19
+## [Unreleased] - 2021-05-24
 
 ### Added
 - [#238](https://github.com/coduo/php-matcher/pull/238) - **@ulid@ - matcher** - [@WengerK](https://github.com/WengerK)
+
+### Fixed
+- [20654f](https://github.com/coduo/php-matcher/commit/20654fa064777bdbf811281bc5aa05ff9c4ad724) - **assertMatchesPattern example in README (#240)** - [@alepdev](https://github.com/alepdev)
 
 ## [6.0.6] - 2021-05-15
 
