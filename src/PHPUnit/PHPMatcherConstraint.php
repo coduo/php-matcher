@@ -52,9 +52,9 @@ final class PHPMatcherConstraint extends Constraint
                 . "\nBacktrace:\n" . $this->matcher->backtrace();
     }
 
-    protected function matches($value) : bool
+    protected function matches($other) : bool
     {
-        return $this->matcher->match($this->lastValue = $value, $this->pattern);
+        return $this->matcher->match($this->lastValue = $other, $this->pattern);
     }
 
     /**
