@@ -67,7 +67,7 @@ class MatcherTest extends PHPMatcherTestCase
 {
     public function test_matcher_that_value_matches_pattern()
     {
-        $this->assertMatchesPattern('{"name": "Norbert"}', '{"name": "@string@"}');
+        $this->assertMatchesPattern('{"name": "@string@"}', '{"name": "Norbert"}');
     }
 }
 ```
@@ -86,7 +86,7 @@ class MatcherTest extends TestCase
 
     public function test_matcher_that_value_matches_pattern()
     {
-        $this->assertMatchesPattern('{"name": "Norbert"}', '{"name": "@string@"}');
+        $this->assertMatchesPattern('{"name": "@string@"}', '{"name": "Norbert"}');
     }
 }
 ```
