@@ -1,4 +1,4 @@
-## [Unreleased] - 2021-06-20
+## [6.0.7] - 2021-06-20
 
 ### Added
 - [2cdaed](https://github.com/coduo/php-matcher/commit/2cdaedb0e28c03da8dfb6c4a35f567161491272e) - **aeon-php/calendar ^1.0 constraint** - [@norberttech](https://github.com/norberttech)
