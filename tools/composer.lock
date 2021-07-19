@@ -1654,20 +1654,20 @@
         },
         {
             "name": "phpbench/container",
-            "version": "2.1.0",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpbench/container.git",
-                "reference": "def10824b6009d31028fa8dc9f73f4b26b234a67"
+                "reference": "4af6c2619296e95b72409fd6244f000276277047"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpbench/container/zipball/def10824b6009d31028fa8dc9f73f4b26b234a67",
-                "reference": "def10824b6009d31028fa8dc9f73f4b26b234a67",
+                "url": "https://api.github.com/repos/phpbench/container/zipball/4af6c2619296e95b72409fd6244f000276277047",
+                "reference": "4af6c2619296e95b72409fd6244f000276277047",
                 "shasum": ""
             },
             "require": {
-                "psr/container": "^1.0",
+                "psr/container": "^1.0|^2.0",
                 "symfony/options-resolver": "^4.2 || ^5.0"
             },
             "require-dev": {
@@ -1699,9 +1699,9 @@
             "description": "Simple, configurable, service container.",
             "support": {
                 "issues": "https://github.com/phpbench/container/issues",
-                "source": "https://github.com/phpbench/container/tree/2.1.0"
+                "source": "https://github.com/phpbench/container/tree/2.2.0"
             },
-            "time": "2021-04-04T07:23:17+00:00"
+            "time": "2021-07-14T20:56:29+00:00"
         },
         {
             "name": "phpbench/dom",
@@ -1756,16 +1756,16 @@
         },
         {
             "name": "phpbench/phpbench",
-            "version": "1.0.3",
+            "version": "1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpbench/phpbench.git",
-                "reference": "9827767f62f6f84974b1317f53536d68ae8db5e1"
+                "reference": "52cb206677ef235d4f26317a25db8791a64cda12"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpbench/phpbench/zipball/9827767f62f6f84974b1317f53536d68ae8db5e1",
-                "reference": "9827767f62f6f84974b1317f53536d68ae8db5e1",
+                "url": "https://api.github.com/repos/phpbench/phpbench/zipball/52cb206677ef235d4f26317a25db8791a64cda12",
+                "reference": "52cb206677ef235d4f26317a25db8791a64cda12",
                 "shasum": ""
             },
             "require": {
@@ -1830,7 +1830,7 @@
             "description": "PHP Benchmarking Framework",
             "support": {
                 "issues": "https://github.com/phpbench/phpbench/issues",
-                "source": "https://github.com/phpbench/phpbench/tree/1.0.3"
+                "source": "https://github.com/phpbench/phpbench/tree/1.0.4"
             },
             "funding": [
                 {
@@ -1838,7 +1838,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-07-03T09:36:14+00:00"
+            "time": "2021-07-18T14:07:54+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -5739,9 +5739,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "phpbench/phpbench": 15
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
