@@ -7,6 +7,6 @@
         "phpstan/phpstan": "^0.12.82",
         "infection/infection": "^0.25.0",
         "phpbench/phpbench": "^1.0.0-alpha7",
-        "friendsofphp/php-cs-fixer": "^2.18"
+        "friendsofphp/php-cs-fixer": "^3.2"
     }
 }
