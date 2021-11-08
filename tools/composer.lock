@@ -1715,16 +1715,16 @@
         },
         {
             "name": "phpbench/dom",
-            "version": "0.3.1",
+            "version": "0.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpbench/dom.git",
-                "reference": "d26e615c4d64da41d168ab1096e4f55d97f2344f"
+                "reference": "b013b717832ddbaadf2a40984b04bc66af9a7110"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpbench/dom/zipball/d26e615c4d64da41d168ab1096e4f55d97f2344f",
-                "reference": "d26e615c4d64da41d168ab1096e4f55d97f2344f",
+                "url": "https://api.github.com/repos/phpbench/dom/zipball/b013b717832ddbaadf2a40984b04bc66af9a7110",
+                "reference": "b013b717832ddbaadf2a40984b04bc66af9a7110",
                 "shasum": ""
             },
             "require": {
@@ -1760,33 +1760,33 @@
             "description": "DOM wrapper to simplify working with the PHP DOM implementation",
             "support": {
                 "issues": "https://github.com/phpbench/dom/issues",
-                "source": "https://github.com/phpbench/dom/tree/0.3.1"
+                "source": "https://github.com/phpbench/dom/tree/0.3.2"
             },
-            "time": "2021-04-21T20:44:19+00:00"
+            "time": "2021-09-24T15:26:07+00:00"
         },
         {
             "name": "phpbench/phpbench",
-            "version": "1.1.1",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpbench/phpbench.git",
-                "reference": "1bb7bec67389121278a1758a593caacdf34ab4d3"
+                "reference": "3555dff668e58d25c39d287f3f1bac13a7817b4c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpbench/phpbench/zipball/1bb7bec67389121278a1758a593caacdf34ab4d3",
-                "reference": "1bb7bec67389121278a1758a593caacdf34ab4d3",
+                "url": "https://api.github.com/repos/phpbench/phpbench/zipball/3555dff668e58d25c39d287f3f1bac13a7817b4c",
+                "reference": "3555dff668e58d25c39d287f3f1bac13a7817b4c",
                 "shasum": ""
             },
             "require": {
-                "doctrine/annotations": "^1.2.7",
+                "doctrine/annotations": "^1.13",
                 "ext-dom": "*",
                 "ext-json": "*",
                 "ext-pcre": "*",
                 "ext-reflection": "*",
                 "ext-spl": "*",
                 "ext-tokenizer": "*",
-                "php": "^7.2 || ^8.0",
+                "php": "^7.3 || ^8.0",
                 "phpbench/container": "^2.1",
                 "phpbench/dom": "~0.3.1",
                 "psr/log": "^1.1",
@@ -1843,7 +1843,7 @@
             "description": "PHP Benchmarking Framework",
             "support": {
                 "issues": "https://github.com/phpbench/phpbench/issues",
-                "source": "https://github.com/phpbench/phpbench/tree/1.1.1"
+                "source": "https://github.com/phpbench/phpbench/tree/1.2.0"
             },
             "funding": [
                 {
@@ -1851,7 +1851,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-09-08T19:08:37+00:00"
+            "time": "2021-11-06T13:52:05+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -2614,20 +2614,20 @@
         },
         {
             "name": "psr/container",
-            "version": "1.1.1",
+            "version": "1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/container.git",
-                "reference": "8622567409010282b7aeebe4bb841fe98b58dcaf"
+                "reference": "513e0666f7216c7459170d56df27dfcefe1689ea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/container/zipball/8622567409010282b7aeebe4bb841fe98b58dcaf",
-                "reference": "8622567409010282b7aeebe4bb841fe98b58dcaf",
+                "url": "https://api.github.com/repos/php-fig/container/zipball/513e0666f7216c7459170d56df27dfcefe1689ea",
+                "reference": "513e0666f7216c7459170d56df27dfcefe1689ea",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.2.0"
+                "php": ">=7.4.0"
             },
             "type": "library",
             "autoload": {
@@ -2656,9 +2656,9 @@
             ],
             "support": {
                 "issues": "https://github.com/php-fig/container/issues",
-                "source": "https://github.com/php-fig/container/tree/1.1.1"
+                "source": "https://github.com/php-fig/container/tree/1.1.2"
             },
-            "time": "2021-03-05T17:36:06+00:00"
+            "time": "2021-11-05T16:50:12+00:00"
         },
         {
             "name": "psr/event-dispatcher",
@@ -3912,16 +3912,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v5.3.7",
+            "version": "v5.3.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "8b1008344647462ae6ec57559da166c2bfa5e16a"
+                "reference": "d4e409d9fbcfbf71af0e5a940abb7b0b4bad0bd3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/8b1008344647462ae6ec57559da166c2bfa5e16a",
-                "reference": "8b1008344647462ae6ec57559da166c2bfa5e16a",
+                "url": "https://api.github.com/repos/symfony/console/zipball/d4e409d9fbcfbf71af0e5a940abb7b0b4bad0bd3",
+                "reference": "d4e409d9fbcfbf71af0e5a940abb7b0b4bad0bd3",
                 "shasum": ""
             },
             "require": {
@@ -3991,7 +3991,7 @@
                 "terminal"
             ],
             "support": {
-                "source": "https://github.com/symfony/console/tree/v5.3.7"
+                "source": "https://github.com/symfony/console/tree/v5.3.10"
             },
             "funding": [
                 {
@@ -4007,7 +4007,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-08-25T20:02:16+00:00"
+            "time": "2021-10-26T09:30:15+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -5269,16 +5269,16 @@
         },
         {
             "name": "symfony/string",
-            "version": "v5.3.7",
+            "version": "v5.3.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/string.git",
-                "reference": "8d224396e28d30f81969f083a58763b8b9ceb0a5"
+                "reference": "d70c35bb20bbca71fc4ab7921e3c6bda1a82a60c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/string/zipball/8d224396e28d30f81969f083a58763b8b9ceb0a5",
-                "reference": "8d224396e28d30f81969f083a58763b8b9ceb0a5",
+                "url": "https://api.github.com/repos/symfony/string/zipball/d70c35bb20bbca71fc4ab7921e3c6bda1a82a60c",
+                "reference": "d70c35bb20bbca71fc4ab7921e3c6bda1a82a60c",
                 "shasum": ""
             },
             "require": {
@@ -5332,7 +5332,7 @@
                 "utf8"
             ],
             "support": {
-                "source": "https://github.com/symfony/string/tree/v5.3.7"
+                "source": "https://github.com/symfony/string/tree/v5.3.10"
             },
             "funding": [
                 {
@@ -5348,7 +5348,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-08-26T08:00:08+00:00"
+            "time": "2021-10-27T18:21:46+00:00"
         },
         {
             "name": "thecodingmachine/safe",
@@ -5750,14 +5750,13 @@
                 "issues": "https://github.com/webmozart/path-util/issues",
                 "source": "https://github.com/webmozart/path-util/tree/2.3.0"
             },
+            "abandoned": "symfony/filesystem",
             "time": "2015-12-17T08:42:14+00:00"
         }
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "phpbench/phpbench": 15
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
