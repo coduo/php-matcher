@@ -135,7 +135,7 @@ class MatcherTest extends TestCase
 * ``isNotEmpty()``
 * ``lowerThan($boundry)``
 * ``greaterThan($boundry)``
-* ``inArray($value)``
+* ``inArray($value)`` - example ``"@array@.inArray(\"ROLE_USER\")"`` 
 * ``hasProperty($propertyName)`` - example ``"@json@.hasProperty(\"property_name\")"``
 * ``oneOf(...$expanders)`` - example ``"@string@.oneOf(contains('foo'), contains('bar'), contains('baz'))"``
 * ``matchRegex($regex)`` - example ``"@string@.matchRegex('/^lorem.+/')"``
