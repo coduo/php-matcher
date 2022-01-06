@@ -1,4 +1,4 @@
-## [Unreleased] - 2022-01-04
+## [Unreleased] - 2022-01-06
 
 ### Updated
 - [96ea40](https://github.com/coduo/php-matcher/commit/96ea401f1dfdf8674d2cc14855f6487ef2c9ed1a) - **README.md** - [@norberttech](https://github.com/norberttech)
