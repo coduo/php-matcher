@@ -47,7 +47,6 @@ class TimeMatcherTest extends TestCase
         return [
             [1, '@time@'],
             [0,  '@time@'],
-            ['2020-01-01',  '@time@'],
             ['00:01:00', '@time@.after("00:05:00")'],
         ];
     }

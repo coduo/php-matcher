@@ -50,7 +50,7 @@ class DateTimeMatcherTest extends TestCase
         return [
             [1, '@datetime@'],
             [0,  '@datetime@'],
-            ['01:00:00', '@datetime@'],
+            ['not a date time', '@datetime@'],
         ];
     }
 
