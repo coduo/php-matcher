@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Coduo\PHPMatcher\Matcher\Pattern\Expander;
 
-use function count;
 use Coduo\PHPMatcher\Matcher\Pattern\PatternExpander;
 use Coduo\ToString\StringConverter;
 

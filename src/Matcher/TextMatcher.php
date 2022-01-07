@@ -30,13 +30,10 @@ final class TextMatcher extends Matcher
 
     private Backtrace $backtrace;
 
-    private ValueMatcher $matcher;
-
-    public function __construct(ValueMatcher $matcher, Backtrace $backtrace, Parser $parser)
+    public function __construct(Backtrace $backtrace, Parser $parser)
     {
         $this->parser = $parser;
         $this->backtrace = $backtrace;
-        $this->matcher = $matcher;
     }
 
     /**

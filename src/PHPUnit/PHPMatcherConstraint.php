@@ -17,8 +17,6 @@ final class PHPMatcherConstraint extends Constraint
 
     private PHPMatcher $matcher;
 
-    private $lastValue;
-
     public function __construct($pattern, Backtrace $backtrace = null)
     {
         if (!\in_array(\gettype($pattern), ['string', 'array', 'object'], true)) {
@@ -54,7 +52,7 @@ final class PHPMatcherConstraint extends Constraint
 
     protected function matches($other) : bool
     {
-        return $this->matcher->match($this->lastValue = $other, $this->pattern);
+        return $this->matcher->match($other, $this->pattern);
     }
 
     /**
