@@ -19,31 +19,7 @@ class TextMatcherTest extends TestCase
         $backtrace = new Backtrace\InMemoryBacktrace();
 
         $parser = new Parser(new Lexer(), new Parser\ExpanderInitializer($backtrace));
-        $scalarMatchers = new Matcher\ChainMatcher(
-            self::class,
-            $backtrace,
-            [
-                new Matcher\CallbackMatcher($backtrace),
-                new Matcher\ExpressionMatcher($backtrace),
-                new Matcher\NullMatcher($backtrace),
-                new Matcher\StringMatcher($backtrace, $parser),
-                new Matcher\IntegerMatcher($backtrace, $parser),
-                new Matcher\BooleanMatcher($backtrace, $parser),
-                new Matcher\DoubleMatcher($backtrace, $parser),
-                new Matcher\NumberMatcher($backtrace, $parser),
-                new Matcher\ScalarMatcher($backtrace),
-                new Matcher\WildcardMatcher($backtrace),
-            ]
-        );
         $this->matcher = new Matcher\TextMatcher(
-            new Matcher\ChainMatcher(
-                self::class,
-                $backtrace,
-                [
-                    $scalarMatchers,
-                    new Matcher\ArrayMatcher($scalarMatchers, $backtrace, $parser),
-                ]
-            ),
             $backtrace,
             $parser
         );

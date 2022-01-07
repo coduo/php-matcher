@@ -50,7 +50,7 @@ class DateMatcherTest extends TestCase
         return [
             [1, '@date@'],
             [0,  '@date@'],
-            ['01:00',  '@date@'],
+            ['not a date',  '@date@'],
         ];
     }
 

@@ -99,6 +99,7 @@ final class Parser
 
         $expander = new AST\Expander($this->getExpanderName());
 
+        /* @phpstan-ignore-next-line  */
         if ($this->endOfPattern()) {
             $this->unexpectedEndOfString(')');
         }

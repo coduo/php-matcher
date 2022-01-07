@@ -38,7 +38,7 @@ final class MatcherFactory implements Factory
 
         $matchers[] = $arrayMatcher;
         $matchers[] = $this->buildOrMatcher($backtrace, $matchers);
-        $matchers[] = new Matcher\TextMatcher($scalarMatchers, $backtrace, $parser);
+        $matchers[] = new Matcher\TextMatcher($backtrace, $parser);
 
         return new Matcher\ChainMatcher(
             'all',
@@ -58,7 +58,7 @@ final class MatcherFactory implements Factory
                 [
                     $orMatcher,
                     $scalarMatchers,
-                    new Matcher\TextMatcher($scalarMatchers, $backtrace, $parser),
+                    new Matcher\TextMatcher($backtrace, $parser),
                 ]
             ),
             $backtrace,

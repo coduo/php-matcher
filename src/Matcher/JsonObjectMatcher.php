@@ -42,13 +42,7 @@ final class JsonObjectMatcher extends Matcher
             return false;
         }
 
-        if ($this->isJsonPattern($pattern)) {
-            return $this->allExpandersMatch($value, $pattern);
-        }
-
-        $this->backtrace->matcherFailed(self::class, $value, $pattern, $this->error);
-
-        return false;
+        return $this->allExpandersMatch($value, $pattern);
     }
 
     public function canMatch($pattern) : bool
