@@ -5,7 +5,7 @@
         "phpunit/phpunit": "^9.5",
         "vimeo/psalm": "^4.6",
         "phpstan/phpstan": "^1.1.2",
-        "infection/infection": "^0.25.3",
+        "infection/infection": "^0.26.0",
         "phpbench/phpbench": "^1.0.0-alpha7",
         "friendsofphp/php-cs-fixer": "^3.1"
     }
