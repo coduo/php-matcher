@@ -15,7 +15,7 @@
         }
     ],
     "require": {
-        "php": ">=7.4",
+        "php": "^7.4.2 || ~8.0 || ~8.1",
         "ext-filter": "*",
         "ext-json": "*",
         "ext-simplexml": "*",
