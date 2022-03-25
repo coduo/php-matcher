@@ -153,7 +153,13 @@ final class ArrayMatcher extends Matcher
                 continue;
             }
 
-            if (!\is_array($value) || !$this->canMatch($pattern)) {
+            if (!\is_array($value)) {
+                return false;
+            }
+
+            if (!$this->canMatch($pattern)) {
+                $this->addValuePatternDifference($value, $parentPath, $this->formatFullPath($parentPath, $path));
+
                 return false;
             }
 
