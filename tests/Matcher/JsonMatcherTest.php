@@ -321,4 +321,13 @@ class JsonMatcherTest extends TestCase
 
         $this->assertEquals('Invalid given JSON of value. Syntax error, malformed JSON', $this->matcher->getError());
     }
+
+    public function test_comparing_value_against_pattern_without_any_patterns() : void
+    {
+        $value = '{"availableLocales": ["en"]}';
+        $pattern = '{"availableLocales": null}';
+
+        $this->assertFalse($this->matcher->match($value, $pattern));
+        $this->assertEquals("Value \"Array(1)\" does not match pattern \"\" at path: \"[availableLocales]\"", $this->matcher->getError());
+    }
 }

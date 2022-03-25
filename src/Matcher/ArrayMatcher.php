@@ -154,6 +154,8 @@ final class ArrayMatcher extends Matcher
             }
 
             if (!\is_array($value) || !$this->canMatch($pattern)) {
+                $this->addValuePatternDifference($value, $parentPath, $this->formatFullPath($parentPath, $path));
+
                 return false;
             }
 
