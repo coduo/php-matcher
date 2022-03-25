@@ -125,11 +125,16 @@ final class Parser
 
         $expander = $this->lexer->lookahead['value'];
 
+        /** @phpstan-ignore-next-line */
         if ($expander === null) {
             throw PatternException::syntaxError($this->unexpectedSyntaxError($this->lexer->lookahead, '.expanderName(args) definition'));
         }
 
         $this->lexer->moveNext();
+
+        if (\is_int($expander)) {
+            return (string) $expander;
+        }
 
         return $expander;
     }
