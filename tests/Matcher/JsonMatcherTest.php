@@ -328,6 +328,9 @@ class JsonMatcherTest extends TestCase
         $pattern = '{"availableLocales": null}';
 
         $this->assertFalse($this->matcher->match($value, $pattern));
-        $this->assertEquals("Value \"Array(1)\" does not match pattern \"\" at path: \"[availableLocales]\"", $this->matcher->getError());
+        $this->assertEquals(
+            'Value "Array(1)" does not match pattern "" at path: "[availableLocales]"',
+            $this->matcher->getError()
+        );
     }
 }
