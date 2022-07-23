@@ -8,5 +8,8 @@
         "infection/infection": "^0.26.2",
         "phpbench/phpbench": "^1.0.0-alpha7",
         "friendsofphp/php-cs-fixer": "^3.1"
+    },
+    "config": {
+        "allow-plugins": false
     }
 }

@@ -96,7 +96,7 @@ final class BacktraceTest extends TestCase
     public function test_backtrace_in_succeed_complex_matching() : void
     {
         $this->matcher->match(
-        /* @lang JSON */
+            /* @lang JSON */
             '{
                 "users":[
                     {
