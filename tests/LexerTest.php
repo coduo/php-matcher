@@ -86,8 +86,8 @@ class LexerTest extends TestCase
         $lexer = new Lexer();
         $lexer->setInput($value);
         $lexer->moveNext();
-        $this->assertEquals($lexer->lookahead['type'], Lexer::T_STRING);
-        $this->assertEquals($lexer->lookahead['value'], \trim(\trim($value, "'"), '"'));
+        $this->assertSame($lexer->lookahead['type'], Lexer::T_STRING);
+        $this->assertSame($lexer->lookahead['value'], \trim(\trim($value, "'"), '"'));
     }
 
     /**
@@ -98,8 +98,8 @@ class LexerTest extends TestCase
         $lexer = new Lexer();
         $lexer->setInput($value);
         $lexer->moveNext();
-        $this->assertEquals($lexer->lookahead['type'], Lexer::T_NUMBER);
-        $this->assertEquals($expectedValue, $lexer->lookahead['value']);
+        $this->assertSame($lexer->lookahead['type'], Lexer::T_NUMBER);
+        $this->assertSame($expectedValue, $lexer->lookahead['value']);
     }
 
     /**
@@ -110,8 +110,8 @@ class LexerTest extends TestCase
         $lexer = new Lexer();
         $lexer->setInput($value);
         $lexer->moveNext();
-        $this->assertEquals($lexer->lookahead['type'], Lexer::T_BOOLEAN);
-        $this->assertEquals($lexer->lookahead['value'], $expectedValue);
+        $this->assertSame($lexer->lookahead['type'], Lexer::T_BOOLEAN);
+        $this->assertSame($lexer->lookahead['value'], $expectedValue);
     }
 
     /**
@@ -122,7 +122,7 @@ class LexerTest extends TestCase
         $lexer = new Lexer();
         $lexer->setInput($value);
         $lexer->moveNext();
-        $this->assertEquals($lexer->lookahead['type'], Lexer::T_NULL);
+        $this->assertSame($lexer->lookahead['type'], Lexer::T_NULL);
         $this->assertNull($lexer->lookahead['value']);
     }
 
@@ -134,7 +134,7 @@ class LexerTest extends TestCase
         $lexer = new Lexer();
         $lexer->setInput($value);
         $lexer->moveNext();
-        $this->assertEquals($lexer->lookahead['type'], Lexer::T_NONE);
+        $this->assertSame($lexer->lookahead['type'], Lexer::T_NONE);
     }
 
     public function test_close_parenthesis() : void
@@ -142,7 +142,7 @@ class LexerTest extends TestCase
         $lexer = new Lexer();
         $lexer->setInput(')');
         $lexer->moveNext();
-        $this->assertEquals($lexer->lookahead['type'], Lexer::T_CLOSE_PARENTHESIS);
+        $this->assertSame($lexer->lookahead['type'], Lexer::T_CLOSE_PARENTHESIS);
     }
 
     public function test_close_open_brace() : void
@@ -150,7 +150,7 @@ class LexerTest extends TestCase
         $lexer = new Lexer();
         $lexer->setInput('{');
         $lexer->moveNext();
-        $this->assertEquals($lexer->lookahead['type'], Lexer::T_OPEN_CURLY_BRACE);
+        $this->assertSame($lexer->lookahead['type'], Lexer::T_OPEN_CURLY_BRACE);
     }
 
     public function test_close_curly_brace() : void
@@ -158,7 +158,7 @@ class LexerTest extends TestCase
         $lexer = new Lexer();
         $lexer->setInput('}');
         $lexer->moveNext();
-        $this->assertEquals($lexer->lookahead['type'], Lexer::T_CLOSE_CURLY_BRACE);
+        $this->assertSame($lexer->lookahead['type'], Lexer::T_CLOSE_CURLY_BRACE);
     }
 
     public function test_colon() : void
@@ -166,7 +166,7 @@ class LexerTest extends TestCase
         $lexer = new Lexer();
         $lexer->setInput(':');
         $lexer->moveNext();
-        $this->assertEquals($lexer->lookahead['type'], Lexer::T_COLON);
+        $this->assertSame($lexer->lookahead['type'], Lexer::T_COLON);
     }
 
     public function test_comma() : void
@@ -174,7 +174,7 @@ class LexerTest extends TestCase
         $lexer = new Lexer();
         $lexer->setInput(',');
         $lexer->moveNext();
-        $this->assertEquals($lexer->lookahead['type'], Lexer::T_COMMA);
+        $this->assertSame($lexer->lookahead['type'], Lexer::T_COMMA);
     }
 
     /**
@@ -185,8 +185,8 @@ class LexerTest extends TestCase
         $lexer = new Lexer();
         $lexer->setInput($value);
         $lexer->moveNext();
-        $this->assertEquals($lexer->lookahead['type'], Lexer::T_TYPE_PATTERN);
-        $this->assertEquals($lexer->lookahead['value'], \trim($value, '@'));
+        $this->assertSame($lexer->lookahead['type'], Lexer::T_TYPE_PATTERN);
+        $this->assertSame($lexer->lookahead['value'], \trim($value, '@'));
     }
 
     /**
@@ -197,8 +197,8 @@ class LexerTest extends TestCase
         $lexer = new Lexer();
         $lexer->setInput($value);
         $lexer->moveNext();
-        $this->assertEquals($lexer->lookahead['type'], Lexer::T_EXPANDER_NAME);
-        $this->assertEquals($lexer->lookahead['value'], $expectedTokenValue);
+        $this->assertSame($lexer->lookahead['type'], Lexer::T_EXPANDER_NAME);
+        $this->assertSame($lexer->lookahead['value'], $expectedTokenValue);
     }
 
     public function test_ignore_whitespaces_between_parenthesis() : void
@@ -207,7 +207,7 @@ class LexerTest extends TestCase
         $lexer = new Lexer();
         $lexer->setInput("@type@.expander( 'arg1',    2    ,'arg3',4)");
 
-        $this->assertEquals($expectedTokens, $this->collectTokens($lexer));
+        $this->assertSame($expectedTokens, $this->collectTokens($lexer));
     }
 
     /**
