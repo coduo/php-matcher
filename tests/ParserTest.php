@@ -77,7 +77,7 @@ class ParserTest extends TestCase
     {
         $pattern = '@type@';
 
-        $this->assertEquals('type', $this->parser->getAST($pattern)->getType());
+        $this->assertSame('type', (string) $this->parser->getAST($pattern)->getType());
         $this->assertFalse($this->parser->getAST($pattern)->hasExpanders());
     }
 
@@ -85,16 +85,16 @@ class ParserTest extends TestCase
     {
         $pattern = '@type@.expander()';
 
-        $this->assertEquals('type', $this->parser->getAST($pattern)->getType());
+        $this->assertSame('type', (string) $this->parser->getAST($pattern)->getType());
         $expanders = $this->parser->getAST($pattern)->getExpanders();
-        $this->assertEquals('expander', $expanders[0]->getName());
+        $this->assertSame('expander', $expanders[0]->getName());
         $this->assertFalse($expanders[0]->hasArguments());
     }
 
     public function test_single_expander_with_arguments() : void
     {
         $pattern = "@type@.expander('arg1', 2, 2.24, \"arg3\")";
-        $this->assertEquals('type', $this->parser->getAST($pattern)->getType());
+        $this->assertSame('type', (string) $this->parser->getAST($pattern)->getType());
         $expanders = $this->parser->getAST($pattern)->getExpanders();
         $expectedArguments = [
             'arg1',
@@ -102,7 +102,7 @@ class ParserTest extends TestCase
             2.24,
             'arg3',
         ];
-        $this->assertEquals($expectedArguments, $expanders[0]->getArguments());
+        $this->assertSame($expectedArguments, $expanders[0]->getArguments());
     }
 
     public function test_many_expanders() : void
@@ -115,14 +115,14 @@ class ParserTest extends TestCase
         ];
 
         $expanders = $this->parser->getAST($pattern)->getExpanders();
-        $this->assertEquals('type', $this->parser->getAST($pattern)->getType());
-        $this->assertEquals('expander', $expanders[0]->getName());
-        $this->assertEquals('expander1', $expanders[1]->getName());
-        $this->assertEquals('expander', $expanders[2]->getName());
+        $this->assertSame('type', (string) $this->parser->getAST($pattern)->getType());
+        $this->assertSame('expander', $expanders[0]->getName());
+        $this->assertSame('expander1', $expanders[1]->getName());
+        $this->assertSame('expander', $expanders[2]->getName());
 
-        $this->assertEquals($expanderArguments[0], $expanders[0]->getArguments());
-        $this->assertEquals($expanderArguments[1], $expanders[1]->getArguments());
-        $this->assertEquals($expanderArguments[2], $expanders[2]->getArguments());
+        $this->assertSame($expanderArguments[0], $expanders[0]->getArguments());
+        $this->assertSame($expanderArguments[1], $expanders[1]->getArguments());
+        $this->assertSame($expanderArguments[2], $expanders[2]->getArguments());
     }
 
     /**
@@ -131,7 +131,7 @@ class ParserTest extends TestCase
     public function test_single_array_argument_with_string_key_value($pattern, $expectedArgument) : void
     {
         $expanders = $this->parser->getAST($pattern)->getExpanders();
-        $this->assertEquals($expectedArgument, $expanders[0]->getArguments());
+        $this->assertSame($expectedArgument, $expanders[0]->getArguments());
     }
 
     public function test_expanders_that_takes_other_expanders_as_arguments() : void
