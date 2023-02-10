@@ -3,4 +3,4 @@ bin/
 var/
 .DS_Store
 .idea
-.phpunit.result.cache
+.phpunit.cache/
