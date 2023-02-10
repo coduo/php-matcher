@@ -53,7 +53,7 @@ class ArrayMatcherTest extends TestCase
         $this->assertTrue($this->matcher->match($value, $pattern));
     }
 
-    public function positiveMatchData()
+    public static function positiveMatchData()
     {
         $simpleArr = [
             'users' => [
@@ -157,7 +157,7 @@ class ArrayMatcherTest extends TestCase
         $this->assertSame($error, $this->matcher->getError());
     }
 
-    public function negativeMatchData()
+    public static function negativeMatchData()
     {
         $simpleArr = [
             'users' => [

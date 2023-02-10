@@ -20,7 +20,7 @@ class IsInDateFormatTest extends TestCase
         $this->assertEquals($result, $expander->match($date));
     }
 
-    public function examplesDatesProvider() : array
+    public static function examplesDatesProvider() : array
     {
         return [
             ['2010-01-01', 'Y-m-d', true],

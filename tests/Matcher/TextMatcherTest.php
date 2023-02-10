@@ -75,7 +75,7 @@ XML;
         $this->assertSame('Type pattern "@null@" is not supported by TextMatcher.', $this->matcher->getError());
     }
 
-    public function matchingData()
+    public static function matchingData()
     {
         return [
             [

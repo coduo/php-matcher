@@ -49,7 +49,7 @@ class JsonMatcherTest extends TestCase
         $this->assertTrue($this->matcher->canMatch($pattern));
     }
 
-    public function positivePatterns()
+    public static function positivePatterns()
     {
         return [
             [\json_encode(['Norbert', 'Michał'])],
@@ -66,7 +66,7 @@ class JsonMatcherTest extends TestCase
         $this->assertFalse($this->matcher->canMatch($pattern));
     }
 
-    public function negativePatterns()
+    public static function negativePatterns()
     {
         return [
             ['@string@'],
@@ -83,7 +83,7 @@ class JsonMatcherTest extends TestCase
         $this->assertTrue($this->matcher->match($value, $pattern), (string) $this->matcher->getError());
     }
 
-    public function positiveMatches()
+    public static function positiveMatches()
     {
         return [
             [
@@ -174,7 +174,7 @@ class JsonMatcherTest extends TestCase
         $this->assertTrue($this->matcher->match($value, $pattern), (string) $this->matcher->getError());
     }
 
-    public function normalizationRequiredDataProvider()
+    public static function normalizationRequiredDataProvider()
     {
         return [
             [
@@ -213,7 +213,7 @@ class JsonMatcherTest extends TestCase
         $this->assertSame($error, $this->matcher->getError());
     }
 
-    public function negativeMatches()
+    public static function negativeMatches()
     {
         return [
             [

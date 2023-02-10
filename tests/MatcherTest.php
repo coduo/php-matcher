@@ -17,7 +17,7 @@ class MatcherTest extends PHPMatcherTestCase
         $this->assertMatchesPattern($pattern, $value);
     }
 
-    public function scalarValueExamples()
+    public static function scalarValueExamples()
     {
         return [
             ['Norbert Orzechowicz', '@string@'],
@@ -80,7 +80,7 @@ class MatcherTest extends PHPMatcherTestCase
         $this->assertMatchesPattern($pattern, $value);
     }
 
-    public function jsonDataProvider()
+    public static function jsonDataProvider()
     {
         return [
             [
@@ -376,7 +376,7 @@ XML;
         $this->assertMatchesPattern($pattern, $value);
     }
 
-    public function nullExamples()
+    public static function nullExamples()
     {
         return [
             [
