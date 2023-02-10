@@ -149,7 +149,7 @@ ERROR,
         $this->expectExceptionMessageMatches("/Expectation failed for method name is \"getTitle\" when invoked zero or more times\nParameter 0 for invocation stdClass::getTitle\(42\) does not match expected value.\nFailed asserting that integer \"42\" is not a valid string../");
 
         $mock = $this->getMockBuilder('stdClass')
-            ->setMethods(['getTitle'])
+            ->addMethods(['getTitle'])
             ->getMock();
 
         $mock->method('getTitle')

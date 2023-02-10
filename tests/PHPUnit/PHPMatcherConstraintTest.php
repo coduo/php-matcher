@@ -112,7 +112,7 @@ JSON
         new PHPMatcherConstraint($pattern);
     }
 
-    public function invalidPatterns()
+    public static function invalidPatterns()
     {
         return [
             [true],
