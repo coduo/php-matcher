@@ -15,40 +15,6 @@ class JsonMatcherTest extends TestCase
 {
     private ?JsonMatcher $matcher = null;
 
-    public function setUp() : void
-    {
-        $backtrace = new Backtrace\InMemoryBacktrace();
-        $parser = new Parser(new Lexer(), new Parser\ExpanderInitializer($backtrace));
-        $scalarMatchers = new Matcher\ChainMatcher(
-            self::class,
-            $backtrace,
-            [
-                new Matcher\CallbackMatcher($backtrace),
-                new Matcher\ExpressionMatcher($backtrace),
-                new Matcher\NullMatcher($backtrace),
-                new Matcher\StringMatcher($backtrace, $parser),
-                new Matcher\IntegerMatcher($backtrace, $parser),
-                new Matcher\BooleanMatcher($backtrace, $parser),
-                new Matcher\DoubleMatcher($backtrace, $parser),
-                new Matcher\NumberMatcher($backtrace, $parser),
-                new Matcher\ScalarMatcher($backtrace),
-                new Matcher\WildcardMatcher($backtrace),
-            ]
-        );
-        $this->matcher = new JsonMatcher(
-            new Matcher\ArrayMatcher($scalarMatchers, $backtrace, $parser),
-            $backtrace
-        );
-    }
-
-    /**
-     * @dataProvider positivePatterns
-     */
-    public function test_positive_can_match($pattern) : void
-    {
-        $this->assertTrue($this->matcher->canMatch($pattern));
-    }
-
     public static function positivePatterns()
     {
         return [
@@ -58,14 +24,6 @@ class JsonMatcherTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider negativePatterns
-     */
-    public function test_negative_can_match($pattern) : void
-    {
-        $this->assertFalse($this->matcher->canMatch($pattern));
-    }
-
     public static function negativePatterns()
     {
         return [
@@ -73,14 +31,6 @@ class JsonMatcherTest extends TestCase
             ['["Norbert", '],
             ['@array@.repeat({"name": "@string@", "value": "@array@"})'],
         ];
-    }
-
-    /**
-     * @dataProvider positiveMatches
-     */
-    public function test_positive_matches($value, $pattern) : void
-    {
-        $this->assertTrue($this->matcher->match($value, $pattern), (string) $this->matcher->getError());
     }
 
     public static function positiveMatches()
@@ -166,14 +116,6 @@ class JsonMatcherTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider normalizationRequiredDataProvider
-     */
-    public function test_positive_matches_after_normalization($value, $pattern) : void
-    {
-        $this->assertTrue($this->matcher->match($value, $pattern), (string) $this->matcher->getError());
-    }
-
     public static function normalizationRequiredDataProvider()
     {
         return [
@@ -202,15 +144,6 @@ class JsonMatcherTest extends TestCase
                 '{"name": @string@, "roles": [@string@, @string@]}',
             ],
         ];
-    }
-
-    /**
-     * @dataProvider negativeMatches
-     */
-    public function test_negative_matches($value, $pattern, string $error) : void
-    {
-        $this->assertFalse($this->matcher->match($value, $pattern), (string) $this->matcher->getError());
-        $this->assertSame($error, $this->matcher->getError());
     }
 
     public static function negativeMatches()
@@ -252,6 +185,73 @@ class JsonMatcherTest extends TestCase
                 'Invalid given JSON of value. Unknown error',
             ],
         ];
+    }
+
+    public function setUp() : void
+    {
+        $backtrace = new Backtrace\InMemoryBacktrace();
+        $parser = new Parser(new Lexer(), new Parser\ExpanderInitializer($backtrace));
+        $scalarMatchers = new Matcher\ChainMatcher(
+            self::class,
+            $backtrace,
+            [
+                new Matcher\CallbackMatcher($backtrace),
+                new Matcher\ExpressionMatcher($backtrace),
+                new Matcher\NullMatcher($backtrace),
+                new Matcher\StringMatcher($backtrace, $parser),
+                new Matcher\IntegerMatcher($backtrace, $parser),
+                new Matcher\BooleanMatcher($backtrace, $parser),
+                new Matcher\DoubleMatcher($backtrace, $parser),
+                new Matcher\NumberMatcher($backtrace, $parser),
+                new Matcher\ScalarMatcher($backtrace),
+                new Matcher\WildcardMatcher($backtrace),
+            ]
+        );
+        $this->matcher = new JsonMatcher(
+            new Matcher\ArrayMatcher($scalarMatchers, $backtrace, $parser),
+            $backtrace
+        );
+    }
+
+    /**
+     * @dataProvider positivePatterns
+     */
+    public function test_positive_can_match($pattern) : void
+    {
+        $this->assertTrue($this->matcher->canMatch($pattern));
+    }
+
+    /**
+     * @dataProvider negativePatterns
+     */
+    public function test_negative_can_match($pattern) : void
+    {
+        $this->assertFalse($this->matcher->canMatch($pattern));
+    }
+
+    /**
+     * @dataProvider positiveMatches
+     */
+    public function test_positive_matches($value, $pattern) : void
+    {
+        $this->assertTrue($this->matcher->match($value, $pattern), (string) $this->matcher->getError());
+    }
+
+    /**
+     * @dataProvider normalizationRequiredDataProvider
+     */
+    public function test_positive_matches_after_normalization($value, $pattern) : void
+    {
+        $this->assertTrue($this->matcher->match($value, $pattern), (string) $this->matcher->getError());
+    }
+
+    /**
+     * @dataProvider negativeMatches
+     */
+    public function test_negative_matches($value, $pattern, string $error) : void
+    {
+        $this->assertFalse($this->matcher->match($value, $pattern), (string) $this->matcher->getError());
+        $this->assertSame($error, $this->matcher->getError());
     }
 
     public function test_error_when_matching_fail() : void

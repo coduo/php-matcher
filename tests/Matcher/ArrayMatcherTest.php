@@ -16,43 +16,6 @@ class ArrayMatcherTest extends TestCase
 
     private Backtrace $backtrace;
 
-    public function setUp() : void
-    {
-        $this->backtrace = new Backtrace\InMemoryBacktrace();
-        $parser = new Parser(new Lexer(), new Parser\ExpanderInitializer($this->backtrace));
-
-        $matchers = [
-            new Matcher\CallbackMatcher($this->backtrace),
-            new Matcher\NullMatcher($this->backtrace),
-            new Matcher\StringMatcher($this->backtrace, $parser),
-            new Matcher\IntegerMatcher($this->backtrace, $parser),
-            new Matcher\BooleanMatcher($this->backtrace, $parser),
-            new Matcher\DoubleMatcher($this->backtrace, $parser),
-            new Matcher\NumberMatcher($this->backtrace, $parser),
-            new Matcher\DateMatcher($this->backtrace, $parser),
-            new Matcher\ScalarMatcher($this->backtrace),
-            new Matcher\WildcardMatcher($this->backtrace),
-        ];
-
-        if (\class_exists('Symfony\\Component\\ExpressionLanguage\\ExpressionLanguage')) {
-            $matchers[] = new Matcher\ExpressionMatcher($this->backtrace);
-        }
-
-        $this->matcher = new Matcher\ArrayMatcher(
-            new Matcher\ChainMatcher(self::class, $this->backtrace, $matchers),
-            $this->backtrace,
-            $parser
-        );
-    }
-
-    /**
-     * @dataProvider positiveMatchData
-     */
-    public function test_positive_match_arrays($value, $pattern) : void
-    {
-        $this->assertTrue($this->matcher->match($value, $pattern));
-    }
-
     public static function positiveMatchData()
     {
         $simpleArr = [
@@ -148,15 +111,6 @@ class ArrayMatcherTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider negativeMatchData
-     */
-    public function test_negative_match_arrays($value, $pattern, string $error) : void
-    {
-        $this->assertFalse($this->matcher->match($value, $pattern));
-        $this->assertSame($error, $this->matcher->getError());
-    }
-
     public static function negativeMatchData()
     {
         $simpleArr = [
@@ -241,6 +195,52 @@ class ArrayMatcherTest extends TestCase
                 'Value "Foobar" does not match pattern "Orzechowicz" at path: "[users][0][lastName]"',
             ],
         ];
+    }
+
+    public function setUp() : void
+    {
+        $this->backtrace = new Backtrace\InMemoryBacktrace();
+        $parser = new Parser(new Lexer(), new Parser\ExpanderInitializer($this->backtrace));
+
+        $matchers = [
+            new Matcher\CallbackMatcher($this->backtrace),
+            new Matcher\NullMatcher($this->backtrace),
+            new Matcher\StringMatcher($this->backtrace, $parser),
+            new Matcher\IntegerMatcher($this->backtrace, $parser),
+            new Matcher\BooleanMatcher($this->backtrace, $parser),
+            new Matcher\DoubleMatcher($this->backtrace, $parser),
+            new Matcher\NumberMatcher($this->backtrace, $parser),
+            new Matcher\DateMatcher($this->backtrace, $parser),
+            new Matcher\ScalarMatcher($this->backtrace),
+            new Matcher\WildcardMatcher($this->backtrace),
+        ];
+
+        if (\class_exists('Symfony\\Component\\ExpressionLanguage\\ExpressionLanguage')) {
+            $matchers[] = new Matcher\ExpressionMatcher($this->backtrace);
+        }
+
+        $this->matcher = new Matcher\ArrayMatcher(
+            new Matcher\ChainMatcher(self::class, $this->backtrace, $matchers),
+            $this->backtrace,
+            $parser
+        );
+    }
+
+    /**
+     * @dataProvider positiveMatchData
+     */
+    public function test_positive_match_arrays($value, $pattern) : void
+    {
+        $this->assertTrue($this->matcher->match($value, $pattern));
+    }
+
+    /**
+     * @dataProvider negativeMatchData
+     */
+    public function test_negative_match_arrays($value, $pattern, string $error) : void
+    {
+        $this->assertFalse($this->matcher->match($value, $pattern));
+        $this->assertSame($error, $this->matcher->getError());
     }
 
     public function test_negative_match_when_cant_find_matcher_that_can_match_array_element() : void

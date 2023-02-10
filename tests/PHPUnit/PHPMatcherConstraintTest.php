@@ -12,6 +12,18 @@ use PHPUnit\Framework\TestCase;
 
 class PHPMatcherConstraintTest extends TestCase
 {
+    public static function invalidPatterns()
+    {
+        return [
+            [true],
+            [1],
+            [1.1],
+            [new \StdClass],
+            [null],
+            [\fopen('php://memory', 'r')],
+        ];
+    }
+
     public function test_it_is_a_phpunit_constraint() : void
     {
         $this->assertInstanceOf(Constraint::class, new PHPMatcherConstraint('@string@'));
@@ -110,17 +122,5 @@ JSON
         $this->expectException(\LogicException::class);
 
         new PHPMatcherConstraint($pattern);
-    }
-
-    public static function invalidPatterns()
-    {
-        return [
-            [true],
-            [1],
-            [1.1],
-            [new \StdClass],
-            [null],
-            [\fopen('php://memory', 'r')],
-        ];
     }
 }

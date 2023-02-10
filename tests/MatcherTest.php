@@ -9,14 +9,6 @@ use Coduo\PHPMatcher\PHPUnit\PHPMatcherTestCase;
 
 class MatcherTest extends PHPMatcherTestCase
 {
-    /**
-     * @dataProvider scalarValueExamples
-     */
-    public function test_matcher_with_scalar_values($value, $pattern) : void
-    {
-        $this->assertMatchesPattern($pattern, $value);
-    }
-
     public static function scalarValueExamples()
     {
         return [
@@ -27,57 +19,6 @@ class MatcherTest extends PHPMatcherTestCase
             ['9f4db639-0e87-4367-9beb-d64e3f42ae18', '@uuid@'],
             ['01BX5ZZKBKACTAV9WEVGEMMVS0', '@ulid@'],
         ];
-    }
-
-    public function test_matcher_with_array_value() : void
-    {
-        $value = [
-            'users' => [
-                [
-                    'id' => 1,
-                    'firstName' => 'Norbert',
-                    'lastName' => 'Orzechowicz',
-                    'enabled' => true,
-                ],
-                [
-                    'id' => 2,
-                    'firstName' => 'Michał',
-                    'lastName' => 'Dąbrowski',
-                    'enabled' => true,
-                ],
-            ],
-            'readyToUse' => true,
-            'data' => new \stdClass(),
-        ];
-
-        $pattern = [
-            'users' => [
-                [
-                    'id' => '@integer@',
-                    'firstName' => '@string@',
-                    'lastName' => 'Orzechowicz',
-                    'enabled' => '@boolean@',
-                ],
-                [
-                    'id' => '@integer@',
-                    'firstName' => '@string@',
-                    'lastName' => 'Dąbrowski',
-                    'enabled' => '@boolean@',
-                ],
-            ],
-            'readyToUse' => true,
-            'data' => '@wildcard@',
-        ];
-
-        $this->assertMatchesPattern($pattern, $value);
-    }
-
-    /**
-     * @dataProvider jsonDataProvider
-     */
-    public function test_matcher_with_json($value, $pattern) : void
-    {
-        $this->assertMatchesPattern($pattern, $value);
     }
 
     public static function jsonDataProvider()
@@ -274,6 +215,76 @@ class MatcherTest extends PHPMatcherTestCase
         ];
     }
 
+    public static function nullExamples()
+    {
+        return [
+            [
+                '{"proformaInvoiceLink":null}', '{"proformaInvoiceLink":null}',
+                '{"proformaInvoiceLink":null, "test":"test"}', '{"proformaInvoiceLink":null, "test":"@string@"}',
+                '{"proformaInvoiceLink":null, "test":"test"}', '{"proformaInvoiceLink":@null@, "test":"@string@"}',
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider scalarValueExamples
+     */
+    public function test_matcher_with_scalar_values($value, $pattern) : void
+    {
+        $this->assertMatchesPattern($pattern, $value);
+    }
+
+    public function test_matcher_with_array_value() : void
+    {
+        $value = [
+            'users' => [
+                [
+                    'id' => 1,
+                    'firstName' => 'Norbert',
+                    'lastName' => 'Orzechowicz',
+                    'enabled' => true,
+                ],
+                [
+                    'id' => 2,
+                    'firstName' => 'Michał',
+                    'lastName' => 'Dąbrowski',
+                    'enabled' => true,
+                ],
+            ],
+            'readyToUse' => true,
+            'data' => new \stdClass(),
+        ];
+
+        $pattern = [
+            'users' => [
+                [
+                    'id' => '@integer@',
+                    'firstName' => '@string@',
+                    'lastName' => 'Orzechowicz',
+                    'enabled' => '@boolean@',
+                ],
+                [
+                    'id' => '@integer@',
+                    'firstName' => '@string@',
+                    'lastName' => 'Dąbrowski',
+                    'enabled' => '@boolean@',
+                ],
+            ],
+            'readyToUse' => true,
+            'data' => '@wildcard@',
+        ];
+
+        $this->assertMatchesPattern($pattern, $value);
+    }
+
+    /**
+     * @dataProvider jsonDataProvider
+     */
+    public function test_matcher_with_json($value, $pattern) : void
+    {
+        $this->assertMatchesPattern($pattern, $value);
+    }
+
     public function test_matcher_with_xml() : void
     {
         $value = <<<'XML'
@@ -374,17 +385,6 @@ XML;
     public function test_null_value_in_the_json(string $value, string $pattern) : void
     {
         $this->assertMatchesPattern($pattern, $value);
-    }
-
-    public static function nullExamples()
-    {
-        return [
-            [
-                '{"proformaInvoiceLink":null}', '{"proformaInvoiceLink":null}',
-                '{"proformaInvoiceLink":null, "test":"test"}', '{"proformaInvoiceLink":null, "test":"@string@"}',
-                '{"proformaInvoiceLink":null, "test":"test"}', '{"proformaInvoiceLink":@null@, "test":"@string@"}',
-            ],
-        ];
     }
 
     public function test_php_pattern_of_github_pull_requests_response() : void

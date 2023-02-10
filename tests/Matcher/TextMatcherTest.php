@@ -14,6 +14,52 @@ class TextMatcherTest extends TestCase
 {
     private ?\Coduo\PHPMatcher\Matcher\TextMatcher $matcher = null;
 
+    public static function matchingData()
+    {
+        return [
+            [
+                'lorem ipsum lol lorem 24 dolorem',
+                'lorem ipsum @string@.startsWith("lo") lorem @number@ dolorem',
+                true,
+            ],
+            [
+                'lorem ipsum 24 dolorem',
+                'lorem ipsum @integer@',
+                false,
+            ],
+            [
+                '/users/12345/active',
+                '/users/@integer@.greaterThan(0)/active',
+                true,
+            ],
+            [
+                '/user/ebd1fb0e-45ae-11e8-842f-0ed5f89f718b/profile',
+                '/user/@uuid@/@string@',
+                true,
+            ],
+            [
+                '/user/12345/profile',
+                '/user/@uuid@/@string@',
+                false,
+            ],
+            [
+                '/user/01BX5ZZKBKACTAV9WEVGEMMVS0/profile',
+                '/user/@ulid@/@string@',
+                true,
+            ],
+            [
+                '/user/12345/profile',
+                '/user/@ulid@/@string@',
+                false,
+            ],
+            [
+                '/user/8ZZZZZZZZZZZZZZZZZZZZZZZZZ/profile',
+                '/user/@ulid@/@string@',
+                false,
+            ],
+        ];
+    }
+
     public function setUp() : void
     {
         $backtrace = new Backtrace\InMemoryBacktrace();
@@ -73,51 +119,5 @@ XML;
 
         $this->assertFalse($this->matcher->match($value, $pattern));
         $this->assertSame('Type pattern "@null@" is not supported by TextMatcher.', $this->matcher->getError());
-    }
-
-    public static function matchingData()
-    {
-        return [
-            [
-                'lorem ipsum lol lorem 24 dolorem',
-                'lorem ipsum @string@.startsWith("lo") lorem @number@ dolorem',
-                true,
-            ],
-            [
-                'lorem ipsum 24 dolorem',
-                'lorem ipsum @integer@',
-                false,
-            ],
-            [
-                '/users/12345/active',
-                '/users/@integer@.greaterThan(0)/active',
-                true,
-            ],
-            [
-                '/user/ebd1fb0e-45ae-11e8-842f-0ed5f89f718b/profile',
-                '/user/@uuid@/@string@',
-                true,
-            ],
-            [
-                '/user/12345/profile',
-                '/user/@uuid@/@string@',
-                false,
-            ],
-            [
-                '/user/01BX5ZZKBKACTAV9WEVGEMMVS0/profile',
-                '/user/@ulid@/@string@',
-                true,
-            ],
-            [
-                '/user/12345/profile',
-                '/user/@ulid@/@string@',
-                false,
-            ],
-            [
-                '/user/8ZZZZZZZZZZZZZZZZZZZZZZZZZ/profile',
-                '/user/@ulid@/@string@',
-                false,
-            ],
-        ];
     }
 }
