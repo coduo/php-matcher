@@ -125,7 +125,6 @@ final class Parser
 
         $expander = $this->lexer->lookahead['value'];
 
-        /** @phpstan-ignore-next-line */
         if ($expander === null) {
             throw PatternException::syntaxError($this->unexpectedSyntaxError($this->lexer->lookahead, '.expanderName(args) definition'));
         }
@@ -259,10 +258,10 @@ final class Parser
     }
 
     /**
-     * @param array $unexpectedToken
+     * @param mixed $unexpectedToken
      * @param string $expected
      */
-    private function unexpectedSyntaxError(array $unexpectedToken, string $expected = null) : string
+    private function unexpectedSyntaxError($unexpectedToken, string $expected = null) : string
     {
         $tokenPos = (isset($unexpectedToken['position'])) ? $unexpectedToken['position'] : '-1';
         $message  = \sprintf('line 0, col %d: Error: ', $tokenPos);
