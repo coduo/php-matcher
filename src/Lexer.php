@@ -6,6 +6,9 @@ namespace Coduo\PHPMatcher;
 
 use Doctrine\Common\Lexer\AbstractLexer;
 
+/**
+ * @template-extends AbstractLexer<Lexer::T_*, string>
+ */
 final class Lexer extends AbstractLexer
 {
     /**
