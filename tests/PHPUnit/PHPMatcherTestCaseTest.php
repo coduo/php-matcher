@@ -28,7 +28,7 @@ class PHPMatcherTestCaseTest extends PHPMatcherTestCase
         $this->expectExceptionMessageMatches('/Failed asserting that integer "42" is not a valid string../');
 
         $mock = $this->getMockBuilder('stdClass')
-            ->setMethods(['getTitle'])
+            ->addMethods(['getTitle'])
             ->getMock();
 
         $mock->method('getTitle')

@@ -15,18 +15,18 @@
         }
     ],
     "require": {
-        "php": "^7.4.2 || ~8.0 || ~8.1 || ~8.2",
+        "php": "~8.1 || ~8.2",
         "ext-filter": "*",
         "ext-json": "*",
         "ext-simplexml": "*",
-        "aeon-php/calendar": "^0.14.0 || ^0.15.0 || ^0.16.0 || ^0.17.0 || ^0.18.0 || ^1.0",
+        "aeon-php/calendar": "^1.0",
         "coduo/php-to-string": "^3",
         "doctrine/lexer": "^1.0||^2.0"
     },
     "require-dev": {
         "ext-pcov": "*",
         "openlss/lib-array2xml": "^1.0",
-        "symfony/expression-language": "^2.3|^3.0|^4.0|^5.0"
+        "symfony/expression-language": "^2.3|^3.0|^4.0|^5.0|^6.0"
     },
     "suggest": {
         "openlss/lib-array2xml": "In order ot use Coduo\\PHPMatcher\\Matcher\\XmlMatcher",

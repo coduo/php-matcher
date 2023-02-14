@@ -74,7 +74,7 @@ final class ExpandersTest extends TestCase
     }
 
     /**
-     * @dataProvider expanderExamples()
+     * @dataProvider expanderExamples
      */
     public function test_expanders($value, $pattern, $expectedResult) : void
     {

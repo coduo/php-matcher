@@ -37,7 +37,7 @@ final class OrMatcherTest extends TestCase
     }
 
     /**
-     * @dataProvider orExamples()
+     * @dataProvider orExamples
      */
     public function test_matcher_with_or($value, $pattern, $expectedResult) : void
     {

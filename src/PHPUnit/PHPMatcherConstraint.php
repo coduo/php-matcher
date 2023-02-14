@@ -39,7 +39,7 @@ final class PHPMatcherConstraint extends Constraint
         return 'matches given pattern.';
     }
 
-    protected function failureDescription($other) : string
+    protected function failureDescription(mixed $other) : string
     {
         $errorDescription = $this->matcher->error() ?: 'Value does not match given pattern';
         $backtrace = $this->matcher->backtrace();
@@ -50,7 +50,7 @@ final class PHPMatcherConstraint extends Constraint
                 . "\nBacktrace:\n" . $this->matcher->backtrace();
     }
 
-    protected function matches($other) : bool
+    protected function matches(mixed $other) : bool
     {
         return $this->matcher->match($other, $this->pattern);
     }
@@ -58,12 +58,12 @@ final class PHPMatcherConstraint extends Constraint
     /**
      * {@inheritdoc}
      */
-    protected function fail($other, $description, ComparisonFailure $comparisonFailure = null) : void
+    protected function fail(mixed $other, string $description, ComparisonFailure $comparisonFailure = null) : never
     {
         parent::fail($other, $description, $comparisonFailure ?? $this->createComparisonFailure($other));
     }
 
-    private function createComparisonFailure($other) : ?ComparisonFailure
+    private function createComparisonFailure(mixed $other) : ?ComparisonFailure
     {
         if (!\is_string($other) || !\is_string($this->pattern) || !\class_exists(Json::class)) {
             return null;
@@ -86,7 +86,6 @@ final class PHPMatcherConstraint extends Constraint
             \json_decode($other),
             Json::prettify($patternJson),
             Json::prettify($otherJson),
-            false,
             'Failed asserting that the pattern matches the given value.'
         );
     }

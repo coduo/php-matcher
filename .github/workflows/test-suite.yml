@@ -19,8 +19,6 @@ jobs:
           - "lowest"
           - "highest"
         php-version:
-          - "7.4"
-          - "8.0"
           - "8.1"
           - "8.2"
         operating-system:
@@ -78,7 +76,7 @@ jobs:
         uses: "shivammathur/setup-php@v2"
         with:
           coverage: "pcov"
-          php-version: "7.4"
+          php-version: "8.1"
           ini-values: memory_limit=-1
           tools: composer:v2
 
@@ -92,9 +90,9 @@ jobs:
         with:
           path: |
             ${{ steps.composer-cache.outputs.dir }}
-          key: "php-7.4-locked-composer-${{ hashFiles('**/composer.lock') }}"
+          key: "php-8.1-locked-composer-${{ hashFiles('**/composer.lock') }}"
           restore-keys: |
-            php-7.4-locked-composer-
+            php-8.1-locked-composer-
 
       - name: "Install locked dependencies"
         run: "composer install --no-interaction --no-progress --no-suggest"
@@ -114,7 +112,7 @@ jobs:
         with:
           coverage: "pcov"
           tools: composer:v2
-          php-version: "7.4"
+          php-version: "8.1"
           ini-values: memory_limit=-1
 
       - name: "Get Composer Cache Directory"
@@ -127,9 +125,9 @@ jobs:
         with:
           path: |
             ${{ steps.composer-cache.outputs.dir }}
-          key: "php-7.4-locked-composer-${{ hashFiles('**/composer.lock') }}"
+          key: "php-8.1-locked-composer-${{ hashFiles('**/composer.lock') }}"
           restore-keys: |
-            php-7.4-locked-composer-
+            php-8.1-locked-composer-
 
       - name: "Install locked dependencies"
         run: "composer install --no-interaction --no-progress --no-suggest"
