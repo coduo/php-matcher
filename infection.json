@@ -17,7 +17,7 @@
   },
   "testFramework": "phpunit",
   "phpUnit": {
-    "customPath": "tools\/vendor\/bin\/phpunit"
+    "customPath": "vendor\/bin\/phpunit"
   },
   "bootstrap": "./vendor/autoload.php"
 }
