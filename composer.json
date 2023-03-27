@@ -25,8 +25,12 @@
     },
     "require-dev": {
         "ext-pcov": "*",
+        "phpunit/phpunit": "^8.5.14|^9.0|^10.0",
         "openlss/lib-array2xml": "^1.0",
         "symfony/expression-language": "^2.3|^3.0|^4.0|^5.0|^6.0"
+    },
+    "conflict": {
+        "phpunit/phpunit": "<8.0, >=11.0"
     },
     "suggest": {
         "openlss/lib-array2xml": "In order ot use Coduo\\PHPMatcher\\Matcher\\XmlMatcher",
@@ -60,7 +64,7 @@
             "tools\/vendor\/bin\/php-cs-fixer fix --using-cache=no"
         ],
         "test" : [
-            "tools\/vendor\/bin\/phpunit"
+            "vendor\/bin\/phpunit"
         ],
         "test:mutation": [
             "Composer\\Config::disableProcessTimeout",
