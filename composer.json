@@ -25,11 +25,12 @@
     },
     "require-dev": {
         "ext-pcov": "*",
+        "phpunit/phpunit": "^8.0|^9.0|^10.0"
         "openlss/lib-array2xml": "^1.0",
         "symfony/expression-language": "^2.3|^3.0|^4.0|^5.0|^6.0"
     },
     "conflict": {
-        "phpunit/phpunit": ">=11.0"
+        "phpunit/phpunit": "<8.0, >=11.0"
     },
     "suggest": {
         "openlss/lib-array2xml": "In order ot use Coduo\\PHPMatcher\\Matcher\\XmlMatcher",
