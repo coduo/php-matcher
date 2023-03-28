@@ -57,23 +57,20 @@
         },
         {
             "name": "coduo/php-to-string",
-            "version": "3.2.0",
+            "version": "3.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/coduo/php-to-string.git",
-                "reference": "a1c8fb40d28252181cdad00b9fdc58ac71c154b1"
+                "reference": "e467de70e5e7403d969a05e853c7f480cde9fda4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/coduo/php-to-string/zipball/a1c8fb40d28252181cdad00b9fdc58ac71c154b1",
-                "reference": "a1c8fb40d28252181cdad00b9fdc58ac71c154b1",
+                "url": "https://api.github.com/repos/coduo/php-to-string/zipball/e467de70e5e7403d969a05e853c7f480cde9fda4",
+                "reference": "e467de70e5e7403d969a05e853c7f480cde9fda4",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.2"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^8.5|^9.5"
             },
             "suggest": {
                 "ext-intl": "Required if you are going to use humanizer with locales different than en_EN"
@@ -107,15 +104,9 @@
             ],
             "support": {
                 "issues": "https://github.com/coduo/php-to-string/issues",
-                "source": "https://github.com/coduo/php-to-string/tree/3.2.0"
+                "source": "https://github.com/coduo/php-to-string/tree/3.2.1"
             },
-            "funding": [
-                {
-                    "url": "https://github.com/norberttech",
-                    "type": "github"
-                }
-            ],
-            "time": "2021-02-23T21:32:39+00:00"
+            "time": "2023-03-28T10:10:37+00:00"
         },
         {
             "name": "doctrine/deprecations",
