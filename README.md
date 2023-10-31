@@ -15,16 +15,37 @@ PHPMatcher::error() : ?string;
 It was built to simplify API's functional testing.
 
 * [![Test Suite](https://github.com/coduo/php-matcher/actions/workflows/test-suite.yml/badge.svg?branch=6.x)](https://github.com/coduo/php-matcher/actions/workflows/test-suite.yml) - [6.x README](https://github.com/coduo/php-matcher/tree/6.x/README.md)  PHP >= 7.4 <= 8.1
-* [![Build Status](https://github.com/coduo/php-matcher/workflows/Tests/badge.svg?branch=5.x)](https://github.com/coduo/php-matcher/actions?query=workflow%3ATests) - [5.x README](https://github.com/coduo/php-matcher/tree/5.x/README.md)  PHP >= 7.2 < 8.0
-* [![Build Status](https://github.com/coduo/php-matcher/workflows/Tests/badge.svg?branch=5.0)](https://github.com/coduo/php-matcher/actions?query=workflow%3ATests) - [5.0 README](https://github.com/coduo/php-matcher/tree/5.0/README.md)  PHP >= 7.2 < 8.0
-* [![Build Status](https://travis-ci.org/coduo/php-matcher.svg?branch=4.0)](https://travis-ci.org/coduo/php-matcher) - [4.0.* README](https://github.com/coduo/php-matcher/tree/4.0/README.md)  PHP >= 7.2 < 8.0
-* [![Build Status](https://travis-ci.org/coduo/php-matcher.svg?branch=3.2)](https://travis-ci.org/coduo/php-matcher) - [3.2.* README](https://github.com/coduo/php-matcher/tree/3.2/README.md) PHP >= 7.0 < 8.0
-* [![Build Status](https://travis-ci.org/coduo/php-matcher.svg?branch=3.1)](https://travis-ci.org/coduo/php-matcher) - [3.1.* README](https://github.com/coduo/php-matcher/tree/3.1/README.md) PHP >= 7.0 < 8.0
+* [5.x README](https://github.com/coduo/php-matcher/tree/5.x/README.md)  PHP >= 7.2 < 8.0
+* [5.0 README](https://github.com/coduo/php-matcher/tree/5.0/README.md)  PHP >= 7.2 < 8.0
+* [4.0.* README](https://github.com/coduo/php-matcher/tree/4.0/README.md)  PHP >= 7.2 < 8.0
+* [3.2.* README](https://github.com/coduo/php-matcher/tree/3.2/README.md) PHP >= 7.0 < 8.0
+* [3.1.* README](https://github.com/coduo/php-matcher/tree/3.1/README.md) PHP >= 7.0 < 8.0
 
 [![Latest Stable Version](https://poser.pugx.org/coduo/php-matcher/v/stable)](https://packagist.org/packages/coduo/php-matcher)
 [![Total Downloads](https://poser.pugx.org/coduo/php-matcher/downloads)](https://packagist.org/packages/coduo/php-matcher)
 [![Latest Unstable Version](https://poser.pugx.org/coduo/php-matcher/v/unstable)](https://packagist.org/packages/coduo/php-matcher)
 [![License](https://poser.pugx.org/coduo/php-matcher/license)](https://packagist.org/packages/coduo/php-matcher)
+
+## We Stand Against Terror
+
+<table>
+  <thead>
+    <tr>
+      <td align="center"><a href="https://www.standwithukraine.how/" target="_blank">Stand With Ukraine</a></td>
+      <td align="center"><a href="https://www.standwithus.com/">Stand With Us</a></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="center"><img width="256" height="186" alt="Flag of Ukraine" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/256px-Flag_of_Ukraine.svg.png"></td>
+      <td align="center"><img width="256" height="186" alt="Flag of Israel" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Flag_of_Israel.svg/256px-Flag_of_Israel.svg.png"></td>
+    </tr>
+  </tbody>
+</table>
+
+> On Feb. 24, 2022, Russia declared an unprovoked war on Ukraine and launched a full-scale invasion. Russia is currently bombing peaceful Ukrainian cities, including schools and hospitals and attacking civilians who are fleeing conflict zones.
+
+> On Oct. 7, 2023, the national holiday of Simchat Torah, Hamas terrorists initiated an attack on Israel in the early hours, targeting civilians. They unleashed violence that resulted in at least 1,400 casualties and abducted at least 200 individuals, not limited to Israelis.
 
 ## Sandbox
 
