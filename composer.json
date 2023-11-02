@@ -61,7 +61,7 @@
             "tools\/vendor\/bin\/php-cs-fixer fix --using-cache=no"
         ],
         "test" : [
-            "vendor\/bin\/phpunit"
+            "vendor\/bin\/phpunit --coverage-html var/phpunit/coverage/html --coverage-filter src"
         ],
         "test:mutation": [
             "Composer\\Config::disableProcessTimeout",
