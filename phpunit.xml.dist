@@ -12,14 +12,12 @@
     </testsuites>
 
     <coverage>
+        <include>
+            <directory suffix=".php">./src/</directory>
+        </include>
+
         <report>
             <html outputDirectory="var/phpunit/coverage/html" lowUpperBound="80" highLowerBound="100"/>
         </report>
     </coverage>
-
-    <source>
-        <include>
-            <directory suffix=".php">./src/</directory>
-        </include>
-    </source>
 </phpunit>
