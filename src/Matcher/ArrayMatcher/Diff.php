@@ -22,7 +22,7 @@ final class Diff
     }
 
     /**
-     *  @return Difference[]
+     * @return Difference[]
      */
     public function all() : array
     {
