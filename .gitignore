@@ -4,4 +4,3 @@ var/
 .DS_Store
 .idea
 .phpunit.cache/
-composer.lock
