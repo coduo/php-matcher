@@ -14,7 +14,7 @@ PHPMatcher::error() : ?string;
 
 It was built to simplify API's functional testing.
 
-* [![Test Suite](https://github.com/coduo/php-matcher/actions/workflows/test-suite.yml/badge.svg?branch=6.x)](https://github.com/coduo/php-matcher/actions/workflows/test-suite.yml) - [6.x README](https://github.com/coduo/php-matcher/tree/6.x/README.md)  PHP >= 7.4 <= 8.1
+* [![Test Suite](https://github.com/coduo/php-matcher/actions/workflows/test-suite.yml/badge.svg?branch=6.x)](https://github.com/coduo/php-matcher/actions/workflows/test-suite.yml) - [6.x README](https://github.com/coduo/php-matcher/tree/6.x/README.md)  PHP >= 8.1 <= 8.3
 * [5.x README](https://github.com/coduo/php-matcher/tree/5.x/README.md)  PHP >= 7.2 < 8.0
 * [5.0 README](https://github.com/coduo/php-matcher/tree/5.0/README.md)  PHP >= 7.2 < 8.0
 * [4.0.* README](https://github.com/coduo/php-matcher/tree/4.0/README.md)  PHP >= 7.2 < 8.0
