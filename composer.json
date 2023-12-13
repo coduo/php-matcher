@@ -15,7 +15,7 @@
         }
     ],
     "require": {
-        "php": "~8.1 || ~8.2",
+        "php": "~8.1 || ~8.2 || ~8.3",
         "ext-filter": "*",
         "ext-json": "*",
         "ext-simplexml": "*",
@@ -25,12 +25,11 @@
     },
     "require-dev": {
         "ext-pcov": "*",
-        "phpunit/phpunit": "^8.5.14|^9.0|^10.0",
+        "phpunit/phpunit": "^10.4",
         "openlss/lib-array2xml": "^1.0",
-        "symfony/expression-language": "^2.3|^3.0|^4.0|^5.0|^6.0"
-    },
-    "conflict": {
-        "phpunit/phpunit": "<8.0, >=11.0"
+        "symfony/expression-language": "^2.3|^3.0|^4.0|^5.0|^6.0",
+        "symfony/cache": "^2.3|^3.0|^4.0|^5.0|^6.0",
+        "symfony/var-exporter": "^2.3|^3.0|^4.0|^5.0|^6.0"
     },
     "suggest": {
         "openlss/lib-array2xml": "In order ot use Coduo\\PHPMatcher\\Matcher\\XmlMatcher",
@@ -64,7 +63,7 @@
             "tools\/vendor\/bin\/php-cs-fixer fix --using-cache=no"
         ],
         "test" : [
-            "vendor\/bin\/phpunit"
+            "vendor\/bin\/phpunit --coverage-html var/phpunit/coverage/html --coverage-filter src"
         ],
         "test:mutation": [
             "Composer\\Config::disableProcessTimeout",
