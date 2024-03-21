@@ -4,6 +4,7 @@
 /.github/ export-ignore
 /tests export-ignore
 /tools export-ignore
+/benchmark export-ignore
 /.gitattributes export-ignore
 /.gitignore export-ignore
 /.php_cs export-ignore
