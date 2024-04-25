@@ -3,7 +3,7 @@ name: "Automation - Changelog Update"
 on:
   push:
     branches:
-      - "3.x"
+      - "6.x"
 
 jobs:
   automation:
