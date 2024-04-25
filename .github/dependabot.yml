@@ -5,6 +5,22 @@ updates:
     schedule:
       interval: "daily"
   - package-ecosystem: "composer"
-    directory: "/tools"
+    directory: "/tools/cs-fixer"
     schedule:
-      interval: "daily"
+      interval: "monthly"
+  - package-ecosystem: "composer"
+    directory: "/tools/infection"
+    schedule:
+      interval: "monthly"
+  - package-ecosystem: "composer"
+    directory: "/tools/phpbench"
+    schedule:
+      interval: "monthly"
+  - package-ecosystem: "composer"
+    directory: "/tools/phpstan"
+    schedule:
+      interval: "monthly"
+  - package-ecosystem: "composer"
+    directory: "/tools/psalm"
+    schedule:
+      interval: "monthly"
