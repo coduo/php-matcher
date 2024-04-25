@@ -90,38 +90,235 @@
 #90 Matcher Coduo\PHPMatcher\Matcher\ExpressionMatcher can't match pattern "@integer@"
 #91 Matcher Coduo\PHPMatcher\Matcher\NullMatcher can't match pattern "@integer@"
 #92 Matcher Coduo\PHPMatcher\Matcher\StringMatcher can't match pattern "@integer@"
-#93 Matcher Coduo\PHPMatcher\Matcher\IntegerMatcher can't match pattern "@integer@"
-#94 Matcher Coduo\PHPMatcher\Matcher\BooleanMatcher can't match pattern "@integer@"
-#95 Matcher Coduo\PHPMatcher\Matcher\DoubleMatcher can't match pattern "@integer@"
-#96 Matcher Coduo\PHPMatcher\Matcher\NumberMatcher can't match pattern "@integer@"
-#97 Matcher Coduo\PHPMatcher\Matcher\TimeMatcher can't match pattern "@integer@"
-#98 Matcher Coduo\PHPMatcher\Matcher\DateMatcher can't match pattern "@integer@"
-#99 Matcher Coduo\PHPMatcher\Matcher\DateTimeMatcher can't match pattern "@integer@"
-#100 Matcher Coduo\PHPMatcher\Matcher\TimeZoneMatcher can't match pattern "@integer@"
-#101 Matcher Coduo\PHPMatcher\Matcher\ScalarMatcher can match pattern "@integer@"
-#102 Matcher Coduo\PHPMatcher\Matcher\ScalarMatcher matching value "131" with "@integer@" pattern
-#103 Matcher Coduo\PHPMatcher\Matcher\ScalarMatcher failed to match value "131" with "@integer@" pattern
-#104 Matcher Coduo\PHPMatcher\Matcher\ScalarMatcher error: "131" does not match "@integer@".
-#105 Matcher Coduo\PHPMatcher\Matcher\WildcardMatcher can't match pattern "@integer@"
-#106 Matcher Coduo\PHPMatcher\Matcher\UuidMatcher can't match pattern "@integer@"
-#107 Matcher Coduo\PHPMatcher\Matcher\UlidMatcher can't match pattern "@integer@"
-#108 Matcher Coduo\PHPMatcher\Matcher\JsonObjectMatcher can't match pattern "@integer@"
-#109 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) failed to match value "131" with "@integer@" pattern
-#110 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) error: "131" does not match "@integer@".
-#111 Matcher Coduo\PHPMatcher\Matcher\TextMatcher can match pattern "@integer@"
-#112 Matcher Coduo\PHPMatcher\Matcher\TextMatcher matching value "131" with "@integer@" pattern
-#113 Matcher Coduo\PHPMatcher\Matcher\TextMatcher failed to match value "131" with "@integer@" pattern
-#114 Matcher Coduo\PHPMatcher\Matcher\TextMatcher error: integer "131" is not a valid string.
-#115 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (array) failed to match value "131" with "@integer@" pattern
-#116 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (array) error: integer "131" is not a valid string.
-#117 Matcher Coduo\PHPMatcher\Matcher\ArrayMatcher failed to match value "Array(3)" with "Array(3)" pattern
-#118 Matcher Coduo\PHPMatcher\Matcher\ArrayMatcher error: Value "131" does not match pattern "@integer@" at path: "[users][0][id]"
-#119 Matcher Coduo\PHPMatcher\Matcher\JsonMatcher failed to match value "{"users":[{"id":131,"firstName":"Norbert","lastName":"Orzechowicz","enabled":true,"roles":[]},{"id":132,"firstName":"Micha\u0142","lastName":"D\u0105browski","enabled":false,"roles":["ROLE_DEVELOPER"]}],"prevPage":"http:\/\/example.com\/api\/users\/1?limit=2","nextPage":"http:\/\/example.com\/api\/users\/3?limit=2"}" with "{"users":[{"id":"@integer@","firstName":"Norbert","lastName":"Orzechowicz","enabled":"@boolean@","roles":"@array@.isEmpty()"},{"id":"@integer@","firstName":"Micha\u0142","lastName":"D\u0105browski","enabled":"expr(value == true)","roles":"@array@"}],"prevPage":"@string@","nextPage":"@string@"}" pattern
-#120 Matcher Coduo\PHPMatcher\Matcher\JsonMatcher error: Value "131" does not match pattern "@integer@" at path: "[users][0][id]"
-#121 Matcher Coduo\PHPMatcher\Matcher\XmlMatcher can't match pattern "{"users":[{"id":"@integer@","firstName":"Norbert","lastName":"Orzechowicz","enabled":"@boolean@","roles":"@array@.isEmpty()"},{"id":"@integer@","firstName":"Micha\u0142","lastName":"D\u0105browski","enabled":"expr(value == true)","roles":"@array@"}],"prevPage":"@string@","nextPage":"@string@"}"
-#122 Matcher Coduo\PHPMatcher\Matcher\OrMatcher can't match pattern "{"users":[{"id":"@integer@","firstName":"Norbert","lastName":"Orzechowicz","enabled":"@boolean@","roles":"@array@.isEmpty()"},{"id":"@integer@","firstName":"Micha\u0142","lastName":"D\u0105browski","enabled":"expr(value == true)","roles":"@array@"}],"prevPage":"@string@","nextPage":"@string@"}"
-#123 Matcher Coduo\PHPMatcher\Matcher\TextMatcher can't match pattern "{"users":[{"id":"@integer@","firstName":"Norbert","lastName":"Orzechowicz","enabled":"@boolean@","roles":"@array@.isEmpty()"},{"id":"@integer@","firstName":"Micha\u0142","lastName":"D\u0105browski","enabled":"expr(value == true)","roles":"@array@"}],"prevPage":"@string@","nextPage":"@string@"}"
-#124 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (all) failed to match value "{"users":[{"id":131,"firstName":"Norbert","lastName":"Orzechowicz","enabled":true,"roles":[]},{"id":132,"firstName":"Micha\u0142","lastName":"D\u0105browski","enabled":false,"roles":["ROLE_DEVELOPER"]}],"prevPage":"http:\/\/example.com\/api\/users\/1?limit=2","nextPage":"http:\/\/example.com\/api\/users\/3?limit=2"}" with "{"users":[{"id":"@integer@","firstName":"Norbert","lastName":"Orzechowicz","enabled":"@boolean@","roles":"@array@.isEmpty()"},{"id":"@integer@","firstName":"Micha\u0142","lastName":"D\u0105browski","enabled":"expr(value == true)","roles":"@array@"}],"prevPage":"@string@","nextPage":"@string@"}" pattern
-#125 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (all) error: Value "131" does not match pattern "@integer@" at path: "[users][0][id]"
-#126 Matcher Coduo\PHPMatcher\Matcher failed to match value "{"users":[{"id":131,"firstName":"Norbert","lastName":"Orzechowicz","enabled":true,"roles":[]},{"id":132,"firstName":"Micha\u0142","lastName":"D\u0105browski","enabled":false,"roles":["ROLE_DEVELOPER"]}],"prevPage":"http:\/\/example.com\/api\/users\/1?limit=2","nextPage":"http:\/\/example.com\/api\/users\/3?limit=2"}" with "{"users":[{"id":"@integer@","firstName":"Norbert","lastName":"Orzechowicz","enabled":"@boolean@","roles":"@array@.isEmpty()"},{"id":"@integer@","firstName":"Micha\u0142","lastName":"D\u0105browski","enabled":"expr(value == true)","roles":"@array@"}],"prevPage":"@string@","nextPage":"@string@"}" pattern
-#127 Matcher Coduo\PHPMatcher\Matcher error: Value "131" does not match pattern "@integer@" at path: "[users][0][id]"
+#93 Matcher Coduo\PHPMatcher\Matcher\IntegerMatcher can match pattern "@integer@"
+#94 Matcher Coduo\PHPMatcher\Matcher\IntegerMatcher matching value "131" with "@integer@" pattern
+#95 Matcher Coduo\PHPMatcher\Matcher\IntegerMatcher successfully matched value "131" with "@integer@" pattern
+#96 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) successfully matched value "131" with "@integer@" pattern
+#97 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (array) successfully matched value "131" with "@integer@" pattern
+#98 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (array) can match pattern "Norbert"
+#99 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (array) matching value "Norbert" with "Norbert" pattern
+#100 Matcher Coduo\PHPMatcher\Matcher\OrMatcher can't match pattern "Norbert"
+#101 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) can match pattern "Norbert"
+#102 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) matching value "Norbert" with "Norbert" pattern
+#103 Matcher Coduo\PHPMatcher\Matcher\CallbackMatcher can't match pattern "Norbert"
+#104 Matcher Coduo\PHPMatcher\Matcher\ExpressionMatcher can't match pattern "Norbert"
+#105 Matcher Coduo\PHPMatcher\Matcher\NullMatcher can't match pattern "Norbert"
+#106 Matcher Coduo\PHPMatcher\Matcher\StringMatcher can't match pattern "Norbert"
+#107 Matcher Coduo\PHPMatcher\Matcher\IntegerMatcher can't match pattern "Norbert"
+#108 Matcher Coduo\PHPMatcher\Matcher\BooleanMatcher can't match pattern "Norbert"
+#109 Matcher Coduo\PHPMatcher\Matcher\DoubleMatcher can't match pattern "Norbert"
+#110 Matcher Coduo\PHPMatcher\Matcher\NumberMatcher can't match pattern "Norbert"
+#111 Matcher Coduo\PHPMatcher\Matcher\TimeMatcher can't match pattern "Norbert"
+#112 Matcher Coduo\PHPMatcher\Matcher\DateMatcher can't match pattern "Norbert"
+#113 Matcher Coduo\PHPMatcher\Matcher\DateTimeMatcher can't match pattern "Norbert"
+#114 Matcher Coduo\PHPMatcher\Matcher\TimeZoneMatcher can't match pattern "Norbert"
+#115 Matcher Coduo\PHPMatcher\Matcher\ScalarMatcher can match pattern "Norbert"
+#116 Matcher Coduo\PHPMatcher\Matcher\ScalarMatcher matching value "Norbert" with "Norbert" pattern
+#117 Matcher Coduo\PHPMatcher\Matcher\ScalarMatcher successfully matched value "Norbert" with "Norbert" pattern
+#118 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) successfully matched value "Norbert" with "Norbert" pattern
+#119 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (array) successfully matched value "Norbert" with "Norbert" pattern
+#120 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (array) can match pattern "Orzechowicz"
+#121 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (array) matching value "Orzechowicz" with "Orzechowicz" pattern
+#122 Matcher Coduo\PHPMatcher\Matcher\OrMatcher can't match pattern "Orzechowicz"
+#123 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) can match pattern "Orzechowicz"
+#124 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) matching value "Orzechowicz" with "Orzechowicz" pattern
+#125 Matcher Coduo\PHPMatcher\Matcher\CallbackMatcher can't match pattern "Orzechowicz"
+#126 Matcher Coduo\PHPMatcher\Matcher\ExpressionMatcher can't match pattern "Orzechowicz"
+#127 Matcher Coduo\PHPMatcher\Matcher\NullMatcher can't match pattern "Orzechowicz"
+#128 Matcher Coduo\PHPMatcher\Matcher\StringMatcher can't match pattern "Orzechowicz"
+#129 Matcher Coduo\PHPMatcher\Matcher\IntegerMatcher can't match pattern "Orzechowicz"
+#130 Matcher Coduo\PHPMatcher\Matcher\BooleanMatcher can't match pattern "Orzechowicz"
+#131 Matcher Coduo\PHPMatcher\Matcher\DoubleMatcher can't match pattern "Orzechowicz"
+#132 Matcher Coduo\PHPMatcher\Matcher\NumberMatcher can't match pattern "Orzechowicz"
+#133 Matcher Coduo\PHPMatcher\Matcher\TimeMatcher can't match pattern "Orzechowicz"
+#134 Matcher Coduo\PHPMatcher\Matcher\DateMatcher can't match pattern "Orzechowicz"
+#135 Matcher Coduo\PHPMatcher\Matcher\DateTimeMatcher can't match pattern "Orzechowicz"
+#136 Matcher Coduo\PHPMatcher\Matcher\TimeZoneMatcher can't match pattern "Orzechowicz"
+#137 Matcher Coduo\PHPMatcher\Matcher\ScalarMatcher can match pattern "Orzechowicz"
+#138 Matcher Coduo\PHPMatcher\Matcher\ScalarMatcher matching value "Orzechowicz" with "Orzechowicz" pattern
+#139 Matcher Coduo\PHPMatcher\Matcher\ScalarMatcher successfully matched value "Orzechowicz" with "Orzechowicz" pattern
+#140 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) successfully matched value "Orzechowicz" with "Orzechowicz" pattern
+#141 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (array) successfully matched value "Orzechowicz" with "Orzechowicz" pattern
+#142 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (array) can match pattern "@boolean@"
+#143 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (array) matching value "true" with "@boolean@" pattern
+#144 Matcher Coduo\PHPMatcher\Matcher\OrMatcher can't match pattern "@boolean@"
+#145 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) can match pattern "@boolean@"
+#146 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) matching value "true" with "@boolean@" pattern
+#147 Matcher Coduo\PHPMatcher\Matcher\CallbackMatcher can't match pattern "@boolean@"
+#148 Matcher Coduo\PHPMatcher\Matcher\ExpressionMatcher can't match pattern "@boolean@"
+#149 Matcher Coduo\PHPMatcher\Matcher\NullMatcher can't match pattern "@boolean@"
+#150 Matcher Coduo\PHPMatcher\Matcher\StringMatcher can't match pattern "@boolean@"
+#151 Matcher Coduo\PHPMatcher\Matcher\IntegerMatcher can't match pattern "@boolean@"
+#152 Matcher Coduo\PHPMatcher\Matcher\BooleanMatcher can match pattern "@boolean@"
+#153 Matcher Coduo\PHPMatcher\Matcher\BooleanMatcher matching value "true" with "@boolean@" pattern
+#154 Matcher Coduo\PHPMatcher\Matcher\BooleanMatcher successfully matched value "true" with "@boolean@" pattern
+#155 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) successfully matched value "true" with "@boolean@" pattern
+#156 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (array) successfully matched value "true" with "@boolean@" pattern
+#157 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (array) can match pattern "@array@.isEmpty()"
+#158 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (array) matching value "Array(0)" with "@array@.isEmpty()" pattern
+#159 Matcher Coduo\PHPMatcher\Matcher\OrMatcher can't match pattern "@array@.isEmpty()"
+#160 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) can match pattern "@array@.isEmpty()"
+#161 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) matching value "Array(0)" with "@array@.isEmpty()" pattern
+#162 Matcher Coduo\PHPMatcher\Matcher\CallbackMatcher can't match pattern "@array@.isEmpty()"
+#163 Matcher Coduo\PHPMatcher\Matcher\ExpressionMatcher can't match pattern "@array@.isEmpty()"
+#164 Matcher Coduo\PHPMatcher\Matcher\NullMatcher can't match pattern "@array@.isEmpty()"
+#165 Matcher Coduo\PHPMatcher\Matcher\StringMatcher can't match pattern "@array@.isEmpty()"
+#166 Matcher Coduo\PHPMatcher\Matcher\IntegerMatcher can't match pattern "@array@.isEmpty()"
+#167 Matcher Coduo\PHPMatcher\Matcher\BooleanMatcher can't match pattern "@array@.isEmpty()"
+#168 Matcher Coduo\PHPMatcher\Matcher\DoubleMatcher can't match pattern "@array@.isEmpty()"
+#169 Matcher Coduo\PHPMatcher\Matcher\NumberMatcher can't match pattern "@array@.isEmpty()"
+#170 Matcher Coduo\PHPMatcher\Matcher\TimeMatcher can't match pattern "@array@.isEmpty()"
+#171 Matcher Coduo\PHPMatcher\Matcher\DateMatcher can't match pattern "@array@.isEmpty()"
+#172 Matcher Coduo\PHPMatcher\Matcher\DateTimeMatcher can't match pattern "@array@.isEmpty()"
+#173 Matcher Coduo\PHPMatcher\Matcher\TimeZoneMatcher can't match pattern "@array@.isEmpty()"
+#174 Matcher Coduo\PHPMatcher\Matcher\ScalarMatcher can match pattern "@array@.isEmpty()"
+#175 Matcher Coduo\PHPMatcher\Matcher\ScalarMatcher matching value "Array(0)" with "@array@.isEmpty()" pattern
+#176 Matcher Coduo\PHPMatcher\Matcher\ScalarMatcher failed to match value "Array(0)" with "@array@.isEmpty()" pattern
+#177 Matcher Coduo\PHPMatcher\Matcher\ScalarMatcher error: "Array(0)" does not match "@array@.isEmpty()".
+#178 Matcher Coduo\PHPMatcher\Matcher\WildcardMatcher can't match pattern "@array@.isEmpty()"
+#179 Matcher Coduo\PHPMatcher\Matcher\UuidMatcher can't match pattern "@array@.isEmpty()"
+#180 Matcher Coduo\PHPMatcher\Matcher\UlidMatcher can't match pattern "@array@.isEmpty()"
+#181 Matcher Coduo\PHPMatcher\Matcher\JsonObjectMatcher can't match pattern "@array@.isEmpty()"
+#182 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) failed to match value "Array(0)" with "@array@.isEmpty()" pattern
+#183 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) error: "Array(0)" does not match "@array@.isEmpty()".
+#184 Matcher Coduo\PHPMatcher\Matcher\TextMatcher can match pattern "@array@.isEmpty()"
+#185 Matcher Coduo\PHPMatcher\Matcher\TextMatcher matching value "Array(0)" with "@array@.isEmpty()" pattern
+#186 Matcher Coduo\PHPMatcher\Matcher\TextMatcher failed to match value "Array(0)" with "@array@.isEmpty()" pattern
+#187 Matcher Coduo\PHPMatcher\Matcher\TextMatcher error: array "Array(0)" is not a valid string.
+#188 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (array) failed to match value "Array(0)" with "@array@.isEmpty()" pattern
+#189 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (array) error: array "Array(0)" is not a valid string.
+#190 Expander isEmpty matching value "Array(0)"
+#191 Expander isEmpty successfully matched value "Array(0)"
+#192 Matcher Coduo\PHPMatcher\Matcher\ArrayMatcher successfully matched value "Array(0)" with "@array@.isEmpty()" pattern
+#193 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (array) can match pattern "Array(5)"
+#194 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (array) matching value "Array(5)" with "Array(5)" pattern
+#195 Matcher Coduo\PHPMatcher\Matcher\OrMatcher can't match pattern "Array(5)"
+#196 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) can match pattern "Array(5)"
+#197 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) matching value "Array(5)" with "Array(5)" pattern
+#198 Matcher Coduo\PHPMatcher\Matcher\CallbackMatcher can't match pattern "Array(5)"
+#199 Matcher Coduo\PHPMatcher\Matcher\ExpressionMatcher can't match pattern "Array(5)"
+#200 Matcher Coduo\PHPMatcher\Matcher\NullMatcher can't match pattern "Array(5)"
+#201 Matcher Coduo\PHPMatcher\Matcher\StringMatcher can't match pattern "Array(5)"
+#202 Matcher Coduo\PHPMatcher\Matcher\IntegerMatcher can't match pattern "Array(5)"
+#203 Matcher Coduo\PHPMatcher\Matcher\BooleanMatcher can't match pattern "Array(5)"
+#204 Matcher Coduo\PHPMatcher\Matcher\DoubleMatcher can't match pattern "Array(5)"
+#205 Matcher Coduo\PHPMatcher\Matcher\NumberMatcher can't match pattern "Array(5)"
+#206 Matcher Coduo\PHPMatcher\Matcher\TimeMatcher can't match pattern "Array(5)"
+#207 Matcher Coduo\PHPMatcher\Matcher\DateMatcher can't match pattern "Array(5)"
+#208 Matcher Coduo\PHPMatcher\Matcher\DateTimeMatcher can't match pattern "Array(5)"
+#209 Matcher Coduo\PHPMatcher\Matcher\TimeZoneMatcher can't match pattern "Array(5)"
+#210 Matcher Coduo\PHPMatcher\Matcher\ScalarMatcher can't match pattern "Array(5)"
+#211 Matcher Coduo\PHPMatcher\Matcher\WildcardMatcher can't match pattern "Array(5)"
+#212 Matcher Coduo\PHPMatcher\Matcher\UuidMatcher can't match pattern "Array(5)"
+#213 Matcher Coduo\PHPMatcher\Matcher\UlidMatcher can't match pattern "Array(5)"
+#214 Matcher Coduo\PHPMatcher\Matcher\JsonObjectMatcher can't match pattern "Array(5)"
+#215 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) failed to match value "Array(5)" with "Array(5)" pattern
+#216 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) error: "Array(0)" does not match "@array@.isEmpty()".
+#217 Matcher Coduo\PHPMatcher\Matcher\TextMatcher can't match pattern "Array(5)"
+#218 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (array) failed to match value "Array(5)" with "Array(5)" pattern
+#219 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (array) error: "Array(0)" does not match "@array@.isEmpty()".
+#220 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (array) can match pattern "@integer@"
+#221 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (array) matching value "132" with "@integer@" pattern
+#222 Matcher Coduo\PHPMatcher\Matcher\OrMatcher can't match pattern "@integer@"
+#223 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) can match pattern "@integer@"
+#224 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) matching value "132" with "@integer@" pattern
+#225 Matcher Coduo\PHPMatcher\Matcher\CallbackMatcher can't match pattern "@integer@"
+#226 Matcher Coduo\PHPMatcher\Matcher\ExpressionMatcher can't match pattern "@integer@"
+#227 Matcher Coduo\PHPMatcher\Matcher\NullMatcher can't match pattern "@integer@"
+#228 Matcher Coduo\PHPMatcher\Matcher\StringMatcher can't match pattern "@integer@"
+#229 Matcher Coduo\PHPMatcher\Matcher\IntegerMatcher can match pattern "@integer@"
+#230 Matcher Coduo\PHPMatcher\Matcher\IntegerMatcher matching value "132" with "@integer@" pattern
+#231 Matcher Coduo\PHPMatcher\Matcher\IntegerMatcher successfully matched value "132" with "@integer@" pattern
+#232 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) successfully matched value "132" with "@integer@" pattern
+#233 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (array) successfully matched value "132" with "@integer@" pattern
+#234 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (array) can match pattern "Michał"
+#235 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (array) matching value "Michał" with "Michał" pattern
+#236 Matcher Coduo\PHPMatcher\Matcher\OrMatcher can't match pattern "Michał"
+#237 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) can match pattern "Michał"
+#238 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) matching value "Michał" with "Michał" pattern
+#239 Matcher Coduo\PHPMatcher\Matcher\CallbackMatcher can't match pattern "Michał"
+#240 Matcher Coduo\PHPMatcher\Matcher\ExpressionMatcher can't match pattern "Michał"
+#241 Matcher Coduo\PHPMatcher\Matcher\NullMatcher can't match pattern "Michał"
+#242 Matcher Coduo\PHPMatcher\Matcher\StringMatcher can't match pattern "Michał"
+#243 Matcher Coduo\PHPMatcher\Matcher\IntegerMatcher can't match pattern "Michał"
+#244 Matcher Coduo\PHPMatcher\Matcher\BooleanMatcher can't match pattern "Michał"
+#245 Matcher Coduo\PHPMatcher\Matcher\DoubleMatcher can't match pattern "Michał"
+#246 Matcher Coduo\PHPMatcher\Matcher\NumberMatcher can't match pattern "Michał"
+#247 Matcher Coduo\PHPMatcher\Matcher\TimeMatcher can't match pattern "Michał"
+#248 Matcher Coduo\PHPMatcher\Matcher\DateMatcher can't match pattern "Michał"
+#249 Matcher Coduo\PHPMatcher\Matcher\DateTimeMatcher can't match pattern "Michał"
+#250 Matcher Coduo\PHPMatcher\Matcher\TimeZoneMatcher can't match pattern "Michał"
+#251 Matcher Coduo\PHPMatcher\Matcher\ScalarMatcher can match pattern "Michał"
+#252 Matcher Coduo\PHPMatcher\Matcher\ScalarMatcher matching value "Michał" with "Michał" pattern
+#253 Matcher Coduo\PHPMatcher\Matcher\ScalarMatcher successfully matched value "Michał" with "Michał" pattern
+#254 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) successfully matched value "Michał" with "Michał" pattern
+#255 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (array) successfully matched value "Michał" with "Michał" pattern
+#256 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (array) can match pattern "Dąbrowski"
+#257 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (array) matching value "Dąbrowski" with "Dąbrowski" pattern
+#258 Matcher Coduo\PHPMatcher\Matcher\OrMatcher can't match pattern "Dąbrowski"
+#259 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) can match pattern "Dąbrowski"
+#260 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) matching value "Dąbrowski" with "Dąbrowski" pattern
+#261 Matcher Coduo\PHPMatcher\Matcher\CallbackMatcher can't match pattern "Dąbrowski"
+#262 Matcher Coduo\PHPMatcher\Matcher\ExpressionMatcher can't match pattern "Dąbrowski"
+#263 Matcher Coduo\PHPMatcher\Matcher\NullMatcher can't match pattern "Dąbrowski"
+#264 Matcher Coduo\PHPMatcher\Matcher\StringMatcher can't match pattern "Dąbrowski"
+#265 Matcher Coduo\PHPMatcher\Matcher\IntegerMatcher can't match pattern "Dąbrowski"
+#266 Matcher Coduo\PHPMatcher\Matcher\BooleanMatcher can't match pattern "Dąbrowski"
+#267 Matcher Coduo\PHPMatcher\Matcher\DoubleMatcher can't match pattern "Dąbrowski"
+#268 Matcher Coduo\PHPMatcher\Matcher\NumberMatcher can't match pattern "Dąbrowski"
+#269 Matcher Coduo\PHPMatcher\Matcher\TimeMatcher can't match pattern "Dąbrowski"
+#270 Matcher Coduo\PHPMatcher\Matcher\DateMatcher can't match pattern "Dąbrowski"
+#271 Matcher Coduo\PHPMatcher\Matcher\DateTimeMatcher can't match pattern "Dąbrowski"
+#272 Matcher Coduo\PHPMatcher\Matcher\TimeZoneMatcher can't match pattern "Dąbrowski"
+#273 Matcher Coduo\PHPMatcher\Matcher\ScalarMatcher can match pattern "Dąbrowski"
+#274 Matcher Coduo\PHPMatcher\Matcher\ScalarMatcher matching value "Dąbrowski" with "Dąbrowski" pattern
+#275 Matcher Coduo\PHPMatcher\Matcher\ScalarMatcher successfully matched value "Dąbrowski" with "Dąbrowski" pattern
+#276 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) successfully matched value "Dąbrowski" with "Dąbrowski" pattern
+#277 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (array) successfully matched value "Dąbrowski" with "Dąbrowski" pattern
+#278 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (array) can match pattern "expr(value == true)"
+#279 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (array) matching value "false" with "expr(value == true)" pattern
+#280 Matcher Coduo\PHPMatcher\Matcher\OrMatcher can't match pattern "expr(value == true)"
+#281 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) can match pattern "expr(value == true)"
+#282 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) matching value "false" with "expr(value == true)" pattern
+#283 Matcher Coduo\PHPMatcher\Matcher\CallbackMatcher can't match pattern "expr(value == true)"
+#284 Matcher Coduo\PHPMatcher\Matcher\ExpressionMatcher can match pattern "expr(value == true)"
+#285 Matcher Coduo\PHPMatcher\Matcher\ExpressionMatcher matching value "false" with "expr(value == true)" pattern
+#286 Matcher Coduo\PHPMatcher\Matcher\ExpressionMatcher failed to match value "false" with "expr(value == true)" pattern
+#287 Matcher Coduo\PHPMatcher\Matcher\ExpressionMatcher error: "expr(value == true)" expression fails for value "false".
+#288 Matcher Coduo\PHPMatcher\Matcher\NullMatcher can't match pattern "expr(value == true)"
+#289 Matcher Coduo\PHPMatcher\Matcher\StringMatcher can't match pattern "expr(value == true)"
+#290 Matcher Coduo\PHPMatcher\Matcher\IntegerMatcher can't match pattern "expr(value == true)"
+#291 Matcher Coduo\PHPMatcher\Matcher\BooleanMatcher can't match pattern "expr(value == true)"
+#292 Matcher Coduo\PHPMatcher\Matcher\DoubleMatcher can't match pattern "expr(value == true)"
+#293 Matcher Coduo\PHPMatcher\Matcher\NumberMatcher can't match pattern "expr(value == true)"
+#294 Matcher Coduo\PHPMatcher\Matcher\TimeMatcher can't match pattern "expr(value == true)"
+#295 Matcher Coduo\PHPMatcher\Matcher\DateMatcher can't match pattern "expr(value == true)"
+#296 Matcher Coduo\PHPMatcher\Matcher\DateTimeMatcher can't match pattern "expr(value == true)"
+#297 Matcher Coduo\PHPMatcher\Matcher\TimeZoneMatcher can't match pattern "expr(value == true)"
+#298 Matcher Coduo\PHPMatcher\Matcher\ScalarMatcher can match pattern "expr(value == true)"
+#299 Matcher Coduo\PHPMatcher\Matcher\ScalarMatcher matching value "false" with "expr(value == true)" pattern
+#300 Matcher Coduo\PHPMatcher\Matcher\ScalarMatcher failed to match value "false" with "expr(value == true)" pattern
+#301 Matcher Coduo\PHPMatcher\Matcher\ScalarMatcher error: "false" does not match "expr(value == true)".
+#302 Matcher Coduo\PHPMatcher\Matcher\WildcardMatcher can't match pattern "expr(value == true)"
+#303 Matcher Coduo\PHPMatcher\Matcher\UuidMatcher can't match pattern "expr(value == true)"
+#304 Matcher Coduo\PHPMatcher\Matcher\UlidMatcher can't match pattern "expr(value == true)"
+#305 Matcher Coduo\PHPMatcher\Matcher\JsonObjectMatcher can't match pattern "expr(value == true)"
+#306 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) failed to match value "false" with "expr(value == true)" pattern
+#307 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (scalars) error: "false" does not match "expr(value == true)".
+#308 Matcher Coduo\PHPMatcher\Matcher\TextMatcher can match pattern "expr(value == true)"
+#309 Matcher Coduo\PHPMatcher\Matcher\TextMatcher matching value "false" with "expr(value == true)" pattern
+#310 Matcher Coduo\PHPMatcher\Matcher\TextMatcher failed to match value "false" with "expr(value == true)" pattern
+#311 Matcher Coduo\PHPMatcher\Matcher\TextMatcher error: boolean "false" is not a valid string.
+#312 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (array) failed to match value "false" with "expr(value == true)" pattern
+#313 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (array) error: boolean "false" is not a valid string.
+#314 Matcher Coduo\PHPMatcher\Matcher\ArrayMatcher failed to match value "Array(3)" with "Array(3)" pattern
+#315 Matcher Coduo\PHPMatcher\Matcher\ArrayMatcher error: Value "false" does not match pattern "expr(value == true)" at path: "[users][1][enabled]"
+#316 Matcher Coduo\PHPMatcher\Matcher\JsonMatcher failed to match value "{"users":[{"id":131,"firstName":"Norbert","lastName":"Orzechowicz","enabled":true,"roles":[]},{"id":132,"firstName":"Micha\u0142","lastName":"D\u0105browski","enabled":false,"roles":["ROLE_DEVELOPER"]}],"prevPage":"http:\/\/example.com\/api\/users\/1?limit=2","nextPage":"http:\/\/example.com\/api\/users\/3?limit=2"}" with "{"users":[{"id":"@integer@","firstName":"Norbert","lastName":"Orzechowicz","enabled":"@boolean@","roles":"@array@.isEmpty()"},{"id":"@integer@","firstName":"Micha\u0142","lastName":"D\u0105browski","enabled":"expr(value == true)","roles":"@array@"}],"prevPage":"@string@","nextPage":"@string@"}" pattern
+#317 Matcher Coduo\PHPMatcher\Matcher\JsonMatcher error: Value "false" does not match pattern "expr(value == true)" at path: "[users][1][enabled]"
+#318 Matcher Coduo\PHPMatcher\Matcher\XmlMatcher can't match pattern "{"users":[{"id":"@integer@","firstName":"Norbert","lastName":"Orzechowicz","enabled":"@boolean@","roles":"@array@.isEmpty()"},{"id":"@integer@","firstName":"Micha\u0142","lastName":"D\u0105browski","enabled":"expr(value == true)","roles":"@array@"}],"prevPage":"@string@","nextPage":"@string@"}"
+#319 Matcher Coduo\PHPMatcher\Matcher\OrMatcher can't match pattern "{"users":[{"id":"@integer@","firstName":"Norbert","lastName":"Orzechowicz","enabled":"@boolean@","roles":"@array@.isEmpty()"},{"id":"@integer@","firstName":"Micha\u0142","lastName":"D\u0105browski","enabled":"expr(value == true)","roles":"@array@"}],"prevPage":"@string@","nextPage":"@string@"}"
+#320 Matcher Coduo\PHPMatcher\Matcher\TextMatcher can't match pattern "{"users":[{"id":"@integer@","firstName":"Norbert","lastName":"Orzechowicz","enabled":"@boolean@","roles":"@array@.isEmpty()"},{"id":"@integer@","firstName":"Micha\u0142","lastName":"D\u0105browski","enabled":"expr(value == true)","roles":"@array@"}],"prevPage":"@string@","nextPage":"@string@"}"
+#321 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (all) failed to match value "{"users":[{"id":131,"firstName":"Norbert","lastName":"Orzechowicz","enabled":true,"roles":[]},{"id":132,"firstName":"Micha\u0142","lastName":"D\u0105browski","enabled":false,"roles":["ROLE_DEVELOPER"]}],"prevPage":"http:\/\/example.com\/api\/users\/1?limit=2","nextPage":"http:\/\/example.com\/api\/users\/3?limit=2"}" with "{"users":[{"id":"@integer@","firstName":"Norbert","lastName":"Orzechowicz","enabled":"@boolean@","roles":"@array@.isEmpty()"},{"id":"@integer@","firstName":"Micha\u0142","lastName":"D\u0105browski","enabled":"expr(value == true)","roles":"@array@"}],"prevPage":"@string@","nextPage":"@string@"}" pattern
+#322 Matcher Coduo\PHPMatcher\Matcher\ChainMatcher (all) error: Value "false" does not match pattern "expr(value == true)" at path: "[users][1][enabled]"
+#323 Matcher Coduo\PHPMatcher\Matcher failed to match value "{"users":[{"id":131,"firstName":"Norbert","lastName":"Orzechowicz","enabled":true,"roles":[]},{"id":132,"firstName":"Micha\u0142","lastName":"D\u0105browski","enabled":false,"roles":["ROLE_DEVELOPER"]}],"prevPage":"http:\/\/example.com\/api\/users\/1?limit=2","nextPage":"http:\/\/example.com\/api\/users\/3?limit=2"}" with "{"users":[{"id":"@integer@","firstName":"Norbert","lastName":"Orzechowicz","enabled":"@boolean@","roles":"@array@.isEmpty()"},{"id":"@integer@","firstName":"Micha\u0142","lastName":"D\u0105browski","enabled":"expr(value == true)","roles":"@array@"}],"prevPage":"@string@","nextPage":"@string@"}" pattern
+#324 Matcher Coduo\PHPMatcher\Matcher error: Value "false" does not match pattern "expr(value == true)" at path: "[users][1][enabled]"

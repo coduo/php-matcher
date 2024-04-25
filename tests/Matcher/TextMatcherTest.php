@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
 
 class TextMatcherTest extends TestCase
 {
-    private ?\Coduo\PHPMatcher\Matcher\TextMatcher $matcher = null;
+    private ?Matcher\TextMatcher $matcher = null;
 
     public static function matchingData()
     {

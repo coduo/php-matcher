@@ -5,6 +5,11 @@
          bootstrap="vendor/autoload.php"
          cacheDirectory=".phpunit.cache"
 >
+    <source>
+        <include>
+            <directory>./src</directory>
+        </include>
+    </source>
     <testsuites>
         <testsuite name="unit">
             <directory>./tests/</directory>

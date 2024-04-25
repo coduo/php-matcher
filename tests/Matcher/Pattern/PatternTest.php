@@ -28,8 +28,8 @@ class PatternTest extends TestCase
     public function setUp() : void
     {
         $this->pattern = new TypePattern('dummy');
-        $this->pattern->addExpander(new isEmail());
-        $this->pattern->addExpander(new isEmpty());
+        $this->pattern->addExpander(new IsEmail());
+        $this->pattern->addExpander(new IsEmpty());
         $this->pattern->addExpander(new Optional());
     }
 

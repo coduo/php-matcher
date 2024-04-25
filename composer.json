@@ -24,13 +24,11 @@
         "doctrine/lexer": "^3.0"
     },
     "require-dev": {
-        "ext-pcov": "*",
         "phpunit/phpunit": "^10.4",
         "openlss/lib-array2xml": "^1.0",
-        "symfony/expression-language": "^2.3|^3.0|^4.0|^5.0|^6.0",
-        "symfony/cache": "^2.3|^3.0|^4.0|^5.0|^6.0",
-        "nikic/php-parser": "^4.18",
-        "symfony/var-exporter": "^2.3|^3.0|^4.0|^5.0|^6.0"
+        "symfony/expression-language": "^5.4|^6.4|^7.0",
+        "symfony/cache": "^5.4|^6.4",
+        "symfony/var-exporter": "^5.4|^6.4|^7.0"
     },
     "suggest": {
         "openlss/lib-array2xml": "In order ot use Coduo\\PHPMatcher\\Matcher\\XmlMatcher",
@@ -53,7 +51,7 @@
     "scripts": {
         "benchmark": [
             "Composer\\Config::disableProcessTimeout",
-            "tools\/phpbench run --report=matcher"
+            "tools\/phpbench\/vendor\/bin\/phpbench run --report=matcher"
         ],
         "build": [
             "@static:analyze",
@@ -61,26 +59,37 @@
             "@test:mutation"
         ],
         "cs:php:fix": [
-            "tools\/vendor\/bin\/php-cs-fixer fix --using-cache=no"
+            "tools\/cs-fixer\/vendor\/bin\/php-cs-fixer fix --using-cache=no"
         ],
         "test" : [
             "vendor\/bin\/phpunit --coverage-html var/phpunit/coverage/html --coverage-filter src"
         ],
         "test:mutation": [
             "Composer\\Config::disableProcessTimeout",
-            "tools\/vendor\/bin\/infection"
+            "tools\/infection/\/vendor\/bin\/infection -j2"
         ],
         "static:analyze": [
-            "tools\/vendor\/bin\/psalm --shepherd --stats",
-            "tools\/vendor\/bin\/phpstan analyze -c phpstan.neon",
-            "tools\/vendor\/bin\/php-cs-fixer fix --dry-run"
+            "tools\/cs-fixer\/vendor\/bin\/php-cs-fixer fix --dry-run",
+            "tools\/psalm\/vendor\/bin\/psalm --shepherd --stats",
+            "tools\/phpstan\/vendor\/bin\/phpstan analyze -c phpstan.neon"
         ],
-        "tools:install": "composer install --working-dir=./tools",
+        "tools:install": [
+            "composer install --working-dir=./tools/cs-fixer",
+            "composer install --working-dir=./tools/phpbench",
+            "composer install --working-dir=./tools/phpstan",
+            "composer install --working-dir=./tools/psalm"
+        ],
+        "tools:update": [
+            "composer update --working-dir=./tools/cs-fixer",
+            "composer update --working-dir=./tools/phpbench",
+            "composer update --working-dir=./tools/phpstan",
+            "composer update --working-dir=./tools/psalm"
+        ],
         "post-install-cmd": [
             "@tools:install"
         ],
         "post-update-cmd": [
-            "@tools:install"
+            "@tools:update"
         ]
     }
 }
