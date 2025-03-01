@@ -2,7 +2,7 @@
     "name": "coduo/php-matcher-tools",
     "description": "Coduo PHP Matcher - Tools",
     "require-dev": {
-        "phpstan/phpstan": "^1.1.2"
+        "phpstan/phpstan": "^2.1.6"
     },
     "config": {
         "allow-plugins": false,
