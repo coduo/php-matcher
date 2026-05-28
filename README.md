@@ -109,7 +109,7 @@ class MatcherTest extends TestCase
 * ``@...@`` - *unbounded array*, once used matcher will skip any further array elements
 * ``@null@``
 * ``@*@`` || ``@wildcard@``
-* ``expr(expression)`` - **optional**, requires `symfony/expression-language: ^2.3|^3.0|^4.0|^5.0` to be present
+* ``expr(expression)`` - **optional**, requires `symfony/expression-language: ^6.4 || ^7.4 || ^8.0` to be present
 * ``@uuid@``
 * ``@ulid@``
 * ``@json@``
