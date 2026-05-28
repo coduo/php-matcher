@@ -1,3 +1,8 @@
+## [Unreleased] - 2026-05-28
+
+### Changed
+- [52ef1b](https://github.com/coduo/php-matcher/commit/52ef1bf1443efbc3356bd52f860b6a7ec3c2860a) - **refactor: updated dependencies** - [@norberttech](https://github.com/norberttech)
+
 ## [6.0.18] - 2025-12-08
 
 ### Added
