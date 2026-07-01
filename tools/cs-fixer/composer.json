@@ -2,7 +2,7 @@
     "name": "coduo/php-matcher-tools",
     "description": "Coduo PHP Matcher - Tools",
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "3.95.3"
+        "friendsofphp/php-cs-fixer": "3.95.11"
     },
     "config": {
         "allow-plugins": false,
